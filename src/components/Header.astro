@@ -1,0 +1,79 @@
+---
+const navLinks = [
+  { label: "HOME", href: "/" },
+  { label: "SERVICES", href: "/services" },
+  { label: "CASE STUDIES", href: "/case-studies" },
+  { label: "ABOUT US", href: "/about" },
+  { label: "BLOG", href: "/blog" },
+  { label: "CONTACT US", href: "/contact" },
+];
+---
+
+<header class="bg-white/75 relative z-50">
+  <!-- Logo: Centered -->
+  <div class="flex justify-center py-5">
+    <a href="/">
+      <img
+        src="/images/global/Logo_main_black-gold.png"
+        alt="Kinga Dow - Exponential Brand Growth"
+        class="h-[100px]"
+      />
+    </a>
+  </div>
+
+  <!-- Divider line (Figma gold gradient: fades in from edges to solid gold center) -->
+  <div class="px-6">
+    <div class="w-full h-[1px]" style="background: linear-gradient(90deg, rgba(186, 146, 0, 0) 0%, rgba(186, 146, 0, 1) 49%, rgba(186, 146, 0, 0) 100%);"></div>
+  </div>
+
+  <!-- Desktop Navigation: Centered below logo -->
+  <nav class="hidden md:flex justify-center items-center gap-12 py-4">
+    {navLinks.map((link) => (
+      <a
+        href={link.href}
+        class="font-aktiv text-black font-medium text-sm tracking-[0.7px] hover:text-kd-gold transition-colors"
+      >
+        {link.label}
+      </a>
+    ))}
+  </nav>
+
+  <!-- Mobile Menu Button -->
+  <div class="md:hidden flex justify-start px-6 py-3">
+    <button
+      id="mobile-menu-btn"
+      class="text-kd-navy"
+      aria-label="Open menu"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Navigation -->
+  <nav
+    id="mobile-menu"
+    class="hidden md:hidden bg-white border-t border-kd-grey/20"
+  >
+    <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col space-y-4">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="font-aktiv text-black font-medium text-sm tracking-[0.7px] hover:text-kd-gold transition-colors py-2"
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+  </nav>
+</header>
+
+<script>
+  const btn = document.getElementById("mobile-menu-btn");
+  const menu = document.getElementById("mobile-menu");
+
+  btn?.addEventListener("click", () => {
+    menu?.classList.toggle("hidden");
+  });
+</script>

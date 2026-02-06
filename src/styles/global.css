@@ -1,0 +1,276 @@
+@import "tailwindcss";
+
+/* ========================================
+   KINGA DOW BRAND DESIGN SYSTEM
+   ======================================== */
+
+@theme {
+  /* Brand Colors */
+  --color-kd-gold: #BA9200;
+  --color-kd-gold-btn: #E0B000;
+  --color-kd-navy: #3F455D;
+  --color-kd-cream: #F6EFE6;
+  --color-kd-cream-light: #FFF8F0;
+  --color-kd-grey: #777777;
+  --color-kd-sage: #59A56D;
+  --color-kd-sage-light: #8CAB95;
+
+  /* Font Families */
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-aktiv: "Aktiv Grotesk Ex", sans-serif;
+  --font-script: "Silver South Script", cursive;
+}
+
+/* ========================================
+   FONT FACE DECLARATIONS
+   ======================================== */
+
+@font-face {
+  font-family: "Aktiv Grotesk Ex";
+  src: url("/fonts/AktivGroteskEx-Regular.woff2") format("woff2"),
+       url("/fonts/AktivGroteskEx-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Silver South Script";
+  src: url("/fonts/Set-Sail-Studios---SilverSouthScript.woff2") format("woff2"),
+       url("/fonts/Set-Sail-Studios---SilverSouthScript.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ========================================
+   BASE STYLES
+   Headlines = Aktiv Grotesk Ex, Body = Montserrat
+   ======================================== */
+
+@layer base {
+  body {
+    font-family: var(--font-montserrat);
+    font-weight: 300;
+    color: #000000;
+    letter-spacing: 0.1em;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* Headlines use Aktiv Grotesk Ex (base defaults, overridable by utility classes) */
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-aktiv);
+    color: var(--color-kd-navy);
+    letter-spacing: 0.05em;
+  }
+}
+
+@layer base {
+  /* Body text uses Montserrat */
+  p {
+    font-family: var(--font-montserrat);
+    font-weight: 300;
+    line-height: 28px;
+    letter-spacing: 0.1em;
+  }
+
+  /* H1 - Hero: Aktiv Grotesk Bold 48/60 */
+  h1 {
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 60px;
+  }
+
+  /* H2 - Section: Aktiv Grotesk SemiBold 36/60 */
+  h2 {
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 60px;
+  }
+
+  /* H3 - Card: Aktiv Grotesk SemiBold 24/32 */
+  h3 {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 32px;
+  }
+}
+
+/* ========================================
+   COMPONENT STYLES
+   ======================================== */
+
+.btn-gold {
+  background-color: var(--color-kd-gold-btn);
+  color: white;
+  font-family: var(--font-montserrat);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+}
+
+.btn-gold:hover {
+  background-color: var(--color-kd-gold);
+  transform: translateY(-2px);
+}
+
+.btn-navy {
+  background-color: var(--color-kd-navy);
+  color: white;
+  font-family: var(--font-montserrat);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+}
+
+.btn-navy:hover {
+  background-color: #2d3142;
+}
+
+.font-script {
+  font-family: var(--font-script);
+}
+
+/* Hero gradient — matches Figma: F6EFE6 @95% → FFEED9 @100% */
+.hero-gradient {
+  background: linear-gradient(to right, rgba(246, 239, 230, 0.95) 0%, #FFEED9 100%);
+}
+
+/* Decorative circle */
+.deco-circle {
+  background: radial-gradient(circle, rgba(186, 146, 0, 0.08) 0%, transparent 70%);
+}
+
+/* Gold ring for circular images */
+.gold-ring {
+  border: 4px solid var(--color-kd-gold);
+  box-shadow: 0 8px 30px rgba(186, 146, 0, 0.15);
+}
+
+/* CTA gradient */
+.cta-gradient {
+  background: linear-gradient(135deg, #F6EFE6 0%, #FFF5E6 100%);
+}
+
+/* Icon box */
+.icon-box {
+  background: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ========================================
+   SCROLL ANIMATIONS
+   Subtle & Professional style
+   ======================================== */
+
+/* Keyframe Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Base animation class - elements start invisible */
+.animate-on-scroll {
+  opacity: 0;
+}
+
+/* When element becomes visible */
+.animate-on-scroll.is-visible {
+  animation-fill-mode: forwards;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+}
+
+/* Animation type classes */
+.fade-in-up.is-visible {
+  animation-name: fadeInUp;
+}
+
+.fade-in.is-visible {
+  animation-name: fadeIn;
+}
+
+.slide-in-left.is-visible {
+  animation-name: slideInLeft;
+}
+
+.slide-in-right.is-visible {
+  animation-name: slideInRight;
+}
+
+.scale-in.is-visible {
+  animation-name: scaleIn;
+}
+
+/* Stagger delays for sequential elements */
+.delay-100 {
+  animation-delay: 0.1s;
+}
+
+.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.delay-300 {
+  animation-delay: 0.3s;
+}
+
+.delay-400 {
+  animation-delay: 0.4s;
+}
+
+.delay-500 {
+  animation-delay: 0.5s;
+}

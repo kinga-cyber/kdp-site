@@ -1,0 +1,550 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ConsultationCTA from "../components/ConsultationCTA.astro";
+---
+
+<Layout
+  title="AI-Powered Retention Marketing for E-commerce | Kinga Dow"
+  description="We build AI-powered retention systems that turn browsers into repeat buyers. 8+ years Klaviyo expertise with intelligent automation. Schedule your AI retention audit."
+>
+  <!-- ========================================
+       HERO SECTION
+       ======================================== -->
+  <section class="hero-gradient relative overflow-hidden">
+    <!-- Decorative circle pattern - left side (from Figma) -->
+    <div class="absolute -left-20 top-16 w-[380px] h-[380px] opacity-30 pointer-events-none">
+      <img src="/images/home/decorative/bg-circle-left.png" alt="" class="w-full h-full object-contain" aria-hidden="true" />
+    </div>
+
+    <!-- Decorative circle pattern - bottom right (from Figma) -->
+    <div class="absolute -right-16 -bottom-16 w-[300px] h-[300px] opacity-20 pointer-events-none">
+      <img src="/images/home/decorative/bg-circle.png" alt="" class="w-full h-full object-contain" aria-hidden="true" />
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 py-12 md:py-20 relative z-10">
+      <div class="text-center max-w-4xl mx-auto">
+        <!-- H1 - Hero: Montserrat Bold 48/60, tracking 5% (2.4px), mobile: 32/40 -->
+        <h1 class="animate-on-scroll fade-in-up font-aktiv text-kd-navy text-[28px] md:text-[48px] font-bold leading-[36px] md:leading-[60px] tracking-[1.4px] md:tracking-[2.4px] mb-8">
+          AI-Powered Retention Marketing for E-commerce
+        </h1>
+
+        <!-- Subtitle: Montserrat Medium 18/24, desktop: 24/32 -->
+        <h2 class="animate-on-scroll fade-in-up delay-100 font-montserrat text-kd-navy text-[18px] md:text-[24px] font-medium leading-[24px] md:leading-[32px] tracking-[1.4px] md:tracking-[1.8px] mb-8">
+          We build AI-powered retention systems that turn<br />browsers into repeat buyers
+        </h2>
+
+        <!-- Body Large: Aktiv Grotesk Light 18/30, tracking 10% (1.8px), mobile: 16/26 -->
+        <p class="animate-on-scroll fade-in-up delay-200 font-montserrat font-light text-black text-[16px] md:text-[18px] mb-12 max-w-[912px] mx-auto leading-[26px] md:leading-[30px] tracking-[1.6px] md:tracking-[1.8px]">
+          Combining 8+ years of Klaviyo expertise with intelligent automation, we deliver full-service retention marketing that finds revenue opportunities others miss.
+        </p>
+
+        <!-- CTA Button - Navy pill -->
+        <a
+          href="/contact"
+          class="animate-on-scroll fade-in-up delay-300 btn-navy inline-block py-4 px-10 rounded-full text-sm md:text-lg md:py-5 md:px-14"
+        >
+          Schedule a Free Consultation
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       LEAD MAGNET SECTION
+       ======================================== -->
+  <section class="bg-white py-10 md:py-16 relative overflow-hidden">
+    <!-- Decorative concentric circle pattern - right side (from Figma node 313:1000) -->
+    <div class="absolute -right-20 top-0 w-[374px] h-[437px] opacity-20 pointer-events-none">
+      <img src="/images/home/decorative/bg-circle-1.png" alt="" class="w-full h-full object-contain" aria-hidden="true" />
+    </div>
+
+    <div class="max-w-6xl mx-auto px-6 relative z-10">
+      <div class="grid md:grid-cols-[3fr_2fr] gap-8 md:gap-12 items-start">
+        <!-- Left: Content -->
+        <div class="animate-on-scroll fade-in-up">
+          <!-- H4 - Label: Aktiv Grotesk SemiBold 32/40, mobile: 24/30 -->
+          <!-- H2 - Section -->
+          <h2 class="font-aktiv text-kd-gold text-[28px] md:text-[36px] font-semibold leading-[36px] md:leading-[60px] tracking-[1.4px] md:tracking-[1.8px] mb-6">
+            Get The<br />AI Retention Playbook
+          </h2>
+
+          <!-- H3 - Card: Aktiv Grotesk SemiBold 24/32, mobile: 20/28 -->
+          <p class="font-aktiv text-kd-navy text-[20px] md:text-[24px] font-semibold leading-[28px] md:leading-[32px] tracking-[1px] md:tracking-[1.2px] mb-4">
+            Discover how AI-powered systems unlock hidden revenue in your retention marketing
+          </p>
+
+          <!-- Body Large: Montserrat Light 18/30, mobile: 16/26 -->
+          <p class="text-black text-[16px] md:text-[18px] leading-[26px] md:leading-[30px] tracking-[1.6px] md:tracking-[1.8px] font-montserrat font-light">
+            The strategies behind our intelligent retention systems — from RFM segmentation to automated flow optimization.
+          </p>
+        </div>
+
+        <!-- Right: Form -->
+        <div class="animate-on-scroll fade-in-up delay-100 relative z-10 md:pt-[110px]">
+          <form id="lead-magnet-form">
+            <div class="grid grid-cols-2 gap-4">
+              <input
+                type="text"
+                id="lm-name"
+                name="name"
+                placeholder="Name"
+                required
+                class="w-full px-5 py-3.5 rounded-lg border border-kd-gold bg-kd-cream focus:outline-none focus:border-kd-gold text-base font-montserrat font-light text-kd-navy placeholder:text-gray-400"
+              />
+              <input
+                type="email"
+                id="lm-email"
+                name="email"
+                placeholder="Email Address"
+                required
+                class="w-full px-5 py-3.5 rounded-lg border border-kd-gold bg-kd-cream focus:outline-none focus:border-kd-gold text-base font-montserrat font-light text-kd-navy placeholder:text-gray-400"
+              />
+            </div>
+            <button
+              type="submit"
+              id="lm-submit-btn"
+              class="btn-navy w-full py-4 rounded-lg text-base font-montserrat font-medium tracking-wider flex items-center justify-between px-6 mt-8"
+              style="box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);"
+            >
+              <span id="lm-submit-text">Download The Playbook</span>
+              <img src="/images/global/play.png" alt="" class="w-5 h-5" />
+            </button>
+          </form>
+          <!-- Success message (hidden by default) -->
+          <p id="lm-success" class="hidden text-kd-gold text-center text-[16px] font-montserrat font-semibold tracking-wide pt-6">
+            Check your email for the playbook!
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gold gradient line separator (from Figma node 313:1037) -->
+    <div class="mt-10 md:mt-16 px-0">
+      <div class="w-full h-[1px]" style="background: linear-gradient(90deg, rgba(186, 146, 0, 0) 0%, rgba(186, 146, 0, 0.6) 49%, rgba(186, 146, 0, 0) 100%);"></div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       SIGNATURE SERVICES SECTION
+       ======================================== -->
+  <section class="pt-4 pb-12 md:pb-20 bg-white relative overflow-hidden">
+    <div class="max-w-6xl mx-auto px-6 relative z-10">
+      <!-- Rounded card container matching Figma: gradient fill, corner radius 21, shadow -->
+      <div
+        class="rounded-[21px] relative overflow-hidden px-8 md:px-14 py-14 md:py-16"
+        style="background: linear-gradient(to right, rgba(255, 246, 235, 0.95) 0%, #FFFAF3 100%); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);"
+      >
+        <!-- Decorative dot pattern - top left (from Figma) -->
+        <div class="absolute -left-16 -top-16 w-[300px] h-[300px] opacity-20 pointer-events-none">
+          <img src="/images/home/decorative/bg-service-dots.png" alt="" class="w-full h-full object-contain" aria-hidden="true" />
+        </div>
+
+        <!-- Decorative circle pattern - bottom right (from Figma) -->
+        <div class="absolute -right-16 -bottom-16 w-[280px] h-[280px] opacity-15 pointer-events-none">
+          <img src="/images/home/decorative/bg-circle.png" alt="" class="w-full h-full object-contain" aria-hidden="true" />
+        </div>
+
+        <!-- H2 - Section: Montserrat SemiBold 36/60, mobile: 28/36 -->
+        <div class="animate-on-scroll fade-in-up text-center mb-16 relative z-10">
+          <h2 class="font-aktiv text-kd-gold text-[28px] md:text-[36px] font-semibold leading-[36px] md:leading-[60px] tracking-[1.4px] md:tracking-[1.8px] mb-4">
+            Signature Services, Intelligent Results
+          </h2>
+          <!-- H3 - Card: Montserrat SemiBold 24/32, mobile: 20/28 -->
+          <p class="font-aktiv text-black text-[20px] md:text-[24px] font-semibold leading-[28px] md:leading-[32px] tracking-[1px] md:tracking-[1.2px] max-w-2xl mx-auto">
+            Full-service retention marketing<br />powered by AI intelligence
+          </p>
+        </div>
+
+        <!-- Services Grid with vertical dividers -->
+        <div class="grid md:grid-cols-3 gap-0 relative z-10">
+          <!-- Service 1: K:AI + Human Intelligence -->
+          <div class="animate-on-scroll fade-in-up delay-100 px-6 py-4 flex flex-col relative">
+            <!-- Vertical divider line -->
+            <div class="hidden md:block absolute right-0 top-0 h-[80%] w-px bg-kd-grey/20" aria-hidden="true"></div>
+            <!-- Icon -->
+            <div class="mb-8">
+              <img src="/images/home/icons/service-icon-1.png" alt="Email & SMS Marketing" class="w-16 h-16 object-contain" />
+            </div>
+
+            <!-- H3 - Card: Montserrat SemiBold 24/32, mobile: 20/28 -->
+            <h3 class="font-aktiv text-kd-gold text-[20px] md:text-[24px] font-semibold leading-[28px] md:leading-[32px] tracking-[1px] md:tracking-[1.2px] mb-4">
+              K:AI + Human<br />Intelligence
+            </h3>
+
+            <!-- Body Regular: Aktiv Grotesk Light 16/28, mobile: 15/24 -->
+            <p class="text-black text-[15px] md:text-[16px] leading-[24px] md:leading-[28px] tracking-[1.5px] md:tracking-[1.6px] mb-8 flex-grow font-montserrat font-light">
+              We combine Klaviyo's Marketing Agent with our AI strategist to deliver complete retention marketing across all channels. Full campaign execution, strategic direction powered by AI, monthly optimization and revenue discovery.
+            </p>
+
+            <!-- Button style: Montserrat Medium 18/22, mobile: 16/20 -->
+            <a href="/services#email-sms-whatsapp" class="group inline-block mt-auto">
+              <span class="font-aktiv text-black text-[16px] md:text-[18px] font-medium tracking-[1.6px] md:tracking-[1.8px]">Learn more</span>
+              <div class="mt-1">
+                <img src="/images/home/decorative/line-arrow.png" alt="" class="h-3 object-contain" aria-hidden="true" />
+              </div>
+            </a>
+          </div>
+
+          <!-- Service 2: Retention Infrastructure -->
+          <div class="animate-on-scroll fade-in-up delay-200 px-6 py-4 flex flex-col relative mt-8 md:mt-0 pt-4">
+            <!-- Vertical divider line -->
+            <div class="hidden md:block absolute right-0 top-0 h-[80%] w-px bg-kd-grey/20" aria-hidden="true"></div>
+            <!-- Icon -->
+            <div class="mb-8">
+              <img src="/images/home/icons/service-icon-2.png" alt="Retention Infrastructure" class="w-16 h-16 object-contain" />
+            </div>
+
+            <!-- H3 - Card: Montserrat SemiBold 24/32, mobile: 20/28 -->
+            <h3 class="font-aktiv text-kd-gold text-[20px] md:text-[24px] font-semibold leading-[28px] md:leading-[32px] tracking-[1px] md:tracking-[1.2px] mb-4">
+              Retention<br />Infrastructure
+            </h3>
+
+            <!-- Body Regular: Aktiv Grotesk Light 16/28, mobile: 15/24 -->
+            <p class="text-black text-[15px] md:text-[16px] leading-[24px] md:leading-[28px] tracking-[1.5px] md:tracking-[1.6px] mb-8 flex-grow font-montserrat font-light">
+              We build the intelligent infrastructure that powers sustainable growth. RFM segmentation, predictive analytics, lifecycle automation, and behavioral triggers that adapt to customer behavior in real-time.
+            </p>
+
+            <!-- Button style: Montserrat Medium 18/22, mobile: 16/20 -->
+            <a href="/services#advanced-retention" class="group inline-block mt-auto">
+              <span class="font-aktiv text-black text-[16px] md:text-[18px] font-medium tracking-[1.6px] md:tracking-[1.8px]">Learn more</span>
+              <div class="mt-1">
+                <img src="/images/home/decorative/line-arrow.png" alt="" class="h-3 object-contain" aria-hidden="true" />
+              </div>
+            </a>
+          </div>
+
+          <!-- Service 3: Ongoing Partnership -->
+          <div class="animate-on-scroll fade-in-up delay-300 px-6 py-4 flex flex-col mt-8 md:mt-0 pt-4">
+            <!-- Icon -->
+            <div class="mb-8">
+              <img src="/images/home/icons/service-icon-3.png" alt="Ongoing Partnership" class="w-16 h-16 object-contain" />
+            </div>
+
+            <!-- H3 - Card: Montserrat SemiBold 24/32, mobile: 20/28 -->
+            <h3 class="font-aktiv text-kd-gold text-[20px] md:text-[24px] font-semibold leading-[28px] md:leading-[32px] tracking-[1px] md:tracking-[1.2px] mb-4">
+              Ongoing<br />Partnership
+            </h3>
+
+            <!-- Body Regular: Aktiv Grotesk Light 16/28, mobile: 15/24 -->
+            <p class="text-black text-[15px] md:text-[16px] leading-[24px] md:leading-[28px] tracking-[1.5px] md:tracking-[1.6px] mb-8 flex-grow font-montserrat font-light">
+              Continuous growth through AI-powered optimization. We don't just set it and forget it — our intelligent systems find new opportunities every month while we execute the complete retention marketing calendar.
+            </p>
+
+            <!-- Button style: Montserrat Medium 18/22, mobile: 16/20 -->
+            <a href="/services#monthly-retainer" class="group inline-block mt-auto">
+              <span class="font-aktiv text-black text-[16px] md:text-[18px] font-medium tracking-[1.6px] md:tracking-[1.8px]">Learn more</span>
+              <div class="mt-1">
+                <img src="/images/home/decorative/line-arrow.png" alt="" class="h-3 object-contain" aria-hidden="true" />
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       CASE STUDIES SECTION
+       ======================================== -->
+  <section class="pt-4 pb-12 md:pb-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <!-- H2 - Section: Montserrat SemiBold 36/60, mobile: 28/36 -->
+      <div class="animate-on-scroll fade-in-up text-center mb-10 md:mb-16">
+        <h2 class="font-aktiv text-kd-gold text-[28px] md:text-[36px] font-semibold leading-[36px] md:leading-[60px] tracking-[1.4px] md:tracking-[1.8px] mb-4">
+          Customer Success Stories
+        </h2>
+        <!-- H3 - Card: Montserrat SemiBold 24/32, mobile: 20/28 -->
+        <p class="font-aktiv text-black text-[20px] md:text-[24px] font-semibold leading-[28px] md:leading-[32px] tracking-[1px] md:tracking-[1.2px] max-w-3xl mx-auto">
+          AI-powered retention systems delivering real results<br />for e-commerce brands
+        </p>
+      </div>
+
+      <!-- Case Studies -->
+      <div class="space-y-16 md:space-y-24">
+        <!-- Case Study 1: Image Left, Text Right -->
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div class="animate-on-scroll scale-in flex justify-center">
+            <img
+              src="/images/case-studies/casestudy1.png"
+              alt="Premium Gift E-commerce Brand"
+              class="w-72 md:w-[340px] object-contain"
+            />
+          </div>
+          <div class="animate-on-scroll fade-in-up delay-100">
+            <!-- H4 - Label: Montserrat Medium 14px UPPERCASE, mobile: same -->
+            <span class="font-aktiv text-kd-gold font-medium text-[14px] leading-[17px] tracking-[1.4px] mb-2 block uppercase">
+              Case Study 1
+            </span>
+            <!-- H3 - Card: Montserrat SemiBold 24/32, mobile: 20/28 -->
+            <h3 class="font-aktiv text-black text-[20px] md:text-[24px] font-semibold leading-[28px] md:leading-[32px] tracking-[1px] md:tracking-[1.2px] mt-1 mb-4">
+              Premium Gift E-commerce<br />Brand AI-Powered Strategy
+            </h3>
+            <!-- Body Regular: Aktiv Grotesk Light 16/28, mobile: 15/24 -->
+            <p class="text-black text-[15px] md:text-[16px] leading-[24px] md:leading-[28px] tracking-[1.5px] md:tracking-[1.6px] font-montserrat font-light">
+              273% email revenue growth in 7 months. Built proprietary RFM + CLV segmentation system using Claude AI partnership. Client had to pause email marketing because fulfillment couldn't keep up with orders.
+            </p>
+          </div>
+        </div>
+
+        <!-- Case Study 2: Text Left, Image Right -->
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div class="animate-on-scroll fade-in-up order-2 md:order-1">
+            <!-- H4 - Label: Montserrat Medium 14px UPPERCASE -->
+            <span class="font-aktiv text-kd-gold font-medium text-[14px] leading-[17px] tracking-[1.4px] mb-2 block uppercase">
+              Case Study 2
+            </span>
+            <!-- H3 - Card: Montserrat SemiBold 24/32, mobile: 20/28 -->
+            <h3 class="font-aktiv text-black text-[20px] md:text-[24px] font-semibold leading-[28px] md:leading-[32px] tracking-[1px] md:tracking-[1.2px] mt-1 mb-4">
+              Legacy Hawaiian Footwear Brand<br />AI-Powered Marketing Coaching
+            </h3>
+            <!-- Body Regular: Aktiv Grotesk Light 16/28, mobile: 15/24 -->
+            <p class="text-black text-[15px] md:text-[16px] leading-[24px] md:leading-[28px] tracking-[1.5px] md:tracking-[1.6px] font-montserrat font-light">
+              40% year-over-year sales growth through AI marketing systems. Transformed overwhelmed operator into confident, data-driven decision maker with automated workflows and weekly AI-powered analysis.
+            </p>
+          </div>
+          <div class="animate-on-scroll scale-in delay-100 flex justify-center order-1 md:order-2">
+            <img
+              src="/images/case-studies/casestudy2.png"
+              alt="Legacy Hawaiian Footwear Brand"
+              class="w-72 md:w-[340px] object-contain"
+            />
+          </div>
+        </div>
+
+        <!-- Case Study 3: Image Left, Text Right -->
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div class="animate-on-scroll scale-in flex justify-center">
+            <img
+              src="/images/case-studies/casestudy3.png"
+              alt="Specialty Gift Basket Company"
+              class="w-72 md:w-[340px] object-contain"
+            />
+          </div>
+          <div class="animate-on-scroll fade-in-up delay-100">
+            <!-- H4 - Label: Montserrat Medium 14px UPPERCASE -->
+            <span class="font-aktiv text-kd-gold font-medium text-[14px] leading-[17px] tracking-[1.4px] mb-2 block uppercase">
+              Case Study 3
+            </span>
+            <!-- H3 - Card: Montserrat SemiBold 24/32, mobile: 20/28 -->
+            <h3 class="font-aktiv text-black text-[20px] md:text-[24px] font-semibold leading-[28px] md:leading-[32px] tracking-[1px] md:tracking-[1.2px] mt-1 mb-4">
+              Specialty Gift Basket Company<br />Email Marketing Transformation
+            </h3>
+            <!-- Body Regular: Aktiv Grotesk Light 16/28, mobile: 15/24 -->
+            <p class="text-black text-[15px] md:text-[16px] leading-[24px] md:leading-[28px] tracking-[1.5px] md:tracking-[1.6px] font-montserrat font-light">
+              205% year-over-year growth through advanced analytics and strategic Klaviyo integration. Transformed seasonal gift business into consistent revenue driver.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       TESTIMONIALS SECTION
+       ======================================== -->
+  <section class="pt-0 pb-4 md:pt-4 md:pb-8 bg-white relative">
+
+    <div class="max-w-6xl mx-auto px-6">
+      <!-- "What Our Clients Say" - Mobile only (shown above cards on mobile, with circles) -->
+      <div class="md:hidden relative flex justify-center items-center min-h-[300px] mb-8">
+        <!-- Ellipse 13: Large grey outlined circle -->
+        <img src="/images/home/decorative/Ellipse 13.png" alt="" class="absolute w-[300px] h-[300px] top-0 left-1/2 -translate-x-[55%] object-contain pointer-events-none" aria-hidden="true" />
+        <!-- Ellipse 12: Gold circle -->
+        <div class="absolute w-[180px] h-[180px] bottom-0 -right-[50px] rounded-full pointer-events-none z-0" style="border: 1px solid #BA9200;" aria-hidden="true"></div>
+
+        <!-- Content centered inside (shifted left to sit within grey circle) -->
+        <div class="relative z-10 text-center -ml-8">
+          <div class="flex items-center justify-center gap-1 mb-3">
+            <img src="/images/home/decorative/Home -  Vector 1.png" alt="" class="h-[20px] object-contain" aria-hidden="true" />
+            <img src="/images/home/decorative/Home - Vector 2.png" alt="" class="h-[20px] object-contain" aria-hidden="true" />
+          </div>
+          <h2 class="font-aktiv text-kd-gold text-[14px] font-semibold leading-[20px] tracking-[0.7px] mb-3">
+            What Our Clients Say
+          </h2>
+          <div class="flex items-center justify-center mb-3">
+            <img src="/images/home/decorative/stars-testimonial.png" alt="5 stars" class="h-4 object-contain" />
+          </div>
+          <p class="text-black text-[13px] leading-[20px] tracking-[1.3px] font-montserrat font-light max-w-[250px] mx-auto">
+            Hear from brands who transformed their retention marketing with AI-powered systems
+          </p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <!-- Left: Testimonial Cards with cream gradient backdrop -->
+        <div class="relative">
+          <!-- Cream gradient backdrop (from Figma node 313:213) -->
+          <div class="absolute -left-6 -top-6 -bottom-6 -right-2 rounded-[19px] pointer-events-none" style="background: linear-gradient(89deg, rgb(247, 240, 231) 1%, rgba(247, 240, 231, 0) 96%);"></div>
+
+          <div class="space-y-6 relative z-10">
+            <!-- Testimonial 1: Tersha Carpenter -->
+            <div class="animate-on-scroll slide-in-left bg-white rounded-lg p-6" style="border: 1.5px solid #EED67D; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);">
+              <div class="flex items-center gap-4">
+                <!-- Avatar + Name + Title: centered column -->
+                <div class="flex-shrink-0 text-center flex flex-col items-center w-[110px] md:w-[150px]">
+                  <div class="w-[55px] h-[55px] md:w-[70px] md:h-[70px] rounded-full overflow-hidden mb-1">
+                    <img src="/images/home/testimonials/tersha.png" alt="Tersha Carpenter" class="w-full h-full object-cover" />
+                  </div>
+                  <p class="font-aktiv text-kd-gold text-[11px] md:text-[12px] font-medium leading-[15px] md:leading-[16px] tracking-[1px]">Tersha Carpenter</p>
+                  <p class="text-[10px] md:text-[11px] text-kd-grey leading-[14px] md:leading-[15px] tracking-[1px] font-montserrat">Founder of<br />Island Slipper</p>
+                </div>
+                <!-- Quote + Stars: right side -->
+                <div class="flex-1 flex flex-col justify-between">
+                  <p class="text-black text-[13px] md:text-[16px] leading-[20px] md:leading-[28px] tracking-[1.3px] md:tracking-[1.6px] font-montserrat font-light text-left mb-4">
+                    She has an exceptional ability to stay on the leading edge of marketing technology, and more importantly, to connect the dots in a way that actually improves the business.
+                  </p>
+                  <div class="flex items-center gap-3 mt-auto flex-nowrap">
+                    <div class="flex items-center gap-0.5">
+                      <svg class="w-4 h-4 md:w-5 md:h-5 text-kd-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                      <svg class="w-4 h-4 md:w-5 md:h-5 text-kd-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                      <svg class="w-4 h-4 md:w-5 md:h-5 text-kd-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                      <svg class="w-4 h-4 md:w-5 md:h-5 text-kd-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                      <svg class="w-4 h-4 md:w-5 md:h-5 text-kd-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
+                    <span class="text-kd-sage text-xs font-aktiv font-medium">Excellent</span>
+                    <span class="text-kd-grey text-xs font-aktiv whitespace-nowrap">5 of 5 stars</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Testimonial 2: Val Yakovchik -->
+            <div class="animate-on-scroll slide-in-left delay-100 bg-white rounded-lg p-6" style="border: 1.5px solid #EED67D; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);">
+              <div class="flex items-center gap-4">
+                <!-- Avatar + Name + Title: centered column -->
+                <div class="flex-shrink-0 text-center flex flex-col items-center w-[110px] md:w-[150px]">
+                  <div class="w-[55px] h-[55px] md:w-[70px] md:h-[70px] rounded-full overflow-hidden mb-1">
+                    <img src="/images/home/testimonials/val.png" alt="Val Yakovchik" class="w-full h-full object-cover" />
+                  </div>
+                  <p class="font-aktiv text-kd-gold text-[11px] md:text-[12px] font-medium leading-[15px] md:leading-[16px] tracking-[1px]">Val Yakovchik</p>
+                  <p class="text-[10px] md:text-[11px] text-kd-grey leading-[14px] md:leading-[15px] tracking-[1px] font-montserrat">Founder & CEO of Moxielash&reg;</p>
+                </div>
+                <!-- Quote + Stars: right side -->
+                <div class="flex-1 flex flex-col justify-between">
+                  <p class="text-black text-[13px] md:text-[16px] leading-[20px] md:leading-[28px] tracking-[1.3px] md:tracking-[1.6px] font-montserrat font-light text-left mb-4">
+                    Kinga is a rockstar. Deep expertise in email marketing, retention, post purchase, segmentation and customer.
+                  </p>
+                  <div class="flex items-center gap-3 mt-auto flex-nowrap">
+                    <div class="flex items-center gap-0.5">
+                      <svg class="w-4 h-4 md:w-5 md:h-5 text-kd-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                      <svg class="w-4 h-4 md:w-5 md:h-5 text-kd-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                      <svg class="w-4 h-4 md:w-5 md:h-5 text-kd-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                      <svg class="w-4 h-4 md:w-5 md:h-5 text-kd-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                      <svg class="w-4 h-4 md:w-5 md:h-5 text-kd-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
+                    <span class="text-kd-sage text-xs font-aktiv font-medium">Excellent</span>
+                    <span class="text-kd-grey text-xs font-aktiv whitespace-nowrap">5 of 5 stars</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Quote block with decorative circles (hidden on mobile, shown on desktop) -->
+        <div class="hidden md:flex relative justify-center items-start min-h-[450px] md:min-h-[550px]">
+          <!-- Ellipse 13: Large grey outlined circle (original ~607px) -->
+          <img src="/images/home/decorative/Ellipse 13.png" alt="" class="absolute w-[380px] md:w-[480px] h-[380px] md:h-[480px] top-0 left-1/2 -translate-x-[55%] object-contain pointer-events-none" aria-hidden="true" />
+          <!-- Ellipse 12: Gold full circle (CSS-drawn to replace half-arc image) -->
+          <div class="absolute w-[220px] md:w-[280px] h-[220px] md:h-[280px] bottom-[10px] -right-[70px] md:-right-[100px] rounded-full pointer-events-none z-0" style="border: 1px solid #BA9200;" aria-hidden="true"></div>
+
+          <!-- Content positioned inside the grey circle -->
+          <div class="relative z-10 -ml-4 md:-ml-6 pt-10 md:pt-14 max-w-[280px]">
+            <!-- Quote marks (Vector 1 & 2) -->
+            <div class="flex items-center gap-1 mb-3">
+              <img src="/images/home/decorative/Home -  Vector 1.png" alt="" class="h-[24px] md:h-[36px] object-contain" aria-hidden="true" />
+              <img src="/images/home/decorative/Home - Vector 2.png" alt="" class="h-[24px] md:h-[36px] object-contain" aria-hidden="true" />
+            </div>
+            <!-- H5 - Small heading -->
+            <h2 class="font-aktiv text-kd-gold text-[14px] md:text-[24px] font-semibold leading-[20px] md:leading-[32px] tracking-[0.7px] md:tracking-[1.2px] mb-4">
+              What Our Clients Say
+            </h2>
+            <!-- Stars -->
+            <div class="flex items-center mb-3">
+              <img src="/images/home/decorative/stars-testimonial.png" alt="5 stars" class="h-5 md:h-6 object-contain" />
+            </div>
+            <!-- Body: Montserrat Light 14/24 -->
+            <p class="text-black text-[13px] md:text-[16px] leading-[22px] md:leading-[28px] tracking-[1.3px] md:tracking-[1.6px] font-montserrat font-light">
+              Hear from brands who transformed their retention marketing with AI-powered systems
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       CTA / CONSULTATION SECTION
+       ======================================== -->
+  <ConsultationCTA />
+</Layout>
+
+<script>
+  const lmForm = document.getElementById('lead-magnet-form');
+
+  lmForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const name = (document.getElementById('lm-name') as HTMLInputElement).value;
+    const email = (document.getElementById('lm-email') as HTMLInputElement).value;
+    const submitBtn = document.getElementById('lm-submit-btn') as HTMLButtonElement;
+    const submitText = document.getElementById('lm-submit-text') as HTMLSpanElement;
+    const successMsg = document.getElementById('lm-success') as HTMLParagraphElement;
+
+    submitBtn.disabled = true;
+    submitText.textContent = 'Sending...';
+
+    try {
+      // Subscribe to Klaviyo list
+      await fetch('https://a.klaviyo.com/client/subscriptions/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'revision': '2024-10-15',
+        },
+        body: JSON.stringify({
+          data: {
+            type: 'subscription',
+            attributes: {
+              profile: {
+                data: {
+                  type: 'profile',
+                  attributes: {
+                    email: email,
+                    first_name: name.split(' ')[0],
+                    last_name: name.split(' ').slice(1).join(' ') || '',
+                    properties: {
+                      lead_magnet: 'AI Retention Playbook',
+                      source: 'website_lead_magnet',
+                    },
+                  },
+                },
+              },
+              custom_source: 'Website Lead Magnet - AI Retention Playbook',
+            },
+            relationships: {
+              list: {
+                data: {
+                  type: 'list',
+                  id: 'W3XhAb',
+                },
+              },
+            },
+          },
+          company_id: 'SqUgaK',
+        }),
+      });
+
+      // Show success
+      lmForm.classList.add('hidden');
+      successMsg.classList.remove('hidden');
+
+    } catch (error) {
+      submitText.textContent = 'Something went wrong. Try again.';
+      submitBtn.disabled = false;
+      setTimeout(() => {
+        submitText.textContent = 'Download The Playbook';
+      }, 3000);
+    }
+  });
+</script>

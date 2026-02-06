@@ -1,0 +1,68 @@
+---
+const currentYear = new Date().getFullYear();
+
+const navLinks = [
+  { label: "HOME", href: "/" },
+  { label: "SERVICES", href: "/services" },
+  { label: "CASE STUDIES", href: "/case-studies" },
+  { label: "ABOUT US", href: "/about" },
+  { label: "BLOG", href: "/blog" },
+  { label: "CONTACT US", href: "/contact" },
+];
+---
+
+<footer class="bg-white pt-6 md:pt-10 pb-0">
+  <div class="max-w-6xl mx-auto px-6">
+    <!-- Logo -->
+    <div class="flex justify-center mb-8">
+      <a href="/">
+        <img
+          src="/images/global/Logo_main_black-gold.png"
+          alt="Kinga Dow"
+          class="h-[100px]"
+        />
+      </a>
+    </div>
+
+    <!-- Mission statement — line breaks match Figma screenshot -->
+    <div class="text-center mb-10">
+      <p class="text-kd-grey text-[11px] md:text-[14px] leading-[18px] md:leading-[24px] tracking-[0.5px] md:tracking-[1.4px] max-w-xl mx-auto font-montserrat font-light">
+        We work with conscious clients, so we have to be conscious too.<br />A world where businesses are fair, ethical, and empowering to all.
+      </p>
+    </div>
+
+    <!-- Social Links — cream circle backgrounds -->
+    <div class="flex justify-center gap-4 mb-10">
+      <!-- Substack -->
+      <a href="#" aria-label="Substack" class="w-12 h-12 rounded-full bg-kd-cream flex items-center justify-center hover:opacity-80 transition-opacity">
+        <img src="/images/global/substack-icon.png" alt="Substack" class="w-6 h-6 object-contain" />
+      </a>
+      <!-- YouTube -->
+      <a href="#" aria-label="YouTube" class="w-12 h-12 rounded-full bg-kd-cream flex items-center justify-center hover:opacity-80 transition-opacity">
+        <img src="/images/global/youtube-icon-figma.png" alt="YouTube" class="w-6 h-6 object-contain" />
+      </a>
+    </div>
+
+    <!-- Footer navigation -->
+    <div class="flex flex-wrap justify-center gap-8 md:gap-12 mb-10">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="font-aktiv text-kd-navy font-medium text-[13px] tracking-[1.3px] hover:text-kd-gold transition-colors uppercase"
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <!-- Copyright bar — cream background -->
+  <div class="bg-kd-cream">
+    <div class="max-w-6xl mx-auto px-6 py-5 flex flex-col md:flex-row justify-between items-center">
+      <p class="text-kd-grey text-[12px] leading-[18px] tracking-[1.2px] font-montserrat font-light">{currentYear} &copy; Kinga Dow. All rights reserved</p>
+      <a href="/privacy" class="text-kd-grey text-[12px] leading-[18px] tracking-[1.2px] font-montserrat font-light hover:text-kd-gold transition-colors mt-3 md:mt-0 underline">
+        Privacy Policy
+      </a>
+    </div>
+  </div>
+</footer>

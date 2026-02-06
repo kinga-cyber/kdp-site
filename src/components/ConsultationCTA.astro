@@ -1,0 +1,172 @@
+---
+// Reusable CTA section — matches Figma sage-green gradient design
+---
+
+<section class="pt-10 md:pt-16 pb-6 md:pb-10 px-6">
+  <div class="max-w-6xl mx-auto rounded-xl overflow-hidden" style="background: linear-gradient(260deg, #8BAA94 33%, #60936F 100%);">
+    <div class="grid md:grid-cols-2 gap-8 p-10 md:pt-10 md:pb-14 md:px-16 items-start">
+      <!-- Left: Content -->
+      <div>
+        <!-- H2 - Section: Montserrat SemiBold 36/60, mobile: 28/36 -->
+        <h2 class="font-aktiv text-[28px] md:text-[36px] font-semibold leading-[36px] md:leading-[60px] tracking-[1.4px] md:tracking-[1.8px] mb-4" style="color: white;">
+          Schedule a<br />Free Consultation
+        </h2>
+        <!-- Script - Medium: Silver South Script 48/55, mobile: 32/38 -->
+        <p class="font-script text-white text-[32px] md:text-[48px] leading-[38px] md:leading-[55px] tracking-[1.6px] md:tracking-[2.4px] mb-6 md:mb-[74px]">
+          Tell us more about you
+        </p>
+        <!-- Body Regular: Aktiv Grotesk Light 16/28, mobile: 15/24 -->
+        <p class="text-white text-[15px] md:text-[16px] leading-[24px] md:leading-[28px] tracking-[1.5px] md:tracking-[1.6px] font-montserrat font-light">
+          All of our services are designed to ensure your success. Each brand is unique! Schedule a FREE consultation so we can learn about your brand and goals!
+        </p>
+      </div>
+
+      <!-- Right: Form -->
+      <div>
+        <form id="consultation-form" class="space-y-4">
+          <input
+            type="text"
+            id="cta-name"
+            name="name"
+            placeholder="Name"
+            required
+            class="w-full px-5 py-3.5 rounded-lg border border-gray-200 bg-white focus:outline-none focus:border-kd-gold text-base font-montserrat font-light text-kd-navy placeholder:text-gray-500"
+          />
+          <input
+            type="email"
+            id="cta-email"
+            name="email"
+            placeholder="Email Address"
+            required
+            class="w-full px-5 py-3.5 rounded-lg border border-gray-200 bg-white focus:outline-none focus:border-kd-gold text-base font-montserrat font-light text-kd-navy placeholder:text-gray-500"
+          />
+          <textarea
+            id="cta-message"
+            name="message"
+            placeholder="Message"
+            rows="4"
+            class="w-full px-5 py-3.5 rounded-lg border border-gray-200 bg-white focus:outline-none focus:border-kd-gold text-base font-montserrat font-light text-kd-navy resize-none placeholder:text-gray-500"
+          ></textarea>
+          <div class="flex items-center gap-2">
+            <input type="checkbox" id="newsletter" name="newsletter" class="w-3.5 h-3.5 accent-kd-gold" />
+            <!-- Body Small: Aktiv Grotesk Regular 14/24 -->
+            <label for="newsletter" class="text-white text-[13px] md:text-[14px] leading-[20px] md:leading-[24px] tracking-[1.3px] md:tracking-[1.4px] font-montserrat font-normal">
+              Subscribe to our newsletter
+            </label>
+          </div>
+          <button
+            type="submit"
+            id="cta-submit-btn"
+            class="btn-navy w-full py-4 px-5 rounded-lg text-base font-montserrat font-medium tracking-wider flex items-center justify-between"
+          >
+            <span id="cta-submit-text">SUBMIT</span>
+            <img src="/images/global/play.png" alt="" class="w-5 h-5" />
+          </button>
+          <!-- Success message (hidden by default) -->
+          <p id="cta-success" class="hidden text-white text-center text-[14px] font-montserrat font-medium tracking-wide pt-2">
+            Thank you! We'll be in touch soon.
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('consultation-form');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const name = (document.getElementById('cta-name') as HTMLInputElement).value;
+    const email = (document.getElementById('cta-email') as HTMLInputElement).value;
+    const message = (document.getElementById('cta-message') as HTMLTextAreaElement).value;
+    const newsletter = (document.getElementById('newsletter') as HTMLInputElement).checked;
+    const submitBtn = document.getElementById('cta-submit-btn') as HTMLButtonElement;
+    const submitText = document.getElementById('cta-submit-text') as HTMLSpanElement;
+    const successMsg = document.getElementById('cta-success') as HTMLParagraphElement;
+
+    // Disable button and show loading
+    submitBtn.disabled = true;
+    submitText.textContent = 'Sending...';
+
+    try {
+      // Create/update profile in Klaviyo
+      const response = await fetch('https://a.klaviyo.com/client/profiles/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'revision': '2024-10-15',
+        },
+        body: JSON.stringify({
+          data: {
+            type: 'profile',
+            attributes: {
+              email: email,
+              first_name: name.split(' ')[0],
+              last_name: name.split(' ').slice(1).join(' ') || '',
+              properties: {
+                consultation_message: message,
+                consultation_request: true,
+                newsletter_opt_in: newsletter,
+                source: 'website_consultation_form',
+              },
+            },
+          },
+          company_id: 'SqUgaK',
+        }),
+      });
+
+      // Subscribe to newsletter list if checked
+      if (newsletter) {
+        await fetch('https://a.klaviyo.com/client/subscriptions/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'revision': '2024-10-15',
+          },
+          body: JSON.stringify({
+            data: {
+              type: 'subscription',
+              attributes: {
+                profile: {
+                  data: {
+                    type: 'profile',
+                    attributes: {
+                      email: email,
+                      first_name: name.split(' ')[0],
+                      last_name: name.split(' ').slice(1).join(' ') || '',
+                    },
+                  },
+                },
+                custom_source: 'Website Consultation Form',
+              },
+              relationships: {
+                list: {
+                  data: {
+                    type: 'list',
+                    id: 'W3XhAb',
+                  },
+                },
+              },
+            },
+            company_id: 'SqUgaK',
+          }),
+        });
+      }
+
+      // Show success
+      form.classList.add('hidden');
+      successMsg.classList.remove('hidden');
+      successMsg.classList.add('text-[18px]', 'py-8');
+
+    } catch (error) {
+      // Show error
+      submitText.textContent = 'Something went wrong. Try again.';
+      submitBtn.disabled = false;
+      setTimeout(() => {
+        submitText.textContent = 'SUBMIT';
+      }, 3000);
+    }
+  });
+</script>

@@ -1,0 +1,765 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ConsultationCTA from "../../components/ConsultationCTA.astro";
+
+// Get the slug from the URL
+const { slug } = Astro.params;
+
+// Blog posts data with full content migrated from kingadow.com
+const allPosts = [
+  {
+    title: "Boosting Your Food Brand's Success with Advanced Email Marketing Strategies Using Klaviyo",
+    date: "June 25, 2024",
+    category: "Email Marketing",
+    excerpt: "In the competitive world of eCommerce, particularly within the food industry, effective email marketing can be the difference between a brand that thrives and one that merely survives...",
+    author: "Kinga Dow",
+    image: "/images/blog/food-brand-klaviyo.png",
+    slug: "boosting-food-brand-email-marketing-klaviyo",
+    content: `
+      <p>In the competitive world of eCommerce, particularly within the food industry, effective email marketing can make all the difference in growing your brand and driving sales. Leveraging the power of Klaviyo, an advanced email marketing platform, you can create highly personalized, targeted campaigns that resonate with your audience and keep them coming back for more. Here's a detailed look at the strategies we used to grow Made In New Mexico food and gift shop eCommerce store, which you can adapt to boost your own brand's success.</p>
+
+      <h2>1. Harnessing User-Generated Content (UGC)</h2>
+      <p>User-generated content is a goldmine for building trust and community around your brand. By encouraging your customers to share their own recipes, meal prep photos, and product reviews, you create authentic content that resonates with potential buyers.</p>
+      <h3>Our Approach:</h3>
+      <ul>
+        <li><strong>Facebook Group:</strong> We established a Facebook group where customers shared their cooking experiences and recipes, particularly those living in New Mexico, Texas and Arizona. This community-driven content was then repurposed for blogs and email campaigns.</li>
+        <li><strong>Contests and Giveaways:</strong> To foster engagement, we ran contests asking customers to submit their favorite recipes using our products, offering giveaways to the best submissions. This not only provided us with a wealth of content but also increased customer loyalty.</li>
+      </ul>
+
+      <h2>2. Capitalizing on Seasonal and Holiday Campaigns</h2>
+      <p>Seasonal and holiday periods are prime opportunities to maximize sales. By running special promotions and creating themed campaigns, you can tap into the increased spending during these times.</p>
+      <h3>Our Approach:</h3>
+      <ul>
+        <li><strong>Holiday Promotions:</strong> From October to December, we focused on products suitable for Thanksgiving and Christmas, offering special discounts and bundles.</li>
+        <li><strong>Seasonal Recipes:</strong> We created and shared holiday-specific recipes through our blog and emails, driving traffic and engagement.</li>
+        <li><strong>Seasonal Banners:</strong> We created seasonal banners reinforcing savings, deadlines and limited stock availability.</li>
+      </ul>
+
+      <h2>3. Effective Product Launch Announcements</h2>
+      <p>Keeping your audience informed and excited about new product launches can significantly boost your sales. Segment your audience to send targeted announcements and back-in-stock alerts.</p>
+      <h3>Our Approach:</h3>
+      <ul>
+        <li><strong>Segmentation:</strong> We segmented our email list based on past purchases and interests, ensuring that product launch emails reached the most interested customers.</li>
+        <li><strong>Back-in-Stock Alerts:</strong> Automated emails were sent to notify customers when popular items were restocked, maintaining high engagement and sales.</li>
+      </ul>
+
+      <h2>4. Gathering Customer Feedback and Conducting Surveys</h2>
+      <p>Understanding your customers' needs and preferences is crucial. Regular surveys and feedback collection help refine your product offerings and marketing strategies.</p>
+      <h3>Our Approach:</h3>
+      <ul>
+        <li><strong>Surveys:</strong> We used tools like Typeform to create engaging surveys, offering discounts and loyalty points as incentives for completion.</li>
+        <li><strong>Product Reviews:</strong> Reviews collected through platforms like Yotpo were incorporated into our emails, providing social proof and building trust.</li>
+      </ul>
+
+      <h2>5. Providing Educational Content</h2>
+      <p>Educational content not only engages your audience but also positions your brand as an authority in the food industry. Share useful tips, recipe roundups, and cooking hacks to keep your customers interested.</p>
+      <h3>Our Approach:</h3>
+      <ul>
+        <li><strong>Weekly Roundups:</strong> We featured the most popular blog posts of the week in our emails, including detailed recipes and cooking guides.</li>
+        <li><strong>Cooking Tips:</strong> Practical cooking tips and hacks were regularly shared to add value to our email content.</li>
+      </ul>
+
+      <h2>6. Building Partnerships and Collaborations</h2>
+      <p>Collaborations with chefs, food bloggers, and influencers can expand your reach and add credibility to your brand. Exclusive content created through these partnerships can drive significant engagement.</p>
+      <h3>Our Approach:</h3>
+      <ul>
+        <li><strong>Guest Posts:</strong> We featured guest posts from well-known chefs and food influencers in our blog and emails.</li>
+        <li><strong>Cooking Demos:</strong> Virtual cooking classes and live Q&A sessions with experts were hosted, engaging our audience and attracting new customers.</li>
+      </ul>
+
+      <h2>7. Developing Exclusive VIP Programs and Loyalty Programs</h2>
+      <p>A VIP program can make your most loyal customers feel special, encouraging repeat purchases and fostering long-term loyalty.</p>
+      <h3>Our Approach:</h3>
+      <ul>
+        <li><strong>VIP Events:</strong> We invited VIP members to exclusive events, such as virtual tastings and behind-the-scenes tours.</li>
+        <li><strong>Personalized Offers:</strong> Personalized emails with special offers and thank-you notes were sent to VIP members.</li>
+      </ul>
+
+      <h2>8. Organizing Event Invitations</h2>
+      <p>Interactive events can significantly boost customer engagement. Use Klaviyo to send out invitations and reminders for events like virtual cooking classes and live Q&A sessions.</p>
+      <h3>Our Approach:</h3>
+      <ul>
+        <li><strong>Virtual Cooking Classes:</strong> Regular cooking classes featuring our products were hosted, with invitations and follow-ups sent via email.</li>
+        <li><strong>Live Q&A Sessions:</strong> We organized live sessions with nutritionists and chefs, providing valuable insights and fostering community engagement.</li>
+      </ul>
+
+      <h2>9. Cross-Selling with Wonderment Emails</h2>
+      <p>Utilizing cross-sell strategies can increase your average order value. Wonderment emails can recommend complementary products based on customer purchase history.</p>
+      <h3>Our Approach:</h3>
+      <ul>
+        <li><strong>Transactional Emails:</strong> We partner with Wonderment to build a transactional email flow to help during the busy season to track deliveries.</li>
+        <li><strong>Dynamic Recommendations:</strong> We used Wonderment emails to recommend products that complemented customers' previous purchases.</li>
+        <li><strong>Enhanced Cross-Selling:</strong> This strategy boosted our average order value and overall sales.</li>
+      </ul>
+
+      <h2>10. Special SMS Flash Sales</h2>
+      <p>Leveraging SMS for flash sales can create a sense of urgency and exclusivity. Encourage email subscribers to opt into SMS for exclusive deals.</p>
+      <h3>Our Approach:</h3>
+      <ul>
+        <li><strong>Email to SMS Campaigns:</strong> We used email campaigns to encourage subscribers to sign up for SMS alerts.</li>
+        <li><strong>Exclusive SMS Offers:</strong> Time-sensitive flash sales were promoted through SMS, driving immediate sales.</li>
+      </ul>
+
+      <h2>Conclusion</h2>
+      <p>By implementing these advanced email marketing strategies with Klaviyo, we enhanced customer engagement, built a loyal community, and drove significant revenue growth. Start leveraging these tactics to optimize your email marketing efforts and elevate your food brand's success.</p>
+      <p><strong>Ready to Transform Your Email Marketing?</strong> Connect with us for more insights and personalized strategies to boost your eCommerce success!</p>
+    `
+  },
+  {
+    title: "Strategies for Capitalizing on Traffic and Growth: Gamification, Social Engagement and Email Acquisition",
+    date: "April 4, 2024",
+    category: "eCommerce",
+    excerpt: "I'm back after a great week at Cosmoprof, Bologna. I'm ready to dissect all the key strategies for capturing traffic and turning visitors into loyal customers...",
+    author: "Kinga Dow",
+    image: "/images/blog/gamification-traffic.png",
+    slug: "strategies-traffic-growth-gamification",
+    content: `
+      <h2>Introduction</h2>
+      <p>I recently attended Cosmoprof in Bologna and observed innovative strategies brands employed to engage audiences. Three primary tactics stood out: email acquisition, Instagram follower enhancement, and brand awareness building.</p>
+
+      <h2>Email Capture</h2>
+      <p>Email collection emerged as a critical strategy for maximizing event ROI. Several beauty brands implemented quiz and survey mechanisms to gather contact information while simultaneously learning about customer preferences.</p>
+      <p><strong>Rica Hair</strong> offered a survey addressing participant hair concerns and recommending products accordingly. This approach built substantial email databases while gathering preference data. However, the quiz's Italian-only language limitation potentially restricted international engagement.</p>
+      <p><strong>Davines</strong> employed personalized surveys collecting information about customer hair needs, visitor interests, and language preferences. This enabled precise audience segmentation. The brand complemented surveys with customized product samples, enhancing the consumer experience.</p>
+      <p><strong>Anaplais</strong> from Greece introduced a claw machine game where email submission served as entry. Winners received product prizes, effectively combining engagement with data collection while strengthening brand connection.</p>
+
+      <h2>Gamification Brand Awareness</h2>
+      <p><strong>Geske</strong> and <strong>Olaplex</strong> utilized spin wheels offering prizes and substantial branded materials. Though less focused on email collection, these tactics generated significant brand visibility through interactive experiences and elevated product presentation.</p>
+      <p><strong>The Humble Company</strong> from Sweden showcased sustainability commitments through ring-toss and spin-wheel games without requiring email or social media follow-ups, prioritizing memorable brand experiences over data collection.</p>
+
+      <h2>Social Engagement</h2>
+      <p><strong>Annabella Mineral</strong>, a Polish cosmetics brand, required Instagram follows and post likes in exchange for product samples. This strategy effectively expanded their follower base while boosting algorithmic visibility.</p>
+
+      <h2>Conclusion</h2>
+      <p>Effective event engagement combines creative tactics—from email acquisition to gamification—fostering meaningful brand interactions that extend beyond the physical event itself.</p>
+    `
+  },
+  {
+    title: "Act Now: Navigating Google and Yahoo's Urgent Sender Requirements for 2024",
+    date: "January 30, 2024",
+    category: "Email Marketing",
+    excerpt: "In the digital marketing realm, delivering emails that reach your audience's inbox is paramount. Google and Yahoo have announced new compliance standards...",
+    author: "Kinga Dow",
+    image: "/images/blog/google-yahoo-2024.png",
+    slug: "google-yahoo-sender-requirements-2024",
+    content: `
+      <h2>Introduction to New Email Marketing Compliance Standards</h2>
+      <p>In the digital marketing realm, delivering emails that engage and convert is paramount. Recent updates in email marketing requirements are pivotal for the success of your campaigns and achieving an impressive deliverability score. Understanding and implementing these requirements will not only benefit your customers with better email practices but will also boost your overall email deliverability.</p>
+
+      <h2>The Importance of Email Compliance</h2>
+      <p>The transition from recommended practices to mandatory compliance is a significant move by major inbox providers like Google and Yahoo. Shane McElroy from Klaviyo underscores the critical nature of these changes, emphasizing that "proper authentication is now a cornerstone for email marketing success." Compliance is more than just a best practice; it's a necessity for reaching your audience effectively.</p>
+
+      <h2>Stringent Google Requirements: A Game-Changer for Bulk Senders</h2>
+      <p>Google's stringent requirements are a benchmark for the industry, ensuring that following their guidelines will keep you in good standing with other providers like Yahoo as well. If you're sending over 5,000 emails per day to Google accounts, these updates are especially relevant to you, encompassing all email types, from personal to transactional.</p>
+
+      <h2>Three Key Compliance Requirements for 2024:</h2>
+      <ul>
+        <li><strong>DMARC Authentication:</strong> Implementing DMARC authentication is a proactive step toward securing your email communications. Google has set forth a specific set of guidelines for DMARC that you'll need to follow for successful implementation.</li>
+        <li><strong>Domain Alignment in "From" Headers:</strong> For bulk senders, using a domain that you own is now compulsory. Your "From" header must reflect your sending domain to comply with DMARC requirements, affecting both marketing and transactional emails.</li>
+        <li><strong>One-Step Unsubscribe Process:</strong> Your marketing emails must include an easy, one-step method for recipients to unsubscribe. The link should be clear and accessible, though not necessarily facilitating a one-click unsubscribe action.</li>
+      </ul>
+
+      <h2>Additional Compliance Tips for All Email Marketers:</h2>
+      <p><strong>Keep Your Spam Rates Low:</strong> It's crucial to maintain a spam complaint rate below 0.10%. Tools like Google's Postmaster are invaluable for monitoring your spam rates.</p>
+      <p><strong>Avoid "From" Header Impersonation:</strong> Refrain from using generic Gmail or Googlemail addresses for your business emails to prevent being flagged as spam. Invest in a domain that represents your brand for better recognition and trust.</p>
+
+      <h2>Proactive Measures from Klaviyo:</h2>
+      <p>Klaviyo is ahead of the curve, preparing to implement a "list unsubscribe header" that will automatically meet the one-click unsubscribe requirement for all marketing emails designed using their platform.</p>
+
+      <h2>How to Check Your Compliance:</h2>
+      <ul>
+        <li><strong>DMARC Authentication Verification:</strong> Access your DNS provider's portal. Find the TXT record beginning with "v=DMARC1". If it's missing, add this record as soon as possible.</li>
+        <li><strong>Ensuring Domain Alignment:</strong> Verify that your "From" address matches your sending domain. If not, update your email settings to correct this mismatch.</li>
+        <li><strong>Unsubscribe Link Accuracy:</strong> Review your marketing emails for the presence of an easily accessible unsubscribe link. If it's complex or missing, update your email templates.</li>
+      </ul>
+
+      <h2>Self-Check with DMARCian:</h2>
+      <p>Utilize DMARCian.com's domain checker to evaluate your DMARC, SPF, and DKIM records. A red "X" next to any of these records signals an immediate need for action.</p>
+
+      <h2>Taking Action on Compliance Issues:</h2>
+      <p>Should you encounter issues with your DMARC, SPF, or DKIM records, contact your DNS provider without delay to add or correct these records, ensuring your compliance is up to date.</p>
+
+      <h2>Final Thoughts on Embracing Compliance Changes:</h2>
+      <p>While these updates may require some adjustments to your current email practices, they present an excellent opportunity to bolster your brand's reputation. By staying compliant, you're not just following rules—you're enhancing your email marketing strategy and forging stronger connections with your customers.</p>
+      <p>For any questions or additional assistance with navigating these updates, please reach out. We're here to help ensure your email marketing efforts remain on the cutting edge of compliance and success.</p>
+    `
+  },
+  {
+    title: "The Crucial Difference Between Copywriters and Email Marketing Copywriters",
+    date: "January 30, 2024",
+    category: "Email Marketing",
+    excerpt: "In the ever-evolving landscape of digital marketing, the role of copywriters has diversified, with email marketing copywriters emerging as specialists...",
+    author: "Kinga Dow",
+    image: "/images/blog/copywriter-difference.png",
+    slug: "difference-copywriters-email-marketing",
+    content: `
+      <h2>Introduction</h2>
+      <p>In the ever-evolving landscape of digital marketing, the role of copywriters has diversified, with a distinct emphasis on specialists who craft persuasive email content. This blog aims to unravel the intricate differences between regular copywriters and those specializing in email marketing. As we explore this, we'll also highlight the crucial SEO elements that contribute to effective email marketing in the realm of ecommerce.</p>
+
+      <h2>Understanding the Basics of Copywriting</h2>
+      <p>Copywriting, in its essence, is the art of using words to captivate, inform, and engage an audience. Regular copywriters are versatile wordsmiths who craft content for various mediums, including blogs, advertisements, and social media posts. Their primary goal is to communicate a message effectively, tailoring their approach to suit diverse platforms and audiences.</p>
+
+      <h2>The Rise of Email Marketing Copywriters</h2>
+      <p>With the exponential growth of digital communication, the demand for specialized email marketing copywriters has surged. Unlike their generalist counterparts, email marketing copywriters focus on mastering the intricacies of email campaigns. They are strategic thinkers, weaving words to not just convey a message but to drive engagement and prompt specific actions within the crowded inbox.</p>
+      <p>At the heart of email marketing lies the need for content that not only grabs attention but also prompts the desired response. Email marketing copywriters excel in creating concise, engaging, and purpose-driven content. This unique skill ensures that the recipient not only opens the email but also takes the intended action – be it making a purchase, subscribing, or participating in a survey.</p>
+
+      <h2>Our Quest for the Perfect Copywriter</h2>
+      <p>Behind the scenes, our journey for finding a copywriter has had its challenges. For years, we've been on the lookout for a talent that not only masters the art of persuasion but also understands the intricacies of email marketing. Despite our rigorous hiring efforts, we found a gap – a scarcity of professionals possessing the precise set of skills demanded by the dynamic world of ecommerce and email marketing.</p>
+
+      <h2>The Need for Specialization</h2>
+      <p>Training new hires became a common theme in our pursuit of the ideal copywriter. The challenge lay in finding individuals with a knack for brevity, an understanding of persuasive calls to action (CTAs), and an inherent sense of urgency – all essential components in the world of email marketing.</p>
+
+      <h2>The Science of Subject Lines</h2>
+      <p>In email marketing, the subject line is a make-or-break element. Crafting an effective subject line requires a mix of art and science – it needs to be intriguing, clear, and relevant. Email marketing copywriters invest significant time in perfecting subject lines that not only resonate with the audience but also stand out amid a sea of emails.</p>
+
+      <h2>Personalization and Audience Segmentation</h2>
+      <p>A distinctive strength of email marketing copywriters lies in their ability to personalize content. By segmenting audiences based on demographics, behaviors, or preferences, they create targeted messages that enhance relevance and increase engagement. This level of personalization is particularly crucial in the competitive ecommerce space.</p>
+
+      <h2>SEO Integration in Email Marketing</h2>
+      <p>While SEO is traditionally associated with web content, its principles are equally relevant in email marketing. Email marketing copywriters adeptly integrate keywords into their content, making it not only engaging for the reader but also optimized for search engines. This ensures that the content aligns with the latest trends and searches related to email marketing, enhancing its visibility.</p>
+
+      <h2>Staying Compliant and Ethical</h2>
+      <p>In an era where data privacy is paramount, email marketing copywriters must navigate laws and regulations like GDPR and CAN-SPAM. Writing content that is not only compelling but also compliant is a crucial skill that sets professional email marketers apart, especially when dealing with ecommerce data and customer information.</p>
+
+      <h2>Conclusion</h2>
+      <p>As the digital marketing landscape evolves, the role of email marketing copywriters emerges as a crucial element in successful ecommerce strategies. Understanding the nuances that set them apart from regular copywriters is essential for businesses looking to leverage email marketing effectively. As we continue our journey, we invite aspiring email marketing copywriters to join us in this exciting venture. Together, we can transform how brands connect with their audiences through strategic, compelling email communication.</p>
+    `
+  },
+  {
+    title: "The Best Ecommerce Partners for Email Marketing: A KDP Guide",
+    date: "June 15, 2023",
+    category: "eCommerce",
+    excerpt: "11 Best Apps for Building Up Your Klaviyo Ecosystem. When it comes to email marketing, having the right partners makes all the difference...",
+    author: "Pola",
+    image: "/images/blog/ecommerce-partners.jpg",
+    slug: "best-ecommerce-partners-email-marketing",
+    content: `
+      <h2>11 Best Apps for Building Up Your Klaviyo Ecosystem</h2>
+      <p>When it comes to email marketing, Klaviyo stands out as a leading marketing automation platform. It empowers eCommerce businesses to create personalized email and SMS campaigns that deliver exceptional results.</p>
+      <p>The platform offers drag-and-drop email builders, pre-built templates, and customizable sign-up forms. A key strength is its seamless integration with eCommerce platforms including Shopify, WooCommerce, and Magento.</p>
+
+      <h2>Featured Partners</h2>
+
+      <h3>1. Loyalty Lion: Customer Loyalty Platform</h3>
+      <p>This engagement tool helps businesses create and manage loyalty programs with points-based rewards, referral programs, and VIP tiers to increase retention and drive revenue growth.</p>
+
+      <h3>2. Attentive: Mobile Messaging Platform</h3>
+      <p>Described as "the #1 text message marketing solution driving 19% of total online revenue for over 8,000 leading brands," Attentive offers SMS-first capabilities with audience segmentation and personalization features.</p>
+
+      <h3>3. Okendo: Customer Review Platform</h3>
+      <p>Okendo enables businesses to collect and display customer reviews, gathering authentic feedback and increasing social proof through customizable review requests and moderation.</p>
+
+      <h3>4. Octane AI: Customer Engagement Platform</h3>
+      <p>This quiz platform allows businesses to create interactive quizzes that boost customer engagement and foster brand loyalty through entertaining and educational content.</p>
+
+      <h3>5. Wonderment: Post-Purchase Experience</h3>
+      <p>Wonderment improves post-purchase experiences through proactive shipping notifications and branded tracking pages with Klaviyo integration.</p>
+
+      <h3>6. Recharge: Subscription Management</h3>
+      <p>Recharge handles subscription-based services with flexible plans, automated billing, and subscriber management capabilities.</p>
+
+      <h3>7. MentionMe: Referral Platform</h3>
+      <p>MentionMe incentivizes customer referrals through customizable programs with real-time reporting and A/B testing functionality.</p>
+
+      <h3>8. Rebuy: Personalization Service</h3>
+      <p>Rebuy offers hyper-personalized product recommendations, post-purchase upsells, and checkout customizations to enhance customer lifetime value.</p>
+
+      <h3>9. Lifetimely: Analytics Tool</h3>
+      <p>This platform provides in-depth customer lifetime value analytics to optimize marketing strategies.</p>
+
+      <h3>10. Gorgias: Customer Support</h3>
+      <p>Gorgias centralizes communication channels for efficient customer inquiry management and personalized support experiences.</p>
+
+      <h3>11. Typeform: Survey and Forms Tool</h3>
+      <p>Typeform creates interactive surveys and forms to gather valuable customer feedback.</p>
+
+      <h2>Conclusion</h2>
+      <p>Building the right ecosystem around Klaviyo can dramatically improve your email marketing results. Each of these partners brings unique capabilities that complement Klaviyo's core functionality, helping you create more personalized, engaging, and effective campaigns.</p>
+    `
+  },
+  {
+    title: "The Power of Technology in Beauty: Geske at Cosmoprof Show",
+    date: "April 5, 2023",
+    category: "eCommerce",
+    excerpt: "Leveraging technology for unique customer experiences in the beauty sector. See how innovative brands are transforming their approach...",
+    author: "Kinga Dow",
+    image: "/images/blog/geske-cosmoprof.gif",
+    slug: "technology-beauty-geske-cosmoprof",
+    content: `
+      <h2>About Geske</h2>
+      <p>Geske is an innovative beauty brand that impressed attendees at Cosmoprof Bologna with its elegant, modern aesthetic. The company's products feature sleek, minimalist packaging combined with beautiful textures and colors. What sets Geske apart is their integration of artificial intelligence and machine learning to personalize products for individual customers, offering a unique and effective experience.</p>
+
+      <h2>Geske ft. Technology</h2>
+      <p>Personalization represents a significant trend in email marketing, and Geske elevates this approach through advanced technology. According to research, "91% of consumers are more likely to shop with brands that provide personalized recommendations" and personalization can increase sales by up to 15%.</p>
+      <p>Geske's AI and machine learning technology analyzes each customer's skin type, preferences, and specific concerns to recommend customized skincare and makeup products, which are created on-site. This delivers a truly individualized beauty experience. Additionally, the brand's commitment to sustainability includes eco-friendly packaging, cruelty-free formulations, and vegan products—values that resonate with today's conscious consumers.</p>
+
+      <h2>My Thoughts</h2>
+      <p>My experience with Geske at Cosmoprof demonstrated the beauty industry's future direction. Technology is already personalizing products and experiences, with innovative brands like Geske leading the way. Upon their spring 2023 launch, Geske's combination of cutting-edge technology, sustainability commitment, and affordable pricing (starting at $29.95) positions them for significant market success.</p>
+
+      <h2>What are your next steps?</h2>
+      <p>Beauty and cosmetics marketers should incorporate personalization and ethical practices into their strategies, leveraging technology to create distinctive customer experiences while reflecting brand values around sustainability and responsibility.</p>
+    `
+  },
+  {
+    title: "How Davines Nailed Their Email Marketing Strategy at Cosmoprof Bologna!",
+    date: "March 27, 2023",
+    category: "eCommerce",
+    excerpt: "Examining how this sustainable hair care brand executed their email marketing at the industry's biggest event...",
+    author: "Kinga Dow",
+    image: "/images/blog/davines-email-marketing.jpg",
+    slug: "davines-email-marketing-cosmoprof",
+    content: `
+      <h2>See how Davines, the sustainable hair care brand, executed a marketing strategy leveraging email!</h2>
+      <p>Cosmoprof Bologna is the biggest cosmetics and makeup trade show in Europe, and this year, I had the pleasure of attending. As an email strategist, I was excited to see how brands leveraged email marketing to engage with their audiences. To my surprise, only a few brands were doing a fantastic job, and Davines was one of them.</p>
+      <p>Davines is a sustainable hair care brand committed to sustainability and education. They use eco-friendly packaging and natural ingredients, and they offer a wide range of products designed for different hair types. In addition, they provide educational resources on their website and partner with organizations to support social and environmental causes.</p>
+
+      <h2>The Strategy</h2>
+      <p>At the trade show, Davines was offering attendees a sample of their shampoo, and all they had to do was scan a QR code and provide their email addresses. The follow-up email with a code for the sample was executed flawlessly, and I was blown away by their marketing department's skill.</p>
+      <p>Working with QR codes is not unusual for me, as I have used this strategy with my clients! I even have a blog post and a YouTube video on this topic- so you can learn how to reach your customers with relevant messaging – whether it's new products, sales, or more, sequentially creating more opportunities for you to sell.</p>
+
+      <h2>My Thoughts</h2>
+      <p>Davines' execution of this strategy was flawless!</p>
+      <p>The email was beautifully designed, with eye-catching visuals and a clear call to action. The messaging was on point, emphasizing the brand's commitment to sustainability and education. Davines also used the opportunity to showcase its other products and offer a discount code for attendees to use on their website.</p>
+      <p>Their QR code seamlessly integrates with their email marketing strategy, providing attendees a convenient and memorable experience. This shows that even tried-and-true marketing tactics can be enhanced with the right execution and attention to detail. By offering a sample in exchange for an email address, Davines built its email list while providing attendees with a tangible experience of its products. The follow-up email was personalized and provided additional value beyond the sample code.</p>
+      <p>Overall, Davines nailed its email marketing strategy at Cosmoprof Bologna. They leveraged the opportunity to build their email list, showcase their products, and emphasize their commitment to sustainability and education. My dream is to see more brands follow in their footsteps and use email marketing to engage with their audiences meaningfully.</p>
+
+      <h2>Conclusion</h2>
+      <p>In conclusion, if you want to enhance your email marketing strategy, take a page from Davines' book. Consider how you can offer value to your audience, personalize your messaging, and seamlessly integrate your strategy with other marketing channels. By doing so, you'll be on your way to email marketing success.</p>
+    `
+  },
+  {
+    title: "Boost Your Email Marketing Strategy with Klaviyo and Google Ads",
+    date: "January 20, 2023",
+    category: "eCommerce",
+    excerpt: "Are you looking for ways to maximize your advertising spend? And reach more highly-qualified buyers? Discover how to integrate Klaviyo with Google Ads...",
+    author: "Pola",
+    image: "/images/blog/klaviyo-google-ads.jpg",
+    slug: "klaviyo-google-ads-integration",
+    content: `
+      <h2>A Powerful Tool</h2>
+      <p>The integration between Klaviyo and Google Ads enables brands to sync Klaviyo segments directly into Google Ads, allowing personalized ad targeting based on browsing and purchase history. This approach improves ad relevance and conversion rates.</p>
+
+      <h2>Step-by-Step Guide</h2>
+      <p>Here's how to set up the integration:</p>
+      <ol>
+        <li>Login to your Klaviyo account</li>
+        <li>Connect your Google Ads account via the Integrations page</li>
+        <li>Complete authorization with your Google Account</li>
+        <li>Connect segments to audience lists</li>
+        <li>Click 'Add Connection' and finalize setup in Google Ads</li>
+      </ol>
+
+      <h2>Key Benefits</h2>
+      <p>The integration offers four main advantages:</p>
+      <ul>
+        <li><strong>Leverage Klaviyo data:</strong> Use browsing and purchase activity data for better targeting</li>
+        <li><strong>Omnichannel targeting:</strong> Target ads across Google's channels alongside email, SMS, and social</li>
+        <li><strong>Streamlined connection:</strong> No manual data transfer required</li>
+        <li><strong>Consolidated data:</strong> Personalized advertising throughout the customer journey</li>
+      </ul>
+
+      <h2>Conclusion</h2>
+      <p>The partnership between Klaviyo and Google Ads creates a powerful solution for e-commerce companies seeking effective, personalized campaigns by connecting customer data with Google Ads. This integration allows you to maximize your advertising spend and reach highly-qualified buyers who are more likely to convert.</p>
+    `
+  },
+  {
+    title: "Discover How The Role of AI Is Growing In Business And How You Can Leverage It!",
+    date: "January 10, 2023",
+    category: "Klaviyo",
+    excerpt: "As AI technology continues to advance, more and more businesses are turning to artificial intelligence to streamline operations and boost results...",
+    author: "Pola",
+    image: "/images/blog/ai-role-business.jpg",
+    slug: "ai-role-growing-business",
+    content: `
+      <p>As AI technology continues to advance, more and more businesses are turning to artificial intelligence to improve their efficiency and provide creative results. Klaviyo's AI and ChatGPT are two powerful tools that can help you optimize your business and stay ahead of the curve!</p>
+
+      <h2>Skills To Learn In 2023</h2>
+      <p>Before we start, I wish you all a very Happy New Year! May this year bring your success in achieving your professional goals and resolutions. Here's to a productive and prosperous year ahead!</p>
+      <p>While I was researching fun and engaging content ideas, it soon became clear that we need to focus on the most innovative and groundbreaking technology available to support marketers and businesses this year.</p>
+      <p>And that technology is…Artificial Intelligence (AI)</p>
+      <p>AI is going to change the way we do work from now on. It has the potential to revolutionize the way we live and work, bringing in new opportunities as it continues to advance. Businesses around the world are already leveraging the power of AI to streamline processes, increase efficiency and drive growth with personalized marketing campaigns. And we want everyone to be ready!</p>
+      <p>To demonstrate how you can use AI at work as a marketer, we will use Klaviyo AI technology and enhance it with the latest craze: ChatGPT.</p>
+
+      <h2>How To Begin</h2>
+      <p>Let's begin with Klaviyo.</p>
+      <p>Login into our Klaviyo account and go into one of our email flows. We will edit the email subject lines using Subject Line Assistant, and Klaviyo AI technology, one of their latest new releases.</p>
+      <p>In this example, we are editing the subject line for the Welcome flow to provide a better direction for the specific content. Providing more information and details to an AI service can help to improve its performance and accuracy.</p>
+      <p>Here are the next steps you need to take to successfully and most effectively get the results you want:</p>
+      <ol>
+        <li>Select flow type. This will ensure that the generated subject lines are relevant.</li>
+        <li>Enter the brand name.</li>
+        <li>Provide a short description of the brand or the email content. Make sure to keep it short, and personal and provide any important information the customers may need.</li>
+        <li>Click 'Generate' and watch the magic happen.</li>
+        <li>You will see three generated subject lines, and the option to generate more if you are not satisfied with the ones available.</li>
+      </ol>
+      <p>As you can see in my example, I have just generated several ideas for my Welcome Flow content email subject line. If you're already using Klaviyo, using their AI tool to help generate subject and preview lines will come naturally. Test this process when creating new flows, and test them against your own subject lines to see which ones perform better.</p>
+
+      <h2>Comparing Klaviyo AI to ChatGPT</h2>
+      <p>Now, let's compare Klaviyo's subject lines with what ChatGPT will create for us.</p>
+      <p>In order to do this, we need a free account on ChatGPT. After logging in, you will see a search box at the bottom of the screen, where you can enter a descriptive phrase or a question.</p>
+      <p>Now sit back, and let the magic happen…</p>
+      <p>I can keep pressing "Regenerate Response" to get more results and look for those which satisfy me the most. You can also add as many or as few details as you want, and give it parameters to use too. For example, if you wanted to mention a specific promotion or a word you can include that in the description.</p>
+      <p>Now it's time to test them!</p>
+
+      <h2>Results</h2>
+      <p>Since it is so easy to come up with unlimited versions of subject lines, this is also an excellent opportunity to set up some extra A/B tests to get your winning subject and preview lines.</p>
+
+      <h2>What Do You Think?</h2>
+      <p>AI is growing in importance for businesses and tools like Klaviyo AI and ChatGPT are making it easier for companies to use AI. As AI continues to evolve, it will be interesting to see how businesses choose to incorporate these technologies into their strategies.</p>
+      <p>So, that's it! How do you see AI fitting into your business's future?</p>
+      <p>We are going to start A/B testing AI copy vs. our copywriters and will be back with a new blog post and video at some point to report the results!</p>
+    `
+  },
+  {
+    title: "Funnel Retail Traffic To Your Online Store & Boost Sales",
+    date: "June 30, 2022",
+    category: "Email Marketing",
+    excerpt: "QR codes are a unique way to bridge your retail presence with your online presence. Learn how to capture in-store customers for your email list...",
+    author: "Kinga Dow",
+    image: "/images/blog/retail-traffic.jpg",
+    slug: "funnel-retail-traffic-online-store",
+    content: `
+      <h2>How Can QR Codes Be Used For Marketing?</h2>
+      <p>QR (Quick Response) codes serve as a bridge connecting physical retail locations to digital channels. These scannable codes enable businesses to move in-store customers onto email databases by directing them to online platforms.</p>
+      <p>The strategy involves advertising the advantages of shopping online compared to in-store experiences, coupled with incentive offers. Once customers join mailing lists through this method, brands can create conversion opportunities through targeted email sequences.</p>
+
+      <h2>Displaying Your QR Code</h2>
+      <p>QR codes should be positioned in high-traffic areas within retail spaces, with designs reflecting brand aesthetics. Display options range from elegant in-store iPad installations to simpler flyer placements near checkout areas.</p>
+      <p>Effective flyers include engaging copy, basic QR code instructions for unfamiliar users, and visible incentive offers that encourage email sharing.</p>
+
+      <h2>Landing Page Strategy</h2>
+      <p>Scanning QR codes directs customers to landing pages where they enter contact information. These pages typically offer dual pathways:</p>
+      <ul>
+        <li>Email entry leading to Klaviyo integration</li>
+        <li>Phone number capture through platforms like Attentive</li>
+      </ul>
+      <p>Follow-up messages confirm subscriptions and provide discount instructions, emphasizing that offers apply exclusively to online purchases.</p>
+
+      <h2>Developing Email Flows in Klaviyo</h2>
+      <p>Brands should establish multi-email sequences triggered by signup events, including:</p>
+      <ul>
+        <li>Initial welcome message</li>
+        <li>Follow-up for unopened emails</li>
+        <li>Sequential daily emails</li>
+      </ul>
+      <p>Using separate lists prevents duplicate messaging for existing subscribers while ensuring new retail converts receive promotional content.</p>
+
+      <h2>Converting Retail Shoppers to Online Buyers</h2>
+      <p>Messaging should emphasize online-exclusive advantages:</p>
+      <ul>
+        <li>Expanded clearance selections</li>
+        <li>Buy-now-pay-later options (Klarna, AfterPay)</li>
+        <li>Exclusive offers and larger product variety</li>
+        <li>VIP sales and new release access</li>
+      </ul>
+      <p>Social proof in the form of reviews demonstrates brand credibility and builds customer confidence in online shopping experiences.</p>
+
+      <h2>Conclusion</h2>
+      <p>QR codes provide a seamless way to bridge the gap between your physical retail presence and your online store. By implementing this strategy with well-designed landing pages and targeted email flows, you can effectively convert in-store traffic into loyal online customers.</p>
+    `
+  }
+];
+
+// Find the current post
+const post = allPosts.find(p => p.slug === slug);
+
+// If post not found, return 404
+if (!post) {
+  return Astro.redirect('/404');
+}
+
+// Get related posts (same category, excluding current)
+const relatedPosts = allPosts
+  .filter(p => p.category === post.category && p.slug !== post.slug)
+  .slice(0, 3);
+
+// Generate static paths for all posts
+export function getStaticPaths() {
+  const posts = [
+    "boosting-food-brand-email-marketing-klaviyo",
+    "strategies-traffic-growth-gamification",
+    "google-yahoo-sender-requirements-2024",
+    "difference-copywriters-email-marketing",
+    "best-ecommerce-partners-email-marketing",
+    "technology-beauty-geske-cosmoprof",
+    "davines-email-marketing-cosmoprof",
+    "klaviyo-google-ads-integration",
+    "ai-role-growing-business",
+    "funnel-retail-traffic-online-store"
+  ];
+
+  return posts.map(slug => ({
+    params: { slug }
+  }));
+}
+---
+
+<Layout
+  title={`${post.title} | Kinga Dow Blog`}
+  description={post.excerpt}
+>
+  <!-- Hero / Article Header -->
+  <article>
+    <header class="relative py-12 md:py-20 overflow-hidden" style="background: linear-gradient(180deg, #F6EFE6 0%, #FAFAFA 100%);">
+      <!-- Decorative circles -->
+      <div class="absolute top-8 left-8 w-24 h-24 rounded-full border border-kd-gold/20"></div>
+      <div class="absolute bottom-12 right-12 w-20 h-20 rounded-full border border-kd-gold/20"></div>
+
+      <div class="max-w-4xl mx-auto px-6 relative z-10">
+        <!-- Breadcrumb -->
+        <nav class="animate-on-scroll fade-in-up mb-6">
+          <ol class="flex items-center gap-2 text-[13px] font-montserrat tracking-[0.6px]">
+            <li><a href="/" class="text-kd-grey hover:text-kd-gold transition-colors">Home</a></li>
+            <li class="text-kd-grey">/</li>
+            <li><a href="/blog" class="text-kd-grey hover:text-kd-gold transition-colors">Blog</a></li>
+            <li class="text-kd-grey">/</li>
+            <li class="text-kd-gold">{post.category}</li>
+          </ol>
+        </nav>
+
+        <!-- Category -->
+        <span class="animate-on-scroll fade-in-up text-kd-gold text-[13px] md:text-[14px] font-montserrat font-medium tracking-[1.3px] uppercase">
+          {post.category}
+        </span>
+
+        <!-- Title -->
+        <h1 class="animate-on-scroll fade-in-up font-aktiv text-kd-navy text-[28px] md:text-[42px] leading-[36px] md:leading-[52px] tracking-[1.4px] md:tracking-[2.1px] font-semibold mt-3 mb-6">
+          {post.title}
+        </h1>
+
+        <!-- Meta info -->
+        <div class="animate-on-scroll fade-in-up delay-100 flex flex-wrap items-center gap-4 md:gap-6">
+          <!-- Author -->
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-kd-cream flex items-center justify-center">
+              <span class="text-kd-navy text-[14px] font-montserrat font-medium">
+                {post.author.charAt(0)}
+              </span>
+            </div>
+            <span class="text-kd-navy text-[14px] font-montserrat font-medium tracking-[0.7px]">
+              {post.author}
+            </span>
+          </div>
+
+          <span class="text-kd-grey">|</span>
+
+          <!-- Date -->
+          <span class="text-kd-grey text-[14px] font-montserrat tracking-[0.7px]">
+            {post.date}
+          </span>
+
+          <span class="text-kd-grey hidden md:inline">|</span>
+
+          <!-- Reading time estimate -->
+          <span class="text-kd-grey text-[14px] font-montserrat tracking-[0.7px] hidden md:inline">
+            5 min read
+          </span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Featured Image -->
+    <div class="max-w-4xl mx-auto px-6 -mt-4 md:-mt-8 mb-10 relative z-20">
+      <div class="animate-on-scroll fade-in-up aspect-[16/9] bg-kd-cream rounded-xl overflow-hidden shadow-lg">
+        <img
+          src={post.image}
+          alt={post.title}
+          class="w-full h-full object-cover"
+        />
+      </div>
+    </div>
+
+    <!-- Article Content -->
+    <div class="max-w-3xl mx-auto px-6 pb-16">
+      <div class="animate-on-scroll fade-in-up prose prose-lg prose-kd" set:html={post.content} />
+
+      <!-- Share Section -->
+      <div class="animate-on-scroll fade-in-up mt-12 pt-8 border-t border-gray-200">
+        <p class="text-kd-navy text-[14px] font-montserrat font-medium tracking-[0.7px] mb-4">
+          Share this article
+        </p>
+        <div class="flex items-center gap-4">
+          <!-- LinkedIn -->
+          <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://kingadow.com/blog/${post.slug}`)}`} target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-kd-cream flex items-center justify-center hover:bg-kd-gold/20 transition-colors">
+            <svg class="w-5 h-5 text-kd-navy" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+
+          <!-- Twitter/X -->
+          <a href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(`https://kingadow.com/blog/${post.slug}`)}&text=${encodeURIComponent(post.title)}`} target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-kd-cream flex items-center justify-center hover:bg-kd-gold/20 transition-colors">
+            <svg class="w-5 h-5 text-kd-navy" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </a>
+
+          <!-- Facebook -->
+          <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://kingadow.com/blog/${post.slug}`)}`} target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-kd-cream flex items-center justify-center hover:bg-kd-gold/20 transition-colors">
+            <svg class="w-5 h-5 text-kd-navy" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </a>
+
+          <!-- Copy Link -->
+          <button onclick="navigator.clipboard.writeText(window.location.href); this.querySelector('span').textContent = 'Copied!'; setTimeout(() => this.querySelector('span').textContent = 'Copy link', 2000)" class="flex items-center gap-2 px-4 py-2 rounded-full bg-kd-cream hover:bg-kd-gold/20 transition-colors text-kd-navy text-[13px] font-montserrat font-medium tracking-[0.6px]">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+            </svg>
+            <span>Copy link</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Related Posts -->
+  {relatedPosts.length > 0 && (
+    <section class="py-12 md:py-16 px-6 bg-[#FAFAFA]">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="animate-on-scroll fade-in-up font-aktiv text-kd-navy text-[24px] md:text-[28px] font-semibold tracking-[1.2px] md:tracking-[1.4px] mb-8">
+          Related Posts
+        </h2>
+
+        <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+          {relatedPosts.map((relatedPost, index) => (
+            <article class="animate-on-scroll fade-in-up bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow" style={`animation-delay: ${index * 0.1}s;`}>
+              <!-- Image -->
+              <a href={`/blog/${relatedPost.slug}`} class="block aspect-video bg-kd-cream relative overflow-hidden">
+                <img
+                  src={relatedPost.image}
+                  alt={relatedPost.title}
+                  class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                />
+              </a>
+
+              <div class="p-5">
+                <span class="text-kd-gold text-[11px] md:text-[12px] font-montserrat font-medium tracking-[1.1px] uppercase">
+                  {relatedPost.category}
+                </span>
+
+                <h3 class="font-aktiv text-kd-navy text-[15px] md:text-[16px] font-semibold leading-[22px] md:leading-[24px] tracking-[0.75px] md:tracking-[0.8px] mt-2 mb-2">
+                  <a href={`/blog/${relatedPost.slug}`} class="hover:text-kd-gold transition-colors line-clamp-2">
+                    {relatedPost.title}
+                  </a>
+                </h3>
+
+                <p class="text-kd-grey text-[11px] md:text-[12px] font-montserrat tracking-[1.1px]">
+                  {relatedPost.date}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <!-- Back to Blog -->
+        <div class="animate-on-scroll fade-in-up text-center mt-10">
+          <a href="/blog" class="btn-gold px-8 py-3.5 rounded-lg text-[14px] font-montserrat font-medium tracking-[1.4px] inline-flex items-center gap-3 hover:opacity-90 transition-opacity">
+            <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+            <span>BACK TO BLOG</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Consultation CTA -->
+  <ConsultationCTA />
+</Layout>
+
+<style>
+  /* Prose styles for blog content */
+  .prose-kd {
+    color: #3F455D;
+  }
+
+  .prose-kd h2 {
+    font-family: 'Aktiv Grotesk Ex', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #3F455D;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+
+  .prose-kd h3 {
+    font-family: 'Aktiv Grotesk Ex', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #3F455D;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.04em;
+  }
+
+  .prose-kd h4 {
+    font-family: 'Aktiv Grotesk Ex', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #3F455D;
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.04em;
+  }
+
+  .prose-kd p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #777777;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.04em;
+  }
+
+  .prose-kd ul,
+  .prose-kd ol {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #777777;
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .prose-kd li {
+    margin-bottom: 0.5rem;
+  }
+
+  .prose-kd a {
+    color: #BA9200;
+    text-decoration: underline;
+    transition: opacity 0.2s;
+  }
+
+  .prose-kd a:hover {
+    opacity: 0.8;
+  }
+
+  .prose-kd blockquote {
+    border-left: 3px solid #BA9200;
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: #3F455D;
+  }
+
+  .prose-kd img {
+    border-radius: 0.75rem;
+    margin: 2rem 0;
+  }
+
+  .prose-kd strong {
+    color: #3F455D;
+    font-weight: 600;
+  }
+
+  /* Line clamp utility */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

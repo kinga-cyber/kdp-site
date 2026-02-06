@@ -1,0 +1,408 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ConsultationCTA from "../../components/ConsultationCTA.astro";
+
+export function getStaticPaths() {
+  return [
+    {
+      params: { slug: "loyaltylion" },
+      props: {
+        title: "MoxieLash + LoyaltyLion",
+        subtitle: "How MoxieLash tripled repeat purchase rates and increased customer engagement by 700% with LoyaltyLion",
+        category: "Beauty & Cosmetics",
+        client: "MoxieLash",
+        technologies: ["LoyaltyLion", "Klaviyo", "Shopify Plus"],
+        image: "/images/case-studies/loyalty-lion.png",
+        stat: "700%",
+        statLabel: "Increased Engagement",
+        content: `
+          <h2>The Client</h2>
+          <p>MoxieLash is an innovative beauty brand established in 2018, known for creating super-strength magnetic eyelashes and Lashies™ with Nano-grip Lash Technology™. As a pioneer in the magnetic lash industry, they needed a strategy to stand out against emerging competitors.</p>
+
+          <h2>The Challenge</h2>
+          <p>MoxieLash faced the common e-commerce startup problem: while their magnetic lashes generated initial market buzz, they needed to compete with emerging copycats. The core challenge involved retaining customers and converting them into repeat buyers rather than relying solely on acquisition.</p>
+
+          <h2>The Solution</h2>
+          <p>Kinga Dow recommended LoyaltyLion as their loyalty platform partner due to its scalability, flexibility, superior Shopify Plus integrations, deep Klaviyo integration for marketing automation, and extensive customization capabilities.</p>
+
+          <h3>Program features included:</h3>
+          <ul>
+            <li>Tiered loyalty structure with gamification</li>
+            <li>Personalized loyalty emails using Klaviyo integration</li>
+            <li>Shopify Plus Points Slider for checkout redemption</li>
+            <li>Branded referral program</li>
+            <li>Weekly automated email campaigns with 12 loyalty data points</li>
+          </ul>
+
+          <h2>The Results</h2>
+          <p>Over a 12-month period, the loyalty program delivered exceptional results:</p>
+          <ul>
+            <li><strong>1.5x higher average orders</strong> from members vs. non-members</li>
+            <li><strong>1.5x higher average spend</strong> from members vs. non-members</li>
+            <li><strong>3x higher repeat purchase rate</strong> (first to second purchase)</li>
+            <li><strong>700% increase</strong> in completed loyalty activities</li>
+            <li>Selected as <strong>"Best Use of Emails"</strong> winner in LoyaltyLion Hall of Fame 2020</li>
+          </ul>
+
+          <h2>Key Takeaway</h2>
+          <p>Integration of loyalty data with email marketing drove significant engagement. Weekly communication, triggered email flows, and multi-site linking optimization created sustained business growth for a competitive beauty market.</p>
+        `,
+        results: [
+          { value: "1.5x", label: "Higher Average Orders" },
+          { value: "3x", label: "Repeat Purchase Rate" },
+          { value: "700%", label: "Increased Engagement" }
+        ]
+      }
+    },
+    {
+      params: { slug: "25x-return-attentive" },
+      props: {
+        title: "25X Return With Attentive",
+        subtitle: "How Kinga Dow Productions helped a leading eCommerce beauty brand quickly increase monthly revenue with SMS marketing",
+        category: "Beauty & SMS Marketing",
+        client: "Leading Beauty Brand",
+        technologies: ["Attentive", "Klaviyo", "SMS Marketing"],
+        image: "/images/case-studies/attentive-return.png",
+        stat: "25X",
+        statLabel: "Return on Investment",
+        content: `
+          <h2>The Objective</h2>
+          <p>Identify, build, and activate a new marketing channel that adds at least 17% additional revenue via SMS marketing.</p>
+
+          <h2>The Challenge</h2>
+          <p>The brand faced several obstacles when launching their SMS program:</p>
+          <ul>
+            <li>SMS marketing remained underutilized despite proven benefits like high open rates and advanced analytics</li>
+            <li>Required sourcing appropriate technology with privacy compliance as priority to avoid legal issues</li>
+            <li>Needed seamless Klaviyo integration with user-friendly features for subscriber growth</li>
+            <li>Had inefficient previous system (Justuno) for collecting customer phone numbers and emails</li>
+            <li>Needed to maintain brand identity while introducing SMS to their audience</li>
+          </ul>
+
+          <h2>The Solution</h2>
+          <p>Kinga Dow Productions completed an internal audit and recommended switching from Justuno to Attentive. Key implementation steps included:</p>
+          <ul>
+            <li>Connected Attentive to Klaviyo for unified operations</li>
+            <li>Achieved TCPA (Telephone Consumer Protection Act) compliance by eliminating third-party plugins</li>
+            <li>Implemented A/B testing to increase segmentation and personalization</li>
+            <li>Created custom pop-ups and lead capture forms for opt-ins</li>
+            <li>Built customer database leveraging behavioral analytics</li>
+          </ul>
+
+          <h2>The Results</h2>
+          <ul>
+            <li>Generated <strong>additional 17% in monthly revenue</strong></li>
+            <li>Increased email and SMS subscriber growth <strong>5x</strong></li>
+            <li>SMS revenue increased <strong>over 104%</strong> during 6-month period after switching to Attentive pop-ups</li>
+            <li>Built substantial behavioral analytics database</li>
+            <li>Uncovered hidden revenue sources via combined email-SMS data</li>
+            <li>SMS demonstrated faster response rates than email campaigns</li>
+          </ul>
+
+          <h2>Key Takeaway</h2>
+          <p>SMS marketing represents an emerging standard for D2C brands. Early adoption positioned this client competitively within their market while generating immediate revenue gains through strategic channel integration.</p>
+        `,
+        results: [
+          { value: "25X", label: "Return on Investment" },
+          { value: "17%", label: "Additional Revenue" },
+          { value: "104%", label: "SMS Revenue Increase" }
+        ]
+      }
+    },
+    {
+      params: { slug: "octane-ai-moxielash" },
+      props: {
+        title: "MoxieLash + Octane AI",
+        subtitle: "From Quiz to Conversion: How MoxieLash's Interactive Quiz Drove 187.85% List Growth and 22% BFCM Sales Lift",
+        category: "Beauty & Quizzes",
+        client: "MoxieLash",
+        technologies: ["Octane AI", "Klaviyo", "Attentive"],
+        image: "/images/case-studies/octane-ai-moxielash.jpg",
+        stat: "187.85%",
+        statLabel: "List Growth",
+        content: `
+          <h2>The Client</h2>
+          <p>MoxieLash – An innovative beauty brand specializing in magnetic eyelashes, established in 2018. They pioneered the industry's first super-strength magnetic lashes with Nano-grip Lash Technology.</p>
+
+          <h2>The Challenge</h2>
+          <p>MoxieLash needed customer acquisition and retention strategies ahead of their peak selling season. The brand required methods to attract new customers while maintaining engagement with existing ones, particularly before Black Friday/Cyber Monday.</p>
+
+          <h2>The Solution</h2>
+          <p>Kinga Dow Productions developed an interactive product recommendation quiz using Octane AI that:</p>
+          <ul>
+            <li>Featured seven easy questions about eye shape and preferences</li>
+            <li>Integrated with Klaviyo for personalized email follow-ups</li>
+            <li>Connected with Attentive for SMS marketing campaigns</li>
+            <li>Included welcome and exit-intent pop-ups (A/B tested versions)</li>
+            <li>Deployed across multiple email flows: Welcome, Cross-Sell, Abandoned Cart, Post-Purchase</li>
+            <li>Utilized seasonal theming for BFCM promotion</li>
+          </ul>
+
+          <h2>The Results</h2>
+          <ul>
+            <li><strong>187.85% List growth</strong> in November for BFCM</li>
+            <li><strong>22% lift in revenue</strong></li>
+            <li><strong>18.97% quiz conversion rate</strong></li>
+            <li>12.5% average pop-up CTR</li>
+            <li>Attentive SMS: 126.6% CVR, 8.3% CTR, $7.99 revenue per send</li>
+            <li>99.9% SMS open rate</li>
+            <li>Nearly 1 in 5 people purchased after taking the quiz</li>
+            <li>Email list tripled for BFCM season</li>
+            <li>8X ROAS (return on ad spend) from SMS</li>
+          </ul>
+
+          <h2>Key Takeaways</h2>
+          <ul>
+            <li><strong>Successful Partnerships:</strong> The partnership between Octane AI and MoxieLash was a success!</li>
+            <li><strong>Personalization Impact:</strong> Customized emails based on quiz responses significantly improved engagement</li>
+            <li><strong>Timing Advantage:</strong> Results accomplished just in time for BFCM!</li>
+            <li><strong>Data Advantage:</strong> Quiz insights enabled better customer segmentation for future campaigns</li>
+          </ul>
+        `,
+        results: [
+          { value: "187.85%", label: "List Growth" },
+          { value: "22%", label: "Revenue Lift" },
+          { value: "8X", label: "SMS ROAS" }
+        ]
+      }
+    },
+    {
+      params: { slug: "gamification-boosts-rev" },
+      props: {
+        title: "Gamification Boosts Revenue",
+        subtitle: "How KD helped an eCommerce beauty brand scale a subscriber list to 400k and bring in $5.53M in revenue during Covid",
+        category: "Beauty & Email Marketing",
+        client: "eCommerce Beauty Brand",
+        technologies: ["Klaviyo", "Gamification", "Email Flows"],
+        image: "/images/case-studies/gamification-boosts-rev.png",
+        stat: "$5.53M",
+        statLabel: "Revenue Generated",
+        content: `
+          <h2>The Challenge</h2>
+          <p>In March 2020, COVID-19 disrupted global business operations. The company needed to convert substantial Facebook ad traffic into email subscribers while managing economic uncertainty. It was important for the company to leverage the expertise of partners with proven experience scaling eCommerce brands.</p>
+
+          <h2>The Solution</h2>
+          <p>Kinga Dow Productions implemented a "Lottery" gamification strategy using Klaviyo email flows. The approach featured:</p>
+          <ul>
+            <li>A popup offering "mystery discounts" in exchange for email addresses</li>
+            <li>Customers discovered discount amounts only at checkout</li>
+            <li>48-hour validity window after opt-in</li>
+            <li>Discount range: $5-$100 (80% redeemed lower-tier discounts)</li>
+          </ul>
+          <p>This mechanism leveraged psychological commitment bias, encouraging customers to complete the purchase experience.</p>
+
+          <h2>The Results</h2>
+          <h3>Email Performance:</h3>
+          <ul>
+            <li>First email: <strong>62% open rate, 42% click rate</strong></li>
+            <li>11.5% of users placed orders from initial email</li>
+            <li>Revenue from Lottery flow: <strong>$4.93M</strong></li>
+          </ul>
+
+          <h3>Subscriber Growth:</h3>
+          <ul>
+            <li>List grew from near-zero to <strong>400K</strong> between March-August 2020</li>
+            <li>Mobile: 411.56K subscriptions (23.4% submission rate)</li>
+            <li>Desktop: 36.69K subscriptions (12.1% submission rate)</li>
+          </ul>
+
+          <h3>Loyalty Integration:</h3>
+          <ul>
+            <li>44K new loyalty program members</li>
+            <li>Additional $1.2M revenue from loyalty program purchases</li>
+            <li><strong>Total revenue: $5.53M</strong></li>
+          </ul>
+
+          <h2>Key Takeaway</h2>
+          <p>Strategic email marketing combined with engaging gamification mechanics proved remarkably effective for rapid customer acquisition and retention, even during unprecedented economic disruption.</p>
+        `,
+        results: [
+          { value: "$5.53M", label: "Total Revenue" },
+          { value: "400K", label: "Subscribers" },
+          { value: "62%", label: "Open Rate" }
+        ]
+      }
+    },
+    {
+      params: { slug: "optinmonster-expansion" },
+      props: {
+        title: "OptinMonster Expansion",
+        subtitle: "How Kinga Dow helped convert 28.57% of website visitors into email list subscribers using OptinMonster",
+        category: "Online Gifts & Conversion",
+        client: "Online Gifts Company",
+        technologies: ["OptinMonster", "Klaviyo", "A/B Testing"],
+        image: "/images/case-studies/optinmonster-expansion.png",
+        stat: "28.57%",
+        statLabel: "Conversion Rate",
+        content: `
+          <h2>The Client</h2>
+          <p>Founded in 2006, this online gifts company sells unique hand-painted artwork inspired by personal photographs that customers submit online.</p>
+
+          <h2>The Challenge</h2>
+          <p>The primary obstacle centered on email marketing growth. The client needed to continuously grow email list subscribers in the competitive gift industry. Website visitors typically browsed multiple pages while seeking gifts for specific occasions, making personalized, intent-based targeting essential for conversion.</p>
+
+          <h2>The Solution</h2>
+          <p>Kinga Dow deployed page-level targeting campaigns across three website pages using OptinMonster's capabilities. Each campaign featured:</p>
+          <ul>
+            <li>Customized lightbox popups with relevant creative</li>
+            <li>Opt-in forms offering discount codes</li>
+            <li>Automated follow-up emails</li>
+          </ul>
+          <p>The team also conducted A/B testing on creative assets to optimize performance.</p>
+
+          <h2>The Results</h2>
+          <ul>
+            <li><strong>Christmas page:</strong> 28.57% conversion rate</li>
+            <li><strong>Anniversary page:</strong> 3.64% visitor signup increase</li>
+            <li><strong>Pet page:</strong> 6.58% conversion increase (post A/B testing)</li>
+            <li><strong>Overall impact:</strong> 138% more website visitors converted into leads</li>
+          </ul>
+
+          <h2>Key Takeaway</h2>
+          <p>Strategic personalization combined with proper technology selection drives meaningful subscriber growth and customer engagement in e-commerce.</p>
+        `,
+        results: [
+          { value: "28.57%", label: "Conversion Rate" },
+          { value: "138%", label: "More Leads" },
+          { value: "6.58%", label: "Pet Page Increase" }
+        ]
+      }
+    }
+  ];
+}
+
+const { slug } = Astro.params;
+const { title, subtitle, category, client, technologies, image, stat, statLabel, content, results } = Astro.props;
+
+// Get other case studies for related section
+const allCaseStudies = [
+  { slug: "loyaltylion", title: "MoxieLash + LoyaltyLion", image: "/images/case-studies/loyalty-lion.png", stat: "700%", statLabel: "Increased Engagement" },
+  { slug: "25x-return-attentive", title: "25X Return With Attentive", image: "/images/case-studies/attentive-return.png", stat: "25X", statLabel: "ROI" },
+  { slug: "octane-ai-moxielash", title: "MoxieLash + Octane AI", image: "/images/case-studies/octane-ai-moxielash.jpg", stat: "187.85%", statLabel: "List Growth" },
+  { slug: "gamification-boosts-rev", title: "Gamification Boosts Revenue", image: "/images/case-studies/gamification-boosts-rev.png", stat: "$5.53M", statLabel: "Revenue" },
+  { slug: "optinmonster-expansion", title: "OptinMonster Expansion", image: "/images/case-studies/optinmonster-expansion.png", stat: "28.57%", statLabel: "Conversion" }
+];
+
+const relatedCaseStudies = allCaseStudies.filter(cs => cs.slug !== slug).slice(0, 3);
+---
+
+<Layout
+  title={`${title} | Kinga Dow Case Study`}
+  description={subtitle}
+>
+  <!-- Hero Section -->
+  <section class="relative py-12 md:py-20 overflow-hidden" style="background: linear-gradient(180deg, #F6EFE6 0%, #FAFAFA 100%);">
+    <!-- Decorative circles -->
+    <div class="absolute top-8 left-8 w-24 h-24 rounded-full border border-kd-gold/20"></div>
+    <div class="absolute bottom-12 right-12 w-20 h-20 rounded-full border border-kd-gold/20"></div>
+
+    <div class="max-w-6xl mx-auto px-6 relative z-10">
+      <!-- Breadcrumb -->
+      <nav class="animate-on-scroll fade-in-up mb-6">
+        <a href="/case-studies" class="text-kd-gold text-[13px] font-montserrat tracking-[1.3px] hover:text-kd-navy transition-colors inline-flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Back to Case Studies
+        </a>
+      </nav>
+
+      <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <!-- Left: Content -->
+        <div>
+          <!-- Category -->
+          <p class="animate-on-scroll fade-in-up text-kd-gold text-[13px] md:text-[14px] tracking-[1.3px] font-montserrat font-medium mb-3 uppercase">
+            {category}
+          </p>
+
+          <!-- Title -->
+          <h1 class="animate-on-scroll fade-in-up delay-100 font-aktiv text-kd-navy text-[28px] md:text-[38px] leading-[36px] md:leading-[48px] tracking-[1.4px] md:tracking-[1.9px] font-semibold mb-4">
+            {title}
+          </h1>
+
+          <!-- Subtitle -->
+          <p class="animate-on-scroll fade-in-up delay-200 font-montserrat text-kd-grey text-[15px] md:text-[17px] leading-[24px] md:leading-[28px] tracking-[0.75px] font-light mb-6">
+            {subtitle}
+          </p>
+
+          <!-- Meta Info -->
+          <div class="animate-on-scroll fade-in-up delay-300 flex flex-wrap gap-4 mb-6">
+            <div class="bg-white/80 rounded-lg px-4 py-2">
+              <span class="block text-kd-grey text-[11px] font-montserrat tracking-[1px] uppercase mb-0.5">Client</span>
+              <span class="block text-kd-navy text-[14px] font-montserrat font-medium">{client}</span>
+            </div>
+            <div class="bg-white/80 rounded-lg px-4 py-2">
+              <span class="block text-kd-grey text-[11px] font-montserrat tracking-[1px] uppercase mb-0.5">Technologies</span>
+              <span class="block text-kd-navy text-[14px] font-montserrat font-medium">{technologies.join(", ")}</span>
+            </div>
+          </div>
+
+          <!-- Results Summary -->
+          <div class="animate-on-scroll fade-in-up delay-400 grid grid-cols-3 gap-4">
+            {results.map((result) => (
+              <div class="text-center md:text-left">
+                <span class="block text-kd-gold text-[22px] md:text-[28px] font-aktiv font-bold">{result.value}</span>
+                <span class="block text-kd-grey text-[11px] md:text-[12px] font-montserrat tracking-[0.5px]">{result.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Right: Image -->
+        <div class="animate-on-scroll fade-in-up delay-200">
+          <div class="rounded-xl overflow-hidden shadow-lg">
+            <img
+              src={image}
+              alt={title}
+              class="w-full h-auto"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <section class="py-12 md:py-16 px-6 bg-white">
+    <div class="max-w-3xl mx-auto">
+      <article class="animate-on-scroll fade-in-up prose-kd" set:html={content} />
+    </div>
+  </section>
+
+  <!-- Related Case Studies -->
+  <section class="py-12 md:py-16 px-6 bg-[#FAFAFA]">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="animate-on-scroll fade-in-up font-aktiv text-kd-navy text-[24px] md:text-[28px] font-semibold tracking-[1.2px] mb-8 text-center">
+        More Case Studies
+      </h2>
+
+      <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+        {relatedCaseStudies.map((cs, index) => (
+          <a href={`/case-studies/${cs.slug}`} class="animate-on-scroll fade-in-up group block" style={`animation-delay: ${index * 0.1}s;`}>
+            <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+              <div class="aspect-[4/3] bg-kd-cream overflow-hidden relative">
+                <img
+                  src={cs.image}
+                  alt={cs.title}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div class="absolute top-3 left-3 bg-white/95 backdrop-blur-sm rounded-lg px-2 py-1.5 shadow-md">
+                  <span class="block text-kd-gold text-[14px] font-aktiv font-bold leading-tight">{cs.stat}</span>
+                  <span class="block text-kd-grey text-[9px] font-montserrat tracking-[0.5px] uppercase">{cs.statLabel}</span>
+                </div>
+              </div>
+              <div class="p-4">
+                <h3 class="font-aktiv text-kd-navy text-[16px] font-semibold leading-[22px] tracking-[0.8px] group-hover:text-kd-gold transition-colors">
+                  {cs.title}
+                </h3>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Consultation CTA -->
+  <ConsultationCTA />
+</Layout>

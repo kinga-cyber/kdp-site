@@ -11,7 +11,7 @@
   --color-kd-navy: #3F455D;
   --color-kd-cream: #F6EFE6;
   --color-kd-cream-light: #FFF8F0;
-  --color-kd-grey: #777777;
+  --color-kd-grey: #333333;
   --color-kd-sage: #59A56D;
   --color-kd-sage-light: #8CAB95;
 
@@ -273,4 +273,120 @@
 
 .delay-500 {
   animation-delay: 0.5s;
+}
+
+/* ========================================
+   BLOG ARTICLE PROSE STYLES
+   Better readability with proper spacing
+   ======================================== */
+
+.prose-kd {
+  color: #333;
+  font-family: var(--font-montserrat);
+  font-weight: 300;
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+}
+
+.prose-kd p {
+  margin-bottom: 1.5rem;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.prose-kd h2 {
+  font-family: var(--font-aktiv);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-kd-navy);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.03em;
+}
+
+.prose-kd h3 {
+  font-family: var(--font-aktiv);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-kd-navy);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.prose-kd h4 {
+  font-family: var(--font-aktiv);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-kd-navy);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose-kd ul,
+.prose-kd ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.prose-kd ul {
+  list-style-type: disc;
+}
+
+.prose-kd ol {
+  list-style-type: decimal;
+}
+
+.prose-kd li {
+  margin-bottom: 0.5rem;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.prose-kd li strong {
+  color: var(--color-kd-navy);
+  font-weight: 500;
+}
+
+.prose-kd strong {
+  font-weight: 500;
+  color: var(--color-kd-navy);
+}
+
+.prose-kd a {
+  color: var(--color-kd-gold);
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.prose-kd a:hover {
+  color: var(--color-kd-navy);
+}
+
+.prose-kd blockquote {
+  border-left: 3px solid var(--color-kd-gold);
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+  font-style: italic;
+  color: var(--color-kd-grey);
+}
+
+.prose-kd img {
+  border-radius: 12px;
+  margin: 2rem 0;
+}
+
+/* First paragraph after heading - no top margin */
+.prose-kd h2 + p,
+.prose-kd h3 + p,
+.prose-kd h4 + p {
+  margin-top: 0;
+}
+
+/* First element has no top margin */
+.prose-kd > *:first-child {
+  margin-top: 0;
 }

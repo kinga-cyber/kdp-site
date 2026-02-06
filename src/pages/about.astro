@@ -1,0 +1,475 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ConsultationCTA from "../components/ConsultationCTA.astro";
+---
+
+<Layout
+  title="About Kinga Dow | AI-Native Retention Marketing Pioneer"
+  description="Meet Kinga Dow—20+ years in e-commerce, 8+ years mastering Klaviyo, and the first to integrate Claude AI into retention marketing. Always evolving, always leading."
+>
+  <!-- ========================================
+       HERO SECTION
+       ======================================== -->
+  <section class="hero-gradient relative overflow-hidden">
+    <!-- Decorative circle pattern - left side -->
+    <div class="absolute -left-20 top-4 w-[250px] h-[390px] opacity-30 pointer-events-none">
+      <img src="/images/home/decorative/bg-circle-left.png" alt="" class="w-full h-full object-contain" aria-hidden="true" />
+    </div>
+
+    <!-- Decorative circle pattern - right side -->
+    <div class="absolute -right-16 top-40 w-[370px] h-[450px] opacity-20 pointer-events-none">
+      <img src="/images/home/decorative/bg-circle-1.png" alt="" class="w-full h-full object-contain" aria-hidden="true" />
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 pt-12 pb-8 md:pt-20 md:pb-12 relative z-10">
+      <div class="text-center max-w-4xl mx-auto">
+        <!-- Label: Gold uppercase -->
+        <span class="animate-on-scroll fade-in-up font-aktiv text-kd-gold font-medium text-[14px] leading-[17px] tracking-[1.4px] mb-4 block uppercase">
+          About
+        </span>
+
+        <!-- H1 - Hero -->
+        <h1 class="animate-on-scroll fade-in-up delay-100 font-aktiv text-kd-navy text-[24px] md:text-[48px] font-bold leading-[32px] md:leading-[60px] tracking-[1.2px] md:tracking-[2.4px] mb-6 whitespace-nowrap">
+          Always Evolving, Always Leading
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="animate-on-scroll fade-in-up delay-200 font-montserrat font-light text-black text-[16px] md:text-[18px] leading-[26px] md:leading-[30px] tracking-[1.6px] md:tracking-[1.8px] max-w-[851px] mx-auto mb-10">
+          From early eCommerce pioneer to the first AI-native retention marketing agency — evolution isn't just what we do, it's who we are.
+        </p>
+      </div>
+
+      <!-- Video/Image Hero -->
+      <div class="animate-on-scroll fade-in-up delay-300 max-w-5xl mx-auto">
+        <div class="relative rounded-[10px] overflow-hidden" style="box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);">
+          <!-- Video placeholder with overlay -->
+          <div class="relative aspect-[16/9]">
+            <img
+              src="/images/about/hero-video-placeholder.jpg"
+              alt="Kinga Dow in Paris - About our agency"
+              class="w-full h-full object-cover"
+              onerror="this.src='/images/ui/poster_img.png'"
+            />
+            <!-- Dark overlay -->
+            <div class="absolute inset-0 bg-black/30"></div>
+
+            <!-- Play button -->
+            <button class="absolute inset-0 flex items-center justify-center group" aria-label="Play video">
+              <div class="w-[70px] h-[70px] md:w-[90px] md:h-[90px] bg-kd-gold rounded-full flex items-center justify-center transition-transform group-hover:scale-110">
+                <svg class="w-6 h-6 md:w-8 md:h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+            </button>
+
+            <!-- Progress bar -->
+            <div class="absolute bottom-0 left-0 right-0 h-[6px] bg-white/50">
+              <div class="h-full bg-kd-gold w-[35%]"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       INTRO SECTION - "The agency that never stopped evolving"
+       ======================================== -->
+  <section class="bg-white py-12 md:py-16">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <!-- Section Headline -->
+      <h2 class="animate-on-scroll fade-in-up font-montserrat text-kd-gold text-[28px] md:text-[36px] font-bold leading-[36px] md:leading-[48px] tracking-[1.4px] md:tracking-[1.8px] mb-8">
+        The agency that never stopped evolving
+      </h2>
+
+      <!-- Body Paragraphs -->
+      <div class="animate-on-scroll fade-in-up delay-100 space-y-6">
+        <p class="font-montserrat font-light text-black text-[16px] md:text-[18px] leading-[26px] md:leading-[30px] tracking-[1.6px] md:tracking-[1.8px]">
+          Kinga Dow Production started building eCommerce brands before most agencies existed. Over two decades, we've moved through every major shift in digital marketing—not by reacting, but by leading.
+        </p>
+        <p class="font-montserrat font-light text-black text-[16px] md:text-[18px] leading-[26px] md:leading-[30px] tracking-[1.6px] md:tracking-[1.8px]">
+          Today, we're pioneering the integration of AI intelligence into retention marketing. We build systems powered by Claude and autonomous workflows that find opportunities humans miss, reduce errors, and deliver results at a depth that manual processes simply can't match.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       CLIENT TESTIMONIAL SECTION
+       ======================================== -->
+  <section class="bg-white py-8 md:py-12 relative overflow-hidden">
+    <!-- Decorative circles - left -->
+    <div class="absolute -left-20 top-20 w-[300px] h-[300px] opacity-20 pointer-events-none">
+      <img src="/images/home/decorative/bg-circle-left.png" alt="" class="w-full h-full object-contain" aria-hidden="true" />
+    </div>
+    <!-- Decorative circles - right -->
+    <div class="absolute -right-16 bottom-10 w-[350px] h-[350px] opacity-15 pointer-events-none">
+      <img src="/images/home/decorative/bg-circle-1.png" alt="" class="w-full h-full object-contain" aria-hidden="true" />
+    </div>
+
+    <div class="max-w-2xl mx-auto px-6 relative z-10">
+      <!-- Testimonial Card -->
+      <div class="animate-on-scroll fade-in-up bg-white rounded-[10px] p-5 md:p-6" style="border: 2px solid #EED67D; box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);">
+        <div class="flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-5">
+          <!-- Left: Avatar + Name -->
+          <div class="flex-shrink-0 text-center">
+            <div class="w-[90px] h-[90px] md:w-[110px] md:h-[110px] rounded-full overflow-hidden mx-auto mb-2 border-2 border-kd-cream">
+              <img src="/images/home/testimonials/tersha.png" alt="Tersha Carpenter" class="w-full h-full object-cover" />
+            </div>
+            <p class="font-aktiv text-kd-gold text-[14px] md:text-[15px] font-medium leading-[20px] tracking-[0.7px]">Tersha Carpenter</p>
+            <p class="text-[12px] md:text-[13px] text-black leading-[18px] tracking-[0.6px] font-montserrat font-light">
+              Founder of<br />Island Slipper
+            </p>
+          </div>
+
+          <!-- Right: Quote + Stars -->
+          <div class="flex-1 flex flex-col">
+            <p class="font-montserrat font-light text-black text-[14px] md:text-[16px] leading-[22px] md:leading-[26px] tracking-[0.8px] mb-4 text-center md:text-left">
+              We started out just doing email marketing and yeah, it's evolved because Kinga has evolved. She keeps me growing.
+            </p>
+
+            <!-- Divider line -->
+            <div class="w-full h-[1px] bg-kd-gold/40 mb-3"></div>
+
+            <!-- Stars and Rating -->
+            <div class="flex flex-col md:flex-row items-center justify-between gap-3">
+              <!-- 5 Stars -->
+              <div class="flex items-center gap-1">
+                <img src="/images/home/decorative/stars-testimonial.png" alt="5 stars" class="h-6 md:h-7 object-contain" />
+              </div>
+
+              <!-- Excellent rating -->
+              <div class="text-center md:text-right">
+                <p class="font-aktiv text-kd-gold text-[13px] md:text-[14px] font-medium tracking-[0.7px]">Excellent</p>
+                <p class="font-aktiv text-black text-[12px] md:text-[14px] font-medium tracking-[0.7px]">5 of 5 stars</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       MEET KINGA SECTION
+       ======================================== -->
+  <section class="bg-white py-12 md:py-16 relative overflow-hidden">
+    <!-- Decorative circles -->
+    <div class="absolute -right-20 top-20 w-[300px] h-[300px] opacity-15 pointer-events-none">
+      <img src="/images/home/decorative/bg-circle.png" alt="" class="w-full h-full object-contain" aria-hidden="true" />
+    </div>
+
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="grid md:grid-cols-[380px_1fr] gap-6 md:gap-12 items-center">
+        <!-- Left: Photo -->
+        <div class="animate-on-scroll fade-in-up order-2 md:order-1">
+          <div class="relative">
+            <!-- Portrait photo with 30px radius per Figma -->
+            <div class="rounded-[30px] overflow-hidden" style="box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);">
+              <img
+                src="/images/about/kinga.png"
+                alt="Kinga Dow - Founder"
+                class="w-full h-auto"
+              />
+            </div>
+            <!-- Decorative gold circle accent (bottom left) -->
+            <div class="absolute -bottom-8 -left-8 w-[200px] h-[200px] rounded-full pointer-events-none -z-10" style="border: 1px solid #BA9200; opacity: 0.3;"></div>
+          </div>
+        </div>
+
+        <!-- Right: Bio -->
+        <div class="animate-on-scroll fade-in-up delay-100 order-1 md:order-2">
+          <!-- "Meet Kinga" - Aktiv Grotesk Ex SemiBold 32px, gold -->
+          <p class="font-aktiv text-kd-gold text-[24px] md:text-[32px] font-semibold leading-[40px] tracking-[1.6px] mb-4">
+            Meet Kinga
+          </p>
+
+          <!-- "Built on Evolution, Driven by Purpose" - Silver South Script 36px, black -->
+          <h2 class="font-script text-black text-[28px] md:text-[36px] font-normal leading-[40px] tracking-[1.8px] mb-8">
+            Built on Evolution, Driven by Purpose
+          </h2>
+
+          <!-- Bio paragraphs - Montserrat Regular (not Light), smaller size -->
+          <div class="space-y-4">
+            <p class="font-montserrat font-normal text-black text-[15px] md:text-[16px] leading-[24px] md:leading-[28px] tracking-[0.8px]">
+              An early adopter of eCommerce digital marketing, Kinga Dow founded her first agency in 2001. By 2017, she found her niche in Klaviyo — back when it was still an emerging platform. Eight years later, she's one of the most experienced Klaviyo retention strategists in the industry.
+            </p>
+            <p class="font-montserrat font-normal text-black text-[15px] md:text-[16px] leading-[24px] md:leading-[28px] tracking-[0.8px]">
+              In 2025, Kinga made the next leap — integrating Claude AI and autonomous workflows into every part of her retention marketing practice. From building AI agent systems that audit 50+ flows in under an hour to developing automated campaign finders, she became the first to bring MCP-connected AI systems to eCommerce marketing.
+            </p>
+            <p class="font-montserrat font-normal text-black text-[15px] md:text-[16px] leading-[24px] md:leading-[28px] tracking-[0.8px]">
+              But evolution without intention is just noise. Kinga built her agency around conscious business — fair wages, sustainable practices, and genuine partnerships with brands that care about their impact. Every system we build, every campaign we run, and every client we take on reflects that commitment.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       CERTIFICATIONS SECTION
+       ======================================== -->
+  <section class="py-10 md:py-14 relative overflow-hidden">
+    <!-- Decorative circle - left -->
+    <div class="absolute -left-20 bottom-0 w-[250px] h-[400px] opacity-40 pointer-events-none">
+      <img src="/images/about/bg-circle-left-4.png" alt="" class="w-full h-full object-contain" aria-hidden="true" />
+    </div>
+    <!-- Decorative circle - right -->
+    <div class="absolute -right-10 bottom-0 w-[200px] h-[200px] opacity-30 pointer-events-none">
+      <img src="/images/about/bg-circle-right-4.png" alt="" class="w-full h-full object-contain" aria-hidden="true" />
+    </div>
+
+    <div class="max-w-6xl mx-auto px-6 relative z-10">
+      <div class="flex flex-col md:flex-row md:items-center gap-8 md:gap-20">
+        <!-- Left: Section Headline -->
+        <div class="animate-on-scroll fade-in-up md:w-[200px] flex-shrink-0">
+          <h2 class="font-aktiv text-kd-gold text-[28px] md:text-[32px] font-semibold leading-[40px] tracking-[1.6px]">
+            Certifications
+          </h2>
+        </div>
+
+        <!-- Right: Click-through Certification carousel -->
+        <div class="animate-on-scroll fade-in-up delay-100 flex-1 relative">
+          <!-- Left Arrow -->
+          <button
+            id="cert-prev"
+            class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 bg-white rounded-full flex items-center justify-center transition-all hover:bg-kd-cream disabled:opacity-30 disabled:cursor-not-allowed"
+            style="box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);"
+            aria-label="Previous certificate"
+          >
+            <svg class="w-5 h-5 text-kd-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+          </button>
+
+          <!-- Carousel container -->
+          <div class="overflow-hidden">
+            <div class="cert-carousel flex gap-8 transition-transform duration-500 ease-in-out" id="cert-carousel">
+              <!-- Cert 1 - AI Fluency (Anthropic) -->
+              <div class="flex-shrink-0 h-[220px] md:h-[237px]">
+                <img
+                  src="/images/about/cert-ai-fluency.png"
+                  alt="AI Fluency: Framework & Foundations - Anthropic Certificate"
+                  class="h-full w-auto"
+                />
+              </div>
+
+              <!-- Cert 2 - Klaviyo Product -->
+              <div class="flex-shrink-0 h-[220px] md:h-[237px]">
+                <img
+                  src="/images/about/cert-klaviyo-product.png"
+                  alt="Klaviyo Product Certification"
+                  class="h-full w-auto"
+                />
+              </div>
+
+              <!-- Cert 3 - CXL Certificate -->
+              <div class="flex-shrink-0 h-[220px] md:h-[237px]">
+                <img
+                  src="/images/about/cert-cxl.png"
+                  alt="CXL Certificate of Completion"
+                  class="h-full w-auto"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Arrow -->
+          <button
+            id="cert-next"
+            class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 bg-white rounded-full flex items-center justify-center transition-all hover:bg-kd-cream disabled:opacity-30 disabled:cursor-not-allowed"
+            style="box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);"
+            aria-label="Next certificate"
+          >
+            <svg class="w-5 h-5 text-kd-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Certificate carousel controls
+    const carousel = document.getElementById('cert-carousel');
+    const prevBtn = document.getElementById('cert-prev');
+    const nextBtn = document.getElementById('cert-next');
+
+    if (carousel && prevBtn && nextBtn) {
+      let currentPosition = 0;
+      const gap = 32; // gap-8 = 2rem = 32px
+
+      function getSlideWidth() {
+        const firstSlide = carousel.children[0] as HTMLElement;
+        return firstSlide ? firstSlide.offsetWidth + gap : 0;
+      }
+
+      function getMaxPosition() {
+        const containerWidth = carousel.parentElement?.offsetWidth || 0;
+        const totalWidth = carousel.scrollWidth;
+        return Math.max(0, totalWidth - containerWidth);
+      }
+
+      function updateButtons() {
+        prevBtn.disabled = currentPosition <= 0;
+        nextBtn.disabled = currentPosition >= getMaxPosition();
+      }
+
+      prevBtn.addEventListener('click', () => {
+        const slideWidth = getSlideWidth();
+        currentPosition = Math.max(0, currentPosition - slideWidth);
+        carousel.style.transform = `translateX(-${currentPosition}px)`;
+        updateButtons();
+      });
+
+      nextBtn.addEventListener('click', () => {
+        const slideWidth = getSlideWidth();
+        const maxPos = getMaxPosition();
+        currentPosition = Math.min(maxPos, currentPosition + slideWidth);
+        carousel.style.transform = `translateX(-${currentPosition}px)`;
+        updateButtons();
+      });
+
+      // Initial state
+      updateButtons();
+
+      // Update on resize
+      window.addEventListener('resize', updateButtons);
+    }
+  </script>
+
+  <!-- ========================================
+       FEATURED ON SECTION
+       ======================================== -->
+  <section class="bg-white py-12 md:py-16">
+    <div class="max-w-6xl mx-auto px-6">
+      <!-- Section Headline -->
+      <h2 class="animate-on-scroll fade-in-up font-aktiv text-kd-gold text-[28px] md:text-[32px] font-semibold leading-[40px] tracking-[1.6px] text-center mb-4">
+        Featured On
+      </h2>
+
+      <p class="animate-on-scroll fade-in-up delay-100 font-montserrat font-light text-black text-[16px] md:text-[20px] leading-[26px] md:leading-[30px] tracking-[1px] text-center mb-10 md:mb-12 max-w-2xl mx-auto">
+        We expand our story with expertise in leading eCommerce and retention marketing publications and podcasts.
+      </p>
+
+      <!-- Featured carousel with arrows -->
+      <div class="animate-on-scroll fade-in-up delay-200 relative">
+        <!-- Left Arrow -->
+        <button
+          id="featured-prev"
+          class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 bg-white rounded-full flex items-center justify-center transition-all hover:bg-kd-cream disabled:opacity-30 disabled:cursor-not-allowed"
+          style="box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);"
+          aria-label="Previous featured item"
+        >
+          <svg class="w-5 h-5 text-kd-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </button>
+
+        <!-- Carousel container -->
+        <div class="overflow-hidden">
+          <div class="featured-carousel flex gap-6 transition-transform duration-500 ease-in-out" id="featured-carousel">
+            <!-- Featured 1 - Women Talk eCommerce -->
+            <a href="#" class="flex-shrink-0 w-[300px] md:w-[350px] group bg-kd-cream rounded-[21px] overflow-hidden transition-all hover:shadow-lg" style="box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);">
+              <div class="aspect-[16/10] overflow-hidden">
+                <img
+                  src="/images/about/featured-women-talk-ecommerce.png"
+                  alt="Women Talk eCommerce Podcast"
+                  class="w-full h-full object-cover transition-transform group-hover:scale-105"
+                />
+              </div>
+              <div class="p-5">
+                <p class="font-montserrat font-semibold text-kd-navy text-[16px] md:text-[18px] tracking-[0.8px]">
+                  Women Talk eCommerce
+                </p>
+              </div>
+            </a>
+
+            <!-- Featured 2 - LoyaltyLion -->
+            <a href="#" class="flex-shrink-0 w-[300px] md:w-[350px] group bg-kd-cream rounded-[21px] overflow-hidden transition-all hover:shadow-lg" style="box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);">
+              <div class="aspect-[16/10] overflow-hidden">
+                <img
+                  src="/images/about/featured-loyaltylion-webinar-thumb.png"
+                  alt="LoyaltyLion Best Use of Email"
+                  class="w-full h-full object-cover transition-transform group-hover:scale-105"
+                />
+              </div>
+              <div class="p-5">
+                <p class="font-montserrat font-semibold text-kd-navy text-[16px] md:text-[18px] tracking-[0.8px]">
+                  Loyalty Lion: Best use of email
+                </p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Arrow -->
+        <button
+          id="featured-next"
+          class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 bg-white rounded-full flex items-center justify-center transition-all hover:bg-kd-cream disabled:opacity-30 disabled:cursor-not-allowed"
+          style="box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);"
+          aria-label="Next featured item"
+        >
+          <svg class="w-5 h-5 text-kd-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Featured carousel controls
+    const featuredCarousel = document.getElementById('featured-carousel');
+    const featuredPrevBtn = document.getElementById('featured-prev');
+    const featuredNextBtn = document.getElementById('featured-next');
+
+    if (featuredCarousel && featuredPrevBtn && featuredNextBtn) {
+      let featuredPosition = 0;
+      const featuredGap = 24; // gap-6 = 1.5rem = 24px
+
+      function getFeaturedSlideWidth() {
+        const firstSlide = featuredCarousel.children[0] as HTMLElement;
+        return firstSlide ? firstSlide.offsetWidth + featuredGap : 0;
+      }
+
+      function getFeaturedMaxPosition() {
+        const containerWidth = featuredCarousel.parentElement?.offsetWidth || 0;
+        const totalWidth = featuredCarousel.scrollWidth;
+        return Math.max(0, totalWidth - containerWidth);
+      }
+
+      function updateFeaturedButtons() {
+        featuredPrevBtn.disabled = featuredPosition <= 0;
+        featuredNextBtn.disabled = featuredPosition >= getFeaturedMaxPosition();
+      }
+
+      featuredPrevBtn.addEventListener('click', () => {
+        const slideWidth = getFeaturedSlideWidth();
+        featuredPosition = Math.max(0, featuredPosition - slideWidth);
+        featuredCarousel.style.transform = `translateX(-${featuredPosition}px)`;
+        updateFeaturedButtons();
+      });
+
+      featuredNextBtn.addEventListener('click', () => {
+        const slideWidth = getFeaturedSlideWidth();
+        const maxPos = getFeaturedMaxPosition();
+        featuredPosition = Math.min(maxPos, featuredPosition + slideWidth);
+        featuredCarousel.style.transform = `translateX(-${featuredPosition}px)`;
+        updateFeaturedButtons();
+      });
+
+      // Initial state
+      updateFeaturedButtons();
+
+      // Update on resize
+      window.addEventListener('resize', updateFeaturedButtons);
+    }
+  </script>
+
+  <!-- ========================================
+       CTA / CONSULTATION SECTION
+       ======================================== -->
+  <ConsultationCTA />
+</Layout>

@@ -1,0 +1,205 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ConsultationCTA from "../components/ConsultationCTA.astro";
+
+// Featured Case Studies data
+const featuredCaseStudies = [
+  {
+    title: "Case Study",
+    subtitle: "MoxieLash + LoyaltyLion",
+    description: "How MoxieLash tripled repeat purchase rates and increased customer engagement by 700% with LoyaltyLion loyalty program integration.",
+    image: "/images/case-studies/loyalty-lion.png",
+    slug: "loyaltylion",
+    category: "Beauty & Cosmetics",
+    stat: "700%",
+    statLabel: "Increased Engagement"
+  },
+  {
+    title: "Case Study",
+    subtitle: "25X Return With Attentive",
+    description: "How Kinga Dow helped a leading eCommerce beauty brand quickly increase monthly revenue with SMS marketing and achieve 25X return on investment.",
+    image: "/images/case-studies/attentive-return.png",
+    slug: "25x-return-attentive",
+    category: "Beauty & SMS Marketing",
+    stat: "25X",
+    statLabel: "Return on Investment"
+  },
+  {
+    title: "Case Study",
+    subtitle: "MoxieLash + Octane AI",
+    description: "From Quiz to Conversion: How MoxieLash's Interactive Quiz Drove 187.85% List Growth and 22% BFCM Sales Lift to Take the Season by Storm.",
+    image: "/images/case-studies/octane-ai-moxielash.jpg",
+    slug: "octane-ai-moxielash",
+    category: "Beauty & Quizzes",
+    stat: "187.85%",
+    statLabel: "List Growth"
+  }
+];
+
+// Additional Projects data
+const projects = [
+  {
+    title: "Gamification Boosts Revenue",
+    description: "How KD helped an eCommerce beauty brand scale a subscriber list to 400k and bring in $5.53M in revenue during Covid.",
+    image: "/images/case-studies/gamification-boosts-rev.png",
+    slug: "gamification-boosts-rev",
+    stat: "$5.53M",
+    statLabel: "Revenue Generated"
+  },
+  {
+    title: "OptinMonster Expansion",
+    description: "How Kinga Dow helped convert 28.57% of website visitors into email list subscribers using OptinMonster.",
+    image: "/images/case-studies/optinmonster-expansion.png",
+    slug: "optinmonster-expansion",
+    stat: "28.57%",
+    statLabel: "Conversion Rate"
+  }
+];
+---
+
+<Layout
+  title="Case Studies | Kinga Dow - Retention Marketing Results"
+  description="Explore our case studies showcasing real results from AI-powered retention marketing strategies. See how we've helped e-commerce brands increase customer lifetime value."
+>
+  <!-- Hero Section -->
+  <section class="hero-gradient relative py-16 md:py-24 overflow-hidden">
+    <!-- Decorative circle pattern - left side -->
+    <div class="absolute -left-20 top-16 w-[380px] h-[380px] opacity-30 pointer-events-none">
+      <img src="/images/home/decorative/bg-circle-left.png" alt="" class="w-full h-full object-contain" aria-hidden="true" />
+    </div>
+    <!-- Decorative circle pattern - bottom right -->
+    <div class="absolute -right-16 -bottom-16 w-[300px] h-[300px] opacity-20 pointer-events-none">
+      <img src="/images/home/decorative/bg-circle.png" alt="" class="w-full h-full object-contain" aria-hidden="true" />
+    </div>
+
+    <div class="max-w-6xl mx-auto px-6 text-center relative z-10">
+      <!-- Label: Gold uppercase -->
+      <span class="animate-on-scroll fade-in-up font-aktiv text-kd-gold font-medium text-[14px] leading-[17px] tracking-[1.4px] mb-4 block uppercase">
+        Case Studies
+      </span>
+
+      <!-- Headline -->
+      <h1 class="animate-on-scroll fade-in-up delay-100 font-aktiv text-kd-navy text-[28px] md:text-[42px] leading-[36px] md:leading-[52px] tracking-[1.4px] md:tracking-[2.1px] font-semibold max-w-3xl mx-auto mb-6">
+        Our Expertise In Action
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="animate-on-scroll fade-in-up delay-200 font-montserrat text-black text-[16px] md:text-[18px] leading-[26px] md:leading-[30px] tracking-[1.6px] md:tracking-[1.8px] font-light max-w-[780px] mx-auto">
+        We've had the pleasure to help many brands grow. From startups to global eCommerce giants, every project demonstrates the successful, clear technologies and strategies have been for our clients.
+      </p>
+    </div>
+  </section>
+
+  <!-- Featured Case Studies Section -->
+  <section class="py-12 md:py-16 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <!-- Case Studies Grid -->
+      <div class="grid md:grid-cols-3 gap-8 md:gap-10">
+        {featuredCaseStudies.map((study, index) => (
+          <article class="animate-on-scroll fade-in-up group" style={`animation-delay: ${index * 0.1}s;`}>
+            <!-- Image -->
+            <a href={`/case-studies/${study.slug}`} class="block">
+              <div class="aspect-[4/3] bg-kd-cream rounded-xl overflow-hidden mb-5 relative">
+                <img
+                  src={study.image}
+                  alt={study.subtitle}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <!-- Stat Badge -->
+                <div class="absolute top-4 left-4 bg-white/95 backdrop-blur-sm rounded-lg px-3 py-2 shadow-md">
+                  <span class="block text-kd-gold text-[18px] md:text-[20px] font-aktiv font-bold leading-tight">{study.stat}</span>
+                  <span class="block text-kd-grey text-[10px] md:text-[11px] font-montserrat tracking-[0.5px] uppercase">{study.statLabel}</span>
+                </div>
+              </div>
+            </a>
+
+            <!-- Content -->
+            <div>
+              <!-- Category -->
+              <span class="text-kd-gold text-[12px] md:text-[13px] font-montserrat font-medium tracking-[1.2px] uppercase">
+                {study.category}
+              </span>
+
+              <!-- Subtitle -->
+              <h3 class="font-aktiv text-kd-navy text-[18px] md:text-[20px] font-semibold leading-[26px] md:leading-[28px] tracking-[0.9px] md:tracking-[1px] mt-1 mb-3">
+                {study.subtitle}
+              </h3>
+
+              <!-- Description -->
+              <p class="text-kd-grey text-[14px] md:text-[15px] leading-[22px] md:leading-[24px] font-montserrat font-light tracking-[0.7px] mb-4">
+                {study.description}
+              </p>
+
+              <!-- Learn More Link -->
+              <a href={`/case-studies/${study.slug}`} class="inline-flex items-center gap-2 text-kd-gold text-[13px] md:text-[14px] font-montserrat font-medium tracking-[1.3px] hover:text-kd-navy transition-colors group">
+                <span>Learn More</span>
+                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Additional Projects Section -->
+  <section class="py-12 md:py-16 px-6 bg-[#FAFAFA]">
+    <div class="max-w-6xl mx-auto">
+      <!-- Section Header -->
+      <div class="animate-on-scroll fade-in-up flex flex-col md:flex-row md:items-center md:justify-between mb-8">
+        <div class="mb-4 md:mb-0">
+          <span class="text-kd-grey text-[12px] md:text-[13px] font-montserrat font-medium tracking-[1.2px] uppercase block mb-1">
+            What we did
+          </span>
+          <h2 class="font-aktiv text-kd-navy text-[24px] md:text-[28px] font-semibold tracking-[1.2px] md:tracking-[1.4px]">
+            More Projects
+          </h2>
+        </div>
+      </div>
+
+      <!-- Projects Grid - 2 columns -->
+      <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+        {projects.map((project, index) => (
+          <article class="animate-on-scroll fade-in-up group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow" style={`animation-delay: ${index * 0.1}s;`}>
+            <a href={`/case-studies/${project.slug}`} class="flex flex-col md:flex-row">
+              <!-- Image -->
+              <div class="md:w-2/5 aspect-video md:aspect-square bg-kd-cream overflow-hidden relative">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <!-- Stat Badge -->
+                <div class="absolute top-3 left-3 bg-white/95 backdrop-blur-sm rounded-lg px-2 py-1.5 shadow-md">
+                  <span class="block text-kd-gold text-[14px] md:text-[16px] font-aktiv font-bold leading-tight">{project.stat}</span>
+                  <span class="block text-kd-grey text-[9px] md:text-[10px] font-montserrat tracking-[0.5px] uppercase">{project.statLabel}</span>
+                </div>
+              </div>
+
+              <!-- Content -->
+              <div class="md:w-3/5 p-5 md:p-6 flex flex-col justify-center">
+                <h3 class="font-aktiv text-kd-navy text-[16px] md:text-[18px] font-semibold leading-[22px] md:leading-[24px] tracking-[0.8px] mb-2">
+                  {project.title}
+                </h3>
+                <p class="text-kd-grey text-[13px] md:text-[14px] leading-[20px] md:leading-[22px] font-montserrat font-light tracking-[0.6px] mb-3">
+                  {project.description}
+                </p>
+                <span class="inline-flex items-center gap-2 text-kd-gold text-[12px] md:text-[13px] font-montserrat font-medium tracking-[1.2px] group-hover:text-kd-navy transition-colors">
+                  <span>View Case Study</span>
+                  <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </div>
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Consultation CTA -->
+  <ConsultationCTA />
+</Layout>

@@ -292,51 +292,53 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
 
   <script>
     // Certificate carousel controls
-    const carousel = document.getElementById('cert-carousel');
-    const prevBtn = document.getElementById('cert-prev');
-    const nextBtn = document.getElementById('cert-next');
+    document.addEventListener('DOMContentLoaded', function() {
+      const carousel = document.getElementById('cert-carousel');
+      const prevBtn = document.getElementById('cert-prev');
+      const nextBtn = document.getElementById('cert-next');
 
-    if (carousel && prevBtn && nextBtn) {
-      let currentPosition = 0;
-      const gap = 32; // gap-8 = 2rem = 32px
+      if (carousel && prevBtn && nextBtn) {
+        let currentPosition = 0;
+        const gap = 32; // gap-8 = 2rem = 32px
 
-      function getSlideWidth() {
-        const firstSlide = carousel.children[0] as HTMLElement;
-        return firstSlide ? firstSlide.offsetWidth + gap : 0;
-      }
+        function getSlideWidth() {
+          const firstSlide = carousel.children[0];
+          return firstSlide ? firstSlide.offsetWidth + gap : 0;
+        }
 
-      function getMaxPosition() {
-        const containerWidth = carousel.parentElement?.offsetWidth || 0;
-        const totalWidth = carousel.scrollWidth;
-        return Math.max(0, totalWidth - containerWidth);
-      }
+        function getMaxPosition() {
+          const containerWidth = carousel.parentElement ? carousel.parentElement.offsetWidth : 0;
+          const totalWidth = carousel.scrollWidth;
+          return Math.max(0, totalWidth - containerWidth);
+        }
 
-      function updateButtons() {
-        prevBtn.disabled = currentPosition <= 0;
-        nextBtn.disabled = currentPosition >= getMaxPosition();
-      }
+        function updateButtons() {
+          prevBtn.disabled = currentPosition <= 0;
+          nextBtn.disabled = currentPosition >= getMaxPosition();
+        }
 
-      prevBtn.addEventListener('click', () => {
-        const slideWidth = getSlideWidth();
-        currentPosition = Math.max(0, currentPosition - slideWidth);
-        carousel.style.transform = `translateX(-${currentPosition}px)`;
+        prevBtn.addEventListener('click', function() {
+          const slideWidth = getSlideWidth();
+          currentPosition = Math.max(0, currentPosition - slideWidth);
+          carousel.style.transform = 'translateX(-' + currentPosition + 'px)';
+          updateButtons();
+        });
+
+        nextBtn.addEventListener('click', function() {
+          const slideWidth = getSlideWidth();
+          const maxPos = getMaxPosition();
+          currentPosition = Math.min(maxPos, currentPosition + slideWidth);
+          carousel.style.transform = 'translateX(-' + currentPosition + 'px)';
+          updateButtons();
+        });
+
+        // Initial state
         updateButtons();
-      });
 
-      nextBtn.addEventListener('click', () => {
-        const slideWidth = getSlideWidth();
-        const maxPos = getMaxPosition();
-        currentPosition = Math.min(maxPos, currentPosition + slideWidth);
-        carousel.style.transform = `translateX(-${currentPosition}px)`;
-        updateButtons();
-      });
-
-      // Initial state
-      updateButtons();
-
-      // Update on resize
-      window.addEventListener('resize', updateButtons);
-    }
+        // Update on resize
+        window.addEventListener('resize', updateButtons);
+      }
+    });
   </script>
 
   <!-- ========================================
@@ -421,51 +423,53 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
 
   <script>
     // Featured carousel controls
-    const featuredCarousel = document.getElementById('featured-carousel');
-    const featuredPrevBtn = document.getElementById('featured-prev');
-    const featuredNextBtn = document.getElementById('featured-next');
+    document.addEventListener('DOMContentLoaded', function() {
+      const featuredCarousel = document.getElementById('featured-carousel');
+      const featuredPrevBtn = document.getElementById('featured-prev');
+      const featuredNextBtn = document.getElementById('featured-next');
 
-    if (featuredCarousel && featuredPrevBtn && featuredNextBtn) {
-      let featuredPosition = 0;
-      const featuredGap = 24; // gap-6 = 1.5rem = 24px
+      if (featuredCarousel && featuredPrevBtn && featuredNextBtn) {
+        let featuredPosition = 0;
+        const featuredGap = 24; // gap-6 = 1.5rem = 24px
 
-      function getFeaturedSlideWidth() {
-        const firstSlide = featuredCarousel.children[0] as HTMLElement;
-        return firstSlide ? firstSlide.offsetWidth + featuredGap : 0;
-      }
+        function getFeaturedSlideWidth() {
+          const firstSlide = featuredCarousel.children[0];
+          return firstSlide ? firstSlide.offsetWidth + featuredGap : 0;
+        }
 
-      function getFeaturedMaxPosition() {
-        const containerWidth = featuredCarousel.parentElement?.offsetWidth || 0;
-        const totalWidth = featuredCarousel.scrollWidth;
-        return Math.max(0, totalWidth - containerWidth);
-      }
+        function getFeaturedMaxPosition() {
+          const containerWidth = featuredCarousel.parentElement ? featuredCarousel.parentElement.offsetWidth : 0;
+          const totalWidth = featuredCarousel.scrollWidth;
+          return Math.max(0, totalWidth - containerWidth);
+        }
 
-      function updateFeaturedButtons() {
-        featuredPrevBtn.disabled = featuredPosition <= 0;
-        featuredNextBtn.disabled = featuredPosition >= getFeaturedMaxPosition();
-      }
+        function updateFeaturedButtons() {
+          featuredPrevBtn.disabled = featuredPosition <= 0;
+          featuredNextBtn.disabled = featuredPosition >= getFeaturedMaxPosition();
+        }
 
-      featuredPrevBtn.addEventListener('click', () => {
-        const slideWidth = getFeaturedSlideWidth();
-        featuredPosition = Math.max(0, featuredPosition - slideWidth);
-        featuredCarousel.style.transform = `translateX(-${featuredPosition}px)`;
+        featuredPrevBtn.addEventListener('click', function() {
+          const slideWidth = getFeaturedSlideWidth();
+          featuredPosition = Math.max(0, featuredPosition - slideWidth);
+          featuredCarousel.style.transform = 'translateX(-' + featuredPosition + 'px)';
+          updateFeaturedButtons();
+        });
+
+        featuredNextBtn.addEventListener('click', function() {
+          const slideWidth = getFeaturedSlideWidth();
+          const maxPos = getFeaturedMaxPosition();
+          featuredPosition = Math.min(maxPos, featuredPosition + slideWidth);
+          featuredCarousel.style.transform = 'translateX(-' + featuredPosition + 'px)';
+          updateFeaturedButtons();
+        });
+
+        // Initial state
         updateFeaturedButtons();
-      });
 
-      featuredNextBtn.addEventListener('click', () => {
-        const slideWidth = getFeaturedSlideWidth();
-        const maxPos = getFeaturedMaxPosition();
-        featuredPosition = Math.min(maxPos, featuredPosition + slideWidth);
-        featuredCarousel.style.transform = `translateX(-${featuredPosition}px)`;
-        updateFeaturedButtons();
-      });
-
-      // Initial state
-      updateFeaturedButtons();
-
-      // Update on resize
-      window.addEventListener('resize', updateFeaturedButtons);
-    }
+        // Update on resize
+        window.addEventListener('resize', updateFeaturedButtons);
+      }
+    });
   </script>
 
   <!-- ========================================

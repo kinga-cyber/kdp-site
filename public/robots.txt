@@ -1,0 +1,7 @@
+# robots.txt for kingadow.com
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.kingadow.com/sitemap-index.xml

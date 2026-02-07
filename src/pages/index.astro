@@ -342,9 +342,9 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
   <!-- ========================================
        TESTIMONIALS SECTION
        ======================================== -->
-  <section class="pt-0 pb-4 md:pt-4 md:pb-8 bg-white relative">
+  <section class="pt-0 pb-4 md:pt-4 md:pb-8 bg-white relative overflow-hidden">
 
-    <div class="max-w-6xl mx-auto px-6">
+    <div class="max-w-6xl mx-auto px-6 overflow-hidden">
       <!-- "What Our Clients Say" - Mobile only (shown above cards on mobile, with circles) -->
       <div class="md:hidden relative flex justify-center items-center min-h-[300px] mb-8">
         <!-- Ellipse 13: Large grey outlined circle -->
@@ -372,9 +372,9 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
 
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <!-- Left: Testimonial Cards with cream gradient backdrop -->
-        <div class="relative">
+        <div class="relative overflow-visible">
           <!-- Cream gradient backdrop (from Figma node 313:213) -->
-          <div class="absolute -left-6 -top-6 -bottom-6 -right-2 rounded-[19px] pointer-events-none" style="background: linear-gradient(89deg, rgb(247, 240, 231) 1%, rgba(247, 240, 231, 0) 96%);"></div>
+          <div class="absolute -left-6 -top-6 -bottom-6 right-0 md:-right-2 rounded-[19px] pointer-events-none" style="background: linear-gradient(89deg, rgb(247, 240, 231) 1%, rgba(247, 240, 231, 0) 96%);"></div>
 
           <div class="space-y-6 relative z-10">
             <!-- Testimonial 1: Tersha Carpenter -->

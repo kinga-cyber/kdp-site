@@ -290,8 +290,9 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
     </div>
   </section>
 
-  <script>
+  <script is:inline>
     // Certificate carousel controls
+    // Using is:inline so DOMContentLoaded fires reliably (Astro module scripts defer past this event)
     document.addEventListener('DOMContentLoaded', function() {
       const carousel = document.getElementById('cert-carousel');
       const prevBtn = document.getElementById('cert-prev');
@@ -421,8 +422,9 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
     </div>
   </section>
 
-  <script>
+  <script is:inline>
     // Featured carousel controls
+    // Using is:inline so DOMContentLoaded fires reliably (Astro module scripts defer past this event)
     document.addEventListener('DOMContentLoaded', function() {
       const featuredCarousel = document.getElementById('featured-carousel');
       const featuredPrevBtn = document.getElementById('featured-prev');

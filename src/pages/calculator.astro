@@ -555,42 +555,60 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
     submitText.textContent = '...';
 
     try {
-      await fetch('https://a.klaviyo.com/client/subscriptions/', {
+      var companyId = 'SqUgaK';
+      var listId = 'W3XhAb';
+      var apiHeaders = {
+        'Content-Type': 'application/json',
+        'revision': '2024-10-15',
+      };
+
+      // Step 1: Create/update profile with calculator results
+      await fetch('https://a.klaviyo.com/client/profiles/?company_id=' + companyId, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'revision': '2024-10-15',
-        },
+        headers: apiHeaders,
+        body: JSON.stringify({
+          data: {
+            type: 'profile',
+            attributes: {
+              email: email,
+              properties: {
+                calculator_score: totalScore,
+                maturity_level: maturity.level,
+                source: 'retention_calculator',
+                completed_date: new Date().toISOString(),
+              },
+            },
+          },
+        }),
+      });
+
+      // Step 2: Subscribe to list
+      await fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + companyId, {
+        method: 'POST',
+        headers: apiHeaders,
         body: JSON.stringify({
           data: {
             type: 'subscription',
             attributes: {
+              custom_source: 'Website - Retention Calculator',
               profile: {
                 data: {
                   type: 'profile',
                   attributes: {
                     email: email,
-                    properties: {
-                      calculator_score: totalScore,
-                      maturity_level: maturity.level,
-                      source: 'retention_calculator',
-                      completed_date: new Date().toISOString(),
-                    },
                   },
                 },
               },
-              custom_source: 'Website - Retention Calculator',
             },
             relationships: {
               list: {
                 data: {
                   type: 'list',
-                  id: 'W3XhAb',
+                  id: listId,
                 },
               },
             },
           },
-          company_id: 'SqUgaK',
         }),
       });
 

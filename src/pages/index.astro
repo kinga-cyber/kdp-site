@@ -513,43 +513,60 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
     submitText.textContent = 'Sending...';
 
     try {
-      // Subscribe to Klaviyo list
-      await fetch('https://a.klaviyo.com/client/subscriptions/', {
+      var companyId = 'SqUgaK';
+      var listId = 'W3XhAb';
+      var apiHeaders = {
+        'Content-Type': 'application/json',
+        'revision': '2024-10-15',
+      };
+
+      // Step 1: Create/update profile with name and lead magnet properties
+      await fetch('https://a.klaviyo.com/client/profiles/?company_id=' + companyId, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'revision': '2024-10-15',
-        },
+        headers: apiHeaders,
+        body: JSON.stringify({
+          data: {
+            type: 'profile',
+            attributes: {
+              email: email,
+              first_name: name.split(' ')[0],
+              last_name: name.split(' ').slice(1).join(' ') || '',
+              properties: {
+                lead_magnet: 'AI Retention Playbook',
+                source: 'website_lead_magnet',
+              },
+            },
+          },
+        }),
+      });
+
+      // Step 2: Subscribe to list
+      await fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + companyId, {
+        method: 'POST',
+        headers: apiHeaders,
         body: JSON.stringify({
           data: {
             type: 'subscription',
             attributes: {
+              custom_source: 'Website Lead Magnet - AI Retention Playbook',
               profile: {
                 data: {
                   type: 'profile',
                   attributes: {
                     email: email,
-                    first_name: name.split(' ')[0],
-                    last_name: name.split(' ').slice(1).join(' ') || '',
-                    properties: {
-                      lead_magnet: 'AI Retention Playbook',
-                      source: 'website_lead_magnet',
-                    },
                   },
                 },
               },
-              custom_source: 'Website Lead Magnet - AI Retention Playbook',
             },
             relationships: {
               list: {
                 data: {
                   type: 'list',
-                  id: 'W3XhAb',
+                  id: listId,
                 },
               },
             },
           },
-          company_id: 'SqUgaK',
         }),
       });
 

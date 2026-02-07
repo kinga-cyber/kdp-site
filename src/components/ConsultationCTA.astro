@@ -62,42 +62,54 @@
             <span id="cta-submit-text">SUBMIT</span>
             <img src="/images/global/play.png" alt="" class="w-5 h-5" />
           </button>
-          <!-- Success message (hidden by default) -->
-          <p id="cta-success" class="hidden text-white text-center text-[14px] font-montserrat font-medium tracking-wide pt-2">
+        </form>
+        <!-- Success message (outside form so it stays visible when form hides) -->
+        <div id="cta-success" class="hidden text-center py-8">
+          <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-white/20 flex items-center justify-center">
+            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <p class="text-white text-[18px] font-montserrat font-medium tracking-wide">
             Thank you! We'll be in touch soon.
           </p>
-        </form>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<script>
-  const form = document.getElementById('consultation-form');
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function() {
+    var form = document.getElementById('consultation-form');
+    if (!form) return;
 
-  form?.addEventListener('submit', async (e) => {
-    e.preventDefault();
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
 
-    const name = (document.getElementById('cta-name') as HTMLInputElement).value;
-    const email = (document.getElementById('cta-email') as HTMLInputElement).value;
-    const message = (document.getElementById('cta-message') as HTMLTextAreaElement).value;
-    const newsletter = (document.getElementById('newsletter') as HTMLInputElement).checked;
-    const submitBtn = document.getElementById('cta-submit-btn') as HTMLButtonElement;
-    const submitText = document.getElementById('cta-submit-text') as HTMLSpanElement;
-    const successMsg = document.getElementById('cta-success') as HTMLParagraphElement;
+      var name = document.getElementById('cta-name').value;
+      var email = document.getElementById('cta-email').value;
+      var message = document.getElementById('cta-message').value;
+      var newsletter = document.getElementById('newsletter').checked;
+      var submitBtn = document.getElementById('cta-submit-btn');
+      var submitText = document.getElementById('cta-submit-text');
+      var successMsg = document.getElementById('cta-success');
 
-    // Disable button and show loading
-    submitBtn.disabled = true;
-    submitText.textContent = 'Sending...';
+      // Disable button and show loading
+      submitBtn.disabled = true;
+      submitText.textContent = 'Sending...';
 
-    try {
-      // Create/update profile in Klaviyo
-      const response = await fetch('https://a.klaviyo.com/client/profiles/', {
+      var companyId = 'SqUgaK';
+      var listId = 'W3XhAb';
+      var apiHeaders = {
+        'Content-Type': 'application/json',
+        'revision': '2024-10-15',
+      };
+
+      // Step 1: Create/update profile with name, message, and custom properties
+      fetch('https://a.klaviyo.com/client/profiles/?company_id=' + companyId, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'revision': '2024-10-15',
-        },
+        headers: apiHeaders,
         body: JSON.stringify({
           data: {
             type: 'profile',
@@ -113,60 +125,51 @@
               },
             },
           },
-          company_id: 'SqUgaK',
         }),
-      });
-
-      // Subscribe to newsletter list if checked
-      if (newsletter) {
-        await fetch('https://a.klaviyo.com/client/subscriptions/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'revision': '2024-10-15',
-          },
-          body: JSON.stringify({
-            data: {
-              type: 'subscription',
-              attributes: {
-                profile: {
-                  data: {
-                    type: 'profile',
-                    attributes: {
-                      email: email,
-                      first_name: name.split(' ')[0],
-                      last_name: name.split(' ').slice(1).join(' ') || '',
+      }).then(function() {
+        // Step 2: Subscribe to list if newsletter checked
+        if (newsletter) {
+          return fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + companyId, {
+            method: 'POST',
+            headers: apiHeaders,
+            body: JSON.stringify({
+              data: {
+                type: 'subscription',
+                attributes: {
+                  custom_source: 'Website Consultation Form',
+                  profile: {
+                    data: {
+                      type: 'profile',
+                      attributes: {
+                        email: email,
+                      },
                     },
                   },
                 },
-                custom_source: 'Website Consultation Form',
-              },
-              relationships: {
-                list: {
-                  data: {
-                    type: 'list',
-                    id: 'W3XhAb',
+                relationships: {
+                  list: {
+                    data: {
+                      type: 'list',
+                      id: listId,
+                    },
                   },
                 },
               },
-            },
-            company_id: 'SqUgaK',
-          }),
-        });
-      }
-
-      // Show success
-      form.classList.add('hidden');
-      successMsg.classList.remove('hidden');
-      successMsg.classList.add('text-[18px]', 'py-8');
-
-    } catch (error) {
-      // Show error
-      submitText.textContent = 'Something went wrong. Try again.';
-      submitBtn.disabled = false;
-      setTimeout(() => {
-        submitText.textContent = 'SUBMIT';
-      }, 3000);
-    }
+            }),
+          });
+        }
+      }).then(function() {
+        // Show success
+        form.classList.add('hidden');
+        successMsg.classList.remove('hidden');
+      }).catch(function() {
+        // Show error
+        submitText.textContent = 'Something went wrong. Try again.';
+        submitBtn.disabled = false;
+        setTimeout(function() {
+          submitText.textContent = 'SUBMIT';
+        }, 3000);
+      });
+    });
   });
 </script>

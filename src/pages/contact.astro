@@ -256,45 +256,65 @@ import Layout from "../layouts/Layout.astro";
       submitBtn.disabled = true;
       submitText.textContent = 'Sending...';
 
-      fetch('https://a.klaviyo.com/client/subscriptions/', {
+      var companyId = 'SqUgaK';
+      var listId = 'W3XhAb';
+      var apiHeaders = {
+        'Content-Type': 'application/json',
+        'revision': '2024-10-15',
+      };
+
+      // Step 1: Create/update the profile with name, message, and custom properties
+      fetch('https://a.klaviyo.com/client/profiles/?company_id=' + companyId, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'revision': '2024-10-15',
-        },
+        headers: apiHeaders,
         body: JSON.stringify({
           data: {
-            type: 'subscription',
+            type: 'profile',
             attributes: {
-              profile: {
-                data: {
-                  type: 'profile',
-                  attributes: {
-                    email: email,
-                    first_name: name.split(' ')[0],
-                    last_name: name.split(' ').slice(1).join(' ') || '',
-                    phone_number: phone || undefined,
-                    properties: {
-                      contact_message: message,
-                      contact_services: services,
-                      contact_request: true,
-                      source: 'website_contact_form',
-                    },
-                  },
-                },
-              },
-              custom_source: 'Contact Form (Xh97Xz)',
-            },
-            relationships: {
-              list: {
-                data: {
-                  type: 'list',
-                  id: 'W3XhAb',
-                },
+              email: email,
+              first_name: name.split(' ')[0],
+              last_name: name.split(' ').slice(1).join(' ') || '',
+              phone_number: phone || undefined,
+              properties: {
+                contact_message: message,
+                contact_services: services,
+                contact_request: true,
+                source: 'website_contact_form',
               },
             },
           },
         }),
+      }).then(function() {
+        // Step 2: Subscribe the profile to the list
+        return fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + companyId, {
+          method: 'POST',
+          headers: apiHeaders,
+          body: JSON.stringify({
+            data: {
+              type: 'subscription',
+              attributes: {
+                custom_source: 'Contact Form (Xh97Xz)',
+                profile: {
+                  data: {
+                    type: 'profile',
+                    attributes: {
+                      email: email,
+                      phone_number: phone || undefined,
+                    },
+                  },
+                },
+              },
+              relationships: {
+                list: {
+                  data: {
+                    type: 'list',
+                    id: listId,
+                  },
+                },
+              },
+            },
+          }),
+        });
       }).then(function() {
         // Show success
         form.classList.add('hidden');

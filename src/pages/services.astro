@@ -1,12 +1,55 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ConsultationCTA from "../components/ConsultationCTA.astro";
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Retention Marketing",
+  "provider": {
+    "@type": "Organization",
+    "name": "Kinga Dow LLC",
+    "url": "https://www.kingadow.com"
+  },
+  "areaServed": "Worldwide",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "AI-Powered Retention Marketing Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Email, SMS & WhatsApp Marketing",
+          "description": "Full campaign execution across email, SMS, and WhatsApp with AI-powered content strategy and send-time optimization."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Advanced Retention Systems",
+          "description": "RFM segmentation, predictive analytics, behavioral triggers, and lifecycle automation for e-commerce brands."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Monthly Retainer Partnership",
+          "description": "Ongoing retention marketing management with monthly AI-powered audits, campaign execution, and revenue opportunity discovery."
+        }
+      }
+    ]
+  }
+};
 ---
 
 <Layout
   title="AI-Powered Retention Marketing Services | Klaviyo Agency | Kinga Dow"
   description="Full-service Klaviyo retention marketing powered by AI. Email, SMS, WhatsApp campaigns, RFM segmentation, predictive analytics, and monthly optimization for e-commerce brands."
 >
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
   <!-- ========================================
        HERO SECTION
        ======================================== -->

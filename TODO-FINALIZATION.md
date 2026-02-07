@@ -32,11 +32,12 @@ The blog listing page and individual post template are ready. Posts have placeho
 - [x] Add featured images for each blog post to /public/images/blog/ (migrated from kingadow.com)
 
 ## Klaviyo Integration
-- [ ] Create Klaviyo forms for:
-  - Contact/consultation form
-  - Newsletter signup
-- [ ] Update form IDs in ConsultationCTA.astro once Klaviyo forms are created
-- [ ] Update calculator.astro Klaviyo list ID (currently using placeholder W3XhAb)
+- [x] All 4 site forms connected to Klaviyo (Company ID: SqUgaK, List: W3XhAb)
+- [x] Contact form (contact.astro) — sends name, email, phone, message, services
+- [x] ConsultationCTA form (ConsultationCTA.astro) — sends name, email, message + optional newsletter subscribe
+- [x] Lead magnet form (index.astro) — sends name, email, lead_magnet property
+- [x] Calculator email capture (calculator.astro) — sends email, score, maturity level
+- See `01-docs/planning/FORMS-REFERENCE.md` for full technical details
 
 ## Buttons Currently Linking to /contact (NOW WORKING ✓)
 - Home page hero: 'Schedule a Free Consultation' button ✓
@@ -63,6 +64,6 @@ The blog listing page and individual post template are ready. Posts have placeho
 - [x] Image alt text audit across all pages (21 bullet.png + footer logo fixed)
 
 ## Notes
-- ConsultationCTA component has its own working form that sends to Klaviyo
-- Calculator page has email capture that sends to Klaviyo (placeholder list)
+- All Klaviyo forms use the same list (W3XhAb) — confirmed by client as intentional
+- Onsite Klaviyo tracking script (SqUgaK) runs globally via Layout.astro
 

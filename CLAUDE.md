@@ -43,6 +43,7 @@ kdp-site/
 | `/calculator` | calculator.astro | Retention maturity assessment tool |
 | `/contact` | contact.astro | Contact form + info |
 | `/consultation` | consultation.astro | Paid AI Strategy Session ($275) with FAQ schema |
+| `/privacy` | privacy.astro | Privacy policy (GDPR, CCPA, third-party disclosures) |
 
 ## Brand
 - **Colors:** Navy `#3F455D`, Gold `#BA9200`, Cream `#F6EFE6`, Grey `#333333`, Sage `#59A56D`
@@ -51,8 +52,18 @@ kdp-site/
 
 ## Integrations
 - **Google Analytics 4:** G-D1HSSBWRMM (in Layout.astro)
-- **Klaviyo:** Company ID SqUgaK (tracking + form submissions)
+- **Klaviyo:** Company ID `SqUgaK`, List `W3XhAb` (tracking + 4 forms)
 - **Sitemap:** Auto-generated via @astrojs/sitemap → sitemap-index.xml
+
+## Klaviyo Forms (all connected, all using list W3XhAb)
+| Form | File | Endpoint | Data |
+|------|------|----------|------|
+| Contact | contact.astro | `client/subscriptions/` | Name, email, phone, message, services |
+| Consultation CTA | ConsultationCTA.astro | `client/profiles/` + `client/subscriptions/` | Name, email, message, newsletter opt-in |
+| Lead Magnet | index.astro | `client/subscriptions/` | Name, email |
+| Calculator | calculator.astro | `client/subscriptions/` | Email, score, maturity level |
+
+See `01-docs/planning/FORMS-REFERENCE.md` for full technical details.
 
 ## SEO Status
 All pages have: page titles, meta descriptions, canonical URLs, OG tags, Twitter cards.
@@ -61,13 +72,10 @@ Social sameAs: LinkedIn, Instagram, Substack, YouTube.
 
 ## Outstanding Tasks
 See `TODO-FINALIZATION.md` for the full list. Key remaining items:
-- [ ] Create /privacy page
 - [ ] Stripe payment link for consultation page
 - [ ] Calendly widget embed for consultation page
-- [ ] Klaviyo form IDs (placeholders in place)
-- [ ] Per-page OG share images (1200x630px)
-- [ ] Google Search Console verification
-- [ ] Image alt text audit
+- [ ] Per-page OG share images (1200x630px) — need design creatives
+- [ ] Update contact form service pill options (currently: Email Marketing, SMS Marketing, Loyalty Program)
 
 ## Documentation
 Project docs live in `/Users/kingadow/Desktop/files/KDP-Website-Redesign/01-docs/`:

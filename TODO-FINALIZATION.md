@@ -7,7 +7,7 @@
 - [x] Create /blog page (DONE - listing page created)
 - [x] Create blog post template (DONE - /blog/[slug].astro created)
 - [x] Create /consultation page (DONE - AI Strategy Session, $275)
-- [ ] Create /privacy page
+- [x] Create /privacy page (DONE - full privacy policy with GDPR, CCPA, third-party services)
 
 ## Paid Consultation Page - Action Items
 - [ ] Add Stripe payment link (replace `YOUR_STRIPE_PAYMENT_LINK` in consultation.astro)

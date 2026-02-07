@@ -143,38 +143,6 @@ import Layout from "../layouts/Layout.astro";
           </div>
         </div>
 
-        <!-- Services Selection -->
-        <div class="mt-8">
-          <label class="block text-kd-gold text-[12px] md:text-[13px] font-montserrat font-medium tracking-[1.2px] uppercase mb-4">
-            Services
-          </label>
-          <div class="flex flex-wrap gap-3">
-            <button
-              type="button"
-              data-service="Email Marketing"
-              class="service-pill px-5 py-2.5 rounded-full border border-kd-gold text-kd-gold text-[13px] md:text-[14px] font-montserrat font-medium tracking-[0.7px] hover:bg-kd-gold hover:text-white transition-all"
-            >
-              Email Marketing
-            </button>
-            <button
-              type="button"
-              data-service="SMS Marketing"
-              class="service-pill px-5 py-2.5 rounded-full border border-kd-gold text-kd-gold text-[13px] md:text-[14px] font-montserrat font-medium tracking-[0.7px] hover:bg-kd-gold hover:text-white transition-all"
-            >
-              SMS Marketing
-            </button>
-            <button
-              type="button"
-              data-service="Loyalty Program"
-              class="service-pill px-5 py-2.5 rounded-full border border-kd-gold text-kd-gold text-[13px] md:text-[14px] font-montserrat font-medium tracking-[0.7px] hover:bg-kd-gold hover:text-white transition-all"
-            >
-              Loyalty Program
-            </button>
-          </div>
-          <!-- Hidden input to store selected services -->
-          <input type="hidden" id="selected-services" name="services" value="" />
-        </div>
-
         <!-- Submit Button -->
         <div class="mt-8 flex justify-center">
           <button
@@ -205,38 +173,8 @@ import Layout from "../layouts/Layout.astro";
   </section>
 </Layout>
 
-<style>
-  .service-pill.active {
-    background-color: #BA9200;
-    color: white;
-  }
-</style>
-
 <script is:inline>
-  // Service pill toggle
   document.addEventListener('DOMContentLoaded', function() {
-    var servicePills = document.querySelectorAll('.service-pill');
-    var selectedServicesInput = document.getElementById('selected-services');
-    var selectedServices = [];
-
-    servicePills.forEach(function(pill) {
-      pill.addEventListener('click', function() {
-        var service = pill.getAttribute('data-service');
-        if (!service) return;
-
-        pill.classList.toggle('active');
-
-        var index = selectedServices.indexOf(service);
-        if (index > -1) {
-          selectedServices.splice(index, 1);
-        } else {
-          selectedServices.push(service);
-        }
-
-        selectedServicesInput.value = selectedServices.join(', ');
-      });
-    });
-
     // Form submission to Klaviyo (form Xh97Xz / list W3XhAb)
     var form = document.getElementById('contact-form');
 
@@ -247,7 +185,6 @@ import Layout from "../layouts/Layout.astro";
       var email = document.getElementById('contact-email').value;
       var phone = document.getElementById('contact-phone').value;
       var message = document.getElementById('contact-message').value;
-      var services = selectedServicesInput.value;
       var submitBtn = document.getElementById('contact-submit-btn');
       var submitText = document.getElementById('contact-submit-text');
       var successMsg = document.getElementById('contact-success');
@@ -277,7 +214,6 @@ import Layout from "../layouts/Layout.astro";
               phone_number: phone || undefined,
               properties: {
                 contact_message: message,
-                contact_services: services,
                 contact_request: true,
                 source: 'website_contact_form',
               },

@@ -47,13 +47,6 @@
             rows="4"
             class="w-full px-5 py-3.5 rounded-lg border border-gray-200 bg-white focus:outline-none focus:border-kd-gold text-base font-montserrat font-light text-kd-navy resize-none placeholder:text-gray-500"
           ></textarea>
-          <div class="flex items-center gap-2">
-            <input type="checkbox" id="newsletter" name="newsletter" class="w-3.5 h-3.5 accent-kd-gold" />
-            <!-- Body Small: Aktiv Grotesk Regular 14/24 -->
-            <label for="newsletter" class="text-white text-[13px] md:text-[14px] leading-[20px] md:leading-[24px] tracking-[1.3px] md:tracking-[1.4px] font-montserrat font-normal">
-              Subscribe to our newsletter
-            </label>
-          </div>
           <button
             type="submit"
             id="cta-submit-btn"
@@ -90,7 +83,6 @@
       var name = document.getElementById('cta-name').value;
       var email = document.getElementById('cta-email').value;
       var message = document.getElementById('cta-message').value;
-      var newsletter = document.getElementById('newsletter').checked;
       var submitBtn = document.getElementById('cta-submit-btn');
       var submitText = document.getElementById('cta-submit-text');
       var successMsg = document.getElementById('cta-success');
@@ -120,44 +112,41 @@
               properties: {
                 consultation_message: message,
                 consultation_request: true,
-                newsletter_opt_in: newsletter,
                 source: 'website_consultation_form',
               },
             },
           },
         }),
       }).then(function() {
-        // Step 2: Subscribe to list if newsletter checked
-        if (newsletter) {
-          return fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + companyId, {
-            method: 'POST',
-            headers: apiHeaders,
-            body: JSON.stringify({
-              data: {
-                type: 'subscription',
-                attributes: {
-                  custom_source: 'Website Consultation Form',
-                  profile: {
-                    data: {
-                      type: 'profile',
-                      attributes: {
-                        email: email,
-                      },
-                    },
-                  },
-                },
-                relationships: {
-                  list: {
-                    data: {
-                      type: 'list',
-                      id: listId,
+        // Step 2: Always subscribe to list
+        return fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + companyId, {
+          method: 'POST',
+          headers: apiHeaders,
+          body: JSON.stringify({
+            data: {
+              type: 'subscription',
+              attributes: {
+                custom_source: 'Website Consultation Form',
+                profile: {
+                  data: {
+                    type: 'profile',
+                    attributes: {
+                      email: email,
                     },
                   },
                 },
               },
-            }),
-          });
-        }
+              relationships: {
+                list: {
+                  data: {
+                    type: 'list',
+                    id: listId,
+                  },
+                },
+              },
+            },
+          }),
+        });
       }).then(function() {
         // Show success
         form.classList.add('hidden');

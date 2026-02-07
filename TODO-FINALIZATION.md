@@ -44,8 +44,9 @@ The blog listing page and individual post template are ready. Posts have placeho
 - Services page hero: 'Schedule a Consultation' button ✓
 - Footer nav: 'CONTACT US' link ✓
 
-## Contact Form Adjustments Needed
-- [ ] Update the services options (currently: Email Marketing, SMS Marketing, Loyalty Program) - needs adjustment
+## Contact Form Adjustments
+- [x] Remove the 3 service pill buttons (DONE — Email Marketing, SMS Marketing, Loyalty Program removed)
+- [x] ConsultationCTA: Remove newsletter checkbox, always subscribe to list (DONE)
 
 ## SEO & Structured Data
 - [x] Page titles and meta descriptions on all pages

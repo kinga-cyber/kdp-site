@@ -10,8 +10,8 @@
 - [x] Create /privacy page (DONE - full privacy policy with GDPR, CCPA, third-party services)
 
 ## Paid Consultation Page - Action Items
-- [ ] Add Stripe payment link (replace `YOUR_STRIPE_PAYMENT_LINK` in consultation.astro)
-- [ ] Add Calendly widget embed (replace placeholder in booking section)
+- [ ] Add Stripe payment link (if needed — "Book Your Session" button currently scrolls to Calendly)
+- [x] Add Calendly widget embed (DONE — calendly.com/kingadow/60min embedded in booking section)
 
 ## Blog Content Migration
 The blog listing page and individual post template are ready. Posts have placeholder content that needs to be migrated from the current website:

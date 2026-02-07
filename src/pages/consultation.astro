@@ -146,9 +146,7 @@ const faqSchema = {
 
             <!-- CTA Button - Links to Stripe -->
             <a
-              href="https://buy.stripe.com/YOUR_STRIPE_PAYMENT_LINK"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#book-consultation"
               class="btn-navy w-full py-4 px-6 rounded-lg text-[14px] md:text-[15px] font-montserrat font-medium tracking-[1.4px] uppercase flex items-center justify-center gap-3"
             >
               Book Your Session
@@ -269,21 +267,10 @@ const faqSchema = {
         Select a time that works for you. After booking, you'll receive a confirmation email with details on how to prepare for our session.
       </p>
 
-      <!-- Calendar Embed Placeholder -->
-      <div class="animate-on-scroll fade-in-up delay-200 bg-kd-cream rounded-xl p-8 md:p-12 min-h-[400px] flex items-center justify-center">
-        <div class="text-center">
-          <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-kd-gold/20 flex items-center justify-center">
-            <svg class="w-8 h-8 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-          </div>
-          <p class="font-montserrat text-kd-grey text-[15px] mb-4">
-            Calendar booking widget will be embedded here
-          </p>
-          <p class="font-montserrat text-kd-grey text-[13px]">
-            (Calendly, Cal.com, or similar)
-          </p>
-        </div>
+      <!-- Calendly Inline Widget -->
+      <div class="animate-on-scroll fade-in-up delay-200">
+        <div class="calendly-inline-widget" data-url="https://calendly.com/kingadow/60min" style="min-width:320px;height:700px;"></div>
+        <script is:inline type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
       </div>
 
       <!-- Alternative: Contact link -->

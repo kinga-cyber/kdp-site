@@ -78,7 +78,7 @@ import Layout from "../layouts/Layout.astro";
   <!-- Contact Form Section -->
   <section class="py-8 md:py-12 px-6 bg-white">
     <div class="max-w-4xl mx-auto">
-      <!-- Form -->
+      <!-- Custom Form (submits to Klaviyo form Xh97Xz / list W3XhAb) -->
       <form id="contact-form" class="animate-on-scroll fade-in-up delay-100">
         <div class="grid md:grid-cols-2 gap-6 md:gap-8">
           <!-- Left Column: Name, Email, Phone -->
@@ -212,52 +212,51 @@ import Layout from "../layouts/Layout.astro";
   }
 </style>
 
-<script>
+<script is:inline>
   // Service pill toggle
-  const servicePills = document.querySelectorAll('.service-pill');
-  const selectedServicesInput = document.getElementById('selected-services') as HTMLInputElement;
-  const selectedServices: string[] = [];
+  document.addEventListener('DOMContentLoaded', function() {
+    var servicePills = document.querySelectorAll('.service-pill');
+    var selectedServicesInput = document.getElementById('selected-services');
+    var selectedServices = [];
 
-  servicePills.forEach(pill => {
-    pill.addEventListener('click', () => {
-      const service = pill.getAttribute('data-service');
-      if (!service) return;
+    servicePills.forEach(function(pill) {
+      pill.addEventListener('click', function() {
+        var service = pill.getAttribute('data-service');
+        if (!service) return;
 
-      pill.classList.toggle('active');
+        pill.classList.toggle('active');
 
-      const index = selectedServices.indexOf(service);
-      if (index > -1) {
-        selectedServices.splice(index, 1);
-      } else {
-        selectedServices.push(service);
-      }
+        var index = selectedServices.indexOf(service);
+        if (index > -1) {
+          selectedServices.splice(index, 1);
+        } else {
+          selectedServices.push(service);
+        }
 
-      selectedServicesInput.value = selectedServices.join(', ');
+        selectedServicesInput.value = selectedServices.join(', ');
+      });
     });
-  });
 
-  // Form submission to Klaviyo
-  const form = document.getElementById('contact-form');
+    // Form submission to Klaviyo (form Xh97Xz / list W3XhAb)
+    var form = document.getElementById('contact-form');
 
-  form?.addEventListener('submit', async (e) => {
-    e.preventDefault();
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
 
-    const name = (document.getElementById('contact-name') as HTMLInputElement).value;
-    const email = (document.getElementById('contact-email') as HTMLInputElement).value;
-    const phone = (document.getElementById('contact-phone') as HTMLInputElement).value;
-    const message = (document.getElementById('contact-message') as HTMLTextAreaElement).value;
-    const services = selectedServicesInput.value;
-    const submitBtn = document.getElementById('contact-submit-btn') as HTMLButtonElement;
-    const submitText = document.getElementById('contact-submit-text') as HTMLSpanElement;
-    const successMsg = document.getElementById('contact-success') as HTMLDivElement;
+      var name = document.getElementById('contact-name').value;
+      var email = document.getElementById('contact-email').value;
+      var phone = document.getElementById('contact-phone').value;
+      var message = document.getElementById('contact-message').value;
+      var services = selectedServicesInput.value;
+      var submitBtn = document.getElementById('contact-submit-btn');
+      var submitText = document.getElementById('contact-submit-text');
+      var successMsg = document.getElementById('contact-success');
 
-    // Disable button and show loading
-    submitBtn.disabled = true;
-    submitText.textContent = 'Sending...';
+      // Disable button and show loading
+      submitBtn.disabled = true;
+      submitText.textContent = 'Sending...';
 
-    try {
-      // Subscribe to Klaviyo list W3XhAb with form UMVMhn
-      await fetch('https://a.klaviyo.com/client/subscriptions/', {
+      fetch('https://a.klaviyo.com/client/subscriptions/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -284,7 +283,7 @@ import Layout from "../layouts/Layout.astro";
                   },
                 },
               },
-              custom_source: 'Contact Form',
+              custom_source: 'Contact Form (Xh97Xz)',
             },
             relationships: {
               list: {
@@ -296,19 +295,18 @@ import Layout from "../layouts/Layout.astro";
             },
           },
         }),
+      }).then(function() {
+        // Show success
+        form.classList.add('hidden');
+        successMsg.classList.remove('hidden');
+      }).catch(function() {
+        // Show error
+        submitText.textContent = 'Something went wrong. Try again.';
+        submitBtn.disabled = false;
+        setTimeout(function() {
+          submitText.textContent = 'SUBMIT';
+        }, 3000);
       });
-
-      // Show success
-      form.classList.add('hidden');
-      successMsg.classList.remove('hidden');
-
-    } catch (error) {
-      // Show error
-      submitText.textContent = 'Something went wrong. Try again.';
-      submitBtn.disabled = false;
-      setTimeout(() => {
-        submitText.textContent = 'SUBMIT';
-      }, 3000);
-    }
+    });
   });
 </script>

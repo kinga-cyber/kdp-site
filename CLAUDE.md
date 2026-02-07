@@ -15,6 +15,7 @@ Website for **Kinga Dow Productions** (kingadow.com), an AI-native retention mar
 - Build command: `npm run build`
 - Output directory: `dist/`
 - No server-side rendering — fully static
+- **⚠️ BATCH CHANGES:** Netlify charges **15 credits per production deploy** (Free plan = 300 credits/month = ~20 deploys). Always batch multiple changes into a single commit/push instead of pushing each fix individually. Only push when a logical set of changes is complete.
 
 ## Project Structure
 ```

@@ -59,8 +59,8 @@ The blog listing page and individual post template are ready. Posts have placeho
 - [x] Favicon (.ico + .svg)
 - [ ] Create per-page OG share images (1200x630px) — need design creatives
 - [x] Set up Google Analytics 4 (G-D1HSSBWRMM)
-- [ ] Set up Google Search Console (need verification code)
-- [ ] Image alt text audit across all pages
+- [x] Google Search Console (already verified — property since 2014)
+- [x] Image alt text audit across all pages (21 bullet.png + footer logo fixed)
 
 ## Notes
 - ConsultationCTA component has its own working form that sends to Klaviyo

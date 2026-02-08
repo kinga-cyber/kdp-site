@@ -1,0 +1,192 @@
+# Netlify Redirects — WordPress to Astro Migration
+# 301 = permanent redirect (preserves SEO equity)
+
+# Main Navigation Pages
+/about-kinga-dow              /about              301
+/about-kinga-dow/             /about/             301
+/our-story                    /about              301
+/our-story/                   /about/             301
+/coaching-services            /consultation       301
+/coaching-services/           /consultation/      301
+/contact-us                   /contact            301
+/contact-us/                  /contact/           301
+/careers                      /                   301
+/careers/                     /                   301
+/products                     /                   301
+/products/                    /                   301
+/newsletter-2                 /                   301
+/newsletter-2/                /                   301
+/request-portfolio-sample     /                   301
+/request-portfolio-sample/    /                   301
+/payment-confirmation         /                   301
+/payment-confirmation/        /                   301
+/payment-failed               /                   301
+/payment-failed/              /                   301
+
+# WordPress Category Archives
+/category/ecommerce           /blog               301
+/category/ecommerce/          /blog/              301
+/category/*                   /blog               301
+
+# Case Studies (old slugs → new slugs)
+/case-studies/case-study-loyaltylion                   /case-studies/loyaltylion              301
+/case-studies/case-study-loyaltylion/                   /case-studies/loyaltylion/             301
+/case-studies/case-study-octane-ai-x-moxielash         /case-studies/octane-ai-moxielash      301
+/case-studies/case-study-octane-ai-x-moxielash/        /case-studies/octane-ai-moxielash/     301
+/case-studies/gamification-boosts-rev-2                /case-studies/gamification-boosts-rev   301
+/case-studies/gamification-boosts-rev-2/               /case-studies/gamification-boosts-rev/  301
+/case-studies/optinmonster-expansion-2                  /case-studies/optinmonster-expansion    301
+/case-studies/optinmonster-expansion-2/                 /case-studies/optinmonster-expansion/   301
+/case-studies/25x-return-with-attentive                /case-studies/25x-return-attentive      301
+/case-studies/25x-return-with-attentive/               /case-studies/25x-return-attentive/     301
+
+# Blog Posts (old root-level slugs → new /blog/ paths)
+/7-steps-to-kickstart-growth-my-personal-journey/                                              /blog/strategies-traffic-growth-gamification/     301
+/7-steps-to-kickstart-growth-my-personal-journey                                               /blog/strategies-traffic-growth-gamification      301
+/boost-your-email-marketing-strategy-with-google-ads-and-klaviyo/                              /blog/klaviyo-google-ads-integration/             301
+/boost-your-email-marketing-strategy-with-google-ads-and-klaviyo                               /blog/klaviyo-google-ads-integration              301
+/discover-how-the-role-of-ai-is-growing-in-business-and-how-you-can-leverage-it/               /blog/ai-role-growing-business/                   301
+/discover-how-the-role-of-ai-is-growing-in-business-and-how-you-can-leverage-it                /blog/ai-role-growing-business                    301
+/funnel-retail-traffic-to-your-online-store-boost-sales/                                       /blog/funnel-retail-traffic-online-store/          301
+/funnel-retail-traffic-to-your-online-store-boost-sales                                        /blog/funnel-retail-traffic-online-store           301
+/how-davines-nailed-their-email-marketing-strategy-at-cosmoprof-bologna/                       /blog/davines-email-marketing-cosmoprof/           301
+/how-davines-nailed-their-email-marketing-strategy-at-cosmoprof-bologna                        /blog/davines-email-marketing-cosmoprof            301
+/how-davines-nailed-their-marketing-at-cosmoprof/                                              /blog/davines-email-marketing-cosmoprof/           301
+/how-davines-nailed-their-marketing-at-cosmoprof                                               /blog/davines-email-marketing-cosmoprof            301
+/strategies-for-capitalizing-on-traffic-and-growth-gamification-social-engagement-and-email-acquisition/   /blog/strategies-traffic-growth-gamification/   301
+/strategies-for-capitalizing-on-traffic-and-growth-gamification-social-engagement-and-email-acquisition    /blog/strategies-traffic-growth-gamification    301
+/the-power-of-technology-in-beauty-geske-kingadow/                                             /blog/technology-beauty-geske-cosmoprof/           301
+/the-power-of-technology-in-beauty-geske-kingadow                                              /blog/technology-beauty-geske-cosmoprof            301
+/boosting-your-food-brands-success-with-advanced-email-marketing-strategies-using-klaviyo/      /blog/boosting-food-brand-email-marketing-klaviyo/ 301
+/boosting-your-food-brands-success-with-advanced-email-marketing-strategies-using-klaviyo       /blog/boosting-food-brand-email-marketing-klaviyo  301
+/the-crucial-difference-between-copywriters-and-email-marketing-copywriters/                    /blog/difference-copywriters-email-marketing/      301
+/the-crucial-difference-between-copywriters-and-email-marketing-copywriters                     /blog/difference-copywriters-email-marketing       301
+/the-11-best-ecommerce-partners-for-email-marketing-a-kdp-guide/                               /blog/best-ecommerce-partners-email-marketing/     301
+/the-11-best-ecommerce-partners-for-email-marketing-a-kdp-guide                                /blog/best-ecommerce-partners-email-marketing      301
+/essential-email-marketing-compliance-updates-for-2024/                                        /blog/google-yahoo-sender-requirements-2024/       301
+/essential-email-marketing-compliance-updates-for-2024                                         /blog/google-yahoo-sender-requirements-2024        301
+/how-to-write-email-copy-convince-convert/                                                     /blog/difference-copywriters-email-marketing/      301
+/how-to-write-email-copy-convince-convert                                                      /blog/difference-copywriters-email-marketing       301
+/how-to-write-email-copy-convince-convert-2/                                                   /blog/difference-copywriters-email-marketing/      301
+/how-to-write-email-copy-convince-convert-2                                                    /blog/difference-copywriters-email-marketing       301
+/mailchimp-ended-the-partnership-with-shopify/                                                 /blog/best-ecommerce-partners-email-marketing/     301
+/mailchimp-ended-the-partnership-with-shopify                                                  /blog/best-ecommerce-partners-email-marketing      301
+
+# Outdated blog posts → blog home
+/google-analytics-important-want-run-profitable-ecommerce-website-case-study/                  /blog/     301
+/google-analytics-important-want-run-profitable-ecommerce-website-case-study                   /blog      301
+/how-to-setup-google-analytics-goals-and-conversion-funnels/                                   /blog/     301
+/how-to-setup-google-analytics-goals-and-conversion-funnels                                    /blog      301
+/predict-when-your-customers-will-reorder/                                                     /blog/     301
+/predict-when-your-customers-will-reorder                                                      /blog      301
+/15-best-elements-for-any-ecommerce-website-that-wants-to-drive-conversions/                   /blog/     301
+/15-best-elements-for-any-ecommerce-website-that-wants-to-drive-conversions                    /blog      301
+/17-tips-to-maximize-your-ecommerce-abandoned-cart-strategy/                                   /blog/     301
+/17-tips-to-maximize-your-ecommerce-abandoned-cart-strategy                                    /blog      301
+/7-must-know-facts-about-the-eus-gdpr-and-your-ecommerce-business/                            /blog/     301
+/7-must-know-facts-about-the-eus-gdpr-and-your-ecommerce-business                             /blog      301
+
+# Old WordPress system URLs
+/wp-admin/*                   /          301
+/wp-login.php                 /          301
+/wp-content/*                 /          301
+/feed/                        /          301
+/xmlrpc.php                   /          301
+
+# Old portfolio pages → case studies
+/ecommerce-website-magento-skyrugs                /case-studies       301
+/ecommerce-website-magento-skyrugs/               /case-studies/      301
+/magento-ecommerce-website-garrett-leather        /case-studies       301
+/magento-ecommerce-website-garrett-leather/       /case-studies/      301
+
+# Wildcard redirects — old WordPress custom post types
+/product/*                    /                   301
+/projects/*                   /case-studies/      301
+/career/*                     /                   301
+/tag/*                        /blog/              301
+
+# Old service/info pages
+/ecommerce-web-design                             /services           301
+/ecommerce-web-design/                            /services/          301
+/sms-email-marketing                              /services           301
+/sms-email-marketing/                             /services/          301
+/revenue-projection-calculator                    /calculator         301
+/revenue-projection-calculator/                   /calculator/        301
+/casestudy                                        /case-studies       301
+/casestudy/                                       /case-studies/      301
+/casestudy-qr-code-landing-page                   /case-studies       301
+/casestudy-qr-code-landing-page/                  /case-studies/      301
+/marketing-forms                                  /contact            301
+/marketing-forms/                                 /contact/           301
+/videos                                           /blog               301
+/videos/                                          /blog/              301
+/ecommerce-video-webinar                          /blog               301
+/ecommerce-video-webinar/                         /blog/              301
+/klaviyo-facebook-live-resource                    /blog               301
+/klaviyo-facebook-live-resource/                   /blog/              301
+
+# Old misc pages → home
+/refer-me                                         /                   301
+/refer-me/                                        /                   301
+/bfcm                                             /                   301
+/bfcm/                                            /                   301
+/bfcm-2                                           /                   301
+/bfcm-2/                                          /                   301
+/home-2                                           /                   301
+/home-2/                                          /                   301
+/home-new                                         /                   301
+/home-new/                                        /                   301
+
+# Thank you / newsletter pages → home
+/thank                                            /                   301
+/thank/                                           /                   301
+/thank-you                                        /                   301
+/thank-you/                                       /                   301
+/thank-you-4                                      /                   301
+/thank-you-4/                                     /                   301
+/newsletter                                       /                   301
+/newsletter/                                      /                   301
+/newsletter-4                                     /                   301
+/newsletter-4/                                    /                   301
+
+# GA4 pages → blog
+/empower-your-data-analysis-with-google-analytics-4       /blog       301
+/empower-your-data-analysis-with-google-analytics-4/      /blog/      301
+/empower-your-data-analysis-with-google-analytics-4-2     /blog       301
+/empower-your-data-analysis-with-google-analytics-4-2/    /blog/      301
+/empower-your-data-analysis-with-google-analytics-4-3     /blog       301
+/empower-your-data-analysis-with-google-analytics-4-3/    /blog/      301
+/empower-your-data-analysis-with-google-analytics-4-4     /blog       301
+/empower-your-data-analysis-with-google-analytics-4-4/    /blog/      301
+
+# Case study alternate slugs
+/case-studies/attentive                                    /case-studies/25x-return-attentive       301
+/case-studies/attentive/                                   /case-studies/25x-return-attentive/      301
+/case-studies/original-document-with-data-and-notes        /case-studies                            301
+/case-studies/original-document-with-data-and-notes/       /case-studies/                           301
+
+# Blog post alternate slug variants (shorter DB slugs)
+/difference-between-copywriters-email-copywriters                                                   /blog/difference-copywriters-email-marketing       301
+/difference-between-copywriters-email-copywriters/                                                  /blog/difference-copywriters-email-marketing/      301
+/essential-email-marketing-compliance-updates-for-2024-your-guide-to-seamless-deliverability        /blog/google-yahoo-sender-requirements-2024        301
+/essential-email-marketing-compliance-updates-for-2024-your-guide-to-seamless-deliverability/       /blog/google-yahoo-sender-requirements-2024/       301
+/the-11-best-ecommerce-partners-for-email-marketing                                                /blog/best-ecommerce-partners-email-marketing      301
+/the-11-best-ecommerce-partners-for-email-marketing/                                               /blog/best-ecommerce-partners-email-marketing/     301
+/15-best-elements-ecommerce-website-drive-conversions                                              /blog                                               301
+/15-best-elements-ecommerce-website-drive-conversions/                                             /blog/                                              301
+/how-to-write-email-copy-convince-convert-2-2                                                      /blog/difference-copywriters-email-marketing        301
+/how-to-write-email-copy-convince-convert-2-2/                                                     /blog/difference-copywriters-email-marketing/       301
+/how-to-create-a-spin-wheel-lottery-with-klaviyo-popups-ecommerce-email-marketing                  /blog/strategies-traffic-growth-gamification        301
+/how-to-create-a-spin-wheel-lottery-with-klaviyo-popups-ecommerce-email-marketing/                 /blog/strategies-traffic-growth-gamification/       301
+/how-to-increase-ecommerce-sales-boost-ecommerce-store-sales                                      /blog                                               301
+/how-to-increase-ecommerce-sales-boost-ecommerce-store-sales/                                     /blog/                                              301
+/how-to-utilize-klaviyo-preference-pages-in-2022-ecommerce-email-sms-marketing                    /blog                                               301
+/how-to-utilize-klaviyo-preference-pages-in-2022-ecommerce-email-sms-marketing/                   /blog/                                              301
+/how-to-utilize-klaviyo-preference-pages-in-2022-ecommerce-email-sms-marketing-2                  /blog                                               301
+/how-to-utilize-klaviyo-preference-pages-in-2022-ecommerce-email-sms-marketing-2/                 /blog/                                              301
+/target-your-audience-through-facebook-and-klaviyo-ecommerce-email-marketing-2022                  /blog                                               301
+/target-your-audience-through-facebook-and-klaviyo-ecommerce-email-marketing-2022/                 /blog/                                              301
+/boost-your-sales-with-birthday-emails-ecommerce-tips-for-klaviyo-users                            /blog                                               301
+/boost-your-sales-with-birthday-emails-ecommerce-tips-for-klaviyo-users/                           /blog/                                              301
+/7-most-important-ga4-reports-for-e-commerce                                                       /blog                                               301
+/7-most-important-ga4-reports-for-e-commerce/                                                      /blog/                                              301

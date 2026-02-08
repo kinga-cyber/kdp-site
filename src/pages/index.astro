@@ -65,17 +65,17 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
           <!-- H4 - Label: Aktiv Grotesk SemiBold 32/40, mobile: 24/30 -->
           <!-- H2 - Section -->
           <h2 class="font-aktiv text-kd-gold text-[24px] md:text-[36px] font-semibold leading-[36px] md:leading-[44px] tracking-[1.4px] md:tracking-[1.8px] mb-6">
-            Get The<br />AI Retention Playbook
+            Get The A/B Testing<br />Agent Blueprint
           </h2>
 
           <!-- H3 - Card: Aktiv Grotesk SemiBold 24/32, mobile: 20/28 -->
-          <p class="font-aktiv text-kd-navy text-[20px] md:text-[24px] font-semibold leading-[28px] md:leading-[32px] tracking-[1px] md:tracking-[1.2px] mb-4">
-            Discover how AI-powered systems unlock hidden revenue in your retention marketing
+          <p class="font-aktiv text-kd-navy text-[18px] md:text-[22px] font-semibold leading-[26px] md:leading-[30px] tracking-[1px] md:tracking-[1.2px] mb-4">
+            The complete framework for turning email guesswork into a compounding revenue engine
           </p>
 
           <!-- Body Large: Montserrat Light 18/30, mobile: 16/26 -->
           <p class="text-black text-[16px] md:text-[18px] leading-[26px] md:leading-[30px] tracking-[1.6px] md:tracking-[1.8px] font-montserrat font-light">
-            The strategies behind our intelligent retention systems — from RFM segmentation to automated flow optimization.
+            The exact methodology for systematic A/B testing — and how to automate the entire cycle with AI.
           </p>
         </div>
 
@@ -106,13 +106,13 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
               class="btn-navy w-full py-4 rounded-lg text-base font-montserrat font-medium tracking-wider flex items-center justify-between px-6 mt-8"
               style="box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);"
             >
-              <span id="lm-submit-text">Download The Playbook</span>
+              <span id="lm-submit-text">Download The Blueprint</span>
               <img src="/images/global/play.png" alt="" class="w-5 h-5" />
             </button>
           </form>
           <!-- Success message (hidden by default) -->
           <p id="lm-success" class="hidden text-kd-gold text-center text-[16px] font-montserrat font-semibold tracking-wide pt-6">
-            Check your email for the playbook!
+            Check your email for the blueprint!
           </p>
         </div>
       </div>
@@ -532,7 +532,7 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
               first_name: name.split(' ')[0],
               last_name: name.split(' ').slice(1).join(' ') || '',
               properties: {
-                lead_magnet: 'AI Retention Playbook',
+                lead_magnet: 'A/B Testing Agent Blueprint',
                 source: 'website_lead_magnet',
               },
             },
@@ -548,7 +548,7 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
           data: {
             type: 'subscription',
             attributes: {
-              custom_source: 'Website Lead Magnet - AI Retention Playbook',
+              custom_source: 'Website Lead Magnet - A/B Testing Agent Blueprint',
               profile: {
                 data: {
                   type: 'profile',
@@ -578,7 +578,7 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
       submitText.textContent = 'Something went wrong. Try again.';
       submitBtn.disabled = false;
       setTimeout(() => {
-        submitText.textContent = 'Download The Playbook';
+        submitText.textContent = 'Download The Blueprint';
       }, 3000);
     }
   });

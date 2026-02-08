@@ -1,0 +1,673 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is this webinar really free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, 100% free. No credit card required. Just register and show up. You'll also get a replay link if you can't make it live."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to know how to use AI already?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not at all. This webinar is designed for email marketers and e-commerce operators at any level. Whether you've never touched AI or you're already experimenting, you'll walk away with actionable next steps."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will there be a replay?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! All registered attendees will receive the replay link within 24 hours. But attending live gives you the chance to ask questions directly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What tools do I need?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Just a computer and an internet connection. We'll be demonstrating workflows using Claude AI and Klaviyo, but you don't need accounts to follow along. Links and resources will be shared after the webinar."
+      }
+    }
+  ]
+};
+
+const eventSchema = {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "From Doer to Director: AI-Powered Email Marketing with Claude",
+  "description": "Free live webinar on how to use Claude AI to transform your email marketing workflow. Learn to build AI-powered flows, automate campaign creation, and scale retention marketing.",
+  "startDate": "2026-02-12T17:00:00+01:00",
+  "endDate": "2026-02-12T18:00:00+01:00",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+  "location": {
+    "@type": "VirtualLocation",
+    "url": "https://www.kingadow.com/webinar"
+  },
+  "organizer": {
+    "@type": "Organization",
+    "name": "Kinga Dow Productions",
+    "url": "https://www.kingadow.com"
+  },
+  "performer": {
+    "@type": "Person",
+    "name": "Kinga Dow"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "url": "https://www.kingadow.com/webinar"
+  },
+  "image": "https://www.kingadow.com/images/about/kinga-headshot.jpg",
+  "isAccessibleForFree": true
+};
+---
+
+<Layout
+  title="Free Webinar: AI-Powered Email Marketing with Claude | Kinga Dow"
+  description="Join this free live webinar to learn how to use Claude AI to transform your email marketing. Build AI-powered flows, automate campaigns, and scale your retention marketing."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(eventSchema)} />
+
+  <!-- Hero Section -->
+  <section class="hero-gradient relative overflow-hidden">
+    <!-- Decorative circle pattern - left side -->
+    <div class="absolute -left-20 top-16 w-[380px] h-[380px] opacity-30 pointer-events-none">
+      <img src="/images/home/decorative/bg-circle-left.png" alt="" class="w-full h-full object-contain" aria-hidden="true" />
+    </div>
+    <!-- Decorative circle pattern - bottom right -->
+    <div class="absolute -right-16 -bottom-16 w-[300px] h-[300px] opacity-20 pointer-events-none">
+      <img src="/images/home/decorative/bg-circle.png" alt="" class="w-full h-full object-contain" aria-hidden="true" />
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 py-12 md:py-20 relative z-10">
+      <div class="text-center max-w-4xl mx-auto">
+        <!-- Label: Gold uppercase -->
+        <span class="animate-on-scroll fade-in-up font-aktiv text-kd-gold font-medium text-[14px] leading-[17px] tracking-[1.4px] mb-4 block uppercase">
+          Free Live Webinar
+        </span>
+
+        <!-- H1 - Hero -->
+        <h1 class="animate-on-scroll fade-in-up delay-100 font-aktiv text-kd-navy text-[24px] md:text-[48px] font-bold leading-[36px] md:leading-[60px] tracking-[1.4px] md:tracking-[2.4px] mb-6">
+          From Doer to Director:<br />AI-Powered Email Marketing<br />with Claude
+        </h1>
+
+        <!-- Subtitle: Script font -->
+        <p class="animate-on-scroll fade-in-up delay-200 font-script text-kd-gold text-[24px] md:text-[36px] leading-[30px] md:leading-[44px] tracking-[1.2px] md:tracking-[1.8px] mb-6">
+          Stop doing everything manually
+        </p>
+
+        <!-- Body text -->
+        <p class="animate-on-scroll fade-in-up delay-300 font-montserrat font-light text-black text-[16px] md:text-[18px] mb-8 max-w-[800px] mx-auto leading-[26px] md:leading-[30px] tracking-[1.6px] md:tracking-[1.8px]">
+          Learn how to use Claude AI to build email flows, automate campaign creation, and transform yourself from a hands-on doer into a strategic director of your retention marketing.
+        </p>
+
+        <!-- CTA Button -->
+        <a
+          href="#register"
+          class="animate-on-scroll fade-in-up delay-400 btn-navy inline-flex py-4 px-10 md:px-14 rounded-lg text-[14px] md:text-[16px] font-montserrat font-medium tracking-[1.4px] uppercase items-center gap-3"
+        >
+          Register Free
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Registration Section -->
+  <section id="register" class="py-12 md:py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="text-center mb-10">
+        <h2 class="animate-on-scroll fade-in-up font-aktiv text-kd-navy text-[21px] md:text-[32px] font-semibold tracking-[1.2px] mb-4">
+          Choose Your Time
+        </h2>
+        <p class="animate-on-scroll fade-in-up delay-100 font-montserrat text-black text-[16px] md:text-[17px] leading-[26px] font-light max-w-xl mx-auto">
+          Pick the session that works best for your timezone. All times shown in CET (Central European Time).
+        </p>
+      </div>
+
+      <!-- Time Option Cards -->
+      <div class="grid md:grid-cols-3 gap-6 mb-10">
+        <!-- PLACEHOLDER: Update dates when confirmed -->
+        <!-- Option 1 -->
+        <div class="animate-on-scroll fade-in-up delay-100 bg-kd-cream/50 rounded-xl p-6 text-center border-2 border-transparent hover:border-kd-gold transition-colors cursor-pointer" data-time="2pm-cet">
+          <p class="font-aktiv text-kd-navy text-[15px] font-semibold tracking-[0.8px] mb-1">
+            <!-- PLACEHOLDER: Update date -->
+            Thursday, Feb 12
+          </p>
+          <p class="font-aktiv text-kd-gold text-[28px] md:text-[32px] font-bold mb-1">
+            2:00 PM
+          </p>
+          <p class="font-montserrat text-kd-grey text-[13px] tracking-[0.6px]">
+            CET (8:00 AM EST)
+          </p>
+        </div>
+
+        <!-- Option 2 (Most Popular) -->
+        <div class="animate-on-scroll fade-in-up delay-200 bg-kd-cream/50 rounded-xl p-6 text-center border-2 border-kd-gold relative cursor-pointer" data-time="5pm-cet">
+          <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-kd-gold text-white text-[11px] font-montserrat font-medium tracking-[1px] uppercase px-3 py-1 rounded-full">
+            Most Popular
+          </span>
+          <p class="font-aktiv text-kd-navy text-[15px] font-semibold tracking-[0.8px] mb-1">
+            <!-- PLACEHOLDER: Update date -->
+            Thursday, Feb 12
+          </p>
+          <p class="font-aktiv text-kd-gold text-[28px] md:text-[32px] font-bold mb-1">
+            5:00 PM
+          </p>
+          <p class="font-montserrat text-kd-grey text-[13px] tracking-[0.6px]">
+            CET (11:00 AM EST)
+          </p>
+        </div>
+
+        <!-- Option 3 -->
+        <div class="animate-on-scroll fade-in-up delay-300 bg-kd-cream/50 rounded-xl p-6 text-center border-2 border-transparent hover:border-kd-gold transition-colors cursor-pointer" data-time="7pm-cet">
+          <p class="font-aktiv text-kd-navy text-[15px] font-semibold tracking-[0.8px] mb-1">
+            <!-- PLACEHOLDER: Update date -->
+            Friday, Feb 13
+          </p>
+          <p class="font-aktiv text-kd-gold text-[28px] md:text-[32px] font-bold mb-1">
+            7:00 PM
+          </p>
+          <p class="font-montserrat text-kd-grey text-[13px] tracking-[0.6px]">
+            CET (1:00 PM EST)
+          </p>
+        </div>
+      </div>
+
+      <!-- Registration Form -->
+      <div class="max-w-lg mx-auto">
+        <div class="animate-on-scroll fade-in-up delay-200 bg-kd-cream rounded-2xl p-8 md:p-10 relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-full h-1 bg-kd-gold"></div>
+
+          <h3 class="font-aktiv text-kd-navy text-[18px] md:text-[22px] font-semibold tracking-[1px] mb-6 text-center">
+            Register Now — It's Free
+          </h3>
+
+          <form id="webinar-form" class="space-y-4">
+            <div>
+              <input
+                type="text"
+                id="webinar-name"
+                name="name"
+                placeholder="First Name"
+                required
+                class="w-full px-5 py-3.5 rounded-lg border border-gray-200 bg-white focus:outline-none focus:border-kd-gold text-[15px] font-montserrat font-light text-kd-navy placeholder:text-gray-400 transition-all"
+              />
+            </div>
+            <div>
+              <input
+                type="email"
+                id="webinar-email"
+                name="email"
+                placeholder="Email Address"
+                required
+                class="w-full px-5 py-3.5 rounded-lg border border-gray-200 bg-white focus:outline-none focus:border-kd-gold text-[15px] font-montserrat font-light text-kd-navy placeholder:text-gray-400 transition-all"
+              />
+            </div>
+
+            <!-- Preferred Time -->
+            <div>
+              <p class="text-kd-gold text-[12px] font-montserrat font-medium tracking-[1.2px] uppercase mb-3">
+                Preferred Time
+              </p>
+              <div class="space-y-2">
+                <label class="flex items-center gap-3 cursor-pointer">
+                  <input type="radio" name="preferred_time" value="2:00 PM CET" class="w-4 h-4 accent-kd-gold" />
+                  <span class="font-montserrat text-kd-navy text-[14px] font-light">2:00 PM CET (8:00 AM EST)</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer">
+                  <input type="radio" name="preferred_time" value="5:00 PM CET" checked class="w-4 h-4 accent-kd-gold" />
+                  <span class="font-montserrat text-kd-navy text-[14px] font-light">5:00 PM CET (11:00 AM EST) — Most Popular</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer">
+                  <input type="radio" name="preferred_time" value="7:00 PM CET" class="w-4 h-4 accent-kd-gold" />
+                  <span class="font-montserrat text-kd-navy text-[14px] font-light">7:00 PM CET (1:00 PM EST)</span>
+                </label>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              id="webinar-submit-btn"
+              class="btn-navy w-full py-4 px-6 rounded-lg text-[14px] md:text-[15px] font-montserrat font-medium tracking-[1.4px] uppercase flex items-center justify-center gap-3"
+            >
+              <span id="webinar-submit-text">Save My Spot</span>
+            </button>
+          </form>
+
+          <!-- Success Message -->
+          <div id="webinar-success" class="hidden text-center py-6">
+            <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-kd-gold/10 flex items-center justify-center">
+              <svg class="w-7 h-7 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h3 class="font-aktiv text-kd-navy text-[20px] md:text-[24px] font-semibold tracking-[1px] mb-2">
+              You're Registered!
+            </h3>
+            <p class="font-montserrat text-kd-grey text-[15px] leading-[24px] font-light">
+              Check your email for the webinar link and calendar invite.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What You'll Learn Section -->
+  <section class="py-12 md:py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="animate-on-scroll fade-in-up font-aktiv text-kd-navy text-[21px] md:text-[32px] font-semibold tracking-[1.2px] text-center mb-10">
+        What You'll Learn
+      </h2>
+
+      <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+        <!-- Item 1 -->
+        <div class="animate-on-scroll fade-in-up delay-100 bg-kd-cream/50 rounded-xl p-6 md:p-8">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-full bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-aktiv text-kd-navy text-[16px] md:text-[18px] font-semibold tracking-[0.8px] mb-2">
+                AI-Powered Flow Building
+              </h3>
+              <p class="font-montserrat text-black text-[15px] leading-[24px] font-light">
+                See how to use Claude AI to create complete email flows — welcome series, abandoned cart, post-purchase — in minutes instead of hours.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="animate-on-scroll fade-in-up delay-200 bg-kd-cream/50 rounded-xl p-6 md:p-8">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-full bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-aktiv text-kd-navy text-[16px] md:text-[18px] font-semibold tracking-[0.8px] mb-2">
+                Campaign Copy at Scale
+              </h3>
+              <p class="font-montserrat text-black text-[15px] leading-[24px] font-light">
+                Learn prompting techniques that generate on-brand email copy, subject lines, and CTAs that actually convert — without sounding robotic.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="animate-on-scroll fade-in-up delay-300 bg-kd-cream/50 rounded-xl p-6 md:p-8">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-full bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-aktiv text-kd-navy text-[16px] md:text-[18px] font-semibold tracking-[0.8px] mb-2">
+                The Director Mindset
+              </h3>
+              <p class="font-montserrat text-black text-[15px] leading-[24px] font-light">
+                Shift from manually executing every task to directing AI as your team. Learn the framework for reviewing, refining, and deploying AI-generated work.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="animate-on-scroll fade-in-up delay-400 bg-kd-cream/50 rounded-xl p-6 md:p-8">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-full bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-aktiv text-kd-navy text-[16px] md:text-[18px] font-semibold tracking-[0.8px] mb-2">
+                Live Demo & Q&A
+              </h3>
+              <p class="font-montserrat text-black text-[15px] leading-[24px] font-light">
+                Watch a live walkthrough of building a real email flow with Claude, then get your questions answered directly by Kinga.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- This Webinar Is For You If... -->
+  <section class="py-12 md:py-16 px-6" style="background: linear-gradient(180deg, #F6EFE6 0%, #FAFAFA 100%);">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="animate-on-scroll fade-in-up font-aktiv text-kd-navy text-[21px] md:text-[32px] font-semibold tracking-[1.2px] text-center mb-10">
+        This Webinar Is For You If...
+      </h2>
+
+      <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+        <div class="animate-on-scroll fade-in-up delay-100 bg-white rounded-xl p-6 shadow-sm">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-full bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <p class="font-montserrat text-black text-[15px] leading-[24px] font-light">
+              You're an e-commerce brand owner or marketer spending too much time on email marketing execution
+            </p>
+          </div>
+        </div>
+
+        <div class="animate-on-scroll fade-in-up delay-200 bg-white rounded-xl p-6 shadow-sm">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-full bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <p class="font-montserrat text-black text-[15px] leading-[24px] font-light">
+              You've heard about AI but haven't figured out how to use it for your email and SMS marketing
+            </p>
+          </div>
+        </div>
+
+        <div class="animate-on-scroll fade-in-up delay-300 bg-white rounded-xl p-6 shadow-sm">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-full bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <p class="font-montserrat text-black text-[15px] leading-[24px] font-light">
+              You're an agency operator or freelancer looking to deliver more in less time for your clients
+            </p>
+          </div>
+        </div>
+
+        <div class="animate-on-scroll fade-in-up delay-400 bg-white rounded-xl p-6 shadow-sm">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-full bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <p class="font-montserrat text-black text-[15px] leading-[24px] font-light">
+              You want to see a real, live demonstration of AI building email marketing assets from scratch
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Kinga Section -->
+  <section class="py-12 md:py-16 px-6" style="background: linear-gradient(180deg, #FAFAFA 0%, #F6EFE6 100%);">
+    <div class="max-w-5xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+        <!-- Left: Photo -->
+        <div class="animate-on-scroll fade-in-up flex justify-center">
+          <div class="w-[280px] h-[280px] md:w-[340px] md:h-[340px] rounded-full overflow-hidden border-4 border-kd-gold/20">
+            <img
+              src="/images/about/kinga-headshot.jpg"
+              alt="Kinga Dow - Founder of Kinga Dow Productions"
+              class="w-full h-full object-cover"
+              onerror="this.style.background='#F6EFE6'; this.alt='Kinga Dow';"
+            />
+          </div>
+        </div>
+
+        <!-- Right: Bio -->
+        <div class="animate-on-scroll fade-in-up delay-100">
+          <span class="font-aktiv text-kd-gold font-medium text-[14px] tracking-[1.4px] mb-3 block uppercase">
+            Your Host
+          </span>
+          <h2 class="font-aktiv text-kd-navy text-[21px] md:text-[28px] font-semibold tracking-[1.2px] mb-4">
+            Kinga Dow
+          </h2>
+          <p class="font-montserrat text-black text-[15px] md:text-[16px] leading-[26px] md:leading-[28px] font-light mb-4">
+            Kinga founded her first web development agency in 2001 and has spent 20+ years in e-commerce. In 2017, she specialized in Klaviyo email marketing and built Kinga Dow Productions into the first AI-native retention marketing agency.
+          </p>
+          <p class="font-montserrat text-black text-[15px] md:text-[16px] leading-[26px] md:leading-[28px] font-light mb-6">
+            Today, she uses Claude AI daily to build email flows, analyze data, manage projects, and scale her agency. In this webinar, she's sharing the exact workflows she uses with her clients.
+          </p>
+
+          <div class="flex flex-wrap gap-4">
+            <div class="bg-white rounded-lg px-4 py-2 shadow-sm">
+              <span class="font-aktiv text-kd-gold text-[18px] font-bold">20+</span>
+              <span class="font-montserrat text-kd-grey text-[12px] ml-1">Years E-commerce</span>
+            </div>
+            <div class="bg-white rounded-lg px-4 py-2 shadow-sm">
+              <span class="font-aktiv text-kd-gold text-[18px] font-bold">8+</span>
+              <span class="font-montserrat text-kd-grey text-[12px] ml-1">Years Klaviyo</span>
+            </div>
+            <div class="bg-white rounded-lg px-4 py-2 shadow-sm">
+              <span class="font-aktiv text-kd-gold text-[18px] font-bold">AI</span>
+              <span class="font-montserrat text-kd-grey text-[12px] ml-1">Native Agency</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-12 md:py-16 px-6 bg-white">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="animate-on-scroll fade-in-up font-aktiv text-kd-navy text-[21px] md:text-[28px] font-semibold tracking-[1.2px] text-center mb-10">
+        Frequently Asked Questions
+      </h2>
+
+      <div class="space-y-4">
+        <!-- FAQ Item 1 -->
+        <details class="animate-on-scroll fade-in-up delay-100 bg-kd-cream/40 rounded-xl p-6 group">
+          <summary class="font-aktiv text-kd-navy text-[16px] md:text-[17px] font-semibold tracking-[0.8px] cursor-pointer list-none flex items-center justify-between">
+            Is this webinar really free?
+            <svg class="w-5 h-5 text-kd-gold transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <p class="font-montserrat text-black text-[15px] leading-[26px] font-light mt-4">
+            Yes, 100% free. No credit card required. Just register and show up. You'll also get a replay link if you can't make it live.
+          </p>
+        </details>
+
+        <!-- FAQ Item 2 -->
+        <details class="animate-on-scroll fade-in-up delay-200 bg-kd-cream/40 rounded-xl p-6 group">
+          <summary class="font-aktiv text-kd-navy text-[16px] md:text-[17px] font-semibold tracking-[0.8px] cursor-pointer list-none flex items-center justify-between">
+            Do I need to know how to use AI already?
+            <svg class="w-5 h-5 text-kd-gold transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <p class="font-montserrat text-black text-[15px] leading-[26px] font-light mt-4">
+            Not at all. This webinar is designed for email marketers and e-commerce operators at any level. Whether you've never touched AI or you're already experimenting, you'll walk away with actionable next steps.
+          </p>
+        </details>
+
+        <!-- FAQ Item 3 -->
+        <details class="animate-on-scroll fade-in-up delay-300 bg-kd-cream/40 rounded-xl p-6 group">
+          <summary class="font-aktiv text-kd-navy text-[16px] md:text-[17px] font-semibold tracking-[0.8px] cursor-pointer list-none flex items-center justify-between">
+            Will there be a replay?
+            <svg class="w-5 h-5 text-kd-gold transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <p class="font-montserrat text-black text-[15px] leading-[26px] font-light mt-4">
+            Yes! All registered attendees will receive the replay link within 24 hours. But attending live gives you the chance to ask questions directly.
+          </p>
+        </details>
+
+        <!-- FAQ Item 4 -->
+        <details class="animate-on-scroll fade-in-up delay-400 bg-kd-cream/40 rounded-xl p-6 group">
+          <summary class="font-aktiv text-kd-navy text-[16px] md:text-[17px] font-semibold tracking-[0.8px] cursor-pointer list-none flex items-center justify-between">
+            What tools do I need?
+            <svg class="w-5 h-5 text-kd-gold transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <p class="font-montserrat text-black text-[15px] leading-[26px] font-light mt-4">
+            Just a computer and an internet connection. We'll be demonstrating workflows using Claude AI and Klaviyo, but you don't need accounts to follow along. Links and resources will be shared after the webinar.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA Section -->
+  <section class="py-12 md:py-16 px-6" style="background: linear-gradient(180deg, #F6EFE6 0%, #FAFAFA 100%);">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="animate-on-scroll fade-in-up font-aktiv text-kd-navy text-[21px] md:text-[32px] font-semibold tracking-[1.2px] mb-4">
+        Ready to Work Smarter?
+      </h2>
+      <p class="animate-on-scroll fade-in-up delay-100 font-script text-kd-gold text-[24px] md:text-[32px] leading-[30px] md:leading-[40px] tracking-[1.2px] mb-6">
+        Your AI-powered email marketing starts here
+      </p>
+      <p class="animate-on-scroll fade-in-up delay-200 font-montserrat text-black text-[16px] md:text-[17px] leading-[26px] font-light mb-8 max-w-xl mx-auto">
+        Join hundreds of e-commerce marketers learning how to use AI to scale their retention marketing. Free, live, and packed with actionable takeaways.
+      </p>
+      <a
+        href="#register"
+        class="animate-on-scroll fade-in-up delay-300 btn-navy inline-flex py-4 px-10 md:px-14 rounded-lg text-[14px] md:text-[16px] font-montserrat font-medium tracking-[1.4px] uppercase items-center gap-3"
+      >
+        Register Free — Save My Spot
+      </a>
+    </div>
+  </section>
+</Layout>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function() {
+    var form = document.getElementById('webinar-form');
+    if (!form) return;
+
+    // Time card selection highlighting
+    var timeCards = document.querySelectorAll('[data-time]');
+    var radioButtons = document.querySelectorAll('input[name="preferred_time"]');
+
+    timeCards.forEach(function(card) {
+      card.addEventListener('click', function() {
+        var time = card.getAttribute('data-time');
+        var valueMap = {
+          '2pm-cet': '2:00 PM CET',
+          '5pm-cet': '5:00 PM CET',
+          '7pm-cet': '7:00 PM CET'
+        };
+        radioButtons.forEach(function(radio) {
+          if (radio.value === valueMap[time]) {
+            radio.checked = true;
+          }
+        });
+        // Update card borders
+        timeCards.forEach(function(c) {
+          if (c === card) {
+            c.classList.add('border-kd-gold');
+            c.classList.remove('border-transparent');
+          } else if (!c.querySelector('.absolute')) {
+            // Don't remove border from "Most Popular" card
+            c.classList.remove('border-kd-gold');
+            c.classList.add('border-transparent');
+          }
+        });
+      });
+    });
+
+    // Form submission to Klaviyo
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      var name = document.getElementById('webinar-name').value;
+      var email = document.getElementById('webinar-email').value;
+      var preferredTime = document.querySelector('input[name="preferred_time"]:checked').value;
+      var submitBtn = document.getElementById('webinar-submit-btn');
+      var submitText = document.getElementById('webinar-submit-text');
+      var successMsg = document.getElementById('webinar-success');
+
+      submitBtn.disabled = true;
+      submitText.textContent = 'Registering...';
+
+      var companyId = 'SqUgaK';
+      var listId = 'W3XhAb';
+      var apiHeaders = {
+        'Content-Type': 'application/json',
+        'revision': '2024-10-15',
+      };
+
+      // Step 1: Create/update profile with webinar properties
+      fetch('https://a.klaviyo.com/client/profiles/?company_id=' + companyId, {
+        method: 'POST',
+        headers: apiHeaders,
+        body: JSON.stringify({
+          data: {
+            type: 'profile',
+            attributes: {
+              email: email,
+              first_name: name,
+              properties: {
+                webinar_registered: true,
+                webinar_name: 'From Doer to Director: AI-Powered Email Marketing with Claude',
+                webinar_preferred_time: preferredTime,
+                source: 'website_webinar_form',
+              },
+            },
+          },
+        }),
+      }).then(function() {
+        // Step 2: Subscribe to list
+        return fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + companyId, {
+          method: 'POST',
+          headers: apiHeaders,
+          body: JSON.stringify({
+            data: {
+              type: 'subscription',
+              attributes: {
+                custom_source: 'Webinar Registration - Claude Email Marketing',
+                profile: {
+                  data: {
+                    type: 'profile',
+                    attributes: {
+                      email: email,
+                    },
+                  },
+                },
+              },
+              relationships: {
+                list: {
+                  data: {
+                    type: 'list',
+                    id: listId,
+                  },
+                },
+              },
+            },
+          }),
+        });
+      }).then(function() {
+        // Show success
+        form.classList.add('hidden');
+        successMsg.classList.remove('hidden');
+      }).catch(function() {
+        submitText.textContent = 'Something went wrong. Try again.';
+        submitBtn.disabled = false;
+        setTimeout(function() {
+          submitText.textContent = 'Save My Spot';
+        }, 3000);
+      });
+    });
+  });
+</script>

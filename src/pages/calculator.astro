@@ -179,6 +179,10 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
               <span id="result-submit-text">Send</span>
             </button>
           </div>
+          <!-- Honeypot (hidden from real users, bots will fill it) -->
+          <div style="position:absolute;left:-9999px;" aria-hidden="true">
+            <input type="text" id="calc-website" name="website" tabindex="-1" autocomplete="off" />
+          </div>
         </form>
 
         <!-- Success message (hidden by default) -->
@@ -543,10 +547,18 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
     e.preventDefault();
 
     const email = (document.getElementById('result-email') as HTMLInputElement).value;
+    const honeypot = (document.getElementById('calc-website') as HTMLInputElement).value;
     const submitBtn = document.getElementById('result-submit-btn') as HTMLButtonElement;
     const submitText = document.getElementById('result-submit-text') as HTMLSpanElement;
     const successMsg = document.getElementById('email-success') as HTMLParagraphElement;
     const form = document.getElementById('results-form') as HTMLFormElement;
+
+    // Honeypot check — if filled, it's a bot. Show fake success.
+    if (honeypot) {
+      form.classList.add('hidden');
+      successMsg.classList.remove('hidden');
+      return;
+    }
 
     const totalScore = calculateTotalScore();
     const maturity = getMaturityLevel(totalScore);

@@ -100,6 +100,10 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
                 class="w-full px-5 py-3.5 rounded-lg border border-kd-gold bg-kd-cream focus:outline-none focus:border-kd-gold text-base font-montserrat font-light text-kd-navy placeholder:text-gray-400"
               />
             </div>
+            <!-- Honeypot (hidden from real users, bots will fill it) -->
+            <div style="position:absolute;left:-9999px;" aria-hidden="true">
+              <input type="text" id="lm-website" name="website" tabindex="-1" autocomplete="off" />
+            </div>
             <button
               type="submit"
               id="lm-submit-btn"
@@ -505,9 +509,17 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
 
     const name = (document.getElementById('lm-name') as HTMLInputElement).value;
     const email = (document.getElementById('lm-email') as HTMLInputElement).value;
+    const honeypot = (document.getElementById('lm-website') as HTMLInputElement).value;
     const submitBtn = document.getElementById('lm-submit-btn') as HTMLButtonElement;
     const submitText = document.getElementById('lm-submit-text') as HTMLSpanElement;
     const successMsg = document.getElementById('lm-success') as HTMLParagraphElement;
+
+    // Honeypot check — if filled, it's a bot. Show fake success.
+    if (honeypot) {
+      lmForm.classList.add('hidden');
+      successMsg.classList.remove('hidden');
+      return;
+    }
 
     submitBtn.disabled = true;
     submitText.textContent = 'Sending...';

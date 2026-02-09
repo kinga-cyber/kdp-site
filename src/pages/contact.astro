@@ -25,12 +25,12 @@ import Layout from "../layouts/Layout.astro";
 
       <!-- Headline -->
       <h1 class="animate-on-scroll fade-in-up delay-100 font-aktiv text-kd-navy text-[30px] md:text-[48px] leading-[40px] md:leading-[58px] tracking-[1.6px] md:tracking-[2.4px] font-semibold max-w-3xl mx-auto mb-6">
-        Get in touch!
+        Let's Talk About Your Retention Marketing
       </h1>
 
       <!-- Subheadline -->
       <p class="animate-on-scroll fade-in-up delay-200 font-montserrat text-black text-[16px] md:text-[18px] leading-[26px] md:leading-[30px] tracking-[1.6px] md:tracking-[1.8px] font-light max-w-2xl mx-auto mb-6">
-        We'd love to hear about your eCommerce project and how we can help your business grow with our strategic email and SMS marketing tactics. Complete the form, and Kinga Dow will personally be in touch in the next 1 – 2 business days.
+        Whether you're exploring AI-powered systems for your e-commerce brand, need a Klaviyo partner who uses more than 30% of the platform, or want to see what autonomous optimization looks like in practice — start here. Kinga will personally be in touch within 1–2 business days.
       </p>
 
       <!-- Contact Info Cards -->
@@ -143,6 +143,11 @@ import Layout from "../layouts/Layout.astro";
           </div>
         </div>
 
+        <!-- Honeypot (hidden from real users, bots will fill it) -->
+        <div style="position:absolute;left:-9999px;" aria-hidden="true">
+          <input type="text" id="contact-website" name="website" tabindex="-1" autocomplete="off" />
+        </div>
+
         <!-- Submit Button -->
         <div class="mt-8 flex justify-center">
           <button
@@ -185,9 +190,17 @@ import Layout from "../layouts/Layout.astro";
       var email = document.getElementById('contact-email').value;
       var phone = document.getElementById('contact-phone').value;
       var message = document.getElementById('contact-message').value;
+      var honeypot = document.getElementById('contact-website').value;
       var submitBtn = document.getElementById('contact-submit-btn');
       var submitText = document.getElementById('contact-submit-text');
       var successMsg = document.getElementById('contact-success');
+
+      // Honeypot check — if filled, it's a bot. Show fake success.
+      if (honeypot) {
+        form.classList.add('hidden');
+        successMsg.classList.remove('hidden');
+        return;
+      }
 
       // Disable button and show loading
       submitBtn.disabled = true;

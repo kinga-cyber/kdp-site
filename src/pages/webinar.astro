@@ -186,7 +186,7 @@ const eventSchema = {
         </div>
       </div>
 
-      <!-- Registration Form -->
+      <!-- Registration Form (Klaviyo Embed) -->
       <div class="max-w-lg mx-auto">
         <div class="animate-on-scroll fade-in-up delay-200 bg-kd-cream rounded-2xl p-8 md:p-10 relative overflow-hidden">
           <div class="absolute top-0 left-0 w-full h-1 bg-kd-gold"></div>
@@ -195,72 +195,8 @@ const eventSchema = {
             Register Now — It's Free
           </h3>
 
-          <form id="webinar-form" class="space-y-4">
-            <div>
-              <input
-                type="text"
-                id="webinar-name"
-                name="name"
-                placeholder="First Name"
-                required
-                class="w-full px-5 py-3.5 rounded-lg border border-gray-200 bg-white focus:outline-none focus:border-kd-gold text-[15px] font-montserrat font-light text-kd-navy placeholder:text-gray-400 transition-all"
-              />
-            </div>
-            <div>
-              <input
-                type="email"
-                id="webinar-email"
-                name="email"
-                placeholder="Email Address"
-                required
-                class="w-full px-5 py-3.5 rounded-lg border border-gray-200 bg-white focus:outline-none focus:border-kd-gold text-[15px] font-montserrat font-light text-kd-navy placeholder:text-gray-400 transition-all"
-              />
-            </div>
-
-            <!-- Preferred Time -->
-            <div>
-              <p class="text-kd-gold text-[12px] font-montserrat font-medium tracking-[1.2px] uppercase mb-3">
-                Preferred Time
-              </p>
-              <div class="space-y-2">
-                <label class="flex items-center gap-3 cursor-pointer">
-                  <input type="radio" name="preferred_time" value="2:00 PM CET" class="w-4 h-4 accent-kd-gold" />
-                  <span class="font-montserrat text-kd-navy text-[14px] font-light">2:00 PM CET (8:00 AM EST)</span>
-                </label>
-                <label class="flex items-center gap-3 cursor-pointer">
-                  <input type="radio" name="preferred_time" value="5:00 PM CET" checked class="w-4 h-4 accent-kd-gold" />
-                  <span class="font-montserrat text-kd-navy text-[14px] font-light">5:00 PM CET (11:00 AM EST) — Most Popular</span>
-                </label>
-                <label class="flex items-center gap-3 cursor-pointer">
-                  <input type="radio" name="preferred_time" value="7:00 PM CET" class="w-4 h-4 accent-kd-gold" />
-                  <span class="font-montserrat text-kd-navy text-[14px] font-light">7:00 PM CET (1:00 PM EST)</span>
-                </label>
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              id="webinar-submit-btn"
-              class="btn-navy w-full py-4 px-6 rounded-lg text-[14px] md:text-[15px] font-montserrat font-medium tracking-[1.4px] uppercase flex items-center justify-center gap-3"
-            >
-              <span id="webinar-submit-text">Save My Spot</span>
-            </button>
-          </form>
-
-          <!-- Success Message -->
-          <div id="webinar-success" class="hidden text-center py-6">
-            <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-kd-gold/10 flex items-center justify-center">
-              <svg class="w-7 h-7 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-            </div>
-            <h3 class="font-aktiv text-kd-navy text-[20px] md:text-[24px] font-semibold tracking-[1px] mb-2">
-              You're Registered!
-            </h3>
-            <p class="font-montserrat text-kd-grey text-[15px] leading-[24px] font-light">
-              Check your email for the webinar link and calendar invite.
-            </p>
-          </div>
+          <!-- Klaviyo Webinar Registration Form -->
+          <div class="klaviyo-form-Y9ipsL"></div>
         </div>
       </div>
     </div>
@@ -553,120 +489,21 @@ const eventSchema = {
 
 <script is:inline>
   document.addEventListener('DOMContentLoaded', function() {
-    var form = document.getElementById('webinar-form');
-    if (!form) return;
-
     // Time card selection highlighting
     var timeCards = document.querySelectorAll('[data-time]');
-    var radioButtons = document.querySelectorAll('input[name="preferred_time"]');
 
     timeCards.forEach(function(card) {
       card.addEventListener('click', function() {
-        var time = card.getAttribute('data-time');
-        var valueMap = {
-          '2pm-cet': '2:00 PM CET',
-          '5pm-cet': '5:00 PM CET',
-          '7pm-cet': '7:00 PM CET'
-        };
-        radioButtons.forEach(function(radio) {
-          if (radio.value === valueMap[time]) {
-            radio.checked = true;
-          }
-        });
         // Update card borders
         timeCards.forEach(function(c) {
           if (c === card) {
             c.classList.add('border-kd-gold');
             c.classList.remove('border-transparent');
           } else if (!c.querySelector('.absolute')) {
-            // Don't remove border from "Most Popular" card
             c.classList.remove('border-kd-gold');
             c.classList.add('border-transparent');
           }
         });
-      });
-    });
-
-    // Form submission to Klaviyo
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      var name = document.getElementById('webinar-name').value;
-      var email = document.getElementById('webinar-email').value;
-      var preferredTime = document.querySelector('input[name="preferred_time"]:checked').value;
-      var submitBtn = document.getElementById('webinar-submit-btn');
-      var submitText = document.getElementById('webinar-submit-text');
-      var successMsg = document.getElementById('webinar-success');
-
-      submitBtn.disabled = true;
-      submitText.textContent = 'Registering...';
-
-      var companyId = 'SqUgaK';
-      var listId = 'W3XhAb';
-      var apiHeaders = {
-        'Content-Type': 'application/json',
-        'revision': '2024-10-15',
-      };
-
-      // Step 1: Create/update profile with webinar properties
-      fetch('https://a.klaviyo.com/client/profiles/?company_id=' + companyId, {
-        method: 'POST',
-        headers: apiHeaders,
-        body: JSON.stringify({
-          data: {
-            type: 'profile',
-            attributes: {
-              email: email,
-              first_name: name,
-              properties: {
-                webinar_registered: true,
-                webinar_name: 'From Doer to Director: AI-Powered Email Marketing with Claude',
-                webinar_preferred_time: preferredTime,
-                source: 'website_webinar_form',
-              },
-            },
-          },
-        }),
-      }).then(function() {
-        // Step 2: Subscribe to list
-        return fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + companyId, {
-          method: 'POST',
-          headers: apiHeaders,
-          body: JSON.stringify({
-            data: {
-              type: 'subscription',
-              attributes: {
-                custom_source: 'Webinar Registration - Claude Email Marketing',
-                profile: {
-                  data: {
-                    type: 'profile',
-                    attributes: {
-                      email: email,
-                    },
-                  },
-                },
-              },
-              relationships: {
-                list: {
-                  data: {
-                    type: 'list',
-                    id: listId,
-                  },
-                },
-              },
-            },
-          }),
-        });
-      }).then(function() {
-        // Show success
-        form.classList.add('hidden');
-        successMsg.classList.remove('hidden');
-      }).catch(function() {
-        submitText.textContent = 'Something went wrong. Try again.';
-        submitBtn.disabled = false;
-        setTimeout(function() {
-          submitText.textContent = 'Save My Spot';
-        }, 3000);
       });
     });
   });

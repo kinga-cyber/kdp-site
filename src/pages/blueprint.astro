@@ -234,6 +234,10 @@ import Layout from "../layouts/Layout.astro";
             required
             class="w-full px-5 py-3.5 rounded-lg border border-kd-gold bg-white focus:outline-none focus:border-kd-navy text-base font-montserrat font-light text-kd-navy placeholder:text-gray-400"
           />
+          <!-- Honeypot (hidden from real users, bots will fill it) -->
+          <div style="position:absolute;left:-9999px;" aria-hidden="true">
+            <input type="text" id="bp-website" name="website" tabindex="-1" autocomplete="off" />
+          </div>
           <button
             type="submit"
             id="bp-submit-btn"
@@ -284,9 +288,17 @@ import Layout from "../layouts/Layout.astro";
 
       var name = document.getElementById('bp-name').value;
       var email = document.getElementById('bp-email').value;
+      var honeypot = document.getElementById('bp-website').value;
       var submitBtn = document.getElementById('bp-submit-btn');
       var submitText = document.getElementById('bp-submit-text');
       var successMsg = document.getElementById('bp-success');
+
+      // Honeypot check — if filled, it's a bot. Show fake success.
+      if (honeypot) {
+        form.classList.add('hidden');
+        successMsg.classList.remove('hidden');
+        return;
+      }
 
       submitBtn.disabled = true;
       submitText.textContent = 'Sending...';

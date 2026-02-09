@@ -1,0 +1,306 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ConsultationCTA from "../components/ConsultationCTA.astro";
+
+// Portfolio items — replace placeholder images with real email screenshots
+// Images should be ~700px wide, full-length email screenshots (tall)
+const portfolioItems = [
+  {
+    id: "sample-1",
+    image: "/images/portfolio/sample-1.jpg",
+    title: "Welcome Flow — Discount Offer",
+    category: "flows",
+    client: "Retail / Sports",
+  },
+  {
+    id: "sample-2",
+    image: "/images/portfolio/sample-2.jpg",
+    title: "Welcome Flow — Review Request",
+    category: "flows",
+    client: "Retail / Sports",
+  },
+  {
+    id: "sample-3",
+    image: "/images/portfolio/sample-3.jpg",
+    title: "Post-Purchase — Cross-Sell",
+    category: "flows",
+    client: "Retail / Sports",
+  },
+  {
+    id: "sample-4",
+    image: "/images/portfolio/sample-4.jpg",
+    title: "Welcome Flow — Clearance",
+    category: "campaigns",
+    client: "Retail / Sports",
+  },
+];
+
+const categories = [
+  { value: "all", label: "All" },
+  { value: "flows", label: "Flows" },
+  { value: "campaigns", label: "Campaigns" },
+  { value: "welcome", label: "Welcome Series" },
+  { value: "winback", label: "Win-Back" },
+  { value: "abandonment", label: "Abandonment" },
+];
+---
+
+<Layout
+  title="Email Marketing Portfolio | Kinga Dow Productions"
+  description="Browse our email marketing portfolio — real Klaviyo campaigns, automated flows, and retention strategies built for e-commerce brands."
+>
+  <!-- ========================================
+       HERO SECTION
+       ======================================== -->
+  <section class="hero-gradient relative overflow-hidden">
+    <!-- Decorative circles -->
+    <div class="absolute -left-20 top-4 w-[250px] h-[390px] opacity-30 pointer-events-none">
+      <img src="/images/home/decorative/bg-circle-left.png" alt="" class="w-full h-full object-contain" aria-hidden="true" />
+    </div>
+    <div class="absolute -right-16 top-40 w-[370px] h-[450px] opacity-20 pointer-events-none">
+      <img src="/images/home/decorative/bg-circle-1.png" alt="" class="w-full h-full object-contain" aria-hidden="true" />
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 pt-12 pb-8 md:pt-20 md:pb-14 relative z-10">
+      <div class="text-center max-w-4xl mx-auto">
+        <!-- Label -->
+        <span class="animate-on-scroll fade-in-up font-aktiv text-kd-gold font-medium text-[14px] leading-[17px] tracking-[1.4px] mb-4 block uppercase">
+          Portfolio
+        </span>
+
+        <!-- H1 -->
+        <h1 class="animate-on-scroll fade-in-up delay-100 font-aktiv text-kd-navy text-[24px] md:text-[48px] font-bold leading-[32px] md:leading-[60px] tracking-[1.2px] md:tracking-[2.4px] mb-6">
+          Emails That Drive Revenue
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="animate-on-scroll fade-in-up delay-200 font-montserrat font-light text-black text-[16px] md:text-[18px] leading-[26px] md:leading-[30px] tracking-[1.6px] md:tracking-[1.8px] max-w-[700px] mx-auto">
+          A selection of real Klaviyo emails we've built for e-commerce brands — from automated flows to seasonal campaigns.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       FILTER TABS
+       ======================================== -->
+  <section class="bg-white pt-8 pb-4">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex flex-wrap justify-center gap-3" id="filter-tabs">
+        {categories.map((cat) => (
+          <button
+            data-filter={cat.value}
+            class:list={[
+              "filter-btn font-aktiv text-[13px] md:text-[14px] font-medium tracking-[1px] px-5 py-2 rounded-full border transition-all uppercase",
+              cat.value === "all"
+                ? "bg-kd-gold text-white border-kd-gold"
+                : "bg-white text-kd-navy border-kd-gold/30 hover:bg-kd-cream hover:border-kd-gold",
+            ]}
+          >
+            {cat.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       PORTFOLIO GRID
+       ======================================== -->
+  <section class="bg-white py-8 md:py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6" id="portfolio-grid">
+        {portfolioItems.map((item) => (
+          <div
+            class="portfolio-item group cursor-pointer animate-on-scroll fade-in-up"
+            data-category={item.category}
+            data-id={item.id}
+          >
+            <!-- Image card — shows top portion, click to expand -->
+            <div class="relative rounded-[12px] overflow-hidden bg-kd-cream" style="box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);">
+              <!-- Email preview — cropped to top portion -->
+              <div class="aspect-[3/4] overflow-hidden">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  class="w-full h-auto object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+
+              <!-- Hover overlay with "View" -->
+              <div class="absolute inset-0 bg-kd-navy/0 group-hover:bg-kd-navy/40 transition-all duration-300 flex items-center justify-center">
+                <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white text-kd-navy font-aktiv font-medium text-[13px] tracking-[1px] px-5 py-2 rounded-full uppercase">
+                  View Full Email
+                </span>
+              </div>
+            </div>
+
+            <!-- Title below card -->
+            <div class="mt-3 px-1">
+              <p class="font-montserrat font-semibold text-kd-navy text-[13px] md:text-[14px] leading-[18px] tracking-[0.6px]">
+                {item.title}
+              </p>
+              <p class="font-montserrat font-light text-kd-grey text-[11px] md:text-[12px] leading-[16px] tracking-[0.5px] mt-1">
+                {item.client}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Empty state when no items match filter -->
+      <div class="hidden text-center py-16" id="empty-state">
+        <p class="font-montserrat font-light text-kd-grey text-[16px] tracking-[0.8px]">
+          More examples coming soon for this category.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       REQUEST PORTFOLIO CTA
+       ======================================== -->
+  <section class="py-12 md:py-16 relative overflow-hidden">
+    <div class="absolute -left-20 top-10 w-[300px] h-[300px] opacity-20 pointer-events-none">
+      <img src="/images/home/decorative/bg-circle-left.png" alt="" class="w-full h-full object-contain" aria-hidden="true" />
+    </div>
+
+    <div class="max-w-2xl mx-auto px-6 text-center relative z-10">
+      <h2 class="animate-on-scroll fade-in-up font-aktiv text-kd-gold text-[20px] md:text-[32px] font-semibold leading-[30px] md:leading-[42px] tracking-[1px] md:tracking-[1.6px] mb-4">
+        Want to See More?
+      </h2>
+      <p class="animate-on-scroll fade-in-up delay-100 font-montserrat font-light text-black text-[15px] md:text-[17px] leading-[24px] md:leading-[28px] tracking-[0.8px] mb-8">
+        Request our full portfolio with detailed case studies, campaign breakdowns, and performance metrics.
+      </p>
+      <a
+        href="/contact"
+        class="animate-on-scroll fade-in-up delay-200 inline-block bg-kd-gold text-white font-aktiv font-semibold text-[14px] md:text-[15px] tracking-[1.2px] px-8 py-4 rounded-full hover:bg-kd-gold/90 transition-all uppercase"
+      >
+        Request Full Portfolio
+      </a>
+    </div>
+  </section>
+
+  <!-- ========================================
+       LIGHTBOX MODAL
+       ======================================== -->
+  <div
+    id="lightbox"
+    class="fixed inset-0 z-[999] bg-black/80 hidden items-center justify-center p-4"
+    style="backdrop-filter: blur(4px);"
+  >
+    <!-- Close button -->
+    <button
+      id="lightbox-close"
+      class="absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 bg-white rounded-full flex items-center justify-center z-10 hover:bg-kd-cream transition-colors"
+      aria-label="Close"
+    >
+      <svg class="w-5 h-5 text-kd-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+
+    <!-- Scrollable image container -->
+    <div class="max-w-[600px] w-full max-h-[90vh] overflow-y-auto rounded-[12px] bg-white">
+      <img
+        id="lightbox-img"
+        src=""
+        alt=""
+        class="w-full h-auto"
+      />
+    </div>
+  </div>
+
+  <!-- ========================================
+       CTA / CONSULTATION SECTION
+       ======================================== -->
+  <ConsultationCTA />
+</Layout>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function() {
+    // ---- Filter tabs ----
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const items = document.querySelectorAll('.portfolio-item');
+    const emptyState = document.getElementById('empty-state');
+
+    filterBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var filter = btn.getAttribute('data-filter');
+
+        // Update active button
+        filterBtns.forEach(function(b) {
+          b.classList.remove('bg-kd-gold', 'text-white', 'border-kd-gold');
+          b.classList.add('bg-white', 'text-kd-navy', 'border-kd-gold/30');
+        });
+        btn.classList.remove('bg-white', 'text-kd-navy', 'border-kd-gold/30');
+        btn.classList.add('bg-kd-gold', 'text-white', 'border-kd-gold');
+
+        // Filter items
+        var visibleCount = 0;
+        items.forEach(function(item) {
+          var cat = item.getAttribute('data-category');
+          if (filter === 'all' || cat === filter) {
+            item.style.display = '';
+            visibleCount++;
+          } else {
+            item.style.display = 'none';
+          }
+        });
+
+        // Show/hide empty state
+        if (emptyState) {
+          if (visibleCount === 0) {
+            emptyState.classList.remove('hidden');
+          } else {
+            emptyState.classList.add('hidden');
+          }
+        }
+      });
+    });
+
+    // ---- Lightbox ----
+    var lightbox = document.getElementById('lightbox');
+    var lightboxImg = document.getElementById('lightbox-img');
+    var lightboxClose = document.getElementById('lightbox-close');
+
+    items.forEach(function(item) {
+      item.addEventListener('click', function() {
+        var img = item.querySelector('img');
+        if (img && lightbox && lightboxImg) {
+          lightboxImg.src = img.src;
+          lightboxImg.alt = img.alt;
+          lightbox.classList.remove('hidden');
+          lightbox.classList.add('flex');
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    });
+
+    function closeLightbox() {
+      if (lightbox) {
+        lightbox.classList.add('hidden');
+        lightbox.classList.remove('flex');
+        document.body.style.overflow = '';
+      }
+    }
+
+    if (lightboxClose) {
+      lightboxClose.addEventListener('click', closeLightbox);
+    }
+
+    if (lightbox) {
+      lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) {
+          closeLightbox();
+        }
+      });
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeLightbox();
+      }
+    });
+  });
+</script>

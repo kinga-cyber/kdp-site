@@ -186,7 +186,7 @@ const eventSchema = {
         </div>
       </div>
 
-      <!-- Registration Form (Klaviyo Embed) -->
+      <!-- Registration Form (Custom — Klaviyo API) -->
       <div class="max-w-lg mx-auto">
         <div class="animate-on-scroll fade-in-up delay-200 bg-kd-cream rounded-2xl p-8 md:p-10 relative overflow-hidden">
           <div class="absolute top-0 left-0 w-full h-1 bg-kd-gold"></div>
@@ -195,8 +195,62 @@ const eventSchema = {
             Register Now — It's Free
           </h3>
 
-          <!-- Klaviyo Webinar Registration Form -->
-          <div class="klaviyo-form-Y9ipsL"></div>
+          <form id="webinar-form" class="space-y-4">
+            <!-- Honeypot -->
+            <div style="position:absolute;left:-9999px;" aria-hidden="true">
+              <input type="text" name="web_url" id="wb-website" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <div>
+              <input
+                type="text"
+                id="wb-first-name"
+                placeholder="First Name"
+                required
+                class="w-full px-4 py-3 rounded-lg border border-kd-gold/30 bg-white font-montserrat text-[15px] text-black placeholder:text-kd-grey focus:outline-none focus:border-kd-gold transition-colors"
+              />
+            </div>
+
+            <div>
+              <input
+                type="email"
+                id="wb-email"
+                placeholder="Email Address"
+                required
+                class="w-full px-4 py-3 rounded-lg border border-kd-gold/30 bg-white font-montserrat text-[15px] text-black placeholder:text-kd-grey focus:outline-none focus:border-kd-gold transition-colors"
+              />
+            </div>
+
+            <!-- Selected time (hidden, set by JS) -->
+            <input type="hidden" id="wb-time" value="5pm-cet" />
+
+            <p id="wb-selected-time" class="font-montserrat text-kd-gold text-[13px] tracking-[0.6px] text-center">
+              Selected: Thursday, Feb 12 — 5:00 PM CET
+            </p>
+
+            <button
+              type="submit"
+              id="wb-submit"
+              class="w-full btn-navy py-4 rounded-lg text-[14px] md:text-[16px] font-montserrat font-medium tracking-[1.4px] uppercase"
+            >
+              Register Free
+            </button>
+
+            <p id="wb-error" class="hidden text-red-500 text-center font-montserrat text-[13px]"></p>
+          </form>
+
+          <!-- Success Message -->
+          <div id="wb-success" class="hidden text-center py-4">
+            <div class="w-16 h-16 bg-kd-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h4 class="font-aktiv text-kd-navy text-[18px] font-semibold tracking-[0.8px] mb-2">You're Registered!</h4>
+            <p class="font-montserrat text-black text-[14px] leading-[22px] font-light">
+              Check your inbox for confirmation and calendar invite. See you there!
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -489,12 +543,23 @@ const eventSchema = {
 
 <script is:inline>
   document.addEventListener('DOMContentLoaded', function() {
-    // Time card selection highlighting
     var timeCards = document.querySelectorAll('[data-time]');
+    var hiddenTime = document.getElementById('wb-time');
+    var selectedTimeText = document.getElementById('wb-selected-time');
 
+    var timeLabels = {
+      '2pm-cet': 'Thursday, Feb 12 — 2:00 PM CET',
+      '5pm-cet': 'Thursday, Feb 12 — 5:00 PM CET',
+      '7pm-cet': 'Friday, Feb 13 — 7:00 PM CET'
+    };
+
+    // Time card selection
     timeCards.forEach(function(card) {
       card.addEventListener('click', function() {
-        // Update card borders
+        var time = card.getAttribute('data-time');
+        if (hiddenTime) hiddenTime.value = time;
+        if (selectedTimeText) selectedTimeText.textContent = 'Selected: ' + (timeLabels[time] || time);
+
         timeCards.forEach(function(c) {
           if (c === card) {
             c.classList.add('border-kd-gold');
@@ -506,5 +571,103 @@ const eventSchema = {
         });
       });
     });
+
+    // Form submission
+    var form = document.getElementById('webinar-form');
+    var submitBtn = document.getElementById('wb-submit');
+    var errorMsg = document.getElementById('wb-error');
+    var successMsg = document.getElementById('wb-success');
+
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Honeypot check
+        var honeypot = document.getElementById('wb-website');
+        if (honeypot && honeypot.value) {
+          form.classList.add('hidden');
+          successMsg.classList.remove('hidden');
+          return;
+        }
+
+        var firstName = document.getElementById('wb-first-name').value.trim();
+        var email = document.getElementById('wb-email').value.trim();
+        var selectedTime = hiddenTime ? hiddenTime.value : '';
+
+        if (!firstName || !email) return;
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Registering...';
+        errorMsg.classList.add('hidden');
+
+        // Step 1: Create/update profile
+        fetch('https://a.klaviyo.com/client/profiles/?company_id=SqUgaK', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'revision': '2024-06-15'
+          },
+          body: JSON.stringify({
+            data: {
+              type: 'profile',
+              attributes: {
+                email: email,
+                first_name: firstName,
+                properties: {
+                  webinar_time_slot: selectedTime,
+                  webinar_registered: true,
+                  custom_source: 'Website Webinar Registration'
+                }
+              }
+            }
+          })
+        })
+        .then(function() {
+          // Step 2: Subscribe to webinar list
+          return fetch('https://a.klaviyo.com/client/subscriptions/?company_id=SqUgaK', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'revision': '2024-06-15'
+            },
+            body: JSON.stringify({
+              data: {
+                type: 'subscription',
+                attributes: {
+                  custom_source: 'Website Webinar Registration',
+                  profile: {
+                    data: {
+                      type: 'profile',
+                      attributes: {
+                        email: email,
+                        first_name: firstName
+                      }
+                    }
+                  }
+                },
+                relationships: {
+                  list: {
+                    data: {
+                      type: 'list',
+                      id: 'W3XhAb'
+                    }
+                  }
+                }
+              }
+            })
+          });
+        })
+        .then(function() {
+          form.classList.add('hidden');
+          successMsg.classList.remove('hidden');
+        })
+        .catch(function() {
+          errorMsg.textContent = 'Something went wrong. Please try again.';
+          errorMsg.classList.remove('hidden');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Register Free';
+        });
+      });
+    }
   });
 </script>

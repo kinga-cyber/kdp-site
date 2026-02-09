@@ -228,119 +228,44 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
           </h2>
         </div>
 
-        <!-- Right: Click-through Certification carousel -->
-        <div class="animate-on-scroll fade-in-up delay-100 flex-1 relative">
-          <!-- Left Arrow -->
-          <button
-            id="cert-prev"
-            class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 bg-white rounded-full flex items-center justify-center transition-all hover:bg-kd-cream disabled:opacity-30 disabled:cursor-not-allowed"
-            style="box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);"
-            aria-label="Previous certificate"
-          >
-            <svg class="w-5 h-5 text-kd-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-            </svg>
-          </button>
+        <!-- Right: Certifications grid -->
+        <div class="animate-on-scroll fade-in-up delay-100 flex-1">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <!-- Cert 1 -->
+            <div>
+              <img
+                src="/images/about/About-Certificate 1.png"
+                alt="Certificate 1"
+                class="w-full h-auto rounded-[10px]"
+                style="box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);"
+              />
+            </div>
 
-          <!-- Carousel container -->
-          <div class="overflow-hidden">
-            <div class="cert-carousel flex gap-8 transition-transform duration-500 ease-in-out" id="cert-carousel">
-              <!-- Cert 1 -->
-              <div class="flex-shrink-0 h-[220px] md:h-[237px]">
-                <img
-                  src="/images/about/About-Certificate 1.png"
-                  alt="Certificate 1"
-                  class="h-full w-auto"
-                />
-              </div>
+            <!-- Cert 2 -->
+            <div>
+              <img
+                src="/images/about/About-Certificate 2.png"
+                alt="Certificate 2"
+                class="w-full h-auto rounded-[10px]"
+                style="box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);"
+              />
+            </div>
 
-              <!-- Cert 2 -->
-              <div class="flex-shrink-0 h-[220px] md:h-[237px]">
-                <img
-                  src="/images/about/About-Certificate 2.png"
-                  alt="Certificate 2"
-                  class="h-full w-auto"
-                />
-              </div>
-
-              <!-- Cert 3 -->
-              <div class="flex-shrink-0 h-[220px] md:h-[237px]">
-                <img
-                  src="/images/about/About-Certificate 3.png"
-                  alt="Certificate 3"
-                  class="h-full w-auto"
-                />
-              </div>
+            <!-- Cert 3 -->
+            <div>
+              <img
+                src="/images/about/About-Certificate 3.png"
+                alt="Certificate 3"
+                class="w-full h-auto rounded-[10px]"
+                style="box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);"
+              />
             </div>
           </div>
-
-          <!-- Right Arrow -->
-          <button
-            id="cert-next"
-            class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 bg-white rounded-full flex items-center justify-center transition-all hover:bg-kd-cream disabled:opacity-30 disabled:cursor-not-allowed"
-            style="box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);"
-            aria-label="Next certificate"
-          >
-            <svg class="w-5 h-5 text-kd-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-            </svg>
-          </button>
         </div>
       </div>
     </div>
   </section>
 
-  <script is:inline>
-    // Certificate carousel controls
-    // Using is:inline so DOMContentLoaded fires reliably (Astro module scripts defer past this event)
-    document.addEventListener('DOMContentLoaded', function() {
-      const carousel = document.getElementById('cert-carousel');
-      const prevBtn = document.getElementById('cert-prev');
-      const nextBtn = document.getElementById('cert-next');
-
-      if (carousel && prevBtn && nextBtn) {
-        let currentPosition = 0;
-        const gap = 32; // gap-8 = 2rem = 32px
-
-        function getSlideWidth() {
-          const firstSlide = carousel.children[0];
-          return firstSlide ? firstSlide.offsetWidth + gap : 0;
-        }
-
-        function getMaxPosition() {
-          const containerWidth = carousel.parentElement ? carousel.parentElement.offsetWidth : 0;
-          const totalWidth = carousel.scrollWidth;
-          return Math.max(0, totalWidth - containerWidth);
-        }
-
-        function updateButtons() {
-          prevBtn.disabled = currentPosition <= 0;
-          nextBtn.disabled = currentPosition >= getMaxPosition();
-        }
-
-        prevBtn.addEventListener('click', function() {
-          const slideWidth = getSlideWidth();
-          currentPosition = Math.max(0, currentPosition - slideWidth);
-          carousel.style.transform = 'translateX(-' + currentPosition + 'px)';
-          updateButtons();
-        });
-
-        nextBtn.addEventListener('click', function() {
-          const slideWidth = getSlideWidth();
-          const maxPos = getMaxPosition();
-          currentPosition = Math.min(maxPos, currentPosition + slideWidth);
-          carousel.style.transform = 'translateX(-' + currentPosition + 'px)';
-          updateButtons();
-        });
-
-        // Initial state
-        updateButtons();
-
-        // Update on resize
-        window.addEventListener('resize', updateButtons);
-      }
-    });
-  </script>
 
   <!-- ========================================
        FEATURED ON SECTION

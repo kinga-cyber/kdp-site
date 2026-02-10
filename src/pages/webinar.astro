@@ -10,7 +10,7 @@ const faqSchema = {
       "name": "Is this webinar really free?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, 100% free. No credit card required. Just register and show up. You'll also get a replay link if you can't make it live."
+        "text": "Yes, 100% free. No credit card required. Just register and show up."
       }
     },
     {
@@ -19,14 +19,6 @@ const faqSchema = {
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Not at all. This webinar is designed for email marketers and e-commerce operators at any level. Whether you've never touched AI or you're already experimenting, you'll walk away with actionable next steps."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Will there be a replay?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes! All registered attendees will receive the replay link within 24 hours. But attending live gives you the chance to ask questions directly."
       }
     },
     {
@@ -45,8 +37,8 @@ const eventSchema = {
   "@type": "Event",
   "name": "From Doer to Director: AI-Powered Email Marketing with Claude",
   "description": "Free live webinar showing how to orchestrate your entire email marketing workflow using Claude AI - shift from doer to director.",
-  "startDate": "2026-02-12T17:00:00+01:00",
-  "endDate": "2026-02-12T18:00:00+01:00",
+  "startDate": "2026-02-19T17:00:00+01:00",
+  "endDate": "2026-02-19T18:00:00+01:00",
   "eventStatus": "https://schema.org/EventScheduled",
   "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
   "location": {
@@ -69,7 +61,7 @@ const eventSchema = {
     "availability": "https://schema.org/InStock",
     "url": "https://www.kingadow.com/webinar"
   },
-  "image": "https://www.kingadow.com/images/about/kinga-headshot.jpg",
+  "image": "https://www.kingadow.com/images/about/kinga-paris.jpg",
   "isAccessibleForFree": true
 };
 ---
@@ -133,7 +125,7 @@ const eventSchema = {
           Choose Your Time
         </h2>
         <p class="animate-on-scroll fade-in-up delay-100 font-montserrat text-black text-[16px] md:text-[17px] leading-[26px] font-light max-w-xl mx-auto">
-          Pick the session that works best for your timezone. All times shown in CET (Central European Time).
+          All times are in CET. Pick the one that works best for you — I'll choose the time that's most convenient for the majority of registrants.
         </p>
       </div>
 
@@ -143,8 +135,7 @@ const eventSchema = {
         <!-- Option 1 -->
         <div class="animate-on-scroll fade-in-up delay-100 bg-kd-cream/50 rounded-xl p-6 text-center border-2 border-transparent hover:border-kd-gold transition-colors cursor-pointer" data-time="2pm-cet">
           <p class="font-aktiv text-kd-navy text-[15px] font-semibold tracking-[0.8px] mb-1">
-            <!-- PLACEHOLDER: Update date -->
-            Thursday, Feb 12
+            Wednesday, Feb 19
           </p>
           <p class="font-aktiv text-kd-gold text-[28px] md:text-[32px] font-bold mb-1">
             2:00 PM
@@ -160,8 +151,7 @@ const eventSchema = {
             Most Popular
           </span>
           <p class="font-aktiv text-kd-navy text-[15px] font-semibold tracking-[0.8px] mb-1">
-            <!-- PLACEHOLDER: Update date -->
-            Thursday, Feb 12
+            Wednesday, Feb 19
           </p>
           <p class="font-aktiv text-kd-gold text-[28px] md:text-[32px] font-bold mb-1">
             5:00 PM
@@ -174,8 +164,7 @@ const eventSchema = {
         <!-- Option 3 -->
         <div class="animate-on-scroll fade-in-up delay-300 bg-kd-cream/50 rounded-xl p-6 text-center border-2 border-transparent hover:border-kd-gold transition-colors cursor-pointer" data-time="7pm-cet">
           <p class="font-aktiv text-kd-navy text-[15px] font-semibold tracking-[0.8px] mb-1">
-            <!-- PLACEHOLDER: Update date -->
-            Friday, Feb 13
+            Thursday, Feb 20
           </p>
           <p class="font-aktiv text-kd-gold text-[28px] md:text-[32px] font-bold mb-1">
             7:00 PM
@@ -225,7 +214,7 @@ const eventSchema = {
             <input type="hidden" id="wb-time" value="5pm-cet" />
 
             <p id="wb-selected-time" class="font-montserrat text-kd-navy text-[14px] font-semibold tracking-[0.6px] text-center">
-              Selected: Thursday, Feb 12 — 5:00 PM CET
+              Selected: Wednesday, Feb 19 — 5:00 PM CET
             </p>
 
             <button
@@ -315,7 +304,7 @@ const eventSchema = {
                 Task Management Setup
               </h3>
               <p class="font-montserrat text-black text-[15px] leading-[24px] font-light">
-                How I organize everything in Asana so nothing falls through the cracks — and how AI helps manage the workflow.
+                How I organize everything in my CRM so nothing falls through the cracks — and how AI helps manage the workflow.
               </p>
             </div>
           </div>
@@ -414,7 +403,7 @@ const eventSchema = {
         <div class="animate-on-scroll fade-in-up flex justify-center">
           <div class="w-[280px] h-[280px] md:w-[340px] md:h-[340px] rounded-full overflow-hidden border-4 border-kd-gold/20">
             <img
-              src="/images/about/kinga-headshot.jpg"
+              src="/images/about/kinga-paris.jpg"
               alt="Kinga Dow - Founder of Kinga Dow Productions"
               class="w-full h-full object-cover"
               onerror="this.style.background='#F6EFE6'; this.alt='Kinga Dow';"
@@ -473,7 +462,7 @@ const eventSchema = {
             </svg>
           </summary>
           <p class="font-montserrat text-black text-[15px] leading-[26px] font-light mt-4">
-            Yes, 100% free. No credit card required. Just register and show up. You'll also get a replay link if you can't make it live.
+            Yes, 100% free. No credit card required. Just register and show up.
           </p>
         </details>
 
@@ -492,19 +481,6 @@ const eventSchema = {
 
         <!-- FAQ Item 3 -->
         <details class="animate-on-scroll fade-in-up delay-300 bg-kd-cream/40 rounded-xl p-6 group">
-          <summary class="font-aktiv text-kd-navy text-[16px] md:text-[17px] font-semibold tracking-[0.8px] cursor-pointer list-none flex items-center justify-between">
-            Will there be a replay?
-            <svg class="w-5 h-5 text-kd-gold transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </summary>
-          <p class="font-montserrat text-black text-[15px] leading-[26px] font-light mt-4">
-            Yes! All registered attendees will receive the replay link within 24 hours. But attending live gives you the chance to ask questions directly.
-          </p>
-        </details>
-
-        <!-- FAQ Item 4 -->
-        <details class="animate-on-scroll fade-in-up delay-400 bg-kd-cream/40 rounded-xl p-6 group">
           <summary class="font-aktiv text-kd-navy text-[16px] md:text-[17px] font-semibold tracking-[0.8px] cursor-pointer list-none flex items-center justify-between">
             What tools do I need?
             <svg class="w-5 h-5 text-kd-gold transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -548,9 +524,9 @@ const eventSchema = {
     var selectedTimeText = document.getElementById('wb-selected-time');
 
     var timeLabels = {
-      '2pm-cet': 'Thursday, Feb 12 — 2:00 PM CET',
-      '5pm-cet': 'Thursday, Feb 12 — 5:00 PM CET',
-      '7pm-cet': 'Friday, Feb 13 — 7:00 PM CET'
+      '2pm-cet': 'Wednesday, Feb 19 — 2:00 PM CET',
+      '5pm-cet': 'Wednesday, Feb 19 — 5:00 PM CET',
+      '7pm-cet': 'Thursday, Feb 20 — 7:00 PM CET'
     };
 
     // Time card selection

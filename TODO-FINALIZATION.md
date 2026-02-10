@@ -49,31 +49,45 @@
 
 ---
 
-## 🔲 REMAINING — Kinga's Action Items
+## ✅ COMPLETED — Feb 9 Session
 
-### 1. Webinar Page — Finalize & Push
+- [x] Lead magnet updated to "A/B Testing Agent Blueprint" (homepage + /blueprint page)
+- [x] Webinar page live with custom registration form (captures time slot)
+- [x] Contact page copy updated
+- [x] Kinga photo updated (kinga-paris.jpg) on About page
+- [x] Certifications updated (3 new certs in grid layout)
+- [x] Featured On section: 4 cards (Mavlers, podcast, WTE, LoyaltyLion)
+- [x] Partner logos updated on Services page (uniform 800×300px)
+- [x] Site logo updated (600×256px)
+- [x] Honeypot spam protection on all 5 forms
+- [x] Global OG share image added (global-og-image.jpg)
+- [x] Portfolio page built (/portfolio — hidden from nav until images ready)
+- [x] Portfolio image guide doc created
+
+---
+
+## 🔲 REMAINING
+
+### 1. Webinar Page — Polish
 - [ ] Add headshot image: `kinga-headshot.jpg` (680×680px square) → `/public/images/about/`
 - [ ] Confirm webinar dates → Update placeholders in `webinar.astro` (search for `PLACEHOLDER`)
+- [ ] Time card selection UX: When a time is selected, show a colored border on the selected card in the form area + darker font for "Selected: ..." text
+- [ ] Update "What You'll Learn" section content (Kinga to provide new copy)
 - [ ] Optional: Create separate Klaviyo list for webinar registrants
 - [ ] Set up Klaviyo notification flow (trigger: Added to List, filter: webinar_registered = true)
-- [ ] Push to GitHub once finalized
 
-### 2. "Featured In" Images — About Page
-- [ ] Provide new Featured In logos/screenshots to add to the carousel
-- [ ] Current items: Women Talk eCommerce, LoyaltyLion
-- [ ] Unused images already in folder: featured-moxielash-winner.png, featured-kinga-dow-productions.png
-- [ ] Image specs: PNG, ~350px wide, save to `/public/images/about/featured-[name].png`
+### 2. Portfolio Page
+- [ ] Provide email screenshots (700px wide, full-length, JPG/PNG)
+- [ ] Save to `/public/images/portfolio/`
+- [ ] Update `portfolioItems` array in `portfolio.astro` with titles/categories
+- [ ] Add Portfolio back to navigation when ready
+- [ ] See `01-docs/handoffs/PORTFOLIO-IMAGE-GUIDE.md` for full specs
 
-### 3. Certification Images — About Page
-- [ ] Provide new/updated certification images
-- [ ] Current: AI Fluency (Anthropic), Klaviyo Product, CXL
-- [ ] Image specs: PNG, ~237px tall, save to `/public/images/about/cert-[name].png`
+### 3. About Page — Remaining
+- [ ] Remove white backgrounds/drop shadows from certificate images (noted for next push)
+- [ ] Certification alt text (update from generic "Certificate 1/2/3" to actual names)
 
-### 4. New Lead Magnet — ✅ Copy & Pages Done
-- [x] Homepage section updated: "Get The A/B Testing Agent Blueprint"
-- [x] Dedicated landing page built: `/blueprint`
-- [x] Klaviyo properties updated to 'A/B Testing Agent Blueprint'
-- [ ] Provide the actual PDF file → save to `/public/downloads/ab-testing-agent-blueprint.pdf`
+### 4. Lead Magnet Delivery
 - [ ] Decide delivery method: Klaviyo email with PDF attached, or direct download?
 
 ### 5. OG Share Images (Optional/Low Priority)

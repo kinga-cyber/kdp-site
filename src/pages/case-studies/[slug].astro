@@ -11,7 +11,7 @@ export function getStaticPaths() {
         subtitle: "How we built a proprietary RFM + CLV segmentation system with Claude AI that grew email revenue from $346K to $1.29M in 7 months",
         category: "E-commerce & Claude AI",
         client: "Premium Gift E-commerce Brand",
-        technologies: ["Klaviyo", "Claude AI", "MCP Integrations", "GA4", "Asana", "Slack"],
+        technologies: ["Klaviyo", "Claude AI", "Reviews.io", "MCP Integrations", "GA4", "Asana", "Slack"],
         image: "/images/case-studies/ai-powered-gift-ecommerce.png",
         stat: "273%",
         statLabel: "Email Revenue Growth",
@@ -25,9 +25,12 @@ export function getStaticPaths() {
           <h2>The Solution</h2>
           <p>Starting in May 2025, we built a comprehensive AI-powered email marketing system using Claude as a daily strategic partner. This wasn't about using AI for simple tasks — it was about creating a custom intelligence system that transformed the entire retention marketing approach.</p>
           <ul>
-            <li>Built proprietary RFM + CLV segmentation system adapted for gift-based businesses, creating dedicated segments for holiday-only buyers, corporate gifters, multi-occasion VIPs, and win-back targets</li>
-            <li>Transformed flow architecture with enhanced and new flows including Post-Purchase Holiday Cross-Sell, VIP/Champions Exclusive Holiday Flow, and Corporate Gifting Nurture sequence</li>
-            <li>Created gamified pop-up strategy with 12 popup types (Spin-to-Win, Scratch-Off, Mystery Box, Quiz-Based Gift Finder) customized by visitor segment</li>
+            <li>Built proprietary RFM + CLV segmentation system adapted for gift-based businesses — each segment received dedicated flows AND campaigns, making RFM the foundation everything else was built on</li>
+            <li>Designed automated flows around RFM segments ensuring each customer lifecycle stage had targeted communication and retention triggers</li>
+            <li>Enhanced existing flows for Q4 — First Purchase with holiday messaging and gift wrapping reminders, Welcome Pop-Up optimized for holiday traffic, WinBack targeting last year's holiday customers, Browse Abandonment with reduced trigger delays and urgency messaging, Abandoned Cart with shipping deadlines and increased incentives</li>
+            <li>Built new sequences including Corporate Gifting Nurture for B2B revenue</li>
+            <li>Integrated Reviews.io and optimized all review metrics with automated review request flows, review-triggered cross-sell sequences, and review-based customer segmentation</li>
+            <li>Created segment-specific pop-up strategy with Spin-to-Win pop-ups for Black Friday and Christmas campaigns, plus dedicated pop-ups tailored to each RFM segment</li>
             <li>Connected Claude to Klaviyo, GA4, Asana, and Slack through MCP integrations, building a full business intelligence system across departments</li>
             <li>Built comprehensive Q4 projections using verified multi-source data — conservative, moderate, and aggressive scenarios that gave the client confidence to prepare for growth</li>
           </ul>
@@ -36,7 +39,6 @@ export function getStaticPaths() {
           <ul>
             <li><strong>273% email revenue growth</strong> — from $346K to $1.29M in 12 months</li>
             <li><strong>Email attribution doubled</strong> — from 10.8% to ~30% of total revenue</li>
-            <li><strong>42.4% open rate</strong> — top 5% globally</li>
             <li><strong>69% of email revenue from automated flows</strong> — up from 40% in 2024</li>
             <li><strong>Q4 exceeded aggressive projection by 11%</strong> — actual Q4 revenue hit $2.4M vs $2.27M projected</li>
             <li><strong>Client had to pause email marketing for 6 days</strong> during peak holiday season because fulfillment couldn't keep up with order volume — and we still beat the aggressive target</li>
@@ -46,9 +48,9 @@ export function getStaticPaths() {
           <p>The real power of AI in retention marketing isn't using it for one-off tasks — it's building a comprehensive intelligence system through sustained strategic partnership. Seven months of daily work with Claude created proprietary RFM segments, projection models, MCP-connected business intelligence, and a flow architecture that generates revenue automatically. When we had to stop sending emails during peak season, the automated systems kept working — December flows generated 81% of email revenue. The foundation matters more than tactics, and the methodology that created 4x growth is the true competitive advantage.</p>
         `,
         results: [
-          { value: "273%", label: "Email Revenue Growth ($346K → $1.29M)" },
-          { value: "42.4%", label: "Open Rate (Top 5% Globally)" },
-          { value: "69%", label: "Revenue from Automated Flows" }
+          { value: "273%", label: "Email Revenue Growth" },
+          { value: "178%", label: "Revenue Attribution Lift" },
+          { value: "+11%", label: "Above Q4 Target" }
         ]
       }
     },

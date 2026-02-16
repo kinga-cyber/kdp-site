@@ -1,0 +1,587 @@
+---
+import Standalone from "../../layouts/Standalone.astro";
+---
+
+<Standalone
+  title="Cohort Retention Intelligence Report — Demo | Kinga Dow"
+  description="See how our AI-powered Cohort Retention Intelligence Agent analyzes customer retention, identifies at-risk cohorts, and generates actionable CRM tasks — all from your Klaviyo data."
+>
+
+  <!-- ========================================
+       DEMO BANNER
+       ======================================== -->
+  <div class="bg-kd-navy text-white text-center py-3 px-6">
+    <span class="font-aktiv font-semibold text-[11px] md:text-[12px] tracking-[2px] uppercase">Demo — Sample Data</span>
+    <span class="font-montserrat font-light text-white/60 text-[11px] md:text-[12px] tracking-[0.5px] ml-2 hidden md:inline">This report uses simulated data to demonstrate capabilities. Connect a live Klaviyo account for real insights.</span>
+  </div>
+
+  <!-- ========================================
+       REPORT HEADER
+       ======================================== -->
+  <section class="bg-kd-navy relative overflow-hidden py-12 md:py-14">
+    <!-- Subtle gradient overlay -->
+    <div class="absolute top-0 right-0 bottom-0 w-[40%] pointer-events-none" style="background: linear-gradient(135deg, rgba(140,171,149,0.08) 0%, rgba(63,69,93,0) 70%);"></div>
+
+    <div class="max-w-[1100px] mx-auto px-6 md:px-8 relative z-10">
+      <div class="flex flex-col md:flex-row justify-between items-start gap-6">
+        <!-- Left: Title & Meta -->
+        <div>
+          <h1 class="!text-white !font-bold !text-[22px] md:!text-[28px] !leading-[32px] md:!leading-[36px] !tracking-[-0.5px] uppercase mb-2">
+            Cohort Retention Intelligence Report
+          </h1>
+          <p class="font-montserrat font-light text-white/70 text-[14px] md:text-[15px] mb-5">
+            Retention analysis &amp; actionable recommendations
+          </p>
+          <div class="flex flex-wrap gap-6 md:gap-8">
+            <div>
+              <span class="font-montserrat text-white/55 text-[12px] block">Client</span>
+              <strong class="font-montserrat font-semibold text-white/85 text-[12px] block mt-0.5">Sample Store</strong>
+            </div>
+            <div>
+              <span class="font-montserrat text-white/55 text-[12px] block">Generated</span>
+              <strong class="font-montserrat font-semibold text-white/85 text-[12px] block mt-0.5">February 16, 2026</strong>
+            </div>
+            <div>
+              <span class="font-montserrat text-white/55 text-[12px] block">Period</span>
+              <strong class="font-montserrat font-semibold text-white/85 text-[12px] block mt-0.5">Feb 2025 — Feb 2026</strong>
+            </div>
+            <div>
+              <span class="font-montserrat text-white/55 text-[12px] block">Customers</span>
+              <strong class="font-montserrat font-semibold text-white/85 text-[12px] block mt-0.5">3,704</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Brand Mark -->
+        <div class="text-left md:text-right shrink-0">
+          <div class="font-aktiv text-white font-bold text-[16px] md:text-[18px] tracking-[4px] uppercase">KINGA DOW</div>
+          <div class="font-montserrat text-white/45 text-[9px] tracking-[3px] uppercase mt-1">Exponential Brand Growth</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       EXECUTIVE SUMMARY
+       ======================================== -->
+  <section class="py-8 md:py-10 bg-kd-cream-light">
+    <div class="max-w-[1100px] mx-auto px-6 md:px-8">
+      <div class="animate-on-scroll fade-in-up bg-white rounded-[12px] p-6 md:p-8 border border-[#E5E1DB]" style="box-shadow: 0 1px 3px rgba(56,54,55,0.04);">
+        <!-- Section Title -->
+        <div class="font-aktiv text-[11px] font-bold tracking-[2.5px] uppercase text-kd-sage-light mb-5 pb-3 border-b border-[#E5E1DB]">
+          Executive Summary
+        </div>
+
+        <!-- Finding + Badge -->
+        <div class="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 items-start">
+          <div class="bg-[#F7F6FF] rounded-[8px] p-5 md:p-6 border-l-4 border-kd-navy">
+            <p class="font-montserrat font-light text-[14px] md:text-[15px] leading-[26px] md:leading-[28px] tracking-[0.5px] text-kd-grey">
+              Your <strong class="font-semibold text-kd-navy">November 2025 cohort</strong> has a <strong class="font-semibold text-kd-navy">14.8% repurchase rate</strong> at 90 days — <strong class="font-semibold text-kd-navy">41% below the 25% benchmark</strong>. This is the weakest cohort in the past 12 months. An additional <strong class="font-semibold text-kd-navy">5 cohort(s)</strong> are in warning status.
+            </p>
+          </div>
+          <div class="flex flex-col items-center px-7 py-5 rounded-[8px] text-center min-w-[140px]" style="background: rgba(186,146,0,0.1);">
+            <span class="font-montserrat text-[10px] font-semibold tracking-[1.5px] uppercase text-kd-gold/70 mb-2">Overall Health</span>
+            <span class="font-aktiv text-[20px] font-bold tracking-[1px] text-kd-gold">WARNING</span>
+          </div>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-5">
+          <div class="bg-kd-cream rounded-[8px] p-5 text-center">
+            <div class="font-aktiv text-[28px] font-bold text-kd-navy mb-1">3,704</div>
+            <div class="font-montserrat text-[11px] font-medium text-kd-sage-light tracking-[0.5px]">Customers Analyzed</div>
+          </div>
+          <div class="bg-kd-cream rounded-[8px] p-5 text-center">
+            <div class="font-aktiv text-[28px] font-bold text-kd-navy mb-1">22.4%</div>
+            <div class="font-montserrat text-[11px] font-medium text-kd-sage-light tracking-[0.5px]">Avg Repurchase Rate (90d)</div>
+          </div>
+          <div class="bg-kd-cream rounded-[8px] p-5 text-center">
+            <div class="font-aktiv text-[28px] font-bold text-kd-navy mb-1">6</div>
+            <div class="font-montserrat text-[11px] font-medium text-kd-sage-light tracking-[0.5px]">Cohorts Needing Attention</div>
+          </div>
+          <div class="bg-kd-cream rounded-[8px] p-5 text-center">
+            <div class="font-aktiv text-[28px] font-bold text-kd-navy mb-1">4,761</div>
+            <div class="font-montserrat text-[11px] font-medium text-kd-sage-light tracking-[0.5px]">Total Orders</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       COHORT TABLE
+       ======================================== -->
+  <section class="py-8 md:py-10 bg-kd-cream-light">
+    <div class="max-w-[1100px] mx-auto px-6 md:px-8">
+      <div class="animate-on-scroll fade-in-up bg-white rounded-[12px] p-6 md:p-8 border border-[#E5E1DB]" style="box-shadow: 0 1px 3px rgba(56,54,55,0.04);">
+        <div class="font-aktiv text-[11px] font-bold tracking-[2.5px] uppercase text-kd-sage-light mb-5 pb-3 border-b border-[#E5E1DB]">
+          Cohort Overview
+        </div>
+
+        <div class="overflow-x-auto mt-2">
+          <table class="w-full border-collapse font-montserrat text-[13px]">
+            <thead>
+              <tr>
+                <th class="bg-kd-navy text-white px-3.5 py-3 text-left font-semibold text-[11px] tracking-[0.5px] uppercase whitespace-nowrap first:rounded-tl-[8px]">Cohort</th>
+                <th class="bg-kd-navy text-white px-3.5 py-3 text-left font-semibold text-[11px] tracking-[0.5px] uppercase whitespace-nowrap">Customers</th>
+                <th class="bg-kd-navy text-white px-3.5 py-3 text-left font-semibold text-[11px] tracking-[0.5px] uppercase whitespace-nowrap">RR 30d</th>
+                <th class="bg-kd-navy text-white px-3.5 py-3 text-left font-semibold text-[11px] tracking-[0.5px] uppercase whitespace-nowrap">RR 60d</th>
+                <th class="bg-kd-navy text-white px-3.5 py-3 text-left font-semibold text-[11px] tracking-[0.5px] uppercase whitespace-nowrap">RR 90d</th>
+                <th class="bg-kd-navy text-white px-3.5 py-3 text-left font-semibold text-[11px] tracking-[0.5px] uppercase whitespace-nowrap">LTV 30d</th>
+                <th class="bg-kd-navy text-white px-3.5 py-3 text-left font-semibold text-[11px] tracking-[0.5px] uppercase whitespace-nowrap">LTV 60d</th>
+                <th class="bg-kd-navy text-white px-3.5 py-3 text-left font-semibold text-[11px] tracking-[0.5px] uppercase whitespace-nowrap">LTV 90d</th>
+                <th class="bg-kd-navy text-white px-3.5 py-3 text-left font-semibold text-[11px] tracking-[0.5px] uppercase whitespace-nowrap">AOV</th>
+                <th class="bg-kd-navy text-white px-3.5 py-3 text-left font-semibold text-[11px] tracking-[0.5px] uppercase whitespace-nowrap last:rounded-tr-[8px]">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="hover:bg-[#F7F6FF] transition-colors">
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold">2026-02</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">150</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-[#C45B5B]">0.0%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-[#C45B5B]">0.0%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-[#C45B5B]">0.0%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$132</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$132</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$132</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$131.78</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap"><span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-[0.5px] uppercase bg-kd-sage-light/15 text-kd-sage-light">MATURING</span></td>
+              </tr>
+              <tr class="hover:bg-[#F7F6FF] transition-colors">
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold">2026-01</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">290</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-kd-gold">12.4%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-kd-gold">13.8%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-[#C45B5B]">13.8%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$134</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$136</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$136</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$119.02</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap"><span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-[0.5px] uppercase bg-kd-sage-light/15 text-kd-sage-light">MATURING</span></td>
+              </tr>
+              <tr class="hover:bg-[#F7F6FF] transition-colors">
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold">2025-12</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">380</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-kd-sage">15.3%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-kd-sage">20.3%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-kd-gold">22.1%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$176</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$187</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$191</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$152.85</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap"><span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-[0.5px] uppercase bg-kd-sage-light/15 text-kd-sage-light">MATURING</span></td>
+              </tr>
+              <tr class="hover:bg-[#F7F6FF] transition-colors">
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold">2025-11</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">634</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-[#C45B5B]">7.1%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-kd-gold">12.3%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-[#C45B5B]">14.8%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$106</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$114</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$117</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$99.30</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap"><span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-[0.5px] uppercase bg-[#C45B5B]/15 text-[#C45B5B]">CRITICAL</span></td>
+              </tr>
+              <tr class="hover:bg-[#F7F6FF] transition-colors">
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold">2025-10</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">420</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-kd-gold">10.7%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-kd-gold">17.1%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-kd-gold">20.7%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$164</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$176</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$187</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$146.39</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap"><span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-[0.5px] uppercase bg-kd-gold/15 text-kd-gold">WARNING</span></td>
+              </tr>
+              <tr class="hover:bg-[#F7F6FF] transition-colors">
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold">2025-09</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">350</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-[#C45B5B]">7.7%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-kd-gold">14.3%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-kd-gold">17.1%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$148</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$161</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$168</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$139.33</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap"><span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-[0.5px] uppercase bg-kd-gold/15 text-kd-gold">WARNING</span></td>
+              </tr>
+              <tr class="hover:bg-[#F7F6FF] transition-colors">
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold">2025-08</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">240</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-kd-gold">13.8%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-kd-sage">21.2%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-kd-sage">25.8%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$164</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$182</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$191</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$146.20</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap"><span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-[0.5px] uppercase bg-kd-sage/15 text-kd-sage">HEALTHY</span></td>
+              </tr>
+              <tr class="hover:bg-[#F7F6FF] transition-colors">
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold">2025-07</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">250</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-kd-gold">10.4%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-kd-sage">24.8%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-kd-sage">29.6%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$154</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$180</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$190</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$140.09</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap"><span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-[0.5px] uppercase bg-kd-sage/15 text-kd-sage">HEALTHY</span></td>
+              </tr>
+              <tr class="hover:bg-[#F7F6FF] transition-colors">
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold">2025-06</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">310</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-kd-gold">11.0%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-kd-gold">17.7%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-kd-gold">21.6%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$143</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$155</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$162</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$131.04</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap"><span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-[0.5px] uppercase bg-kd-gold/15 text-kd-gold">WARNING</span></td>
+              </tr>
+              <tr class="hover:bg-[#F7F6FF] transition-colors">
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold">2025-05</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">280</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-kd-gold">11.1%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-kd-gold">16.1%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-kd-gold">18.6%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$150</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$160</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$168</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$135.61</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap"><span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-[0.5px] uppercase bg-kd-gold/15 text-kd-gold">WARNING</span></td>
+              </tr>
+              <tr class="hover:bg-[#F7F6FF] transition-colors">
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold">2025-04</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">220</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-kd-gold">13.6%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-kd-sage">25.0%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap font-semibold text-kd-sage">29.5%</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$144</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$163</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$173</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap">$127.21</td>
+                <td class="px-3.5 py-2.5 border-b border-[#E5E1DB] whitespace-nowrap"><span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-[0.5px] uppercase bg-kd-sage/15 text-kd-sage">HEALTHY</span></td>
+              </tr>
+              <tr class="hover:bg-[#F7F6FF] transition-colors">
+                <td class="px-3.5 py-2.5 whitespace-nowrap font-semibold">2025-03</td>
+                <td class="px-3.5 py-2.5 whitespace-nowrap">180</td>
+                <td class="px-3.5 py-2.5 whitespace-nowrap font-semibold text-kd-gold">13.3%</td>
+                <td class="px-3.5 py-2.5 whitespace-nowrap font-semibold text-kd-gold">19.4%</td>
+                <td class="px-3.5 py-2.5 whitespace-nowrap font-semibold text-kd-gold">23.9%</td>
+                <td class="px-3.5 py-2.5 whitespace-nowrap">$140</td>
+                <td class="px-3.5 py-2.5 whitespace-nowrap">$152</td>
+                <td class="px-3.5 py-2.5 whitespace-nowrap">$160</td>
+                <td class="px-3.5 py-2.5 whitespace-nowrap">$122.51</td>
+                <td class="px-3.5 py-2.5 whitespace-nowrap"><span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-[0.5px] uppercase bg-kd-gold/15 text-kd-gold">WARNING</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       TREND VISUALIZATION (Charts)
+       ======================================== -->
+  <section class="py-8 md:py-10 bg-kd-cream-light">
+    <div class="max-w-[1100px] mx-auto px-6 md:px-8">
+      <div class="animate-on-scroll fade-in-up bg-white rounded-[12px] p-6 md:p-8 border border-[#E5E1DB]" style="box-shadow: 0 1px 3px rgba(56,54,55,0.04);">
+        <div class="font-aktiv text-[11px] font-bold tracking-[2.5px] uppercase text-kd-sage-light mb-5 pb-3 border-b border-[#E5E1DB]">
+          Trend Visualization
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+          <div class="bg-kd-cream rounded-[8px] p-5">
+            <h4 class="font-aktiv text-[12px] font-bold text-kd-navy uppercase tracking-[1px] mb-4 text-center">Repurchase Rate by Cohort (90-Day)</h4>
+            <canvas id="repurchaseChart"></canvas>
+          </div>
+          <div class="bg-kd-cream rounded-[8px] p-5">
+            <h4 class="font-aktiv text-[12px] font-bold text-kd-navy uppercase tracking-[1px] mb-4 text-center">Average LTV by Cohort (90-Day)</h4>
+            <canvas id="ltvChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       DETAILED ANALYSIS — Cohort Cards
+       ======================================== -->
+  <section class="py-8 md:py-10 bg-kd-cream-light">
+    <div class="max-w-[1100px] mx-auto px-6 md:px-8 space-y-6">
+
+      <!-- March 2025 -->
+      <div class="animate-on-scroll fade-in-up bg-white rounded-[12px] p-6 md:p-8 border border-[#E5E1DB]" style="box-shadow: 0 1px 3px rgba(56,54,55,0.04);">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-5 pb-4 border-b border-[#E5E1DB] gap-3">
+          <h3 class="!text-[18px] !font-bold !text-kd-navy">March 2025 Cohort</h3>
+          <div class="flex gap-2">
+            <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-[0.5px] uppercase bg-kd-gold/15 text-kd-gold">WARNING</span>
+            <span class="inline-block px-3 py-1 rounded-[4px] text-[11px] font-bold tracking-[0.5px] bg-kd-gold/10 text-kd-gold">MEDIUM PRIORITY</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-5">
+          <div class="bg-kd-cream rounded-[6px] p-3.5 text-center">
+            <div class="font-montserrat text-[10px] font-semibold text-kd-sage-light uppercase tracking-[1px] mb-1.5">Repurchase Rate (90d)</div>
+            <div class="font-aktiv text-[20px] font-bold text-kd-gold">23.9%</div>
+          </div>
+          <div class="bg-kd-cream rounded-[6px] p-3.5 text-center">
+            <div class="font-montserrat text-[10px] font-semibold text-kd-sage-light uppercase tracking-[1px] mb-1.5">Benchmark</div>
+            <div class="font-aktiv text-[20px] font-bold text-kd-navy">25%</div>
+          </div>
+          <div class="bg-kd-cream rounded-[6px] p-3.5 text-center">
+            <div class="font-montserrat text-[10px] font-semibold text-kd-sage-light uppercase tracking-[1px] mb-1.5">Your Average</div>
+            <div class="font-aktiv text-[20px] font-bold text-kd-navy">22.4%</div>
+          </div>
+        </div>
+        <div class="mb-4">
+          <h4 class="font-aktiv text-[12px] font-bold text-kd-navy uppercase tracking-[1px] mb-2">What This Means</h4>
+          <p class="font-montserrat font-light text-[14px] leading-[24px] tracking-[0.5px] text-kd-grey">Of 180 customers acquired in March 2025, only 51 made a second purchase within 90 days. This is 4% below the 25% healthy benchmark.</p>
+        </div>
+        <div class="mb-4">
+          <h4 class="font-aktiv text-[12px] font-bold text-kd-navy uppercase tracking-[1px] mb-2">Contributing Factors to Investigate</h4>
+          <ul class="list-none p-0">
+            <li class="pl-5 py-1.5 relative font-montserrat text-[13px] leading-[22px] text-kd-grey font-light before:content-['→'] before:absolute before:left-0 before:text-kd-sage before:font-bold">No single obvious driver — investigate product mix, acquisition source, and post-purchase experience holistically for this cohort.</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-aktiv text-[12px] font-bold text-kd-navy uppercase tracking-[1px] mb-2">Recommended Actions</h4>
+          <ul class="list-none p-0">
+            <li class="pl-5 py-1.5 relative font-montserrat text-[13px] leading-[22px] text-kd-grey font-light before:content-['→'] before:absolute before:left-0 before:text-kd-sage before:font-bold">Create a Klaviyo segment for March 2025 one-time buyers and analyze their profile properties, product categories, and acquisition source.</li>
+            <li class="pl-5 py-1.5 relative font-montserrat text-[13px] leading-[22px] text-kd-grey font-light before:content-['→'] before:absolute before:left-0 before:text-kd-sage before:font-bold">Test a replenishment or reorder reminder campaign timed to the typical product lifecycle for this cohort's most-purchased categories.</li>
+            <li class="pl-5 py-1.5 relative font-montserrat text-[13px] leading-[22px] text-kd-grey font-light before:content-['→'] before:absolute before:left-0 before:text-kd-sage before:font-bold">Build a cross-sell recommendation campaign based on complementary products to what this cohort originally purchased.</li>
+            <li class="pl-5 py-1.5 relative font-montserrat text-[13px] leading-[22px] text-kd-grey font-light before:content-['→'] before:absolute before:left-0 before:text-kd-sage before:font-bold">Review customer satisfaction signals: support tickets, reviews, and NPS scores from this cohort to identify product or fulfillment issues.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- November 2025 — CRITICAL -->
+      <div class="animate-on-scroll fade-in-up bg-white rounded-[12px] p-6 md:p-8 border border-[#E5E1DB]" style="box-shadow: 0 1px 3px rgba(56,54,55,0.04);">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-5 pb-4 border-b border-[#E5E1DB] gap-3">
+          <h3 class="!text-[18px] !font-bold !text-kd-navy">November 2025 Cohort</h3>
+          <div class="flex gap-2">
+            <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-[0.5px] uppercase bg-[#C45B5B]/15 text-[#C45B5B]">CRITICAL</span>
+            <span class="inline-block px-3 py-1 rounded-[4px] text-[11px] font-bold tracking-[0.5px] bg-[#C45B5B]/10 text-[#C45B5B]">HIGH PRIORITY</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-5">
+          <div class="bg-kd-cream rounded-[6px] p-3.5 text-center">
+            <div class="font-montserrat text-[10px] font-semibold text-kd-sage-light uppercase tracking-[1px] mb-1.5">Repurchase Rate (90d)</div>
+            <div class="font-aktiv text-[20px] font-bold text-[#C45B5B]">14.8%</div>
+          </div>
+          <div class="bg-kd-cream rounded-[6px] p-3.5 text-center">
+            <div class="font-montserrat text-[10px] font-semibold text-kd-sage-light uppercase tracking-[1px] mb-1.5">Benchmark</div>
+            <div class="font-aktiv text-[20px] font-bold text-kd-navy">25%</div>
+          </div>
+          <div class="bg-kd-cream rounded-[6px] p-3.5 text-center">
+            <div class="font-montserrat text-[10px] font-semibold text-kd-sage-light uppercase tracking-[1px] mb-1.5">Your Average</div>
+            <div class="font-aktiv text-[20px] font-bold text-kd-navy">22.4%</div>
+          </div>
+        </div>
+        <div class="mb-4">
+          <h4 class="font-aktiv text-[12px] font-bold text-kd-navy uppercase tracking-[1px] mb-2">What This Means</h4>
+          <p class="font-montserrat font-light text-[14px] leading-[24px] tracking-[0.5px] text-kd-grey">Of 634 customers acquired in November 2025, only 97 made a second purchase within 90 days. This is 41% below the 25% healthy benchmark and below your 22.4% average across all cohorts.</p>
+        </div>
+        <div class="mb-4">
+          <h4 class="font-aktiv text-[12px] font-bold text-kd-navy uppercase tracking-[1px] mb-2">Contributing Factors to Investigate</h4>
+          <ul class="list-none p-0">
+            <li class="pl-5 py-1.5 relative font-montserrat text-[13px] leading-[22px] text-kd-grey font-light before:content-['→'] before:absolute before:left-0 before:text-kd-sage before:font-bold">Low average order value ($99.30) suggests this cohort was driven by promotions or discount-heavy campaigns — these buyers tend to have weaker brand loyalty.</li>
+            <li class="pl-5 py-1.5 relative font-montserrat text-[13px] leading-[22px] text-kd-grey font-light before:content-['→'] before:absolute before:left-0 before:text-kd-sage before:font-bold">Large cohort size (634 customers) from a high-acquisition period. Rapid growth often dilutes customer quality when paid channels scale too aggressively.</li>
+            <li class="pl-5 py-1.5 relative font-montserrat text-[13px] leading-[22px] text-kd-grey font-light before:content-['→'] before:absolute before:left-0 before:text-kd-sage before:font-bold">AOV dropped 32% vs the prior cohort — this may indicate a shift toward lower-margin products, heavier discounting, or a different customer profile.</li>
+            <li class="pl-5 py-1.5 relative font-montserrat text-[13px] leading-[22px] text-kd-grey font-light before:content-['→'] before:absolute before:left-0 before:text-kd-sage before:font-bold">LTV is trending downward compared to 3 months ago, suggesting the customer mix or purchase behavior is deteriorating over time.</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-aktiv text-[12px] font-bold text-kd-navy uppercase tracking-[1px] mb-2">Recommended Actions</h4>
+          <ul class="list-none p-0">
+            <li class="pl-5 py-1.5 relative font-montserrat text-[13px] leading-[22px] text-kd-grey font-light before:content-['→'] before:absolute before:left-0 before:text-kd-sage before:font-bold">Create a Klaviyo segment for November 2025 one-time buyers and analyze their profile properties, product categories, and acquisition source.</li>
+            <li class="pl-5 py-1.5 relative font-montserrat text-[13px] leading-[22px] text-kd-grey font-light before:content-['→'] before:absolute before:left-0 before:text-kd-sage before:font-bold">Launch a targeted win-back campaign to non-repeaters with a personalized offer based on their original purchase category — not a blanket discount.</li>
+            <li class="pl-5 py-1.5 relative font-montserrat text-[13px] leading-[22px] text-kd-grey font-light before:content-['→'] before:absolute before:left-0 before:text-kd-sage before:font-bold">Review the discount strategy used during this acquisition period — if coupon-driven, test loyalty-based incentives (points, tiers) instead of straight discounts for future campaigns.</li>
+            <li class="pl-5 py-1.5 relative font-montserrat text-[13px] leading-[22px] text-kd-grey font-light before:content-['→'] before:absolute before:left-0 before:text-kd-sage before:font-bold">Audit the paid acquisition channels active during this period — compare retention rates by UTM source to identify which channels bring back repeat buyers.</li>
+            <li class="pl-5 py-1.5 relative font-montserrat text-[13px] leading-[22px] text-kd-grey font-light before:content-['→'] before:absolute before:left-0 before:text-kd-sage before:font-bold">Consider a dedicated re-engagement survey to this cohort to understand why they didn't return — the insight is worth more than the campaign.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================
+       CRM TASK SUMMARY
+       ======================================== -->
+  <section class="py-8 md:py-10 bg-kd-cream-light">
+    <div class="max-w-[1100px] mx-auto px-6 md:px-8">
+      <div class="animate-on-scroll fade-in-up bg-white rounded-[12px] p-6 md:p-8 border border-[#E5E1DB]" style="box-shadow: 0 1px 3px rgba(56,54,55,0.04);">
+        <div class="font-aktiv text-[11px] font-bold tracking-[2.5px] uppercase text-kd-sage-light mb-5 pb-3 border-b border-[#E5E1DB]">
+          CRM Task Summary
+        </div>
+        <div class="mt-2">
+          <!-- Task Items -->
+          <div class="grid grid-cols-1 md:grid-cols-[60px_1fr_auto_auto] gap-2 md:gap-4 items-center py-3.5 border-b border-[#E5E1DB]">
+            <div><span class="inline-block px-3 py-1 rounded-[4px] text-[11px] font-bold tracking-[0.5px] bg-[#C45B5B]/10 text-[#C45B5B]">HIGH</span></div>
+            <div>
+              <div class="font-montserrat font-medium text-[14px] text-kd-grey">Build November 2025 one-time buyer segment in Klaviyo</div>
+              <div class="font-montserrat text-[12px] text-kd-sage-light mt-0.5">November 2025 cohort: 14.8% repurchase rate — need to understand who these customers are</div>
+            </div>
+            <div class="font-montserrat text-[11px] text-kd-sage-light font-medium">CRM Strategist</div>
+            <div class="font-montserrat text-[11px] text-kd-sage-light">Within 3 days</div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-[60px_1fr_auto_auto] gap-2 md:gap-4 items-center py-3.5 border-b border-[#E5E1DB]">
+            <div><span class="inline-block px-3 py-1 rounded-[4px] text-[11px] font-bold tracking-[0.5px] bg-[#C45B5B]/10 text-[#C45B5B]">HIGH</span></div>
+            <div>
+              <div class="font-montserrat font-medium text-[14px] text-kd-grey">Launch personalized win-back campaign for November 2025 non-repeaters</div>
+              <div class="font-montserrat text-[12px] text-kd-sage-light mt-0.5">Only 14.8% repurchased — segment by product category and send targeted offers</div>
+            </div>
+            <div class="font-montserrat text-[11px] text-kd-sage-light font-medium">Email Marketing Manager</div>
+            <div class="font-montserrat text-[11px] text-kd-sage-light">Within 1 week</div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-[60px_1fr_auto_auto] gap-2 md:gap-4 items-center py-3.5 border-b border-[#E5E1DB]">
+            <div><span class="inline-block px-3 py-1 rounded-[4px] text-[11px] font-bold tracking-[0.5px] bg-kd-gold/10 text-kd-gold">MEDIUM</span></div>
+            <div>
+              <div class="font-montserrat font-medium text-[14px] text-kd-grey">Audit acquisition sources for November 2025 cohort</div>
+              <div class="font-montserrat text-[12px] text-kd-sage-light mt-0.5">Compare retention by UTM source — identify which channels drove one-time vs repeat buyers</div>
+            </div>
+            <div class="font-montserrat text-[11px] text-kd-sage-light font-medium">Growth Lead</div>
+            <div class="font-montserrat text-[11px] text-kd-sage-light">Within 2 weeks</div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-[60px_1fr_auto_auto] gap-2 md:gap-4 items-center py-3.5 border-b border-[#E5E1DB]">
+            <div><span class="inline-block px-3 py-1 rounded-[4px] text-[11px] font-bold tracking-[0.5px] bg-kd-gold/10 text-kd-gold">MEDIUM</span></div>
+            <div>
+              <div class="font-montserrat font-medium text-[14px] text-kd-grey">Analyze discount strategy impact on customer retention</div>
+              <div class="font-montserrat text-[12px] text-kd-sage-light mt-0.5">Multiple cohorts underperforming — assess whether promotional strategy is attracting one-time discount seekers</div>
+            </div>
+            <div class="font-montserrat text-[11px] text-kd-sage-light font-medium">Marketing Director</div>
+            <div class="font-montserrat text-[11px] text-kd-sage-light">Within 3 weeks</div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-[60px_1fr_auto_auto] gap-2 md:gap-4 items-center py-3.5">
+            <div><span class="inline-block px-3 py-1 rounded-[4px] text-[11px] font-bold tracking-[0.5px] bg-kd-sage/10 text-kd-sage">LOW</span></div>
+            <div>
+              <div class="font-montserrat font-medium text-[14px] text-kd-grey">Review and optimize post-purchase email sequence timing</div>
+              <div class="font-montserrat text-[12px] text-kd-sage-light mt-0.5">Ensure post-purchase touchpoints align with product replenishment cycles and cross-sell opportunities</div>
+            </div>
+            <div class="font-montserrat text-[11px] text-kd-sage-light font-medium">CRM Strategist</div>
+            <div class="font-montserrat text-[11px] text-kd-sage-light">Within 1 month</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       FOOTER
+       ======================================== -->
+  <div class="text-center py-10 md:py-12 bg-kd-cream-light">
+    <p class="font-montserrat text-[11px] text-kd-sage-light mb-1">Confidential — Kinga Dow &amp; Sample Store</p>
+    <p class="font-montserrat text-[11px] text-kd-sage-light mb-3">Generated by Cohort Retention Intelligence Agent · February 16, 2026</p>
+    <div class="font-aktiv text-[13px] font-bold text-kd-navy tracking-[3px] uppercase">KINGA DOW</div>
+  </div>
+
+  <!-- ========================================
+       CHART.JS
+       ======================================== -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" is:inline></script>
+  <script is:inline>
+    const chartData = {
+      labels: ["2025-03","2025-04","2025-05","2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02"],
+      repurchase_rates: [23.9,29.5,18.6,21.6,29.6,25.8,17.1,20.7,14.8,22.1,13.8,0.0],
+      ltv_values: [160,173,168,162,190,191,168,187,117,191,136,132]
+    };
+
+    const chartDefaults = {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#3F455D',
+          titleFont: { family: 'Montserrat', weight: '600', size: 12 },
+          bodyFont: { family: 'Montserrat', weight: '400', size: 12 },
+          padding: 12,
+          cornerRadius: 6,
+        },
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: { font: { family: 'Montserrat', size: 11 }, color: '#8CAB95' },
+        },
+        y: {
+          grid: { color: 'rgba(229,225,219,0.6)' },
+          ticks: { font: { family: 'Montserrat', size: 11 }, color: '#8CAB95' },
+        },
+      },
+    };
+
+    // Repurchase Rate Chart
+    new Chart(document.getElementById('repurchaseChart'), {
+      type: 'bar',
+      data: {
+        labels: chartData.labels,
+        datasets: [{
+          data: chartData.repurchase_rates,
+          backgroundColor: chartData.repurchase_rates.map(function(v) {
+            return v >= 25 ? 'rgba(89,165,109,0.7)' :
+                   v >= 15 ? 'rgba(186,146,0,0.7)' :
+                   'rgba(196,91,91,0.7)';
+          }),
+          borderRadius: 4,
+          borderSkipped: false,
+        }, {
+          type: 'line',
+          data: Array(chartData.labels.length).fill(25),
+          borderColor: 'rgba(63,69,93,0.3)',
+          borderDash: [6, 4],
+          borderWidth: 1.5,
+          pointRadius: 0,
+          fill: false,
+        }],
+      },
+      options: Object.assign({}, chartDefaults, {
+        scales: Object.assign({}, chartDefaults.scales, {
+          y: Object.assign({}, chartDefaults.scales.y, {
+            ticks: Object.assign({}, chartDefaults.scales.y.ticks, {
+              callback: function(v) { return v + '%'; },
+            }),
+            suggestedMax: 35,
+          }),
+        }),
+      }),
+    });
+
+    // LTV Chart
+    new Chart(document.getElementById('ltvChart'), {
+      type: 'line',
+      data: {
+        labels: chartData.labels,
+        datasets: [{
+          data: chartData.ltv_values,
+          borderColor: '#3F455D',
+          backgroundColor: 'rgba(63,69,93,0.08)',
+          fill: true,
+          tension: 0.3,
+          pointBackgroundColor: '#3F455D',
+          pointRadius: 5,
+          pointHoverRadius: 7,
+          borderWidth: 2.5,
+        }],
+      },
+      options: Object.assign({}, chartDefaults, {
+        scales: Object.assign({}, chartDefaults.scales, {
+          y: Object.assign({}, chartDefaults.scales.y, {
+            ticks: Object.assign({}, chartDefaults.scales.y.ticks, {
+              callback: function(v) { return '$' + v; },
+            }),
+          }),
+        }),
+      }),
+    });
+  </script>
+
+</Standalone>

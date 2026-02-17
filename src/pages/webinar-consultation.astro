@@ -1,0 +1,493 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How is this different from the regular consultation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The regular consultation is a broad AI strategy session. This setup session is laser-focused on building the exact 4-agent email marketing system you saw in the webinar — with your prompts, your tools, your brand."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if I don't use Klaviyo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No problem. The workflow adapts to your email platform. If you use ActiveCampaign, Brevo, MailerLite, or another tool with MCP support, we'll configure it for that."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need Claude Pro already?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not yet. We can set everything up during the session. You'll need Claude Pro ($20/month) to run the system, but you don't need it before we meet."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if I need to reschedule?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can reschedule up to 24 hours before your session at no extra cost."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will I get a recording?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Every session is recorded and sent to you within 24 hours."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens after the session?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You'll have a fully configured system ready to use. If you want ongoing support, we can discuss that — but there's zero obligation."
+      }
+    }
+  ]
+};
+
+// Deadline: Friday, Feb 21, 2026 5:00 PM CET (UTC+1)
+const deadlineISO = "2026-02-21T17:00:00+01:00";
+---
+
+<Layout
+  title="Webinar Exclusive: AI Setup Session — $197 | Kinga Dow"
+  description="Build your AI email marketing system in one guided hour with Kinga. Get the exact prompts, MCP setup, and custom configuration for your brand. Webinar-exclusive $197 rate — 48 hours only."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <!-- ========================================
+       HERO
+       ======================================== -->
+  <section class="hero-gradient relative overflow-hidden">
+    <!-- Decorative circles -->
+    <div class="absolute -left-20 top-16 w-[380px] h-[380px] opacity-30 pointer-events-none">
+      <img src="/images/home/decorative/bg-circle-left.png" alt="" class="w-full h-full object-contain" aria-hidden="true" />
+    </div>
+    <div class="absolute -right-16 -bottom-16 w-[300px] h-[300px] opacity-20 pointer-events-none">
+      <img src="/images/home/decorative/bg-circle.png" alt="" class="w-full h-full object-contain" aria-hidden="true" />
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 py-14 md:py-24 relative z-10">
+      <div class="text-center max-w-4xl mx-auto">
+        <!-- Urgency eyebrow -->
+        <span class="animate-on-scroll fade-in-up font-montserrat text-kd-gold font-medium text-[12px] md:text-[13px] tracking-[1.6px] mb-5 block uppercase">
+          Webinar Attendee Exclusive &mdash; 48-Hour Offer
+        </span>
+
+        <!-- H1 -->
+        <h1 class="animate-on-scroll fade-in-up delay-100 font-aktiv text-kd-navy text-[24px] md:text-[44px] font-bold leading-[32px] md:leading-[54px] tracking-[1px] md:tracking-[2px] mb-5">
+          Build Your AI Email Marketing<br class="hidden md:block" /> System &mdash; Guided Setup Session
+        </h1>
+
+        <!-- Subheadline -->
+        <p class="animate-on-scroll fade-in-up delay-200 font-montserrat font-light text-kd-grey text-[16px] md:text-[19px] leading-[26px] md:leading-[32px] tracking-[0.8px] mb-8 max-w-[700px] mx-auto">
+          You saw what&rsquo;s possible. Now get the exact prompts, setup, and custom configuration for your brand &mdash; in one hour with Kinga.
+        </p>
+
+        <!-- Countdown Timer -->
+        <div class="animate-on-scroll fade-in-up delay-300 mb-10">
+          <div id="countdown" class="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-6 py-3 shadow-sm border border-kd-gold/20">
+            <svg class="w-4 h-4 text-kd-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span id="countdown-text" class="font-montserrat font-medium text-kd-navy text-[13px] md:text-[14px] tracking-[0.5px]">
+              Calculating...
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       PRICING CARD
+       ======================================== -->
+  <section class="py-14 md:py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+
+        <!-- Left: Pricing Card -->
+        <div class="animate-on-scroll fade-in-up">
+          <div class="bg-kd-cream rounded-2xl p-8 md:p-10 relative overflow-hidden">
+            <!-- Gold accent bar -->
+            <div class="absolute top-0 left-0 w-full h-1 bg-kd-gold"></div>
+
+            <!-- Session name -->
+            <h2 class="font-aktiv text-kd-navy text-[20px] md:text-[26px] font-semibold tracking-[1px] mb-2">
+              AI Setup Session
+            </h2>
+
+            <p class="font-montserrat text-kd-gold text-[13px] md:text-[14px] font-medium tracking-[1.4px] uppercase mb-6">
+              60-Minute Guided Session
+            </p>
+
+            <!-- Pricing -->
+            <div class="mb-2">
+              <span class="font-montserrat text-kd-grey/40 text-[22px] md:text-[26px] font-light line-through mr-3">$275</span>
+              <span class="font-aktiv text-kd-navy text-[48px] md:text-[56px] font-bold leading-none">$197</span>
+              <span class="font-montserrat text-kd-grey text-[14px] font-light ml-2">USD</span>
+            </div>
+
+            <!-- Urgency -->
+            <p class="font-montserrat text-kd-gold text-[12px] md:text-[13px] font-medium tracking-[0.8px] mb-8">
+              Available until Friday, February 21 at 5:00 PM CET
+            </p>
+
+            <!-- CTA Button -->
+            <a
+              href="#"
+              id="hero-cta"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-gold w-full py-4 px-6 rounded-lg text-[14px] md:text-[15px] font-montserrat font-medium tracking-[1.4px] uppercase flex items-center justify-center gap-2"
+            >
+              Book Your Setup Session &rarr;
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Value prop -->
+        <div class="animate-on-scroll fade-in-up delay-100">
+          <h3 class="font-aktiv text-kd-navy text-[20px] md:text-[24px] font-semibold tracking-[1px] mb-6">
+            Designed for Professionals Who Want to Level Up
+          </h3>
+
+          <p class="font-montserrat font-light text-kd-grey text-[15px] md:text-[16px] leading-[26px] tracking-[0.8px] mb-5">
+            I built the webinar to give you real, actionable value for free &mdash; and I hope it delivered.
+          </p>
+          <p class="font-montserrat font-light text-kd-grey text-[15px] md:text-[16px] leading-[26px] tracking-[0.8px] mb-5">
+            This setup session is for those who want to go further, faster. If your company or agency invests in professional development, this is the most efficient way to get the full system running for your team. One hour, and you walk away with everything configured and ready to use.
+          </p>
+          <p class="font-script text-kd-gold text-[22px] md:text-[26px] leading-[30px] tracking-[1px]">
+            Think of it as the difference between watching a cooking show and having the chef in your kitchen.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       WHAT'S INCLUDED
+       ======================================== -->
+  <section class="py-14 md:py-20 px-6" style="background: linear-gradient(180deg, #F6EFE6 0%, #FAFAFA 100%);">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="animate-on-scroll fade-in-up font-aktiv text-kd-navy text-[21px] md:text-[32px] font-semibold tracking-[1.2px] text-center mb-12">
+        Everything You Need to Go<br class="hidden md:block" /> From Doer to Director
+      </h2>
+
+      <div class="space-y-5">
+        <!-- Item 1 -->
+        <div class="animate-on-scroll fade-in-up delay-100 bg-white rounded-xl p-6 md:p-8 shadow-sm border border-gray-100">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-kd-gold/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <span class="font-aktiv text-kd-gold font-bold text-[15px]">1</span>
+            </div>
+            <div>
+              <h3 class="font-aktiv text-kd-navy text-[16px] md:text-[18px] font-semibold tracking-[0.5px] mb-2">
+                The Exact Prompts for All 4 Agents
+              </h3>
+              <p class="font-montserrat font-light text-kd-grey text-[14px] md:text-[15px] leading-[24px] tracking-[0.5px]">
+                The Strategist, Copywriter, Asana Project Builder, and Klaviyo Setup agent &mdash; every prompt I use, customized for your brand and workflow.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="animate-on-scroll fade-in-up delay-200 bg-white rounded-xl p-6 md:p-8 shadow-sm border border-gray-100">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-kd-gold/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <span class="font-aktiv text-kd-gold font-bold text-[15px]">2</span>
+            </div>
+            <div>
+              <h3 class="font-aktiv text-kd-navy text-[16px] md:text-[18px] font-semibold tracking-[0.5px] mb-2">
+                MCP Connector Setup Walkthrough
+              </h3>
+              <p class="font-montserrat font-light text-kd-grey text-[14px] md:text-[15px] leading-[24px] tracking-[0.5px]">
+                We&rsquo;ll connect Claude to your tools together &mdash; Klaviyo, Asana, Fireflies, Google Drive, or whatever your stack looks like.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="animate-on-scroll fade-in-up delay-300 bg-white rounded-xl p-6 md:p-8 shadow-sm border border-gray-100">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-kd-gold/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <span class="font-aktiv text-kd-gold font-bold text-[15px]">3</span>
+            </div>
+            <div>
+              <h3 class="font-aktiv text-kd-navy text-[16px] md:text-[18px] font-semibold tracking-[0.5px] mb-2">
+                Custom Workflow Configuration
+              </h3>
+              <p class="font-montserrat font-light text-kd-grey text-[14px] md:text-[15px] leading-[24px] tracking-[0.5px]">
+                Not a generic template. We&rsquo;ll map the 4-agent workflow to YOUR clients, YOUR campaigns, and YOUR team structure.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="animate-on-scroll fade-in-up delay-400 bg-white rounded-xl p-6 md:p-8 shadow-sm border border-gray-100">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-kd-gold/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <span class="font-aktiv text-kd-gold font-bold text-[15px]">4</span>
+            </div>
+            <div>
+              <h3 class="font-aktiv text-kd-navy text-[16px] md:text-[18px] font-semibold tracking-[0.5px] mb-2">
+                Memory &amp; Skills Setup
+              </h3>
+              <p class="font-montserrat font-light text-kd-grey text-[14px] md:text-[15px] leading-[24px] tracking-[0.5px]">
+                I&rsquo;ll help you configure Claude&rsquo;s Memory and upload custom Skills so it learns your brand voice, formatting preferences, and workflow patterns from day one.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="animate-on-scroll fade-in-up delay-500 bg-white rounded-xl p-6 md:p-8 shadow-sm border border-gray-100">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-kd-gold/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <span class="font-aktiv text-kd-gold font-bold text-[15px]">5</span>
+            </div>
+            <div>
+              <h3 class="font-aktiv text-kd-navy text-[16px] md:text-[18px] font-semibold tracking-[0.5px] mb-2">
+                Session Recording
+              </h3>
+              <p class="font-montserrat font-light text-kd-grey text-[14px] md:text-[15px] leading-[24px] tracking-[0.5px]">
+                Everything we cover is recorded and sent to you within 24 hours. Revisit it anytime, or share it with your team.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       HOW IT WORKS
+       ======================================== -->
+  <section class="py-14 md:py-20 bg-white px-6">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="animate-on-scroll fade-in-up font-aktiv text-kd-navy text-[21px] md:text-[32px] font-semibold tracking-[1.2px] text-center mb-12">
+        How It Works
+      </h2>
+
+      <div class="grid md:grid-cols-4 gap-6 md:gap-8">
+        <!-- Step 1 -->
+        <div class="animate-on-scroll fade-in-up delay-100 text-center">
+          <div class="w-14 h-14 rounded-full bg-kd-cream border-2 border-kd-gold/30 flex items-center justify-center mx-auto mb-4">
+            <span class="font-aktiv text-kd-gold font-bold text-[18px]">1</span>
+          </div>
+          <h3 class="font-aktiv text-kd-navy text-[15px] md:text-[16px] font-semibold tracking-[0.5px] mb-2">Secure Your Spot</h3>
+          <p class="font-montserrat font-light text-kd-grey text-[13px] md:text-[14px] leading-[22px] tracking-[0.5px]">
+            Pay $197 and lock in your webinar-exclusive rate before the 48-hour window closes.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="animate-on-scroll fade-in-up delay-200 text-center">
+          <div class="w-14 h-14 rounded-full bg-kd-cream border-2 border-kd-gold/30 flex items-center justify-center mx-auto mb-4">
+            <span class="font-aktiv text-kd-gold font-bold text-[18px]">2</span>
+          </div>
+          <h3 class="font-aktiv text-kd-navy text-[15px] md:text-[16px] font-semibold tracking-[0.5px] mb-2">Choose Your Time</h3>
+          <p class="font-montserrat font-light text-kd-grey text-[13px] md:text-[14px] leading-[22px] tracking-[0.5px]">
+            After payment, you&rsquo;ll select a time that works for you from my calendar.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="animate-on-scroll fade-in-up delay-300 text-center">
+          <div class="w-14 h-14 rounded-full bg-kd-cream border-2 border-kd-gold/30 flex items-center justify-center mx-auto mb-4">
+            <span class="font-aktiv text-kd-gold font-bold text-[18px]">3</span>
+          </div>
+          <h3 class="font-aktiv text-kd-navy text-[15px] md:text-[16px] font-semibold tracking-[0.5px] mb-2">Prepare</h3>
+          <p class="font-montserrat font-light text-kd-grey text-[13px] md:text-[14px] leading-[22px] tracking-[0.5px]">
+            You&rsquo;ll receive a short questionnaire so I can understand your brand, tools, and goals before we meet.
+          </p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="animate-on-scroll fade-in-up delay-400 text-center">
+          <div class="w-14 h-14 rounded-full bg-kd-cream border-2 border-kd-gold/30 flex items-center justify-center mx-auto mb-4">
+            <span class="font-aktiv text-kd-gold font-bold text-[18px]">4</span>
+          </div>
+          <h3 class="font-aktiv text-kd-navy text-[15px] md:text-[16px] font-semibold tracking-[0.5px] mb-2">We Build It Together</h3>
+          <p class="font-montserrat font-light text-kd-grey text-[13px] md:text-[14px] leading-[22px] tracking-[0.5px]">
+            In 60 minutes, we&rsquo;ll set up your agents, connect your tools, and configure Claude for your workflow.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       FAQ
+       ======================================== -->
+  <section class="py-14 md:py-20 px-6" style="background: linear-gradient(180deg, #FAFAFA 0%, #F6EFE6 100%);">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="animate-on-scroll fade-in-up font-aktiv text-kd-navy text-[21px] md:text-[28px] font-semibold tracking-[1.2px] text-center mb-10">
+        Frequently Asked Questions
+      </h2>
+
+      <div class="space-y-4">
+        <!-- FAQ 1 -->
+        <details class="animate-on-scroll fade-in-up delay-100 bg-white rounded-xl p-6 group">
+          <summary class="font-aktiv text-kd-navy text-[15px] md:text-[16px] font-semibold tracking-[0.8px] cursor-pointer list-none flex items-center justify-between">
+            How is this different from the regular consultation?
+            <svg class="w-5 h-5 text-kd-gold transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <p class="font-montserrat text-kd-grey text-[14px] md:text-[15px] leading-[26px] font-light mt-4">
+            The regular consultation is a broad AI strategy session. This setup session is laser-focused on building the exact 4-agent email marketing system you saw in the webinar &mdash; with your prompts, your tools, your brand.
+          </p>
+        </details>
+
+        <!-- FAQ 2 -->
+        <details class="animate-on-scroll fade-in-up delay-200 bg-white rounded-xl p-6 group">
+          <summary class="font-aktiv text-kd-navy text-[15px] md:text-[16px] font-semibold tracking-[0.8px] cursor-pointer list-none flex items-center justify-between">
+            What if I don&rsquo;t use Klaviyo?
+            <svg class="w-5 h-5 text-kd-gold transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <p class="font-montserrat text-kd-grey text-[14px] md:text-[15px] leading-[26px] font-light mt-4">
+            No problem. The workflow adapts to your email platform. If you use ActiveCampaign, Brevo, MailerLite, or another tool with MCP support, we&rsquo;ll configure it for that.
+          </p>
+        </details>
+
+        <!-- FAQ 3 -->
+        <details class="animate-on-scroll fade-in-up delay-300 bg-white rounded-xl p-6 group">
+          <summary class="font-aktiv text-kd-navy text-[15px] md:text-[16px] font-semibold tracking-[0.8px] cursor-pointer list-none flex items-center justify-between">
+            Do I need Claude Pro already?
+            <svg class="w-5 h-5 text-kd-gold transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <p class="font-montserrat text-kd-grey text-[14px] md:text-[15px] leading-[26px] font-light mt-4">
+            Not yet. We can set everything up during the session. You&rsquo;ll need Claude Pro ($20/month) to run the system, but you don&rsquo;t need it before we meet.
+          </p>
+        </details>
+
+        <!-- FAQ 4 -->
+        <details class="animate-on-scroll fade-in-up delay-400 bg-white rounded-xl p-6 group">
+          <summary class="font-aktiv text-kd-navy text-[15px] md:text-[16px] font-semibold tracking-[0.8px] cursor-pointer list-none flex items-center justify-between">
+            What if I need to reschedule?
+            <svg class="w-5 h-5 text-kd-gold transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <p class="font-montserrat text-kd-grey text-[14px] md:text-[15px] leading-[26px] font-light mt-4">
+            You can reschedule up to 24 hours before your session at no extra cost.
+          </p>
+        </details>
+
+        <!-- FAQ 5 -->
+        <details class="animate-on-scroll fade-in-up delay-500 bg-white rounded-xl p-6 group">
+          <summary class="font-aktiv text-kd-navy text-[15px] md:text-[16px] font-semibold tracking-[0.8px] cursor-pointer list-none flex items-center justify-between">
+            Will I get a recording?
+            <svg class="w-5 h-5 text-kd-gold transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <p class="font-montserrat text-kd-grey text-[14px] md:text-[15px] leading-[26px] font-light mt-4">
+            Yes. Every session is recorded and sent to you within 24 hours.
+          </p>
+        </details>
+
+        <!-- FAQ 6 -->
+        <details class="animate-on-scroll fade-in-up delay-500 bg-white rounded-xl p-6 group">
+          <summary class="font-aktiv text-kd-navy text-[15px] md:text-[16px] font-semibold tracking-[0.8px] cursor-pointer list-none flex items-center justify-between">
+            What happens after the session?
+            <svg class="w-5 h-5 text-kd-gold transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <p class="font-montserrat text-kd-grey text-[14px] md:text-[15px] leading-[26px] font-light mt-4">
+            You&rsquo;ll have a fully configured system ready to use. If you want ongoing support, we can discuss that &mdash; but there&rsquo;s zero obligation.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       FINAL CTA
+       ======================================== -->
+  <section class="py-14 md:py-20 bg-white px-6">
+    <div class="max-w-3xl mx-auto text-center">
+      <div class="animate-on-scroll scale-in bg-kd-navy rounded-2xl p-10 md:p-14">
+        <h2 class="font-aktiv text-white text-[22px] md:text-[32px] font-semibold tracking-[1px] leading-[30px] md:leading-[42px] mb-4">
+          Ready to Build Your System?
+        </h2>
+        <p class="font-montserrat font-light text-white/60 text-[15px] md:text-[16px] leading-[26px] tracking-[0.8px] mb-8 max-w-[560px] mx-auto">
+          This $197 rate is only available for 48 hours after the webinar. After that, setup sessions return to the regular $275 price.
+        </p>
+        <a
+          href="#"
+          id="final-cta"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-gold py-4 px-10 rounded-lg text-[14px] md:text-[15px] tracking-[1.4px] inline-flex items-center gap-2"
+        >
+          Book Your Setup Session &mdash; $197 &rarr;
+        </a>
+      </div>
+
+      <p class="font-montserrat font-light text-kd-grey/50 text-[13px] md:text-[14px] tracking-[0.5px] mt-8">
+        Questions before booking? Email me at <a href="mailto:kinga@kingadow.com" class="text-kd-gold hover:text-kd-navy transition-colors font-medium">kinga@kingadow.com</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ========================================
+       COUNTDOWN TIMER SCRIPT
+       ======================================== -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function() {
+      var deadline = new Date('2026-02-21T17:00:00+01:00').getTime();
+      var countdownText = document.getElementById('countdown-text');
+      var countdownContainer = document.getElementById('countdown');
+
+      function updateCountdown() {
+        var now = new Date().getTime();
+        var distance = deadline - now;
+
+        if (distance <= 0) {
+          countdownText.textContent = 'This offer has expired';
+          countdownContainer.classList.remove('border-kd-gold/20');
+          countdownContainer.classList.add('border-red-300', 'bg-red-50');
+          return;
+        }
+
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        var parts = [];
+        if (days > 0) parts.push(days + 'd');
+        parts.push(hours + 'h');
+        parts.push(minutes + 'm');
+        parts.push(seconds + 's');
+
+        countdownText.textContent = 'Offer expires in ' + parts.join(' ');
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    });
+  </script>
+</Layout>

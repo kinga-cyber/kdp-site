@@ -34,7 +34,7 @@ const faqSchema = {
       "name": "What if I need to reschedule?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "You can reschedule up to 24 hours before your session at no extra cost."
+        "text": "You get one complimentary reschedule, as long as it's made at least 24 hours before your session. I also reserve the right to reschedule if a conflict arises on my end — in that case, I'll notify you as soon as possible and we'll find a new time that works for both of us."
       }
     },
     {
@@ -56,7 +56,7 @@ const faqSchema = {
   ]
 };
 
-// Deadline: Friday, Feb 21, 2026 5:00 PM CET (UTC+1)
+// Deadline: Saturday, Feb 21, 2026 5:00 PM CET (UTC+1)
 const deadlineISO = "2026-02-21T17:00:00+01:00";
 ---
 
@@ -141,15 +141,13 @@ const deadlineISO = "2026-02-21T17:00:00+01:00";
 
             <!-- Urgency -->
             <p class="font-montserrat text-kd-gold text-[12px] md:text-[13px] font-medium tracking-[0.8px] mb-8">
-              Available until Friday, February 21 at 5:00 PM CET
+              Available until Saturday, February 21 at 5:00 PM CET
             </p>
 
             <!-- CTA Button -->
             <a
-              href="#"
+              href="#book-session"
               id="hero-cta"
-              target="_blank"
-              rel="noopener noreferrer"
               class="btn-gold w-full py-4 px-6 rounded-lg text-[14px] md:text-[15px] font-montserrat font-medium tracking-[1.4px] uppercase flex items-center justify-center gap-2"
             >
               Book Your Setup Session &rarr;
@@ -169,7 +167,7 @@ const deadlineISO = "2026-02-21T17:00:00+01:00";
           <p class="font-montserrat font-light text-kd-grey text-[15px] md:text-[16px] leading-[26px] tracking-[0.8px] mb-5">
             This setup session is for those who want to go further, faster. If your company or agency invests in professional development, this is the most efficient way to get the full system running for your team. One hour, and you walk away with everything configured and ready to use.
           </p>
-          <p class="font-script text-kd-gold text-[22px] md:text-[26px] leading-[30px] tracking-[1px]">
+          <p class="font-montserrat text-kd-gold text-[14px] md:text-[15px] leading-[24px] tracking-[0.8px] font-medium italic">
             Think of it as the difference between watching a cooking show and having the chef in your kitchen.
           </p>
         </div>
@@ -390,7 +388,7 @@ const deadlineISO = "2026-02-21T17:00:00+01:00";
             </svg>
           </summary>
           <p class="font-montserrat text-kd-grey text-[14px] md:text-[15px] leading-[26px] font-light mt-4">
-            You can reschedule up to 24 hours before your session at no extra cost.
+            You get one complimentary reschedule, as long as it&rsquo;s made at least 24 hours before your session. I also reserve the right to reschedule if a conflict arises on my end &mdash; in that case, I&rsquo;ll notify you as soon as possible and we&rsquo;ll find a new time that works for both of us.
           </p>
         </details>
 
@@ -436,10 +434,8 @@ const deadlineISO = "2026-02-21T17:00:00+01:00";
           This $197 rate is only available for 48 hours after the webinar. After that, setup sessions return to the regular $275 price.
         </p>
         <a
-          href="#"
+          href="#book-session"
           id="final-cta"
-          target="_blank"
-          rel="noopener noreferrer"
           class="btn-gold py-4 px-10 rounded-lg text-[14px] md:text-[15px] tracking-[1.4px] inline-flex items-center gap-2"
         >
           Book Your Setup Session &mdash; $197 &rarr;
@@ -447,6 +443,48 @@ const deadlineISO = "2026-02-21T17:00:00+01:00";
       </div>
 
       <p class="font-montserrat font-light text-kd-grey/50 text-[13px] md:text-[14px] tracking-[0.5px] mt-8">
+        Questions before booking? Email me at <a href="mailto:kinga@kingadow.com" class="text-kd-gold hover:text-kd-navy transition-colors font-medium">kinga@kingadow.com</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ========================================
+       BOOKING SECTION (Stripe + Calendly)
+       ======================================== -->
+  <section id="book-session" class="py-14 md:py-20 px-6" style="background: linear-gradient(180deg, #F6EFE6 0%, #FAFAFA 100%);">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="animate-on-scroll fade-in-up font-aktiv text-kd-navy text-[21px] md:text-[32px] font-semibold tracking-[1.2px] mb-4">
+        Book Your Setup Session
+      </h2>
+
+      <p class="animate-on-scroll fade-in-up delay-100 font-montserrat text-kd-grey text-[15px] md:text-[16px] leading-[26px] font-light mb-10 max-w-xl mx-auto">
+        Complete your payment below, then select a time that works for you. After booking, you&rsquo;ll receive a confirmation email with everything you need to prepare.
+      </p>
+
+      <div class="animate-on-scroll fade-in-up delay-200 space-y-8">
+        <!-- Step 1: Payment via Stripe -->
+        <div class="text-center">
+          <p class="font-aktiv text-kd-gold text-[14px] font-medium tracking-[1.4px] uppercase mb-4">Step 1 &mdash; Secure Your Spot</p>
+          <a
+            href="#"
+            id="booking-cta"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-gold inline-flex items-center justify-center gap-3 py-4 px-10 rounded-lg text-[14px] md:text-[15px] font-montserrat font-medium tracking-[1.4px] uppercase"
+          >
+            Pay $197 &amp; Lock In Your Rate &rarr;
+          </a>
+        </div>
+
+        <!-- Step 2: Schedule via Calendly -->
+        <div>
+          <p class="font-aktiv text-kd-gold text-[14px] font-medium tracking-[1.4px] uppercase mb-4">Step 2 &mdash; Choose Your Time</p>
+          <div class="calendly-inline-widget" data-url="#" style="min-width:320px;height:700px;"></div>
+          <script is:inline type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+        </div>
+      </div>
+
+      <p class="animate-on-scroll fade-in-up delay-300 font-montserrat font-light text-kd-grey/50 text-[13px] md:text-[14px] tracking-[0.5px] mt-8">
         Questions before booking? Email me at <a href="mailto:kinga@kingadow.com" class="text-kd-gold hover:text-kd-navy transition-colors font-medium">kinga@kingadow.com</a>
       </p>
     </div>

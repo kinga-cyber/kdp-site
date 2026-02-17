@@ -452,39 +452,63 @@ const deadlineISO = "2026-02-21T17:00:00+01:00";
        BOOKING SECTION (Stripe + Calendly)
        ======================================== -->
   <section id="book-session" class="py-14 md:py-20 px-6" style="background: linear-gradient(180deg, #F6EFE6 0%, #FAFAFA 100%);">
-    <div class="max-w-3xl mx-auto text-center">
-      <h2 class="animate-on-scroll fade-in-up font-aktiv text-kd-navy text-[21px] md:text-[32px] font-semibold tracking-[1.2px] mb-4">
-        Book Your Setup Session
-      </h2>
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="animate-on-scroll fade-in-up font-aktiv text-kd-navy text-[21px] md:text-[32px] font-semibold tracking-[1.2px] mb-4">
+          Book Your Setup Session
+        </h2>
+        <p class="animate-on-scroll fade-in-up delay-100 font-montserrat text-kd-grey text-[15px] md:text-[16px] leading-[26px] font-light max-w-xl mx-auto">
+          Complete your payment below, then select a time that works for you.
+        </p>
+      </div>
 
-      <p class="animate-on-scroll fade-in-up delay-100 font-montserrat text-kd-grey text-[15px] md:text-[16px] leading-[26px] font-light mb-10 max-w-xl mx-auto">
-        Complete your payment below, then select a time that works for you. After booking, you&rsquo;ll receive a confirmation email with everything you need to prepare.
-      </p>
+      <div class="animate-on-scroll fade-in-up delay-200 grid md:grid-cols-2 gap-8 items-start">
 
-      <div class="animate-on-scroll fade-in-up delay-200 space-y-8">
-        <!-- Step 1: Payment via Stripe -->
-        <div class="text-center">
-          <p class="font-aktiv text-kd-gold text-[14px] font-medium tracking-[1.4px] uppercase mb-4">Step 1 &mdash; Secure Your Spot</p>
+        <!-- Step 1: Payment Card -->
+        <div class="bg-white rounded-2xl p-8 md:p-10 shadow-sm border border-gray-100 text-center">
+          <div class="w-12 h-12 rounded-full bg-kd-gold/10 border-2 border-kd-gold/30 flex items-center justify-center mx-auto mb-5">
+            <span class="font-aktiv text-kd-gold font-bold text-[16px]">1</span>
+          </div>
+          <h3 class="font-aktiv text-kd-navy text-[16px] md:text-[18px] font-semibold tracking-[0.8px] mb-2">
+            Secure Your Spot
+          </h3>
+          <p class="font-montserrat font-light text-kd-grey text-[13px] md:text-[14px] leading-[22px] tracking-[0.5px] mb-6">
+            Lock in your webinar-exclusive $197 rate via our secure payment page.
+          </p>
           <a
             href="https://buy.stripe.com/aFa28s5Vke075rB11y7ss02"
             id="booking-cta"
             target="_blank"
             rel="noopener noreferrer"
-            class="btn-gold inline-flex items-center justify-center gap-3 py-4 px-10 rounded-lg text-[14px] md:text-[15px] font-montserrat font-medium tracking-[1.4px] uppercase"
+            class="btn-gold w-full py-4 px-6 rounded-lg text-[13px] md:text-[14px] font-montserrat font-medium tracking-[1.4px] uppercase flex items-center justify-center gap-2"
           >
-            Pay $197 &amp; Lock In Your Rate &rarr;
+            Pay $197 &amp; Book &rarr;
           </a>
+          <p class="font-montserrat text-kd-grey/40 text-[11px] tracking-[0.3px] mt-4">
+            Secure checkout powered by Stripe
+          </p>
         </div>
 
-        <!-- Step 2: Schedule via Calendly -->
-        <div>
-          <p class="font-aktiv text-kd-gold text-[14px] font-medium tracking-[1.4px] uppercase mb-4">Step 2 &mdash; Choose Your Time</p>
-          <div class="calendly-inline-widget" data-url="https://calendly.com/kingadow/ai-email-marketing-guided-setup-session" style="min-width:320px;height:700px;"></div>
-          <script is:inline type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+        <!-- Step 2: Calendly Card -->
+        <div class="bg-white rounded-2xl p-8 md:p-10 shadow-sm border border-gray-100 text-center">
+          <div class="w-12 h-12 rounded-full bg-kd-gold/10 border-2 border-kd-gold/30 flex items-center justify-center mx-auto mb-5">
+            <span class="font-aktiv text-kd-gold font-bold text-[16px]">2</span>
+          </div>
+          <h3 class="font-aktiv text-kd-navy text-[16px] md:text-[18px] font-semibold tracking-[0.8px] mb-2">
+            Choose Your Time
+          </h3>
+          <p class="font-montserrat font-light text-kd-grey text-[13px] md:text-[14px] leading-[22px] tracking-[0.5px] mb-6">
+            After payment, select a session time that works for your schedule.
+          </p>
+          <div class="rounded-xl overflow-hidden border border-gray-100">
+            <div class="calendly-inline-widget" data-url="https://calendly.com/kingadow/ai-email-marketing-guided-setup-session?hide_gdpr_banner=1&hide_event_type_details=1" style="min-width:280px;height:580px;"></div>
+            <script is:inline type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+          </div>
         </div>
+
       </div>
 
-      <p class="animate-on-scroll fade-in-up delay-300 font-montserrat font-light text-kd-grey/50 text-[13px] md:text-[14px] tracking-[0.5px] mt-8">
+      <p class="animate-on-scroll fade-in-up delay-300 font-montserrat font-light text-kd-grey/50 text-[13px] md:text-[14px] tracking-[0.5px] mt-10 text-center">
         Questions before booking? Email me at <a href="mailto:kinga@kingadow.com" class="text-kd-gold hover:text-kd-navy transition-colors font-medium">kinga@kingadow.com</a>
       </p>
     </div>

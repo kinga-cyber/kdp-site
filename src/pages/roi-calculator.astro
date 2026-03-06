@@ -1,24 +1,39 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import ConsultationCTA from "../components/ConsultationCTA.astro";
+import Standalone from "../layouts/Standalone.astro";
 ---
 
-<Layout
+<Standalone
   title="AI Workflow ROI Calculator | Kinga Dow"
   description="Calculate how much time your Klaviyo agency can save by automating email marketing workflows with AI."
 >
+
+  <!-- ========================================
+       DEMO BANNER
+       ======================================== -->
+  <div class="bg-kd-navy text-white text-center py-3 px-6">
+    <span class="font-aktiv font-semibold text-[11px] md:text-[12px] tracking-[2px] uppercase">Interactive Tool</span>
+    <span class="font-montserrat font-light text-white/60 text-[11px] md:text-[12px] tracking-[0.5px] ml-2 hidden md:inline">AI Workflow ROI Calculator by Kinga Dow</span>
+  </div>
+
   <!-- ========================================
        HERO HEADER
        ======================================== -->
-  <section class="py-12 md:py-20 bg-kd-cream text-center px-6">
-    <div class="max-w-3xl mx-auto">
-      <p class="font-montserrat text-[11px] font-semibold tracking-[4px] uppercase text-kd-sage mb-4">
-        Kinga Dow &middot; AI Integration
-      </p>
-      <h1 class="font-aktiv text-[28px] md:text-[44px] font-bold leading-[1.15] tracking-[-0.5px] text-kd-navy mb-4">
+  <section class="hero-gradient relative overflow-hidden">
+    <div class="absolute -left-20 top-16 w-[380px] h-[380px] opacity-30 pointer-events-none">
+      <img src="/images/home/decorative/bg-circle-left.png" alt="" class="w-full h-full object-contain" aria-hidden="true" />
+    </div>
+    <div class="absolute -right-16 -bottom-16 w-[300px] h-[300px] opacity-20 pointer-events-none">
+      <img src="/images/home/decorative/bg-circle.png" alt="" class="w-full h-full object-contain" aria-hidden="true" />
+    </div>
+
+    <div class="max-w-[900px] mx-auto px-6 py-16 md:py-24 relative z-10">
+      <span class="animate-on-scroll fade-in-up font-montserrat text-kd-gold font-medium text-[13px] tracking-[1.4px] mb-5 block uppercase">Kinga Dow &middot; AI Integration</span>
+
+      <h1 class="animate-on-scroll fade-in-up delay-100 font-aktiv text-kd-navy text-[28px] md:text-[48px] font-bold leading-[36px] md:leading-[58px] tracking-[1px] md:tracking-[1.8px] mb-6">
         AI Workflow ROI<br class="md:hidden" /> Calculator<br />for Email Marketing Agencies
       </h1>
-      <p class="font-montserrat text-[17px] font-light text-kd-grey leading-[1.6] max-w-[560px] mx-auto">
+
+      <p class="animate-on-scroll fade-in-up delay-200 font-montserrat font-light text-kd-grey text-[16px] md:text-[18px] leading-[26px] md:leading-[30px] tracking-[0.8px] max-w-[640px]">
         Drag the sliders to match your agency. See what happens when you automate just 3 workflow steps.
       </p>
     </div>
@@ -27,33 +42,24 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
   <!-- ========================================
        STICKY STATS + SLIDERS SECTION
        ======================================== -->
-  <section id="roi-stats" class="sticky top-0 z-50 py-3 md:py-4 bg-white transition-shadow duration-300">
+  <section id="roi-stats" class="sticky top-0 z-50 py-3 md:py-4 bg-white/95 backdrop-blur-sm transition-shadow duration-300 border-b border-gray-200/60">
     <div class="max-w-[960px] mx-auto px-6">
       <!-- Stats Cards -->
       <div class="grid grid-cols-3 gap-3 md:gap-4">
-        <div class="bg-kd-navy rounded-xl p-3 md:p-5 text-center relative overflow-hidden">
-          <div class="absolute top-0 right-0 w-20 h-20 bg-[radial-gradient(circle_at_top_right,rgba(140,171,149,0.15),transparent_70%)]"></div>
-          <div class="relative">
-            <p id="statHours" class="font-montserrat text-[22px] md:text-[36px] font-bold text-white leading-none mb-1 tabular-nums">~61</p>
-            <p class="font-montserrat text-[8px] md:text-[11px] font-medium tracking-[1.5px] uppercase text-kd-cream opacity-80">Hours saved</p>
-            <p class="font-montserrat text-[9px] font-light text-kd-grey italic mt-0.5 hidden md:block">per client / month</p>
-          </div>
+        <div class="bg-white border border-gray-200 rounded-xl p-3 md:p-5 text-center shadow-sm">
+          <p id="statHours" class="font-montserrat text-[22px] md:text-[36px] font-bold text-kd-navy leading-none mb-1 tabular-nums">~61</p>
+          <p class="font-montserrat text-[8px] md:text-[11px] font-semibold tracking-[1.5px] uppercase text-kd-grey/60">Hours saved</p>
+          <p class="font-montserrat text-[9px] font-light text-kd-grey/50 italic mt-0.5 hidden md:block">per client / month</p>
         </div>
-        <div class="bg-kd-navy rounded-xl p-3 md:p-5 text-center relative overflow-hidden">
-          <div class="absolute top-0 right-0 w-20 h-20 bg-[radial-gradient(circle_at_top_right,rgba(140,171,149,0.15),transparent_70%)]"></div>
-          <div class="relative">
-            <p id="statTotal" class="font-montserrat text-[22px] md:text-[36px] font-bold text-white leading-none mb-1 tabular-nums">~61</p>
-            <p class="font-montserrat text-[8px] md:text-[11px] font-medium tracking-[1.5px] uppercase text-kd-cream opacity-80">Total saved</p>
-            <p class="font-montserrat text-[9px] font-light text-kd-grey italic mt-0.5 hidden md:block">all clients / month</p>
-          </div>
+        <div class="bg-white border border-gray-200 rounded-xl p-3 md:p-5 text-center shadow-sm">
+          <p id="statTotal" class="font-montserrat text-[22px] md:text-[36px] font-bold text-kd-navy leading-none mb-1 tabular-nums">~61</p>
+          <p class="font-montserrat text-[8px] md:text-[11px] font-semibold tracking-[1.5px] uppercase text-kd-grey/60">Total saved</p>
+          <p class="font-montserrat text-[9px] font-light text-kd-grey/50 italic mt-0.5 hidden md:block">all clients / month</p>
         </div>
-        <div class="bg-kd-navy rounded-xl p-3 md:p-5 text-center relative overflow-hidden">
-          <div class="absolute top-0 right-0 w-20 h-20 bg-[radial-gradient(circle_at_top_right,rgba(140,171,149,0.15),transparent_70%)]"></div>
-          <div class="relative">
-            <p id="statDays" class="font-montserrat text-[22px] md:text-[36px] font-bold text-white leading-none mb-1 tabular-nums">~8</p>
-            <p class="font-montserrat text-[8px] md:text-[11px] font-medium tracking-[1.5px] uppercase text-kd-cream opacity-80">Working days saved</p>
-            <p class="font-montserrat text-[9px] font-light text-kd-grey italic mt-0.5 hidden md:block">all clients / month</p>
-          </div>
+        <div class="bg-white border border-gray-200 rounded-xl p-3 md:p-5 text-center shadow-sm">
+          <p id="statDays" class="font-montserrat text-[22px] md:text-[36px] font-bold text-kd-navy leading-none mb-1 tabular-nums">~8</p>
+          <p class="font-montserrat text-[8px] md:text-[11px] font-semibold tracking-[1.5px] uppercase text-kd-grey/60">Working days saved</p>
+          <p class="font-montserrat text-[9px] font-light text-kd-grey/50 italic mt-0.5 hidden md:block">all clients / month</p>
         </div>
       </div>
 
@@ -72,9 +78,9 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
       </div>
 
       <!-- Explainer Bar -->
-      <div class="mt-3 md:mt-4 bg-kd-cream rounded-xl px-4 py-3 text-center">
+      <div class="mt-3 md:mt-4 bg-kd-cream/60 border border-kd-gold/15 rounded-xl px-4 py-3 text-center">
         <p id="explainerBar" class="font-montserrat text-[13px] md:text-[14px] font-light text-kd-grey leading-[1.5]">
-          That's like getting <strong class="font-semibold text-kd-navy">a few extra days of capacity each month</strong>.
+          That&rsquo;s like getting <strong class="font-semibold text-kd-navy">a few extra days of capacity each month</strong>.
         </p>
       </div>
     </div>
@@ -83,61 +89,65 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
   <!-- ========================================
        BREAKDOWN TABLE
        ======================================== -->
-  <section class="pb-8 md:pb-12 bg-white px-6">
+  <section class="py-12 md:py-16 bg-white px-6">
     <div class="max-w-[960px] mx-auto">
-      <div class="bg-white rounded-2xl p-6 md:p-10 border border-[rgba(159,159,174,0.15)] overflow-x-auto" style="box-shadow: 0 1px 3px rgba(64,69,91,0.06), 0 8px 32px rgba(64,69,91,0.04);">
-        <h2 class="font-aktiv text-[13px] font-semibold tracking-[3px] uppercase text-kd-navy mb-8 pb-4 border-b-2 border-kd-sage">
-          Time Savings Breakdown — Per Client / Month
-        </h2>
-        <table class="roi-table w-full border-collapse min-w-[600px]">
-          <thead>
+      <h2 class="animate-on-scroll fade-in-up font-aktiv text-kd-navy text-[22px] md:text-[32px] font-semibold tracking-[1px] leading-[30px] md:leading-[42px] mb-3">
+        Time Savings Breakdown
+      </h2>
+      <p class="animate-on-scroll fade-in-up delay-100 font-montserrat font-light text-kd-grey text-[15px] md:text-[16px] leading-[26px] tracking-[0.8px] mb-8">
+        Per-client monthly savings across three core workflow steps.
+      </p>
+
+      <div class="animate-on-scroll fade-in-up delay-200 overflow-x-auto">
+        <table class="roi-table w-full border-collapse rounded-xl overflow-hidden border border-gray-200 min-w-[600px]">
+          <thead class="bg-kd-navy">
             <tr>
-              <th class="text-left">Task</th>
-              <th>Manual</th>
-              <th>With AI</th>
-              <th>Saved</th>
-              <th>Reduction</th>
+              <th class="text-left py-3.5 px-4 text-white font-montserrat font-semibold text-[12px] tracking-[1px] uppercase">Task</th>
+              <th class="py-3.5 px-4 text-white font-montserrat font-semibold text-[12px] tracking-[1px] uppercase">Manual</th>
+              <th class="py-3.5 px-4 text-white font-montserrat font-semibold text-[12px] tracking-[1px] uppercase">With AI</th>
+              <th class="py-3.5 px-4 text-white font-montserrat font-semibold text-[12px] tracking-[1px] uppercase">Saved</th>
+              <th class="py-3.5 px-4 text-white font-montserrat font-semibold text-[12px] tracking-[1px] uppercase">Reduction</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td class="task-name">Project management setup</td>
-              <td id="asanaManual">16.7 hrs</td>
-              <td id="asanaAI">0.75 hrs</td>
-              <td class="saved" id="asanaSaved">~16 hrs</td>
-              <td class="reduction" id="asanaReduction">95%</td>
+          <tbody class="font-montserrat font-light text-kd-grey">
+            <tr class="border-b border-gray-200">
+              <td class="py-3.5 px-4 font-medium text-kd-navy">Project management setup</td>
+              <td class="py-3.5 px-4 text-center tabular-nums" id="asanaManual">16.7 hrs</td>
+              <td class="py-3.5 px-4 text-center tabular-nums" id="asanaAI">0.75 hrs</td>
+              <td class="py-3.5 px-4 text-center tabular-nums font-semibold text-kd-sage" id="asanaSaved">~16 hrs</td>
+              <td class="py-3.5 px-4 text-center tabular-nums font-semibold text-kd-sage" id="asanaReduction">95%</td>
             </tr>
-            <tr class="detail-row">
-              <td colspan="5" id="asanaDetail">40 tasks × 25 min manual vs. parallel batch processing — 5 tasks simultaneously in 5 min per batch</td>
+            <tr class="border-b border-gray-200 bg-gray-50/50">
+              <td colspan="5" class="py-2.5 px-4 text-[12px] font-light text-kd-grey/50 italic" id="asanaDetail">40 tasks &times; 25 min manual vs. parallel batch processing &mdash; 5 tasks simultaneously in 5 min per batch</td>
             </tr>
-            <tr>
-              <td class="task-name">Email building (design)</td>
-              <td id="designManual">80 hrs</td>
-              <td id="designAI">40 hrs</td>
-              <td class="saved" id="designSaved">40 hrs</td>
-              <td class="reduction" id="designReduction">50%</td>
+            <tr class="border-b border-gray-200">
+              <td class="py-3.5 px-4 font-medium text-kd-navy">Email building (design)</td>
+              <td class="py-3.5 px-4 text-center tabular-nums" id="designManual">80 hrs</td>
+              <td class="py-3.5 px-4 text-center tabular-nums" id="designAI">40 hrs</td>
+              <td class="py-3.5 px-4 text-center tabular-nums font-semibold text-kd-sage" id="designSaved">40 hrs</td>
+              <td class="py-3.5 px-4 text-center tabular-nums font-semibold text-kd-sage" id="designReduction">50%</td>
             </tr>
-            <tr class="detail-row">
-              <td colspan="5" id="designDetail">40 emails × 2 hrs manual vs. 1 hr with AI-generated briefs and skeleton layouts</td>
+            <tr class="border-b border-gray-200 bg-gray-50/50">
+              <td colspan="5" class="py-2.5 px-4 text-[12px] font-light text-kd-grey/50 italic" id="designDetail">40 emails &times; 2 hrs manual vs. 1 hr with AI-generated briefs and skeleton layouts</td>
             </tr>
-            <tr>
-              <td class="task-name">Campaign deployment</td>
-              <td id="klaviyoManual">6.7 hrs</td>
-              <td id="klaviyoAI">1.3 hrs</td>
-              <td class="saved" id="klaviyoSaved">5.3 hrs</td>
-              <td class="reduction" id="klaviyoReduction">80%</td>
+            <tr class="border-b border-gray-200">
+              <td class="py-3.5 px-4 font-medium text-kd-navy">Campaign deployment</td>
+              <td class="py-3.5 px-4 text-center tabular-nums" id="klaviyoManual">6.7 hrs</td>
+              <td class="py-3.5 px-4 text-center tabular-nums" id="klaviyoAI">1.3 hrs</td>
+              <td class="py-3.5 px-4 text-center tabular-nums font-semibold text-kd-sage" id="klaviyoSaved">5.3 hrs</td>
+              <td class="py-3.5 px-4 text-center tabular-nums font-semibold text-kd-sage" id="klaviyoReduction">80%</td>
             </tr>
-            <tr class="detail-row">
-              <td colspan="5" id="klaviyoDetail">40 campaigns × 10 min manual vs. 2 min with AI automating campaign creation via API</td>
+            <tr class="bg-gray-50/50">
+              <td colspan="5" class="py-2.5 px-4 text-[12px] font-light text-kd-grey/50 italic" id="klaviyoDetail">40 campaigns &times; 10 min manual vs. 2 min with AI automating campaign creation via API</td>
             </tr>
           </tbody>
           <tfoot>
-            <tr class="total-row">
-              <td class="task-name">Total per client</td>
-              <td id="totalManual">103.4 hrs</td>
-              <td id="totalAI">42 hrs</td>
-              <td class="total-saved" id="totalSaved">~61 hrs</td>
-              <td class="total-saved" id="totalReduction">59%</td>
+            <tr class="bg-kd-navy text-white">
+              <td class="py-3.5 px-4 font-montserrat font-semibold text-[14px]">Total per client</td>
+              <td class="py-3.5 px-4 text-center font-montserrat font-semibold tabular-nums" id="totalManual">103.4 hrs</td>
+              <td class="py-3.5 px-4 text-center font-montserrat font-semibold tabular-nums" id="totalAI">42 hrs</td>
+              <td class="py-3.5 px-4 text-center font-montserrat font-bold tabular-nums bg-kd-sage" id="totalSaved">~61 hrs</td>
+              <td class="py-3.5 px-4 text-center font-montserrat font-bold tabular-nums bg-kd-sage" id="totalReduction">59%</td>
             </tr>
           </tfoot>
         </table>
@@ -148,36 +158,47 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
   <!-- ========================================
        INSIGHT CARDS
        ======================================== -->
-  <section class="pb-8 md:pb-12 bg-white px-6">
+  <section class="py-12 md:py-16 px-6" style="background: linear-gradient(180deg, #F6EFE6 0%, #FAFAFA 100%);">
     <div class="max-w-[960px] mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="roi-insight-card">
-          <h3 class="font-aktiv text-[16px] font-bold text-kd-navy mb-2">Your team gets time back</h3>
-          <p class="font-montserrat text-[14px] font-light text-[#383637] leading-[1.6]">
+      <h2 class="animate-on-scroll fade-in-up font-aktiv text-kd-navy text-[22px] md:text-[32px] font-semibold tracking-[1px] leading-[30px] md:leading-[42px] mb-3">
+        What this means for your agency.
+      </h2>
+      <p class="animate-on-scroll fade-in-up delay-100 font-montserrat font-light text-kd-grey text-[15px] md:text-[16px] leading-[26px] tracking-[0.8px] mb-8">
+        The numbers above translate directly into operational capacity and growth potential.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="animate-on-scroll fade-in-up delay-100 bg-white border border-gray-200 rounded-xl p-7 shadow-sm transition-all duration-200 hover:shadow-md hover:-translate-y-0.5">
+          <span class="inline-block bg-kd-cream text-kd-gold text-[10px] font-bold tracking-[1px] uppercase px-2.5 py-1 rounded-md mb-3">Capacity</span>
+          <h3 class="font-aktiv text-kd-navy text-[16px] md:text-[18px] font-semibold tracking-[0.5px] mb-3">Your team gets time back</h3>
+          <p class="font-montserrat font-light text-kd-grey text-[14px] md:text-[15px] leading-[24px] tracking-[0.5px]">
             Per client, you save
-            <span id="insightDays" class="inline-block bg-kd-cream text-kd-sage font-bold px-2 py-0.5 rounded text-[14px]">7.7 days</span>
-            of manual work every month — capacity your CRM managers can reinvest in strategy and creative.
+            <span id="insightDays" class="inline-block bg-kd-sage/10 border border-kd-sage/20 text-kd-sage font-semibold px-2 py-0.5 rounded text-[14px]">7.7 days</span>
+            of manual work every month &mdash; capacity your CRM managers can reinvest in strategy and creative.
           </p>
         </div>
-        <div class="roi-insight-card">
-          <h3 class="font-aktiv text-[16px] font-bold text-kd-navy mb-2">Handle more clients</h3>
-          <p class="font-montserrat text-[14px] font-light text-[#383637] leading-[1.6]">
+        <div class="animate-on-scroll fade-in-up delay-200 bg-white border border-gray-200 rounded-xl p-7 shadow-sm transition-all duration-200 hover:shadow-md hover:-translate-y-0.5">
+          <span class="inline-block bg-kd-cream text-kd-gold text-[10px] font-bold tracking-[1px] uppercase px-2.5 py-1 rounded-md mb-3">Scale</span>
+          <h3 class="font-aktiv text-kd-navy text-[16px] md:text-[18px] font-semibold tracking-[0.5px] mb-3">Handle more clients</h3>
+          <p class="font-montserrat font-light text-kd-grey text-[14px] md:text-[15px] leading-[24px] tracking-[0.5px]">
             If each CRM manager saves
-            <span id="insightHours" class="inline-block bg-kd-cream text-kd-sage font-bold px-2 py-0.5 rounded text-[14px]">61 hrs</span>
+            <span id="insightHours" class="inline-block bg-kd-sage/10 border border-kd-sage/20 text-kd-sage font-semibold px-2 py-0.5 rounded text-[14px]">61 hrs</span>
             per client per month, going from 4 to 6+ brands becomes operationally realistic.
           </p>
         </div>
-        <div class="roi-insight-card">
-          <h3 class="font-aktiv text-[16px] font-bold text-kd-navy mb-2">Grow without growing headcount</h3>
-          <p class="font-montserrat text-[14px] font-light text-[#383637] leading-[1.6]">
-            Across all your clients, that's
-            <span id="insightTotalDays" class="inline-block bg-kd-cream text-kd-sage font-bold px-2 py-0.5 rounded text-[14px]">7.7 working days</span>
-            of freed capacity — without adding to payroll.
+        <div class="animate-on-scroll fade-in-up delay-300 bg-white border border-gray-200 rounded-xl p-7 shadow-sm transition-all duration-200 hover:shadow-md hover:-translate-y-0.5">
+          <span class="inline-block bg-kd-cream text-kd-gold text-[10px] font-bold tracking-[1px] uppercase px-2.5 py-1 rounded-md mb-3">Growth</span>
+          <h3 class="font-aktiv text-kd-navy text-[16px] md:text-[18px] font-semibold tracking-[0.5px] mb-3">Grow without growing headcount</h3>
+          <p class="font-montserrat font-light text-kd-grey text-[14px] md:text-[15px] leading-[24px] tracking-[0.5px]">
+            Across all your clients, that&rsquo;s
+            <span id="insightTotalDays" class="inline-block bg-kd-sage/10 border border-kd-sage/20 text-kd-sage font-semibold px-2 py-0.5 rounded text-[14px]">7.7 working days</span>
+            of freed capacity &mdash; without adding to payroll.
           </p>
         </div>
-        <div class="roi-insight-card">
-          <h3 class="font-aktiv text-[16px] font-bold text-kd-navy mb-2">And this is just the start</h3>
-          <p class="font-montserrat text-[14px] font-light text-[#383637] leading-[1.6]">
+        <div class="animate-on-scroll fade-in-up delay-400 bg-white border border-gray-200 rounded-xl p-7 shadow-sm transition-all duration-200 hover:shadow-md hover:-translate-y-0.5">
+          <span class="inline-block bg-kd-cream text-kd-gold text-[10px] font-bold tracking-[1px] uppercase px-2.5 py-1 rounded-md mb-3">Potential</span>
+          <h3 class="font-aktiv text-kd-navy text-[16px] md:text-[18px] font-semibold tracking-[0.5px] mb-3">And this is just the start</h3>
+          <p class="font-montserrat font-light text-kd-grey text-[14px] md:text-[15px] leading-[24px] tracking-[0.5px]">
             These numbers cover 3 steps. Flow audits, A/B testing, retention analysis, and copywriting automation add additional savings on top.
           </p>
         </div>
@@ -186,35 +207,58 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
   </section>
 
   <!-- ========================================
-       CONSULTATION CTA
+       CTA BANNER
        ======================================== -->
-  <ConsultationCTA />
+  <section class="py-16 md:py-20 px-6 bg-white">
+    <div class="max-w-[800px] mx-auto">
+      <div class="animate-on-scroll scale-in bg-kd-navy rounded-2xl p-10 md:p-14 text-center">
+        <h2 class="font-aktiv text-white text-[22px] md:text-[32px] font-semibold tracking-[1px] leading-[30px] md:leading-[42px] mb-4">
+          Ready to see these savings in action?
+        </h2>
+        <p class="font-montserrat font-light text-white/60 text-[15px] md:text-[16px] leading-[26px] tracking-[0.8px] mb-8 max-w-[560px] mx-auto">
+          Book a free consultation to discuss how AI workflow automation can transform your agency&rsquo;s operations.
+        </p>
+        <a href="https://www.kingadow.com/#consultation" class="btn-gold py-4 px-10 rounded-lg text-[14px] md:text-[15px] tracking-[1.4px] inline-flex items-center gap-2">
+          Book Consultation &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
 
-</Layout>
+  <!-- ========================================
+       FOOTER NOTE
+       ======================================== -->
+  <div class="text-center py-10 border-t border-gray-200">
+    <p class="font-montserrat font-light text-kd-grey/50 text-[13px] md:text-[14px] tracking-[0.5px]">
+      AI Workflow ROI Calculator by <a href="https://www.kingadow.com" class="text-kd-gold hover:text-kd-navy transition-colors font-medium">Kinga Dow</a> &mdash; AI-powered retention marketing for e-commerce.
+    </p>
+  </div>
+
+</Standalone>
 
 <!-- ========================================
      SCOPED STYLES
      ======================================== -->
 <style>
-  /* Slider styling */
+  /* Slider styling — lighter, gold-accent version */
   .roi-slider {
     -webkit-appearance: none;
     appearance: none;
-    height: 6px;
+    height: 5px;
     border-radius: 3px;
-    background: linear-gradient(to right, #8CAB95, #3F455D);
+    background: linear-gradient(to right, #E0B000, #BA9200);
     outline: none;
     cursor: pointer;
   }
   .roi-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    background: #3F455D;
-    border: 3px solid white;
-    box-shadow: 0 2px 8px rgba(64,69,91,0.25);
+    background: white;
+    border: 3px solid #BA9200;
+    box-shadow: 0 2px 6px rgba(186,146,0,0.25);
     cursor: pointer;
     transition: transform 0.15s ease;
   }
@@ -222,97 +266,13 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
     transform: scale(1.15);
   }
   .roi-slider::-moz-range-thumb {
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    background: #3F455D;
-    border: 3px solid white;
-    box-shadow: 0 2px 8px rgba(64,69,91,0.25);
-    cursor: pointer;
-  }
-
-  /* Table styling */
-  .roi-table thead th {
-    background: #3F455D;
-    color: white;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 14px 16px;
-    text-align: center;
-    border: 1px solid rgba(159,159,174,0.3);
-  }
-  .roi-table thead th:first-child {
-    border-radius: 8px 0 0 0;
-  }
-  .roi-table thead th:last-child {
-    border-radius: 0 8px 0 0;
-  }
-  .roi-table tbody td {
-    padding: 14px 16px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 15px;
-    text-align: center;
-    border: 1px solid rgba(159,159,174,0.2);
-    font-variant-numeric: tabular-nums;
-  }
-  .roi-table tbody td.task-name {
-    text-align: left;
-    font-weight: 600;
-    color: #3F455D;
-  }
-  .roi-table tbody tr:nth-child(4n+1) {
-    background: #F6EFE6;
-  }
-  .roi-table tbody tr.detail-row {
-    background: white !important;
-  }
-  .roi-table tbody tr.detail-row td {
-    font-size: 12px;
-    font-weight: 300;
-    color: #9F9FAE;
-    font-style: italic;
-    padding: 8px 16px;
-    text-align: left;
-  }
-  .roi-table .saved,
-  .roi-table .reduction {
-    color: #8CAB95;
-    font-weight: 700;
-  }
-  .roi-table tfoot td {
-    padding: 14px 16px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    text-align: center;
-    border: 1px solid rgba(159,159,174,0.3);
-  }
-  .roi-table tfoot td.task-name {
-    text-align: left;
-  }
-  .roi-table .total-row td {
-    background: #3F455D;
-    color: white;
-  }
-  .roi-table .total-row td.total-saved {
-    background: #8CAB95;
-    color: white;
-  }
-
-  /* Insight cards */
-  .roi-insight-card {
     background: white;
-    border-radius: 12px;
-    padding: 28px;
-    border: 1px solid rgba(159,159,174,0.15);
-    box-shadow: 0 1px 3px rgba(64,69,91,0.04);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  .roi-insight-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(64,69,91,0.08);
+    border: 3px solid #BA9200;
+    box-shadow: 0 2px 6px rgba(186,146,0,0.25);
+    cursor: pointer;
   }
 
   /* Tabular nums utility */

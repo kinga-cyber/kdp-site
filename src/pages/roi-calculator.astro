@@ -25,83 +25,49 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
   </section>
 
   <!-- ========================================
-       STICKY STATS SECTION
+       STICKY STATS + SLIDERS SECTION
        ======================================== -->
   <section id="roi-stats" class="sticky top-0 z-50 py-3 md:py-4 bg-white transition-shadow duration-300">
     <div class="max-w-[960px] mx-auto px-6">
+      <!-- Stats Cards -->
       <div class="grid grid-cols-3 gap-3 md:gap-4">
-        <div class="bg-kd-navy rounded-xl p-4 md:p-6 text-center relative overflow-hidden">
+        <div class="bg-kd-navy rounded-xl p-3 md:p-5 text-center relative overflow-hidden">
           <div class="absolute top-0 right-0 w-20 h-20 bg-[radial-gradient(circle_at_top_right,rgba(140,171,149,0.15),transparent_70%)]"></div>
           <div class="relative">
-            <p id="statHours" class="font-montserrat text-[24px] md:text-[40px] font-bold text-white leading-none mb-1 tabular-nums">~61</p>
-            <p class="font-montserrat text-[9px] md:text-[11px] font-medium tracking-[1.5px] uppercase text-kd-cream opacity-80">Hours saved</p>
-            <p class="font-montserrat text-[9px] md:text-[10px] font-light text-kd-grey italic mt-0.5 hidden md:block">per client / month</p>
+            <p id="statHours" class="font-montserrat text-[22px] md:text-[36px] font-bold text-white leading-none mb-1 tabular-nums">~61</p>
+            <p class="font-montserrat text-[8px] md:text-[11px] font-medium tracking-[1.5px] uppercase text-kd-cream opacity-80">Hours saved</p>
+            <p class="font-montserrat text-[9px] font-light text-kd-grey italic mt-0.5 hidden md:block">per client / month</p>
           </div>
         </div>
-        <div class="bg-kd-navy rounded-xl p-4 md:p-6 text-center relative overflow-hidden">
+        <div class="bg-kd-navy rounded-xl p-3 md:p-5 text-center relative overflow-hidden">
           <div class="absolute top-0 right-0 w-20 h-20 bg-[radial-gradient(circle_at_top_right,rgba(140,171,149,0.15),transparent_70%)]"></div>
           <div class="relative">
-            <p id="statTotal" class="font-montserrat text-[24px] md:text-[40px] font-bold text-white leading-none mb-1 tabular-nums">~61</p>
-            <p class="font-montserrat text-[9px] md:text-[11px] font-medium tracking-[1.5px] uppercase text-kd-cream opacity-80">Total saved</p>
-            <p class="font-montserrat text-[9px] md:text-[10px] font-light text-kd-grey italic mt-0.5 hidden md:block">all clients / month</p>
+            <p id="statTotal" class="font-montserrat text-[22px] md:text-[36px] font-bold text-white leading-none mb-1 tabular-nums">~61</p>
+            <p class="font-montserrat text-[8px] md:text-[11px] font-medium tracking-[1.5px] uppercase text-kd-cream opacity-80">Total saved</p>
+            <p class="font-montserrat text-[9px] font-light text-kd-grey italic mt-0.5 hidden md:block">all clients / month</p>
           </div>
         </div>
-        <div class="bg-kd-navy rounded-xl p-4 md:p-6 text-center relative overflow-hidden">
+        <div class="bg-kd-navy rounded-xl p-3 md:p-5 text-center relative overflow-hidden">
           <div class="absolute top-0 right-0 w-20 h-20 bg-[radial-gradient(circle_at_top_right,rgba(140,171,149,0.15),transparent_70%)]"></div>
           <div class="relative">
-            <p id="statFTE" class="font-montserrat text-[24px] md:text-[40px] font-bold text-white leading-none mb-1 tabular-nums">0.4</p>
-            <p class="font-montserrat text-[9px] md:text-[11px] font-medium tracking-[1.5px] uppercase text-kd-cream opacity-80">FTE freed</p>
-            <p class="font-montserrat text-[9px] md:text-[10px] font-light text-kd-grey italic mt-0.5 hidden md:block">capacity equivalent</p>
+            <p id="statFTE" class="font-montserrat text-[22px] md:text-[36px] font-bold text-white leading-none mb-1 tabular-nums">0.4</p>
+            <p class="font-montserrat text-[8px] md:text-[11px] font-medium tracking-[1.5px] uppercase text-kd-cream opacity-80">FTE freed</p>
+            <p class="font-montserrat text-[9px] font-light text-kd-grey italic mt-0.5 hidden md:block">capacity equivalent</p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ========================================
-       SLIDER INPUTS
-       ======================================== -->
-  <section class="py-8 md:py-12 bg-white px-6">
-    <div class="max-w-[960px] mx-auto">
-      <div class="bg-white rounded-2xl p-8 md:p-10 border border-[rgba(159,159,174,0.15)]" style="box-shadow: 0 1px 3px rgba(64,69,91,0.06), 0 8px 32px rgba(64,69,91,0.04);">
-        <h2 class="font-aktiv text-[13px] font-semibold tracking-[3px] uppercase text-kd-navy mb-8 pb-4 border-b-2 border-kd-sage">
-          Your Numbers
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
-          <!-- Emails per client -->
-          <div class="flex flex-col gap-2">
-            <label class="font-montserrat text-[13px] font-medium text-kd-navy tracking-[0.5px]">
-              Emails per client per month
-            </label>
-            <div class="flex items-center gap-4">
-              <input
-                type="range"
-                id="emailsSlider"
-                min="5"
-                max="120"
-                value="40"
-                class="roi-slider flex-1"
-              />
-              <span id="emailsValue" class="min-w-[52px] text-center text-[24px] font-bold text-kd-navy font-montserrat tabular-nums">40</span>
-            </div>
-          </div>
-          <!-- Number of clients -->
-          <div class="flex flex-col gap-2">
-            <label class="font-montserrat text-[13px] font-medium text-kd-navy tracking-[0.5px]">
-              Number of clients
-            </label>
-            <div class="flex items-center gap-4">
-              <input
-                type="range"
-                id="clientsSlider"
-                min="1"
-                max="50"
-                value="1"
-                class="roi-slider flex-1"
-              />
-              <span id="clientsValue" class="min-w-[52px] text-center text-[24px] font-bold text-kd-navy font-montserrat tabular-nums">1</span>
-            </div>
-          </div>
+      <!-- Sliders -->
+      <div class="mt-3 md:mt-4 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
+        <div class="flex items-center gap-3">
+          <label class="font-montserrat text-[11px] md:text-[12px] font-medium text-kd-navy tracking-[0.5px] whitespace-nowrap">Emails/client</label>
+          <input type="range" id="emailsSlider" min="5" max="120" value="40" class="roi-slider flex-1" />
+          <span id="emailsValue" class="min-w-[36px] text-center text-[18px] md:text-[22px] font-bold text-kd-navy font-montserrat tabular-nums">40</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <label class="font-montserrat text-[11px] md:text-[12px] font-medium text-kd-navy tracking-[0.5px] whitespace-nowrap">Clients</label>
+          <input type="range" id="clientsSlider" min="1" max="50" value="1" class="roi-slider flex-1" />
+          <span id="clientsValue" class="min-w-[36px] text-center text-[18px] md:text-[22px] font-bold text-kd-navy font-montserrat tabular-nums">1</span>
         </div>
       </div>
     </div>

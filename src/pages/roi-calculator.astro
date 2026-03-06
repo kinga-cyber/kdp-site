@@ -27,13 +27,16 @@ import Standalone from "../layouts/Standalone.astro";
     </div>
 
     <div class="max-w-[900px] mx-auto px-6 py-16 md:py-24 relative z-10">
-      <span class="animate-on-scroll fade-in-up font-montserrat text-kd-gold font-medium text-[13px] tracking-[1.4px] mb-5 block uppercase">Kinga Dow &middot; AI Integration</span>
+      <a href="/" class="animate-on-scroll fade-in-up inline-block mb-6">
+        <img src="/images/global/logo.png" alt="Kinga Dow" class="h-[60px] md:h-[80px]" />
+      </a>
+      <span class="animate-on-scroll fade-in-up delay-100 font-montserrat text-kd-gold font-medium text-[13px] tracking-[1.4px] mb-5 block uppercase">AI Integration</span>
 
-      <h1 class="animate-on-scroll fade-in-up delay-100 font-aktiv text-kd-navy text-[28px] md:text-[48px] font-bold leading-[36px] md:leading-[58px] tracking-[1px] md:tracking-[1.8px] mb-6">
+      <h1 class="animate-on-scroll fade-in-up delay-200 font-aktiv text-kd-navy text-[28px] md:text-[48px] font-bold leading-[36px] md:leading-[58px] tracking-[1px] md:tracking-[1.8px] mb-6">
         AI Workflow ROI<br class="md:hidden" /> Calculator<br />for Email Marketing Agencies
       </h1>
 
-      <p class="animate-on-scroll fade-in-up delay-200 font-montserrat font-light text-kd-grey text-[16px] md:text-[18px] leading-[26px] md:leading-[30px] tracking-[0.8px] max-w-[640px]">
+      <p class="animate-on-scroll fade-in-up delay-300 font-montserrat font-light text-kd-grey text-[16px] md:text-[18px] leading-[26px] md:leading-[30px] tracking-[0.8px] max-w-[640px]">
         Drag the sliders to match your agency. See what happens when you automate just 3 workflow steps.
       </p>
     </div>
@@ -42,21 +45,21 @@ import Standalone from "../layouts/Standalone.astro";
   <!-- ========================================
        STICKY STATS + SLIDERS SECTION
        ======================================== -->
-  <section id="roi-stats" class="sticky top-0 z-50 py-3 md:py-4 bg-white/95 backdrop-blur-sm transition-shadow duration-300 border-b border-gray-200/60">
+  <section id="roi-stats" class="md:sticky md:top-0 z-50 py-3 md:py-4 bg-white/95 backdrop-blur-sm transition-shadow duration-300 border-b border-gray-200/60">
     <div class="max-w-[960px] mx-auto px-6">
       <!-- Stats Cards -->
       <div class="grid grid-cols-3 gap-3 md:gap-4">
-        <div class="bg-white border border-gray-200 rounded-xl p-3 md:p-5 text-center shadow-sm">
+        <div class="stat-card border border-gray-200/80 rounded-xl p-3 md:p-5 text-center shadow-sm">
           <p id="statHours" class="font-montserrat text-[22px] md:text-[36px] font-bold text-kd-navy leading-none mb-1 tabular-nums">~61</p>
           <p class="font-montserrat text-[8px] md:text-[11px] font-semibold tracking-[1.5px] uppercase text-kd-grey/60">Hours saved</p>
           <p class="font-montserrat text-[9px] font-light text-kd-grey/50 italic mt-0.5 hidden md:block">per client / month</p>
         </div>
-        <div class="bg-white border border-gray-200 rounded-xl p-3 md:p-5 text-center shadow-sm">
+        <div class="stat-card border border-gray-200/80 rounded-xl p-3 md:p-5 text-center shadow-sm">
           <p id="statTotal" class="font-montserrat text-[22px] md:text-[36px] font-bold text-kd-navy leading-none mb-1 tabular-nums">~61</p>
           <p class="font-montserrat text-[8px] md:text-[11px] font-semibold tracking-[1.5px] uppercase text-kd-grey/60">Total saved</p>
           <p class="font-montserrat text-[9px] font-light text-kd-grey/50 italic mt-0.5 hidden md:block">all clients / month</p>
         </div>
-        <div class="bg-white border border-gray-200 rounded-xl p-3 md:p-5 text-center shadow-sm">
+        <div class="stat-card border border-gray-200/80 rounded-xl p-3 md:p-5 text-center shadow-sm">
           <p id="statDays" class="font-montserrat text-[22px] md:text-[36px] font-bold text-kd-navy leading-none mb-1 tabular-nums">~8</p>
           <p class="font-montserrat text-[8px] md:text-[11px] font-semibold tracking-[1.5px] uppercase text-kd-grey/60">Working days saved</p>
           <p class="font-montserrat text-[9px] font-light text-kd-grey/50 italic mt-0.5 hidden md:block">all clients / month</p>
@@ -240,6 +243,11 @@ import Standalone from "../layouts/Standalone.astro";
      SCOPED STYLES
      ======================================== -->
 <style>
+  /* Stat card gradient */
+  .stat-card {
+    background: linear-gradient(135deg, #FFFFFF 0%, #F6EFE6 100%);
+  }
+
   /* Slider styling — lighter, gold-accent version */
   .roi-slider {
     -webkit-appearance: none;

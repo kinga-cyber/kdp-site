@@ -1,0 +1,452 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ConsultationCTA from "../components/ConsultationCTA.astro";
+---
+
+<Layout
+  title="AI Workflow ROI Calculator | Kinga Dow"
+  description="Calculate how much time your Klaviyo agency can save by automating email marketing workflows with AI."
+>
+  <!-- ========================================
+       HERO HEADER
+       ======================================== -->
+  <section class="py-12 md:py-20 bg-kd-cream text-center px-6">
+    <div class="max-w-3xl mx-auto">
+      <p class="font-montserrat text-[11px] font-semibold tracking-[4px] uppercase text-kd-sage mb-4">
+        Kinga Dow &middot; AI Integration
+      </p>
+      <h1 class="font-aktiv text-[28px] md:text-[44px] font-bold leading-[1.15] tracking-[-0.5px] text-kd-navy mb-4">
+        AI Workflow ROI Calculator<br />for Email Marketing Agencies
+      </h1>
+      <p class="font-montserrat text-[17px] font-light text-kd-grey leading-[1.6] max-w-[560px] mx-auto">
+        Drag the sliders to match your agency. See what happens when you automate just 3 workflow steps.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========================================
+       STICKY STATS SECTION
+       ======================================== -->
+  <section id="roi-stats" class="sticky top-0 z-50 py-3 md:py-4 bg-white transition-shadow duration-300">
+    <div class="max-w-[960px] mx-auto px-6">
+      <div class="grid grid-cols-3 gap-3 md:gap-4">
+        <div class="bg-kd-navy rounded-xl p-4 md:p-6 text-center relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-20 h-20 bg-[radial-gradient(circle_at_top_right,rgba(140,171,149,0.15),transparent_70%)]"></div>
+          <div class="relative">
+            <p id="statHours" class="font-montserrat text-[24px] md:text-[40px] font-bold text-white leading-none mb-1 tabular-nums">~61</p>
+            <p class="font-montserrat text-[9px] md:text-[11px] font-medium tracking-[1.5px] uppercase text-kd-cream opacity-80">Hours saved</p>
+            <p class="font-montserrat text-[9px] md:text-[10px] font-light text-kd-grey italic mt-0.5 hidden md:block">per client / month</p>
+          </div>
+        </div>
+        <div class="bg-kd-navy rounded-xl p-4 md:p-6 text-center relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-20 h-20 bg-[radial-gradient(circle_at_top_right,rgba(140,171,149,0.15),transparent_70%)]"></div>
+          <div class="relative">
+            <p id="statTotal" class="font-montserrat text-[24px] md:text-[40px] font-bold text-white leading-none mb-1 tabular-nums">~61</p>
+            <p class="font-montserrat text-[9px] md:text-[11px] font-medium tracking-[1.5px] uppercase text-kd-cream opacity-80">Total saved</p>
+            <p class="font-montserrat text-[9px] md:text-[10px] font-light text-kd-grey italic mt-0.5 hidden md:block">all clients / month</p>
+          </div>
+        </div>
+        <div class="bg-kd-navy rounded-xl p-4 md:p-6 text-center relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-20 h-20 bg-[radial-gradient(circle_at_top_right,rgba(140,171,149,0.15),transparent_70%)]"></div>
+          <div class="relative">
+            <p id="statFTE" class="font-montserrat text-[24px] md:text-[40px] font-bold text-white leading-none mb-1 tabular-nums">0.4</p>
+            <p class="font-montserrat text-[9px] md:text-[11px] font-medium tracking-[1.5px] uppercase text-kd-cream opacity-80">FTE freed</p>
+            <p class="font-montserrat text-[9px] md:text-[10px] font-light text-kd-grey italic mt-0.5 hidden md:block">capacity equivalent</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       SLIDER INPUTS
+       ======================================== -->
+  <section class="py-8 md:py-12 bg-white px-6">
+    <div class="max-w-[960px] mx-auto">
+      <div class="bg-white rounded-2xl p-8 md:p-10 border border-[rgba(159,159,174,0.15)]" style="box-shadow: 0 1px 3px rgba(64,69,91,0.06), 0 8px 32px rgba(64,69,91,0.04);">
+        <h2 class="font-aktiv text-[13px] font-semibold tracking-[3px] uppercase text-kd-navy mb-8 pb-4 border-b-2 border-kd-sage">
+          Your Numbers
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+          <!-- Emails per client -->
+          <div class="flex flex-col gap-2">
+            <label class="font-montserrat text-[13px] font-medium text-kd-navy tracking-[0.5px]">
+              Emails per client per month
+            </label>
+            <div class="flex items-center gap-4">
+              <input
+                type="range"
+                id="emailsSlider"
+                min="5"
+                max="120"
+                value="40"
+                class="roi-slider flex-1"
+              />
+              <span id="emailsValue" class="min-w-[52px] text-center text-[24px] font-bold text-kd-navy font-montserrat tabular-nums">40</span>
+            </div>
+          </div>
+          <!-- Number of clients -->
+          <div class="flex flex-col gap-2">
+            <label class="font-montserrat text-[13px] font-medium text-kd-navy tracking-[0.5px]">
+              Number of clients
+            </label>
+            <div class="flex items-center gap-4">
+              <input
+                type="range"
+                id="clientsSlider"
+                min="1"
+                max="50"
+                value="1"
+                class="roi-slider flex-1"
+              />
+              <span id="clientsValue" class="min-w-[52px] text-center text-[24px] font-bold text-kd-navy font-montserrat tabular-nums">1</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       BREAKDOWN TABLE
+       ======================================== -->
+  <section class="pb-8 md:pb-12 bg-white px-6">
+    <div class="max-w-[960px] mx-auto">
+      <div class="bg-white rounded-2xl p-6 md:p-10 border border-[rgba(159,159,174,0.15)] overflow-x-auto" style="box-shadow: 0 1px 3px rgba(64,69,91,0.06), 0 8px 32px rgba(64,69,91,0.04);">
+        <h2 class="font-aktiv text-[13px] font-semibold tracking-[3px] uppercase text-kd-navy mb-8 pb-4 border-b-2 border-kd-sage">
+          Time Savings Breakdown — Per Client / Month
+        </h2>
+        <table class="roi-table w-full border-collapse min-w-[600px]">
+          <thead>
+            <tr>
+              <th class="text-left">Task</th>
+              <th>Manual</th>
+              <th>With AI</th>
+              <th>Saved</th>
+              <th>Reduction</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="task-name">Project management setup</td>
+              <td id="asanaManual">16.7 hrs</td>
+              <td id="asanaAI">0.75 hrs</td>
+              <td class="saved" id="asanaSaved">~16 hrs</td>
+              <td class="reduction" id="asanaReduction">95%</td>
+            </tr>
+            <tr class="detail-row">
+              <td colspan="5" id="asanaDetail">40 tasks × 25 min manual vs. parallel batch processing — 5 tasks simultaneously in 5 min per batch</td>
+            </tr>
+            <tr>
+              <td class="task-name">Email building (design)</td>
+              <td id="designManual">80 hrs</td>
+              <td id="designAI">40 hrs</td>
+              <td class="saved" id="designSaved">40 hrs</td>
+              <td class="reduction" id="designReduction">50%</td>
+            </tr>
+            <tr class="detail-row">
+              <td colspan="5" id="designDetail">40 emails × 2 hrs manual vs. 1 hr with AI-generated briefs and skeleton layouts</td>
+            </tr>
+            <tr>
+              <td class="task-name">Campaign deployment</td>
+              <td id="klaviyoManual">6.7 hrs</td>
+              <td id="klaviyoAI">1.3 hrs</td>
+              <td class="saved" id="klaviyoSaved">5.3 hrs</td>
+              <td class="reduction" id="klaviyoReduction">80%</td>
+            </tr>
+            <tr class="detail-row">
+              <td colspan="5" id="klaviyoDetail">40 campaigns × 10 min manual vs. 2 min with AI automating campaign creation via API</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr class="total-row">
+              <td class="task-name">Total per client</td>
+              <td id="totalManual">103.4 hrs</td>
+              <td id="totalAI">42 hrs</td>
+              <td class="total-saved" id="totalSaved">~61 hrs</td>
+              <td class="total-saved" id="totalReduction">59%</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       INSIGHT CARDS
+       ======================================== -->
+  <section class="pb-8 md:pb-12 bg-white px-6">
+    <div class="max-w-[960px] mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="roi-insight-card">
+          <h3 class="font-aktiv text-[16px] font-bold text-kd-navy mb-2">A full working week back</h3>
+          <p class="font-montserrat text-[14px] font-light text-[#383637] leading-[1.6]">
+            Per client, per month. That's capacity your CRM managers can reinvest in deeper strategy, better creative, and higher-value work.
+          </p>
+        </div>
+        <div class="roi-insight-card">
+          <h3 class="font-aktiv text-[16px] font-bold text-kd-navy mb-2">More clients per manager</h3>
+          <p class="font-montserrat text-[14px] font-light text-[#383637] leading-[1.6]">
+            If your team handles 4 brands each and you give them back
+            <span id="insightHours" class="inline-block bg-kd-cream text-kd-sage font-bold px-2 py-0.5 rounded text-[14px]">61 hrs</span>,
+            going from 4 to 6+ brands becomes operationally realistic.
+          </p>
+        </div>
+        <div class="roi-insight-card">
+          <h3 class="font-aktiv text-[16px] font-bold text-kd-navy mb-2">Scale without hiring</h3>
+          <p class="font-montserrat text-[14px] font-light text-[#383637] leading-[1.6]">
+            Across all your clients, that's
+            <span id="insightFTE" class="inline-block bg-kd-cream text-kd-sage font-bold px-2 py-0.5 rounded text-[14px]">0.4 FTEs</span>
+            worth of capacity freed up — on just three workflow steps.
+          </p>
+        </div>
+        <div class="roi-insight-card">
+          <h3 class="font-aktiv text-[16px] font-bold text-kd-navy mb-2">And this is just the start</h3>
+          <p class="font-montserrat text-[14px] font-light text-[#383637] leading-[1.6]">
+            These numbers cover 3 steps. Flow audits, A/B testing, retention analysis, and copywriting automation add additional savings on top.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       CONSULTATION CTA
+       ======================================== -->
+  <ConsultationCTA />
+
+</Layout>
+
+<!-- ========================================
+     SCOPED STYLES
+     ======================================== -->
+<style>
+  /* Slider styling */
+  .roi-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    border-radius: 3px;
+    background: linear-gradient(to right, #8CAB95, #3F455D);
+    outline: none;
+    cursor: pointer;
+  }
+  .roi-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #3F455D;
+    border: 3px solid white;
+    box-shadow: 0 2px 8px rgba(64,69,91,0.25);
+    cursor: pointer;
+    transition: transform 0.15s ease;
+  }
+  .roi-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+  }
+  .roi-slider::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #3F455D;
+    border: 3px solid white;
+    box-shadow: 0 2px 8px rgba(64,69,91,0.25);
+    cursor: pointer;
+  }
+
+  /* Table styling */
+  .roi-table thead th {
+    background: #3F455D;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 14px 16px;
+    text-align: center;
+    border: 1px solid rgba(159,159,174,0.3);
+  }
+  .roi-table thead th:first-child {
+    border-radius: 8px 0 0 0;
+  }
+  .roi-table thead th:last-child {
+    border-radius: 0 8px 0 0;
+  }
+  .roi-table tbody td {
+    padding: 14px 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    text-align: center;
+    border: 1px solid rgba(159,159,174,0.2);
+    font-variant-numeric: tabular-nums;
+  }
+  .roi-table tbody td.task-name {
+    text-align: left;
+    font-weight: 600;
+    color: #3F455D;
+  }
+  .roi-table tbody tr:nth-child(4n+1) {
+    background: #F6EFE6;
+  }
+  .roi-table tbody tr.detail-row {
+    background: white !important;
+  }
+  .roi-table tbody tr.detail-row td {
+    font-size: 12px;
+    font-weight: 300;
+    color: #9F9FAE;
+    font-style: italic;
+    padding: 8px 16px;
+    text-align: left;
+  }
+  .roi-table .saved,
+  .roi-table .reduction {
+    color: #8CAB95;
+    font-weight: 700;
+  }
+  .roi-table tfoot td {
+    padding: 14px 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    text-align: center;
+    border: 1px solid rgba(159,159,174,0.3);
+  }
+  .roi-table tfoot td.task-name {
+    text-align: left;
+  }
+  .roi-table .total-row td {
+    background: #3F455D;
+    color: white;
+  }
+  .roi-table .total-row td.total-saved {
+    background: #8CAB95;
+    color: white;
+  }
+
+  /* Insight cards */
+  .roi-insight-card {
+    background: white;
+    border-radius: 12px;
+    padding: 28px;
+    border: 1px solid rgba(159,159,174,0.15);
+    box-shadow: 0 1px 3px rgba(64,69,91,0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .roi-insight-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(64,69,91,0.08);
+  }
+
+  /* Tabular nums utility */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+</style>
+
+<!-- ========================================
+     CALCULATOR LOGIC
+     ======================================== -->
+<script>
+  const emailsSlider = document.getElementById('emailsSlider') as HTMLInputElement;
+  const clientsSlider = document.getElementById('clientsSlider') as HTMLInputElement;
+  const emailsValue = document.getElementById('emailsValue')!;
+  const clientsValue = document.getElementById('clientsValue')!;
+
+  function fmt(n: number): string {
+    return n >= 10 ? Math.round(n).toLocaleString() : n.toFixed(1);
+  }
+
+  function calculate(): void {
+    const emails = parseInt(emailsSlider.value);
+    const clients = parseInt(clientsSlider.value);
+    emailsValue.textContent = String(emails);
+    clientsValue.textContent = String(clients);
+
+    // Asana: 25 min manual per task, 5 parallel batches of 5 min
+    const asanaManual = (emails * 25) / 60;
+    const asanaAI = (Math.ceil(emails / 5) * 5) / 60;
+    const asanaSaved = asanaManual - asanaAI;
+    const asanaRed = Math.round((asanaSaved / asanaManual) * 100);
+
+    // Design: 2 hrs manual, 1 hr with AI
+    const designManual = emails * 2;
+    const designAI = emails * 1;
+    const designSaved = designManual - designAI;
+    const designRed = Math.round((designSaved / designManual) * 100);
+
+    // Klaviyo: 10 min manual, 2 min with AI
+    const klaviyoManual = (emails * 10) / 60;
+    const klaviyoAI = (emails * 2) / 60;
+    const klaviyoSaved = klaviyoManual - klaviyoAI;
+    const klaviyoRed = Math.round((klaviyoSaved / klaviyoManual) * 100);
+
+    // Totals
+    const totalManual = asanaManual + designManual + klaviyoManual;
+    const totalAI = asanaAI + designAI + klaviyoAI;
+    const totalSaved = totalManual - totalAI;
+    const totalRed = Math.round((totalSaved / totalManual) * 100);
+    const totalAllClients = totalSaved * clients;
+    const fte = totalAllClients / 160;
+
+    // Update table
+    document.getElementById('asanaManual')!.textContent = fmt(asanaManual) + ' hrs';
+    document.getElementById('asanaAI')!.textContent = fmt(asanaAI) + ' hrs';
+    document.getElementById('asanaSaved')!.textContent = '~' + fmt(asanaSaved) + ' hrs';
+    document.getElementById('asanaReduction')!.textContent = asanaRed + '%';
+    document.getElementById('asanaDetail')!.textContent =
+      emails + ' tasks × 25 min manual vs. parallel batch processing — 5 tasks simultaneously in 5 min per batch';
+
+    document.getElementById('designManual')!.textContent = fmt(designManual) + ' hrs';
+    document.getElementById('designAI')!.textContent = fmt(designAI) + ' hrs';
+    document.getElementById('designSaved')!.textContent = fmt(designSaved) + ' hrs';
+    document.getElementById('designReduction')!.textContent = designRed + '%';
+    document.getElementById('designDetail')!.textContent =
+      emails + ' emails × 2 hrs manual vs. 1 hr with AI-generated briefs and skeleton layouts';
+
+    document.getElementById('klaviyoManual')!.textContent = fmt(klaviyoManual) + ' hrs';
+    document.getElementById('klaviyoAI')!.textContent = fmt(klaviyoAI) + ' hrs';
+    document.getElementById('klaviyoSaved')!.textContent = fmt(klaviyoSaved) + ' hrs';
+    document.getElementById('klaviyoReduction')!.textContent = klaviyoRed + '%';
+    document.getElementById('klaviyoDetail')!.textContent =
+      emails + ' campaigns × 10 min manual vs. 2 min with AI automating campaign creation via API';
+
+    document.getElementById('totalManual')!.textContent = fmt(totalManual) + ' hrs';
+    document.getElementById('totalAI')!.textContent = fmt(totalAI) + ' hrs';
+    document.getElementById('totalSaved')!.textContent = '~' + fmt(totalSaved) + ' hrs';
+    document.getElementById('totalReduction')!.textContent = totalRed + '%';
+
+    // Update stat cards
+    document.getElementById('statHours')!.textContent = '~' + fmt(totalSaved);
+    document.getElementById('statTotal')!.textContent = '~' + fmt(totalAllClients);
+    document.getElementById('statFTE')!.textContent = fte.toFixed(1);
+
+    // Update insights
+    document.getElementById('insightHours')!.textContent = fmt(totalSaved) + ' hrs';
+    document.getElementById('insightFTE')!.textContent = fte.toFixed(1) + ' FTEs';
+  }
+
+  emailsSlider.addEventListener('input', calculate);
+  clientsSlider.addEventListener('input', calculate);
+
+  // Initial calculation
+  calculate();
+
+  // Sticky shadow effect
+  const roiStats = document.getElementById('roi-stats');
+  if (roiStats) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          roiStats.classList.add('shadow-lg');
+        } else {
+          roiStats.classList.remove('shadow-lg');
+        }
+      },
+      { threshold: 1, rootMargin: '-1px 0px 0px 0px' }
+    );
+    observer.observe(roiStats);
+  }
+</script>

@@ -74,7 +74,7 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
       <!-- Explainer Bar -->
       <div class="mt-3 md:mt-4 bg-kd-cream rounded-xl px-4 py-3 text-center">
         <p id="explainerBar" class="font-montserrat text-[13px] md:text-[14px] font-light text-kd-grey leading-[1.5]">
-          That's roughly <strong class="font-semibold text-kd-navy">1 full working day</strong> of capacity back — just from automating 3 workflow steps.
+          That's like getting <strong class="font-semibold text-kd-navy">a few extra days of capacity each month</strong>.
         </p>
       </div>
     </div>
@@ -154,9 +154,9 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
         <div class="roi-insight-card">
           <h3 class="font-aktiv text-[16px] font-bold text-kd-navy mb-2">Your team gets time back</h3>
           <p class="font-montserrat text-[14px] font-light text-[#383637] leading-[1.6]">
-            That's
-            <span id="insightDays" class="inline-block bg-kd-cream text-kd-sage font-bold px-2 py-0.5 rounded text-[14px]">~8 days</span>
-            worth of work your team doesn't have to do manually — every single month.
+            Per client, you save
+            <span id="insightDays" class="inline-block bg-kd-cream text-kd-sage font-bold px-2 py-0.5 rounded text-[14px]">7.7 days</span>
+            of manual work every month — capacity your CRM managers can reinvest in strategy and creative.
           </p>
         </div>
         <div class="roi-insight-card">
@@ -170,9 +170,9 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
         <div class="roi-insight-card">
           <h3 class="font-aktiv text-[16px] font-bold text-kd-navy mb-2">Grow without growing headcount</h3>
           <p class="font-montserrat text-[14px] font-light text-[#383637] leading-[1.6]">
-            The time you save across all clients is like getting
-            <span id="insightPeople" class="inline-block bg-kd-cream text-kd-sage font-bold px-2 py-0.5 rounded text-[14px]">a part-time hire</span>
-            — without adding to payroll.
+            Across all your clients, that's
+            <span id="insightTotalDays" class="inline-block bg-kd-cream text-kd-sage font-bold px-2 py-0.5 rounded text-[14px]">7.7 working days</span>
+            of freed capacity — without adding to payroll.
           </p>
         </div>
         <div class="roi-insight-card">
@@ -335,12 +335,13 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
   }
 
   function peoplePhrase(days: number): string {
-    if (days < 5)  return 'a few days of extra capacity back';
-    if (days < 10) return 'almost half a team member\u2019s capacity back';
-    if (days < 20) return 'roughly 1 full-time person\u2019s worth of work back';
-    if (days < 40) return 'the equivalent of 1\u20132 full-time hires back';
-    if (days < 80) return 'the output of a small team back';
-    return 'a department\u2019s worth of manual work eliminated';
+    const people = days / 21;
+    if (people < 0.3) return 'a few extra days of capacity each month';
+    if (people < 0.7) return 'almost half a team member\u2019s capacity back';
+    if (people < 1.2) return 'roughly 1 full-time person\u2019s worth of work back \u2014 without hiring anyone';
+    if (people < 1.8) return 'roughly 1.5 full-time people\u2019s worth of work back \u2014 without hiring anyone';
+    const rounded = Math.round(people);
+    return 'roughly ' + rounded + ' full-time people\u2019s worth of work back \u2014 without hiring anyone';
   }
 
   function calculate(): void {
@@ -411,14 +412,14 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
     // Update explainer bar
     const explainerBar = document.getElementById('explainerBar');
     if (explainerBar) {
-      explainerBar.innerHTML = 'That\u2019s roughly <strong class="font-semibold text-kd-navy">' +
-        peoplePhrase(totalDays) + '</strong> \u2014 just from automating 3 workflow steps.';
+      explainerBar.innerHTML = 'That\u2019s like getting <strong class="font-semibold text-kd-navy">' +
+        peoplePhrase(totalDays) + '</strong>.';
     }
 
     // Update insights
-    document.getElementById('insightDays')!.textContent = '~' + fmt(totalDays) + ' days';
     document.getElementById('insightHours')!.textContent = fmt(totalSaved) + ' hrs';
-    document.getElementById('insightPeople')!.textContent = peoplePhrase(totalDays);
+    document.getElementById('insightDays')!.textContent = fmt(perClientDays) + ' days';
+    document.getElementById('insightTotalDays')!.textContent = fmt(totalDays) + ' working days';
   }
 
   emailsSlider.addEventListener('input', calculate);

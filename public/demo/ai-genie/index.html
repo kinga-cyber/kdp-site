@@ -15,18 +15,18 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg-dark: #0c0f1a;
-    --bg-card: #141828;
-    --bg-card-hover: #1a2035;
-    --accent: #4f7df9;
-    --accent-glow: rgba(79, 125, 249, 0.15);
-    --accent-secondary: #38c97b;
-    --text-primary: #e8eaf0;
-    --text-secondary: #8b90a5;
-    --text-muted: #5c6180;
-    --border: rgba(255,255,255,0.06);
-    --border-accent: rgba(79, 125, 249, 0.3);
-    --gradient-hero: linear-gradient(165deg, #0c0f1a 0%, #131832 40%, #0f1428 100%);
+    --bg-dark: #2a2f45;
+    --bg-card: #333952;
+    --bg-card-hover: #3b4260;
+    --accent: #7b9cf5;
+    --accent-glow: rgba(123, 156, 245, 0.12);
+    --accent-secondary: #6cc99a;
+    --text-primary: #f0f1f5;
+    --text-secondary: #b0b5cc;
+    --text-muted: #838aa8;
+    --border: rgba(255,255,255,0.10);
+    --border-accent: rgba(123, 156, 245, 0.3);
+    --gradient-hero: linear-gradient(165deg, #2a2f45 0%, #313858 40%, #2a2f45 100%);
     --font-body: 'DM Sans', -apple-system, sans-serif;
     --font-display: 'DM Serif Display', Georgia, serif;
   }
@@ -52,7 +52,7 @@
     z-index: 100;
     padding: 1.2rem 2rem;
     backdrop-filter: blur(20px);
-    background: rgba(12, 15, 26, 0.85);
+    background: rgba(42, 47, 69, 0.88);
     border-bottom: 1px solid var(--border);
     display: flex;
     justify-content: space-between;
@@ -60,7 +60,7 @@
     transition: box-shadow 0.3s ease, background 0.3s ease;
   }
   nav.scrolled {
-    background: rgba(12, 15, 26, 0.95);
+    background: rgba(42, 47, 69, 0.95);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
     border-bottom-color: rgba(255,255,255,0.08);
   }
@@ -128,11 +128,11 @@
   .btn-primary {
     background: var(--accent);
     color: #fff;
-    box-shadow: 0 0 30px rgba(79, 125, 249, 0.25);
+    box-shadow: 0 0 30px rgba(107, 142, 240, 0.25);
   }
   .btn-primary:hover {
-    background: #6590ff;
-    box-shadow: 0 0 40px rgba(79, 125, 249, 0.4);
+    background: #809af5;
+    box-shadow: 0 0 40px rgba(107, 142, 240, 0.35);
     transform: translateY(-1px);
   }
   .btn-secondary {
@@ -152,7 +152,7 @@
   /* ===== HERO ===== */
   .hero {
     background: var(--gradient-hero);
-    padding: 10rem 2rem 6rem;
+    padding: 10rem 2rem 2rem;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -236,14 +236,14 @@
   .product-preview {
     max-width: 900px;
     margin: 0 auto;
-    padding: 0 2rem 4rem;
+    padding: 2rem 2rem 4rem;
   }
   .preview-window {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5), 0 0 60px rgba(79, 125, 249, 0.08);
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.3), 0 0 60px rgba(107, 142, 240, 0.08);
   }
   .preview-titlebar {
     display: flex;
@@ -390,7 +390,7 @@
     margin: 0 auto;
   }
   .section-label {
-    font-size: 0.75rem;
+    font-size: 0.95rem;
     text-transform: uppercase;
     letter-spacing: 0.12em;
     color: var(--accent);
@@ -604,7 +604,7 @@
     text-align: center;
   }
   .social-proof-label {
-    font-size: 0.7rem;
+    font-size: 0.95rem;
     text-transform: uppercase;
     letter-spacing: 0.12em;
     color: var(--text-muted);
@@ -998,7 +998,7 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-badge">&#9889; Now Live — Production-Ready Klaviyo Automation</div>
-  <h1>Stop prototyping.<br>Start running <em>real</em> Klaviyo AI.</h1>
+  <h1>Stop prototyping.<br>Start running <em>real</em> Klaviyo&nbsp;AI.</h1>
   <p class="hero-sub">Your team connected Claude to Klaviyo MCP. Got excited. Then realized: raw data isn't intelligence, one-off chats aren't automation, and prototypes don't run themselves. AI Genie closes that gap.</p>
   <div class="hero-ctas">
     <a href="https://app.obviyo.ai/" class="btn btn-primary">Start Free — 500 eTokens</a>

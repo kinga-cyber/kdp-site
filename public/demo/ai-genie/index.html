@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="AI Genie — Production-Grade Klaviyo Automation for Agencies">
+<meta property="og:description" content="Stop prototyping. Start running real Klaviyo AI. 10 pre-built agents, uplift scoring, and scheduled automation — no code required.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://app.obviyo.ai/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Genie — Production-Grade Klaviyo Automation for Agencies">
+<meta name="twitter:description" content="Stop prototyping. Start running real Klaviyo AI. 10 pre-built agents, uplift scoring, and scheduled automation — no code required.">
+<title>AI Genie — Production-Grade Klaviyo Automation for Agencies</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-dark: #0c0f1a;
+    --bg-card: #141828;
+    --bg-card-hover: #1a2035;
+    --accent: #4f7df9;
+    --accent-glow: rgba(79, 125, 249, 0.15);
+    --accent-secondary: #38c97b;
+    --text-primary: #e8eaf0;
+    --text-secondary: #8b90a5;
+    --text-muted: #5c6180;
+    --border: rgba(255,255,255,0.06);
+    --border-accent: rgba(79, 125, 249, 0.3);
+    --gradient-hero: linear-gradient(165deg, #0c0f1a 0%, #131832 40%, #0f1428 100%);
+    --font-body: 'DM Sans', -apple-system, sans-serif;
+    --font-display: 'DM Serif Display', Georgia, serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    line-height: 1.65;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 1.2rem 2rem;
+    backdrop-filter: blur(20px);
+    background: rgba(12, 15, 26, 0.85);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: box-shadow 0.3s ease, background 0.3s ease;
+  }
+  nav.scrolled {
+    background: rgba(12, 15, 26, 0.95);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+    border-bottom-color: rgba(255,255,255,0.08);
+  }
+  .nav-logo {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+  .nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text-primary); }
+
+  /* ===== MOBILE MENU ===== */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 110;
+    background: none;
+    border: none;
+  }
+  .hamburger span {
+    width: 22px;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+
+  /* ===== BUTTONS ===== */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.8rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    border: none;
+    font-family: var(--font-body);
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 0 30px rgba(79, 125, 249, 0.25);
+  }
+  .btn-primary:hover {
+    background: #6590ff;
+    box-shadow: 0 0 40px rgba(79, 125, 249, 0.4);
+    transform: translateY(-1px);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+  }
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    background: var(--accent-glow);
+  }
+  .btn-small {
+    padding: 0.55rem 1.2rem;
+    font-size: 0.85rem;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: var(--gradient-hero);
+    padding: 10rem 2rem 6rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(79,125,249,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--accent-glow);
+    border: 1px solid var(--border-accent);
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 2rem;
+    letter-spacing: 0.02em;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.15;
+    max-width: 800px;
+    margin: 0 auto 1.5rem;
+    color: var(--text-primary);
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    max-width: 580px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 3.5rem;
+  }
+  .hero-proof {
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+  .hero-proof-item {
+    text-align: center;
+  }
+  .hero-proof-item .number {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--accent);
+    display: block;
+  }
+  .hero-proof-item .label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+  }
+
+  /* ===== PRODUCT PREVIEW ===== */
+  .product-preview {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+  }
+  .preview-window {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5), 0 0 60px rgba(79, 125, 249, 0.08);
+  }
+  .preview-titlebar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.25rem;
+    background: rgba(255,255,255,0.02);
+    border-bottom: 1px solid var(--border);
+  }
+  .preview-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .preview-dot.red { background: #ff5f56; }
+  .preview-dot.yellow { background: #ffbd2e; }
+  .preview-dot.green { background: #27c93f; }
+  .preview-titlebar-text {
+    flex: 1;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .preview-body {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    min-height: 380px;
+  }
+  .preview-sidebar {
+    border-right: 1px solid var(--border);
+    padding: 1.25rem;
+  }
+  .preview-sidebar-title {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+  .preview-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.55rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.2rem;
+    cursor: default;
+  }
+  .preview-nav-item.active {
+    background: var(--accent-glow);
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .preview-nav-icon {
+    font-size: 0.9rem;
+    width: 20px;
+    text-align: center;
+  }
+  .preview-main {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .preview-msg {
+    max-width: 85%;
+    padding: 0.85rem 1.1rem;
+    border-radius: 10px;
+    font-size: 0.82rem;
+    line-height: 1.55;
+  }
+  .preview-msg.user {
+    align-self: flex-end;
+    background: var(--accent);
+    color: #fff;
+    border-bottom-right-radius: 4px;
+  }
+  .preview-msg.ai {
+    align-self: flex-start;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    border-bottom-left-radius: 4px;
+  }
+  .preview-msg.ai strong { color: var(--text-primary); font-weight: 600; }
+  .preview-msg.ai .score { color: var(--accent-secondary); font-weight: 700; }
+  .preview-msg.ai .warn { color: #f9734f; font-weight: 600; }
+  .preview-input-bar {
+    margin-top: auto;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.6rem 0.85rem;
+  }
+  .preview-input-bar span {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    flex: 1;
+  }
+  .preview-send-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: var(--accent);
+    border: none;
+    color: #fff;
+    font-size: 0.75rem;
+    cursor: default;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .preview-typing {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    padding: 0.5rem 0;
+  }
+  .preview-typing-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--text-muted);
+    animation: typingBounce 1.4s ease infinite;
+  }
+  .preview-typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .preview-typing-dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typingBounce {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-4px); opacity: 1; }
+  }
+
+  /* ===== SECTIONS ===== */
+  section {
+    padding: 6rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+  .section-heading {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .section-desc {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    max-width: 600px;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+
+  /* ===== SCROLL ANIMATIONS ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-stagger > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .reveal-stagger.visible > * {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-stagger.visible > *:nth-child(1) { transition-delay: 0.05s; }
+  .reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.1s; }
+  .reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.15s; }
+  .reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.2s; }
+  .reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.25s; }
+  .reveal-stagger.visible > *:nth-child(6) { transition-delay: 0.3s; }
+  .reveal-stagger.visible > *:nth-child(7) { transition-delay: 0.35s; }
+  .reveal-stagger.visible > *:nth-child(8) { transition-delay: 0.4s; }
+  .reveal-stagger.visible > *:nth-child(9) { transition-delay: 0.45s; }
+  .reveal-stagger.visible > *:nth-child(10) { transition-delay: 0.5s; }
+
+  /* ===== PROBLEM ===== */
+  .problem-section {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 5rem;
+  }
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .problem-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: border-color 0.3s;
+  }
+  .problem-card:hover {
+    border-color: rgba(255,255,255,0.12);
+  }
+  .problem-card .step-num {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+  .problem-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+  }
+  .problem-card p {
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    line-height: 1.65;
+  }
+  .problem-card.highlight {
+    border-color: var(--border-accent);
+    background: linear-gradient(135deg, var(--bg-card) 0%, rgba(79,125,249,0.05) 100%);
+  }
+
+  /* ===== HOW IT WORKS ===== */
+  .how-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .how-left .step-list {
+    list-style: none;
+    counter-reset: steps;
+  }
+  .how-left .step-list li {
+    counter-increment: steps;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+  .how-left .step-list li::before {
+    content: counter(steps);
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--accent-glow);
+    border: 1px solid var(--border-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .step-content h4 {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.35rem;
+  }
+  .step-content p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .how-right {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 2.5rem;
+    position: sticky;
+    top: 6rem;
+  }
+  .how-right .chat-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .chat-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent-secondary);
+    animation: pulse-dot 2s ease infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .chat-header-text {
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .chat-header-sub {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+  .prompt-examples {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+  .prompt-example {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    cursor: default;
+    transition: all 0.2s;
+  }
+  .prompt-example:hover {
+    border-color: var(--border-accent);
+    color: var(--text-primary);
+    background: var(--accent-glow);
+  }
+  .prompt-example::before {
+    content: '\2192 ';
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* ===== SOCIAL PROOF ===== */
+  .social-proof-section {
+    border-bottom: 1px solid var(--border);
+    padding: 5rem 2rem;
+  }
+  .social-proof-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .social-proof-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 2.5rem;
+  }
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    text-align: left;
+    margin-bottom: 3rem;
+  }
+  .testimonial-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+  }
+  .testimonial-card blockquote {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+    font-style: italic;
+  }
+  .testimonial-card blockquote strong {
+    color: var(--text-primary);
+    font-style: normal;
+  }
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .testimonial-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--accent-glow);
+    border: 1px solid var(--border-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .testimonial-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .testimonial-role {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+  .logo-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    opacity: 0.4;
+  }
+  .logo-strip-item {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.03em;
+  }
+
+  /* ===== AGENTS ===== */
+  .agents-section {
+    background: linear-gradient(180deg, transparent 0%, rgba(79,125,249,0.03) 50%, transparent 100%);
+    padding: 6rem 2rem;
+  }
+  .agents-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .agents-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1rem;
+  }
+  .agent-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    transition: all 0.25s;
+  }
+  .agent-card:hover {
+    border-color: rgba(255,255,255,0.1);
+    background: var(--bg-card-hover);
+    transform: translateY(-2px);
+  }
+  .agent-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+  }
+  .agent-icon.revenue { background: rgba(79,125,249,0.12); }
+  .agent-icon.risk { background: rgba(249,115,79,0.12); }
+  .agent-icon.savings { background: rgba(56,201,123,0.12); }
+  .agent-card h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+  }
+  .agent-card p {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+  .agent-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+  .agent-tag {
+    font-size: 0.68rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.04);
+    color: var(--text-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .agent-tag.revenue { color: var(--accent); background: var(--accent-glow); }
+  .agent-tag.risk { color: #f9734f; background: rgba(249,115,79,0.1); }
+  .agent-tag.savings { color: var(--accent-secondary); background: rgba(56,201,123,0.1); }
+
+  /* ===== DIFFERENTIATOR ===== */
+  .diff-section {
+    border-top: 1px solid var(--border);
+    padding-top: 6rem;
+  }
+  .diff-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .diff-col-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  .diff-col-label.mcp { color: var(--text-muted); }
+  .diff-col-label.genie { color: var(--accent); }
+  .diff-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.75rem;
+  }
+  .diff-card.genie {
+    border-color: var(--border-accent);
+    background: linear-gradient(135deg, var(--bg-card) 0%, rgba(79,125,249,0.04) 100%);
+  }
+  .diff-row {
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+  }
+  .diff-row:last-child { border-bottom: none; }
+  .diff-row .feature { color: var(--text-secondary); }
+  .diff-row .status-no { color: var(--text-muted); font-size: 0.8rem; }
+  .diff-row .status-yes { color: var(--accent-secondary); font-weight: 600; font-size: 0.8rem; }
+
+  /* ===== PRICING ===== */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .price-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2.25rem;
+    text-align: center;
+    transition: all 0.25s;
+  }
+  .price-card:hover {
+    border-color: rgba(255,255,255,0.1);
+  }
+  .price-card.featured {
+    border-color: var(--accent);
+    position: relative;
+    box-shadow: 0 0 50px rgba(79,125,249,0.1);
+  }
+  .price-card.featured::before {
+    content: 'Most Popular';
+    position: absolute;
+    top: -11px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .price-name {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .price-amount {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    margin-bottom: 0.25rem;
+  }
+  .price-amount span { font-size: 1rem; color: var(--text-muted); font-family: var(--font-body); }
+  .price-tokens {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .price-features {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 1.75rem;
+  }
+  .price-features li {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    padding: 0.4rem 0;
+    padding-left: 1.25rem;
+    position: relative;
+  }
+  .price-features li::before {
+    content: '\2713';
+    position: absolute;
+    left: 0;
+    color: var(--accent-secondary);
+    font-weight: 700;
+    font-size: 0.8rem;
+  }
+
+  /* ===== AGENCY ===== */
+  .agency-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .agency-feature {
+    padding: 1.5rem;
+    border-left: 2px solid var(--border);
+    transition: border-color 0.3s;
+  }
+  .agency-feature:hover {
+    border-color: var(--accent);
+  }
+  .agency-feature h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .agency-feature p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* ===== CTA ===== */
+  .cta-section {
+    text-align: center;
+    padding: 6rem 2rem;
+    margin: 0 auto;
+    max-width: 700px;
+  }
+  .cta-section h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3vw, 2.2rem);
+    margin-bottom: 1rem;
+  }
+  .cta-section p {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .how-grid { grid-template-columns: 1fr; }
+    .diff-grid { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .testimonial-grid { grid-template-columns: 1fr; }
+    .hero-proof { gap: 2rem; }
+    nav { padding: 1rem 1.5rem; }
+    section { padding: 4rem 1.5rem; }
+
+    .hamburger { display: flex; }
+    .nav-links {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 280px;
+      height: 100vh;
+      background: var(--bg-card);
+      flex-direction: column;
+      padding: 5rem 2rem 2rem;
+      gap: 1.5rem;
+      transition: right 0.3s ease;
+      border-left: 1px solid var(--border);
+      box-shadow: -10px 0 40px rgba(0,0,0,0.5);
+    }
+    .nav-links.open {
+      right: 0;
+    }
+    .nav-links a {
+      display: block !important;
+      font-size: 1rem;
+    }
+    .nav-links .btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .preview-body { grid-template-columns: 1fr; }
+    .preview-sidebar { display: none; }
+    .product-preview { padding: 0 1rem 3rem; }
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-badge, .hero h1, .hero-sub, .hero-ctas, .hero-proof {
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero h1 { animation-delay: 0.1s; }
+  .hero-sub { animation-delay: 0.2s; }
+  .hero-ctas { animation-delay: 0.3s; }
+  .hero-proof { animation-delay: 0.4s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Email <span>Pulse</span></div>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links">
+    <a href="#how">How It Works</a>
+    <a href="#agents">Agents</a>
+    <a href="#pricing">Pricing</a>
+    <a href="https://app.obviyo.ai/" class="btn btn-primary btn-small">Start Free</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">&#9889; Now Live — Production-Ready Klaviyo Automation</div>
+  <h1>Stop prototyping.<br>Start running <em>real</em> Klaviyo AI.</h1>
+  <p class="hero-sub">Your team connected Claude to Klaviyo MCP. Got excited. Then realized: raw data isn't intelligence, one-off chats aren't automation, and prototypes don't run themselves. AI Genie closes that gap.</p>
+  <div class="hero-ctas">
+    <a href="https://app.obviyo.ai/" class="btn btn-primary">Start Free — 500 eTokens</a>
+    <a href="https://calendly.com/meet-obviyo/email-pulse-demo" class="btn btn-secondary">Book a Demo</a>
+  </div>
+  <div class="hero-proof">
+    <div class="hero-proof-item">
+      <span class="number">10</span>
+      <span class="label">Pre-built Agents</span>
+    </div>
+    <div class="hero-proof-item">
+      <span class="number">&lt;3 min</span>
+      <span class="label">Setup Time</span>
+    </div>
+    <div class="hero-proof-item">
+      <span class="number">0</span>
+      <span class="label">Code Required</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT PREVIEW -->
+<div class="product-preview reveal">
+  <div class="preview-window">
+    <div class="preview-titlebar">
+      <div class="preview-dot red"></div>
+      <div class="preview-dot yellow"></div>
+      <div class="preview-dot green"></div>
+      <div class="preview-titlebar-text">AI Genie — Klaviyo AI Companion</div>
+    </div>
+    <div class="preview-body">
+      <div class="preview-sidebar">
+        <div class="preview-sidebar-title">Workspace</div>
+        <div class="preview-nav-item active">
+          <span class="preview-nav-icon">&#128172;</span> AI Companion
+        </div>
+        <div class="preview-nav-item">
+          <span class="preview-nav-icon">&#9881;&#65039;</span> Agents
+        </div>
+        <div class="preview-nav-item">
+          <span class="preview-nav-icon">&#128202;</span> Reports
+        </div>
+        <div class="preview-nav-item">
+          <span class="preview-nav-icon">&#128268;</span> Integrations
+        </div>
+        <div class="preview-sidebar-title" style="margin-top:1.25rem;">Accounts</div>
+        <div class="preview-nav-item active">
+          <span class="preview-nav-icon">&#9679;</span> Acme Store
+        </div>
+        <div class="preview-nav-item">
+          <span class="preview-nav-icon">&#9675;</span> Bolt Fashion
+        </div>
+        <div class="preview-nav-item">
+          <span class="preview-nav-icon">&#9675;</span> Peak Outdoor
+        </div>
+      </div>
+      <div class="preview-main">
+        <div class="preview-msg user">How are my campaigns performing this month?</div>
+        <div class="preview-msg ai">
+          <strong>Campaign Performance Summary — March 2026</strong><br><br>
+          Analyzed <strong>12 campaigns</strong> sent this month across 3 lifecycle stages.<br><br>
+          Overall Email Pulse Score: <span class="score">82 / 100</span> (up from 74 last month)<br><br>
+          Top performer: <strong>"Spring VIP Early Access"</strong> — 34.2% open rate, 4.8% click rate, $12,400 attributed revenue. Uplift classification: <span class="score">Persuadable</span>.<br><br>
+          <span class="warn">&#9888; Attention needed:</span> 2 campaigns scored below 50. "Weekly Digest #11" has a 12% open rate — consider subject line testing or segment refinement.
+        </div>
+        <div class="preview-typing">
+          <div class="preview-typing-dot"></div>
+          <div class="preview-typing-dot"></div>
+          <div class="preview-typing-dot"></div>
+        </div>
+        <div class="preview-input-bar">
+          <span>Ask about your Klaviyo data...</span>
+          <button class="preview-send-btn" aria-label="Send">&#9650;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SOCIAL PROOF -->
+<div class="social-proof-section reveal">
+  <div class="social-proof-inner">
+    <div class="social-proof-label">Trusted by Klaviyo-focused agencies</div>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <blockquote>"We were spending <strong>6+ hours per client</strong> on manual reporting. AI Genie cut that to a scheduled agent that runs itself. Our team now focuses on strategy, not data pulling."</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">JR</div>
+          <div>
+            <div class="testimonial-name">Jordan R.</div>
+            <div class="testimonial-role">Head of Email, Growth Agency</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <blockquote>"The flow audit agent found <strong>$38K in revenue leakage</strong> in our first client account — a broken welcome series we hadn't noticed in months. Paid for itself immediately."</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">SP</div>
+          <div>
+            <div class="testimonial-name">Sarah P.</div>
+            <div class="testimonial-role">Founder, E-commerce Email Studio</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="logo-strip">
+      <span class="logo-strip-item">ACME Digital</span>
+      <span class="logo-strip-item">RetentionLab</span>
+      <span class="logo-strip-item">FlowState</span>
+      <span class="logo-strip-item">Lifecycle Co.</span>
+      <span class="logo-strip-item">ScaleEmail</span>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="problem-section">
+  <p class="section-label reveal">The Problem</p>
+  <h2 class="section-heading reveal">Every agency hits the same wall with Klaviyo + AI.</h2>
+  <p class="section-desc reveal">MCP gave you access. It didn't give you a production system. Here's where things stall:</p>
+  <div class="problem-grid reveal-stagger">
+    <div class="problem-card">
+      <div class="step-num">Stage 1 &middot; Excitement</div>
+      <h3>Claude can read my Klaviyo data!</h3>
+      <p>You connect MCP, ask a few questions, get numbers back. It works. Everyone on the team is impressed. You start imagining what's possible.</p>
+    </div>
+    <div class="problem-card">
+      <div class="step-num">Stage 2 &middot; Frustration</div>
+      <h3>Wait — why do the answers keep changing?</h3>
+      <p>Same question, different sessions, different interpretations. The AI doesn't know what "good" means in your client's account. Open rates go up — is that good? Depends on lifecycle stage. The AI doesn't know that.</p>
+    </div>
+    <div class="problem-card highlight">
+      <div class="step-num">Stage 3 &middot; The Wall</div>
+      <h3>We can't ship this to clients.</h3>
+      <p>No scheduling. No security between accounts. No way to run it continuously. No structured output you'd trust in a client report. Your prototype stays a prototype — and your billable hours keep going to manual work.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <p class="section-label reveal">How AI Genie Works</p>
+  <h2 class="section-heading reveal">The AI operating system between<br>Claude and Klaviyo.</h2>
+  <p class="section-desc reveal">AI Genie adds the missing layers — intelligence, governance, and runtime — that turn a chat prototype into a production automation system.</p>
+  <div class="how-grid reveal">
+    <div class="how-left">
+      <ul class="step-list">
+        <li>
+          <div class="step-content">
+            <h4>Activate your account</h4>
+            <p>Connect Klaviyo and Google Analytics. AI assistant (Claude Sonnet 4.6) is included — no API key needed. You're live in under 3 minutes.</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-content">
+            <h4>Explore with the Klaviyo AI Companion</h4>
+            <p>Ask questions in plain language. Unlike raw MCP, your data is pre-processed through uplift modeling and lifecycle scoring — so AI responses are consistent, not hallucinated guesses.</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-content">
+            <h4>Deploy agents from templates</h4>
+            <p>Choose from 10 pre-built agent templates — flow audits, campaign analysis, deliverability monitoring, send-time optimization, and more. Customize with simple instructions. No code.</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-content">
+            <h4>Run continuously, route results anywhere</h4>
+            <p>Agents run on schedules you set. Reports and tasks get delivered to Email, Slack, Asana, Microsoft Teams, or via webhook. Your team acts on insights, not raw data.</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-content">
+            <h4>Create flows directly via API</h4>
+            <p>AI Genie can create Klaviyo flows in draft status — triggers, steps, and emails — using the Klaviyo API. A capability even Klaviyo's own MCP doesn't offer yet.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="how-right">
+      <div class="chat-header">
+        <div class="chat-dot"></div>
+        <div>
+          <div class="chat-header-text">Klaviyo AI Companion</div>
+          <div class="chat-header-sub">Claude Sonnet 4.6 &middot; 500 eTokens</div>
+        </div>
+      </div>
+      <div class="prompt-examples">
+        <div class="prompt-example">How are my campaigns performing this month?</div>
+        <div class="prompt-example">Which flows need improvement?</div>
+        <div class="prompt-example">What's my overall email health score?</div>
+        <div class="prompt-example">Which landing pages are underperforming?</div>
+        <div class="prompt-example">Show me my top products by revenue</div>
+        <div class="prompt-example">Create a weekly campaign digest agent</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENTS -->
+<section class="agents-section" id="agents">
+  <div class="agents-inner">
+    <p class="section-label reveal">Agent Template Library</p>
+    <h2 class="section-heading reveal">10 production-ready agents. Pick one. Launch it.</h2>
+    <p class="section-desc reveal">Each agent is a continuous automation workflow — not a one-time chat. They analyze, score, and deliver actionable insights on a schedule.</p>
+    <div class="agents-grid reveal-stagger">
+      <div class="agent-card">
+        <div class="agent-icon revenue">&#128202;</div>
+        <div>
+          <h4>Campaign Performance Digest</h4>
+          <p>Evaluates all recent campaigns with Email Pulse uplift scores. Highlights top and bottom performers with reasons.</p>
+          <div class="agent-tags"><span class="agent-tag revenue">Revenue</span><span class="agent-tag">Campaigns</span></div>
+        </div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-icon risk">&#128295;</div>
+        <div>
+          <h4>Flow Health Monitor</h4>
+          <p>Audits all automated flows across 8 evaluation layers — events, setup quality, performance, and uplift scoring.</p>
+          <div class="agent-tags"><span class="agent-tag risk">Risk</span><span class="agent-tag">Flows</span></div>
+        </div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-icon risk">&#128236;</div>
+        <div>
+          <h4>Deliverability & Reputation Watch</h4>
+          <p>Monitors Email Pulse score trends and campaign deliverability metrics. Alerts when scores drop before they impact revenue.</p>
+          <div class="agent-tags"><span class="agent-tag risk">Risk</span><span class="agent-tag">Deliverability</span></div>
+        </div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-icon revenue">&#128142;</div>
+        <div>
+          <h4>Revenue Uplift Opportunity Finder</h4>
+          <p>Groups campaigns by uplift classification to find "Persuadable" segments with high unrealized revenue potential.</p>
+          <div class="agent-tags"><span class="agent-tag revenue">Revenue</span><span class="agent-tag">Campaigns</span></div>
+        </div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-icon revenue">&#127760;</div>
+        <div>
+          <h4>Landing Page Conversion Monitor</h4>
+          <p>Evaluates landing page performance across all lifecycle stages. Identifies high-traffic pages with low conversion.</p>
+          <div class="agent-tags"><span class="agent-tag revenue">Revenue</span><span class="agent-tag">Landing Pages</span></div>
+        </div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-icon revenue">&#128230;</div>
+        <div>
+          <h4>Product Performance Tracker</h4>
+          <p>Evaluates product performance across lifecycle stages. Surfaces underperformers and hidden winners by audience segment.</p>
+          <div class="agent-tags"><span class="agent-tag revenue">Revenue</span><span class="agent-tag">Products</span></div>
+        </div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-icon revenue">&#127978;</div>
+        <div>
+          <h4>InMail Shop Expansion Scout</h4>
+          <p>Identifies high-revenue campaigns and flows that don't have InMail Shop blocks yet. Quantifies the expansion opportunity.</p>
+          <div class="agent-tags"><span class="agent-tag revenue">Revenue</span><span class="agent-tag">InMail Shop</span></div>
+        </div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-icon revenue">&#128269;</div>
+        <div>
+          <h4>Flow Revenue Leakage Detector</h4>
+          <p>Identifies flows with high open rates but low click-through or placed order rates — signs of revenue leaking out of your funnel.</p>
+          <div class="agent-tags"><span class="agent-tag revenue">Revenue</span><span class="agent-tag">Flows</span></div>
+        </div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-icon savings">&#9200;</div>
+        <div>
+          <h4>Send Time & Engagement Optimizer</h4>
+          <p>Analyzes 90 days of campaign history to find optimal send windows and subject line patterns that drive engagement.</p>
+          <div class="agent-tags"><span class="agent-tag savings">Cost Savings</span><span class="agent-tag">Campaigns</span></div>
+        </div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-icon savings">&#128101;</div>
+        <div>
+          <h4>Audience Segment Health Check</h4>
+          <p>Evaluates segment-level engagement health. Flags segments drifting toward inactivity before deliverability takes a hit.</p>
+          <div class="agent-tags"><span class="agent-tag savings">Cost Savings</span><span class="agent-tag">Audiences</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFFERENTIATOR -->
+<section class="diff-section">
+  <p class="section-label reveal">Why Not Just Use MCP?</p>
+  <h2 class="section-heading reveal">Connecting Claude to Klaviyo is step one.<br>AI Genie is everything after.</h2>
+  <div class="diff-grid reveal">
+    <div class="diff-card">
+      <div class="diff-col-label mcp">Raw Klaviyo MCP</div>
+      <div class="diff-row"><span class="feature">Klaviyo data access</span><span class="status-yes">&#10003;</span></div>
+      <div class="diff-row"><span class="feature">Structured uplift scoring</span><span class="status-no">—</span></div>
+      <div class="diff-row"><span class="feature">Lifecycle interpretation</span><span class="status-no">—</span></div>
+      <div class="diff-row"><span class="feature">Consistent AI outputs</span><span class="status-no">—</span></div>
+      <div class="diff-row"><span class="feature">Scheduled automation</span><span class="status-no">—</span></div>
+      <div class="diff-row"><span class="feature">Multi-account security</span><span class="status-no">—</span></div>
+      <div class="diff-row"><span class="feature">Flow creation via API</span><span class="status-no">—</span></div>
+      <div class="diff-row"><span class="feature">Google Analytics integration</span><span class="status-no">—</span></div>
+      <div class="diff-row"><span class="feature">Slack / Asana / Teams delivery</span><span class="status-no">—</span></div>
+    </div>
+    <div class="diff-card genie">
+      <div class="diff-col-label genie">AI Genie</div>
+      <div class="diff-row"><span class="feature">Klaviyo data access</span><span class="status-yes">&#10003;</span></div>
+      <div class="diff-row"><span class="feature">Structured uplift scoring</span><span class="status-yes">&#10003; Built-in</span></div>
+      <div class="diff-row"><span class="feature">Lifecycle interpretation</span><span class="status-yes">&#10003; Built-in</span></div>
+      <div class="diff-row"><span class="feature">Consistent AI outputs</span><span class="status-yes">&#10003; Domain skills</span></div>
+      <div class="diff-row"><span class="feature">Scheduled automation</span><span class="status-yes">&#10003; Continuous</span></div>
+      <div class="diff-row"><span class="feature">Multi-account security</span><span class="status-yes">&#10003; Per-account</span></div>
+      <div class="diff-row"><span class="feature">Flow creation via API</span><span class="status-yes">&#10003; Draft mode</span></div>
+      <div class="diff-row"><span class="feature">Google Analytics integration</span><span class="status-yes">&#10003; Store behavior</span></div>
+      <div class="diff-row"><span class="feature">Slack / Asana / Teams delivery</span><span class="status-yes">&#10003; + Webhook</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENCY -->
+<section>
+  <p class="section-label reveal">Built for Agencies</p>
+  <h2 class="section-heading reveal">Manage every client's Klaviyo AI<br>from one platform.</h2>
+  <p class="section-desc reveal">You don't have dev time to build and maintain custom AI infrastructure per client. AI Genie gives you a managed system that scales across your entire book.</p>
+  <div class="agency-features reveal-stagger">
+    <div class="agency-feature">
+      <h4>Multi-Account Management</h4>
+      <p>Switch between client accounts with isolated data, permissions, and agent configurations. No cross-contamination.</p>
+    </div>
+    <div class="agency-feature">
+      <h4>Standardized Intelligence</h4>
+      <p>Every client gets the same uplift modeling, lifecycle scoring, and domain expertise. Consistent quality at scale.</p>
+    </div>
+    <div class="agency-feature">
+      <h4>White-Glove Onboarding</h4>
+      <p>Our analysts set up Email Pulse for your clients — integration, styling, flows. You approve it. They see the lift.</p>
+    </div>
+    <div class="agency-feature">
+      <h4>Lead With AI Services</h4>
+      <p>Turn AI Genie into a new revenue line. Offer AI-powered audits, continuous monitoring, and automated optimization as premium services.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <p class="section-label reveal">Pricing</p>
+  <h2 class="section-heading reveal">Start free. Scale when it works.</h2>
+  <p class="section-desc reveal">Usage is measured in eTokens — one transparent unit across all services. No hidden costs.</p>
+  <div class="pricing-grid reveal-stagger">
+    <div class="price-card">
+      <div class="price-name">Starter</div>
+      <div class="price-amount">$0</div>
+      <div class="price-tokens">500 eTokens included</div>
+      <ul class="price-features">
+        <li>Full Klaviyo AI Companion access</li>
+        <li>All 10 agent templates</li>
+        <li>InMail Shop personalization</li>
+        <li>No credit card required</li>
+      </ul>
+      <a href="https://app.obviyo.ai/" class="btn btn-secondary" style="width:100%;justify-content:center;">Start Free</a>
+    </div>
+    <div class="price-card featured">
+      <div class="price-name">Monthly</div>
+      <div class="price-amount">$295<span>/mo</span></div>
+      <div class="price-tokens">3,000 eTokens / month</div>
+      <ul class="price-features">
+        <li>Everything in Starter</li>
+        <li>Multi-user access</li>
+        <li>Multi-account security</li>
+        <li>White-glove onboarding available</li>
+        <li>Volume pricing for agencies</li>
+        <li>SLA available</li>
+      </ul>
+      <a href="https://app.obviyo.ai/" class="btn btn-primary" style="width:100%;justify-content:center;">Get Started</a>
+    </div>
+    <div class="price-card">
+      <div class="price-name">Service Pack</div>
+      <div class="price-amount">$99</div>
+      <div class="price-tokens">500 eTokens per pack</div>
+      <ul class="price-features">
+        <li>No subscription required</li>
+        <li>Strict cost control</li>
+        <li>Multi-user access</li>
+        <li>Ideal for seasonal or project use</li>
+      </ul>
+      <a href="https://app.obviyo.ai/" class="btn btn-secondary" style="width:100%;justify-content:center;">Buy Tokens</a>
+    </div>
+  </div>
+  <p style="text-align:center;margin-top:1.5rem;font-size:0.85rem;color:var(--text-muted);">Bring your own Anthropic API key to reduce token costs. Enterprise pricing available.</p>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-section reveal">
+  <h2>Your clients need AI-powered Klaviyo.<br>You don't need to build it.</h2>
+  <p>Activate AI Genie, deploy your first agent in minutes, and start delivering AI-driven results across your client base — without writing a single line of code.</p>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+    <a href="https://app.obviyo.ai/" class="btn btn-primary">Start Free — 500 eTokens</a>
+    <a href="https://calendly.com/meet-obviyo/email-pulse-demo" class="btn btn-secondary">Book a Demo</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 Email Pulse by Obviyo &middot; <a href="https://emailpulse.ai/legal/" style="color:var(--text-muted);text-decoration:underline;">Terms</a> &middot; <a href="https://emailpulse.ai/privacy-policy/" style="color:var(--text-muted);text-decoration:underline;">Privacy</a></p>
+</footer>
+
+<script>
+// Mobile menu toggle
+function toggleMenu() {
+  document.querySelector('.hamburger').classList.toggle('active');
+  document.querySelector('.nav-links').classList.toggle('open');
+}
+// Close menu on link click
+document.querySelectorAll('.nav-links a').forEach(function(a) {
+  a.addEventListener('click', function() {
+    document.querySelector('.hamburger').classList.remove('active');
+    document.querySelector('.nav-links').classList.remove('open');
+  });
+});
+
+// Nav scroll shadow
+var navEl = document.querySelector('nav');
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 50) {
+    navEl.classList.add('scrolled');
+  } else {
+    navEl.classList.remove('scrolled');
+  }
+});
+
+// Scroll reveal animations
+var revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+revealEls.forEach(function(el) { observer.observe(el); });
+</script>
+
+</body>
+</html>

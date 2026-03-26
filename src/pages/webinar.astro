@@ -15,10 +15,10 @@ const faqSchema = {
     },
     {
       "@type": "Question",
-      "name": "Do I need to know how to use AI already?",
+      "name": "Do I need to have attended the first webinar?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Not at all. This webinar is designed for email marketers and e-commerce operators at any level. Whether you've never touched AI or you're already experimenting, you'll walk away with actionable next steps."
+        "text": "No. This webinar stands on its own. The first one covered campaigns. This one covers flows. Different topic, same approach."
       }
     },
     {
@@ -26,7 +26,23 @@ const faqSchema = {
       "name": "What tools do I need?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Just a computer and an internet connection. We'll be demonstrating workflows using Claude AI and Klaviyo, but you don't need accounts to follow along. Links and resources will be shared after the webinar."
+        "text": "Just a computer and an internet connection. I'll be demonstrating workflows using Claude, Klaviyo, Figma, and Asana, but you don't need accounts to follow along. Resources will be shared after the webinar."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will there be a replay?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. If you register but can't attend live, you'll receive the replay link by email."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this too technical for me?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. I show the workflow at the strategic level — what the system does and how the pieces connect. This isn't a coding tutorial."
       }
     }
   ]
@@ -35,10 +51,10 @@ const faqSchema = {
 const eventSchema = {
   "@context": "https://schema.org",
   "@type": "Event",
-  "name": "From Doer to Director: AI-Powered Email Marketing with Claude",
-  "description": "Free live webinar showing how to orchestrate your entire email marketing workflow using Claude AI - shift from doer to director.",
-  "startDate": "2026-02-19T17:00:00+01:00",
-  "endDate": "2026-02-19T18:00:00+01:00",
+  "name": "From Doer to Director Part Two: Building Klaviyo Flows with AI",
+  "description": "Free live webinar showing how to build Klaviyo flows using Claude AI as your strategist — from flow strategy to Asana briefs, Figma prototypes, and live deployment.",
+  "startDate": "2026-04-02T17:00:00+02:00",
+  "endDate": "2026-04-02T18:00:00+02:00",
   "eventStatus": "https://schema.org/EventScheduled",
   "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
   "location": {
@@ -67,8 +83,8 @@ const eventSchema = {
 ---
 
 <Layout
-  title="Free Webinar: AI-Powered Email Marketing with Claude | Kinga Dow"
-  description="Join this free live webinar to learn how to orchestrate your entire email marketing workflow using Claude AI. See how to shift from doer to director."
+  title="Free Webinar: From Doer to Director Part Two — AI-Powered Email Marketing with Claude | Kinga Dow"
+  description="Free live webinar: Watch how Claude builds Klaviyo flow strategy, creates Asana briefs, generates Figma prototypes, and deploys everything into Klaviyo. From strategy to live flow."
 >
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <script type="application/ld+json" set:html={JSON.stringify(eventSchema)} />
@@ -93,17 +109,17 @@ const eventSchema = {
 
         <!-- H1 - Hero -->
         <h1 class="animate-on-scroll fade-in-up delay-100 font-aktiv text-kd-navy text-[24px] md:text-[48px] font-bold leading-[36px] md:leading-[60px] tracking-[1.4px] md:tracking-[2.4px] mb-6">
-          From Doer to Director:<br />AI-Powered Email Marketing<br />with Claude
+          From Doer to Director, Part Two:<br />Building Klaviyo Flows with AI
         </h1>
 
         <!-- Subtitle -->
         <p class="animate-on-scroll fade-in-up delay-200 font-montserrat text-kd-gold text-[18px] md:text-[24px] font-medium leading-[26px] md:leading-[32px] tracking-[1.4px] md:tracking-[1.8px] mb-6">
-          Stop doing everything manually
+          Last time, I showed you campaigns. This time, it's flows.
         </p>
 
         <!-- Body text -->
         <p class="animate-on-scroll fade-in-up delay-300 font-montserrat font-light text-black text-[16px] md:text-[18px] mb-8 max-w-[800px] mx-auto leading-[26px] md:leading-[30px] tracking-[1.6px] md:tracking-[1.8px]">
-          Watch me orchestrate an entire email campaign using Claude AI as my command center. See how I shifted from doing everything myself to directing AI — and how you can make the same transformation.
+          Watch me use Claude as my Klaviyo strategist — building flow strategy, creating Asana tasks with briefs, generating email prototypes in Figma for my designer, and deploying everything into Klaviyo. From strategy to live flow. One system.
         </p>
 
         <!-- CTA Button -->
@@ -121,56 +137,19 @@ const eventSchema = {
   <section id="register" class="py-12 md:py-20 bg-white">
     <div class="max-w-4xl mx-auto px-6">
       <div class="text-center mb-10">
-        <h2 class="animate-on-scroll fade-in-up font-aktiv text-kd-navy text-[21px] md:text-[32px] font-semibold tracking-[1.2px] mb-4">
-          Choose Your Time
-        </h2>
-        <p class="animate-on-scroll fade-in-up delay-100 font-montserrat text-black text-[16px] md:text-[17px] leading-[26px] font-light max-w-xl mx-auto">
-          All times are in CET. Pick the one that works best for you — I'll choose the time that's most convenient for the majority of registrants.
-        </p>
-      </div>
-
-      <!-- Time Option Cards -->
-      <div class="grid md:grid-cols-3 gap-6 mb-10">
-        <!-- PLACEHOLDER: Update dates when confirmed -->
-        <!-- Option 1 -->
-        <div class="animate-on-scroll fade-in-up delay-100 bg-kd-cream/50 rounded-xl p-6 text-center border-2 border-transparent hover:border-kd-gold transition-colors cursor-pointer" data-time="2pm-cet">
+        <!-- Date/Time Display -->
+        <div class="animate-on-scroll fade-in-up bg-kd-cream/50 rounded-xl p-6 md:p-8 max-w-lg mx-auto mb-8">
           <p class="font-aktiv text-kd-navy text-[15px] font-semibold tracking-[0.8px] mb-1">
-            Thursday, Feb 19
+            Wednesday, April 2nd
           </p>
           <p class="font-aktiv text-kd-gold text-[28px] md:text-[32px] font-bold mb-1">
-            2:00 PM
+            5:00 PM CET
           </p>
-          <p class="font-montserrat text-kd-grey text-[13px] tracking-[0.6px]">
-            CET (8:00 AM EST)
+          <p class="font-montserrat text-kd-grey text-[13px] tracking-[0.6px] mb-3">
+            (11:00 AM EST)
           </p>
-        </div>
-
-        <!-- Option 2 (Most Popular) -->
-        <div class="animate-on-scroll fade-in-up delay-200 bg-kd-cream/50 rounded-xl p-6 text-center border-2 border-kd-gold relative cursor-pointer" data-time="5pm-cet">
-          <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-kd-gold text-white text-[11px] font-montserrat font-medium tracking-[1px] uppercase px-3 py-1 rounded-full">
-            Most Popular
-          </span>
-          <p class="font-aktiv text-kd-navy text-[15px] font-semibold tracking-[0.8px] mb-1">
-            Thursday, Feb 19
-          </p>
-          <p class="font-aktiv text-kd-gold text-[28px] md:text-[32px] font-bold mb-1">
-            5:00 PM
-          </p>
-          <p class="font-montserrat text-kd-grey text-[13px] tracking-[0.6px]">
-            CET (11:00 AM EST)
-          </p>
-        </div>
-
-        <!-- Option 3 -->
-        <div class="animate-on-scroll fade-in-up delay-300 bg-kd-cream/50 rounded-xl p-6 text-center border-2 border-transparent hover:border-kd-gold transition-colors cursor-pointer" data-time="7pm-cet">
-          <p class="font-aktiv text-kd-navy text-[15px] font-semibold tracking-[0.8px] mb-1">
-            Friday, Feb 20
-          </p>
-          <p class="font-aktiv text-kd-gold text-[28px] md:text-[32px] font-bold mb-1">
-            7:00 PM
-          </p>
-          <p class="font-montserrat text-kd-grey text-[13px] tracking-[0.6px]">
-            CET (1:00 PM EST)
+          <p class="font-montserrat text-kd-navy text-[14px] font-medium tracking-[0.6px]">
+            Free · Live on Google Meet
           </p>
         </div>
       </div>
@@ -209,13 +188,6 @@ const eventSchema = {
                 class="w-full px-4 py-3 rounded-lg border border-kd-gold/30 bg-white font-montserrat text-[15px] text-black placeholder:text-kd-grey focus:outline-none focus:border-kd-gold transition-colors"
               />
             </div>
-
-            <!-- Selected time (hidden, set by JS) -->
-            <input type="hidden" id="wb-time" value="5pm-cet" />
-
-            <p id="wb-selected-time" class="font-montserrat text-kd-navy text-[14px] font-semibold tracking-[0.6px] text-center">
-              Selected: Thursday, Feb 19 — 5:00 PM CET
-            </p>
 
             <button
               type="submit"
@@ -263,10 +235,10 @@ const eventSchema = {
             </div>
             <div>
               <h3 class="font-aktiv text-kd-navy text-[16px] md:text-[18px] font-semibold tracking-[0.8px] mb-2">
-                Strategy & Planning with AI
+                Claude as Your Klaviyo Strategist
               </h3>
               <p class="font-montserrat text-black text-[15px] leading-[24px] font-light">
-                How I use Claude to develop campaign strategy, define audience segments, and plan content themes — in minutes, not hours.
+                How I use Claude to figure out which flows to build, define the logic, and map out the full strategy — the same way a senior strategist would, but in minutes.
               </p>
             </div>
           </div>
@@ -277,15 +249,15 @@ const eventSchema = {
           <div class="flex items-start gap-4">
             <div class="w-12 h-12 rounded-full bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
               <svg class="w-6 h-6 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
               </svg>
             </div>
             <div>
               <h3 class="font-aktiv text-kd-navy text-[16px] md:text-[18px] font-semibold tracking-[0.8px] mb-2">
-                Email Copywriting Process
+                Flow Visualization
               </h3>
               <p class="font-montserrat text-black text-[15px] leading-[24px] font-light">
-                My exact workflow for generating email copy that sounds human — subject lines, body copy, and CTAs that convert.
+                How Claude builds visual flow charts — splits, triggers, timing, messaging paths — so you can see and approve the architecture before building anything.
               </p>
             </div>
           </div>
@@ -296,15 +268,15 @@ const eventSchema = {
           <div class="flex items-start gap-4">
             <div class="w-12 h-12 rounded-full bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
               <svg class="w-6 h-6 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
               </svg>
             </div>
             <div>
               <h3 class="font-aktiv text-kd-navy text-[16px] md:text-[18px] font-semibold tracking-[0.8px] mb-2">
-                Task Management Setup
+                From Strategy to Asana Briefs
               </h3>
               <p class="font-montserrat text-black text-[15px] leading-[24px] font-light">
-                How I organize everything in my CRM so nothing falls through the cracks — and how AI helps manage the workflow.
+                How Claude turns the flow strategy into structured Asana tasks with briefs, assignments, and deadlines — so your team knows exactly what needs to happen.
               </p>
             </div>
           </div>
@@ -315,15 +287,53 @@ const eventSchema = {
           <div class="flex items-start gap-4">
             <div class="w-12 h-12 rounded-full bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
               <svg class="w-6 h-6 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-aktiv text-kd-navy text-[16px] md:text-[18px] font-semibold tracking-[0.8px] mb-2">
+                AI-Powered Email Prototypes in Figma
+              </h3>
+              <p class="font-montserrat text-black text-[15px] leading-[24px] font-light">
+                How Claude generates email starting points in Figma using the MCP extension — not finished designs, but structured prototypes that give your designer a head start instead of a blank canvas.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="animate-on-scroll fade-in-up delay-100 bg-kd-cream/50 rounded-xl p-6 md:p-8">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-full bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
             <div>
               <h3 class="font-aktiv text-kd-navy text-[16px] md:text-[18px] font-semibold tracking-[0.8px] mb-2">
-                The Director Mindset
+                From Figma to Klaviyo in 3 Minutes
               </h3>
               <p class="font-montserrat text-black text-[15px] leading-[24px] font-light">
-                How to shift from doing everything yourself to being the human in the loop — reviewing, refining, and deploying AI-generated work.
+                How Grotto Slice takes the finalized Figma design and turns it into a fully built Klaviyo template — sliced, compressed, alt-tagged, and ready to use. No HTML.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 6 -->
+        <div class="animate-on-scroll fade-in-up delay-200 bg-kd-cream/50 rounded-xl p-6 md:p-8">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-full bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-aktiv text-kd-navy text-[16px] md:text-[18px] font-semibold tracking-[0.8px] mb-2">
+                The Full Pipeline: Strategy to Live Flow
+              </h3>
+              <p class="font-montserrat text-black text-[15px] leading-[24px] font-light">
+                How all of this connects into one system — from Claude defining the strategy, to Asana tasks, to Figma prototypes, to a live Klaviyo flow. End to end.
               </p>
             </div>
           </div>
@@ -348,7 +358,7 @@ const eventSchema = {
               </svg>
             </div>
             <p class="font-montserrat text-black text-[15px] leading-[24px] font-light">
-              You're tired of doing repetitive marketing tasks and want to work smarter
+              You watched the first webinar and want to see how the system handles flows, not just campaigns
             </p>
           </div>
         </div>
@@ -361,7 +371,7 @@ const eventSchema = {
               </svg>
             </div>
             <p class="font-montserrat text-black text-[15px] leading-[24px] font-light">
-              You've tried AI tools but haven't figured out how to use them for real workflows
+              You're building Klaviyo flows manually and want a faster, more strategic approach
             </p>
           </div>
         </div>
@@ -374,7 +384,7 @@ const eventSchema = {
               </svg>
             </div>
             <p class="font-montserrat text-black text-[15px] leading-[24px] font-light">
-              You want to learn from someone who's actually using AI daily in email marketing
+              You want to see how Claude, Figma, Asana, and Klaviyo work together as one connected pipeline
             </p>
           </div>
         </div>
@@ -387,7 +397,20 @@ const eventSchema = {
               </svg>
             </div>
             <p class="font-montserrat text-black text-[15px] leading-[24px] font-light">
-              You're ready to become the director who orchestrates and reviews, instead of the doer who executes everything
+              You're an agency owner or email marketer who wants to deliver more flows without adding more hours
+            </p>
+          </div>
+        </div>
+
+        <div class="animate-on-scroll fade-in-up delay-100 bg-white rounded-xl p-6 shadow-sm md:col-span-2 md:max-w-[calc(50%-0.75rem)]">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-full bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <p class="font-montserrat text-black text-[15px] leading-[24px] font-light">
+              You've heard about MCP connectors but haven't seen them used in a real production workflow
             </p>
           </div>
         </div>
@@ -420,10 +443,10 @@ const eventSchema = {
             Kinga Dow
           </h2>
           <p class="font-montserrat text-black text-[15px] md:text-[16px] leading-[26px] md:leading-[28px] font-light mb-4">
-            Kinga founded her first web development agency in 2001 and has spent 20+ years in e-commerce. In 2017, she specialized in Klaviyo email marketing and built Kinga Dow Productions into the first AI-native retention marketing agency.
+            Kinga founded her first web development agency in 2001 and has spent 20+ years in e-commerce. In 2017, she specialized in Klaviyo email marketing and built Kinga Dow Marketing into the first AI-native retention marketing agency.
           </p>
           <p class="font-montserrat text-black text-[15px] md:text-[16px] leading-[26px] md:leading-[28px] font-light mb-6">
-            Today, she uses Claude AI daily to build email flows, analyze data, manage projects, and scale her agency. In this webinar, she's sharing the exact workflows she uses with her clients.
+            In the first "From Doer to Director" webinar, she walked through her AI-powered campaign workflow. Since then, the system has evolved — and this time she's showing how it handles the full flow production pipeline, from strategy through deployment.
           </p>
 
           <div class="flex flex-wrap gap-4">
@@ -469,13 +492,13 @@ const eventSchema = {
         <!-- FAQ Item 2 -->
         <details class="animate-on-scroll fade-in-up delay-200 bg-kd-cream/40 rounded-xl p-6 group">
           <summary class="font-aktiv text-kd-navy text-[16px] md:text-[17px] font-semibold tracking-[0.8px] cursor-pointer list-none flex items-center justify-between">
-            Do I need to know how to use AI already?
+            Do I need to have attended the first webinar?
             <svg class="w-5 h-5 text-kd-gold transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </summary>
           <p class="font-montserrat text-black text-[15px] leading-[26px] font-light mt-4">
-            Not at all. This webinar is designed for email marketers and e-commerce operators at any level. Whether you've never touched AI or you're already experimenting, you'll walk away with actionable next steps.
+            No. This webinar stands on its own. The first one covered campaigns. This one covers flows. Different topic, same approach.
           </p>
         </details>
 
@@ -488,7 +511,33 @@ const eventSchema = {
             </svg>
           </summary>
           <p class="font-montserrat text-black text-[15px] leading-[26px] font-light mt-4">
-            Just a computer and an internet connection. We'll be demonstrating workflows using Claude AI and Klaviyo, but you don't need accounts to follow along. Links and resources will be shared after the webinar.
+            Just a computer and an internet connection. I'll be demonstrating workflows using Claude, Klaviyo, Figma, and Asana, but you don't need accounts to follow along. Resources will be shared after the webinar.
+          </p>
+        </details>
+
+        <!-- FAQ Item 4 -->
+        <details class="animate-on-scroll fade-in-up delay-400 bg-kd-cream/40 rounded-xl p-6 group">
+          <summary class="font-aktiv text-kd-navy text-[16px] md:text-[17px] font-semibold tracking-[0.8px] cursor-pointer list-none flex items-center justify-between">
+            Will there be a replay?
+            <svg class="w-5 h-5 text-kd-gold transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <p class="font-montserrat text-black text-[15px] leading-[26px] font-light mt-4">
+            Yes. If you register but can't attend live, you'll receive the replay link by email.
+          </p>
+        </details>
+
+        <!-- FAQ Item 5 -->
+        <details class="animate-on-scroll fade-in-up delay-100 bg-kd-cream/40 rounded-xl p-6 group">
+          <summary class="font-aktiv text-kd-navy text-[16px] md:text-[17px] font-semibold tracking-[0.8px] cursor-pointer list-none flex items-center justify-between">
+            Is this too technical for me?
+            <svg class="w-5 h-5 text-kd-gold transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <p class="font-montserrat text-black text-[15px] leading-[26px] font-light mt-4">
+            No. I show the workflow at the strategic level — what the system does and how the pieces connect. This isn't a coding tutorial.
           </p>
         </details>
       </div>
@@ -499,13 +548,13 @@ const eventSchema = {
   <section class="py-12 md:py-16 px-6" style="background: linear-gradient(180deg, #F6EFE6 0%, #FAFAFA 100%);">
     <div class="max-w-3xl mx-auto text-center">
       <h2 class="animate-on-scroll fade-in-up font-aktiv text-kd-navy text-[21px] md:text-[32px] font-semibold tracking-[1.2px] mb-4">
-        Ready to Work Smarter?
+        Ready to See the Full Pipeline?
       </h2>
       <p class="animate-on-scroll fade-in-up delay-100 font-montserrat text-kd-gold text-[18px] md:text-[24px] font-medium leading-[26px] md:leading-[32px] tracking-[1.4px] md:tracking-[1.8px] mb-6">
-        Your AI-powered email marketing starts here
+        From flow strategy to live Klaviyo deployment — powered by AI.
       </p>
       <p class="animate-on-scroll fade-in-up delay-200 font-montserrat text-black text-[16px] md:text-[17px] leading-[26px] font-light mb-8 max-w-xl mx-auto">
-        Join hundreds of e-commerce marketers learning how to use AI to scale their retention marketing. Free, live, and packed with actionable takeaways.
+        Join e-commerce marketers and agency owners learning how to build flows at scale using Claude as their strategist, Figma for design, and Grotto Slice for deployment. Free, live, real workflows.
       </p>
       <a
         href="#register"
@@ -519,35 +568,6 @@ const eventSchema = {
 
 <script is:inline>
   document.addEventListener('DOMContentLoaded', function() {
-    var timeCards = document.querySelectorAll('[data-time]');
-    var hiddenTime = document.getElementById('wb-time');
-    var selectedTimeText = document.getElementById('wb-selected-time');
-
-    var timeLabels = {
-      '2pm-cet': 'Thursday, Feb 19 — 2:00 PM CET',
-      '5pm-cet': 'Thursday, Feb 19 — 5:00 PM CET',
-      '7pm-cet': 'Friday, Feb 20 — 7:00 PM CET'
-    };
-
-    // Time card selection
-    timeCards.forEach(function(card) {
-      card.addEventListener('click', function() {
-        var time = card.getAttribute('data-time');
-        if (hiddenTime) hiddenTime.value = time;
-        if (selectedTimeText) selectedTimeText.textContent = 'Selected: ' + (timeLabels[time] || time);
-
-        timeCards.forEach(function(c) {
-          if (c === card) {
-            c.classList.add('border-kd-gold');
-            c.classList.remove('border-transparent');
-          } else if (!c.querySelector('.absolute')) {
-            c.classList.remove('border-kd-gold');
-            c.classList.add('border-transparent');
-          }
-        });
-      });
-    });
-
     // Form submission
     var form = document.getElementById('webinar-form');
     var submitBtn = document.getElementById('wb-submit');
@@ -568,7 +588,6 @@ const eventSchema = {
 
         var firstName = document.getElementById('wb-first-name').value.trim();
         var email = document.getElementById('wb-email').value.trim();
-        var selectedTime = hiddenTime ? hiddenTime.value : '';
 
         if (!firstName || !email) return;
 
@@ -590,8 +609,8 @@ const eventSchema = {
                 email: email,
                 first_name: firstName,
                 properties: {
-                  webinar_time_slot: selectedTime,
                   webinar_registered: true,
+                  webinar_topic: 'from-doer-to-director-part-two-flows',
                   custom_source: 'Website Webinar Registration'
                 }
               }

@@ -192,6 +192,17 @@ const eventSchema = {
               />
             </div>
 
+            <label class="flex items-start gap-3 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                id="wb-marketing-consent"
+                class="mt-1 w-4 h-4 rounded border-kd-gold/30 text-kd-gold focus:ring-kd-gold accent-[#BA9200] cursor-pointer"
+              />
+              <span class="font-montserrat text-[13px] text-kd-grey leading-[20px] font-light">
+                I'd also like to receive email marketing, tips, and updates from Kinga Dow.
+              </span>
+            </label>
+
             <button
               type="submit"
               id="wb-submit"
@@ -591,6 +602,7 @@ const eventSchema = {
 
         var firstName = document.getElementById('wb-first-name').value.trim();
         var email = document.getElementById('wb-email').value.trim();
+        var marketingConsent = document.getElementById('wb-marketing-consent').checked;
 
         if (!firstName || !email) return;
 
@@ -614,7 +626,8 @@ const eventSchema = {
                 properties: {
                   webinar_registered: true,
                   webinar_topic: 'from-doer-to-director-part-two-flows',
-                  custom_source: 'Website Webinar Registration'
+                  custom_source: 'Website Webinar Registration',
+                  marketing_consent: marketingConsent
                 }
               }
             }
@@ -654,6 +667,43 @@ const eventSchema = {
               }
             })
           });
+        })
+        .then(function() {
+          // Step 3: If marketing consent, also subscribe to main marketing list
+          if (marketingConsent) {
+            return fetch('https://a.klaviyo.com/client/subscriptions/?company_id=SqUgaK', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'revision': '2024-06-15'
+              },
+              body: JSON.stringify({
+                data: {
+                  type: 'subscription',
+                  attributes: {
+                    custom_source: 'Webinar Marketing Opt-in',
+                    profile: {
+                      data: {
+                        type: 'profile',
+                        attributes: {
+                          email: email,
+                          first_name: firstName
+                        }
+                      }
+                    }
+                  },
+                  relationships: {
+                    list: {
+                      data: {
+                        type: 'list',
+                        id: 'W3XhAb'
+                      }
+                    }
+                  }
+                }
+              })
+            });
+          }
         })
         .then(function() {
           form.classList.add('hidden');

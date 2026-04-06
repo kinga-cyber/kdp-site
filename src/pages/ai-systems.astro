@@ -253,10 +253,56 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
           </p>
         </div>
 
-        <!-- Email Design System + A/B Testing Agent — 2 columns -->
-        <div class="grid md:grid-cols-2 gap-6 mb-6">
+        <!-- Flow Production Pipeline — full-width hero card with image -->
+        <div class="animate-on-scroll fade-in-up delay-100 bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-kd-gold/10 mb-6">
+          <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
+            <!-- Left: description -->
+            <div>
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-lg bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                  </svg>
+                </div>
+                <h3 class="font-aktiv text-kd-navy text-[18px] md:text-[22px] font-semibold tracking-[0.8px]">
+                  Flow Production Pipeline
+                </h3>
+              </div>
+              <ul class="space-y-2.5 font-montserrat text-black text-[14px] md:text-[15px] leading-[24px] font-light">
+                <li class="flex items-start gap-2.5">
+                  <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                  Six steps from strategy to live Klaviyo flow
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                  AI builds architecture, visual maps, briefs, designs, HTML, and deploys
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                  You review at three checkpoints — everything between runs automatically
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                  A complete flow with all emails, built and deployed in one pipeline
+                </li>
+              </ul>
+            </div>
+
+            <!-- Right: Pipeline image -->
+            <div>
+              <img
+                src="/images/ai-systems/Pipeline Card — Light Gradient.png"
+                alt="Flow Production Pipeline showing 6 steps: Claude strategist, Flow visuals, Asana briefs, Figma prototypes, Automatic slice, and Klaviyo deploy"
+                class="w-full rounded-2xl shadow-sm"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Email Design System + A/B Testing Agent + Campaign Pipeline — 3 columns -->
+        <div class="grid md:grid-cols-3 gap-6">
           <!-- Email Design System -->
-          <div class="animate-on-scroll fade-in-up delay-100 bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-kd-gold/10">
+          <div class="animate-on-scroll fade-in-up delay-200 bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-kd-gold/10">
             <div class="flex items-center gap-3 mb-4">
               <div class="w-10 h-10 rounded-lg bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
                 <svg class="w-5 h-5 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -288,7 +334,7 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
           </div>
 
           <!-- A/B Testing Agent -->
-          <div class="animate-on-scroll fade-in-up delay-200 bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-kd-gold/10">
+          <div class="animate-on-scroll fade-in-up delay-300 bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-kd-gold/10">
             <div class="flex items-center gap-3 mb-4">
               <div class="w-10 h-10 rounded-lg bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
                 <svg class="w-5 h-5 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -315,41 +361,6 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
               <li class="flex items-start gap-2.5">
                 <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
                 Turns random testing into a compounding revenue engine
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Flow Production Pipeline + Campaign Pipeline — 2 columns -->
-        <div class="grid md:grid-cols-2 gap-6">
-          <!-- Flow Production Pipeline -->
-          <div class="animate-on-scroll fade-in-up delay-300 bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-kd-gold/10">
-            <div class="flex items-center gap-3 mb-4">
-              <div class="w-10 h-10 rounded-lg bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
-                <svg class="w-5 h-5 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                </svg>
-              </div>
-              <h3 class="font-aktiv text-kd-navy text-[17px] md:text-[20px] font-semibold tracking-[0.8px]">
-                Flow Production Pipeline
-              </h3>
-            </div>
-            <ul class="space-y-2 font-montserrat text-black text-[14px] md:text-[15px] leading-[24px] font-light">
-              <li class="flex items-start gap-2.5">
-                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
-                Six steps from strategy to live Klaviyo flow
-              </li>
-              <li class="flex items-start gap-2.5">
-                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
-                AI builds architecture, visual maps, briefs, designs, HTML, and deploys
-              </li>
-              <li class="flex items-start gap-2.5">
-                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
-                You review at three checkpoints — everything between runs automatically
-              </li>
-              <li class="flex items-start gap-2.5">
-                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
-                A complete flow with all emails, built and deployed in one pipeline
               </li>
             </ul>
           </div>

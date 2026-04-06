@@ -2,6 +2,14 @@
 // Reusable CTA section — matches Figma sage-green gradient design
 ---
 
+<!-- Hidden Netlify form for email notifications (detected at build time) -->
+<form name="consultation-notification" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="text" name="name" />
+  <input type="email" name="email" />
+  <textarea name="message"></textarea>
+  <input type="text" name="form-type" />
+</form>
+
 <section class="pt-10 md:pt-16 pb-6 md:pb-10 px-6">
   <div class="max-w-6xl mx-auto rounded-xl overflow-hidden" style="background: linear-gradient(260deg, #8BAA94 33%, #60936F 100%);">
     <div class="grid md:grid-cols-2 gap-8 p-10 md:pt-10 md:pb-14 md:px-16 items-start">
@@ -109,6 +117,15 @@
         'Content-Type': 'application/json',
         'revision': '2024-10-15',
       };
+
+      // Send email notification via Netlify Forms (parallel, non-blocking)
+      var notifyData = new FormData();
+      notifyData.append('form-name', 'consultation-notification');
+      notifyData.append('name', name);
+      notifyData.append('email', email);
+      notifyData.append('message', message || 'No message');
+      notifyData.append('form-type', 'Consultation Request');
+      fetch('/', { method: 'POST', body: notifyData }).catch(function() {});
 
       // Step 1: Create/update profile with name, message, and custom properties
       fetch('https://a.klaviyo.com/client/profiles/?company_id=' + companyId, {

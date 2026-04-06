@@ -75,6 +75,15 @@ import Layout from "../layouts/Layout.astro";
     </div>
   </section>
 
+  <!-- Hidden Netlify form for email notifications (detected at build time) -->
+  <form name="contact-notification" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <input type="tel" name="phone" />
+    <textarea name="message"></textarea>
+    <input type="text" name="form-type" />
+  </form>
+
   <!-- Contact Form Section -->
   <section class="py-8 md:py-12 px-6 bg-white">
     <div class="max-w-4xl mx-auto">
@@ -212,6 +221,16 @@ import Layout from "../layouts/Layout.astro";
         'Content-Type': 'application/json',
         'revision': '2024-10-15',
       };
+
+      // Send email notification via Netlify Forms (parallel, non-blocking)
+      var notifyData = new FormData();
+      notifyData.append('form-name', 'contact-notification');
+      notifyData.append('name', name);
+      notifyData.append('email', email);
+      notifyData.append('phone', phone || 'Not provided');
+      notifyData.append('message', message || 'No message');
+      notifyData.append('form-type', 'Contact Form');
+      fetch('/', { method: 'POST', body: notifyData }).catch(function() {});
 
       // Step 1: Create/update the profile with name, message, and custom properties
       fetch('https://a.klaviyo.com/client/profiles/?company_id=' + companyId, {

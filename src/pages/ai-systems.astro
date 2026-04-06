@@ -105,109 +105,504 @@ import ConsultationCTA from "../components/ConsultationCTA.astro";
        AI SYSTEMS
        ======================================== -->
   <section class="py-12 md:py-20 relative overflow-hidden" style="background-color: #FAFAFA;">
-    <div class="max-w-5xl mx-auto px-6 relative z-10">
-      <h2 class="animate-on-scroll fade-in-up font-aktiv text-kd-navy text-[21px] md:text-[32px] font-semibold tracking-[1.2px] text-center mb-12 md:mb-16">
-        Our Systems
-      </h2>
+    <div class="max-w-6xl mx-auto px-6 relative z-10">
+      <div class="text-center mb-12 md:mb-16">
+        <h2 class="animate-on-scroll fade-in-up font-aktiv text-kd-navy text-[21px] md:text-[32px] font-semibold tracking-[1.2px] mb-3">
+          Our Systems
+        </h2>
+        <p class="animate-on-scroll fade-in-up delay-100 font-montserrat text-kd-grey text-[15px] md:text-[16px] font-light tracking-[0.8px]">
+          Nine systems. Three categories. Everything from audit to deployment.
+        </p>
+      </div>
 
-      <div class="space-y-8 md:space-y-10">
+      <!-- ===== UNDERSTAND ===== -->
+      <div class="mb-14 md:mb-20">
+        <div class="animate-on-scroll fade-in-up mb-8 md:mb-10">
+          <div class="flex items-center gap-4 mb-2">
+            <div class="w-10 h-[3px] bg-kd-gold rounded-full"></div>
+            <h3 class="font-aktiv text-kd-navy font-bold text-[22px] md:text-[28px] tracking-[1.4px] uppercase">Understand</h3>
+          </div>
+          <p class="font-montserrat text-kd-grey text-[15px] md:text-[16px] font-light italic tracking-[0.6px] ml-14">
+            The systems that analyze your data, capture your brand, and track your competitors.
+          </p>
+        </div>
 
-        <!-- System 1: Klaviyo Flow Audit -->
-        <div class="animate-on-scroll fade-in-up delay-100 bg-white rounded-2xl p-8 md:p-10 shadow-sm border border-kd-gold/10">
-          <div class="flex items-start gap-5">
-            <div class="w-14 h-14 rounded-xl bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
-              <svg class="w-7 h-7 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-              </svg>
-            </div>
+        <!-- Flow Audit — full-width hero card with chart -->
+        <div class="animate-on-scroll fade-in-up delay-100 bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-kd-gold/10 mb-6">
+          <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
+            <!-- Left: description -->
             <div>
-              <h3 class="font-aktiv text-kd-navy text-[18px] md:text-[22px] font-semibold tracking-[0.8px] mb-3">
-                Klaviyo Flow Audit
-              </h3>
-              <p class="font-montserrat text-black text-[15px] md:text-[16px] leading-[26px] md:leading-[28px] font-light">
-                90 days of performance data analyzed. Every flow scored by priority. Full briefs with optimization strategy delivered directly into your CRM — organized and ready for execution.
-              </p>
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-lg bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                  </svg>
+                </div>
+                <h3 class="font-aktiv text-kd-navy text-[18px] md:text-[22px] font-semibold tracking-[0.8px]">
+                  Klaviyo Flow Audit
+                </h3>
+              </div>
+              <ul class="space-y-2.5 font-montserrat text-black text-[14px] md:text-[15px] leading-[24px] font-light">
+                <li class="flex items-start gap-2.5">
+                  <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                  Pulls 90 days of flow performance data automatically
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                  Scores every flow by revenue impact and priority level
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                  Identifies underperforming, missing, and inactive flows
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                  Delivers optimization briefs directly into your CRM
+                </li>
+              </ul>
+            </div>
+
+            <!-- Right: HTML/CSS chart -->
+            <div class="rounded-2xl p-5 md:p-7 bg-white shadow-sm" style="background: linear-gradient(145deg, #fff9f9 0%, #fffdf5 30%, #f5fff8 60%, #ffffff 100%);">
+              <!-- Stat boxes -->
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 mb-6">
+                <div class="rounded-xl p-3 text-center bg-gray-50 border border-gray-100">
+                  <p class="font-montserrat text-[10px] text-kd-grey tracking-[0.3px] mb-1">Flows analyzed</p>
+                  <p class="font-aktiv text-kd-navy text-[22px] font-bold">34</p>
+                </div>
+                <div class="rounded-xl p-3 text-center border" style="background: #FEF2F2; border-color: #FECACA;">
+                  <p class="font-montserrat text-[10px] text-[#DC2626] tracking-[0.3px] mb-1">Underperforming</p>
+                  <p class="font-aktiv text-[#DC2626] text-[22px] font-bold">14</p>
+                </div>
+                <div class="rounded-xl p-3 text-center border" style="background: #FFFBEB; border-color: #FDE68A;">
+                  <p class="font-montserrat text-[10px] text-[#D97706] tracking-[0.3px] mb-1">Missing or inactive</p>
+                  <p class="font-aktiv text-[#D97706] text-[22px] font-bold">7</p>
+                </div>
+                <div class="rounded-xl p-3 text-center border" style="background: #F0FDF4; border-color: #BBF7D0;">
+                  <p class="font-montserrat text-[10px] text-[#16A34A] tracking-[0.3px] mb-1">Revenue opportunity</p>
+                  <p class="font-aktiv text-[#16A34A] text-[22px] font-bold">$171K</p>
+                </div>
+              </div>
+
+              <!-- Legend -->
+              <div class="flex flex-wrap gap-x-5 gap-y-1 mb-5">
+                <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#EF4444]"></span><span class="font-montserrat text-[11px] text-kd-grey">Underperforming</span></div>
+                <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#F59E0B]"></span><span class="font-montserrat text-[11px] text-kd-grey">Missing</span></div>
+                <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#A3B1C6]"></span><span class="font-montserrat text-[11px] text-kd-grey">Inactive</span></div>
+                <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#16A34A]"></span><span class="font-montserrat text-[11px] text-kd-grey">On track</span></div>
+              </div>
+
+              <!-- Bar chart — labels above bars -->
+              <div class="space-y-1">
+                <!-- Welcome series -->
+                <div class="flex items-end gap-2">
+                  <span class="font-montserrat text-[11px] text-kd-navy w-[90px] text-right flex-shrink-0 pb-1">Welcome series</span>
+                  <div class="flex-1 flex flex-col">
+                    <span class="inline-block self-start mb-1 px-2 py-0.5 rounded text-[9px] font-medium text-[#DC2626]" style="background: #FEE2E2;">Underperforming</span>
+                    <div class="w-full bg-gray-100 rounded-md h-6">
+                      <div class="h-full rounded-md" style="width: 60%; background: linear-gradient(90deg, #F87171, #FCA5A5);"></div>
+                    </div>
+                  </div>
+                  <span class="font-montserrat text-[12px] text-kd-navy font-semibold w-[40px] text-right flex-shrink-0 pb-1">$48K</span>
+                </div>
+                <!-- Abandoned cart -->
+                <div class="flex items-end gap-2">
+                  <span class="font-montserrat text-[11px] text-kd-navy w-[90px] text-right flex-shrink-0 pb-1">Abandoned cart</span>
+                  <div class="flex-1 flex flex-col">
+                    <span class="inline-block self-start mb-1 px-2 py-0.5 rounded text-[9px] font-medium text-[#DC2626]" style="background: #FEE2E2;">Underperforming</span>
+                    <div class="w-full bg-gray-100 rounded-md h-6">
+                      <div class="h-full rounded-md" style="width: 75%; background: linear-gradient(90deg, #F87171, #FCA5A5);"></div>
+                    </div>
+                  </div>
+                  <span class="font-montserrat text-[12px] text-kd-navy font-semibold w-[40px] text-right flex-shrink-0 pb-1">$37K</span>
+                </div>
+                <!-- Browse abandon -->
+                <div class="flex items-end gap-2">
+                  <span class="font-montserrat text-[11px] text-kd-navy w-[90px] text-right flex-shrink-0 pb-1">Browse abandon</span>
+                  <div class="flex-1 flex flex-col">
+                    <span class="inline-block self-start mb-1 px-2 py-0.5 rounded text-[9px] font-medium text-[#92400E]" style="background: #FEF3C7;">Missing</span>
+                    <div class="w-full bg-gray-100 rounded-md h-6">
+                      <div class="h-full rounded-md" style="width: 50%; background: linear-gradient(90deg, #FBBF24, #FCD34D);"></div>
+                    </div>
+                  </div>
+                  <span class="font-montserrat text-[12px] text-kd-navy font-semibold w-[40px] text-right flex-shrink-0 pb-1">$29K</span>
+                </div>
+                <!-- Post-purchase -->
+                <div class="flex items-end gap-2">
+                  <span class="font-montserrat text-[11px] text-kd-navy w-[90px] text-right flex-shrink-0 pb-1">Post-purchase</span>
+                  <div class="flex-1 flex flex-col">
+                    <span class="inline-block self-start mb-1 px-2 py-0.5 rounded text-[9px] font-medium text-[#DC2626]" style="background: #FEE2E2;">Underperforming</span>
+                    <div class="w-full bg-gray-100 rounded-md h-6">
+                      <div class="h-full rounded-md" style="width: 65%; background: linear-gradient(90deg, #F87171, #FCA5A5);"></div>
+                    </div>
+                  </div>
+                  <span class="font-montserrat text-[12px] text-kd-navy font-semibold w-[40px] text-right flex-shrink-0 pb-1">$22K</span>
+                </div>
+                <!-- Winback -->
+                <div class="flex items-end gap-2">
+                  <span class="font-montserrat text-[11px] text-kd-navy w-[90px] text-right flex-shrink-0 pb-1">Winback</span>
+                  <div class="flex-1 flex flex-col">
+                    <span class="inline-block self-start mb-1 px-2 py-0.5 rounded text-[9px] font-medium text-[#92400E]" style="background: #FEF3C7;">Missing</span>
+                    <div class="w-full bg-gray-100 rounded-md h-6">
+                      <div class="h-full rounded-md" style="width: 40%; background: linear-gradient(90deg, #FBBF24, #FCD34D);"></div>
+                    </div>
+                  </div>
+                  <span class="font-montserrat text-[12px] text-kd-navy font-semibold w-[40px] text-right flex-shrink-0 pb-1">$18K</span>
+                </div>
+                <!-- Sunset -->
+                <div class="flex items-end gap-2">
+                  <span class="font-montserrat text-[11px] text-kd-navy w-[90px] text-right flex-shrink-0 pb-1">Sunset</span>
+                  <div class="flex-1 flex flex-col">
+                    <span class="inline-block self-start mb-1 px-2 py-0.5 rounded text-[9px] font-medium text-[#92400E]" style="background: #FEF3C7;">Missing</span>
+                    <div class="w-full bg-gray-100 rounded-md h-6">
+                      <div class="h-full rounded-md" style="width: 35%; background: linear-gradient(90deg, #FBBF24, #FCD34D);"></div>
+                    </div>
+                  </div>
+                  <span class="font-montserrat text-[12px] text-kd-navy font-semibold w-[40px] text-right flex-shrink-0 pb-1">$9K</span>
+                </div>
+                <!-- Birthday -->
+                <div class="flex items-end gap-2">
+                  <span class="font-montserrat text-[11px] text-kd-navy w-[90px] text-right flex-shrink-0 pb-1">Birthday</span>
+                  <div class="flex-1 flex flex-col">
+                    <span class="inline-block self-start mb-1 px-2 py-0.5 rounded text-[9px] font-medium text-[#6B7280]" style="background: #E5E7EB;">Inactive</span>
+                    <div class="w-full bg-gray-100 rounded-md h-6">
+                      <div class="h-full rounded-md" style="width: 25%; background: linear-gradient(90deg, #94A3B8, #B8C5D6);"></div>
+                    </div>
+                  </div>
+                  <span class="font-montserrat text-[12px] text-kd-navy font-semibold w-[40px] text-right flex-shrink-0 pb-1">$5K</span>
+                </div>
+                <!-- VIP tier -->
+                <div class="flex items-end gap-2">
+                  <span class="font-montserrat text-[11px] text-kd-navy w-[90px] text-right flex-shrink-0 pb-1">VIP tier</span>
+                  <div class="flex-1 flex flex-col">
+                    <span class="inline-block self-start mb-1 px-2 py-0.5 rounded text-[9px] font-medium text-[#6B7280]" style="background: #E5E7EB;">Inactive</span>
+                    <div class="w-full bg-gray-100 rounded-md h-6">
+                      <div class="h-full rounded-md" style="width: 18%; background: linear-gradient(90deg, #94A3B8, #B8C5D6);"></div>
+                    </div>
+                  </div>
+                  <span class="font-montserrat text-[12px] text-kd-navy font-semibold w-[40px] text-right flex-shrink-0 pb-1">$3K</span>
+                </div>
+              </div>
+
+              <!-- Top opportunities -->
+              <div class="mt-6 pt-5 border-t border-gray-200">
+                <p class="font-montserrat text-[11px] text-kd-grey tracking-[0.3px] mb-4">Top unrealized revenue opportunities</p>
+                <div class="space-y-3">
+                  <div class="flex items-center justify-between gap-3 bg-gray-50 rounded-lg p-3 border border-gray-100">
+                    <div>
+                      <p class="font-montserrat text-[13px] text-kd-navy font-semibold leading-[18px]">Welcome series — add SMS branch</p>
+                      <p class="font-montserrat text-[11px] text-kd-grey mt-0.5">Target: 45% open rate &rarr; current: 28%</p>
+                    </div>
+                    <span class="font-aktiv text-[16px] text-[#16A34A] font-bold flex-shrink-0">+$48K</span>
+                  </div>
+                  <div class="flex items-center justify-between gap-3 bg-gray-50 rounded-lg p-3 border border-gray-100">
+                    <div>
+                      <p class="font-montserrat text-[13px] text-kd-navy font-semibold leading-[18px]">Abandoned cart — add 3rd email + incentive</p>
+                      <p class="font-montserrat text-[11px] text-kd-grey mt-0.5">Target: 8% conversion &rarr; current: 4.2%</p>
+                    </div>
+                    <span class="font-aktiv text-[16px] text-[#16A34A] font-bold flex-shrink-0">+$37K</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- System 2: A/B Testing Agent -->
-        <div class="animate-on-scroll fade-in-up delay-200 bg-white rounded-2xl p-8 md:p-10 shadow-sm border border-kd-gold/10">
-          <div class="flex items-start gap-5">
-            <div class="w-14 h-14 rounded-xl bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
-              <svg class="w-7 h-7 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-              </svg>
-            </div>
-            <div>
-              <h3 class="font-aktiv text-kd-navy text-[18px] md:text-[22px] font-semibold tracking-[0.8px] mb-3">
-                A/B Testing Agent
-              </h3>
-              <p class="font-montserrat text-black text-[15px] md:text-[16px] leading-[26px] md:leading-[28px] font-light">
-                A complete testing program that runs autonomously. Identifies what to test, prioritizes by revenue impact, creates test specifications, monitors results, and logs everything. Turns random testing into a compounding revenue engine.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- System 3: Campaign Pipeline -->
-        <div class="animate-on-scroll fade-in-up delay-300 bg-white rounded-2xl p-8 md:p-10 shadow-sm border border-kd-gold/10">
-          <div class="flex items-start gap-5">
-            <div class="w-14 h-14 rounded-xl bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
-              <svg class="w-7 h-7 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-            </div>
-            <div>
-              <h3 class="font-aktiv text-kd-navy text-[18px] md:text-[22px] font-semibold tracking-[0.8px] mb-3">
-                Campaign Pipeline
-              </h3>
-              <p class="font-montserrat text-black text-[15px] md:text-[16px] leading-[26px] md:leading-[28px] font-light">
-                Marketing calendar to email copy to CRM tasks to draft campaign in Klaviyo. One input, every system updated. What used to take hours now flows through automatically — ready to send.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- System 4: Brand Foundation -->
-        <div class="animate-on-scroll fade-in-up delay-400 bg-white rounded-2xl p-8 md:p-10 shadow-sm border border-kd-gold/10">
-          <div class="flex items-start gap-5">
-            <div class="w-14 h-14 rounded-xl bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
-              <svg class="w-7 h-7 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-              </svg>
-            </div>
-            <div>
-              <h3 class="font-aktiv text-kd-navy text-[18px] md:text-[22px] font-semibold tracking-[0.8px] mb-3">
+        <!-- Brand Foundation + Inbox Intelligence — 2 columns -->
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- Brand Foundation -->
+          <div class="animate-on-scroll fade-in-up delay-200 bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-kd-gold/10">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+              </div>
+              <h3 class="font-aktiv text-kd-navy text-[17px] md:text-[20px] font-semibold tracking-[0.8px]">
                 Brand Foundation
               </h3>
-              <p class="font-montserrat text-black text-[15px] md:text-[16px] leading-[26px] md:leading-[28px] font-light">
-                The essential setup that makes everything else work. Your brand voice, audience profiles, messaging framework, and customer data — captured and structured so AI actually understands your business. Without this, AI gives you generic. With it, every output sounds like you.
-              </p>
             </div>
+            <ul class="space-y-2 font-montserrat text-black text-[14px] md:text-[15px] leading-[24px] font-light">
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                Captures your brand voice, tone, and messaging framework
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                Builds audience profiles from your actual customer data
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                Structures everything so AI understands your business — not a generic version of it
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                The setup that makes every other system work
+              </li>
+            </ul>
           </div>
-        </div>
 
-        <!-- System 5: Inbox Intelligence -->
-        <div class="animate-on-scroll fade-in-up delay-500 bg-white rounded-2xl p-8 md:p-10 shadow-sm border border-kd-gold/10">
-          <div class="flex items-start gap-5">
-            <div class="w-14 h-14 rounded-xl bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
-              <svg class="w-7 h-7 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-            </div>
-            <div>
-              <h3 class="font-aktiv text-kd-navy text-[18px] md:text-[22px] font-semibold tracking-[0.8px] mb-3">
+          <!-- Inbox Intelligence -->
+          <div class="animate-on-scroll fade-in-up delay-300 bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-kd-gold/10">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h3 class="font-aktiv text-kd-navy text-[17px] md:text-[20px] font-semibold tracking-[0.8px]">
                 Inbox Intelligence
               </h3>
-              <p class="font-montserrat text-black text-[15px] md:text-[16px] leading-[26px] md:leading-[28px] font-light">
-                Every competitor email captured, analyzed, and turned into strategic insight. Subject line patterns, send timing, campaign themes, positioning gaps — all tracked automatically. Weekly reports tell you exactly where to differentiate and when to move.
-              </p>
             </div>
+            <ul class="space-y-2 font-montserrat text-black text-[14px] md:text-[15px] leading-[24px] font-light">
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                Captures every competitor email automatically
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                Analyzes subject lines, send timing, campaign themes, and positioning gaps
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                Tracks patterns across weeks and months
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                Weekly reports showing exactly where to differentiate
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== BUILD ===== -->
+      <div class="mb-14 md:mb-20">
+        <div class="animate-on-scroll fade-in-up mb-8 md:mb-10">
+          <div class="flex items-center gap-4 mb-2">
+            <div class="w-10 h-[3px] bg-kd-gold rounded-full"></div>
+            <h3 class="font-aktiv text-kd-navy font-bold text-[22px] md:text-[28px] tracking-[1.4px] uppercase">Build</h3>
+          </div>
+          <p class="font-montserrat text-kd-grey text-[15px] md:text-[16px] font-light italic tracking-[0.6px] ml-14">
+            The systems that create your assets, test your strategies, and produce complete flows and campaigns.
+          </p>
+        </div>
+
+        <!-- Email Design System + A/B Testing Agent — 2 columns -->
+        <div class="grid md:grid-cols-2 gap-6 mb-6">
+          <!-- Email Design System -->
+          <div class="animate-on-scroll fade-in-up delay-100 bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-kd-gold/10">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                </svg>
+              </div>
+              <h3 class="font-aktiv text-kd-navy text-[17px] md:text-[20px] font-semibold tracking-[0.8px]">
+                Email Design System
+              </h3>
+            </div>
+            <ul class="space-y-2 font-montserrat text-black text-[14px] md:text-[15px] leading-[24px] font-light">
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                Rebuilds your entire email design language as a Figma component library
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                Every layout, color, font, and content block structured for reuse
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                New emails assemble from brand-consistent parts instead of starting from scratch
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                Set up once, used across every campaign and flow
+              </li>
+            </ul>
+          </div>
+
+          <!-- A/B Testing Agent -->
+          <div class="animate-on-scroll fade-in-up delay-200 bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-kd-gold/10">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+              </div>
+              <h3 class="font-aktiv text-kd-navy text-[17px] md:text-[20px] font-semibold tracking-[0.8px]">
+                A/B Testing Agent
+              </h3>
+            </div>
+            <ul class="space-y-2 font-montserrat text-black text-[14px] md:text-[15px] leading-[24px] font-light">
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                Identifies what to test across flows and campaigns
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                Prioritizes tests by revenue impact, not guesswork
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                Creates specs, monitors results, and logs everything automatically
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                Turns random testing into a compounding revenue engine
+              </li>
+            </ul>
           </div>
         </div>
 
+        <!-- Flow Production Pipeline + Campaign Pipeline — 2 columns -->
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- Flow Production Pipeline -->
+          <div class="animate-on-scroll fade-in-up delay-300 bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-kd-gold/10">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </div>
+              <h3 class="font-aktiv text-kd-navy text-[17px] md:text-[20px] font-semibold tracking-[0.8px]">
+                Flow Production Pipeline
+              </h3>
+            </div>
+            <ul class="space-y-2 font-montserrat text-black text-[14px] md:text-[15px] leading-[24px] font-light">
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                Six steps from strategy to live Klaviyo flow
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                AI builds architecture, visual maps, briefs, designs, HTML, and deploys
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                You review at three checkpoints — everything between runs automatically
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                A complete flow with all emails, built and deployed in one pipeline
+              </li>
+            </ul>
+          </div>
+
+          <!-- Campaign Pipeline -->
+          <div class="animate-on-scroll fade-in-up delay-400 bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-kd-gold/10">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 class="font-aktiv text-kd-navy text-[17px] md:text-[20px] font-semibold tracking-[0.8px]">
+                Campaign Pipeline
+              </h3>
+            </div>
+            <ul class="space-y-2 font-montserrat text-black text-[14px] md:text-[15px] leading-[24px] font-light">
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                Marketing calendar to copy to CRM tasks to Klaviyo draft in one pass
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                One input, every system updated
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                Copy, tasks, and campaign drafts generated automatically
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                What used to take a team hours runs in minutes
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
+
+      <!-- ===== DEPLOY ===== -->
+      <div>
+        <div class="animate-on-scroll fade-in-up mb-8 md:mb-10">
+          <div class="flex items-center gap-4 mb-2">
+            <div class="w-10 h-[3px] bg-kd-gold rounded-full"></div>
+            <h3 class="font-aktiv text-kd-navy font-bold text-[22px] md:text-[28px] tracking-[1.4px] uppercase">Deploy</h3>
+          </div>
+          <p class="font-montserrat text-kd-grey text-[15px] md:text-[16px] font-light italic tracking-[0.6px] ml-14">
+            The systems that build and push finished work directly into Klaviyo — ready to review and send.
+          </p>
+        </div>
+
+        <!-- Klaviyo Build + Design-to-Deploy — 2 columns -->
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- Klaviyo Build -->
+          <div class="animate-on-scroll fade-in-up delay-100 bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-kd-gold/10">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                </svg>
+              </div>
+              <h3 class="font-aktiv text-kd-navy text-[17px] md:text-[20px] font-semibold tracking-[0.8px]">
+                Klaviyo Build
+              </h3>
+            </div>
+            <ul class="space-y-2 font-montserrat text-black text-[14px] md:text-[15px] leading-[24px] font-light">
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                Creates flows, campaigns, and templates directly inside Klaviyo
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                Configures triggers, filters, timing, and conditional splits
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                Assigns emails to flow steps with correct logic
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                No manual setup — built by AI, reviewed by you
+              </li>
+            </ul>
+          </div>
+
+          <!-- Design-to-Deploy Pipeline -->
+          <div class="animate-on-scroll fade-in-up delay-200 bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-kd-gold/10">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                </svg>
+              </div>
+              <h3 class="font-aktiv text-kd-navy text-[17px] md:text-[20px] font-semibold tracking-[0.8px]">
+                Design-to-Deploy Pipeline
+              </h3>
+            </div>
+            <ul class="space-y-2 font-montserrat text-black text-[14px] md:text-[15px] leading-[24px] font-light">
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                Reads a finished Figma email design
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                Converts to production-ready, table-based HTML
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                Uploads directly into Klaviyo as a template draft
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-kd-gold mt-2 flex-shrink-0"></span>
+                Ready for review and send — no manual code handoff
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 

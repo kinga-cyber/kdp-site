@@ -1,0 +1,663 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is this really free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, 100% free. Just enter your name and email to get instant access to the full replay."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why do you ask if I'm a brand or an agency?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "So I can send you follow-up content that's actually relevant. Brands and agencies face different challenges — the emails you'll get after this will be tailored to yours."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What will I learn from this masterclass?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "How to automate your entire email campaign workflow — from building a marketing calendar to writing copy and launching campaigns in Klaviyo — using Claude AI and MCP connectors."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need technical skills to follow along?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. This is shown at the strategic level — what the system does and how the pieces connect. It's not a coding tutorial."
+      }
+    }
+  ]
+};
+---
+
+<Layout
+  title="Masterclass: From Doer to Director — AI-Powered Campaign Automation | Kinga Dow"
+  description="Free masterclass replay: Watch how I automate the entire email campaign process — from marketing calendar to live Klaviyo sends — using Claude AI and MCP connectors."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <!-- Hero Section -->
+  <section class="hero-gradient relative overflow-hidden">
+    <div class="absolute -left-20 top-16 w-[380px] h-[380px] opacity-30 pointer-events-none">
+      <img src="/images/home/decorative/bg-circle-left.png" alt="" class="w-full h-full object-contain" aria-hidden="true" />
+    </div>
+    <div class="absolute -right-16 -bottom-16 w-[300px] h-[300px] opacity-20 pointer-events-none">
+      <img src="/images/home/decorative/bg-circle.png" alt="" class="w-full h-full object-contain" aria-hidden="true" />
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 py-12 md:py-20 relative z-10">
+      <div class="text-center max-w-4xl mx-auto">
+        <span class="animate-on-scroll fade-in-up font-aktiv text-kd-gold font-medium text-[14px] leading-[17px] tracking-[1.4px] mb-4 block uppercase">
+          Free Masterclass Replay
+        </span>
+
+        <h1 class="animate-on-scroll fade-in-up delay-100 font-aktiv text-kd-navy text-[24px] md:text-[40px] font-bold leading-[36px] md:leading-[52px] tracking-[1.4px] md:tracking-[2px] mb-6">
+          From Doer to Director:<br />AI-Powered Campaign Automation
+        </h1>
+
+        <p class="animate-on-scroll fade-in-up delay-200 font-montserrat text-kd-gold text-[18px] md:text-[24px] font-medium leading-[26px] md:leading-[32px] tracking-[1.4px] md:tracking-[1.8px] mb-6">
+          Stop building campaigns manually. Watch the system that does it.
+        </p>
+
+        <p class="animate-on-scroll fade-in-up delay-300 font-montserrat font-light text-black text-[16px] md:text-[18px] mb-4 max-w-[800px] mx-auto leading-[26px] md:leading-[30px] tracking-[1.6px] md:tracking-[1.8px]">
+          Watch me build a full month of email campaigns — from marketing calendar to live Klaviyo sends — using Claude AI and MCP connectors. The entire workflow, start to finish.
+        </p>
+        <p class="animate-on-scroll fade-in-up delay-300 font-montserrat font-medium text-kd-navy text-[16px] md:text-[18px] mb-8 tracking-[1.6px] md:tracking-[1.8px] md:whitespace-nowrap">
+          One system. Days of work compressed into hours.
+        </p>
+
+        <a
+          href="#watch"
+          class="animate-on-scroll fade-in-up delay-400 btn-navy inline-flex py-4 px-10 md:px-14 rounded-lg text-[14px] md:text-[16px] font-montserrat font-medium tracking-[1.4px] uppercase items-center gap-3"
+        >
+          Watch the Replay
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- What You'll Learn Section -->
+  <section class="py-12 md:py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="animate-on-scroll fade-in-up font-aktiv text-kd-navy text-[21px] md:text-[32px] font-semibold tracking-[1.2px] text-center mb-10">
+        What You'll Learn
+      </h2>
+
+      <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+        <!-- Item 1 -->
+        <div class="animate-on-scroll fade-in-up delay-100 bg-kd-cream/50 rounded-xl p-6 md:p-8">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-full bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-aktiv text-kd-navy text-[16px] md:text-[18px] font-semibold tracking-[0.8px] mb-2">
+                AI-Built Marketing Calendar
+              </h3>
+              <p class="font-montserrat text-black text-[15px] leading-[24px] font-light">
+                How Claude builds an entire month's campaign calendar — themes, send dates, segments, subject lines — in minutes instead of days.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="animate-on-scroll fade-in-up delay-200 bg-kd-cream/50 rounded-xl p-6 md:p-8">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-full bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-aktiv text-kd-navy text-[16px] md:text-[18px] font-semibold tracking-[0.8px] mb-2">
+                Campaign Copy at Scale
+              </h3>
+              <p class="font-montserrat text-black text-[15px] leading-[24px] font-light">
+                How to generate email copy that sounds like your brand — not generic AI output — and get it into Klaviyo without copy-pasting.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="animate-on-scroll fade-in-up delay-300 bg-kd-cream/50 rounded-xl p-6 md:p-8">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-full bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-aktiv text-kd-navy text-[16px] md:text-[18px] font-semibold tracking-[0.8px] mb-2">
+                The MCP Connector Workflow
+              </h3>
+              <p class="font-montserrat text-black text-[15px] leading-[24px] font-light">
+                How Claude connects directly to Klaviyo, Asana, and other tools — pushing campaigns live without switching between tabs.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="animate-on-scroll fade-in-up delay-400 bg-kd-cream/50 rounded-xl p-6 md:p-8">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-full bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-aktiv text-kd-navy text-[16px] md:text-[18px] font-semibold tracking-[0.8px] mb-2">
+                The Director Mindset
+              </h3>
+              <p class="font-montserrat text-black text-[15px] leading-[24px] font-light">
+                How to shift from doing everything manually to directing an AI-powered system — freeing up time for strategy, segmentation, and iteration.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gated Form Section -->
+  <section id="watch" class="py-12 md:py-20" style="background: linear-gradient(180deg, #F6EFE6 0%, #FAFAFA 100%);">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="text-center mb-8">
+        <h2 class="animate-on-scroll fade-in-up font-aktiv text-kd-navy text-[21px] md:text-[32px] font-semibold tracking-[1.2px] mb-4">
+          Get Instant Access
+        </h2>
+        <p class="animate-on-scroll fade-in-up delay-100 font-montserrat text-black text-[16px] leading-[26px] font-light max-w-xl mx-auto">
+          Enter your details below and the full replay is yours — immediately, no waiting.
+        </p>
+      </div>
+
+      <div class="max-w-lg mx-auto">
+        <div class="animate-on-scroll fade-in-up delay-200 bg-white rounded-2xl p-8 md:p-10 relative overflow-hidden shadow-sm">
+          <div class="absolute top-0 left-0 w-full h-1 bg-kd-gold"></div>
+
+          <form id="mc-form" class="space-y-5">
+            <!-- Honeypot -->
+            <div style="position:absolute;left:-9999px;" aria-hidden="true">
+              <input type="text" name="web_url" id="mc-website" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <div>
+              <input
+                type="text"
+                id="mc-first-name"
+                placeholder="First Name"
+                required
+                class="w-full px-4 py-3 rounded-lg border border-kd-gold/30 bg-white font-montserrat text-[15px] text-black placeholder:text-kd-grey focus:outline-none focus:border-kd-gold transition-colors"
+              />
+            </div>
+
+            <div>
+              <input
+                type="email"
+                id="mc-email"
+                placeholder="Email Address"
+                required
+                class="w-full px-4 py-3 rounded-lg border border-kd-gold/30 bg-white font-montserrat text-[15px] text-black placeholder:text-kd-grey focus:outline-none focus:border-kd-gold transition-colors"
+              />
+            </div>
+
+            <!-- Brand / Agency Selector -->
+            <div>
+              <p class="font-montserrat text-kd-navy text-[14px] font-medium tracking-[0.6px] mb-3">
+                I'm a...
+              </p>
+              <input type="hidden" id="mc-audience-type" value="" />
+              <div class="grid grid-cols-2 gap-3">
+                <button
+                  type="button"
+                  id="mc-btn-brand"
+                  class="audience-btn px-4 py-4 rounded-lg font-montserrat text-[15px] font-semibold tracking-[0.8px] uppercase transition-all bg-kd-navy text-white hover:opacity-90"
+                >
+                  Brand
+                </button>
+                <button
+                  type="button"
+                  id="mc-btn-agency"
+                  class="audience-btn px-4 py-4 rounded-lg font-montserrat text-[15px] font-semibold tracking-[0.8px] uppercase transition-all bg-kd-sage text-white hover:opacity-90"
+                >
+                  Agency
+                </button>
+              </div>
+              <p id="mc-audience-error" class="hidden text-red-500 font-montserrat text-[13px] mt-2">
+                Please select one.
+              </p>
+            </div>
+
+            <!-- Newsletter Consent -->
+            <label class="flex items-start gap-3 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                id="mc-newsletter"
+                checked
+                class="mt-1 w-4 h-4 rounded border-kd-gold/30 text-kd-gold focus:ring-kd-gold accent-[#BA9200] cursor-pointer"
+              />
+              <span class="font-montserrat text-[13px] text-kd-grey leading-[20px] font-light">
+                Also add me to the newsletter for email marketing tips, AI workflows, and case studies.
+              </span>
+            </label>
+
+            <button
+              type="submit"
+              id="mc-submit"
+              class="w-full btn-navy py-4 rounded-lg text-[14px] md:text-[16px] font-montserrat font-medium tracking-[1.4px] uppercase"
+            >
+              Watch the Replay
+            </button>
+
+            <p id="mc-error" class="hidden text-red-500 text-center font-montserrat text-[13px]"></p>
+          </form>
+
+          <!-- Success: Show Replay Link -->
+          <div id="mc-success" class="hidden text-center py-4">
+            <div class="w-16 h-16 bg-kd-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h4 class="font-aktiv text-kd-navy text-[18px] font-semibold tracking-[0.8px] mb-2">You're In!</h4>
+            <p class="font-montserrat text-black text-[14px] leading-[22px] font-light mb-6">
+              Here's your masterclass replay. Check your inbox — I'll be sending you some follow-up content over the next few days.
+            </p>
+            <a
+              href="https://youtu.be/CAA_jRgq5Xw"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-gold inline-flex py-4 px-10 md:px-14 rounded-lg text-[14px] md:text-[16px] font-montserrat font-medium tracking-[1.4px] uppercase items-center gap-3"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+              </svg>
+              Watch Now on YouTube
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- This Masterclass Is For You If... -->
+  <section class="py-12 md:py-16 px-6 bg-white">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="animate-on-scroll fade-in-up font-aktiv text-kd-navy text-[21px] md:text-[32px] font-semibold tracking-[1.2px] text-center mb-10">
+        This Masterclass Is For You If...
+      </h2>
+
+      <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+        <div class="animate-on-scroll fade-in-up delay-100 bg-kd-cream/50 rounded-xl p-6 shadow-sm">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-full bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <p class="font-montserrat text-black text-[15px] leading-[24px] font-light">
+              You're an e-commerce brand owner spending too many hours on email campaigns every month
+            </p>
+          </div>
+        </div>
+
+        <div class="animate-on-scroll fade-in-up delay-200 bg-kd-cream/50 rounded-xl p-6 shadow-sm">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-full bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <p class="font-montserrat text-black text-[15px] leading-[24px] font-light">
+              You're an agency operator looking for a faster way to manage client campaigns at scale
+            </p>
+          </div>
+        </div>
+
+        <div class="animate-on-scroll fade-in-up delay-300 bg-kd-cream/50 rounded-xl p-6 shadow-sm">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-full bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <p class="font-montserrat text-black text-[15px] leading-[24px] font-light">
+              You're curious about AI for email marketing but haven't seen it used in a real production workflow
+            </p>
+          </div>
+        </div>
+
+        <div class="animate-on-scroll fade-in-up delay-400 bg-kd-cream/50 rounded-xl p-6 shadow-sm">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-full bg-kd-gold/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-kd-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <p class="font-montserrat text-black text-[15px] leading-[24px] font-light">
+              You want to see the difference between generic AI prompting and a connected system that actually builds and deploys
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Kinga Section -->
+  <section class="py-12 md:py-16 px-6" style="background: linear-gradient(180deg, #FAFAFA 0%, #F6EFE6 100%);">
+    <div class="max-w-5xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+        <div class="animate-on-scroll fade-in-up flex justify-center">
+          <div class="w-[280px] h-[280px] md:w-[340px] md:h-[340px] rounded-full overflow-hidden border-4 border-kd-gold/20">
+            <img
+              src="/images/about/kinga-paris.jpg"
+              alt="Kinga Dow - Founder of Kinga Dow Productions"
+              class="w-full h-full object-cover"
+              onerror="this.style.background='#F6EFE6'; this.alt='Kinga Dow';"
+            />
+          </div>
+        </div>
+
+        <div class="animate-on-scroll fade-in-up delay-100">
+          <span class="font-aktiv text-kd-gold font-medium text-[14px] tracking-[1.4px] mb-3 block uppercase">
+            Your Host
+          </span>
+          <h2 class="font-aktiv text-kd-navy text-[21px] md:text-[28px] font-semibold tracking-[1.2px] mb-4">
+            Kinga Dow
+          </h2>
+          <p class="font-montserrat text-black text-[15px] md:text-[16px] leading-[26px] md:leading-[28px] font-light mb-4">
+            Kinga founded her first web development agency in 2001 and has spent 20+ years in e-commerce. In 2017, she specialized in Klaviyo email marketing and built Kinga Dow Marketing into the first AI-native retention marketing agency.
+          </p>
+          <p class="font-montserrat text-black text-[15px] md:text-[16px] leading-[26px] md:leading-[28px] font-light mb-6">
+            In this masterclass, she walks through the exact system she uses to build a full month of email campaigns — from strategy to live sends — using Claude AI and MCP connectors. No theory. Real workflows, real tools, real results.
+          </p>
+
+          <div class="flex flex-wrap gap-4">
+            <div class="bg-white rounded-lg px-4 py-2 shadow-sm">
+              <span class="font-aktiv text-kd-gold text-[18px] font-bold">20+</span>
+              <span class="font-montserrat text-kd-grey text-[12px] ml-1">Years E-commerce</span>
+            </div>
+            <div class="bg-white rounded-lg px-4 py-2 shadow-sm">
+              <span class="font-aktiv text-kd-gold text-[18px] font-bold">8+</span>
+              <span class="font-montserrat text-kd-grey text-[12px] ml-1">Years Klaviyo</span>
+            </div>
+            <div class="bg-white rounded-lg px-4 py-2 shadow-sm">
+              <span class="font-aktiv text-kd-gold text-[18px] font-bold">AI</span>
+              <span class="font-montserrat text-kd-grey text-[12px] ml-1">Native Agency</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-12 md:py-16 px-6 bg-white">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="animate-on-scroll fade-in-up font-aktiv text-kd-navy text-[21px] md:text-[28px] font-semibold tracking-[1.2px] text-center mb-10">
+        Frequently Asked Questions
+      </h2>
+
+      <div class="space-y-4">
+        <details class="animate-on-scroll fade-in-up delay-100 bg-kd-cream/40 rounded-xl p-6 group">
+          <summary class="font-aktiv text-kd-navy text-[16px] md:text-[17px] font-semibold tracking-[0.8px] cursor-pointer list-none flex items-center justify-between">
+            Is this really free?
+            <svg class="w-5 h-5 text-kd-gold transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <p class="font-montserrat text-black text-[15px] leading-[26px] font-light mt-4">
+            Yes, 100% free. Just enter your name and email to get instant access to the full replay.
+          </p>
+        </details>
+
+        <details class="animate-on-scroll fade-in-up delay-200 bg-kd-cream/40 rounded-xl p-6 group">
+          <summary class="font-aktiv text-kd-navy text-[16px] md:text-[17px] font-semibold tracking-[0.8px] cursor-pointer list-none flex items-center justify-between">
+            Why do you ask if I'm a brand or an agency?
+            <svg class="w-5 h-5 text-kd-gold transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <p class="font-montserrat text-black text-[15px] leading-[26px] font-light mt-4">
+            So I can send you follow-up content that's actually relevant. Brands and agencies face different challenges — the emails you'll get after this will be tailored to yours.
+          </p>
+        </details>
+
+        <details class="animate-on-scroll fade-in-up delay-300 bg-kd-cream/40 rounded-xl p-6 group">
+          <summary class="font-aktiv text-kd-navy text-[16px] md:text-[17px] font-semibold tracking-[0.8px] cursor-pointer list-none flex items-center justify-between">
+            What will I learn from this masterclass?
+            <svg class="w-5 h-5 text-kd-gold transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <p class="font-montserrat text-black text-[15px] leading-[26px] font-light mt-4">
+            How to automate your entire email campaign workflow — from building a marketing calendar to writing copy and launching campaigns in Klaviyo — using Claude AI and MCP connectors.
+          </p>
+        </details>
+
+        <details class="animate-on-scroll fade-in-up delay-400 bg-kd-cream/40 rounded-xl p-6 group">
+          <summary class="font-aktiv text-kd-navy text-[16px] md:text-[17px] font-semibold tracking-[0.8px] cursor-pointer list-none flex items-center justify-between">
+            Do I need technical skills to follow along?
+            <svg class="w-5 h-5 text-kd-gold transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <p class="font-montserrat text-black text-[15px] leading-[26px] font-light mt-4">
+            No. This is shown at the strategic level — what the system does and how the pieces connect. It's not a coding tutorial.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA Section -->
+  <section class="py-12 md:py-16 px-6" style="background: linear-gradient(180deg, #F6EFE6 0%, #FAFAFA 100%);">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="animate-on-scroll fade-in-up font-aktiv text-kd-navy text-[21px] md:text-[32px] font-semibold tracking-[1.2px] mb-4">
+        Ready to See It in Action?
+      </h2>
+      <p class="animate-on-scroll fade-in-up delay-100 font-montserrat text-kd-gold text-[18px] md:text-[24px] font-medium leading-[26px] md:leading-[32px] tracking-[1.4px] md:tracking-[1.8px] mb-6">
+        From marketing calendar to live Klaviyo campaigns — powered by AI.
+      </p>
+      <p class="animate-on-scroll fade-in-up delay-200 font-montserrat text-black text-[16px] md:text-[17px] leading-[26px] font-light mb-8 max-w-xl mx-auto">
+        Watch the full workflow — the same system used to drive 273% email revenue growth for a mid-size DTC brand. Free, real, no fluff.
+      </p>
+      <a
+        href="#watch"
+        class="animate-on-scroll fade-in-up delay-300 btn-navy inline-flex py-4 px-10 md:px-14 rounded-lg text-[14px] md:text-[16px] font-montserrat font-medium tracking-[1.4px] uppercase items-center gap-3"
+      >
+        Watch the Replay
+      </a>
+    </div>
+  </section>
+</Layout>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Audience type selector
+    var btnBrand = document.getElementById('mc-btn-brand');
+    var btnAgency = document.getElementById('mc-btn-agency');
+    var audienceInput = document.getElementById('mc-audience-type');
+    var audienceError = document.getElementById('mc-audience-error');
+
+    function selectAudience(type) {
+      audienceInput.value = type;
+      audienceError.classList.add('hidden');
+
+      // Reset both to dimmed state
+      btnBrand.className = 'audience-btn px-4 py-4 rounded-lg font-montserrat text-[15px] font-semibold tracking-[0.8px] uppercase transition-all bg-kd-navy text-white opacity-40';
+      btnAgency.className = 'audience-btn px-4 py-4 rounded-lg font-montserrat text-[15px] font-semibold tracking-[0.8px] uppercase transition-all bg-kd-sage text-white opacity-40';
+
+      // Highlight selected with full opacity + ring + slight scale
+      var activeBtn = type === 'brand' ? btnBrand : btnAgency;
+      var baseColor = type === 'brand' ? 'bg-kd-navy' : 'bg-kd-sage';
+      activeBtn.className = 'audience-btn px-4 py-4 rounded-lg font-montserrat text-[15px] font-semibold tracking-[0.8px] uppercase transition-all ' + baseColor + ' text-white opacity-100 ring-2 ring-offset-2 ring-kd-gold scale-[1.03]';
+    }
+
+    if (btnBrand) btnBrand.addEventListener('click', function() { selectAudience('brand'); });
+    if (btnAgency) btnAgency.addEventListener('click', function() { selectAudience('agency'); });
+
+    // Form submission
+    var form = document.getElementById('mc-form');
+    var submitBtn = document.getElementById('mc-submit');
+    var errorMsg = document.getElementById('mc-error');
+    var successMsg = document.getElementById('mc-success');
+
+    // Klaviyo list IDs
+    var webinarLeadsListId = 'VYmEWU';
+    var newsletterListId = 'RxZsvW';
+
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Honeypot check
+        var honeypot = document.getElementById('mc-website');
+        if (honeypot && honeypot.value) {
+          form.classList.add('hidden');
+          successMsg.classList.remove('hidden');
+          return;
+        }
+
+        var firstName = document.getElementById('mc-first-name').value.trim();
+        var email = document.getElementById('mc-email').value.trim();
+        var audienceType = document.getElementById('mc-audience-type').value;
+        var newsletterConsent = document.getElementById('mc-newsletter').checked;
+
+        if (!firstName || !email) return;
+
+        // Validate audience type
+        if (!audienceType) {
+          audienceError.classList.remove('hidden');
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Loading...';
+        errorMsg.classList.add('hidden');
+
+        // Step 1: Create/update profile with audience_type
+        fetch('https://a.klaviyo.com/client/profiles/?company_id=SqUgaK', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'revision': '2024-06-15'
+          },
+          body: JSON.stringify({
+            data: {
+              type: 'profile',
+              attributes: {
+                email: email,
+                first_name: firstName,
+                properties: {
+                  audience_type: audienceType,
+                  masterclass_registered: true,
+                  masterclass_topic: 'from-doer-to-director-part-one-campaigns',
+                  custom_source: 'Masterclass Landing Page'
+                }
+              }
+            }
+          })
+        })
+        .then(function() {
+          // Step 2: Subscribe to Webinar Leads list
+          return fetch('https://a.klaviyo.com/client/subscriptions/?company_id=SqUgaK', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'revision': '2024-06-15'
+            },
+            body: JSON.stringify({
+              data: {
+                type: 'subscription',
+                attributes: {
+                  custom_source: 'Masterclass Landing Page',
+                  profile: {
+                    data: {
+                      type: 'profile',
+                      attributes: {
+                        email: email,
+                        first_name: firstName
+                      }
+                    }
+                  }
+                },
+                relationships: {
+                  list: {
+                    data: {
+                      type: 'list',
+                      id: webinarLeadsListId
+                    }
+                  }
+                }
+              }
+            })
+          });
+        })
+        .then(function() {
+          // Step 3: If newsletter consent, also subscribe to Newsletter list
+          if (newsletterConsent) {
+            return fetch('https://a.klaviyo.com/client/subscriptions/?company_id=SqUgaK', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'revision': '2024-06-15'
+              },
+              body: JSON.stringify({
+                data: {
+                  type: 'subscription',
+                  attributes: {
+                    custom_source: 'Masterclass Newsletter Opt-in',
+                    profile: {
+                      data: {
+                        type: 'profile',
+                        attributes: {
+                          email: email,
+                          first_name: firstName
+                        }
+                      }
+                    }
+                  },
+                  relationships: {
+                    list: {
+                      data: {
+                        type: 'list',
+                        id: newsletterListId
+                      }
+                    }
+                  }
+                }
+              })
+            });
+          }
+        })
+        .then(function() {
+          form.classList.add('hidden');
+          successMsg.classList.remove('hidden');
+        })
+        .catch(function() {
+          errorMsg.textContent = 'Something went wrong. Please try again.';
+          errorMsg.classList.remove('hidden');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Watch the Replay';
+        });
+      });
+    }
+  });
+</script>

@@ -7,7 +7,9 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://www.kingadow.com',
-  integrations: [sitemap()],
+  integrations: [sitemap({
+    filter: (page) => !page.includes('/masterclass')
+  })],
   vite: {
     plugins: [tailwindcss()]
   }

@@ -1,6 +1,10 @@
 # Netlify Redirects — WordPress to Astro Migration
 # 301 = permanent redirect (preserves SEO equity)
 
+# Webinar Redirect
+/webinar                      /masterclass-flows  302
+/webinar/                     /masterclass-flows/ 302
+
 # Main Navigation Pages
 /about-kinga-dow              /about              301
 /about-kinga-dow/             /about/             301

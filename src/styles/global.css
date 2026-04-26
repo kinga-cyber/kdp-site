@@ -468,50 +468,52 @@
   margin: 2rem 0;
 }
 
-/* Callout box — for self-assessments, key takeaways, etc. */
-.kd-callout {
+/* Callout box — for self-assessments, key takeaways, etc.
+   Selectors prefixed with .prose-kd to win specificity over .prose-kd p / ul / li rules. */
+.prose-kd .kd-callout {
   margin: 2rem 0;
   padding: 1.75rem 1.75rem 1.5rem;
   background: var(--color-kd-navy);
   border-radius: 0.75rem;
   color: var(--color-kd-cream);
 }
-.kd-callout-title {
+.prose-kd .kd-callout-title {
   font-family: var(--font-aktiv);
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #E0B43A;
-  margin-bottom: 1rem;
+  color: #F5C842;
+  margin: 0 0 1rem 0;
 }
-.kd-callout ul {
+.prose-kd .kd-callout ul {
   list-style: none;
   padding-left: 0;
   margin: 0;
   color: var(--color-kd-cream);
 }
-.kd-callout li {
+.prose-kd .kd-callout li {
   position: relative;
-  padding-left: 2.25rem;
+  padding-left: 2.5rem;
   margin-bottom: 0.85rem;
   color: var(--color-kd-cream);
   line-height: 1.55;
   font-size: 0.95rem;
 }
-.kd-callout li::before {
+/* Override the default gold-dot bullet from .prose-kd ul li::before */
+.prose-kd .kd-callout li::before {
   content: '';
   position: absolute;
   left: 0;
-  top: 0.15em;
-  width: 1.4rem;
-  height: 1.4rem;
-  background-color: rgba(224, 180, 58, 0.18);
+  top: 0.1em;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: rgba(245, 200, 66, 0.2);
   border-radius: 50%;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E0B43A' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 6 6 18'/%3E%3Cpath d='m6 6 12 12'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F5C842' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 6 6 18'/%3E%3Cpath d='m6 6 12 12'/%3E%3C/svg%3E");
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 55%;
 }
 
 /* First paragraph after heading - no top margin */

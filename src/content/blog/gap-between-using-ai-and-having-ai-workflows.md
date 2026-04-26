@@ -1,6 +1,6 @@
 ---
 title: "The Gap Between Using AI and Having AI Workflows"
-date: 2026-04-30
+date: 2026-04-27
 author: "Kinga Dow"
 category: "AI Systems"
 excerpt: "Most agencies think they're using AI. They're in the chatbot phase. Here's what separates tool usage from connected workflows — and what the gap is costing you."

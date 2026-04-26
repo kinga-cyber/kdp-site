@@ -9,7 +9,7 @@
   const observerOptions = {
     root: null,
     rootMargin: '0px',
-    threshold: 0.1 // Trigger when 10% of element is visible
+    threshold: 0 // Trigger as soon as any part is visible (avoids tall-element gotchas on mobile)
   };
 
   const observer = new IntersectionObserver((entries) => {

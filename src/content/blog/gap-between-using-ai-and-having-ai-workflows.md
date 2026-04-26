@@ -34,7 +34,9 @@ Here's the pattern I see on nearly every call: individual team members using AI 
 
 One person uses ChatGPT for subject lines. Another uses Claude for campaign briefs. Someone else pastes flow screenshots into an AI chat and asks what's wrong. The outputs get copy-pasted into Slack, dropped into a Google Doc, or just stay in someone's browser tab.
 
-As one agency team lead put it: "Everyone on the team is using AI. But right now everyone is using it in their own unique way."
+As one agency team lead put it:
+
+> Everyone on the team is using AI. But right now everyone is using it in their own unique way.
 
 No consistency. No repeatability. No compounding.
 
@@ -60,7 +62,11 @@ It's like using Excel for a to-do list and thinking you know spreadsheets. You'r
 
 This is why so many agency owners I talk to believe they can figure AI out themselves. They're already using it, so how hard can the next step be? But "using Claude" and "having production-grade autonomous workflows" are separated by months of architecture decisions, integration work, and system design that aren't visible from the chatbot side.
 
-One agency founder told me directly: "Once you put the systems in place, you have much less work, and it's more cost effective to do it yourself." She's not wrong about the first part. But she's dramatically underestimating what "putting the systems in place" actually involves — because from where she's standing, she can't see the gap.
+One agency founder told me directly:
+
+> Once you put the systems in place, you have much less work, and it's more cost effective to do it yourself.
+
+She's not wrong about the first part. But she's dramatically underestimating what "putting the systems in place" actually involves — because from where she's standing, she can't see the gap.
 
 ## What the Gap Costs You
 
@@ -68,7 +74,11 @@ The cost isn't a dramatic failure. It's a slow bleed that compounds across clien
 
 **Hours on manual campaign setup.** Every campaign that gets built by hand — briefing designers, writing copy, setting up in Klaviyo, QA-ing the send — is time that a connected system could compress from hours to minutes. One solo agency owner I spoke with was spending 60 hours on a single client paying $3,200 a month. The math doesn't work without automation.
 
-**Flows with missed triggers nobody catches.** One team lead told me: "There's always things being missed on flows. I catch them all the time. Our email marketers are doing it all the time. I don't think it's because they're being careless — I think it's just because they don't have that level of attention." When you're managing 30+ flows per brand across 8 brands, manual auditing is functionally impossible.
+**Flows with missed triggers nobody catches.** One team lead told me:
+
+> There's always things being missed on flows. I catch them all the time. Our email marketers are doing it all the time. I don't think it's because they're being careless — I think it's just because they don't have that level of attention.
+
+When you're managing 30+ flows per brand across 8 brands, manual auditing is functionally impossible.
 
 **Audit findings that never become tasks.** You run an audit, identify 15 issues, put them in a document. Three weeks later, half of them are still sitting there because nobody turned them into assigned tasks with deadlines. The analysis happened. The execution didn't.
 
@@ -78,13 +88,18 @@ The cost isn't a dramatic failure. It's a slow bleed that compounds across clien
 
 This isn't meant as a criticism. It's a self-assessment. If most of these describe your operation, you're in the chatbot phase:
 
-- Your team uses AI individually but there's no shared system or methodology
-- You copy-paste AI outputs into other tools manually
-- Your audits are still done by opening Klaviyo and scrolling through flows one by one
-- Your marketing calendar lives in a spreadsheet that someone updates by hand
-- Your project management doesn't know what your AI conversations produced
-- You couldn't hand your AI setup to a new hire and have them replicate it on day one
-- "Using AI" at your agency means "everyone has a ChatGPT subscription"
+<div class="kd-callout">
+<p class="kd-callout-title">The Chatbot-Phase Self-Check</p>
+<ul>
+<li>Your team uses AI individually but there's no shared system or methodology</li>
+<li>You copy-paste AI outputs into other tools manually</li>
+<li>Your audits are still done by opening Klaviyo and scrolling through flows one by one</li>
+<li>Your marketing calendar lives in a spreadsheet that someone updates by hand</li>
+<li>Your project management doesn't know what your AI conversations produced</li>
+<li>You couldn't hand your AI setup to a new hire and have them replicate it on day one</li>
+<li>"Using AI" at your agency means "everyone has a ChatGPT subscription"</li>
+</ul>
+</div>
 
 If you recognized three or more of those — you're not behind. You're exactly where most agencies are right now. But "where most agencies are" is about to stop being good enough.
 

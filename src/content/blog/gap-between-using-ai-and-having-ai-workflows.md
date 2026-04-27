@@ -72,7 +72,7 @@ She's not wrong about the first part. But she's dramatically underestimating wha
 
 The cost isn't a dramatic failure. It's a slow bleed that compounds across clients and months.
 
-**Hours on manual campaign setup.** Every campaign that gets built by hand — briefing designers, writing copy, setting up in Klaviyo, QA-ing the send — is time that a connected system could compress from hours to minutes. One solo agency owner I spoke with was spending 60 hours on a single client paying $3,200 a month. The math doesn't work without automation.
+**Hours on manual campaign setup.** Every campaign that gets built by hand — briefing designers, writing copy, setting up in Klaviyo, QA-ing the send — is time that a connected system could compress from hours to minutes. One solo agency owner I spoke with was spending 55 hours on a single client paying $3,000 a month. The math doesn't work without automation.
 
 **Flows with missed triggers nobody catches.** One team lead told me:
 

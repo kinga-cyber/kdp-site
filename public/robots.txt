@@ -29,7 +29,7 @@ User-agent: cohere-ai
 Allow: /
 
 # Sitemap
-Sitemap: https://www.kingadow.com/sitemap-index.xml
+Sitemap: https://kingadow.com/sitemap-index.xml
 
 # LLM Content
-# See https://www.kingadow.com/llms.txt for AI-optimized site summary
+# See https://kingadow.com/llms.txt for AI-optimized site summary

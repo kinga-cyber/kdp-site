@@ -10,7 +10,7 @@ export async function GET(context) {
     title: "Kinga Dow Blog",
     description:
       "Retention marketing, Klaviyo strategy, and AI workflows for e-commerce brands.",
-    site: context.site ?? "https://www.kingadow.com",
+    site: context.site ?? "https://kingadow.com",
     items: posts.map((post) => ({
       title: post.data.title,
       pubDate: post.data.date,

@@ -20,7 +20,7 @@ interface Props {
 const {
   title,
   description = "AI-powered retention marketing for e-commerce. We build systems that turn browsers into repeat buyers.",
-  ogImage = "https://www.kingadow.com/images/global/global-og-image.jpg",
+  ogImage = "https://kingadow.com/images/global/global-og-image.jpg",
   ogType = "website",
   articlePublishedTime,
   articleModifiedTime,
@@ -30,7 +30,7 @@ const {
   canonicalOverride,
 } = Astro.props;
 
-const siteUrl = "https://www.kingadow.com";
+const siteUrl = "https://kingadow.com";
 const canonicalUrl =
   canonicalOverride ?? new URL(Astro.url.pathname, siteUrl).toString();
 ---
@@ -101,8 +101,8 @@ const canonicalUrl =
       "name": "Kinga Dow LLC",
       "alternateName": "Kinga Dow Productions",
       "description": "AI-powered retention marketing agency for e-commerce, specializing in Klaviyo for DTC brands.",
-      "url": "https://www.kingadow.com",
-      "logo": "https://www.kingadow.com/images/global/logo.png",
+      "url": "https://kingadow.com",
+      "logo": "https://kingadow.com/images/global/logo.png",
       "email": "hello@kingadow.com",
       "founder": { "@type": "Person", "name": "Kinga Dow" },
       "knowsAbout": [

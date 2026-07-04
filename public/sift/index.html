@@ -660,15 +660,36 @@ button {
 }
 .insp-preview {
   width: 100%;
-  /* Screen-adaptive height (was a fixed 4/3 box that stayed short & landscape-shaped on big
-     monitors, squeezing portrait phone photos into a sliver). Grows with the viewport. */
-  height: clamp(240px, 54vh, 640px);
+  /* Screen-adaptive default (was a fixed 4/3 box that stayed short & landscape-shaped on big
+     monitors). --insp-preview-h lets the user drag the handle below to grow it past the default
+     — useful on small laptops where the metadata otherwise caps how tall the image can get. */
+  height: var(--insp-preview-h, clamp(240px, 54vh, 640px));
+  flex-shrink: 0;                    /* keep its height inside the flex-column shell */
   background: var(--surface-3);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   border-bottom: 1px solid var(--border);
+}
+/* Horizontal drag handle under the image — pull down for a bigger preview (metadata scrolls below) */
+.insp-vresizer {
+  flex-shrink: 0;
+  height: 11px;
+  cursor: row-resize;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+}
+.insp-vresizer .grip {
+  width: 40px; height: 3px; border-radius: 2px;
+  background: var(--border);
+  transition: background 0.12s, box-shadow 0.12s, width 0.12s;
+}
+.insp-vresizer:hover .grip, .insp-vresizer.dragging .grip {
+  background: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent-glow);
+  width: 64px;
 }
 /* max-width/height (not forced width/height:100%) so EXIF-rotated iPhone photos size & centre
    correctly — forcing 100%×100% + object-fit mis-places rotated images. */
@@ -1210,6 +1231,7 @@ kbd {
         <button class="insp-close" id="inspClose" type="button" aria-label="Close inspector" title="Close (Esc)" onclick="closeInspector()">✕</button>
       </div>
       <div class="insp-preview" id="inspPreview"></div>
+      <div class="insp-vresizer" id="inspVResizer" title="Drag up/down to resize the image — double-click to reset"><span class="grip"></span></div>
       <div class="insp-body">
         <div class="insp-name" id="inspName"></div>
         <div class="insp-path" id="inspPath"></div>
@@ -1443,6 +1465,7 @@ document.addEventListener('click', e => {
 });
 syncThemeButton();    // reflect the saved theme on the header toggle
 setupInspectorResizer(); // drag the divider to resize the inspector + preview
+setupPreviewResizer();   // drag the handle under the image to resize the preview height
 $('sortColorSelect').innerHTML = '<option value="">Rainbow order</option>' +
   COLOR_PALETTE.map(c => `<option value="${c.key}">${esc(c.label)} first</option>`).join('');
 renderStarFilter();   // build the toolbar rating-filter stars
@@ -1554,6 +1577,48 @@ function setupInspectorResizer() {
   handle.addEventListener('dblclick', () => {
     document.documentElement.style.removeProperty('--inspector-w');
     try { localStorage.removeItem('photoOrganizer:inspectorW'); } catch (e) {}
+  });
+}
+
+// Vertical resizer under the image: drag to make the preview taller/shorter (the metadata below
+// scrolls). Lets you enlarge the image on a small laptop where height is otherwise capped.
+function previewHeightBounds() {
+  return { min: 160, max: Math.max(240, Math.round(window.innerHeight * 0.9)) };
+}
+function setPreviewHeight(px) {
+  const b = previewHeightBounds();
+  const h = Math.max(b.min, Math.min(b.max, px));
+  document.documentElement.style.setProperty('--insp-preview-h', h + 'px');
+  return h;
+}
+function setupPreviewResizer() {
+  const handle = $('inspVResizer');
+  if (!handle) return;
+  try { const saved = parseInt(localStorage.getItem('photoOrganizer:inspPreviewH') || '', 10); if (saved) setPreviewHeight(saved); } catch (e) {}
+
+  let startY = 0, startH = 0;
+  const onMove = e => setPreviewHeight(startH + (e.clientY - startY));   // drag down → taller
+  const onUp = () => {
+    document.removeEventListener('mousemove', onMove);
+    document.removeEventListener('mouseup', onUp);
+    handle.classList.remove('dragging');
+    document.body.style.userSelect = '';
+    const h = getComputedStyle(document.documentElement).getPropertyValue('--insp-preview-h').trim();
+    try { if (h) localStorage.setItem('photoOrganizer:inspPreviewH', parseInt(h, 10)); } catch (e) {}
+  };
+  handle.addEventListener('mousedown', e => {
+    e.preventDefault();
+    startY = e.clientY;
+    startH = $('inspPreview').getBoundingClientRect().height;
+    handle.classList.add('dragging');
+    document.body.style.userSelect = 'none';
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
+  });
+  // Double-click to reset to the screen-adaptive default.
+  handle.addEventListener('dblclick', () => {
+    document.documentElement.style.removeProperty('--insp-preview-h');
+    try { localStorage.removeItem('photoOrganizer:inspPreviewH'); } catch (e) {}
   });
 }
 

@@ -1719,6 +1719,25 @@ async function connectDrive() {
   await openDriveFolderPicker();
 }
 
+// The Drive session token is kept in localStorage so a reload doesn't force a re-login.
+// Tokens are short-lived (~1 h), read-only scope, and never leave this browser.
+function persistDriveToken() {
+  try { localStorage.setItem('photoOrganizer:driveToken', JSON.stringify({ t: drive.accessToken, exp: drive.tokenExpiry })); } catch (e) {}
+}
+function clearDriveToken() {
+  try { localStorage.removeItem('photoOrganizer:driveToken'); } catch (e) {}
+}
+function restoreDriveToken() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('photoOrganizer:driveToken') || 'null');
+    if (saved && saved.t && Date.now() < (saved.exp || 0) - 60000) {
+      drive.accessToken = saved.t;
+      drive.tokenExpiry = saved.exp;
+    }
+  } catch (e) {}
+}
+restoreDriveToken();
+
 let _tokenRefresh = null;   // a single in-flight token request (Google's client allows only one at a time)
 function getDriveToken(silent) {
   // Valid cached token → use it immediately.
@@ -1738,6 +1757,7 @@ function getDriveToken(silent) {
       if (resp.error) { reject(new Error(resp.error)); return; }
       drive.accessToken = resp.access_token;
       drive.tokenExpiry = Date.now() + (resp.expires_in ? resp.expires_in * 1000 : 3600000);
+      persistDriveToken();   // survive reloads — no re-login while the token is fresh
       resolve(drive.accessToken);
     };
     try { drive.tokenClient.requestAccessToken({ prompt: silent ? '' : 'consent' }); }
@@ -1786,7 +1806,7 @@ async function driveApi(pathAndQuery, opts) {
     throw err;
   }
   if (r.status === 401 && !opts.authRetried) {
-    if (drive.accessToken === usedToken) drive.accessToken = null;   // force refresh, but don't nuke a token a sibling already refreshed
+    if (drive.accessToken === usedToken) { drive.accessToken = null; clearDriveToken(); }   // force refresh, but don't nuke a token a sibling already refreshed
     await getDriveToken(true);
     return driveApi(pathAndQuery, Object.assign({}, opts, { authRetried: true }));
   }
@@ -1806,7 +1826,7 @@ async function driveFetchBlob(url, retried) {
     const usedToken = drive.accessToken;
     const r = await fetch(url, { headers: { Authorization: 'Bearer ' + drive.accessToken } });
     if (r.status === 401 && !retried) {
-      if (drive.accessToken === usedToken) drive.accessToken = null;
+      if (drive.accessToken === usedToken) { drive.accessToken = null; clearDriveToken(); }
       await getDriveToken(true);
       return driveFetchBlob(url, true);
     }

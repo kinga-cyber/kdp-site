@@ -1,0 +1,3907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Always load the latest Sift, never a stale cached copy (only affects this file, not the CDN AI models). -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Sift — smart media browser</title>
+<script>
+  // Apply saved theme before first paint to avoid a flash of the wrong theme.
+  try {
+    var t = localStorage.getItem('photoOrganizer:theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.17.0/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.0/dist/mobilenet.min.js"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0C0C0E;
+  --surface: #161619;
+  --surface-2: #1E1E22;
+  --surface-3: #26262B;
+  --border: #2A2A30;
+  --border-hover: #3A3A42;
+  --text: #E8E6E3;
+  --text-dim: #8A8A95;
+  --text-muted: #5A5A65;
+  --accent: #4ADE80;
+  --accent-dim: #22C55E;
+  --accent-glow: rgba(74, 222, 128, 0.12);
+  --warning: #FB923C;
+  --danger: #F87171;
+  --blue: #60A5FA;
+  --purple: #A78BFA;
+  --gold: #FBBF24;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --header-bg: rgba(12,12,14,0.9);
+  --shadow: 0 2px 8px rgba(0,0,0,0.35);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.45);
+}
+
+/* ── Light theme ── (everything is variable-driven, so this is just a token swap) */
+html[data-theme="light"] {
+  --bg: #F5F5F3;
+  --surface: #FFFFFF;
+  --surface-2: #F0F0ED;
+  --surface-3: #E5E5E1;
+  --border: #DCDCD7;
+  --border-hover: #C2C2BB;
+  --text: #1B1B1F;
+  --text-dim: #5E5E69;
+  --text-muted: #93939F;
+  --accent: #16A34A;
+  --accent-dim: #15803D;
+  --accent-glow: rgba(22,163,74,0.12);
+  --blue: #2563EB;
+  --purple: #7C3AED;
+  --gold: #D97706;
+  --header-bg: rgba(255,255,255,0.85);
+  --shadow: 0 2px 8px rgba(0,0,0,0.10);
+  --shadow-lg: 0 10px 28px rgba(0,0,0,0.16);
+}
+html[data-theme="light"] .btn-primary { color: #FFFFFF; }
+
+html { font-size: 16px; }  /* base scale for the whole app — all rem sizes follow this */
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  height: 100vh;
+  overflow: hidden;
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-hover); }
+
+button {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius);
+  padding: 0.5rem 0.9rem;
+  transition: all 0.15s ease;
+  color: var(--text);
+}
+.btn-primary { background: var(--accent); color: #0C0C0E; }
+.btn-primary:hover { background: var(--accent-dim); }
+.btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-secondary { background: var(--surface-2); color: var(--text); border: 1px solid var(--border); }
+.btn-secondary:hover { border-color: var(--border-hover); background: var(--surface-3); }
+.btn-ghost { background: transparent; color: var(--text-dim); padding: 0.4rem 0.6rem; }
+.btn-ghost:hover { color: var(--text); background: var(--surface-2); }
+.btn-ghost.on { color: var(--accent); background: var(--accent-glow); }
+
+/* ── Header ── */
+.header {
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.25rem;
+  background: var(--header-bg);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 1rem; }
+.logo {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.logo span { color: var(--text-dim); }
+.header-center { flex: 1; display: flex; justify-content: center; padding: 0 1rem; }
+.search-box {
+  width: 100%;
+  max-width: 420px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.4rem 1rem;
+  color: var(--text);
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.search-box:focus { border-color: var(--accent); }
+.search-box::placeholder { color: var(--text-muted); }
+.header-actions { display: flex; gap: 0.5rem; align-items: center; }
+.header-stats { display: flex; gap: 1.1rem; margin-right: 0.5rem; }
+.stat { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--text-dim); white-space: nowrap; }
+.stat strong { color: var(--text); font-weight: 500; }
+
+/* ── Layout ── */
+.app { display: flex; height: calc(100vh - 54px); }
+
+/* ── Sidebar (folder tree) ── */
+.sidebar {
+  position: relative;
+  width: 280px;
+  min-width: 200px;
+  border-right: 1px solid var(--border);
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Folder / source switcher in the sidebar header */
+.folder-switcher {
+  display: inline-flex; align-items: center; gap: 0.25rem;
+  background: transparent; border: 1px solid transparent; cursor: pointer;
+  color: var(--text-dim); font-family: inherit; padding: 0.12rem 0.3rem; border-radius: 6px;
+  max-width: 160px;
+}
+.folder-switcher:hover { background: var(--surface-2); border-color: var(--border); color: var(--text); }
+.folder-switcher #rootName { max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.folder-switcher .fs-caret { font-size: 0.6rem; color: var(--text-muted); flex-shrink: 0; }
+.switcher-menu {
+  position: absolute; top: 2.5rem; left: 0.5rem; right: 0.5rem; z-index: 60;
+  background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg); padding: 0.3rem; display: none; max-height: 62vh; overflow-y: auto;
+}
+.switcher-menu.open { display: block; }
+.switcher-menu .sm-label { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); padding: 0.4rem 0.5rem 0.25rem; }
+.switcher-menu .sm-item {
+  display: flex; align-items: center; gap: 0.5rem; padding: 0.45rem 0.5rem; border-radius: 6px;
+  cursor: pointer; font-size: 0.82rem; color: var(--text-dim); white-space: nowrap;
+}
+.switcher-menu .sm-item:hover { background: var(--surface-3); color: var(--text); }
+.switcher-menu .sm-item.current { color: var(--accent); }
+.switcher-menu .sm-item .sm-icon { flex-shrink: 0; font-size: 0.95rem; }
+.switcher-menu .sm-item .sm-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.switcher-menu .sm-item .sm-meta { font-size: 0.66rem; color: var(--text-muted); flex-shrink: 0; }
+.switcher-menu .sm-divider { height: 1px; background: var(--border); margin: 0.3rem 0.25rem; }
+.sidebar-section-title {
+  padding: 0.85rem 1rem 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.tree {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.25rem 0.4rem 1rem;
+}
+.tree-node { user-select: none; }
+.tree-row {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.32rem 0.4rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+.tree-row:hover { background: var(--surface-2); }
+.tree-row.active { background: var(--accent-glow); border-color: rgba(74,222,128,0.25); }
+.tree-row.active .tree-name { color: var(--accent); }
+.tree-toggle {
+  width: 14px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  flex-shrink: 0;
+  transition: transform 0.12s;
+}
+.tree-toggle.empty { visibility: hidden; }
+.tree-icon { font-size: 0.85rem; flex-shrink: 0; opacity: 0.85; }
+.tree-name { overflow: hidden; text-overflow: ellipsis; flex: 1; }
+.tree-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.tree-children { overflow: hidden; }
+
+/* ── Main ── */
+.main { flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+
+/* Toolbar */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 1rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  flex-wrap: wrap;
+}
+.crumbs {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 120px;
+}
+.crumbs .seg { cursor: pointer; }
+.crumbs .seg:hover { color: var(--accent); }
+.crumbs .sep { color: var(--text-muted); }
+.toolbar-group { display: flex; align-items: center; gap: 0.4rem; }
+.toolbar .divider { width: 1px; height: 22px; background: var(--border); }
+.toggle-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  cursor: pointer;
+  padding: 0.35rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-2);
+  white-space: nowrap;
+}
+.toggle-pill.on { color: var(--accent); border-color: rgba(74,222,128,0.35); background: var(--accent-glow); }
+.toggle-pill input { display: none; }
+.mini-select {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.32rem 0.5rem;
+  color: var(--text);
+  outline: none;
+}
+.size-slider { width: 110px; accent-color: var(--accent); cursor: pointer; }
+.size-label { font-size: 0.78rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
+
+/* Filter chips row */
+.filter-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  overflow-x: auto;
+  min-height: 44px;
+}
+.filter-row.hidden { display: none; }
+.chip {
+  font-size: 0.8rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.12s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.chip:hover { border-color: var(--border-hover); color: var(--text); }
+.chip.active { background: var(--accent-glow); border-color: rgba(74,222,128,0.35); color: var(--accent); }
+.chip .chip-count { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; opacity: 0.7; }
+.filter-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-right: 0.2rem; flex-shrink: 0; }
+
+/* Content / grid */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 1.1rem 5rem;
+  position: relative;
+}
+.group-section { margin-bottom: 1.6rem; }
+.group-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.7rem;
+  position: sticky;
+  top: -1rem;
+  background: var(--bg);
+  padding: 0.4rem 0;
+  z-index: 5;
+}
+.group-title { font-size: 0.82rem; font-weight: 600; }
+.group-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 500;
+  padding: 0.18rem 0.45rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: var(--surface-3);
+  color: var(--text-dim);
+}
+.group-count { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--text-muted); }
+.group-line { flex: 1; height: 1px; background: var(--border); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--thumb, 170px), 1fr));
+  gap: 0.6rem;
+}
+.card {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  background: var(--surface-2);
+  transition: border-color 0.12s, transform 0.12s, box-shadow 0.12s;
+}
+.card:hover { border-color: var(--border-hover); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.card.selected { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent-glow), var(--shadow); }
+.card.selected:hover { box-shadow: 0 0 0 1px var(--accent-glow), var(--shadow-lg); }
+/* Best-frame culling */
+.card.keeper { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold), var(--shadow); }
+.card.dup { opacity: 0.42; filter: saturate(0.85); }
+.card.dup:hover { opacity: 1; filter: none; }
+.card .q-badge {
+  position: absolute; bottom: 1.85rem; left: 0.35rem;
+  font-size: 0.6rem; padding: 0.1rem 0.34rem; border-radius: 3px;
+  background: rgba(0,0,0,0.7); color: #fff;
+  font-family: 'JetBrains Mono', monospace; z-index: 6;
+}
+.card .q-badge.good { color: var(--gold); }
+.card .q-badge.low  { color: var(--danger); }
+.card .best-badge {
+  position: absolute; top: 0.35rem; left: 3.9rem;
+  font-size: 0.56rem; font-weight: 700; letter-spacing: 0.03em;
+  padding: 0.14rem 0.4rem; border-radius: 3px;
+  background: var(--gold); color: #0C0C0E; z-index: 7;
+  font-family: 'JetBrains Mono', monospace; white-space: nowrap;
+}
+.card .promote-badge {
+  position: absolute; top: 0.35rem; left: 3.9rem;
+  font-size: 0.56rem; padding: 0.14rem 0.4rem; border-radius: 3px;
+  background: rgba(0,0,0,0.72); color: var(--gold); cursor: pointer;
+  opacity: 0; transition: opacity .12s; z-index: 7;
+  font-family: 'JetBrains Mono', monospace; white-space: nowrap;
+}
+.card.dup:hover .promote-badge { opacity: 1; }
+.card .thumb-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1/1;
+  background: var(--surface-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.card img, .card video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.card .placeholder { font-size: 1.6rem; opacity: 0.3; }
+.card .play-badge {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 2.2rem; height: 2.2rem;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  font-size: 0.95rem;
+  pointer-events: none;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+.card .ext-badge {
+  position: absolute;
+  top: 0.35rem; right: 0.35rem;
+  font-size: 0.6rem;
+  padding: 0.12rem 0.32rem;
+  border-radius: 3px;
+  background: rgba(0,0,0,0.65);
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+}
+.card .dur-badge {
+  position: absolute;
+  bottom: 1.85rem; right: 0.35rem;
+  font-size: 0.62rem;
+  padding: 0.1rem 0.34rem;
+  border-radius: 3px;
+  background: rgba(0,0,0,0.7);
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  z-index: 6;
+}
+.card .star-badge {
+  position: absolute;
+  top: 0.32rem; left: 2.15rem;   /* sits to the right of the select checkbox, no overlap */
+  font-size: 0.98rem;
+  line-height: 1;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.85);
+  opacity: 0;
+  cursor: pointer;
+  z-index: 6;
+}
+.card:hover .star-badge { opacity: 0.85; }
+.card .star-badge.on { opacity: 1; color: var(--gold); }
+.card .caption {
+  padding: 0.4rem 0.5rem;
+  font-size: 0.74rem;
+  color: var(--text-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: 'JetBrains Mono', monospace;
+}
+.card .tags-line {
+  position: absolute;
+  bottom: 1.85rem; left: 0; right: 0;
+  display: flex;
+  gap: 0.2rem;
+  padding: 0 0.4rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  transition: opacity 0.12s;
+}
+.card:hover .tags-line { opacity: 1; }
+.card .tag {
+  font-size: 0.55rem;
+  padding: 0.08rem 0.3rem;
+  border-radius: 3px;
+  background: rgba(0,0,0,0.7);
+  color: var(--accent);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Empty / welcome */
+.welcome {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 2rem;
+}
+.welcome .big-icon { font-size: 3.5rem; margin-bottom: 1.2rem; opacity: 0.5; }
+.welcome h1 { font-size: 1.3rem; font-weight: 600; margin-bottom: 0.6rem; }
+.welcome p { color: var(--text-dim); font-size: 0.88rem; line-height: 1.7; max-width: 520px; margin-bottom: 1.5rem; }
+.welcome .hint { font-size: 0.74rem; color: var(--text-muted); margin-top: 1.2rem; max-width: 540px; line-height: 1.6; }
+.welcome .formats { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--text-muted); margin-top: 0.8rem; }
+
+/* Recent folders on the welcome screen */
+.recents { width: 100%; max-width: 640px; margin: 0 auto 1.6rem; text-align: left; }
+.recents-label {
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--text-muted); margin: 0 0.2rem 0.6rem; display: flex; align-items: center; gap: 0.5rem;
+}
+.recents-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.55rem; }
+@media (max-width: 720px) { .recents-grid { grid-template-columns: 1fr; } }
+.recent-card {
+  display: flex; align-items: center; gap: 0.7rem; text-align: left;
+  background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 0.65rem 0.75rem; cursor: pointer; transition: all 0.15s ease; position: relative;
+}
+.recent-card:hover { border-color: var(--accent); background: var(--accent-glow); }
+.recent-card .rc-icon { font-size: 1.3rem; flex-shrink: 0; line-height: 1; }
+.recent-card .rc-body { flex: 1; min-width: 0; }
+.recent-card .rc-name {
+  font-size: 0.85rem; font-weight: 600; color: var(--text);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.recent-card .rc-meta { font-size: 0.68rem; color: var(--text-dim); margin-top: 0.15rem; }
+.recent-card .rc-remove {
+  position: absolute; top: 0.3rem; right: 0.4rem; width: 18px; height: 18px;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; line-height: 1; color: var(--text-muted); opacity: 0;
+  background: var(--surface-3); transition: opacity 0.15s ease, color 0.15s ease;
+}
+.recent-card:hover .rc-remove { opacity: 1; }
+.recent-card .rc-remove:hover { color: var(--danger); }
+
+/* Full-window drag-and-drop overlay */
+.drop-overlay {
+  position: fixed; inset: 0; z-index: 9000; display: none;
+  align-items: center; justify-content: center;
+  background: rgba(12, 12, 14, 0.82); backdrop-filter: blur(6px);
+  pointer-events: none;
+}
+.drop-overlay.show { display: flex; }
+.drop-overlay .drop-card {
+  border: 2px dashed var(--accent); border-radius: var(--radius-lg);
+  padding: 2.6rem 3.4rem; text-align: center; background: var(--accent-glow);
+}
+.drop-overlay .drop-card .drop-icon { font-size: 3rem; margin-bottom: 0.6rem; }
+.drop-overlay .drop-card h2 { font-size: 1.1rem; font-weight: 600; color: var(--text); }
+.drop-overlay .drop-card p { font-size: 0.8rem; color: var(--text-dim); margin-top: 0.3rem; }
+.empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4rem 2rem; text-align: center; }
+.empty-state .icon { font-size: 2.2rem; opacity: 0.3; margin-bottom: 0.8rem; }
+.empty-state p { color: var(--text-dim); font-size: 0.85rem; }
+
+/* ── Inspector (right panel) ── */
+.inspector {
+  width: var(--inspector-w, 300px);
+  min-width: 240px;
+  flex-shrink: 0;
+  background: transparent;          /* only the inset card shows — no longer glued to the edge */
+  display: none;
+  flex-direction: column;
+  overflow: hidden;                 /* the inner shell is the scroller */
+  padding: 0.5rem 0.5rem 0.5rem 0;  /* breathing room on right + bottom (left gutter = resizer) */
+}
+.inspector.open { display: flex; }
+
+/* Inner rounded card that holds everything — gives a deliberate floating-panel feel and is the scroll container */
+.insp-shell {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+/* Sticky header: filename + an always-visible close button */
+.insp-header {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 0.7rem;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+}
+.insp-title {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.95rem;
+  font-weight: 650;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.insp-close {
+  flex-shrink: 0;
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; line-height: 1;
+  color: var(--text-dim);
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: color 0.12s, background 0.12s, border-color 0.12s;
+}
+.insp-close:hover { color: var(--danger); border-color: var(--danger); background: rgba(248,113,113,0.10); }
+
+/* Drag handle between the grid and the inspector */
+.resizer {
+  width: 7px;
+  flex-shrink: 0;
+  cursor: col-resize;
+  background: transparent;
+  position: relative;
+  display: none;            /* shown only when the inspector is docked + open */
+  z-index: 40;
+}
+.resizer::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: 3px;
+  width: 1px;
+  background: var(--border);
+  transition: background 0.12s, box-shadow 0.12s;
+}
+.resizer.show { display: block; }
+.resizer:hover::after, .resizer.dragging::after {
+  background: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent-glow);
+}
+.insp-preview {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: var(--surface-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+.insp-preview img, .insp-preview video { width: 100%; height: 100%; object-fit: contain; }
+.insp-body { padding: 1rem; }
+.insp-name { display: none; }   /* filename now lives in the sticky header */
+.insp-path {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  word-break: break-all;
+  margin-bottom: 0.9rem;
+}
+.insp-meta { display: grid; grid-template-columns: 84px 1fr; gap: 0.5rem 0.7rem; font-size: 0.82rem; margin-bottom: 1.1rem; }
+.insp-meta dt { color: var(--text-muted); }
+.insp-meta a { color: var(--blue); text-decoration: none; }
+.insp-meta a:hover { text-decoration: underline; }
+.insp-meta dd { color: var(--text); text-align: left; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; word-break: break-word; overflow-wrap: anywhere; min-width: 0; }
+.insp-block { margin-bottom: 1rem; }
+.insp-block-title { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 0.5rem; }
+.rating-stars { display: flex; gap: 0.15rem; font-size: 1.1rem; }
+.rating-stars .s { cursor: pointer; color: var(--text-muted); transition: color 0.1s; }
+.rating-stars .s.on { color: var(--gold); }
+.insp-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.insp-tag {
+  font-size: 0.74rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+}
+.insp-note {
+  width: 100%;
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.55rem;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.86rem;
+  outline: none;
+  resize: vertical;
+  min-height: 64px;
+}
+.insp-note:focus { border-color: var(--accent); }
+
+/* ── Lightbox ── */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(8,8,10,0.96);
+  backdrop-filter: blur(10px);
+  z-index: 400;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.lightbox.open { display: flex; }
+.lightbox img, .lightbox video { max-width: 92vw; max-height: 82vh; object-fit: contain; border-radius: 6px; }
+.lb-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+}
+.lb-name { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text); }
+.lb-nav {
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  background: rgba(0,0,0,0.4);
+  border: 1px solid var(--border);
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.lb-nav:hover { background: var(--surface-3); }
+.lb-prev { left: 1.5rem; }
+.lb-next { right: 1.5rem; }
+.lb-foot { position: absolute; bottom: 1.2rem; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--text-dim); }
+
+/* ── Processing overlay ── */
+.processing {
+  position: fixed;
+  inset: 0;
+  background: rgba(12,12,14,0.93);
+  backdrop-filter: blur(8px);
+  z-index: 350;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.processing.active { display: flex; }
+.spinner {
+  width: 46px; height: 46px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 1.3rem;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.proc-text { font-size: 0.95rem; margin-bottom: 0.3rem; }
+.proc-sub { font-size: 0.78rem; color: var(--text-dim); }
+.proc-bar-out { width: 320px; height: 4px; background: var(--surface-3); border-radius: 2px; margin-top: 1.3rem; overflow: hidden; }
+.proc-bar-in { height: 100%; background: var(--accent); width: 0%; transition: width 0.25s ease; }
+.proc-cancel { margin-top: 1.3rem; }
+
+/* ── Toast ── */
+.toast {
+  position: fixed;
+  bottom: 1.4rem; right: 1.4rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.7rem 1rem;
+  font-size: 0.8rem;
+  z-index: 500;
+  transform: translateY(120px);
+  opacity: 0;
+  transition: all 0.3s ease;
+  max-width: 360px;
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast.success { border-color: rgba(74,222,128,0.35); }
+.toast.error { border-color: rgba(248,113,113,0.35); }
+
+.no-fsa {
+  background: rgba(251,146,60,0.1);
+  border: 1px solid rgba(251,146,60,0.3);
+  color: var(--warning);
+  border-radius: var(--radius);
+  padding: 0.7rem 1rem;
+  font-size: 0.78rem;
+  margin-top: 1rem;
+  max-width: 520px;
+  line-height: 1.6;
+}
+
+/* ── Modal ── */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(8,8,10,0.8);
+  backdrop-filter: blur(6px);
+  z-index: 450;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+.modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  width: 560px;
+  max-width: 100%;
+  max-height: 86vh;
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+.modal h2 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.3rem; }
+.modal .sub { font-size: 0.8rem; color: var(--text-dim); margin-bottom: 1rem; line-height: 1.6; }
+.modal ol { margin: 0 0 1rem 1.1rem; font-size: 0.8rem; color: var(--text-dim); line-height: 1.8; }
+.modal ol code, .modal .sub code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  background: var(--surface-2);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  color: var(--accent);
+  word-break: break-all;
+}
+.modal a { color: var(--blue); }
+.modal label { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 0.4rem; }
+.modal input[type=text] {
+  width: 100%;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.55rem 0.7rem;
+  color: var(--text);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.76rem;
+  outline: none;
+}
+.modal input[type=text]:focus { border-color: var(--accent); }
+.modal-actions { display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1.3rem; }
+.folder-pick-list { display: flex; flex-direction: column; gap: 0.2rem; margin: 0.3rem 0 0.5rem; max-height: 50vh; overflow-y: auto; padding-right: 0.2rem; }
+.folder-pick {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  cursor: pointer;
+  font-size: 0.82rem;
+  transition: border-color 0.12s, background 0.12s;
+}
+.folder-pick:hover { border-color: var(--accent); background: var(--accent-glow); }
+.folder-pick .fp-icon { font-size: 1rem; flex-shrink: 0; }
+.folder-pick .fp-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.folder-pick .fp-caret { color: var(--text-muted); font-size: 0.85rem; flex-shrink: 0; }
+.folder-pick .fp-scan {
+  opacity: 0; flex-shrink: 0;
+  padding: 0.2rem 0.55rem; font-size: 0.7rem;
+  background: var(--surface-3); border: 1px solid var(--border); border-radius: 6px;
+  color: var(--text-dim); transition: opacity 0.12s, color 0.12s, border-color 0.12s;
+}
+.folder-pick:hover .fp-scan { opacity: 1; }
+.folder-pick .fp-scan:hover { border-color: var(--accent); color: var(--accent); }
+.picker-search {
+  width: 100%; margin-bottom: 0.6rem;
+  background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 0.5rem 0.75rem; color: var(--text); font-size: 0.82rem; outline: none;
+}
+.picker-search:focus { border-color: var(--accent); }
+.picker-search::placeholder { color: var(--text-muted); }
+.picker-section {
+  display: flex; align-items: center; gap: 0.45rem;
+  padding: 0.55rem 0.2rem 0.3rem; cursor: pointer; user-select: none;
+}
+.picker-section.static { cursor: default; }
+.picker-section .ps-caret { color: var(--text-muted); font-size: 0.7rem; width: 12px; flex-shrink: 0; }
+.picker-section .ps-count { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--text-muted); }
+.picker-section:hover .filter-label { color: var(--text-dim); }
+.drive-pill {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--blue);
+  background: rgba(96,165,250,0.1);
+  border: 1px solid rgba(96,165,250,0.25);
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+}
+
+/* ── Multi-select checkbox on cards ── */
+.card .check {
+  position: absolute;
+  top: 0.35rem; left: 0.35rem;
+  width: 22px; height: 22px;
+  border-radius: 6px;
+  border: 2px solid rgba(255,255,255,0.7);
+  background: rgba(0,0,0,0.45);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; color: #fff;
+  opacity: 0; transition: opacity 0.12s;
+  z-index: 6;
+}
+.card:hover .check { opacity: 1; }
+.card.checked .check { opacity: 1; background: var(--accent); border-color: var(--accent); color: #0C0C0E; }
+.card.checked { border-color: var(--accent); }
+.card.checked .thumb-wrap { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+/* ── Selection action bar ── */
+.selbar {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 0.6rem 1.1rem;
+  display: none;
+  align-items: center;
+  gap: 0.8rem;
+  z-index: 30;
+}
+.selbar.on { display: flex; }
+.selbar .count { font-size: 0.82rem; color: var(--text); }
+.selbar .count strong { color: var(--accent); }
+.selbar .spacer { flex: 1; }
+
+/* ── Responsive: on narrow windows the inspector floats over the grid instead of
+   competing for column width (which was clipping its values off the right edge) ── */
+@media (max-width: 1024px) {
+  .inspector.open {
+    position: fixed;
+    top: 54px; right: 0; bottom: 0;
+    width: min(348px, 92vw);   /* +8px to absorb the gutter */
+    z-index: 70;
+    padding: 0.5rem;           /* even gutter on all sides while floating */
+  }
+  .inspector.open .insp-shell { box-shadow: var(--shadow-lg); }
+  /* No docked column to resize when the inspector floats */
+  .resizer { display: none !important; }
+}
+@media (max-width: 720px) {
+  .sidebar { width: 210px; min-width: 180px; }
+  .toolbar { gap: 0.4rem; }
+}
+@media (max-width: 900px) {
+  /* Free up header room for the action buttons on tighter windows */
+  .header-stats { display: none !important; }
+}
+
+/* The sticky .insp-header keeps the filename + close button visible while scrolling. */
+
+/* Keyboard-shortcuts overlay */
+.shortcuts { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem 1.4rem; margin-top: 0.4rem; }
+@media (max-width: 520px) { .shortcuts { grid-template-columns: 1fr; } }
+.shortcut { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; font-size: 0.8rem; color: var(--text-dim); }
+.shortcut .sc-desc { min-width: 0; }
+kbd {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--text);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  padding: 0.12rem 0.4rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Colour swatch dots (filter chips, card captions, inspector) */
+.swatch {
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(128,128,128,0.5);
+  vertical-align: middle;
+  margin-right: 0.3rem;
+  flex-shrink: 0;
+}
+.swatch.lg { width: 18px; height: 18px; margin-right: 0; }
+.chip .swatch { margin-right: 0; }
+
+/* Inspector multi-colour picker */
+.color-pick-grid { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.color-pick {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  font-size: 0.7rem; padding: 0.2rem 0.5rem;
+  border: 1px solid var(--border); border-radius: 999px;
+  background: var(--surface-2); color: var(--text-dim);
+  cursor: pointer; transition: all 0.12s;
+}
+.color-pick:hover { border-color: var(--border-hover); color: var(--text); }
+.color-pick.on { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+.color-pick .swatch { margin-right: 0; }
+
+/* Rating (star) filter in the toolbar */
+.star-filter { display: inline-flex; align-items: center; gap: 0.35rem; }
+.sf-stars { display: inline-flex; align-items: center; gap: 0.05rem; font-size: 0.95rem; line-height: 1; }
+.sf-stars .sf { cursor: pointer; color: var(--text-muted); transition: color 0.1s; }
+.sf-stars .sf:hover, .sf-stars .sf.on { color: var(--gold); }
+.sf-stars .sf-plus { font-size: 0.62rem; color: var(--gold); margin-left: 0.1rem; font-family: 'JetBrains Mono', monospace; }
+.sf-stars .sf-clear { cursor: pointer; color: var(--text-muted); font-size: 0.7rem; margin-left: 0.25rem; }
+.sf-stars .sf-clear:hover { color: var(--danger); }
+
+/* Semantic search toggle in the header */
+.header-center { display: flex; align-items: center; gap: 0.4rem; }
+.smart-toggle { font-size: 0.95rem; line-height: 1; padding: 0.4rem 0.55rem; border-radius: 999px; }
+.smart-toggle.on { color: var(--accent); background: var(--accent-glow); }
+.search-box.smart { border-color: var(--accent); }
+
+/* Removable AI tags in the inspector */
+.insp-tags { align-items: center; }
+.insp-tag.removable { cursor: pointer; transition: all 0.12s; }
+.insp-tag.removable.cat { border-color: rgba(74,222,128,0.35); color: var(--accent); }
+.insp-tag.removable:hover { border-color: var(--danger); color: var(--danger); background: rgba(248,113,113,0.08); }
+.insp-tag.removable .rm { opacity: 0.45; font-size: 0.58rem; }
+.insp-tag.removable:hover .rm { opacity: 1; }
+.insp-tag.clear-all { cursor: pointer; border-style: dashed; color: var(--text-muted); }
+.insp-tag.clear-all:hover { color: var(--danger); border-color: var(--danger); }
+.chip.chip-danger { color: var(--text-muted); border-style: dashed; }
+.chip.chip-danger:hover { color: var(--danger); border-color: var(--danger); background: rgba(248,113,113,0.08); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="logo">Sift <span>/ media</span></div>
+  </div>
+  <div class="header-center">
+    <input type="text" class="search-box" id="searchBox" placeholder="Search by file name…" />
+    <button class="btn-ghost smart-toggle" id="smartToggle" onclick="toggleSmart()" title="AI semantic search — find images by describing them (runs in your browser)">✨</button>
+  </div>
+  <div class="header-actions">
+    <div class="header-stats" id="headerStats" style="display:none;">
+      <div class="stat"><strong id="statImages">0</strong> images</div>
+      <div class="stat"><strong id="statFolders">0</strong> folders</div>
+      <div class="stat"><strong id="statTagged">0</strong> tagged</div>
+    </div>
+    <span class="drive-pill" id="drivePill" style="display:none;"></span>
+    <button class="btn-secondary" id="reopenBtn" style="display:none;" onclick="reopenSource()">Change Folder</button>
+    <button class="btn-ghost" id="shortcutsBtn" onclick="openShortcuts()" title="Keyboard shortcuts (press ?)">⌘</button>
+    <button class="btn-ghost" id="themeToggle" onclick="toggleTheme()" title="Toggle light / dark theme">🌙</button>
+    <button class="btn-ghost" id="driveSettingsBtn" onclick="openDriveSetupModal(location.protocol==='file:')" title="Change / re-enter Google Drive Client ID">⚙</button>
+    <button class="btn-secondary" id="driveBtn" onclick="connectDrive()">☁️ Google Drive</button>
+    <button class="btn-primary" id="openBtn" onclick="openFolder()">📂 Open Folder</button>
+  </div>
+</div>
+
+<div class="app">
+  <!-- Folder tree -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-section-title">
+      <span>Folders</span>
+      <button class="folder-switcher" id="folderSwitcher" style="display:none;" onclick="toggleSwitcher(event)" title="Switch folder or source">
+        <span id="rootName" style="text-transform:none;letter-spacing:0;"></span>
+        <span class="fs-caret">▾</span>
+      </button>
+    </div>
+    <div class="switcher-menu" id="switcherMenu"></div>
+    <div class="tree" id="tree">
+      <div style="padding:1rem;color:var(--text-muted);font-size:0.78rem;line-height:1.6;">
+        No folder open yet.<br>Click <strong style="color:var(--text-dim)">Open Folder</strong> to point at a project — including your Google&nbsp;Drive folder.
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main">
+    <div class="toolbar" id="toolbar" style="display:none;">
+      <div class="crumbs" id="crumbs"></div>
+      <div class="toolbar-group">
+        <label class="toggle-pill" id="subfoldersPill" onclick="toggleSubfolders()">
+          <span id="subCheck">☐</span> Include subfolders
+        </label>
+      </div>
+      <div class="divider"></div>
+      <div class="toolbar-group">
+        <span class="size-label">Group</span>
+        <select class="mini-select" id="groupSelect" onchange="setGroupBy(this.value)">
+          <option value="none">None</option>
+          <option value="folder">Folder</option>
+          <option value="category">AI category</option>
+          <option value="color">Colour</option>
+          <option value="cluster">Near-dup cluster</option>
+          <option value="type">File type</option>
+        </select>
+      </div>
+      <div class="toolbar-group">
+        <span class="size-label">Sort</span>
+        <select class="mini-select" id="sortSelect" onchange="setSort(this.value)">
+          <option value="name">Name</option>
+          <option value="name-desc">Name ↓</option>
+          <option value="modified">Newest</option>
+          <option value="modified-asc">Oldest</option>
+          <option value="size">Largest</option>
+          <option value="rating">Rating</option>
+          <option value="color">Colour</option>
+          <option value="quality">Quality</option>
+        </select>
+        <select class="mini-select" id="sortColorSelect" style="display:none;" onchange="setSortColor(this.value)" title="Lead with this colour, then nearest shades"></select>
+      </div>
+      <div class="divider"></div>
+      <div class="toolbar-group">
+        <span class="size-label">Size</span>
+        <input type="range" class="size-slider" id="sizeSlider" min="90" max="320" value="170" oninput="setThumbSize(this.value)">
+      </div>
+      <div class="divider"></div>
+      <div class="toolbar-group">
+        <span class="star-filter" title="Filter by rating">
+          <span class="size-label">Rating</span>
+          <span class="sf-stars" id="sfStars"></span>
+        </span>
+        <button class="btn-secondary" id="refreshBtn" style="display:none;" onclick="refreshDrive()" title="Re-scan this Drive folder for new or changed photos">↻ Refresh</button>
+        <button class="btn-secondary" id="tagBtn" onclick="autoTag()" title="Run on-device AI over the images currently shown. It looks at each picture and labels what's in it (people, interiors, food, product, etc.), then adds category filter chips so you can jump to a type. Runs in your browser; nothing is uploaded.">✨ Auto-tag view</button>
+        <button class="btn-secondary" id="colorBtn" onclick="tagColors()" title="Match each image's garment / subject colour to your palette (Sky blue, Dusty pink, Army green, etc.), then add colour filter chips. Runs in your browser; nothing is uploaded.">🎨 Tag colours</button>
+        <button class="btn-secondary" id="cullBtn" onclick="findBestShots()" title="Group near-identical photos & video clips, score each for sharpness and exposure, and pick the single best shot from each pile. Runs in your browser; nothing is uploaded.">⭐ Find best shots</button>
+        <label class="toggle-pill" id="bestOnlyPill" style="display:none;" onclick="toggleBestOnly()"><span id="bestOnlyCheck">☐</span> Best only</label>
+      </div>
+    </div>
+
+    <div class="filter-row hidden" id="filterRow"></div>
+
+    <div class="content" id="content">
+      <div class="welcome" id="welcome">
+        <div class="big-icon">🗂️</div>
+        <h1>Browse your photos like Adobe Bridge</h1>
+        <p>Open a project folder once and see <strong>every image inside it</strong> — no more clicking through five levels of subfolders. <strong>Drag a folder anywhere onto this window</strong>, or pick one below.</p>
+
+        <div class="recents" id="recentsWrap" style="display:none;">
+          <div class="recents-label">Jump back in</div>
+          <div class="recents-grid" id="recentsGrid"></div>
+        </div>
+
+        <div style="display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:center;">
+          <button class="btn-primary" onclick="openFolder()" style="padding:0.7rem 1.4rem;font-size:0.9rem;">📂 Open a Folder</button>
+          <button class="btn-secondary" onclick="connectDrive()" style="padding:0.7rem 1.4rem;font-size:0.9rem;">☁️ Connect Google Drive</button>
+        </div>
+        <div class="formats">JPG · PNG · WEBP · GIF · BMP · SVG · MP4 · MOV · WEBM</div>
+        <div class="hint">
+          <strong style="color:var(--text-dim)">Using Google Drive?</strong> Install <em>Google&nbsp;Drive for Desktop</em>, let it sync, then open that folder here — every nested project folder becomes instantly browsable. Nothing is uploaded; everything stays on your machine.
+        </div>
+        <div class="no-fsa" id="noFsa" style="display:none;">
+          ⚠️ This browser doesn't support the File System Access API. Please use <strong>Chrome</strong>, <strong>Edge</strong>, or another Chromium browser to open folders directly.
+        </div>
+      </div>
+    </div>
+
+    <div class="selbar" id="selbar">
+      <span class="count"><strong id="selCount">0</strong> selected</span>
+      <button class="btn-ghost" onclick="selectAllInView()">Select all in view</button>
+      <button class="btn-ghost" onclick="clearChecked()">Clear</button>
+      <span class="spacer"></span>
+      <button class="btn-primary" id="downloadBtn" onclick="downloadSelected()">⬇ Download</button>
+    </div>
+  </div>
+
+  <!-- Drag handle to resize the inspector (and the preview image) -->
+  <div class="resizer" id="inspResizer" title="Drag to resize — wider shows a bigger preview"></div>
+
+  <!-- Inspector -->
+  <aside class="inspector" id="inspector">
+    <div class="insp-shell">
+      <div class="insp-header">
+        <div class="insp-title" id="inspTitle"></div>
+        <button class="insp-close" id="inspClose" type="button" aria-label="Close inspector" title="Close (Esc)" onclick="closeInspector()">✕</button>
+      </div>
+      <div class="insp-preview" id="inspPreview"></div>
+      <div class="insp-body">
+        <div class="insp-name" id="inspName"></div>
+        <div class="insp-path" id="inspPath"></div>
+        <dl class="insp-meta" id="inspMeta"></dl>
+        <div class="insp-block">
+          <div class="insp-block-title">Rating</div>
+          <div class="rating-stars" id="inspStars"></div>
+        </div>
+        <div class="insp-block">
+          <div class="insp-block-title">Colour</div>
+          <div class="insp-color" id="inspColor"></div>
+        </div>
+        <div class="insp-block">
+          <div class="insp-block-title">AI Tags</div>
+          <div class="insp-tags" id="inspTags"><span style="color:var(--text-muted);font-size:0.74rem;">Not tagged yet</span></div>
+        </div>
+        <div class="insp-block" id="inspCullBlock" style="display:none;">
+          <div class="insp-block-title">Best shots</div>
+          <div class="insp-cull" id="inspCull"></div>
+        </div>
+        <div class="insp-block">
+          <div class="insp-block-title">Note</div>
+          <textarea class="insp-note" id="inspNote" placeholder="Add a note for this image…"></textarea>
+        </div>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <div class="lb-bar">
+    <span class="lb-name" id="lbName"></span>
+    <span style="display:flex;align-items:center;gap:0.4rem;">
+      <button class="btn-ghost" id="lbSelect" onclick="lbToggleSelect()" title="Select this file for download (adds it to the selection bar)">☐ Select</button>
+      <button class="btn-ghost" id="lbDownload" onclick="lbDownloadCurrent()" title="Download this file now">⬇</button>
+      <button class="btn-ghost" onclick="closeLightbox()" style="font-size:1.1rem;">✕</button>
+    </span>
+  </div>
+  <button class="lb-nav lb-prev" onclick="lbStep(-1)">‹</button>
+  <div id="lbStage"></div>
+  <button class="lb-nav lb-next" onclick="lbStep(1)">›</button>
+  <div class="lb-foot" id="lbFoot"></div>
+</div>
+
+<!-- Processing -->
+<div class="processing" id="processing">
+  <div class="spinner"></div>
+  <div class="proc-text" id="procText">Working…</div>
+  <div class="proc-sub" id="procSub"></div>
+  <div class="proc-bar-out"><div class="proc-bar-in" id="procBar"></div></div>
+  <button class="btn-secondary proc-cancel" id="procCancel" style="display:none;" onclick="cancelWork()">Cancel</button>
+</div>
+
+<div id="modalRoot"></div>
+<div class="toast" id="toast"></div>
+
+<div class="drop-overlay" id="dropOverlay">
+  <div class="drop-card">
+    <div class="drop-icon">📂</div>
+    <h2>Drop a folder to open it</h2>
+    <p>Everything inside — including nested subfolders — becomes browsable.</p>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════════════
+//  Sift — Adobe Bridge–style browser for photos & video
+//  (forked from the original Photo Sorter; rebuilt for
+//   nested-folder browsing + AI tagging over local/Drive)
+// ════════════════════════════════════════════════════════
+
+// ── State ──
+const state = {
+  rootHandle: null,
+  rootName: '',
+  tree: null,              // root folder node
+  nodesByPath: new Map(),  // path -> folder node
+  files: [],               // all file entries (flat)
+  filesByPath: new Map(),  // path -> file entry
+  currentPath: '',         // selected folder path ('' = root)
+  includeSubfolders: false,
+  thumb: 170,
+  groupBy: 'none',
+  sort: 'name',
+  sortColor: null,         // when sorting by colour, lead with this palette key (null = rainbow)
+  search: '',
+  minStars: 0,             // rating filter: show only images rated ≥ this (0 = off)
+  activeCategory: null,    // AI category filter
+  activeColor: null,       // colour filter (palette key)
+  activeType: null,        // file-type filter (extension, e.g. 'jpg'/'tif'/'psd'/'mp4')
+  smart: false,            // semantic-search mode (CLIP)
+  smartQuery: '',
+  smartScores: null,       // Map path -> similarity for the current query
+  embeddings: new Map(),   // path -> Float32Array (CLIP image embeddings for this folder)
+  selectedPath: null,
+  model: null,
+  meta: {},                // persisted per-file: {rating, note, tags, category}
+  viewList: [],            // currently rendered file entries (for lightbox nav)
+  cancel: false,
+  source: 'fs',            // 'fs' (File System Access) | 'drive' (Google Drive API)
+  checked: new Set(),      // paths picked for multi-select download
+  cull: null,              // Map<path,{clusterId,isKeeper,isDup,keeperPath,score,size}> from last cull run
+  culled: false,           // true once "Find best shots" has run for this folder
+  bestOnly: false,         // hide near-dups, show only keepers + uniques
+  quality: new Map(),      // path -> 0..100 quality score (session cache; also persisted in meta.quality)
+  dupThreshold: 0.92,      // cosine threshold for "same shot"
+};
+
+// ── Google Drive ──
+// Baked-in OAuth Client ID (public value, safe to embed). Overrides any stale saved value
+// so the "deleted_client" error from an old ID can't come back.
+const DEFAULT_CLIENT_ID = '681735897805-ke6i2alc4kptljsgets1qmafpkpdkgp8.apps.googleusercontent.com';
+try { localStorage.setItem('photoOrganizer:googleClientId', DEFAULT_CLIENT_ID); } catch (e) {}
+const drive = {
+  clientId: DEFAULT_CLIENT_ID,
+  tokenClient: null,
+  accessToken: null,
+  tokenExpiry: 0,
+  rootId: null,
+};
+const DRIVE_SCOPE = 'https://www.googleapis.com/auth/drive.readonly';
+const FOLDER_MIME = 'application/vnd.google-apps.folder';
+
+const IMAGE_EXT = ['jpg','jpeg','png','webp','gif','bmp','svg','avif','jfif','ico'];
+const RENDERABLE = ['jpg','jpeg','png','webp','gif','bmp','svg','avif','jfif','ico'];
+const VIDEO_EXT = ['mp4','mov','webm','m4v','ogv'];
+const RAW_EXT   = ['heic','heif','tiff','tif','cr2','cr3','nef','arw','dng','raf','orf','rw2'];
+
+// ── Generic scene categories (keyword → MobileNet ImageNet labels) ──
+const CATEGORIES = {
+  people:    { label: 'People',    kw: ['person','people','man','woman','child','baby','face','portrait','crowd','bride','groom','suit','dress','jersey'] },
+  building:  { label: 'Buildings', kw: ['house','home','building','mansion','palace','church','castle','cottage','barn','tower','skyscraper','facade','roof','dome'] },
+  interior:  { label: 'Interiors', kw: ['room','living','bedroom','couch','sofa','chair','table','desk','bookcase','shelf','cabinet','lamp','curtain','fireplace','dining','furniture','kitchen','bathroom','tub','sink','stove','oven'] },
+  nature:    { label: 'Nature',    kw: ['tree','forest','park','beach','ocean','sea','mountain','valley','hill','field','lake','river','sky','cloud','sunset','flower','plant','garden','waterfall','desert','snow'] },
+  food:      { label: 'Food',      kw: ['food','plate','meal','pizza','burger','cake','bread','fruit','vegetable','coffee','wine','restaurant','dish','dessert','sandwich','soup','salad'] },
+  animal:    { label: 'Animals',   kw: ['dog','cat','bird','horse','animal','pet','fish','wildlife','lion','tiger','bear','elephant','cow','sheep'] },
+  vehicle:   { label: 'Vehicles',  kw: ['car','truck','vehicle','motorcycle','bicycle','bus','train','boat','ship','airplane','jet','aircraft'] },
+  document:  { label: 'Documents', kw: ['book','paper','document','envelope','menu','website','screen','monitor','laptop','keyboard','text','newspaper','sign','poster'] },
+  product:   { label: 'Products',  kw: ['bottle','box','packaging','watch','jewelry','shoe','bag','perfume','cosmetic','phone','camera','clothing','product'] },
+  event:     { label: 'Events',    kw: ['stage','concert','wedding','party','crowd','balloon','candle','gift','celebration','flag','fireworks'] },
+};
+const CAT_ORDER = ['people','building','interior','nature','food','animal','vehicle','product','event','document','other'];
+
+// ── Custom colour palette (garment / product colours) ──
+// Edit the hex values here to fine-tune matching to your real swatches.
+const COLOR_PALETTE = [
+  { key: 'sky-blue',    label: 'Sky blue',        hex: '#AECBE3' },
+  { key: 'white',       label: 'White',           hex: '#FFFFFF' },
+  { key: 'grey',        label: 'Grey',            hex: '#B3B3B5' },
+  { key: 'dusty-pink',  label: 'Dusty pink',      hex: '#DDB6B9' },
+  { key: 'mauve',       label: 'Mauve',           hex: '#8E7689' },
+  { key: 'army-green',  label: 'Army green',      hex: '#4E5A40' },
+  { key: 'navy-blue',   label: 'Navy blue',       hex: '#131C3A' },
+  { key: 'beige',       label: 'Beige',           hex: '#D3CBB8' },
+  { key: 'pistachio',   label: 'Pistachio green', hex: '#9CBA94' },
+  { key: 'aegean-teal', label: 'Aegean teal',     hex: '#2E7389' },
+];
+// Visual ordering for "sort/group by colour": neutrals → warm → green → blue.
+const COLOR_ORDER = ['white','beige','grey','dusty-pink','mauve','pistachio','army-green','sky-blue','aegean-teal','navy-blue'];
+const COLOR_BY_KEY = Object.fromEntries(COLOR_PALETTE.map(c => [c.key, c]));
+function colorLabel(k) { return COLOR_BY_KEY[k]?.label || k; }
+function colorHex(k) { return COLOR_BY_KEY[k]?.hex || '#888'; }
+
+// ── Colour math: match an RGB sample to the nearest palette colour (perceptual Lab distance) ──
+function hexToRgb(hex) {
+  const n = parseInt(hex.slice(1), 16);
+  return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
+}
+function rgbToLab({ r, g, b }) {
+  let R = r / 255, G = g / 255, B = b / 255;
+  R = R > 0.04045 ? Math.pow((R + 0.055) / 1.055, 2.4) : R / 12.92;
+  G = G > 0.04045 ? Math.pow((G + 0.055) / 1.055, 2.4) : G / 12.92;
+  B = B > 0.04045 ? Math.pow((B + 0.055) / 1.055, 2.4) : B / 12.92;
+  let X = (R * 0.4124 + G * 0.3576 + B * 0.1805) / 0.95047;
+  let Y = (R * 0.2126 + G * 0.7152 + B * 0.0722) / 1.0;
+  let Z = (R * 0.0193 + G * 0.1192 + B * 0.9505) / 1.08883;
+  const f = t => t > 0.008856 ? Math.cbrt(t) : (7.787 * t) + 16 / 116;
+  X = f(X); Y = f(Y); Z = f(Z);
+  return { L: 116 * Y - 16, a: 500 * (X - Y), b: 200 * (Y - Z) };
+}
+const PALETTE_LAB = COLOR_PALETTE.map(c => ({ key: c.key, lab: rgbToLab(hexToRgb(c.hex)) }));
+const LAB_BY_KEY = Object.fromEntries(PALETTE_LAB.map(p => [p.key, p.lab]));
+// Perceptual distance between two palette colours (0 = identical). Untagged sorts last.
+function colorDistanceToTarget(fileKey, targetKey) {
+  if (!fileKey) return Infinity;
+  const a = LAB_BY_KEY[fileKey], b = LAB_BY_KEY[targetKey];
+  if (!a || !b) return Infinity;
+  const dL = a.L - b.L, da = a.a - b.a, db = a.b - b.b;
+  return dL * dL + da * da + db * db;
+}
+// A picture can have several colours. Closest of its colours to a target (0 if it has the target).
+function minColorDistance(keys, targetKey) {
+  if (!keys.length) return Infinity;
+  if (keys.includes(targetKey)) return 0;
+  return Math.min(...keys.map(k => colorDistanceToTarget(k, targetKey)));
+}
+function minColorOrder(keys) {
+  if (!keys.length) return 99;
+  return Math.min(...keys.map(k => { const i = COLOR_ORDER.indexOf(k); return i === -1 ? 98 : i; }));
+}
+function nearestPaletteColor(rgb) {
+  const lab = rgbToLab(rgb);
+  let best = null, bestD = Infinity;
+  for (const p of PALETTE_LAB) {
+    const dL = lab.L - p.lab.L, da = lab.a - p.lab.a, db = lab.b - p.lab.b;
+    const d = dL * dL + da * da + db * db;
+    if (d < bestD) { bestD = d; best = p.key; }
+  }
+  return best;
+}
+
+// ── DOM refs ──
+const $ = id => document.getElementById(id);
+
+// ── Init ──
+if (!window.showDirectoryPicker) { $('noFsa').style.display = 'block'; }
+loadMeta();
+renderRecents();      // populate "Jump back in" cards on the welcome screen
+setupFolderDrop();    // drag a folder anywhere onto the window to open it
+// Close the folder switcher when clicking outside it.
+document.addEventListener('click', e => {
+  const menu = $('switcherMenu');
+  if (menu && menu.classList.contains('open') && !menu.contains(e.target) && !$('folderSwitcher').contains(e.target)) closeSwitcher();
+});
+syncThemeButton();    // reflect the saved theme on the header toggle
+setupInspectorResizer(); // drag the divider to resize the inspector + preview
+$('sortColorSelect').innerHTML = '<option value="">Rainbow order</option>' +
+  COLOR_PALETTE.map(c => `<option value="${c.key}">${esc(c.label)} first</option>`).join('');
+renderStarFilter();   // build the toolbar rating-filter stars
+$('searchBox').addEventListener('input', e => {
+  if (state.smart) { onSmartInput(e.target.value); }
+  else { state.search = e.target.value.toLowerCase().trim(); renderGrid(); }
+});
+document.addEventListener('keydown', e => {
+  if ($('lightbox').classList.contains('open')) {
+    if (e.key === 'ArrowRight') lbStep(1);
+    else if (e.key === 'ArrowLeft') lbStep(-1);
+    else if (e.key === 'Escape') closeLightbox();
+    return;
+  }
+  // Close the folder switcher with Escape first.
+  if (e.key === 'Escape' && $('switcherMenu').classList.contains('open')) { closeSwitcher(); return; }
+  // Close any open modal (incl. the shortcuts overlay) with Escape.
+  if (e.key === 'Escape' && $('modalRoot').innerHTML) { closeModal(); return; }
+  // Whether the user is typing in a field (gates the Escape + "?" branches below).
+  const typing = /^(input|textarea|select)$/i.test((e.target.tagName || '')) || e.target.isContentEditable;
+  // Close the inspector with Escape (when open and not typing in the note/search).
+  if (e.key === 'Escape' && !typing && $('inspector').classList.contains('open')) { closeInspector(); return; }
+  // "?" opens the shortcuts overlay — but not while typing in a field.
+  if (e.key === '?' && !typing && !$('modalRoot').innerHTML) { e.preventDefault(); openShortcuts(); }
+});
+
+// ── Light / dark theme ──
+function toggleTheme() {
+  const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+  document.documentElement.dataset.theme = next;
+  try { localStorage.setItem('photoOrganizer:theme', next); } catch (e) {}
+  syncThemeButton();
+}
+function syncThemeButton() {
+  const btn = $('themeToggle'); if (!btn) return;
+  const light = document.documentElement.dataset.theme === 'light';
+  btn.textContent = light ? '☀️' : '🌙';
+  btn.title = light ? 'Switch to dark theme' : 'Switch to light theme';
+}
+
+// ── Keyboard-shortcuts overlay ──
+function openShortcuts() {
+  const rows = [
+    ['Open the lightbox', 'Double-click an image'],
+    ['Previous / next image', '← / →'],
+    ['Close lightbox, dialog, or inspector', 'Esc'],
+    ['Select a range of images', 'Shift-click a checkbox'],
+    ['Star / unstar an image', 'Click the ☆ on a thumbnail'],
+    ['Search by file name', 'Type in the search box'],
+    ['Open a folder', 'Drag a folder onto the window'],
+    ['Show this help', '?'],
+  ];
+  modal(`
+    <h2>Keyboard shortcuts</h2>
+    <div class="sub">Quick ways to move around Sift.</div>
+    <div class="shortcuts">
+      ${rows.map(([d, k]) => `<div class="shortcut"><span class="sc-desc">${esc(d)}</span><kbd>${esc(k)}</kbd></div>`).join('')}
+    </div>
+    <div class="modal-actions"><button class="btn-secondary" onclick="closeModal()">Close</button></div>
+  `);
+}
+
+// ── Resizable inspector: drag the divider to grow/shrink the panel + preview ──
+function inspectorWidthBounds() {
+  // Keep at least the sidebar + a usable grid visible; cap the panel at ~65% of the window.
+  return { min: 240, max: Math.max(280, Math.round(window.innerWidth * 0.65)) };
+}
+function setInspectorWidth(px) {
+  const b = inspectorWidthBounds();
+  const w = Math.max(b.min, Math.min(b.max, px));
+  document.documentElement.style.setProperty('--inspector-w', w + 'px');
+  return w;
+}
+function setupInspectorResizer() {
+  const handle = $('inspResizer');
+  if (!handle) return;
+  // Restore a saved width.
+  try { const saved = parseInt(localStorage.getItem('photoOrganizer:inspectorW') || '', 10); if (saved) setInspectorWidth(saved); } catch (e) {}
+
+  let startX = 0, startW = 0;
+  const onMove = e => {
+    // Dragging left (toward the grid) widens the inspector; dragging right narrows it.
+    setInspectorWidth(startW + (startX - e.clientX));
+  };
+  const onUp = () => {
+    document.removeEventListener('mousemove', onMove);
+    document.removeEventListener('mouseup', onUp);
+    handle.classList.remove('dragging');
+    document.body.style.userSelect = '';
+    const w = getComputedStyle(document.documentElement).getPropertyValue('--inspector-w').trim();
+    try { if (w) localStorage.setItem('photoOrganizer:inspectorW', parseInt(w, 10)); } catch (e) {}
+  };
+  handle.addEventListener('mousedown', e => {
+    e.preventDefault();
+    startX = e.clientX;
+    startW = $('inspector').getBoundingClientRect().width;
+    handle.classList.add('dragging');
+    document.body.style.userSelect = 'none';
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
+  });
+  // Double-click the divider to reset to the default width.
+  handle.addEventListener('dblclick', () => {
+    document.documentElement.style.removeProperty('--inspector-w');
+    try { localStorage.removeItem('photoOrganizer:inspectorW'); } catch (e) {}
+  });
+}
+
+// Drive thumbnail links can expire/reject at higher sizes — fall back to the full image.
+async function inspPreviewFallback(path) {
+  if (state.selectedPath !== path) return;
+  const f = state.filesByPath.get(path);
+  if (!f) return;
+  const prev = $('inspPreview');
+  // Server thumbnail failed. If the browser can't decode the bytes (raw/psd/pdf), show a
+  // placeholder — never download the full file just to hand undecodable bytes to an <img>.
+  if (imgDecodable(f)) {
+    const url = await ensureBlobUrl(f).catch(() => null);
+    if (state.selectedPath !== path) return;   // user moved on while it downloaded
+    if (url) { prev.innerHTML = `<img src="${url}">`; return; }
+  }
+  prev.innerHTML = `<span class="placeholder" style="font-size:2rem;opacity:0.3;">${f.kind === 'raw' ? '🖼️' : '🚫'}</span>`;
+}
+
+// ════════════════════════════════════════════════════════
+//  Folder opening + recursive scan
+// ════════════════════════════════════════════════════════
+async function openFolder() {
+  if (!window.showDirectoryPicker) {
+    showToast('Your browser does not support opening folders. Use Chrome or Edge.', 'error');
+    return;
+  }
+  let handle;
+  try {
+    // id + startIn make the OS dialog reopen where you last browsed.
+    const opts = { mode: 'read', id: 'photoOrganizer' };
+    if (state.rootHandle && state.source === 'fs') opts.startIn = state.rootHandle;
+    handle = await window.showDirectoryPicker(opts);
+  } catch (err) {
+    if (err && err.name === 'AbortError') return;
+    showToast('Could not open folder: ' + err.message, 'error');
+    return;
+  }
+  await openLocalHandle(handle);
+}
+
+// Scan + display an already-obtained directory handle (from the picker, a recent, or drag-and-drop).
+async function openLocalHandle(handle) {
+  state.source = 'fs';
+  state.rootHandle = handle;
+  state.rootName = handle.name;
+  loadMeta(); // re-scope persisted ratings/notes/tags to this folder
+  state.files = [];
+  state.filesByPath = new Map();
+  state.nodesByPath = new Map();
+  state.selectedPath = null;
+  closeInspector();
+
+  showProcessing('Scanning folder…', 'Reading nested folders', true);
+  state.cancel = false;
+
+  const rootNode = makeNode(handle.name, '', handle, null);
+  state.tree = rootNode;
+  state.nodesByPath.set('', rootNode);
+
+  let scanned = 0;
+  try {
+    await scanDir(handle, '', rootNode, () => {
+      scanned++;
+      if (scanned % 25 === 0) updateProcessing('Scanning folder…', `${scanned} items found`, -1);
+    });
+  } catch (err) {
+    hideProcessing();
+    showToast('Scan failed: ' + err.message, 'error');
+    return;
+  }
+
+  computeCounts(rootNode);
+  hideProcessing();
+
+  if (state.cancel) { showToast('Scan cancelled', 'error'); return; }
+
+  state.currentPath = '';
+  state.activeCategory = null;
+  state.activeType = null;
+  state.includeSubfolders = state.files.length > 0 && (rootNode.dirs.length > 0);
+  $('subCheck').textContent = state.includeSubfolders ? '☑' : '☐';
+  $('subfoldersPill').classList.toggle('on', state.includeSubfolders);
+
+  { const _w = $('welcome'); if (_w) _w.style.display = 'none'; }
+  $('toolbar').style.display = 'flex';
+  $('headerStats').style.display = 'flex';
+  $('reopenBtn').style.display = 'inline-block';
+  $('reopenBtn').textContent = 'Change Folder';
+  $('refreshBtn').style.display = 'none';
+  $('openBtn').style.display = 'none';
+  $('driveBtn').style.display = 'none';
+  $('drivePill').style.display = 'none';
+  $('rootName').textContent = handle.name;
+  $('folderSwitcher').style.display = 'inline-flex';
+
+  renderTree();
+  renderGrid();
+  updateStats();
+  recentsAdd({ kind: 'fs', name: handle.name, handle, images: state.files.length, folders: state.nodesByPath.size });
+  showToast(`Opened "${handle.name}" — ${state.files.length} images in ${state.nodesByPath.size} folders`, 'success');
+}
+
+function reopenSource() {
+  if (state.source === 'drive') connectDrive();
+  else openFolder();
+}
+
+function makeNode(name, path, handle, parentPath) {
+  return { name, path, handle, parentPath, dirs: [], fileCount: 0, recursiveCount: 0, expanded: path === '' };
+}
+
+async function scanDir(dirHandle, path, node, onItem) {
+  const entries = [];
+  for await (const [name, h] of dirHandle.entries()) {
+    if (state.cancel) return;
+    entries.push([name, h]);
+  }
+  // sort: folders first then files, alphabetical
+  entries.sort((a, b) => {
+    if (a[1].kind !== b[1].kind) return a[1].kind === 'directory' ? -1 : 1;
+    return a[0].localeCompare(b[0], undefined, { numeric: true });
+  });
+
+  for (const [name, h] of entries) {
+    if (state.cancel) return;
+    if (name.startsWith('.') || name.startsWith('._')) continue; // skip hidden / AppleDouble
+    const childPath = path ? path + '/' + name : name;
+    if (h.kind === 'directory') {
+      const childNode = makeNode(name, childPath, h, path);
+      node.dirs.push(childNode);
+      state.nodesByPath.set(childPath, childNode);
+      onItem && onItem();
+      await scanDir(h, childPath, childNode, onItem);
+    } else {
+      const ext = (name.split('.').pop() || '').toLowerCase();
+      const kind = IMAGE_EXT.includes(ext) ? 'image'
+                 : VIDEO_EXT.includes(ext) ? 'video'
+                 : RAW_EXT.includes(ext) ? 'raw' : 'other';
+      if (kind === 'other') continue; // only track media
+      const entry = {
+        name, path: childPath, ext, kind, handle: h,
+        dir: path, url: null, fileObj: null,
+        size: null, modified: null, width: null, height: null,
+      };
+      state.files.push(entry);
+      state.filesByPath.set(childPath, entry);
+      node.fileCount++;
+      onItem && onItem();
+    }
+  }
+}
+
+function computeCounts(node) {
+  let total = node.fileCount;
+  for (const d of node.dirs) total += computeCounts(d);
+  node.recursiveCount = total;
+  return total;
+}
+
+// ════════════════════════════════════════════════════════
+//  Google Drive source
+// ════════════════════════════════════════════════════════
+async function connectDrive() {
+  if (location.protocol === 'file:') {
+    openDriveSetupModal(true); // explain the localhost requirement
+    return;
+  }
+  if (typeof google === 'undefined' || !google.accounts || !google.accounts.oauth2) {
+    showToast('Google sign-in library not loaded yet — check your connection and retry.', 'error');
+    return;
+  }
+  if (!drive.clientId) { openDriveSetupModal(false); return; }
+
+  let token;
+  try { token = await getDriveToken(); }
+  catch (err) {
+    if (err && err.message === 'cancelled') return;
+    showToast('Google sign-in failed: ' + (err.message || err), 'error');
+    return;
+  }
+  if (!token) return;
+
+  // choose which folder to browse
+  await openDriveFolderPicker();
+}
+
+let _tokenRefresh = null;   // a single in-flight token request (Google's client allows only one at a time)
+function getDriveToken(silent) {
+  // Valid cached token → use it immediately.
+  if (drive.accessToken && Date.now() < drive.tokenExpiry - 60000) return Promise.resolve(drive.accessToken);
+  // A refresh is already in flight (e.g. many parallel scan calls hit 401 at once) → share it,
+  // never fire a second requestAccessToken (that clobbers the callback and hangs the first one).
+  if (_tokenRefresh) return _tokenRefresh;
+  _tokenRefresh = new Promise((resolve, reject) => {
+    if (!drive.tokenClient) {
+      drive.tokenClient = google.accounts.oauth2.initTokenClient({
+        client_id: drive.clientId,
+        scope: DRIVE_SCOPE,
+        callback: () => {}, // replaced per request below
+      });
+    }
+    drive.tokenClient.callback = (resp) => {
+      if (resp.error) { reject(new Error(resp.error)); return; }
+      drive.accessToken = resp.access_token;
+      drive.tokenExpiry = Date.now() + (resp.expires_in ? resp.expires_in * 1000 : 3600000);
+      resolve(drive.accessToken);
+    };
+    try { drive.tokenClient.requestAccessToken({ prompt: silent ? '' : 'consent' }); }
+    catch (err) { reject(err); }
+  }).finally(() => { _tokenRefresh = null; });
+  return _tokenRefresh;
+}
+
+// Raw Drive REST call (JSON), with one silent token refresh on 401
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// Global concurrency limiter so parallel scanning can't flood the Drive API
+function makeSemaphore(max) {
+  let active = 0; const q = [];
+  return async function run(fn) {
+    if (active >= max) await new Promise(res => q.push(res));
+    active++;
+    try { return await fn(); }
+    finally { active--; const next = q.shift(); if (next) next(); }
+  };
+}
+const driveSem = makeSemaphore(12);
+
+// fetch with a hard timeout so one stalled request can't hang the whole scan forever
+function fetchWithTimeout(url, init, ms) {
+  const ctl = new AbortController();
+  const t = setTimeout(() => ctl.abort(), ms || 30000);
+  return fetch(url, Object.assign({}, init, { signal: ctl.signal })).finally(() => clearTimeout(t));
+}
+
+async function driveApi(pathAndQuery, opts) {
+  opts = opts || {};
+  const usedToken = drive.accessToken;
+  let r;
+  try {
+    r = await fetchWithTimeout('https://www.googleapis.com/drive/v3/' + pathAndQuery, {
+      headers: { Authorization: 'Bearer ' + drive.accessToken },
+    }, 30000);
+  } catch (err) {
+    // timeout / network drop — retry with backoff instead of hanging
+    if ((opts.tries || 0) < 6) {
+      const tries = (opts.tries || 0) + 1;
+      await sleep(Math.min(8000, 350 * Math.pow(2, tries)) + Math.floor(Math.random() * 300));
+      return driveApi(pathAndQuery, Object.assign({}, opts, { tries }));
+    }
+    throw err;
+  }
+  if (r.status === 401 && !opts.authRetried) {
+    if (drive.accessToken === usedToken) drive.accessToken = null;   // force refresh, but don't nuke a token a sibling already refreshed
+    await getDriveToken(true);
+    return driveApi(pathAndQuery, Object.assign({}, opts, { authRetried: true }));
+  }
+  // back off and retry on rate-limit / transient server errors
+  if ((r.status === 429 || r.status >= 500) && (opts.tries || 0) < 6) {
+    const tries = (opts.tries || 0) + 1;
+    await sleep(Math.min(8000, 350 * Math.pow(2, tries)) + Math.floor(Math.random() * 300));
+    return driveApi(pathAndQuery, Object.assign({}, opts, { tries }));
+  }
+  if (!r.ok) throw new Error('Drive API ' + r.status);
+  return r.json();
+}
+
+// Fetch bytes (image/video media) as a blob with auth — CORS-safe, untainted (works for AI)
+async function driveFetchBlob(url, retried) {
+  try {
+    const usedToken = drive.accessToken;
+    const r = await fetch(url, { headers: { Authorization: 'Bearer ' + drive.accessToken } });
+    if (r.status === 401 && !retried) {
+      if (drive.accessToken === usedToken) drive.accessToken = null;
+      await getDriveToken(true);
+      return driveFetchBlob(url, true);
+    }
+    if (!r.ok) return null;
+    return await r.blob();
+  } catch (err) { return null; }
+}
+
+function driveMediaUrl(id) { return 'https://www.googleapis.com/drive/v3/files/' + encodeURIComponent(id) + '?alt=media'; }
+
+async function driveListChildren(folderId) {
+  const out = [];
+  let pageToken = '';
+  const fields = 'nextPageToken,files(id,name,mimeType,thumbnailLink,size,createdTime,modifiedTime,imageMediaMetadata(width,height,time,location(latitude,longitude,altitude),cameraMake,cameraModel,aperture,isoSpeed,focalLength,exposureTime,flashUsed),videoMediaMetadata(width,height,durationMillis))';
+  do {
+    const q = encodeURIComponent(`'${folderId}' in parents and trashed=false`);
+    let url = `files?q=${q}&fields=${encodeURIComponent(fields)}&pageSize=1000&orderBy=folder,name&supportsAllDrives=true&includeItemsFromAllDrives=true`;
+    if (pageToken) url += '&pageToken=' + pageToken;
+    const data = await driveApi(url);
+    (data.files || []).forEach(f => out.push(f));
+    pageToken = data.nextPageToken || '';
+  } while (pageToken && !state.cancel);
+  return out;
+}
+
+async function scanDrive(folderId, path, node, onItem) {
+  if (state.cancel) return;
+  // the network listing goes through the semaphore (caps global concurrency)
+  const children = await driveSem(() => driveListChildren(folderId));
+  const subScans = [];
+  for (const c of children) {
+    if (state.cancel) return;
+    const childPath = path ? path + '/' + c.name : c.name;
+    if (c.mimeType === FOLDER_MIME) {
+      const childNode = makeNode(c.name, childPath, null, path);
+      childNode.driveId = c.id;
+      node.dirs.push(childNode);
+      state.nodesByPath.set(childPath, childNode);
+      onItem && onItem();
+      // recurse in parallel — the semaphore bounds how many actually run at once
+      subScans.push(scanDrive(c.id, childPath, childNode, onItem));
+    } else {
+      const ext = (c.name.split('.').pop() || '').toLowerCase();
+      let kind = IMAGE_EXT.includes(ext) ? 'image'
+               : VIDEO_EXT.includes(ext) ? 'video'
+               : RAW_EXT.includes(ext) ? 'raw' : 'other';
+      // trust the Drive mimeType when the extension is unknown
+      if (kind === 'other') {
+        if (c.mimeType && c.mimeType.startsWith('image/')) kind = 'image';
+        else if (c.mimeType && c.mimeType.startsWith('video/')) kind = 'video';
+        else continue;
+      }
+      const dims = c.imageMediaMetadata || c.videoMediaMetadata || {};
+      // EXIF capture date / GPS / camera — Drive parses these server-side (no download).
+      const imd = c.imageMediaMetadata || {};
+      let takenMs = null;
+      if (imd.time) { const t = Date.parse(imd.time.replace(/^(\d{4}):(\d{2}):(\d{2})/, '$1-$2-$3')); if (!isNaN(t)) takenMs = t; }
+      if (takenMs == null && c.createdTime) { const t = Date.parse(c.createdTime); if (!isNaN(t)) takenMs = t; }   // videos: no EXIF → createdTime
+      let gps = null;
+      if (imd.location && imd.location.latitude != null && imd.location.longitude != null && !(imd.location.latitude === 0 && imd.location.longitude === 0)) {
+        gps = { lat: imd.location.latitude, lng: imd.location.longitude };
+        if (imd.location.altitude != null) gps.alt = imd.location.altitude;
+      }
+      let camera = null;
+      if (imd.cameraMake || imd.cameraModel) camera = [imd.cameraMake, imd.cameraModel].filter(Boolean).join(' ').trim() || null;
+      const entry = {
+        name: c.name, path: childPath, ext, kind, handle: null,
+        driveId: c.id, mimeType: c.mimeType, thumbnailLink: c.thumbnailLink || null,
+        dir: path, url: null, fullUrl: null, fileObj: null,
+        size: c.size != null ? +c.size : null,
+        modified: c.modifiedTime ? Date.parse(c.modifiedTime) : null,
+        width: dims.width || null, height: dims.height || null,
+        duration: c.videoMediaMetadata && c.videoMediaMetadata.durationMillis ? +c.videoMediaMetadata.durationMillis / 1000 : null,
+        taken: takenMs, gps, camera,
+      };
+      state.files.push(entry);
+      state.filesByPath.set(childPath, entry);
+      node.fileCount++;
+      onItem && onItem();
+    }
+  }
+  await Promise.all(subScans);
+}
+
+// ── Drive scan cache (IndexedDB — holds the folder structure, not the images) ──
+const CACHE_DB = 'photoOrganizerCache', CACHE_STORE = 'scans';
+function idbOpen() {
+  return new Promise((res, rej) => {
+    const r = indexedDB.open(CACHE_DB, 1);
+    r.onupgradeneeded = () => r.result.createObjectStore(CACHE_STORE);
+    r.onsuccess = () => res(r.result);
+    r.onerror = () => rej(r.error);
+  });
+}
+async function cacheGet(key) {
+  try { const db = await idbOpen(); return await new Promise((res, rej) => { const rq = db.transaction(CACHE_STORE, 'readonly').objectStore(CACHE_STORE).get(key); rq.onsuccess = () => res(rq.result || null); rq.onerror = () => rej(rq.error); }); }
+  catch (e) { return null; }
+}
+async function cacheSet(key, val) {
+  try { const db = await idbOpen(); return await new Promise((res, rej) => { const tx = db.transaction(CACHE_STORE, 'readwrite'); tx.objectStore(CACHE_STORE).put(val, key); tx.oncomplete = () => res(true); tx.onerror = () => rej(tx.error); }); }
+  catch (e) { return false; }
+}
+
+// ════════════════════════════════════════════════════════
+//  Recent folders — "Jump back in" on the welcome screen
+//  Stored in IndexedDB so we can keep live FileSystemDirectoryHandles
+//  (those can't be serialized to localStorage). Drive + local unified.
+// ════════════════════════════════════════════════════════
+const RECENTS_KEY = 'recents', RECENTS_MAX = 6;
+let recentList = [];
+
+async function recentsAdd(entry) {
+  try {
+    const list = (await cacheGet(RECENTS_KEY)) || [];
+    // Drop any existing entry for the same target so the new one floats to the top.
+    const kept = [];
+    for (const e of list) {
+      if (e.kind === 'drive' && entry.kind === 'drive') { if (e.rootId === entry.rootId) continue; }
+      else if (e.kind === 'fs' && entry.kind === 'fs') {
+        let same = e.name === entry.name;
+        if (e.handle && entry.handle && e.handle.isSameEntry) {
+          try { same = await e.handle.isSameEntry(entry.handle); } catch (_) {}
+        }
+        if (same) continue;
+      }
+      kept.push(e);
+    }
+    entry.lastOpened = Date.now();
+    const next = [entry, ...kept].slice(0, RECENTS_MAX);
+    await cacheSet(RECENTS_KEY, next);
+    renderRecents();
+  } catch (e) { /* recents are best-effort */ }
+}
+
+async function recentsRemove(idx, ev) {
+  if (ev) ev.stopPropagation();
+  const list = (await cacheGet(RECENTS_KEY)) || [];
+  list.splice(idx, 1);
+  await cacheSet(RECENTS_KEY, list);
+  renderRecents();
+}
+
+async function renderRecents() {
+  const wrap = $('recentsWrap'), grid = $('recentsGrid');
+  if (!wrap || !grid) return;
+  recentList = (await cacheGet(RECENTS_KEY)) || [];
+  if (!recentList.length) { wrap.style.display = 'none'; return; }
+  grid.innerHTML = recentList.map((e, i) => {
+    const icon = e.kind === 'drive' ? '☁️' : '📂';
+    const bits = [];
+    if (e.images != null) bits.push(`${e.images.toLocaleString()} image${e.images === 1 ? '' : 's'}`);
+    if (e.lastOpened) bits.push(timeAgo(e.lastOpened));
+    return `<div class="recent-card" onclick="reopenRecent(${i})" title="Reopen “${esc(e.name)}”">
+      <span class="rc-icon">${icon}</span>
+      <span class="rc-body">
+        <span class="rc-name">${esc(e.name)}</span>
+        <span class="rc-meta">${esc(bits.join(' · '))}</span>
+      </span>
+      <span class="rc-remove" onclick="recentsRemove(${i}, event)" title="Remove from recents">×</span>
+    </div>`;
+  }).join('');
+  wrap.style.display = 'block';
+}
+
+async function reopenRecent(idx) {
+  const e = recentList[idx];
+  if (!e) return;
+  if (e.kind === 'drive') { reopenDriveById(e.rootId, e.name); return; }
+  // Local folder: re-verify read permission (the click is the user gesture we need).
+  const h = e.handle;
+  if (!h) { showToast('That folder is no longer available — open it again.', 'error'); recentsRemove(idx); return; }
+  try {
+    let perm = await h.queryPermission({ mode: 'read' });
+    if (perm !== 'granted') perm = await h.requestPermission({ mode: 'read' });
+    if (perm !== 'granted') { showToast(`Permission to read “${e.name}” was denied.`, 'error'); return; }
+  } catch (err) {
+    showToast(`Could not reopen “${e.name}”: ${err.message}`, 'error');
+    return;
+  }
+  await openLocalHandle(h);
+}
+
+// ── Folder / source switcher (sidebar header dropdown) ──
+// Jump between recent folders and switch local ⇄ Drive without reloading or re-logging-in.
+async function buildSwitcherMenu() {
+  recentList = (await cacheGet(RECENTS_KEY)) || [];   // keep indices aligned with reopenRecent()
+  let html = '';
+  if (recentList.length) {
+    html += `<div class="sm-label">Switch to</div>`;
+    html += recentList.map((e, i) => {
+      const icon = e.kind === 'drive' ? '☁️' : '📂';
+      const current = state.source === e.kind && state.rootName === e.name &&
+        (e.kind !== 'drive' || drive.rootId === e.rootId);
+      const meta = e.images != null ? e.images.toLocaleString() : '';
+      return `<div class="sm-item ${current ? 'current' : ''}" onclick="switchToRecent(${i})" title="${esc(e.name)}">
+        <span class="sm-icon">${icon}</span>
+        <span class="sm-name">${esc(e.name)}</span>
+        ${meta ? `<span class="sm-meta">${esc(meta)}</span>` : ''}
+      </div>`;
+    }).join('');
+    html += `<div class="sm-divider"></div>`;
+  }
+  html += `<div class="sm-item" onclick="switcherAction('local')"><span class="sm-icon">📂</span><span class="sm-name">Open local folder…</span></div>`;
+  html += `<div class="sm-item" onclick="switcherAction('drive')"><span class="sm-icon">☁️</span><span class="sm-name">Google Drive…</span></div>`;
+  $('switcherMenu').innerHTML = html;
+}
+function toggleSwitcher(event) {
+  if (event) event.stopPropagation();
+  const menu = $('switcherMenu');
+  if (menu.classList.contains('open')) { closeSwitcher(); return; }
+  buildSwitcherMenu().then(() => menu.classList.add('open'));
+}
+function closeSwitcher() { const m = $('switcherMenu'); if (m) m.classList.remove('open'); }
+function switchToRecent(i) { closeSwitcher(); reopenRecent(i); }
+function switcherAction(which) { closeSwitcher(); if (which === 'drive') connectDrive(); else openFolder(); }
+
+// ── Drag a folder anywhere onto the window to open it ──
+function setupFolderDrop() {
+  const ov = $('dropOverlay');
+  if (!ov) return;
+  const hasFiles = e => e.dataTransfer && Array.from(e.dataTransfer.types || []).includes('Files');
+  let depth = 0;
+  window.addEventListener('dragenter', e => { if (!hasFiles(e)) return; e.preventDefault(); depth++; ov.classList.add('show'); });
+  window.addEventListener('dragover',  e => { if (hasFiles(e)) e.preventDefault(); });
+  window.addEventListener('dragleave', e => { if (!hasFiles(e)) return; depth--; if (depth <= 0) { depth = 0; ov.classList.remove('show'); } });
+  window.addEventListener('drop', async e => {
+    if (!hasFiles(e)) return;
+    e.preventDefault(); depth = 0; ov.classList.remove('show');
+    const item = e.dataTransfer.items && e.dataTransfer.items[0];
+    if (!item) return;
+    if (!item.getAsFileSystemHandle) { showToast('Dropping folders needs Chrome or Edge.', 'error'); return; }
+    let handle;
+    try { handle = await item.getAsFileSystemHandle(); }
+    catch (err) { showToast('Could not read what you dropped: ' + err.message, 'error'); return; }
+    if (!handle || handle.kind !== 'directory') { showToast('Please drop a folder, not a single file.', 'error'); return; }
+    await openLocalHandle(handle);
+  });
+}
+
+function snapshotTree(node) {
+  return { name: node.name, path: node.path, driveId: node.driveId || null, parentPath: node.parentPath,
+           fileCount: node.fileCount, recursiveCount: node.recursiveCount, expanded: node.expanded,
+           dirs: node.dirs.map(snapshotTree) };
+}
+function makeDriveSnapshot(rootId, rootName, savedAt) {
+  return { rootId, rootName, savedAt, tree: snapshotTree(state.tree),
+    files: state.files.map(f => ({ name: f.name, path: f.path, ext: f.ext, kind: f.kind,
+      driveId: f.driveId, mimeType: f.mimeType, thumbnailLink: f.thumbnailLink || null,
+      dir: f.dir, size: f.size, modified: f.modified, width: f.width, height: f.height,
+      duration: f.duration || null, taken: f.taken || null, gps: f.gps || null, camera: f.camera || null })) };
+}
+function restoreTree(snap) {
+  const node = makeNode(snap.name, snap.path, null, snap.parentPath);
+  node.driveId = snap.driveId; node.fileCount = snap.fileCount;
+  node.recursiveCount = snap.recursiveCount; node.expanded = snap.expanded;
+  state.nodesByPath.set(snap.path, node);
+  node.dirs = (snap.dirs || []).map(restoreTree);
+  return node;
+}
+function restoreDriveSnapshot(snap) {
+  state.nodesByPath = new Map();
+  state.tree = restoreTree(snap.tree);
+  state.files = snap.files.map(f => Object.assign({}, f, { handle: null, url: null, fullUrl: null, fileObj: null }));
+  state.filesByPath = new Map();
+  state.files.forEach(f => state.filesByPath.set(f.path, f));
+}
+
+async function loadDriveRoot(rootId, rootName, opts) {
+  opts = opts || {};
+  state.source = 'drive';
+  drive.rootId = rootId;
+  drive.rootName = rootName;
+  state.rootHandle = null;
+  state.rootName = rootName;
+  loadMeta();
+  state.selectedPath = null;
+  closeInspector();
+
+  // Instant open from cache (unless the user asked to refresh)
+  if (!opts.forceRescan) {
+    const cached = await cacheGet('drive:' + rootId);
+    if (cached && cached.files) {
+      restoreDriveSnapshot(cached);
+      finalizeDriveUI(rootName, { fromCache: true, savedAt: cached.savedAt });
+      return;
+    }
+  }
+
+  // Fresh scan
+  state.files = [];
+  state.filesByPath = new Map();
+  state.nodesByPath = new Map();
+  showProcessing(opts.forceRescan ? 'Refreshing from Google Drive…' : 'Scanning Google Drive…', 'Reading nested folders', true);
+  state.cancel = false;
+  const rootNode = makeNode(rootName, '', null, null);
+  rootNode.driveId = rootId;
+  state.tree = rootNode;
+  state.nodesByPath.set('', rootNode);
+
+  let scanned = 0;
+  try {
+    await scanDrive(rootId, '', rootNode, () => {
+      scanned++;
+      if (scanned % 20 === 0) updateProcessing(opts.forceRescan ? 'Refreshing from Google Drive…' : 'Scanning Google Drive…', `${scanned} items found`, -1);
+    });
+  } catch (err) {
+    hideProcessing();
+    showToast('Drive scan failed: ' + err.message, 'error');
+    return;
+  }
+
+  computeCounts(rootNode);
+  hideProcessing();
+  if (state.cancel) { showToast('Scan cancelled', 'error'); return; }
+
+  await cacheSet('drive:' + rootId, makeDriveSnapshot(rootId, rootName, Date.now()));
+  finalizeDriveUI(rootName, { fromCache: false });
+}
+
+function finalizeDriveUI(rootName, info) {
+  state.currentPath = '';
+  state.activeCategory = null;
+  state.activeType = null;
+  state.includeSubfolders = state.files.length > 0 && state.tree.dirs.length > 0;
+  $('subCheck').textContent = state.includeSubfolders ? '☑' : '☐';
+  $('subfoldersPill').classList.toggle('on', state.includeSubfolders);
+
+  { const _w = $('welcome'); if (_w) _w.style.display = 'none'; }
+  $('toolbar').style.display = 'flex';
+  $('headerStats').style.display = 'flex';
+  $('reopenBtn').style.display = 'inline-block';
+  $('reopenBtn').textContent = 'Change Folder';
+  $('refreshBtn').style.display = 'inline-block';
+  $('openBtn').style.display = 'none';
+  $('driveBtn').style.display = 'none';
+  $('drivePill').style.display = 'inline-flex';
+  $('drivePill').innerHTML = '☁️ Drive · ' + esc(rootName);
+  $('rootName').textContent = rootName;
+  $('folderSwitcher').style.display = 'inline-flex';
+
+  try { localStorage.setItem('photoOrganizer:lastDrive', JSON.stringify({ rootId: drive.rootId, rootName })); } catch (e) {}
+  recentsAdd({ kind: 'drive', rootId: drive.rootId, name: rootName, images: state.files.length, folders: state.nodesByPath.size });
+
+  renderTree();
+  renderGrid();
+  updateStats();
+  if (info.fromCache) {
+    const age = info.savedAt ? ` (saved ${timeAgo(info.savedAt)})` : '';
+    showToast(`Opened "${rootName}" instantly from cache${age} — ${state.files.length} images. Click ↻ Refresh to pull new photos.`, 'success');
+  } else {
+    showToast(`Scanned "${rootName}" — ${state.files.length} images in ${state.nodesByPath.size} folders. Saved for instant reopen.`, 'success');
+  }
+}
+
+function refreshDrive() {
+  if (state.source !== 'drive' || !drive.rootId) return;
+  loadDriveRoot(drive.rootId, state.rootName, { forceRescan: true });
+}
+
+// One-click reopen of a Drive folder by id (gets a token, then loads from cache instantly)
+async function reopenDriveById(rootId, rootName) {
+  if (!rootId) return;
+  if (location.protocol === 'file:') { openDriveSetupModal(true); return; }
+  if (typeof google === 'undefined' || !google.accounts || !google.accounts.oauth2) { showToast('Google sign-in library not loaded yet — retry in a moment.', 'error'); return; }
+  if (!drive.clientId) { openDriveSetupModal(false); return; }
+  try { await getDriveToken(); } catch (e) { if (e && e.message === 'cancelled') return; showToast('Sign-in failed: ' + (e.message || e), 'error'); return; }
+  loadDriveRoot(rootId, rootName);
+}
+// Kept for the legacy lastDrive shortcut (still used if no recents entry exists).
+async function reopenLastDrive() {
+  let last; try { last = JSON.parse(localStorage.getItem('photoOrganizer:lastDrive') || 'null'); } catch (e) {}
+  if (last && last.rootId) reopenDriveById(last.rootId, last.rootName);
+}
+
+function timeAgo(ms) {
+  const s = Math.floor((Date.now() - ms) / 1000);
+  if (s < 90) return 'just now';
+  const m = Math.floor(s / 60); if (m < 90) return m + ' min ago';
+  const h = Math.floor(m / 60); if (h < 36) return h + ' hr ago';
+  return Math.floor(h / 24) + ' days ago';
+}
+
+// ── Drive: setup + folder-picker modals ──
+function openDriveSetupModal(fileProtocol) {
+  const origin = location.origin && location.origin !== 'null' ? location.origin : '(serve this page over http first)';
+  const fileWarn = fileProtocol ? `
+    <div class="no-fsa" style="margin:0 0 1rem;">
+      ⚠️ Google sign-in can't run from a <code>file://</code> page. Serve this folder over a local
+      web server first, e.g. run <code>python3 -m http.server 8000</code> in the folder that
+      contains <code>index.html</code>, then open <code>http://localhost:8000</code>.
+    </div>` : '';
+  modal(`
+    <h2>Connect Google Drive</h2>
+    <div class="sub">One-time setup. This creates a free Google OAuth client so the app can read your Drive directly in your browser. Nothing is sent to any server but Google's.</div>
+    ${fileWarn}
+    <ol>
+      <li>Go to the <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">Google Cloud Console → Credentials</a> and pick or create a project.</li>
+      <li>Enable the <a href="https://console.cloud.google.com/apis/library/drive.googleapis.com" target="_blank" rel="noopener">Google Drive API</a> for that project.</li>
+      <li>Configure the <b>OAuth consent screen</b> (External, add yourself as a Test user).</li>
+      <li>Create an <b>OAuth client ID</b> → type <b>Web application</b>.</li>
+      <li>Under <b>Authorized JavaScript origins</b> add exactly: <code>${esc(origin)}</code></li>
+      <li>Copy the <b>Client ID</b> (ends in <code>.apps.googleusercontent.com</code>) and paste it below.</li>
+    </ol>
+    <label>Google OAuth Client ID</label>
+    <input type="text" id="clientIdInput" placeholder="1234567890-abc….apps.googleusercontent.com" value="${esc(drive.clientId)}">
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn-primary" onclick="saveClientId()">Save &amp; connect</button>
+    </div>
+  `);
+  setTimeout(() => { const i = $('clientIdInput'); if (i) i.focus(); }, 50);
+}
+
+function saveClientId() {
+  const v = $('clientIdInput').value.trim();
+  if (!v || !/\.apps\.googleusercontent\.com$/.test(v)) {
+    showToast('That doesn\'t look like a valid Client ID (must end in .apps.googleusercontent.com)', 'error');
+    return;
+  }
+  drive.clientId = v;
+  localStorage.setItem('photoOrganizer:googleClientId', v);
+  drive.tokenClient = null; // force re-init with new id
+  closeModal();
+  connectDrive();
+}
+
+// List ONLY the sub-folders of a parent (cheap — no file metadata), for the picker
+async function driveListFolders(parentId) {
+  const out = [];
+  let pageToken = '';
+  const q = encodeURIComponent(`'${parentId}' in parents and mimeType='${FOLDER_MIME}' and trashed=false`);
+  do {
+    let url = `files?q=${q}&fields=nextPageToken,files(id,name)&pageSize=1000&orderBy=name&supportsAllDrives=true&includeItemsFromAllDrives=true`;
+    if (pageToken) url += '&pageToken=' + pageToken;
+    const data = await driveApi(url);
+    (data.files || []).forEach(f => out.push(f));
+    pageToken = data.nextPageToken || '';
+  } while (pageToken);
+  return out;
+}
+
+// Drill-down folder picker — navigate INTO folders, then scan the exact one you want.
+let pickerPath = []; // [{id, name}] — current location; empty = top level
+let pickerFilter = '';
+let pickerOpen = { drives: false, shared: false };
+let pickerData = { my: [], drives: [], shared: [], sub: [] };
+
+async function openDriveFolderPicker() {
+  pickerPath = [];
+  pickerFilter = '';
+  pickerOpen = { drives: false, shared: false };
+  await renderDrivePicker();
+}
+
+function drillInto(id, name) { pickerPath.push({ id, name }); pickerFilter = ''; renderDrivePicker(); }
+function pickerGoTo(i) { pickerPath = i < 0 ? [] : pickerPath.slice(0, i + 1); pickerFilter = ''; renderDrivePicker(); }
+
+// One folder row: click anywhere to open it; the "Scan" button (hover) browses it as-is.
+function folderRow(id, name, icon) {
+  icon = icon || '📁';
+  return `<div class="folder-pick" onclick="drillInto('${jsStr(id)}','${jsStr(name)}')" title="Open “${esc(name)}”">
+    <span class="fp-icon">${icon}</span>
+    <span class="fp-name">${esc(name)}</span>
+    <button class="fp-scan" onclick="event.stopPropagation();pickDriveRoot('${jsStr(id)}','${jsStr(name)}')" title="Browse this folder + everything inside">Scan</button>
+    <span class="fp-caret">›</span>
+  </div>`;
+}
+
+// Fetch the folder list for the current level (cached so search can filter instantly), then show the modal.
+async function renderDrivePicker() {
+  showProcessing(pickerPath.length ? 'Opening folder…' : 'Loading your Drive…', '', false);
+  try {
+    if (pickerPath.length === 0) {
+      pickerData.my = await driveListFolders('root');
+      pickerData.drives = []; pickerData.shared = [];
+      try { pickerData.drives = (await driveApi('drives?pageSize=100&fields=drives(id,name)')).drives || []; } catch (e) { console.warn('[Sift] Shared drives list failed:', e); }
+      try {
+        const q = encodeURIComponent("sharedWithMe=true and mimeType='" + FOLDER_MIME + "' and trashed=false");
+        pickerData.shared = (await driveApi(`files?q=${q}&fields=files(id,name)&pageSize=200&supportsAllDrives=true&includeItemsFromAllDrives=true`)).files || [];
+      } catch (e) { console.warn('[Sift] "Shared with me" list failed:', e); }
+    } else {
+      pickerData.sub = await driveListFolders(pickerPath[pickerPath.length - 1].id);
+    }
+  } catch (err) { hideProcessing(); showToast('Could not list folders: ' + err.message, 'error'); return; }
+  hideProcessing();
+  showPickerModal();
+}
+
+function showPickerModal() {
+  let crumb = `<span class="seg" onclick="pickerGoTo(-1)">Drive</span>`;
+  pickerPath.forEach((p, i) => { crumb += ` <span class="sep">/</span> <span class="seg" onclick="pickerGoTo(${i})">${esc(p.name)}</span>`; });
+  const cur = pickerPath[pickerPath.length - 1];
+  const browseCurrent = cur
+    ? `<button class="btn-primary" style="width:100%;margin-bottom:0.6rem;" onclick="pickDriveRoot('${jsStr(cur.id)}','${jsStr(cur.name)}')">✓ Browse “${esc(cur.name)}” — this folder + everything inside</button>`
+    : '';
+  modal(`
+    <h2>Choose a folder to browse</h2>
+    <div class="crumbs" style="margin-bottom:0.55rem;">${crumb}</div>
+    <input type="text" id="pickerSearch" class="picker-search" placeholder="🔍 Filter folders by name…" oninput="filterPicker(this.value)" autocomplete="off">
+    ${browseCurrent}
+    <div class="folder-pick-list" id="pickerList"></div>
+    <div class="modal-actions"><button class="btn-ghost" onclick="closeModal()">Cancel</button></div>
+  `);
+  updatePickerList();
+  const s = $('pickerSearch'); if (s) { s.value = pickerFilter; s.focus(); }
+}
+
+function filterPicker(v) { pickerFilter = v; updatePickerList(); }
+function togglePickerSection(key) { pickerOpen[key] = !pickerOpen[key]; updatePickerList(); }
+function updatePickerList() { const el = $('pickerList'); if (el) el.innerHTML = buildPickerListHTML(); }
+
+function buildPickerListHTML() {
+  const f = pickerFilter.trim().toLowerCase();
+  const match = arr => f ? arr.filter(x => x.name.toLowerCase().includes(f)) : arr;
+
+  // Drilled into a folder — just its sub-folders.
+  if (pickerPath.length > 0) {
+    const subs = match(pickerData.sub || []);
+    if (!subs.length) return `<div class="sub" style="padding:0.5rem 0;">${f ? 'No sub-folders match “' + esc(pickerFilter) + '”.' : 'No sub-folders here. Use “Browse this folder” above to view its images.'}</div>`;
+    return subs.map(x => folderRow(x.id, x.name)).join('');
+  }
+
+  // Top level. When filtering, show one flat matched list across all sources.
+  if (f) {
+    const all = [
+      ...pickerData.my.map(x => ({ ...x, icon: '📁' })),
+      ...pickerData.drives.map(x => ({ ...x, icon: '👥' })),
+      ...pickerData.shared.map(x => ({ ...x, icon: '🔗' })),
+    ].filter(x => x.name.toLowerCase().includes(f));
+    if (!all.length) return `<div class="sub" style="padding:0.5rem 0;">No folders match “${esc(pickerFilter)}”.</div>`;
+    return all.map(x => folderRow(x.id, x.name, x.icon)).join('');
+  }
+
+  // Unfiltered: recents, Entire My Drive, My Drive folders, then collapsible shared sections.
+  let html = '';
+  const recents = (typeof recentList !== 'undefined' ? recentList : []).filter(r => r.kind === 'drive').slice(0, 3);
+  if (recents.length) {
+    html += `<div class="picker-section static"><span class="filter-label" style="margin:0;">Recent</span></div>`;
+    html += recents.map(r => `<div class="folder-pick" onclick="pickDriveRoot('${jsStr(r.rootId)}','${jsStr(r.name)}')" title="Reopen “${esc(r.name)}”"><span class="fp-icon">🕘</span><span class="fp-name">${esc(r.name)}</span><span class="fp-caret">↻</span></div>`).join('');
+  }
+  html += `<div class="picker-section static"><span class="filter-label" style="margin:0;">My Drive</span></div>`;
+  html += `<div class="folder-pick" style="border-color:rgba(74,222,128,0.35);" onclick="pickDriveRoot('root','My Drive')" title="Browse all of My Drive"><span class="fp-icon">☁️</span><span class="fp-name"><b>Entire My Drive</b> — everything</span></div>`;
+  html += pickerData.my.map(x => folderRow(x.id, x.name)).join('');
+  if (pickerData.drives.length) {
+    html += `<div class="picker-section" onclick="togglePickerSection('drives')"><span class="ps-caret">${pickerOpen.drives ? '▾' : '▸'}</span><span class="filter-label" style="margin:0;">Shared drives</span><span class="ps-count">${pickerData.drives.length}</span></div>`;
+    if (pickerOpen.drives) html += pickerData.drives.map(x => folderRow(x.id, x.name, '👥')).join('');
+  }
+  if (pickerData.shared.length) {
+    html += `<div class="picker-section" onclick="togglePickerSection('shared')"><span class="ps-caret">${pickerOpen.shared ? '▾' : '▸'}</span><span class="filter-label" style="margin:0;">Shared with me</span><span class="ps-count">${pickerData.shared.length}</span></div>`;
+    if (pickerOpen.shared) html += pickerData.shared.map(x => folderRow(x.id, x.name, '🔗')).join('');
+  }
+  return html;
+}
+
+function pickDriveRoot(id, name) {
+  closeModal();
+  loadDriveRoot(id, name);
+}
+
+// ── Drive byte access (used by thumbnails, preview, lightbox, AI) ──
+async function ensureBlobUrl(f) {
+  // Returns an untainted, same-origin object URL for the full media (works for AI + <img>/<video>)
+  if (f.url) return f.url;
+  if (state.source === 'drive') {
+    const blob = await driveFetchBlob(driveMediaUrl(f.driveId));
+    if (blob) { f.fileObj = blob; if (f.size == null) f.size = blob.size; f.url = URL.createObjectURL(blob); }
+    return f.url;
+  } else {
+    const file = await f.handle.getFile();
+    f.fileObj = file; if (f.size == null) f.size = file.size; if (!f.modified) f.modified = file.lastModified;
+    f.url = URL.createObjectURL(file);
+    return f.url;
+  }
+}
+
+// Can a browser <img> natively decode this file's bytes? RAW/TIFF/PSD/PDF cannot —
+// only Google's server-rendered thumbnail can show them; never feed their bytes to an <img>.
+function imgDecodable(f) { return f.kind === 'image' && RENDERABLE.includes(f.ext); }
+
+// ── Modal plumbing ──
+function modal(html) { $('modalRoot').innerHTML = `<div class="modal-backdrop" onclick="if(event.target===this)closeModal()"><div class="modal">${html}</div></div>`; }
+function closeModal() { $('modalRoot').innerHTML = ''; }
+
+// ════════════════════════════════════════════════════════
+//  Folder tree rendering
+// ════════════════════════════════════════════════════════
+function renderTree() {
+  const el = $('tree');
+  el.innerHTML = '';
+  el.appendChild(buildTreeNode(state.tree, 0));
+}
+
+function buildTreeNode(node, depth) {
+  const wrap = document.createElement('div');
+  wrap.className = 'tree-node';
+
+  const row = document.createElement('div');
+  row.className = 'tree-row' + (node.path === state.currentPath ? ' active' : '');
+  row.style.paddingLeft = (0.4 + depth * 0.85) + 'rem';
+
+  const hasChildren = node.dirs.length > 0;
+  const toggle = document.createElement('span');
+  toggle.className = 'tree-toggle' + (hasChildren ? '' : ' empty');
+  toggle.textContent = node.expanded ? '▾' : '▸';
+  toggle.onclick = (e) => { e.stopPropagation(); node.expanded = !node.expanded; renderTree(); };
+
+  const icon = document.createElement('span');
+  icon.className = 'tree-icon';
+  icon.textContent = node.expanded && hasChildren ? '📂' : '📁';
+
+  const name = document.createElement('span');
+  name.className = 'tree-name';
+  name.textContent = node.path === '' ? node.name : node.name;
+
+  const count = document.createElement('span');
+  count.className = 'tree-count';
+  count.textContent = node.recursiveCount || '';
+
+  row.appendChild(toggle);
+  row.appendChild(icon);
+  row.appendChild(name);
+  row.appendChild(count);
+  row.onclick = () => selectFolder(node.path);
+
+  wrap.appendChild(row);
+
+  if (hasChildren && node.expanded) {
+    const children = document.createElement('div');
+    children.className = 'tree-children';
+    for (const d of node.dirs) children.appendChild(buildTreeNode(d, depth + 1));
+    wrap.appendChild(children);
+  }
+  return wrap;
+}
+
+function selectFolder(path) {
+  state.currentPath = path;
+  state.activeCategory = null;
+  state.activeType = null;
+  // auto-expand the chain of ancestor folders so the selection is visible in the tree
+  let p = state.nodesByPath.get(path);
+  while (p && p.parentPath != null) {
+    const parent = state.nodesByPath.get(p.parentPath);
+    if (parent) parent.expanded = true;
+    p = parent;
+  }
+  renderTree();
+  renderCrumbs();
+  renderGrid();
+}
+
+function renderCrumbs() {
+  const el = $('crumbs');
+  const segs = state.currentPath === '' ? [] : state.currentPath.split('/');
+  let html = `<span class="seg" onclick="selectFolder('')">${esc(state.rootName)}</span>`;
+  let acc = '';
+  segs.forEach(s => {
+    acc = acc ? acc + '/' + s : s;
+    html += `<span class="sep">/</span><span class="seg" onclick="selectFolder('${esc(acc).replace(/'/g,"\\'")}')">${esc(s)}</span>`;
+  });
+  el.innerHTML = html;
+}
+
+// ════════════════════════════════════════════════════════
+//  Grid rendering
+// ════════════════════════════════════════════════════════
+function filesForView() {
+  let list;
+  if (state.includeSubfolders) {
+    const prefix = state.currentPath === '' ? '' : state.currentPath + '/';
+    list = state.files.filter(f => state.currentPath === '' ? true : f.path.startsWith(prefix));
+  } else {
+    list = state.files.filter(f => f.dir === state.currentPath);
+  }
+  // filters
+  if (state.search) list = list.filter(f => f.name.toLowerCase().includes(state.search));
+  if (state.minStars) list = list.filter(f => (getMeta(f.path).rating || 0) >= state.minStars);
+  if (state.activeCategory) list = list.filter(f => getMeta(f.path).category === state.activeCategory);
+  if (state.activeColor) list = list.filter(f => getColors(f.path).includes(state.activeColor));
+  if (state.activeType) list = list.filter(f => f.ext === state.activeType);
+  if (state.bestOnly && state.culled) list = list.filter(f => !cullInfo(f.path).isDup);   // hide near-dups
+  return list;
+}
+
+function sortFiles(list) {
+  // Smart search overrides the sort: rank by similarity to the query.
+  if (state.smart && state.smartScores) {
+    return [...list].sort((a, b) => (state.smartScores.get(b.path) ?? -1) - (state.smartScores.get(a.path) ?? -1));
+  }
+  const s = state.sort;
+  const arr = [...list];
+  arr.sort((a, b) => {
+    switch (s) {
+      case 'name': return a.name.localeCompare(b.name, undefined, { numeric: true });
+      case 'name-desc': return b.name.localeCompare(a.name, undefined, { numeric: true });
+      case 'modified': return (b.modified || 0) - (a.modified || 0);
+      case 'modified-asc': return (a.modified || 0) - (b.modified || 0);
+      case 'size': return (b.size || 0) - (a.size || 0);
+      case 'rating': return (getMeta(b.path).rating || 0) - (getMeta(a.path).rating || 0);
+      case 'color': {
+        const ca = getColors(a.path), cb = getColors(b.path);
+        if (state.sortColor) {
+          // Lead with the chosen colour (images that include it first), then nearest shades.
+          const da = minColorDistance(ca, state.sortColor), db = minColorDistance(cb, state.sortColor);
+          return da - db || a.name.localeCompare(b.name, undefined, { numeric: true });
+        }
+        return minColorOrder(ca) - minColorOrder(cb) || a.name.localeCompare(b.name, undefined, { numeric: true });
+      }
+      case 'quality': return (qualityOf(b.path) ?? -1) - (qualityOf(a.path) ?? -1);
+      default: return 0;
+    }
+  });
+  return arr;
+}
+
+function renderGrid() {
+  if (!state.tree) return;
+  renderCrumbs();
+  renderFilterChips();
+  const content = $('content');
+  content.style.setProperty('--thumb', state.thumb + 'px');
+
+  let list = sortFiles(filesForView());
+  state.viewList = list;
+
+  if (!list.length) {
+    content.innerHTML = `<div class="empty-state"><div class="icon">📂</div><p>${
+      state.search || state.activeCategory || state.activeColor || state.activeType || state.minStars || state.bestOnly
+        ? 'No images match the current filters.'
+        : 'No images in this folder.' + (state.nodesByPath.get(state.currentPath)?.dirs.length ? ' Try “Include subfolders”.' : '')
+    }</p></div>`;
+    return;
+  }
+
+  let html = '';
+  if (state.groupBy === 'none') {
+    html = `<div class="grid">${list.map(cardHTML).join('')}</div>`;
+  } else {
+    const groups = groupFiles(list, state.groupBy);
+    html = groups.map(g => `
+      <div class="group-section">
+        <div class="group-head">
+          ${g.badge ? `<span class="group-badge">${esc(g.badge)}</span>` : ''}
+          <span class="group-title">${esc(g.title)}</span>
+          <span class="group-count">${g.items.length}</span>
+          <span class="group-line"></span>
+        </div>
+        <div class="grid">${g.items.map(cardHTML).join('')}</div>
+      </div>`).join('');
+  }
+  content.innerHTML = html;
+  attachLazyLoading();
+  updateSelectionBar();
+}
+
+function groupFiles(list, mode) {
+  const map = new Map();
+  for (const f of list) {
+    let key, title, badge = '';
+    if (mode === 'folder') { key = f.dir; title = f.dir === '' ? state.rootName : f.dir; }
+    else if (mode === 'category') { key = getMeta(f.path).category || 'untagged'; title = key === 'untagged' ? 'Untagged' : (CATEGORIES[key]?.label || cap(key)); badge = 'AI'; }
+    else if (mode === 'color') { key = getColors(f.path)[0] || 'untagged'; title = key === 'untagged' ? 'No colour' : colorLabel(key); badge = 'COLOUR'; }
+    else if (mode === 'cluster') {
+      const c = cullInfo(f.path);
+      const solo = !(state.culled && c.size > 1);
+      key = solo ? 'solo' : 'c' + c.clusterId;
+      title = solo ? 'Unique shots' : 'Group ' + (c.clusterId + 1);
+      badge = solo ? '' : 'DUPES';
+    }
+    else if (mode === 'type') { key = f.ext; title = f.ext.toUpperCase(); }
+    if (!map.has(key)) map.set(key, { key, title, badge, items: [] });
+    map.get(key).items.push(f);
+  }
+  let groups = [...map.values()];
+  if (mode === 'category') {
+    groups.sort((a, b) => {
+      const ia = CAT_ORDER.indexOf(a.key); const ib = CAT_ORDER.indexOf(b.key);
+      return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+    });
+  } else if (mode === 'color') {
+    groups.sort((a, b) => {
+      const ia = COLOR_ORDER.indexOf(a.key); const ib = COLOR_ORDER.indexOf(b.key);
+      return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+    });
+  } else if (mode === 'cluster') {
+    groups.forEach(g => g.items.sort((a, b) =>
+      ((cullInfo(b.path).isKeeper ? 1 : 0) - (cullInfo(a.path).isKeeper ? 1 : 0)) ||
+      ((qualityOf(b.path) ?? -1) - (qualityOf(a.path) ?? -1))));
+    groups.sort((a, b) => (a.key === 'solo' ? 1 : 0) - (b.key === 'solo' ? 1 : 0) || b.items.length - a.items.length);
+  } else {
+    groups.sort((a, b) => a.title.localeCompare(b.title, undefined, { numeric: true }));
+  }
+  return groups;
+}
+
+function cardHTML(f) {
+  const m = getMeta(f.path);
+  const sel = state.selectedPath === f.path ? 'selected' : '';
+  const chk = state.checked.has(f.path) ? 'checked' : '';
+  const starred = (m.rating || 0) > 0;
+  const tags = (m.tags || []).slice(0, 2);
+  const c = cullInfo(f.path);
+  const q = qualityOf(f.path);
+  const isKeeper = state.culled && c.isKeeper && c.size > 1;
+  const isDup = state.culled && c.isDup;
+  const qCls = q == null ? '' : (q >= 70 ? 'good' : q >= 45 ? 'ok' : 'low');
+  return `<div class="card ${sel} ${chk} ${isKeeper ? 'keeper' : ''} ${isDup ? 'dup' : ''}" data-path="${esc(f.path)}" onclick="selectFile('${jsStr(f.path)}', event)" ondblclick="openLightbox('${jsStr(f.path)}')">
+    <div class="thumb-wrap" data-lazy="${esc(f.path)}">
+      <span class="placeholder">${f.kind === 'video' ? '🎬' : f.kind === 'raw' ? '🖼️' : '⏳'}</span>
+    </div>
+    <span class="check" onclick="event.stopPropagation();toggleCheck('${jsStr(f.path)}', event)" title="Select for download">${chk ? '✓' : ''}</span>
+    <span class="ext-badge">${esc(f.kind === 'video' ? 'VID' : f.ext.toUpperCase())}</span>
+    ${f.kind === 'video' && f.duration ? `<span class="dur-badge">${esc(fmtDuration(f.duration))}</span>` : ''}
+    <span class="star-badge ${starred ? 'on' : ''}" title="${starred ? 'Unstar' : 'Star this image'}" onclick="event.stopPropagation();quickStar('${jsStr(f.path)}')">${starred ? '★' : '☆'}</span>
+    ${state.culled && q != null ? `<span class="q-badge ${qCls}" title="Quality score (sharpness + exposure)">${Math.round(q)}</span>` : ''}
+    ${isKeeper ? `<span class="best-badge" title="Best shot in its group">★ BEST</span>` : ''}
+    ${isDup ? `<span class="promote-badge" title="Make this the keeper" onclick="event.stopPropagation();promoteKeeper('${jsStr(f.path)}')">▲ keep</span>` : ''}
+    ${tags.length ? `<div class="tags-line">${tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>` : ''}
+    <div class="caption">${getColors(f.path).map(k => `<span class="swatch" style="background:${colorHex(k)}" title="${esc(colorLabel(k))}"></span>`).join('')}${esc(f.name)}</div>
+  </div>`;
+}
+
+// ── Lazy thumbnail loading via IntersectionObserver ──
+let io = null;
+function attachLazyLoading() {
+  if (io) io.disconnect();
+  io = new IntersectionObserver((entries) => {
+    entries.forEach(async (en) => {
+      if (!en.isIntersecting) return;
+      const wrap = en.target;
+      io.unobserve(wrap);
+      const path = wrap.getAttribute('data-lazy');
+      const f = state.filesByPath.get(path);
+      if (!f) return;
+      await loadThumb(f, wrap);
+    });
+  }, { rootMargin: '300px' });
+  document.querySelectorAll('.thumb-wrap[data-lazy]').forEach(w => io.observe(w));
+}
+
+async function loadThumb(f, wrap) {
+  try {
+    // ── Google Drive source ──
+    if (state.source === 'drive') {
+      if (f.kind === 'video') {
+        // Drive generates a poster frame — show it (with a ▶ badge) instead of a bare 🎬.
+        if (f.thumbnailLink) {
+          const img = document.createElement('img');
+          img.loading = 'lazy';
+          img.referrerPolicy = 'no-referrer';
+          img.onerror = () => { img.onerror = null; wrap.innerHTML = '<span class="placeholder">🎬</span>'; };
+          img.src = f.thumbnailLink.replace(/=s\d+(-[a-z]+)?$/, '=s400');
+          wrap.innerHTML = ''; wrap.appendChild(img);
+          wrap.insertAdjacentHTML('beforeend', '<span class="play-badge">▶</span>');
+        } else {
+          wrap.innerHTML = '<span class="placeholder">🎬</span>';
+        }
+        return;
+      }
+      // Drive renders thumbnails server-side — even for HEIC/TIFF/PSD the browser can't decode the raw bytes.
+      if (f.thumbnailLink) {
+        const img = document.createElement('img');
+        img.loading = 'lazy';
+        img.referrerPolicy = 'no-referrer';
+        let triedFallback = false;            // onerror acts at most once — no reliance on same-src being a no-op
+        img.onerror = async () => {
+          if (triedFallback) return;
+          triedFallback = true;
+          img.onerror = null;                 // detach before any further src change
+          // Server thumbnail failed. Only the server thumbnail can show raw/psd/pdf — never feed
+          // their undecodable bytes into an <img> (that was the flicker loop).
+          if (!imgDecodable(f)) { wrap.innerHTML = `<span class="placeholder">${f.kind === 'raw' ? '🖼️' : '🚫'}</span>`; return; }
+          const url = await ensureBlobUrl(f);
+          if (url) { img.onerror = () => { img.onerror = null; wrap.innerHTML = '<span class="placeholder">🚫</span>'; }; img.src = url; }
+          else wrap.innerHTML = '<span class="placeholder">🚫</span>';
+        };
+        img.src = f.thumbnailLink.replace(/=s\d+(-[a-z]+)?$/, '=s400');
+        wrap.innerHTML = ''; wrap.appendChild(img);
+      } else {
+        // No server thumbnail. Only download + decode when the browser can render the bytes.
+        if (!imgDecodable(f)) { wrap.innerHTML = `<span class="placeholder">${f.kind === 'raw' ? '🖼️' : '🚫'}</span>`; return; }
+        const url = await ensureBlobUrl(f);
+        if (url) { const img = document.createElement('img'); img.onerror = () => { img.onerror = null; wrap.innerHTML = '<span class="placeholder">🚫</span>'; }; img.src = url; wrap.innerHTML = ''; wrap.appendChild(img); }
+        else wrap.innerHTML = `<span class="placeholder">${f.kind === 'raw' ? '🖼️' : '🚫'}</span>`;
+      }
+      return;
+    }
+
+    // ── File System source ──
+    if (!f.url) {
+      const file = await f.handle.getFile();
+      f.fileObj = file;
+      f.size = file.size;
+      f.modified = file.lastModified;
+      if (f.kind === 'image' && RENDERABLE.includes(f.ext)) {
+        f.url = URL.createObjectURL(file);
+      } else if (f.kind === 'video') {
+        f.url = URL.createObjectURL(file);
+      } else {
+        // raw / non-renderable: leave placeholder
+        return;
+      }
+    }
+    if (f.kind === 'image') {
+      const img = document.createElement('img');
+      img.loading = 'lazy';
+      img.src = f.url;
+      img.onload = () => { if (!f.width) { f.width = img.naturalWidth; f.height = img.naturalHeight; } };
+      img.onerror = () => { wrap.innerHTML = '<span class="placeholder">🚫</span>'; };
+      wrap.innerHTML = '';
+      wrap.appendChild(img);
+    } else if (f.kind === 'video') {
+      const v = document.createElement('video');
+      v.src = f.url; v.muted = true; v.preload = 'metadata'; v.loop = true; v.playsInline = true;
+      wrap.innerHTML = '';
+      wrap.appendChild(v);
+      wrap.insertAdjacentHTML('beforeend', '<span class="play-badge">▶</span>');
+      // Capture duration/dimensions from the first frame and show a duration badge.
+      v.addEventListener('loadedmetadata', () => {
+        if (isFinite(v.duration)) f.duration = v.duration;
+        if (!f.width && v.videoWidth) { f.width = v.videoWidth; f.height = v.videoHeight; }
+        if (f.duration && !wrap.querySelector('.dur-badge')) {
+          wrap.insertAdjacentHTML('beforeend', `<span class="dur-badge">${esc(fmtDuration(f.duration))}</span>`);
+        }
+      }, { once: true });
+      // Hover to preview: play muted from the start; reset on leave. (Local blob is already loaded.)
+      const card = wrap.closest('.card'), badge = wrap.querySelector('.play-badge');
+      if (card) {
+        card.addEventListener('mouseenter', () => { try { v.currentTime = 0; } catch (e) {} v.play().catch(() => {}); if (badge) badge.style.opacity = '0'; });
+        card.addEventListener('mouseleave', () => { v.pause(); try { v.currentTime = 0; } catch (e) {} if (badge) badge.style.opacity = ''; });
+      }
+    }
+  } catch (err) {
+    wrap.innerHTML = '<span class="placeholder">🚫</span>';
+  }
+}
+
+// ════════════════════════════════════════════════════════
+//  Filter chips (AI categories present in current view)
+// ════════════════════════════════════════════════════════
+function renderFilterChips() {
+  const row = $('filterRow');
+  // count categories within the unfiltered view scope (folder + subfolder setting, ignoring category filter)
+  let scope;
+  if (state.includeSubfolders) {
+    const prefix = state.currentPath === '' ? '' : state.currentPath + '/';
+    scope = state.files.filter(f => state.currentPath === '' ? true : f.path.startsWith(prefix));
+  } else {
+    scope = state.files.filter(f => f.dir === state.currentPath);
+  }
+  const counts = {}, colorCounts = {}, typeCounts = {};
+  scope.forEach(f => {
+    const m = getMeta(f.path);
+    if (m.category) counts[m.category] = (counts[m.category] || 0) + 1;
+    getColors(f.path).forEach(c => { colorCounts[c] = (colorCounts[c] || 0) + 1; });
+    if (f.ext) typeCounts[f.ext] = (typeCounts[f.ext] || 0) + 1;
+  });
+
+  const cats = Object.keys(counts).sort((a, b) => {
+    const ia = CAT_ORDER.indexOf(a); const ib = CAT_ORDER.indexOf(b);
+    return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+  });
+  const cols = Object.keys(colorCounts).sort((a, b) => {
+    const ia = COLOR_ORDER.indexOf(a); const ib = COLOR_ORDER.indexOf(b);
+    return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+  });
+  const types = Object.keys(typeCounts).sort((a, b) => typeCounts[b] - typeCounts[a] || a.localeCompare(b));
+  const showTypes = types.length >= 2;   // only worth a filter when the folder mixes types
+
+  if (cats.length === 0 && cols.length === 0 && !showTypes) { row.classList.add('hidden'); return; }
+  row.classList.remove('hidden');
+  let html = '', prev = false;
+  const divider = () => prev ? `<span class="divider" style="width:1px;height:20px;background:var(--border);margin:0 0.3rem;"></span>` : '';
+
+  if (showTypes) {
+    html += `<span class="filter-label">Type</span>`;
+    html += `<span class="chip ${!state.activeType ? 'active' : ''}" onclick="setTypeFilter(null)">All <span class="chip-count">${scope.length}</span></span>`;
+    types.forEach(t => {
+      html += `<span class="chip ${state.activeType === t ? 'active' : ''}" onclick="setTypeFilter('${jsStr(t)}')">${esc(t.toUpperCase())} <span class="chip-count">${typeCounts[t]}</span></span>`;
+    });
+    prev = true;
+  }
+  if (cats.length) {
+    html += divider();
+    html += `<span class="filter-label">AI categories</span>`;
+    html += `<span class="chip ${!state.activeCategory ? 'active' : ''}" onclick="setCategory(null)">All <span class="chip-count">${scope.length}</span></span>`;
+    cats.forEach(c => {
+      const lbl = CATEGORIES[c]?.label || cap(c);
+      html += `<span class="chip ${state.activeCategory === c ? 'active' : ''}" onclick="setCategory('${jsStr(c)}')">${esc(lbl)} <span class="chip-count">${counts[c]}</span></span>`;
+    });
+    html += `<span class="chip chip-danger" onclick="clearTagsInView()" title="Remove AI tags & categories from every image in this view">✕ Clear AI tags</span>`;
+    prev = true;
+  }
+  if (cols.length) {
+    html += divider();
+    html += `<span class="filter-label">Colours</span>`;
+    html += `<span class="chip ${!state.activeColor ? 'active' : ''}" onclick="setColorFilter(null)">All</span>`;
+    cols.forEach(c => {
+      html += `<span class="chip ${state.activeColor === c ? 'active' : ''}" onclick="setColorFilter('${jsStr(c)}')"><span class="swatch" style="background:${colorHex(c)}"></span>${esc(colorLabel(c))} <span class="chip-count">${colorCounts[c]}</span></span>`;
+    });
+    prev = true;
+  }
+  row.innerHTML = html;
+}
+
+function setCategory(c) { state.activeCategory = c; renderGrid(); }
+function setColorFilter(c) { state.activeColor = c; renderGrid(); }
+function setTypeFilter(t) { state.activeType = t; renderGrid(); }
+
+// ════════════════════════════════════════════════════════
+//  Selection + Inspector
+// ════════════════════════════════════════════════════════
+async function selectFile(path, event) {
+  state.selectedPath = path;
+  document.querySelectorAll('.card').forEach(c => c.classList.toggle('selected', c.getAttribute('data-path') === path));
+  await renderInspector(path);
+}
+
+async function renderInspector(path) {
+  const f = state.filesByPath.get(path);
+  if (!f) return;
+  $('inspector').classList.add('open');
+  $('inspResizer').classList.add('show');
+  const m = getMeta(path);
+
+  // preview
+  const prev = $('inspPreview');
+  const ph = ico => `<span class="placeholder" style="font-size:2rem;opacity:0.3;">${ico}</span>`;
+  prev.innerHTML = ph('⏳');
+  if (state.source === 'drive') {
+    if (f.kind === 'video') {
+      const url = await ensureBlobUrl(f);
+      prev.innerHTML = url ? `<video src="${url}" controls></video>` : ph('🚫');
+    } else if (f.thumbnailLink) {
+      prev.innerHTML = `<img referrerpolicy="no-referrer" src="${esc(f.thumbnailLink.replace(/=s\d+(-[a-z]+)?$/, '=s1024'))}" onerror="inspPreviewFallback('${jsStr(path)}')">`;
+    } else if (imgDecodable(f)) {
+      const url = await ensureBlobUrl(f);
+      prev.innerHTML = url ? `<img src="${url}">` : ph('🚫');
+    } else {
+      prev.innerHTML = ph(f.kind === 'raw' ? '🖼️' : '🚫');   // raw/psd/pdf can't be decoded by <img>
+    }
+  } else {
+    if (!f.url) await ensureBlobUrl(f).catch(() => {});
+    if (f.url && imgDecodable(f)) prev.innerHTML = `<img src="${f.url}">`;
+    else if (f.url && f.kind === 'video') prev.innerHTML = `<video src="${f.url}" controls></video>`;
+    else prev.innerHTML = ph(f.kind === 'raw' ? '🖼️' : '🚫');
+  }
+
+  $('inspName').textContent = f.name;
+  $('inspTitle').textContent = f.name;   // filename in the sticky header
+  $('inspTitle').title = f.name;         // full name on hover when truncated
+  $('inspPath').textContent = f.path;
+
+  // metadata
+  const renderInspMeta = () => {
+    if (f.fileObj == null && f.size == null) return;
+    const rows = [];
+    rows.push(['Type', f.ext.toUpperCase()]);
+    if (f.size != null) rows.push(['Size', humanSize(f.size)]);
+    if (f.width) rows.push(['Dimensions', `${f.width} × ${f.height}`]);
+    if (f.kind === 'video' && f.duration) rows.push(['Duration', fmtDuration(f.duration)]);
+    if (f.modified) rows.push(['Modified', new Date(f.modified).toLocaleDateString()]);
+    if (f.taken) rows.push(['Taken', new Date(f.taken).toLocaleString()]);
+    if (f.camera) rows.push(['Camera', f.camera]);
+    if (f.gps) {
+      // GPS is sensitive: display-only link that only fires on a deliberate click; rel=noreferrer suppresses Referer.
+      const q = encodeURIComponent(f.gps.lat + ',' + f.gps.lng);
+      const label = f.gps.lat.toFixed(5) + ', ' + f.gps.lng.toFixed(5);
+      rows.push(['Location', `<a href="https://www.google.com/maps?q=${q}" target="_blank" rel="noreferrer noopener">${esc(label)}</a>`]);
+    }
+    rows.push(['Folder', f.dir || state.rootName]);
+    // Location is intentional HTML (an anchor); every other value is escaped.
+    $('inspMeta').innerHTML = rows.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${k === 'Location' ? v : esc(String(v))}</dd>`).join('');
+  };
+  renderInspMeta();
+  // Local JPEG/TIFF: parse EXIF (capture date / GPS / camera) from the file head, in-browser.
+  if (state.source === 'fs' && f.handle && !f.exifDone && ['jpg', 'jpeg', 'jpe', 'jfif', 'tif', 'tiff'].includes(f.ext)) {
+    f.exifDone = true;
+    (async () => {
+      try {
+        const file = f.fileObj || await f.handle.getFile();
+        const ex = await readExif(file);
+        f.taken = ex.taken; f.gps = ex.gps; f.camera = ex.camera;
+        if (state.selectedPath === path) renderInspMeta();
+      } catch (e) {}
+    })();
+  }
+  // A playing video reports its own duration/dimensions once metadata loads — fill them in.
+  if (f.kind === 'video') {
+    const vid = prev.querySelector('video');
+    if (vid) vid.addEventListener('loadedmetadata', () => {
+      if (isFinite(vid.duration)) f.duration = vid.duration;
+      if (!f.width && vid.videoWidth) { f.width = vid.videoWidth; f.height = vid.videoHeight; }
+      if (state.selectedPath === path) renderInspMeta();
+    }, { once: true });
+  }
+
+  // rating
+  renderStars(path);
+
+  // tags (click any to remove)
+  renderInspTags(path);
+
+  // colour
+  renderInspColor(path);
+
+  // best-shots / cull
+  renderInspCull(path);
+
+  // note
+  const note = $('inspNote');
+  note.value = m.note || '';
+  note.oninput = () => { setMeta(path, { note: note.value }); };
+}
+
+function renderInspColor(path) {
+  const el = $('inspColor'); if (!el) return;
+  const cur = new Set(getColors(path));
+  const hint = cur.size
+    ? `<div style="font-size:0.66rem;color:var(--text-muted);margin-bottom:0.45rem;">Click swatches to add or remove (an image can have several colours).</div>`
+    : `<div style="font-size:0.66rem;color:var(--text-muted);margin-bottom:0.45rem;">Not analyzed — run 🎨 Tag colours, or click a swatch to add.</div>`;
+  const chips = COLOR_PALETTE.map(c =>
+    `<span class="color-pick ${cur.has(c.key) ? 'on' : ''}" onclick="toggleColorOn('${jsStr(path)}','${c.key}')">
+       <span class="swatch" style="background:${c.hex}"></span>${esc(c.label)}</span>`).join('');
+  el.innerHTML = hint + `<div class="color-pick-grid">${chips}</div>`;
+}
+
+function toggleColorOn(path, key) {
+  const s = new Set(getColors(path));
+  if (s.has(key)) s.delete(key); else s.add(key);
+  setColors(path, [...s]);
+  renderInspColor(path);
+  renderGrid();
+}
+
+// ── AI tags: click to remove (the model often mislabels flat-lay product shots) ──
+function renderInspTags(path) {
+  const m = getMeta(path);
+  const el = $('inspTags'); if (!el) return;
+  const hasCat = !!m.category, hasTags = (m.tags || []).length > 0;
+  if (!hasCat && !hasTags) {
+    el.innerHTML = `<span style="color:var(--text-muted);font-size:0.72rem;">Not tagged — run ✨ Auto-tag</span>`;
+    return;
+  }
+  let html = `<div style="font-size:0.66rem;color:var(--text-muted);margin-bottom:0.4rem;width:100%;">Click a tag to remove it.</div>`;
+  if (hasCat) html += `<span class="insp-tag removable cat" onclick="removeCategory('${jsStr(path)}')" title="Remove this category">${esc(CATEGORIES[m.category]?.label || m.category)} <span class="rm">✕</span></span>`;
+  (m.tags || []).forEach(t => {
+    html += `<span class="insp-tag removable" onclick="removeTag('${jsStr(path)}', '${jsStr(t)}')" title="Remove this tag">${esc(t)} <span class="rm">✕</span></span>`;
+  });
+  html += `<span class="insp-tag clear-all" onclick="clearTags('${jsStr(path)}')" title="Remove all AI tags & the category for this image">Clear all</span>`;
+  el.innerHTML = html;
+}
+function removeTag(path, tag) {
+  const m = getMeta(path);
+  setMeta(path, { tags: (m.tags || []).filter(t => t !== tag) });
+  renderInspTags(path);
+  renderGrid();
+}
+function removeCategory(path) {
+  setMeta(path, { category: undefined });
+  renderInspTags(path);
+  renderGrid();
+}
+function clearTags(path) {
+  setMeta(path, { tags: [], category: undefined });
+  renderInspTags(path);
+  renderGrid();
+}
+// Bulk: wipe AI tags + categories from every image in the current folder view.
+function clearTagsInView() {
+  let scope;
+  if (state.includeSubfolders) {
+    const prefix = state.currentPath === '' ? '' : state.currentPath + '/';
+    scope = state.files.filter(f => state.currentPath === '' ? true : f.path.startsWith(prefix));
+  } else {
+    scope = state.files.filter(f => f.dir === state.currentPath);
+  }
+  const tagged = scope.filter(f => { const m = getMeta(f.path); return m.category || (m.tags || []).length; });
+  if (!tagged.length) { showToast('No AI tags to clear here', 'error'); return; }
+  if (!confirm(`Remove AI tags & categories from ${tagged.length} image(s) in this view?\n\nColours, ratings, and notes are kept.`)) return;
+  tagged.forEach(f => setMeta(f.path, { tags: [], category: undefined }, true));
+  persistMeta();
+  state.activeCategory = null;
+  state.activeType = null;
+  if (state.selectedPath) renderInspTags(state.selectedPath);
+  renderGrid();
+  updateStats();
+  showToast(`Cleared AI tags from ${tagged.length} image(s)`, 'success');
+}
+
+function renderStars(path) {
+  const m = getMeta(path);
+  const r = m.rating || 0;
+  const el = $('inspStars');
+  el.innerHTML = [1,2,3,4,5].map(i => `<span class="s ${i <= r ? 'on' : ''}" onclick="setRating('${jsStr(path)}', ${i})">★</span>`).join('');
+}
+
+function setRating(path, r) {
+  const cur = getMeta(path).rating || 0;
+  setMeta(path, { rating: cur === r ? 0 : r });
+  renderStars(path);
+  // update card star + grid if star filter active
+  const card = document.querySelector(`.card[data-path="${cssEsc(path)}"] .star-badge`);
+  if (card) { const on = (getMeta(path).rating || 0) > 0; card.textContent = on ? '★' : '☆'; card.classList.toggle('on', on); }
+  if (state.minStars || state.sort === 'rating') renderGrid();
+}
+
+function quickStar(path) {
+  const cur = getMeta(path).rating || 0;
+  setMeta(path, { rating: cur > 0 ? 0 : 5 });
+  const badge = document.querySelector(`.card[data-path="${cssEsc(path)}"] .star-badge`);
+  if (badge) { const on = (getMeta(path).rating || 0) > 0; badge.textContent = on ? '★' : '☆'; badge.classList.toggle('on', on); }
+  if (state.selectedPath === path) renderStars(path);
+  if (state.minStars) renderGrid();
+}
+
+function closeInspector() { $('inspector').classList.remove('open'); $('inspResizer').classList.remove('show'); state.selectedPath = null; }
+
+// ════════════════════════════════════════════════════════
+//  Multi-select + ZIP download
+// ════════════════════════════════════════════════════════
+let lastCheckedPath = null;
+function toggleCheck(path, event) {
+  // shift-click selects a contiguous range within the current view
+  if (event && event.shiftKey && lastCheckedPath) {
+    const ids = state.viewList.map(f => f.path);
+    const a = ids.indexOf(lastCheckedPath), b = ids.indexOf(path);
+    if (a !== -1 && b !== -1) {
+      const [lo, hi] = a < b ? [a, b] : [b, a];
+      for (let i = lo; i <= hi; i++) state.checked.add(ids[i]);
+    }
+  } else if (state.checked.has(path)) {
+    state.checked.delete(path);
+  } else {
+    state.checked.add(path);
+  }
+  lastCheckedPath = path;
+  // update just the affected cards' classes without a full re-render
+  document.querySelectorAll('.card').forEach(c => {
+    const p = c.getAttribute('data-path');
+    const on = state.checked.has(p);
+    c.classList.toggle('checked', on);
+    const box = c.querySelector('.check'); if (box) box.textContent = on ? '✓' : '';
+  });
+  updateSelectionBar();
+}
+
+function selectAllInView() {
+  state.viewList.forEach(f => state.checked.add(f.path));
+  renderGrid();
+  updateSelectionBar();
+}
+function clearChecked() {
+  state.checked.clear();
+  lastCheckedPath = null;
+  renderGrid();
+  updateSelectionBar();
+}
+function updateSelectionBar() {
+  const n = state.checked.size;
+  $('selCount').textContent = n;
+  $('selbar').classList.toggle('on', n > 0);
+  // One file downloads directly; multiple come as a zip — label the button to match.
+  $('downloadBtn').textContent = n > 1 ? `⬇ Download ZIP (${n})` : '⬇ Download';
+}
+
+// Save one blob straight to the browser's Downloads folder, as the file itself (no picker, no nesting).
+function saveBlob(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 10000);
+}
+async function fetchFileBlob(f) {
+  if (state.source === 'drive') return driveFetchBlob(driveMediaUrl(f.driveId));
+  if (f.handle) return f.handle.getFile();
+  return null;
+}
+
+async function downloadSelected() {
+  const picked = state.files.filter(f => state.checked.has(f.path));
+  if (!picked.length) { showToast('Nothing selected', 'error'); return; }
+
+  // ── One file → download it directly to Downloads, as the file (no zip, no folders to dig through) ──
+  if (picked.length === 1) {
+    const f = picked[0];
+    try {
+      if (state.source === 'drive') showProcessing('Downloading…', f.name, false);
+      const blob = await fetchFileBlob(f);
+      hideProcessing();
+      if (!blob) { showToast('Could not download that file', 'error'); return; }
+      saveBlob(blob, f.name);
+      showToast(`Downloaded ${f.name}`, 'success');
+    } catch (err) { hideProcessing(); showToast('Download failed: ' + err.message, 'error'); }
+    return;
+  }
+
+  // ── Multiple files → one zip, FLATTENED (all files at the top level — no nested folders to click through) ──
+  if (typeof JSZip === 'undefined') { showToast('ZIP library not loaded — check your connection.', 'error'); return; }
+  showProcessing('Preparing download…', `0 of ${picked.length}`, true);
+  state.cancel = false;
+  const zip = new JSZip();
+  const used = {};
+  let done = 0, failed = 0;
+
+  for (const f of picked) {
+    if (state.cancel) break;
+    done++;
+    updateProcessing('Downloading files…', `${done} of ${picked.length}` + (failed ? ` · ${failed} failed` : ''), (done / picked.length) * 100);
+    try {
+      const blob = await fetchFileBlob(f);
+      if (!blob) { failed++; continue; }
+      // Flatten to just the filename; de-dupe collisions across folders (file.jpg, file-1.jpg, …).
+      let name = f.name;
+      if (used[name]) { const dot = name.lastIndexOf('.'); name = dot > 0 ? name.slice(0, dot) + '-' + used[name] + name.slice(dot) : name + '-' + used[name]; }
+      used[f.name] = (used[f.name] || 0) + 1;
+      zip.file(name, blob);
+    } catch (err) { failed++; }
+  }
+
+  if (state.cancel && done < picked.length) { hideProcessing(); showToast('Download cancelled', 'error'); return; }
+
+  updateProcessing('Zipping…', 'Compressing your files', -1);
+  const out = await zip.generateAsync({ type: 'blob' }, meta => updateProcessing('Zipping…', Math.round(meta.percent) + '%', meta.percent));
+  saveBlob(out, (state.rootName || 'photos').replace(/[^\w.-]+/g, '_') + '-selection.zip');
+  hideProcessing();
+  showToast(`Downloaded ${done - failed} file${done - failed !== 1 ? 's' : ''}` + (failed ? ` (${failed} failed)` : ''), 'success');
+}
+
+// ════════════════════════════════════════════════════════
+//  Lightbox
+// ════════════════════════════════════════════════════════
+let lbIndex = -1;
+async function openLightbox(path) {
+  lbIndex = state.viewList.findIndex(f => f.path === path);
+  if (lbIndex < 0) return;
+  $('lightbox').classList.add('open');
+  await showLb();
+}
+async function showLb() {
+  const f = state.viewList[lbIndex];
+  if (!f) return;
+  const stage = $('lbStage');
+  stage.innerHTML = `<div style="color:var(--text-dim);font-size:0.9rem;">Loading…</div>`;
+  const noPrev = `<div style="color:var(--text-dim);font-size:0.9rem;text-align:center;">${f.kind === 'raw' ? 'Full preview not available for ' + f.ext.toUpperCase() + ' in browser' : 'Cannot preview'}</div>`;
+  const seq = lbIndex; // guard against rapid navigation
+
+  if (state.source === 'drive') {
+    // Non-decodable types (raw/psd/pdf) can only be shown via Google's server thumbnail — never the raw bytes.
+    if (!imgDecodable(f) && f.kind !== 'video' && f.thumbnailLink) {
+      stage.innerHTML = `<img referrerpolicy="no-referrer" src="${esc(f.thumbnailLink.replace(/=s\d+(-[a-z]+)?$/, '=s1600'))}">`;
+    } else {
+      const url = await ensureBlobUrl(f);
+      if (seq !== lbIndex) return;
+      if (url && imgDecodable(f)) stage.innerHTML = `<img src="${url}">`;
+      else if (url && f.kind === 'video') stage.innerHTML = `<video src="${url}" controls autoplay></video>`;
+      else stage.innerHTML = (f.thumbnailLink ? `<img referrerpolicy="no-referrer" src="${esc(f.thumbnailLink.replace(/=s\d+(-[a-z]+)?$/, '=s1600'))}">` : noPrev);
+    }
+  } else {
+    if (!f.url) await ensureBlobUrl(f).catch(() => {});
+    if (seq !== lbIndex) return;
+    if (f.url && imgDecodable(f)) stage.innerHTML = `<img src="${f.url}">`;
+    else if (f.url && f.kind === 'video') stage.innerHTML = `<video src="${f.url}" controls autoplay></video>`;
+    else stage.innerHTML = noPrev;
+  }
+  $('lbName').textContent = f.name;
+  $('lbFoot').textContent = `${lbIndex + 1} / ${state.viewList.length}  ·  ${f.dir || state.rootName}`;
+  updateLbSelect();
+}
+function lbStep(d) {
+  lbIndex = (lbIndex + d + state.viewList.length) % state.viewList.length;
+  showLb();
+}
+// Reflect whether the enlarged image is selected for download.
+function updateLbSelect() {
+  const f = state.viewList[lbIndex]; if (!f) return;
+  const on = state.checked.has(f.path);
+  const b = $('lbSelect');
+  b.textContent = on ? '☑ Selected' : '☐ Select';
+  b.classList.toggle('on', on);
+}
+// Toggle the enlarged image into/out of the download selection (same selection the bar uses).
+function lbToggleSelect() {
+  const f = state.viewList[lbIndex]; if (!f) return;
+  toggleCheck(f.path);          // updates state.checked + grid cards + the selection bar
+  updateLbSelect();
+}
+// Download just the enlarged file, straight to Downloads.
+async function lbDownloadCurrent() {
+  const f = state.viewList[lbIndex]; if (!f) return;
+  try {
+    if (state.source === 'drive') showProcessing('Downloading…', f.name, false);
+    const blob = await fetchFileBlob(f);
+    hideProcessing();
+    if (!blob) { showToast('Could not download that file', 'error'); return; }
+    saveBlob(blob, f.name);
+    showToast(`Downloaded ${f.name}`, 'success');
+  } catch (err) { hideProcessing(); showToast('Download failed: ' + err.message, 'error'); }
+}
+function closeLightbox() { $('lightbox').classList.remove('open'); const s = $('lbStage'); s.innerHTML = ''; }
+
+// ════════════════════════════════════════════════════════
+//  AI auto-tagging (MobileNet)
+// ════════════════════════════════════════════════════════
+async function autoTag() {
+  const list = filesForView().filter(f => (f.kind === 'image' && RENDERABLE.includes(f.ext)) || f.kind === 'video');
+  if (!list.length) { showToast('No taggable media in this view', 'error'); return; }
+
+  showProcessing('Loading AI model…', 'First run downloads ~16MB', true);
+  state.cancel = false;
+  if (!state.model) {
+    try { state.model = await mobilenet.load({ version: 2, alpha: 1.0 }); }
+    catch (err) { hideProcessing(); showToast('Failed to load AI model. Check connection.', 'error'); return; }
+  }
+
+  let done = 0;
+  for (const f of list) {
+    if (state.cancel) break;
+    done++;
+    updateProcessing(`Tagging ${done} of ${list.length}…`, f.name, (done / list.length) * 100);
+    try {
+      const url = await ensureBlobUrl(f);
+      if (!url) continue;
+      const src = await aiSourceFor(f, url);   // <img> for images, a frame <canvas> for videos
+      if (!f.width) { f.width = src.width; f.height = src.height; }
+      const preds = await state.model.classify(src.el);
+      const tags = preds.slice(0, 3).map(p => p.className.split(',')[0].trim().toLowerCase());
+      const category = classifyCategory(preds);
+      setMeta(f.path, { tags, category }, true);
+      src.cleanup();
+    } catch (err) { /* skip unreadable */ }
+  }
+  persistMeta();
+  hideProcessing();
+  renderGrid();
+  if (state.selectedPath) renderInspector(state.selectedPath);
+  updateStats();
+  showToast(state.cancel ? `Tagged ${done} before cancel` : `Tagged ${done} images`, 'success');
+}
+
+// ── Colour tagging: match each image's garment/subject colour to the palette ──
+async function tagColors() {
+  const list = filesForView().filter(f => (f.kind === 'image' && RENDERABLE.includes(f.ext)) || f.kind === 'video');
+  if (!list.length) { showToast('No analyzable media here (colour needs an image or video)', 'error'); return; }
+  showProcessing('Analyzing colours…', 'Matching to your palette', true);
+  state.cancel = false;
+  let done = 0;
+  for (const f of list) {
+    if (state.cancel) break;
+    done++;
+    updateProcessing(`Matching colours ${done} of ${list.length}…`, f.name, (done / list.length) * 100);
+    try {
+      const url = await ensureBlobUrl(f);
+      if (!url) continue;
+      const src = await aiSourceFor(f, url);   // <img> for images, a frame <canvas> for videos
+      if (!f.width) { f.width = src.width; f.height = src.height; }
+      const cols = garmentColorsOf(src.el);
+      const ordered = COLOR_PALETTE.map(c => c.key).filter(k => cols.includes(k));
+      setMeta(f.path, { colors: ordered.length ? ordered : undefined, color: undefined }, true);
+      src.cleanup();
+    } catch (err) { /* skip unreadable */ }
+  }
+  persistMeta();
+  hideProcessing();
+  renderGrid();
+  if (state.selectedPath) renderInspector(state.selectedPath);
+  updateStats();
+  showToast(state.cancel ? `Analyzed ${done} before cancel` : `Colour-tagged ${done} images`, 'success');
+}
+
+// Estimate the garment/subject colour: treat the photo's edges as background and
+// average the centre pixels that differ from it. Falls back to the centre average
+// when the subject ~matches the backdrop (e.g. a white tee on white).
+// Returns up to two palette keys for the garment/subject: each subject pixel votes for
+// its nearest palette colour, and we keep the top one (plus a second if it's substantial,
+// e.g. a two-tone outfit). Falls back to one colour when the subject ~matches the backdrop.
+function garmentColorsOf(img) {
+  const N = 80;
+  const cv = document.createElement('canvas'); cv.width = N; cv.height = N;
+  const ctx = cv.getContext('2d', { willReadFrequently: true });
+  ctx.drawImage(img, 0, 0, N, N);
+  let data;
+  try { data = ctx.getImageData(0, 0, N, N).data; } catch (e) { return []; }
+  const px = (x, y) => { const i = (y * N + x) * 4; return { r: data[i], g: data[i + 1], b: data[i + 2], a: data[i + 3] }; };
+
+  // Background = average of the four 8×8 corner blocks.
+  let br = 0, bg = 0, bb = 0, bn = 0;
+  for (const [cx, cy] of [[0, 0], [N - 8, 0], [0, N - 8], [N - 8, N - 8]])
+    for (let y = 0; y < 8; y++) for (let x = 0; x < 8; x++) {
+      const p = px(cx + x, cy + y); if (p.a < 128) continue;
+      br += p.r; bg += p.g; bb += p.b; bn++;
+    }
+  const bgc = bn ? { r: br / bn, g: bg / bn, b: bb / bn } : { r: 255, g: 255, b: 255 };
+  const bgLab = rgbToLab(bgc);
+
+  // Centre region (middle 50%): vote subject pixels into palette buckets.
+  const votes = {};
+  let subj = 0, ar = 0, ag = 0, ab = 0, an = 0;
+  const lo = Math.floor(N * 0.25), hi = Math.ceil(N * 0.75);
+  for (let y = lo; y < hi; y++) for (let x = lo; x < hi; x++) {
+    const p = px(x, y); if (p.a < 128) continue;
+    ar += p.r; ag += p.g; ab += p.b; an++;
+    const l = rgbToLab(p), dL = l.L - bgLab.L, da = l.a - bgLab.a, db = l.b - bgLab.b;
+    if (Math.sqrt(dL * dL + da * da + db * db) > 14) { const k = nearestPaletteColor(p); votes[k] = (votes[k] || 0) + 1; subj++; }
+  }
+
+  // Subject ~ background (e.g. white tee on white): one colour from the centre average.
+  if (subj < an * 0.06 || subj === 0) {
+    if (an > 0) return [nearestPaletteColor({ r: Math.round(ar / an), g: Math.round(ag / an), b: Math.round(ab / an) })];
+    return [nearestPaletteColor(bgc)];
+  }
+
+  const ranked = Object.entries(votes).sort((a, b) => b[1] - a[1]);
+  const out = [ranked[0][0]];
+  // Keep a second colour only if it's a real share of the subject (two-tone outfit).
+  if (ranked[1] && ranked[1][1] >= ranked[0][1] * 0.35 && ranked[1][1] >= subj * 0.20) out.push(ranked[1][0]);
+  return out;
+}
+
+// ════════════════════════════════════════════════════════
+//  Best-frame / near-duplicate culling
+// ════════════════════════════════════════════════════════
+const Q_EDGE = 256, SHARP_REF = 1000, W_SHARP = 0.65, W_EXPO = 0.35, VIDEO_FRAMES = 5;
+const _clamp = (v, lo, hi) => v < lo ? lo : v > hi ? hi : v;
+
+// Read meta.quality.score (persisted), falling back to the session Map.
+function qualityOf(path) {
+  const m = getMeta(path);
+  if (m.quality && typeof m.quality.score === 'number') return m.quality.score;
+  const s = state.quality.get(path);
+  return (typeof s === 'number') ? s : null;
+}
+
+// Cluster record lookup with safe defaults: no record => normal standalone keeper.
+function cullInfo(path) {
+  return (state.cull && state.cull.get(path)) || { clusterId: null, isKeeper: true, isDup: false, keeperPath: path, score: -1, size: 1 };
+}
+
+// Core scorer: variance-of-Laplacian (sharpness) + luminance histogram (exposure). Sync.
+function imageQualityScore(srcEl) {
+  const sw = srcEl.naturalWidth || srcEl.width, sh = srcEl.naturalHeight || srcEl.height;
+  if (!sw || !sh) return { score: 0, ok: false };
+  const scale = Math.min(1, Q_EDGE / Math.max(sw, sh));
+  const w = Math.max(1, Math.round(sw * scale)), h = Math.max(1, Math.round(sh * scale));
+  const cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+  const ctx = cv.getContext('2d', { willReadFrequently: true });
+  ctx.drawImage(srcEl, 0, 0, w, h);
+  let data; try { data = ctx.getImageData(0, 0, w, h).data; } catch (e) { return { score: 0, ok: false }; }
+  const N = w * h, gray = new Float32Array(N), hist = new Uint32Array(256);
+  for (let i = 0, p = 0; i < N; i++, p += 4) {
+    const y = 0.299 * data[p] + 0.587 * data[p + 1] + 0.114 * data[p + 2];
+    gray[i] = y; hist[(y | 0) & 255]++;
+  }
+  let s = 0, s2 = 0, cnt = 0;
+  for (let y = 1; y < h - 1; y++) for (let x = 1; x < w - 1; x++) {
+    const i = y * w + x;
+    const L = 4 * gray[i] - gray[i - 1] - gray[i + 1] - gray[i - w] - gray[i + w];
+    s += L; s2 += L * L; cnt++;
+  }
+  const varLap = cnt ? Math.max(0, s2 / cnt - (s / cnt) * (s / cnt)) : 0;
+  const sharpScore = 100 * _clamp(Math.log10(1 + varLap) / Math.log10(1 + SHARP_REF), 0, 1);
+  let clipHi = 0, clipLo = 0;
+  for (let b = 250; b < 256; b++) clipHi += hist[b];
+  for (let b = 0; b <= 5; b++) clipLo += hist[b];
+  clipHi /= N; clipLo /= N;
+  const pAt = frac => { let acc = 0, t = frac * N; for (let b = 0; b < 256; b++) { acc += hist[b]; if (acc >= t) return b; } return 255; };
+  const contrast = pAt(0.95) - pAt(0.05);
+  let mean = 0; for (let b = 0; b < 256; b++) mean += b * hist[b]; mean /= N;
+  let expo = 100;
+  if (clipHi > 0.02) expo -= 40 * _clamp((clipHi - 0.02) / 0.20, 0, 1);
+  if (clipLo > 0.05) expo -= 25 * _clamp((clipLo - 0.05) / 0.30, 0, 1);
+  if (contrast < 60) expo -= 30 * _clamp((60 - contrast) / 60, 0, 1);
+  if (mean < 60) expo -= 15 * _clamp((60 - mean) / 60, 0, 1);
+  if (mean > 200) expo -= 15 * _clamp((mean - 200) / 55, 0, 1);
+  const expoScore = _clamp(expo, 0, 100);
+  // DEFERRED eyes-open: const eyeScore = faceOpenScore(srcEl); fold a 0..1 factor into `score` here.
+  const gate = 1 - 0.5 * _clamp((clipHi - 0.10) / 0.90, 0, 1);
+  let score = (W_SHARP * sharpScore + W_EXPO * expoScore) * gate;
+  score = _clamp(Math.round(score) || 0, 0, 100);
+  return { score, sharp: Math.round(sharpScore), expo: Math.round(expoScore), varLap, clipHi, clipLo, contrast, ok: true };
+}
+
+// Multi-frame video sampler: extends videoFrameCanvas; resolves to [{canvas,t},...], skips first/last ~8%.
+function videoFrameCanvases(url, n = VIDEO_FRAMES) {
+  return new Promise((resolve, reject) => {
+    const v = document.createElement('video');
+    v.muted = true; v.playsInline = true; v.preload = 'auto'; v.crossOrigin = 'anonymous';
+    const out = []; let times = [], idx = 0, settled = false, to = 0;
+    const cleanup = () => { clearTimeout(to); v.removeAttribute('src'); try { v.load(); } catch (_) {} v.remove(); };
+    const fail = e => { if (settled) return; settled = true; cleanup(); reject(e || new Error('video frames failed')); };
+    const done = () => { if (settled) return; settled = true; cleanup(); resolve(out); };
+    const grab = () => {
+      if (settled) return;
+      try {
+        const w = v.videoWidth, h = v.videoHeight;
+        if (!w || !h) return fail(new Error('no video dimensions'));
+        const cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+        cv.getContext('2d').drawImage(v, 0, 0, w, h);
+        out.push({ canvas: cv, t: times[idx] });
+        idx++;
+        if (idx >= times.length) return done();
+        try { v.currentTime = times[idx]; } catch (_) { grab(); }
+      } catch (e) { fail(e); }
+    };
+    v.onloadedmetadata = () => {
+      const d = isFinite(v.duration) && v.duration > 0 ? v.duration : 0;
+      if (!d) times = [0.1];
+      else for (let i = 0; i < n; i++) times.push(d * (0.08 + 0.84 * (n === 1 ? 0.5 : i / (n - 1))));
+      v.onseeked = grab;
+      try { v.currentTime = times[0]; } catch (_) { grab(); }
+    };
+    v.onerror = () => fail(v.error || new Error('video load error'));
+    to = setTimeout(() => fail(new Error('video frames timeout')), 20000);
+    v.src = url;
+  });
+}
+
+// Score one file (image or video) using ensureBlobUrl + aiSourceFor like autoTag/tagColors.
+async function scoreFile(f) {
+  const url = await ensureBlobUrl(f);
+  if (!url) return { score: 0, ok: false };
+  if (f.kind === 'video') {
+    let frames;
+    try { frames = await videoFrameCanvases(url, VIDEO_FRAMES); } catch (e) { return { score: 0, ok: false }; }
+    let best = null;
+    for (const fr of frames) { const q = imageQualityScore(fr.canvas); if (q.ok && (!best || q.score > best.score)) best = q; }
+    for (const fr of frames) { fr.canvas.width = fr.canvas.height = 0; }
+    return best || { score: 0, ok: false };
+  }
+  const src = await aiSourceFor(f, url);
+  try { return imageQualityScore(src.el); } finally { src.cleanup && src.cleanup(); }
+}
+
+// Greedy star clustering over existing L2-normalized CLIP embeddings (cosine == dot product).
+async function clusterNearDuplicates(threshold) {
+  const cand = [];
+  const wasBestOnly = state.bestOnly; state.bestOnly = false;   // cluster the full view, not the keeper-only subset
+  const view = filesForView();
+  state.bestOnly = wasBestOnly;
+  view.forEach((f, i) => {
+    const emb = state.embeddings.get(f.path);
+    if (!emb) return;
+    const m = getMeta(f.path);
+    cand.push({ path: f.path, emb, q: qualityOf(f.path) ?? -1, rating: m.rating || 0, pin: !!m.dupPin, exclude: !!m.dupExclude, idx: i });
+  });
+  cand.sort((a, b) => (b.pin - a.pin) || (b.q - a.q) || (b.rating - a.rating) || (a.idx - b.idx));
+  const result = new Map(), assigned = new Array(cand.length).fill(false);
+  let clusterId = 0, cmp = 0;
+  for (let i = 0; i < cand.length; i++) {
+    if (state.cancel) break;
+    if (assigned[i]) continue;
+    const seed = cand[i]; assigned[i] = true;
+    const members = [seed];
+    if (!seed.exclude) {
+      for (let j = i + 1; j < cand.length; j++) {
+        if (assigned[j]) continue;
+        const o = cand[j];
+        if (o.exclude) continue;
+        if (cosine(seed.emb, o.emb) >= threshold) { assigned[j] = true; members.push(o); }
+        if ((++cmp & 0x7FF) === 0) await Promise.resolve();
+      }
+    }
+    const id = clusterId++, keeperPath = seed.path;
+    for (const mbr of members) result.set(mbr.path, {
+      clusterId: id, isKeeper: mbr.path === keeperPath, isDup: mbr.path !== keeperPath,
+      keeperPath, score: mbr.q, size: members.length,
+    });
+  }
+  return result;
+}
+
+// Run action: ensure embeddings -> score quality -> cluster -> mark -> render.
+async function findBestShots() {
+  const list = filesForView().filter(f => (f.kind === 'image' && RENDERABLE.includes(f.ext)) || f.kind === 'video');
+  if (!list.length) { showToast('No analyzable media in this view', 'error'); return; }
+  const ok = await indexViewForAI();          // loads CLIP, fills state.embeddings, drives its own overlay
+  if (!ok) return;
+  showProcessing('Finding best shots…', 'Scoring sharpness & exposure', true);
+  state.cancel = false;
+  let done = 0;
+  for (const f of list) {
+    if (state.cancel) break;
+    done++;
+    updateProcessing(`Scoring ${done} of ${list.length}…`, f.name, (done / list.length) * 100);
+    if (qualityOf(f.path) == null) {
+      try {
+        const q = await scoreFile(f);
+        if (q && q.ok !== false) {
+          state.quality.set(f.path, q.score);
+          setMeta(f.path, { quality: { score: q.score, sharp: q.sharp, expo: q.expo, varLap: q.varLap, clipHi: q.clipHi } }, true);
+        }
+      } catch (e) { /* skip unreadable */ }
+    }
+    if (done % 8 === 0) await new Promise(r => requestAnimationFrame(r));
+  }
+  persistMeta();
+  updateProcessing('Grouping near-duplicates…', '', 100);
+  state.cull = await clusterNearDuplicates(state.dupThreshold);
+  hideProcessing();
+  state.culled = true;
+  $('bestOnlyPill').style.display = '';
+  renderGrid();
+  if (state.selectedPath) renderInspector(state.selectedPath);
+  const groups = new Set();
+  let dups = 0;
+  for (const r of state.cull.values()) { if (r.size > 1) groups.add(r.clusterId); if (r.isDup) dups++; }
+  showToast(state.cancel ? `Scored ${done} before cancel` : `Found ${groups.size} near-dup group(s) · ${dups} hidden behind keepers`, 'success');
+}
+
+function toggleBestOnly() {
+  state.bestOnly = !state.bestOnly;
+  $('bestOnlyCheck').textContent = state.bestOnly ? '☑' : '☐';
+  $('bestOnlyPill').classList.toggle('on', state.bestOnly);
+  renderGrid();
+}
+
+// Manual override: pin a different shot as keeper, then re-cluster (cheap; no rescore/re-embed).
+async function promoteKeeper(path) {
+  const cur = cullInfo(path);
+  if (cur.clusterId != null && state.cull) {
+    for (const [p, r] of state.cull) if (r.clusterId === cur.clusterId && p !== path && getMeta(p).dupPin) setMeta(p, { dupPin: undefined }, true);
+  }
+  setMeta(path, { dupPin: true });
+  persistMeta();
+  state.cull = await clusterNearDuplicates(state.dupThreshold);
+  renderGrid();
+  if (state.selectedPath) renderInspector(state.selectedPath);
+  showToast('Promoted to keeper', 'success');
+}
+
+async function toggleExcluded(path) {
+  setMeta(path, { dupExclude: !getMeta(path).dupExclude });
+  if (state.embeddings.size) state.cull = await clusterNearDuplicates(state.dupThreshold);
+  renderGrid();
+  if (state.selectedPath) renderInspector(state.selectedPath);
+}
+
+// Inspector "Best shots" block.
+function renderInspCull(path) {
+  const block = $('inspCullBlock'), el = $('inspCull');
+  if (!block || !el) return;
+  if (!state.culled) { block.style.display = 'none'; return; }
+  block.style.display = '';
+  const m = getMeta(path);
+  const c = cullInfo(path);
+  const q = qualityOf(path);
+  const lines = [];
+  if (q != null) lines.push(`<div style="font-size:0.74rem;color:var(--text);margin-bottom:0.4rem;">Quality score: <b>${Math.round(q)}</b>/100${m.quality ? ` <span style="color:var(--text-muted);">(sharp ${m.quality.sharp}, exposure ${m.quality.expo})</span>` : ''}</div>`);
+  if (m.dupExclude) lines.push(`<div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:0.5rem;">Excluded from culling.</div>`);
+  else if (c.size > 1) lines.push(`<div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:0.5rem;">${c.isKeeper ? '★ Keeper of' : 'Near-duplicate in'} Group ${c.clusterId + 1} (${c.size} shots).</div>`);
+  else lines.push(`<div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:0.5rem;">Unique shot.</div>`);
+  let btns = '';
+  if (!m.dupExclude && c.size > 1 && !c.isKeeper) btns += `<button class="btn-secondary" onclick="promoteKeeper('${jsStr(path)}')">Make keeper</button> `;
+  btns += `<button class="btn-secondary" onclick="toggleExcluded('${jsStr(path)}')">${m.dupExclude ? 'Restore' : 'Exclude from culling'}</button>`;
+  el.innerHTML = lines.join('') + `<div style="display:flex;gap:0.4rem;flex-wrap:wrap;">${btns}</div>`;
+}
+
+// ════════════════════════════════════════════════════════
+//  Semantic ("smart") search — CLIP via Transformers.js, in-browser
+// ════════════════════════════════════════════════════════
+const clip = { lib: null, tokenizer: null, textModel: null, processor: null, visionModel: null, loading: null };
+const CLIP_MODEL = 'Xenova/clip-vit-base-patch32';
+
+async function loadClip() {
+  if (clip.visionModel) return clip;
+  if (clip.loading) return clip.loading;
+  clip.loading = (async () => {
+    const t = await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.0.2');
+    t.env.allowLocalModels = false;
+    clip.lib = t;
+    clip.tokenizer  = await t.AutoTokenizer.from_pretrained(CLIP_MODEL);
+    clip.textModel  = await t.CLIPTextModelWithProjection.from_pretrained(CLIP_MODEL);
+    clip.processor  = await t.AutoProcessor.from_pretrained(CLIP_MODEL);
+    clip.visionModel = await t.CLIPVisionModelWithProjection.from_pretrained(CLIP_MODEL);
+    return clip;
+  })();
+  return clip.loading;
+}
+function l2norm(arr) {
+  let s = 0; for (let i = 0; i < arr.length; i++) s += arr[i] * arr[i];
+  s = Math.sqrt(s) || 1;
+  const o = new Float32Array(arr.length);
+  for (let i = 0; i < arr.length; i++) o[i] = arr[i] / s;
+  return o;
+}
+function cosine(a, b) { let s = 0; for (let i = 0; i < a.length; i++) s += a[i] * b[i]; return s; }
+async function clipEmbedImageUrl(url) { return clipEmbedSource(url); }
+// Embed any source: a URL string (images, via RawImage.read) or a frame <canvas> (videos, via RawImage.fromCanvas).
+async function clipEmbedSource(srcOrCanvas) {
+  const img = (typeof srcOrCanvas === 'string')
+    ? await clip.lib.RawImage.read(srcOrCanvas)
+    : clip.lib.RawImage.fromCanvas(srcOrCanvas);
+  const inputs = await clip.processor(img);
+  const { image_embeds } = await clip.visionModel(inputs);
+  return l2norm(image_embeds.data);
+}
+async function clipEmbedText(text) {
+  const inputs = clip.tokenizer([text], { padding: true, truncation: true });
+  const { text_embeds } = await clip.textModel(inputs);
+  return l2norm(text_embeds.data);
+}
+function embKey(path) { return 'clipemb:' + metaKey() + ':' + path; }
+
+// Compute (and cache) CLIP embeddings for the images in the current view.
+async function indexViewForAI() {
+  const list = filesForView().filter(f => ((f.kind === 'image' && RENDERABLE.includes(f.ext)) || f.kind === 'video') && !state.embeddings.has(f.path));
+  if (!list.length && state.embeddings.size) return true;   // already indexed
+  if (!list.length) { showToast('No analyzable media to index here', 'error'); return false; }
+  showProcessing('Loading AI search model…', 'First run downloads the model (~tens of MB)', true);
+  state.cancel = false;
+  try { await loadClip(); }
+  catch (e) { hideProcessing(); showToast('Could not load the AI model: ' + (e.message || e), 'error'); return false; }
+  let done = 0;
+  for (const f of list) {
+    if (state.cancel) break;
+    done++;
+    updateProcessing(`Indexing ${done} of ${list.length}…`, f.name, (done / list.length) * 100);
+    let emb = await cacheGet(embKey(f.path));
+    if (!emb) {
+      try {
+        const url = await ensureBlobUrl(f);
+        if (!url) continue;
+        if (f.kind === 'video') {
+          const cv = await videoFrameCanvas(url);
+          emb = await clipEmbedSource(cv);
+          cv.remove();
+        } else {
+          emb = await clipEmbedImageUrl(url);
+        }
+        await cacheSet(embKey(f.path), emb);
+      } catch (e) { continue; }
+    }
+    state.embeddings.set(f.path, emb instanceof Float32Array ? emb : Float32Array.from(emb));
+  }
+  hideProcessing();
+  return state.embeddings.size > 0;
+}
+
+function toggleSmart() {
+  state.smart = !state.smart;
+  $('smartToggle').classList.toggle('on', state.smart);
+  $('searchBox').classList.toggle('smart', state.smart);
+  $('searchBox').placeholder = state.smart ? '✨ Describe what you’re looking for…' : 'Search by file name…';
+  $('searchBox').value = '';
+  state.search = ''; state.smartQuery = ''; state.smartScores = null;
+  renderGrid();
+}
+
+let smartTimer = null;
+function onSmartInput(v) {
+  state.smartQuery = v.trim();
+  if (smartTimer) clearTimeout(smartTimer);
+  smartTimer = setTimeout(runSmartSearch, 350);
+}
+async function runSmartSearch() {
+  if (!state.smart) return;
+  const q = state.smartQuery;
+  if (!q) { state.smartScores = null; renderGrid(); return; }
+  if (!clip.visionModel || state.embeddings.size === 0) {
+    const ok = await indexViewForAI();
+    if (!ok || state.smartQuery !== q) return;
+  }
+  let qemb;
+  try { qemb = await clipEmbedText(q); }
+  catch (e) { showToast('AI search failed: ' + (e.message || e), 'error'); return; }
+  if (state.smartQuery !== q) return;   // a newer query superseded this one
+  const scores = new Map();
+  for (const [path, emb] of state.embeddings) scores.set(path, cosine(qemb, emb));
+  state.smartScores = scores;
+  renderGrid();
+}
+
+function classifyCategory(preds) {
+  const combined = preds.map(p => p.className.toLowerCase()).join(' ');
+  const scores = {};
+  for (const [cat, def] of Object.entries(CATEGORIES)) {
+    let s = 0;
+    for (const kw of def.kw) if (combined.includes(kw)) s++;
+    if (s > 0) scores[cat] = s;
+  }
+  if (!Object.keys(scores).length) return 'other';
+  return Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
+}
+
+function loadImageEl(src) {
+  return new Promise((resolve, reject) => {
+    const img = document.createElement('img');
+    img.crossOrigin = 'anonymous';
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
+  });
+}
+
+// Seek a video to a representative frame and paint it into a <canvas> the AI pipelines can read.
+// Works for both sources: ensureBlobUrl gives a same-origin object URL, so the canvas is untainted.
+function videoFrameCanvas(url) {
+  return new Promise((resolve, reject) => {
+    const v = document.createElement('video');
+    v.muted = true; v.playsInline = true; v.preload = 'auto'; v.crossOrigin = 'anonymous';
+    let settled = false;
+    const cleanup = () => { v.removeAttribute('src'); try { v.load(); } catch (_) {} v.remove(); };
+    const fail = e => { if (settled) return; settled = true; cleanup(); reject(e || new Error('video frame failed')); };
+    const grab = () => {
+      if (settled) return;
+      try {
+        const w = v.videoWidth, h = v.videoHeight;
+        if (!w || !h) return fail(new Error('no video dimensions'));
+        const cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+        cv.getContext('2d').drawImage(v, 0, 0, w, h);
+        settled = true; cleanup(); resolve(cv);
+      } catch (e) { fail(e); }
+    };
+    v.onloadedmetadata = () => {
+      const d = isFinite(v.duration) && v.duration > 0 ? v.duration : 0;
+      v.onseeked = grab;                                   // fires once the target frame is decoded
+      // Seek to a non-zero target so 'seeked' always fires (seeking to 0 from 0 can be a silent no-op).
+      try { v.currentTime = d ? Math.min(1, d / 2) : 0.1; } catch (_) { grab(); }
+    };
+    v.onerror = () => fail(v.error || new Error('video load error'));
+    setTimeout(() => fail(new Error('video frame timeout')), 15000);   // never hang the batch
+    v.src = url;
+  });
+}
+
+// Unified AI input: an <img> for images (unchanged) or a frame <canvas> for videos.
+// Both are valid for mobilenet.classify, garmentColorsOf (drawImage), and CLIP (fromCanvas).
+async function aiSourceFor(f, url) {
+  if (f.kind === 'video') {
+    const cv = await videoFrameCanvas(url);
+    return { el: cv, width: cv.width, height: cv.height, cleanup: () => cv.remove() };
+  }
+  const img = await loadImageEl(url);
+  return { el: img, width: img.naturalWidth, height: img.naturalHeight, cleanup: () => img.remove() };
+}
+
+// ── Tiny self-contained JPEG/TIFF EXIF reader (DateTimeOriginal + GPS + camera). No dependency. ──
+async function readExif(file) {
+  const out = { taken: null, gps: null, camera: null };
+  try {
+    const buf = await file.slice(0, 256 * 1024).arrayBuffer();   // EXIF sits at the head
+    const dv = new DataView(buf);
+    if (dv.byteLength < 4 || dv.getUint16(0) !== 0xFFD8) return out;   // not JPEG (SOI)
+    let off = 2, tiff = -1;
+    while (off + 4 < dv.byteLength) {
+      if (dv.getUint8(off) !== 0xFF) break;
+      const marker = dv.getUint8(off + 1), len = dv.getUint16(off + 2);
+      if (marker === 0xE1 && off + 10 <= dv.byteLength &&   // APP1
+          dv.getUint32(off + 4) === 0x45786966 && dv.getUint16(off + 8) === 0x0000) {   // 'Exif\0\0'
+        tiff = off + 10; break;
+      }
+      if (marker === 0xDA) break;   // start of scan — keep scanning past non-Exif APP1 (e.g. XMP) blocks
+      off += 2 + len;
+    }
+    if (tiff < 0) return out;
+    const le = dv.getUint16(tiff) === 0x4949;   // 'II' little / 'MM' big
+    const u16 = o => dv.getUint16(o, le), u32 = o => dv.getUint32(o, le);
+    const TYPE_SIZE = { 1: 1, 2: 1, 3: 2, 4: 4, 5: 8, 7: 1, 9: 4, 10: 8 };
+    function val(entry) {
+      const type = u16(entry + 2), count = u32(entry + 4);
+      const size = (TYPE_SIZE[type] || 1) * count;
+      const vo = size <= 4 ? entry + 8 : tiff + u32(entry + 8);
+      if (type === 2) { let s = ''; for (let i = 0; i < count && dv.getUint8(vo + i); i++) s += String.fromCharCode(dv.getUint8(vo + i)); return s.trim(); }
+      if (type === 3) return u16(vo);
+      if (type === 4) return u32(vo);
+      if (type === 5) { const r = []; for (let i = 0; i < count; i++) { const n = u32(vo + i * 8), d = u32(vo + i * 8 + 4); r.push(d ? n / d : 0); } return count === 1 ? r[0] : r; }
+      return null;
+    }
+    function readIFD(ifd, want) {
+      const found = {};
+      if (ifd + 2 > dv.byteLength) return found;
+      const n = u16(ifd);
+      for (let i = 0; i < n; i++) {
+        const entry = ifd + 2 + i * 12;
+        if (entry + 12 > dv.byteLength) break;
+        const tag = u16(entry);
+        if (want[tag] !== undefined) { try { found[tag] = val(entry); } catch (e) {} }
+      }
+      return found;
+    }
+    const ifd0 = readIFD(tiff + u32(tiff + 4), { 0x010F: 1, 0x0110: 1, 0x8769: 1, 0x8825: 1 });
+    if (ifd0[0x010F] || ifd0[0x0110]) out.camera = [ifd0[0x010F], ifd0[0x0110]].filter(Boolean).join(' ').trim() || null;
+    if (ifd0[0x8769] != null) {
+      const dto = readIFD(tiff + ifd0[0x8769], { 0x9003: 1 })[0x9003];
+      if (dto) { const t = Date.parse(String(dto).replace(/^(\d{4}):(\d{2}):(\d{2})/, '$1-$2-$3')); if (!isNaN(t)) out.taken = t; }
+    }
+    if (ifd0[0x8825] != null) {
+      const g = readIFD(tiff + ifd0[0x8825], { 1: 1, 2: 1, 3: 1, 4: 1 });
+      const dms = a => Array.isArray(a) ? a[0] + a[1] / 60 + a[2] / 3600 : null;
+      let lat = dms(g[2]), lng = dms(g[4]);
+      if (lat != null && lng != null) {
+        if (typeof g[1] === 'string' && /S/i.test(g[1])) lat = -lat;
+        if (typeof g[3] === 'string' && /W/i.test(g[3])) lng = -lng;
+        if (!(lat === 0 && lng === 0)) out.gps = { lat, lng };
+      }
+    }
+  } catch (e) { /* malformed EXIF — ignore */ }
+  return out;
+}
+
+// ════════════════════════════════════════════════════════
+//  Toolbar actions
+// ════════════════════════════════════════════════════════
+function toggleSubfolders() {
+  state.includeSubfolders = !state.includeSubfolders;
+  $('subCheck').textContent = state.includeSubfolders ? '☑' : '☐';
+  $('subfoldersPill').classList.toggle('on', state.includeSubfolders);
+  state.activeCategory = null;
+  state.activeType = null;
+  state.activeColor = null;
+  renderGrid();
+}
+function setGroupBy(v) { state.groupBy = v; renderGrid(); }
+function setSort(v) {
+  state.sort = v;
+  const cs = $('sortColorSelect');
+  if (cs) cs.style.display = v === 'color' ? '' : 'none';
+  renderGrid();
+}
+function setSortColor(v) { state.sortColor = v || null; renderGrid(); }
+function setThumbSize(v) { state.thumb = +v; $('content').style.setProperty('--thumb', v + 'px'); }
+// Rating filter — click a star to show images rated ≥ that many; click it again to clear.
+function setMinStars(n) {
+  state.minStars = state.minStars === n ? 0 : n;
+  renderStarFilter();
+  renderGrid();
+}
+function renderStarFilter() {
+  const el = $('sfStars'); if (!el) return;
+  let html = [1, 2, 3, 4, 5].map(i => `<span class="sf ${i <= state.minStars ? 'on' : ''}" title="Show ${i}★ and up" onclick="setMinStars(${i})">★</span>`).join('');
+  if (state.minStars) html += `<span class="sf-plus">+</span><span class="sf-clear" title="Clear rating filter" onclick="setMinStars(0)">✕</span>`;
+  el.innerHTML = html;
+}
+
+function updateStats() {
+  $('statImages').textContent = state.files.filter(f => f.kind === 'image').length;
+  $('statFolders').textContent = state.nodesByPath.size;
+  $('statTagged').textContent = Object.values(state.meta).filter(m => m && m.category).length;
+}
+
+// ════════════════════════════════════════════════════════
+//  Per-file metadata (persisted in localStorage)
+// ════════════════════════════════════════════════════════
+// NOTE: storage keys keep the legacy 'photoOrganizer:' prefix on purpose even though the app is
+// now "Sift" — renaming them would orphan every user's saved ratings/tags/notes/recents/caches.
+function metaKey() { return 'photoOrganizer:' + (state.rootName || 'default'); }
+function loadMeta() {
+  try { state.meta = JSON.parse(localStorage.getItem(metaKey()) || '{}'); } catch { state.meta = {}; }
+  state.embeddings = new Map();   // CLIP embeddings are per-folder
+  state.smartScores = null;
+  // Cull marks are per-folder too — clear them so they don't leak across a folder switch.
+  state.cull = null; state.culled = false; state.bestOnly = false; state.quality = new Map();
+  const pill = $('bestOnlyPill'); if (pill) { pill.style.display = 'none'; pill.classList.remove('on'); }
+  const bc = $('bestOnlyCheck'); if (bc) bc.textContent = '☐';
+}
+function getMeta(path) { return state.meta[path] || {}; }
+// Colours are stored as an array (`colors`); fall back to the legacy single `color`.
+function getColors(path) {
+  const m = getMeta(path);
+  if (m.colors && m.colors.length) return m.colors;
+  if (m.color) return [m.color];
+  return [];
+}
+function setColors(path, arr) {
+  // Store in palette order, de-duplicated; clear the legacy single field.
+  const seen = new Set(arr);
+  const ordered = COLOR_PALETTE.map(c => c.key).filter(k => seen.has(k));
+  setMeta(path, { colors: ordered.length ? ordered : undefined, color: undefined });
+}
+let persistTimer = null;
+function setMeta(path, patch, defer) {
+  state.meta[path] = Object.assign({}, state.meta[path], patch);
+  if (defer) return; // batch persist
+  if (persistTimer) clearTimeout(persistTimer);
+  persistTimer = setTimeout(persistMeta, 400);
+}
+function persistMeta() { try { localStorage.setItem(metaKey(), JSON.stringify(state.meta)); } catch (e) {} }
+window.addEventListener('beforeunload', persistMeta);
+
+// ════════════════════════════════════════════════════════
+//  Helpers
+// ════════════════════════════════════════════════════════
+function esc(s) { const d = document.createElement('div'); d.textContent = s == null ? '' : s; return d.innerHTML; }
+function jsStr(s) { return String(s).replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '&quot;'); }
+function cssEsc(s) { return (window.CSS && CSS.escape) ? CSS.escape(s) : String(s).replace(/["\\]/g, '\\$&'); }
+function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+function humanSize(b) {
+  if (b < 1024) return b + ' B';
+  if (b < 1048576) return (b / 1024).toFixed(0) + ' KB';
+  if (b < 1073741824) return (b / 1048576).toFixed(1) + ' MB';
+  return (b / 1073741824).toFixed(2) + ' GB';
+}
+function fmtDuration(s) {
+  if (!isFinite(s) || s < 0) return '';
+  s = Math.round(s);
+  const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), ss = String(s % 60).padStart(2, '0');
+  return h ? `${h}:${String(m).padStart(2, '0')}:${ss}` : `${m}:${ss}`;
+}
+
+// Processing overlay
+function showProcessing(text, sub, cancelable) {
+  $('procText').textContent = text; $('procSub').textContent = sub || '';
+  $('procBar').style.width = '0%';
+  $('procCancel').style.display = cancelable ? 'inline-block' : 'none';
+  $('processing').classList.add('active');
+}
+function updateProcessing(text, sub, pct) {
+  $('procText').textContent = text; $('procSub').textContent = sub || '';
+  if (pct >= 0) $('procBar').style.width = pct + '%';
+}
+function hideProcessing() { $('processing').classList.remove('active'); }
+function cancelWork() { state.cancel = true; hideProcessing(); }
+
+function showToast(msg, type) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.className = 'toast ' + (type || '') + ' show';
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('show'), 3400);
+}
+</script>
+</body>
+</html>

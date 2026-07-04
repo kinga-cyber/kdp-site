@@ -660,7 +660,9 @@ button {
 }
 .insp-preview {
   width: 100%;
-  aspect-ratio: 4/3;
+  /* Screen-adaptive height (was a fixed 4/3 box that stayed short & landscape-shaped on big
+     monitors, squeezing portrait phone photos into a sliver). Grows with the viewport. */
+  height: clamp(240px, 54vh, 640px);
   background: var(--surface-3);
   display: flex;
   align-items: center;
@@ -668,7 +670,9 @@ button {
   overflow: hidden;
   border-bottom: 1px solid var(--border);
 }
-.insp-preview img, .insp-preview video { width: 100%; height: 100%; object-fit: contain; }
+/* max-width/height (not forced width/height:100%) so EXIF-rotated iPhone photos size & centre
+   correctly — forcing 100%×100% + object-fit mis-places rotated images. */
+.insp-preview img, .insp-preview video { max-width: 100%; max-height: 100%; object-fit: contain; }
 .insp-body { padding: 1rem; }
 .insp-name { display: none; }   /* filename now lives in the sticky header */
 .insp-path {
@@ -726,11 +730,16 @@ button {
   flex-direction: column;
 }
 .lightbox.open { display: flex; }
-.lightbox img, .lightbox video { max-width: 92vw; max-height: 82vh; object-fit: contain; border-radius: 6px; }
-/* Zoom-to-100%: click the image (or press Z) to inspect focus; scroll/trackpad pans. */
-.lightbox #lbStage img { cursor: zoom-in; }
-#lbStage.zoomed { overflow: auto; max-width: 96vw; max-height: 86vh; border-radius: 6px; }
-#lbStage.zoomed img { max-width: none; max-height: none; cursor: zoom-out; border-radius: 0; }
+/* The stage is a fixed viewport box; the media fills it — scaling UP on large monitors and
+   DOWN on small ones — always preserving aspect ratio. Without the fixed box, a photo smaller
+   than the screen (e.g. a 2048px image on a 4K display) would sit at its natural size and look
+   tiny. object-fit:contain keeps it letterboxed, never stretched. */
+#lbStage { width: 92vw; height: 82vh; display: flex; align-items: center; justify-content: center; }
+#lbStage img, #lbStage video { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 6px; }
+/* Zoom-to-100%: click the image (or press Z) to inspect focus at native pixels; scroll/trackpad pans. */
+#lbStage img { cursor: zoom-in; }
+#lbStage.zoomed { width: 96vw; height: 86vh; display: block; overflow: auto; }
+#lbStage.zoomed img { width: auto; height: auto; max-width: none; max-height: none; object-fit: none; cursor: zoom-out; border-radius: 0; }
 .lb-stars { display: inline-flex; gap: 0.15rem; margin-left: 0.9rem; }
 .lb-stars .s { cursor: pointer; color: var(--text-dim); font-size: 1rem; transition: color 0.1s; }
 .lb-stars .s:hover { color: var(--gold); }
@@ -2888,7 +2897,7 @@ async function renderInspector(path) {
       const url = await ensureBlobUrl(f);
       prev.innerHTML = url ? `<video src="${url}" controls></video>` : ph('🚫');
     } else if (f.thumbnailLink) {
-      prev.innerHTML = `<img referrerpolicy="no-referrer" src="${esc(f.thumbnailLink.replace(/=s\d+(-[a-z]+)?$/, '=s1024'))}" onerror="inspPreviewFallback('${jsStr(path)}')">`;
+      prev.innerHTML = `<img referrerpolicy="no-referrer" src="${esc(f.thumbnailLink.replace(/=s\d+(-[a-z]+)?$/, '=s1600'))}" onerror="inspPreviewFallback('${jsStr(path)}')">`;
     } else if (imgDecodable(f)) {
       const url = await ensureBlobUrl(f);
       prev.innerHTML = url ? `<img src="${url}">` : ph('🚫');
@@ -3255,13 +3264,13 @@ async function showLb() {
   if (state.source === 'drive') {
     // Non-decodable types (raw/psd/pdf) can only be shown via Google's server thumbnail — never the raw bytes.
     if (!imgDecodable(f) && f.kind !== 'video' && f.thumbnailLink) {
-      stage.innerHTML = `<img referrerpolicy="no-referrer" src="${esc(f.thumbnailLink.replace(/=s\d+(-[a-z]+)?$/, '=s1600'))}">`;
+      stage.innerHTML = `<img referrerpolicy="no-referrer" src="${esc(f.thumbnailLink.replace(/=s\d+(-[a-z]+)?$/, '=s2048'))}">`;
     } else {
       const url = await ensureBlobUrl(f);
       if (seq !== lbIndex) return;
       if (url && imgDecodable(f)) stage.innerHTML = `<img src="${url}">`;
       else if (url && f.kind === 'video') stage.innerHTML = `<video src="${url}" controls autoplay></video>`;
-      else stage.innerHTML = (f.thumbnailLink ? `<img referrerpolicy="no-referrer" src="${esc(f.thumbnailLink.replace(/=s\d+(-[a-z]+)?$/, '=s1600'))}">` : noPrev);
+      else stage.innerHTML = (f.thumbnailLink ? `<img referrerpolicy="no-referrer" src="${esc(f.thumbnailLink.replace(/=s\d+(-[a-z]+)?$/, '=s2048'))}">` : noPrev);
     }
   } else {
     if (!f.url) await ensureBlobUrl(f).catch(() => {});

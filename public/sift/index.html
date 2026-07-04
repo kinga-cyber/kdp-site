@@ -392,6 +392,17 @@ button {
 }
 .card .q-badge.good { color: var(--gold); }
 .card .q-badge.low  { color: var(--danger); }
+/* AI-search match strength (smart mode only): mini bar + % relative to the best hit */
+.card .match-badge {
+  position: absolute; bottom: 1.85rem; right: 0.35rem;
+  display: flex; align-items: center; gap: 0.3rem;
+  font-size: 0.6rem; padding: 0.12rem 0.36rem; border-radius: 3px;
+  background: rgba(0,0,0,0.72); color: #fff;
+  font-family: 'JetBrains Mono', monospace; z-index: 6;
+}
+.card .match-badge .mtrack { width: 26px; height: 4px; border-radius: 2px; background: rgba(255,255,255,0.22); overflow: hidden; }
+.card .match-badge .mfill { display: block; height: 100%; border-radius: 2px; background: var(--accent); }
+.card .match-badge.strong .mfill { background: var(--gold); }
 .card .best-badge {
   position: absolute; top: 0.35rem; left: 3.9rem;
   font-size: 0.56rem; font-weight: 700; letter-spacing: 0.03em;
@@ -1287,6 +1298,8 @@ const state = {
   smart: false,            // semantic-search mode (CLIP)
   smartQuery: '',
   smartScores: null,       // Map path -> similarity for the current query
+  smartNorm: null,         // Map path -> 0..1 match strength relative to the best hit
+  smartAll: false,         // smart mode: false = show only top matches, true = show everything ranked
   embeddings: new Map(),   // path -> Float32Array (CLIP image embeddings for this folder)
   selectedPath: null,
   model: null,
@@ -2508,6 +2521,8 @@ function filesForView() {
   if (state.activeColor) list = list.filter(f => getColors(f.path).includes(state.activeColor));
   if (state.activeType) list = list.filter(f => f.ext === state.activeType);
   if (state.selectedOnly) list = list.filter(f => state.checked.has(f.path));             // review picks
+  if (state.smart && state.smartNorm && !state.smartAll)
+    list = list.filter(f => (state.smartNorm.get(f.path) ?? 0) >= SMART_TOP);             // top AI matches only
   if (state.bestOnly && state.culled) list = list.filter(f => !cullInfo(f.path).isDup);   // hide near-dups
   return list;
 }
@@ -2555,7 +2570,7 @@ function renderGrid() {
 
   if (!list.length) {
     content.innerHTML = `<div class="empty-state"><div class="icon">📂</div><p>${
-      state.search || state.activeCategory || state.activeColor || state.activeType || state.minStars || state.bestOnly || state.selectedOnly
+      state.search || state.activeCategory || state.activeColor || state.activeType || state.minStars || state.bestOnly || state.selectedOnly || (state.smart && state.smartNorm && !state.smartAll)
         ? 'No images match the current filters.'
         : 'No images in this folder.' + (state.nodesByPath.get(state.currentPath)?.dirs.length ? ' Try “Include subfolders”.' : '')
     }</p></div>`;
@@ -2643,6 +2658,7 @@ function cardHTML(f) {
     ${f.kind === 'video' && f.duration ? `<span class="dur-badge">${esc(fmtDuration(f.duration))}</span>` : ''}
     <span class="star-badge ${starred ? 'on' : ''}" title="${starred ? 'Unstar' : 'Star this image'}" onclick="event.stopPropagation();quickStar('${jsStr(f.path)}')">${starred ? '★' : '☆'}</span>
     ${state.culled && q != null ? `<span class="q-badge ${qCls}" title="Quality score (sharpness + exposure)">${Math.round(q)}</span>` : ''}
+    ${(() => { const s = state.smart && state.smartNorm ? state.smartNorm.get(f.path) : null; if (s == null) return ''; const pct = Math.round(s * 100); return `<span class="match-badge ${pct >= 85 ? 'strong' : ''}" title="AI match strength for the current search (relative to the best hit)"><span class="mtrack"><span class="mfill" style="width:${pct}%"></span></span>${pct}%</span>`; })()}
     ${isKeeper ? `<span class="best-badge" title="Best shot in its group">★ BEST</span>` : ''}
     ${isDup ? `<span class="promote-badge" title="Make this the keeper" onclick="event.stopPropagation();promoteKeeper('${jsStr(f.path)}')">▲ keep</span>` : ''}
     ${tags.length ? `<div class="tags-line">${tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>` : ''}
@@ -2797,12 +2813,22 @@ function renderFilterChips() {
   const types = Object.keys(typeCounts).sort((a, b) => typeCounts[b] - typeCounts[a] || a.localeCompare(b));
   const showTypes = types.length >= 2;   // only worth a filter when the folder mixes types
 
-  if (cats.length === 0 && cols.length === 0 && !showTypes) { row.classList.add('hidden'); return; }
+  const smartActive = state.smart && state.smartNorm;
+  if (cats.length === 0 && cols.length === 0 && !showTypes && !smartActive) { row.classList.add('hidden'); return; }
   row.classList.remove('hidden');
   let html = '', prev = false;
   const divider = () => prev ? `<span class="divider" style="width:1px;height:20px;background:var(--border);margin:0 0.3rem;"></span>` : '';
 
+  if (smartActive) {
+    // AI search: show only the strong hits by default, with one click to see the full ranking.
+    const top = scope.filter(f => (state.smartNorm.get(f.path) ?? 0) >= SMART_TOP).length;
+    html += `<span class="filter-label">✨ Match</span>`;
+    html += `<span class="chip ${!state.smartAll ? 'active' : ''}" onclick="setSmartAll(false)" title="Only the strongest matches for your search">Top matches <span class="chip-count">${top}</span></span>`;
+    html += `<span class="chip ${state.smartAll ? 'active' : ''}" onclick="setSmartAll(true)" title="Everything, ranked best-match first">All ranked <span class="chip-count">${scope.length}</span></span>`;
+    prev = true;
+  }
   if (showTypes) {
+    html += divider();
     html += `<span class="filter-label">Type</span>`;
     html += `<span class="chip ${!state.activeType ? 'active' : ''}" onclick="setTypeFilter(null)">All <span class="chip-count">${scope.length}</span></span>`;
     types.forEach(t => {
@@ -3797,6 +3823,12 @@ function toggleSmart() {
   $('searchBox').placeholder = state.smart ? '✨ Describe what you’re looking for…' : 'Search by file name…';
   $('searchBox').value = '';
   state.search = ''; state.smartQuery = ''; state.smartScores = null;
+  state.smartNorm = null; state.smartAll = false;
+  renderGrid();
+}
+
+function setSmartAll(v) {
+  state.smartAll = v;
   renderGrid();
 }
 
@@ -3809,7 +3841,7 @@ function onSmartInput(v) {
 async function runSmartSearch() {
   if (!state.smart) return;
   const q = state.smartQuery;
-  if (!q) { state.smartScores = null; renderGrid(); return; }
+  if (!q) { state.smartScores = null; state.smartNorm = null; renderGrid(); return; }
   if (!clip.visionModel || state.embeddings.size === 0) {
     const ok = await indexViewForAI();
     if (!ok || state.smartQuery !== q) return;
@@ -3821,8 +3853,17 @@ async function runSmartSearch() {
   const scores = new Map();
   for (const [path, emb] of state.embeddings) scores.set(path, cosine(qemb, emb));
   state.smartScores = scores;
+  // Normalize to 0..1 relative to this query's best/worst hit — drives the match badges
+  // and the "Top matches" cut. (Raw CLIP cosines are query-dependent, so relative is what's meaningful.)
+  let mx = -Infinity, mn = Infinity;
+  for (const s of scores.values()) { if (s > mx) mx = s; if (s < mn) mn = s; }
+  const span = (mx - mn) || 1;
+  const norm = new Map();
+  for (const [p, s] of scores) norm.set(p, (s - mn) / span);
+  state.smartNorm = norm;
   renderGrid();
 }
+const SMART_TOP = 0.6;   // "Top matches" = within the top 40% of this query's score range
 
 function classifyCategory(preds) {
   const combined = preds.map(p => p.className.toLowerCase()).join(' ');

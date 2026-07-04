@@ -1185,6 +1185,8 @@ kbd {
     <div class="insp-shell">
       <div class="insp-header">
         <div class="insp-title" id="inspTitle"></div>
+        <button class="btn-ghost" id="inspSelect" type="button" onclick="inspToggleSelect()" title="Select this file for download (adds it to the selection bar)">☐ Select</button>
+        <button class="btn-ghost" id="inspDownloadBtn" type="button" onclick="inspDownloadCurrent()" title="Download this file now">⬇</button>
         <button class="insp-close" id="inspClose" type="button" aria-label="Close inspector" title="Close (Esc)" onclick="closeInspector()">✕</button>
       </div>
       <div class="insp-preview" id="inspPreview"></div>
@@ -2858,6 +2860,7 @@ async function renderInspector(path) {
   $('inspTitle').textContent = f.name;   // filename in the sticky header
   $('inspTitle').title = f.name;         // full name on hover when truncated
   $('inspPath').textContent = f.path;
+  updateInspSelect();                    // reflect whether this file is picked for download
 
   // metadata
   const renderInspMeta = () => {
@@ -3072,6 +3075,7 @@ function updateSelectionBar() {
   $('selbar').classList.toggle('on', n > 0);
   // One file downloads directly; multiple come as a zip — label the button to match.
   $('downloadBtn').textContent = n > 1 ? `⬇ Download ZIP (${n})` : '⬇ Download';
+  updateInspSelect();   // keep the inspector's Select button in step with grid/lightbox toggles
   // Nothing left picked → drop out of picks-only view so the grid doesn't go blank.
   if (n === 0 && state.selectedOnly) { state.selectedOnly = false; syncSelOnlyPill(); renderGrid(); }
 }
@@ -3278,9 +3282,9 @@ function lbToggleSelect() {
   toggleCheck(f.path);          // updates state.checked + grid cards + the selection bar
   updateLbSelect();
 }
-// Download just the enlarged file, straight to Downloads.
-async function lbDownloadCurrent() {
-  const f = state.viewList[lbIndex]; if (!f) return;
+// Download one file, straight to Downloads (shared by the lightbox and the inspector).
+async function downloadOneFile(f) {
+  if (!f) return;
   try {
     if (state.source === 'drive') showProcessing('Downloading…', f.name, false);
     const blob = await fetchFileBlob(f);
@@ -3290,6 +3294,21 @@ async function lbDownloadCurrent() {
     showToast(`Downloaded ${f.name}`, 'success');
   } catch (err) { hideProcessing(); showToast('Download failed: ' + err.message, 'error'); }
 }
+async function lbDownloadCurrent() { await downloadOneFile(state.viewList[lbIndex]); }
+// ── Inspector select/download — same selection the grid checkboxes and lightbox use ──
+function updateInspSelect() {
+  const b = $('inspSelect');
+  if (!b || !state.selectedPath) return;
+  const on = state.checked.has(state.selectedPath);
+  b.textContent = on ? '☑ Selected' : '☐ Select';
+  b.classList.toggle('on', on);
+}
+function inspToggleSelect() {
+  if (!state.selectedPath) return;
+  toggleCheck(state.selectedPath);   // updates state.checked + grid cards + the selection bar
+  updateInspSelect();
+}
+async function inspDownloadCurrent() { await downloadOneFile(state.filesByPath.get(state.selectedPath)); }
 function closeLightbox() { $('lightbox').classList.remove('open'); const s = $('lbStage'); s.classList.remove('zoomed'); s.innerHTML = ''; }
 // Click the enlarged image to zoom to 100% at that spot; click again to fit.
 $('lbStage').addEventListener('click', e => {

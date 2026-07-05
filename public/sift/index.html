@@ -928,6 +928,18 @@ button {
 .bp-form .field { margin-bottom: 0.85rem; }
 .bp-form .hint { font-size: 0.68rem; color: var(--text-muted); margin-top: 0.25rem; line-height: 1.5; }
 .bp-assign { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.7rem 0.8rem; margin-top: 1rem; }
+/* Ask Claude (copy generation) */
+.modal:has(.ac-body) { width: 680px; }
+.ac-list { max-height: 46vh; overflow-y: auto; margin-top: 0.6rem; }
+.ac-file { padding: 0.5rem 0.1rem; border-bottom: 1px solid var(--border); font-size: 0.78rem; }
+.ac-file .hd { display: flex; align-items: center; gap: 0.6rem; }
+.ac-file .nm { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ac-file .st { margin-left: auto; font-size: 0.7rem; color: var(--text-dim); flex-shrink: 0; }
+.ac-file .st.ok { color: var(--accent); }
+.ac-file .st.err { color: var(--danger); }
+.ac-copy { background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 0.5rem 0.65rem; margin: 0.4rem 0 0.1rem; font-size: 0.76rem; line-height: 1.55; }
+.ac-copy b { color: var(--accent); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 0.1rem; }
+.ac-note { font-size: 0.7rem; color: var(--text-muted); line-height: 1.5; margin-top: 0.6rem; }
 .folder-pick-list { display: flex; flex-direction: column; gap: 0.2rem; margin: 0.3rem 0 0.5rem; max-height: 50vh; overflow-y: auto; padding-right: 0.2rem; }
 .folder-pick {
   display: flex; align-items: center; gap: 0.5rem;
@@ -1246,6 +1258,7 @@ kbd {
       <span class="spacer"></span>
       <button class="btn-ghost" onclick="copyPickedNames()" title="Copy the picked file names to the clipboard — paste into a message to your client">📋 Copy names</button>
       <button class="btn-ghost" onclick="exportPickedCsv()" title="Download a spreadsheet (CSV) of your picks: names, ratings, colours, tags, notes">📄 CSV</button>
+      <button class="btn-secondary" onclick="openAskClaude()" title="Claude writes alt text, product descriptions, and captions for your picked images — in the active brand profile's voice">✨ Ask Claude</button>
       <button class="btn-primary" id="downloadBtn" onclick="downloadSelected()">⬇ Download</button>
     </div>
   </div>
@@ -1283,6 +1296,10 @@ kbd {
         <div class="insp-block" id="inspCullBlock" style="display:none;">
           <div class="insp-block-title">Best shots</div>
           <div class="insp-cull" id="inspCull"></div>
+        </div>
+        <div class="insp-block" id="inspClaudeBlock" style="display:none;">
+          <div class="insp-block-title">✨ Claude copy</div>
+          <div id="inspClaude"></div>
         </div>
         <div class="insp-block">
           <div class="insp-block-title">Note</div>
@@ -2672,6 +2689,191 @@ async function bpImport(file) {
 }
 
 // ════════════════════════════════════════════════════════
+//  ✨ Ask Claude — e-commerce copy for the picked images.
+//  Opt-in cloud feature: uses the user's own Anthropic API key (stored only in
+//  this browser) and sends images to Claude ONLY when Generate is clicked.
+//  Copy is written through the active brand profile so it sounds like the brand.
+// ════════════════════════════════════════════════════════
+const CLAUDE_KEY = 'photoOrganizer:anthropicKey';
+const CLAUDE_MODEL = 'claude-opus-4-8';
+const AC_SCHEMA = {
+  type: 'object',
+  properties: {
+    alt: { type: 'string', description: 'Concise alt text for accessibility, under 125 characters, no "image of" prefix' },
+    description: { type: 'string', description: 'Product description in the brand voice' },
+    caption: { type: 'string', description: 'A social media caption in the brand voice' },
+  },
+  required: ['alt', 'description', 'caption'],
+  additionalProperties: false,
+};
+function getClaudeKey() { try { return localStorage.getItem(CLAUDE_KEY) || ''; } catch (e) { return ''; } }
+function setClaudeKey(k) { try { if (k) localStorage.setItem(CLAUDE_KEY, k); else localStorage.removeItem(CLAUDE_KEY); } catch (e) {} }
+
+// One message to Claude: brand context as system, image + task as user, JSON out (schema-enforced).
+async function claudeCopyForImage(system, b64, hint) {
+  const body = {
+    model: CLAUDE_MODEL,
+    max_tokens: 1024,
+    system,
+    messages: [{
+      role: 'user',
+      content: [
+        { type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: b64 } },
+        { type: 'text', text: `Write the alt text, product description, and social caption for this image.${hint ? ' Filename (may hint at the product): ' + hint : ''}` },
+      ],
+    }],
+    output_config: { format: { type: 'json_schema', schema: AC_SCHEMA } },
+  };
+  const r = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+      'x-api-key': getClaudeKey(),
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true',
+    },
+    body: JSON.stringify(body),
+  });
+  const data = await r.json().catch(() => null);
+  if (r.status === 401) throw new Error('API key rejected — check it in the ✨ panel');
+  if (r.status === 429) throw new Error('Rate limited — try again in a minute');
+  if (!r.ok) throw new Error(data?.error?.message || ('API error ' + r.status));
+  if (data.stop_reason === 'refusal') throw new Error('Claude declined this image');
+  const text = (data.content || []).find(b => b.type === 'text')?.text || '';
+  return JSON.parse(text);
+}
+
+// Downscaled JPEG base64 (768px long edge) — enough for copywriting, cheap to send.
+async function imageBase64ForClaude(f) {
+  const url = await ensureBlobUrl(f);
+  if (!url) throw new Error('no preview available');
+  let source;
+  if (f.kind === 'video') {
+    source = await videoFrameCanvas(url);
+  } else {
+    source = await new Promise((res, rej) => {
+      const img = new Image();
+      img.onload = () => res(img); img.onerror = () => rej(new Error('undecodable image'));
+      img.src = url;
+    });
+  }
+  const w = source.videoWidth || source.naturalWidth || source.width;
+  const h = source.videoHeight || source.naturalHeight || source.height;
+  const scale = Math.min(1, 768 / Math.max(w, h));
+  const cv = document.createElement('canvas');
+  cv.width = Math.max(1, Math.round(w * scale)); cv.height = Math.max(1, Math.round(h * scale));
+  cv.getContext('2d').drawImage(source, 0, 0, cv.width, cv.height);
+  if (source.remove) source.remove();
+  const b64 = cv.toDataURL('image/jpeg', 0.85).split(',')[1];
+  cv.remove();
+  return b64;
+}
+
+// Brand profile → system prompt. Without a profile the copy is competent but generic.
+function buildBrandSystem(p) {
+  const parts = ['You are an expert e-commerce copywriter. You write alt text, product descriptions, and social captions from product photos.'];
+  if (p) {
+    parts.push(`You write for the brand "${p.name}". Everything below is the brand context — follow it exactly.`);
+    if (p.about) parts.push('ABOUT THE BRAND:\n' + p.about);
+    if (p.voice) parts.push('VOICE & TONE:\n' + p.voice);
+    if (p.vocabulary) parts.push('VOCABULARY — use these exact terms and colour names where they apply:\n' + p.vocabulary);
+    if (p.rules) parts.push('RULES — non-negotiable:\n' + p.rules);
+    if (p.products) parts.push('PRODUCT LIST — match the image to the right product name instead of guessing:\n' + p.products);
+  } else {
+    parts.push('No brand context was provided, so keep the copy neutral and professional.');
+  }
+  parts.push('Alt text: under 125 characters, factual, no "image of" prefix. Description: 40-60 words unless the rules say otherwise. Caption: one or two sentences, engaging, in the brand voice.');
+  return parts.join('\n\n');
+}
+
+let acCancelled = false;
+function acFiles() {
+  return pickedFiles().filter(f => (f.kind === 'image' && RENDERABLE.includes(f.ext)) || f.kind === 'video');
+}
+function openAskClaude() {
+  const files = acFiles();
+  const skipped = pickedFiles().length - files.length;
+  const profile = activeBrandProfile();
+  const hasKey = !!getClaudeKey();
+  modal(`
+    <h2>✨ Ask Claude</h2>
+    <div class="sub">Claude looks at each picked image and writes <strong>alt text</strong>, a
+    <strong>product description</strong>, and a <strong>caption</strong>${profile ? ` in the <strong>${esc(profile.name)}</strong> voice` : ''}.
+    Results are saved with each image and included in the 📄 CSV export.</div>
+    <div class="ac-body">
+      ${profile ? '' : `<div class="ac-note">⚠️ No brand profile is active for this folder — the copy will be generic.
+        <a href="#" onclick="closeModal();openBrandProfiles();return false;">Set one up in 💼 Brand profiles</a> for on-brand output.</div>`}
+      <div class="field" style="margin-top:0.8rem;">
+        <label>Anthropic API key ${hasKey ? '<span style="color:var(--accent);text-transform:none;letter-spacing:0;">✓ saved in this browser</span>' : ''}</label>
+        <input type="text" id="acKey" placeholder="${hasKey ? '•••••••• (leave blank to keep the saved key)' : 'sk-ant-…  — from console.anthropic.com'}" autocomplete="off">
+        <div class="hint" style="font-size:0.68rem;color:var(--text-muted);margin-top:0.25rem;">Stored only in this browser. Images are sent to Claude only when you click Generate.</div>
+      </div>
+      <div class="ac-note"><strong>${files.length}</strong> image${files.length !== 1 ? 's' : ''} ready${skipped ? ` · ${skipped} skipped (format can't be analyzed)` : ''}.</div>
+      <div class="ac-list" id="acList"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" id="acCancelBtn" style="display:none;" onclick="acCancelled=true;this.textContent='Stopping…'">Cancel</button>
+      <span style="flex:1"></span>
+      <button class="btn-secondary" onclick="closeModal()">Close</button>
+      <button class="btn-primary" id="acGoBtn" onclick="acGenerate()" ${files.length ? '' : 'disabled'}>Generate</button>
+    </div>
+  `);
+}
+async function acGenerate() {
+  const keyInput = ($('acKey').value || '').trim();
+  if (keyInput) setClaudeKey(keyInput);
+  if (!getClaudeKey()) { showToast('Paste your Anthropic API key first', 'error'); return; }
+  const files = acFiles();
+  if (!files.length) return;
+  if (files.length > 25 && !confirm(`Send ${files.length} images to Claude? (One API call each.)`)) return;
+
+  const system = buildBrandSystem(activeBrandProfile());
+  const list = $('acList');
+  list.innerHTML = files.map((f, i) => `
+    <div class="ac-file" id="ac_${i}">
+      <div class="hd"><span class="nm">${esc(f.name)}</span><span class="st">queued</span></div>
+      <div class="out"></div>
+    </div>`).join('');
+  $('acGoBtn').disabled = true;
+  $('acCancelBtn').style.display = '';
+  acCancelled = false;
+
+  let done = 0, failed = 0, idx = 0;
+  const setSt = (i, cls, txt) => { const el = $('ac_' + i); if (el) { const st = el.querySelector('.st'); st.className = 'st ' + cls; st.textContent = txt; } };
+  const worker = async () => {
+    while (idx < files.length && !acCancelled) {
+      const i = idx++;
+      const f = files[i];
+      setSt(i, '', 'reading…');
+      try {
+        const b64 = await imageBase64ForClaude(f);
+        if (acCancelled) { setSt(i, '', 'cancelled'); continue; }
+        setSt(i, '', 'writing…');
+        const copy = await claudeCopyForImage(system, b64, f.name);
+        setMeta(f.path, { claudeCopy: { alt: copy.alt, description: copy.description, caption: copy.caption } }, true);
+        done++;
+        setSt(i, 'ok', '✓ done');
+        const el = $('ac_' + i);
+        if (el) el.querySelector('.out').innerHTML = `
+          <div class="ac-copy"><b>Alt text</b>${esc(copy.alt)}</div>
+          <div class="ac-copy"><b>Description</b>${esc(copy.description)}</div>
+          <div class="ac-copy"><b>Caption</b>${esc(copy.caption)}</div>`;
+        if (state.selectedPath === f.path) renderInspector(f.path);
+      } catch (e) {
+        failed++;
+        setSt(i, 'err', '✗ ' + (e.message || 'failed'));
+      }
+    }
+  };
+  await Promise.all([worker(), worker()]);   // two at a time — fast without hammering rate limits
+  persistMeta();
+  $('acGoBtn').disabled = false;
+  $('acGoBtn').textContent = 'Regenerate';
+  $('acCancelBtn').style.display = 'none';
+  showToast(acCancelled ? `Stopped — ${done} written` : `Copy written for ${done} image${done !== 1 ? 's' : ''}` + (failed ? ` (${failed} failed)` : ''), failed && !done ? 'error' : 'success');
+}
+
+// ════════════════════════════════════════════════════════
 //  Folder tree rendering
 // ════════════════════════════════════════════════════════
 function renderTree() {
@@ -3155,6 +3357,13 @@ async function renderInspector(path) {
   $('inspTitle').title = f.name;         // full name on hover when truncated
   $('inspPath').textContent = f.path;
   updateInspSelect();                    // reflect whether this file is picked for download
+  // Claude-written copy (from ✨ Ask Claude), if any
+  const cc = m.claudeCopy;
+  $('inspClaudeBlock').style.display = cc ? '' : 'none';
+  if (cc) $('inspClaude').innerHTML =
+    `<div class="ac-copy"><b>Alt text</b>${esc(cc.alt || '')}</div>` +
+    `<div class="ac-copy"><b>Description</b>${esc(cc.description || '')}</div>` +
+    `<div class="ac-copy"><b>Caption</b>${esc(cc.caption || '')}</div>`;
 
   // metadata
   const renderInspMeta = () => {
@@ -3400,7 +3609,7 @@ function exportPickedCsv() {
   const picked = pickedFiles();
   if (!picked.length) { showToast('Nothing selected yet', 'error'); return; }
   const q = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
-  const rows = [['Name', 'Folder', 'Type', 'Size (bytes)', 'Rating', 'Colours', 'Category', 'AI tags', 'Quality', 'Note'].map(q).join(',')];
+  const rows = [['Name', 'Folder', 'Type', 'Size (bytes)', 'Rating', 'Colours', 'Category', 'AI tags', 'Quality', 'Note', 'Alt text', 'Description', 'Caption'].map(q).join(',')];
   for (const f of picked) {
     const m = getMeta(f.path);
     rows.push([
@@ -3410,6 +3619,7 @@ function exportPickedCsv() {
       (m.tags || []).join('; '),
       qualityOf(f.path) != null ? qualityOf(f.path).toFixed(2) : '',
       m.note || '',
+      m.claudeCopy?.alt || '', m.claudeCopy?.description || '', m.claudeCopy?.caption || '',
     ].map(q).join(','));
   }
   saveBlob(new Blob(['﻿' + rows.join('\r\n')], { type: 'text/csv;charset=utf-8' }),

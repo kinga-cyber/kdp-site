@@ -45,7 +45,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--sage-deep);outline-
 .bar nav{margin-left:auto;display:flex;gap:1.4rem;}
 .bar nav a{border:none;font-size:.82rem;font-weight:600;color:var(--ink);}
 .bar nav a:hover{color:var(--navy);}
-@media(max-width:720px){.bar nav{display:none;}}
+.bar nav a.open-app{background:var(--navy);color:#F7F0E7;padding:7px 15px;border-radius:8px;}
+.bar nav a.open-app:hover{background:var(--navy-deep);color:#fff;}
+@media(max-width:720px){.bar nav a:not(.open-app){display:none;}.bar nav{gap:0;}}
+.hero-cta{display:inline-flex;align-items:center;gap:6px;margin-top:26px;background:var(--navy);color:#F7F0E7;border:none;font-family:'Aktiv','Mont',sans-serif;font-weight:700;font-size:.92rem;letter-spacing:.01em;padding:13px 26px;border-radius:10px;transition:background .15s,transform .15s;}
+.hero-cta:hover{background:var(--navy-deep);color:#fff;transform:translateY(-1px);}
 
 /* ── hero ── */
 .hero{position:relative;overflow:hidden;background:linear-gradient(160deg,#474C64 0%,#3C4157 48%,#2F3446 100%);color:#F7F0E7;}
@@ -151,6 +155,7 @@ footer .fmeta a{font-weight:600;}
       <a href="#start">Getting started</a>
       <a href="#features">Features</a>
       <a href="#privacy">Privacy</a>
+      <a href="https://kingadow.com/sift/" class="open-app">Open Sift &rarr;</a>
     </nav>
   </div>
 </header>
@@ -165,6 +170,7 @@ footer .fmeta a{font-weight:600;}
       <span class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v10m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>Nothing is uploaded</span>
       <span class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7l8-4 8 4-8 4-8-4z"/><path d="M4 12l8 4 8-4M4 17l8 4 8-4"/></svg>Local folders or Google Drive</span>
     </div>
+    <a href="https://kingadow.com/sift/" class="hero-cta">Open Sift &rarr;</a>
   </div>
 </section>
 

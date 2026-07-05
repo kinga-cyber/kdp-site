@@ -85,7 +85,7 @@ body {
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--border-hover); }
 
-button {
+button, a.btn-ghost {
   font-family: 'DM Sans', sans-serif;
   font-size: 0.85rem;
   font-weight: 500;
@@ -96,6 +96,7 @@ button {
   transition: all 0.15s ease;
   color: var(--text);
 }
+a.btn-ghost { display: inline-flex; align-items: center; text-decoration: none; }
 .btn-primary { background: var(--accent); color: #0C0C0E; }
 .btn-primary:hover { background: var(--accent-dim); }
 .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
@@ -522,6 +523,9 @@ button {
 .welcome p { color: var(--text-dim); font-size: 0.88rem; line-height: 1.7; max-width: 520px; margin-bottom: 1.5rem; }
 .welcome .hint { font-size: 0.74rem; color: var(--text-muted); margin-top: 1.2rem; max-width: 540px; line-height: 1.6; }
 .welcome .formats { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--text-muted); margin-top: 0.8rem; }
+.welcome-guide { font-size: 0.8rem; color: var(--text-muted); margin-top: 1rem; }
+.welcome-guide a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; }
+.welcome-guide a:hover { border-bottom-color: currentColor; }
 
 /* Recent folders on the welcome screen */
 .recents { width: 100%; max-width: 640px; margin: 0 auto 1.6rem; text-align: left; }
@@ -1149,6 +1153,7 @@ kbd {
     </div>
     <span class="drive-pill" id="drivePill" style="display:none;"></span>
     <button class="btn-secondary" id="reopenBtn" style="display:none;" onclick="reopenSource()">Change Folder</button>
+    <a class="btn-ghost" id="guideLink" href="guide/" target="_blank" rel="noopener" title="Open the Sift guide — overview & feature manual">📖 Guide</a>
     <button class="btn-ghost" id="shortcutsBtn" onclick="openShortcuts()" title="Keyboard shortcuts (press ?)">⌘</button>
     <button class="btn-ghost" id="themeToggle" onclick="toggleTheme()" title="Toggle light / dark theme">🌙</button>
     <button class="btn-ghost" id="brandBtn" onclick="openBrandProfiles()" title="Brand profiles — the business context Claude uses when writing copy for your images">💼</button>
@@ -1252,6 +1257,7 @@ kbd {
           <button class="btn-secondary" onclick="connectDrive()" style="padding:0.7rem 1.4rem;font-size:0.9rem;">☁️ Connect Google Drive</button>
         </div>
         <div class="formats">JPG · PNG · WEBP · GIF · BMP · SVG · MP4 · MOV · WEBM</div>
+        <div class="welcome-guide">New to Sift? <a href="guide/" target="_blank" rel="noopener">Read the guide</a> for a quick tour of what it does.</div>
         <div class="hint">
           <strong style="color:var(--text-dim)">Using Google Drive?</strong> Install <em>Google&nbsp;Drive for Desktop</em>, let it sync, then open that folder here — every nested project folder becomes instantly browsable. Nothing is uploaded; everything stays on your machine.
         </div>

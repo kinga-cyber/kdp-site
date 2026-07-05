@@ -1330,6 +1330,7 @@ const state = {
   smartQuery: '',
   smartScores: null,       // Map path -> similarity for the current query
   smartNorm: null,         // Map path -> 0..1 match strength relative to the best hit
+  smartTop: null,          // Set of paths that count as "Top matches" for the current query
   smartAll: false,         // smart mode: false = show only top matches, true = show everything ranked
   embeddings: new Map(),   // path -> Float32Array (CLIP image embeddings for this folder)
   selectedPath: null,
@@ -2596,7 +2597,7 @@ function filesForView() {
   if (state.activeType) list = list.filter(f => f.ext === state.activeType);
   if (state.selectedOnly) list = list.filter(f => state.checked.has(f.path));             // review picks
   if (state.smart && state.smartNorm && !state.smartAll)
-    list = list.filter(f => (state.smartNorm.get(f.path) ?? 0) >= SMART_TOP);             // top AI matches only
+    list = list.filter(f => state.smartTop && state.smartTop.has(f.path));                // top AI matches only
   if (state.bestOnly && state.culled) list = list.filter(f => !cullInfo(f.path).isDup);   // hide near-dups
   return list;
 }
@@ -2895,7 +2896,7 @@ function renderFilterChips() {
 
   if (smartActive) {
     // AI search: show only the strong hits by default, with one click to see the full ranking.
-    const top = scope.filter(f => (state.smartNorm.get(f.path) ?? 0) >= SMART_TOP).length;
+    const top = scope.filter(f => state.smartTop && state.smartTop.has(f.path)).length;
     html += `<span class="filter-label">✨ Match</span>`;
     html += `<span class="chip ${!state.smartAll ? 'active' : ''}" onclick="setSmartAll(false)" title="Only the strongest matches for your search">Top matches <span class="chip-count">${top}</span></span>`;
     html += `<span class="chip ${state.smartAll ? 'active' : ''}" onclick="setSmartAll(true)" title="Everything, ranked best-match first">All ranked <span class="chip-count">${scope.length}</span></span>`;
@@ -3853,7 +3854,26 @@ async function clipEmbedText(text) {
   const { text_embeds } = await clip.textModel(inputs);
   return l2norm(text_embeds.data);
 }
-function embKey(path) { return 'clipemb:' + metaKey() + ':' + path; }
+// Embed a search query as an ENSEMBLE of caption phrasings. CLIP was trained on photo
+// captions, so "a photo of a navy dress" ranks better than the raw words "navy dress";
+// averaging several templates is a standard retrieval boost (and one model call — batched).
+async function clipEmbedQuery(q) {
+  const templates = [q, `a photo of ${q}`, `a product photo of ${q}`, `a picture of ${q}`];
+  const inputs = clip.tokenizer(templates, { padding: true, truncation: true });
+  const { text_embeds } = await clip.textModel(inputs);
+  const [n, d] = text_embeds.dims;
+  const data = text_embeds.data;
+  const avg = new Float32Array(d);
+  for (let i = 0; i < n; i++) {
+    // normalize each template embedding before averaging so no phrasing dominates
+    let s = 0; for (let j = 0; j < d; j++) { const v = data[i * d + j]; s += v * v; }
+    s = Math.sqrt(s) || 1;
+    for (let j = 0; j < d; j++) avg[j] += data[i * d + j] / s / n;
+  }
+  return l2norm(avg);
+}
+// Videos use a versioned key: v2 = averaged multi-frame embedding (v1 was a single frame).
+function embKey(path, isVideo) { return 'clipemb:' + metaKey() + ':' + (isVideo ? 'v2:' : '') + path; }
 
 // Compute (and cache) CLIP embeddings for the images in the current view.
 async function indexViewForAI() {
@@ -3869,19 +3889,27 @@ async function indexViewForAI() {
     if (state.cancel) break;
     done++;
     updateProcessing(`Indexing ${done} of ${list.length}…`, f.name, (done / list.length) * 100);
-    let emb = await cacheGet(embKey(f.path));
+    let emb = await cacheGet(embKey(f.path, f.kind === 'video'));
     if (!emb) {
       try {
         const url = await ensureBlobUrl(f);
         if (!url) continue;
         if (f.kind === 'video') {
-          const cv = await videoFrameCanvas(url);
-          emb = await clipEmbedSource(cv);
-          cv.remove();
+          // Sample several frames and average — a clip is findable by anything that
+          // happens in it, not just whatever the first frame happened to show.
+          const frames = await videoFrameCanvases(url, 3);
+          let acc = null;
+          for (const fr of frames) {
+            const e = await clipEmbedSource(fr.canvas);
+            if (!acc) acc = new Float32Array(e.length);
+            for (let i = 0; i < acc.length; i++) acc[i] += e[i] / frames.length;
+            fr.canvas.remove();
+          }
+          emb = l2norm(acc);
         } else {
           emb = await clipEmbedImageUrl(url);
         }
-        await cacheSet(embKey(f.path), emb);
+        await cacheSet(embKey(f.path, f.kind === 'video'), emb);
       } catch (e) { continue; }
     }
     state.embeddings.set(f.path, emb instanceof Float32Array ? emb : Float32Array.from(emb));
@@ -3897,7 +3925,7 @@ function toggleSmart() {
   $('searchBox').placeholder = state.smart ? '✨ Describe what you’re looking for…' : 'Search by file name…';
   $('searchBox').value = '';
   state.search = ''; state.smartQuery = ''; state.smartScores = null;
-  state.smartNorm = null; state.smartAll = false;
+  state.smartNorm = null; state.smartTop = null; state.smartAll = false;
   renderGrid();
 }
 
@@ -3915,29 +3943,41 @@ function onSmartInput(v) {
 async function runSmartSearch() {
   if (!state.smart) return;
   const q = state.smartQuery;
-  if (!q) { state.smartScores = null; state.smartNorm = null; renderGrid(); return; }
+  if (!q) { state.smartScores = null; state.smartNorm = null; state.smartTop = null; renderGrid(); return; }
   if (!clip.visionModel || state.embeddings.size === 0) {
     const ok = await indexViewForAI();
     if (!ok || state.smartQuery !== q) return;
   }
   let qemb;
-  try { qemb = await clipEmbedText(q); }
+  try { qemb = await clipEmbedQuery(q); }   // caption-template ensemble ranks better than the raw words
   catch (e) { showToast('AI search failed: ' + (e.message || e), 'error'); return; }
   if (state.smartQuery !== q) return;   // a newer query superseded this one
   const scores = new Map();
   for (const [path, emb] of state.embeddings) scores.set(path, cosine(qemb, emb));
   state.smartScores = scores;
-  // Normalize to 0..1 relative to this query's best/worst hit — drives the match badges
-  // and the "Top matches" cut. (Raw CLIP cosines are query-dependent, so relative is what's meaningful.)
+  // Normalize to 0..1 relative to this query's best/worst hit — drives the match badges.
+  // (Raw CLIP cosines are query-dependent, so relative is what's meaningful.)
   let mx = -Infinity, mn = Infinity;
   for (const s of scores.values()) { if (s > mx) mx = s; if (s < mn) mn = s; }
   const span = (mx - mn) || 1;
   const norm = new Map();
   for (const [p, s] of scores) norm.set(p, (s - mn) / span);
   state.smartNorm = norm;
+  // "Top matches" = statistically-above-the-crowd for THIS query (mean + 0.85σ), instead of a
+  // fixed fraction of the score range — adapts to how peaky or flat the match distribution is.
+  // Floor of 3 so a search never comes back empty; cap of 50% so a vague query isn't "all top".
+  const vals = [...scores.values()];
+  const mean = vals.reduce((a, b) => a + b, 0) / (vals.length || 1);
+  const sd = Math.sqrt(vals.reduce((a, b) => a + (b - mean) * (b - mean), 0) / (vals.length || 1));
+  const cut = mean + 0.85 * sd;
+  const ranked = [...scores.entries()].sort((a, b) => b[1] - a[1]);
+  let top = ranked.filter(([, s]) => s >= cut);
+  const floorN = Math.min(3, ranked.length), capN = Math.max(floorN, Math.floor(ranked.length * 0.5));
+  if (top.length < floorN) top = ranked.slice(0, floorN);
+  if (top.length > capN) top = ranked.slice(0, capN);
+  state.smartTop = new Set(top.map(([p]) => p));
   renderGrid();
 }
-const SMART_TOP = 0.6;   // "Top matches" = within the top 40% of this query's score range
 
 function classifyCategory(preds) {
   const combined = preds.map(p => p.className.toLowerCase()).join(' ');

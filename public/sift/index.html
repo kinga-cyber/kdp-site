@@ -1117,6 +1117,16 @@ kbd {
 .insp-tag.removable:hover .rm { opacity: 1; }
 .insp-tag.clear-all { cursor: pointer; border-style: dashed; color: var(--text-muted); }
 .insp-tag.clear-all:hover { color: var(--danger); border-color: var(--danger); }
+/* User-defined tags: distinct from AI tags (accent-tinted, not green) */
+.insp-tag.user { border-color: rgba(96,165,250,0.45); color: #93c5fd; background: rgba(96,165,250,0.08); cursor: pointer; transition: all 0.12s; }
+.insp-tag.user:hover { border-color: var(--danger); color: var(--danger); background: rgba(248,113,113,0.08); }
+.insp-tag.user .rm { opacity: 0.45; font-size: 0.58rem; }
+.insp-tag.user:hover .rm { opacity: 1; }
+.insp-label-input { width: 100%; margin-top: 0.45rem; padding: 0.4rem 0.55rem; font-size: 0.74rem; color: var(--text);
+  background: var(--bg); border: 1px solid var(--border); border-radius: 6px; outline: none; transition: border-color 0.12s; }
+.insp-label-input:focus { border-color: rgba(96,165,250,0.6); }
+.insp-label-input::placeholder { color: var(--text-muted); }
+.card .tag.tag-user { border-color: rgba(96,165,250,0.5); color: #bfdbfe; background: rgba(96,165,250,0.16); }
 .chip.chip-danger { color: var(--text-muted); border-style: dashed; }
 .chip.chip-danger:hover { color: var(--danger); border-color: var(--danger); background: rgba(248,113,113,0.08); }
 </style>
@@ -1182,6 +1192,7 @@ kbd {
           <option value="none">None</option>
           <option value="folder">Folder</option>
           <option value="category">AI category</option>
+          <option value="label">Your tags</option>
           <option value="color">Colour</option>
           <option value="cluster">Near-dup cluster</option>
           <option value="type">File type</option>
@@ -1293,6 +1304,13 @@ kbd {
           <div class="insp-block-title">AI Tags</div>
           <div class="insp-tags" id="inspTags"><span style="color:var(--text-muted);font-size:0.74rem;">Not tagged yet</span></div>
         </div>
+        <div class="insp-block">
+          <div class="insp-block-title">Your tags</div>
+          <div class="insp-tags" id="inspLabels"></div>
+          <input type="text" id="inspLabelInput" class="insp-label-input" placeholder="Add your own tag, press Enter"
+                 onkeydown="if(event.key==='Enter'){event.preventDefault();addLabelFromInput();}"
+                 title="Type any tag you like (e.g. Hero, Approved, Reshoot, Q3 campaign) and press Enter. Your tags become filter and group options, so you can sort the whole library your way.">
+        </div>
         <div class="insp-block" id="inspCullBlock" style="display:none;">
           <div class="insp-block-title">Best shots</div>
           <div class="insp-cull" id="inspCull"></div>
@@ -1373,6 +1391,7 @@ const state = {
   search: '',
   minStars: 0,             // rating filter: show only images rated ≥ this (0 = off)
   activeCategory: null,    // AI category filter
+  activeLabel: null,       // custom user-tag filter
   activeColor: null,       // colour filter (palette key)
   activeType: null,        // file-type filter (extension, e.g. 'jpg'/'tif'/'psd'/'mp4')
   smart: false,            // semantic-search mode (CLIP)
@@ -1384,7 +1403,7 @@ const state = {
   embeddings: new Map(),   // path -> Float32Array (CLIP image embeddings for this folder)
   selectedPath: null,
   model: null,
-  meta: {},                // persisted per-file: {rating, note, tags, category}
+  meta: {},                // persisted per-file: {rating, note, tags, category, labels}
   viewList: [],            // currently rendered file entries (for lightbox nav)
   cancel: false,
   source: 'fs',            // 'fs' (File System Access) | 'drive' (Google Drive API)
@@ -1749,6 +1768,7 @@ async function openLocalHandle(handle) {
 
   state.currentPath = '';
   state.activeCategory = null;
+  state.activeLabel = null;
   state.activeType = null;
   state.includeSubfolders = state.files.length > 0 && (rootNode.dirs.length > 0);
   $('subCheck').textContent = state.includeSubfolders ? '☑' : '☐';
@@ -2313,6 +2333,7 @@ async function loadDriveRoot(rootId, rootName, opts) {
 function finalizeDriveUI(rootName, info) {
   state.currentPath = '';
   state.activeCategory = null;
+  state.activeLabel = null;
   state.activeType = null;
   state.includeSubfolders = state.files.length > 0 && state.tree.dirs.length > 0;
   $('subCheck').textContent = state.includeSubfolders ? '☑' : '☐';
@@ -2955,6 +2976,7 @@ function buildTreeNode(node, depth) {
 function selectFolder(path) {
   state.currentPath = path;
   state.activeCategory = null;
+  state.activeLabel = null;
   state.activeType = null;
   // auto-expand the chain of ancestor folders so the selection is visible in the tree
   let p = state.nodesByPath.get(path);
@@ -2995,6 +3017,7 @@ function filesForView() {
   if (state.search) list = list.filter(f => f.name.toLowerCase().includes(state.search));
   if (state.minStars) list = list.filter(f => (getMeta(f.path).rating || 0) >= state.minStars);
   if (state.activeCategory) list = list.filter(f => getMeta(f.path).category === state.activeCategory);
+  if (state.activeLabel) list = list.filter(f => (getMeta(f.path).labels || []).includes(state.activeLabel));
   if (state.activeColor) list = list.filter(f => getColors(f.path).includes(state.activeColor));
   if (state.activeType) list = list.filter(f => f.ext === state.activeType);
   if (state.selectedOnly) list = list.filter(f => state.checked.has(f.path));             // review picks
@@ -3047,7 +3070,7 @@ function renderGrid() {
 
   if (!list.length) {
     content.innerHTML = `<div class="empty-state"><div class="icon">📂</div><p>${
-      state.search || state.activeCategory || state.activeColor || state.activeType || state.minStars || state.bestOnly || state.selectedOnly || (state.smart && state.smartNorm && !state.smartAll)
+      state.search || state.activeCategory || state.activeLabel || state.activeColor || state.activeType || state.minStars || state.bestOnly || state.selectedOnly || (state.smart && state.smartNorm && !state.smartAll)
         ? 'No images match the current filters.'
         : 'No images in this folder.' + (state.nodesByPath.get(state.currentPath)?.dirs.length ? ' Try “Include subfolders”.' : '')
     }</p></div>`;
@@ -3079,6 +3102,20 @@ function groupFiles(list, mode) {
   const map = new Map();
   for (const f of list) {
     let key, title, badge = '';
+    if (mode === 'label') {
+      // an image can carry several of your tags, so it appears under each one
+      const ls = getMeta(f.path).labels || [];
+      if (!ls.length) {
+        if (!map.has('untagged')) map.set('untagged', { key: 'untagged', title: 'Untagged', badge: '', items: [] });
+        map.get('untagged').items.push(f);
+      } else {
+        ls.forEach(l => {
+          if (!map.has(l)) map.set(l, { key: l, title: l, badge: 'TAG', items: [] });
+          map.get(l).items.push(f);
+        });
+      }
+      continue;
+    }
     if (mode === 'folder') { key = f.dir; title = f.dir === '' ? state.rootName : f.dir; }
     else if (mode === 'category') { key = getMeta(f.path).category || 'untagged'; title = key === 'untagged' ? 'Untagged' : (CATEGORIES[key]?.label || cap(key)); badge = 'AI'; }
     else if (mode === 'color') { key = getColors(f.path)[0] || 'untagged'; title = key === 'untagged' ? 'No colour' : colorLabel(key); badge = 'COLOUR'; }
@@ -3109,6 +3146,10 @@ function groupFiles(list, mode) {
       ((cullInfo(b.path).isKeeper ? 1 : 0) - (cullInfo(a.path).isKeeper ? 1 : 0)) ||
       ((qualityOf(b.path) ?? -1) - (qualityOf(a.path) ?? -1))));
     groups.sort((a, b) => (a.key === 'solo' ? 1 : 0) - (b.key === 'solo' ? 1 : 0) || b.items.length - a.items.length);
+  } else if (mode === 'label') {
+    groups.sort((a, b) =>
+      (a.key === 'untagged' ? 1 : 0) - (b.key === 'untagged' ? 1 : 0) ||
+      a.title.localeCompare(b.title, undefined, { numeric: true }));
   } else {
     groups.sort((a, b) => a.title.localeCompare(b.title, undefined, { numeric: true }));
   }
@@ -3120,6 +3161,7 @@ function cardHTML(f) {
   const sel = state.selectedPath === f.path ? 'selected' : '';
   const chk = state.checked.has(f.path) ? 'checked' : '';
   const starred = (m.rating || 0) > 0;
+  const labels = (m.labels || []);
   const tags = (m.tags || []).slice(0, 2);
   const c = cullInfo(f.path);
   const q = qualityOf(f.path);
@@ -3138,7 +3180,7 @@ function cardHTML(f) {
     ${(() => { const s = state.smart && state.smartNorm ? state.smartNorm.get(f.path) : null; if (s == null) return ''; const pct = Math.round(s * 100); return `<span class="match-badge ${pct >= 85 ? 'strong' : ''}" title="AI match strength for the current search (relative to the best hit)"><span class="mtrack"><span class="mfill" style="width:${pct}%"></span></span>${pct}%</span>`; })()}
     ${isKeeper ? `<span class="best-badge" title="Best shot in its group">★ BEST</span>` : ''}
     ${isDup ? `<span class="promote-badge" title="Make this the keeper" onclick="event.stopPropagation();promoteKeeper('${jsStr(f.path)}')">▲ keep</span>` : ''}
-    ${tags.length ? `<div class="tags-line">${tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>` : ''}
+    ${labels.length || tags.length ? `<div class="tags-line">${labels.slice(0, 2).map(t => `<span class="tag tag-user">${esc(t)}</span>`).join('')}${tags.slice(0, labels.length ? 1 : 2).map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>` : ''}
     <div class="caption">${getColors(f.path).map(k => `<span class="swatch" style="background:${colorHex(k)}" title="${esc(colorLabel(k))}"></span>`).join('')}${esc(f.name)}</div>
   </div>`;
 }
@@ -3296,13 +3338,15 @@ function renderFilterChips() {
   } else {
     scope = state.files.filter(f => f.dir === state.currentPath);
   }
-  const counts = {}, colorCounts = {}, typeCounts = {};
+  const counts = {}, colorCounts = {}, typeCounts = {}, labelCounts = {};
   scope.forEach(f => {
     const m = getMeta(f.path);
     if (m.category) counts[m.category] = (counts[m.category] || 0) + 1;
+    (m.labels || []).forEach(l => { labelCounts[l] = (labelCounts[l] || 0) + 1; });
     getColors(f.path).forEach(c => { colorCounts[c] = (colorCounts[c] || 0) + 1; });
     if (f.ext) typeCounts[f.ext] = (typeCounts[f.ext] || 0) + 1;
   });
+  const labels = Object.keys(labelCounts).sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
 
   const cats = Object.keys(counts).sort((a, b) => {
     const ia = CAT_ORDER.indexOf(a); const ib = CAT_ORDER.indexOf(b);
@@ -3316,7 +3360,7 @@ function renderFilterChips() {
   const showTypes = types.length >= 2;   // only worth a filter when the folder mixes types
 
   const smartActive = state.smart && state.smartNorm;
-  if (cats.length === 0 && cols.length === 0 && !showTypes && !smartActive) { row.classList.add('hidden'); return; }
+  if (cats.length === 0 && labels.length === 0 && cols.length === 0 && !showTypes && !smartActive) { row.classList.add('hidden'); return; }
   row.classList.remove('hidden');
   let html = '', prev = false;
   const divider = () => prev ? `<span class="divider" style="width:1px;height:20px;background:var(--border);margin:0 0.3rem;"></span>` : '';
@@ -3347,6 +3391,15 @@ function renderFilterChips() {
       html += `<span class="chip ${state.activeCategory === c ? 'active' : ''}" onclick="setCategory('${jsStr(c)}')">${esc(lbl)} <span class="chip-count">${counts[c]}</span></span>`;
     });
     html += `<span class="chip chip-danger" onclick="clearTagsInView()" title="Remove AI tags & categories from every image in this view">✕ Clear AI tags</span>`;
+    prev = true;
+  }
+  if (labels.length) {
+    html += divider();
+    html += `<span class="filter-label">Your tags</span>`;
+    html += `<span class="chip ${!state.activeLabel ? 'active' : ''}" onclick="setLabelFilter(null)">All <span class="chip-count">${scope.length}</span></span>`;
+    labels.forEach(l => {
+      html += `<span class="chip label-chip ${state.activeLabel === l ? 'active' : ''}" onclick="setLabelFilter('${jsStr(l)}')">${esc(l)} <span class="chip-count">${labelCounts[l]}</span></span>`;
+    });
     prev = true;
   }
   if (cols.length) {
@@ -3466,6 +3519,8 @@ async function renderInspector(path) {
 
   // tags (click any to remove)
   renderInspTags(path);
+  renderInspLabels(path);
+  { const li = $('inspLabelInput'); if (li) li.value = ''; }
 
   // colour
   renderInspColor(path);
@@ -3532,6 +3587,39 @@ function clearTags(path) {
   renderInspTags(path);
   renderGrid();
 }
+// ── Your tags: user-defined labels you type yourself (survive AI clears) ──
+function renderInspLabels(path) {
+  const el = $('inspLabels'); if (!el) return;
+  const labels = getMeta(path).labels || [];
+  if (!labels.length) {
+    el.innerHTML = `<span style="color:var(--text-muted);font-size:0.72rem;">No tags yet. Add your own below to sort your way.</span>`;
+    return;
+  }
+  el.innerHTML = `<div style="font-size:0.66rem;color:var(--text-muted);margin-bottom:0.4rem;width:100%;">Click a tag to remove it.</div>` +
+    labels.map(t => `<span class="insp-tag user" onclick="removeLabel('${jsStr(path)}', '${jsStr(t)}')" title="Remove this tag">${esc(t)} <span class="rm">✕</span></span>`).join('');
+}
+function addLabelFromInput() {
+  const path = state.selectedPath; if (!path) return;
+  const input = $('inspLabelInput'); if (!input) return;
+  const raw = input.value.trim();
+  if (!raw) return;
+  // allow comma-separated entry in one go
+  const incoming = raw.split(',').map(s => s.trim()).filter(Boolean);
+  const cur = getMeta(path).labels || [];
+  const merged = [...cur];
+  incoming.forEach(t => { if (!merged.some(x => x.toLowerCase() === t.toLowerCase())) merged.push(t); });
+  setMeta(path, { labels: merged });
+  input.value = '';
+  renderInspLabels(path);
+  renderGrid();
+}
+function removeLabel(path, label) {
+  const cur = getMeta(path).labels || [];
+  setMeta(path, { labels: cur.filter(t => t !== label) });
+  renderInspLabels(path);
+  renderGrid();
+}
+function setLabelFilter(l) { state.activeLabel = l; renderGrid(); }
 // Bulk: wipe AI tags + categories from every image in the current folder view.
 function clearTagsInView() {
   let scope;
@@ -3547,6 +3635,7 @@ function clearTagsInView() {
   tagged.forEach(f => setMeta(f.path, { tags: [], category: undefined }, true));
   persistMeta();
   state.activeCategory = null;
+  state.activeLabel = null;
   state.activeType = null;
   if (state.selectedPath) renderInspTags(state.selectedPath);
   renderGrid();
@@ -3661,13 +3750,14 @@ function exportPickedCsv() {
   const picked = pickedFiles();
   if (!picked.length) { showToast('Nothing selected yet', 'error'); return; }
   const q = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
-  const rows = [['Name', 'Folder', 'Type', 'Size (bytes)', 'Rating', 'Colours', 'Category', 'AI tags', 'Quality', 'Note', 'Alt text', 'Description', 'Caption'].map(q).join(',')];
+  const rows = [['Name', 'Folder', 'Type', 'Size (bytes)', 'Rating', 'Colours', 'Category', 'Your tags', 'AI tags', 'Quality', 'Note', 'Alt text', 'Description', 'Caption'].map(q).join(',')];
   for (const f of picked) {
     const m = getMeta(f.path);
     rows.push([
       f.name, f.dir || state.rootName, f.ext, f.size || '',
       m.rating || '', getColors(f.path).map(colorLabel).join('; '),
       m.category ? (CATEGORIES[m.category]?.label || m.category) : '',
+      (m.labels || []).join('; '),
       (m.tags || []).join('; '),
       qualityOf(f.path) != null ? qualityOf(f.path).toFixed(2) : '',
       m.note || '',
@@ -4550,6 +4640,7 @@ function toggleSubfolders() {
   $('subCheck').textContent = state.includeSubfolders ? '☑' : '☐';
   $('subfoldersPill').classList.toggle('on', state.includeSubfolders);
   state.activeCategory = null;
+  state.activeLabel = null;
   state.activeType = null;
   state.activeColor = null;
   renderGrid();

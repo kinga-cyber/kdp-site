@@ -1516,6 +1516,7 @@ document.addEventListener('click', e => {
 syncThemeButton();    // reflect the saved theme on the header toggle
 setupInspectorResizer(); // drag the divider to resize the inspector + preview
 setupPreviewResizer();   // drag the handle under the image to resize the preview height
+autoResumeLastFolder();  // reload lands back in the open folder, not the welcome screen
 $('sortColorSelect').innerHTML = '<option value="">Rainbow order</option>' +
   COLOR_PALETTE.map(c => `<option value="${c.key}">${esc(c.label)} first</option>`).join('');
 renderStarFilter();   // build the toolbar rating-filter stars
@@ -2094,8 +2095,34 @@ async function recentsAdd(entry) {
     entry.lastOpened = Date.now();
     const next = [entry, ...kept].slice(0, RECENTS_MAX);
     await cacheSet(RECENTS_KEY, next);
+    // Remember what's open so a reload resumes here instead of the welcome screen.
+    try { localStorage.setItem('photoOrganizer:lastOpen', JSON.stringify({ kind: entry.kind, name: entry.name, rootId: entry.rootId || null })); } catch (e) {}
     renderRecents();
   } catch (e) { /* recents are best-effort */ }
+}
+
+// On page load, silently reopen the folder that was open before the reload. No clicks and
+// no popups: a local folder resumes only if Chrome still grants access without asking, and
+// Drive resumes only while the saved session token is fresh. Anything else falls back to
+// the welcome screen (where the same folder is one click away in "Jump back in").
+async function autoResumeLastFolder() {
+  try {
+    if (state.tree) return;   // something is already open
+    const last = JSON.parse(localStorage.getItem('photoOrganizer:lastOpen') || 'null');
+    if (!last) return;
+    const list = (await cacheGet(RECENTS_KEY)) || [];
+    const e = list.find(r => r.kind === last.kind && (r.kind === 'drive' ? r.rootId === last.rootId : r.name === last.name));
+    if (!e || state.tree) return;
+    if (e.kind === 'drive') {
+      if (!(drive.accessToken && Date.now() < drive.tokenExpiry - 60000)) return;  // no silent token — don't pop a login
+      reopenDriveById(e.rootId, e.name);
+    } else {
+      const h = e.handle;
+      if (!h) return;
+      if ((await h.queryPermission({ mode: 'read' })) !== 'granted') return;       // would need a user gesture
+      await openLocalHandle(h);
+    }
+  } catch (err) { /* resume is best-effort — the welcome screen is the fallback */ }
 }
 
 async function recentsRemove(idx, ev) {
@@ -3134,6 +3161,18 @@ function attachLazyLoading() {
   document.querySelectorAll('.thumb-wrap[data-lazy]').forEach(w => io.observe(w));
 }
 
+// Drive thumbnail URLs expire after a few hours — a cached scan can hold dead links.
+// When one fails, fetch a fresh link (one lightweight metadata call), update the file
+// in place (grid, lightbox, and inspector all benefit), and let the caller retry once.
+async function freshThumbnailLink(f) {
+  if (state.source !== 'drive' || !f.driveId || !drive.accessToken) return null;
+  try {
+    const d = await driveApi(`files/${f.driveId}?fields=thumbnailLink&supportsAllDrives=true`);
+    if (d && d.thumbnailLink) { f.thumbnailLink = d.thumbnailLink; return d.thumbnailLink; }
+  } catch (e) {}
+  return null;
+}
+
 async function loadThumb(f, wrap) {
   try {
     // ── Google Drive source ──
@@ -3144,7 +3183,14 @@ async function loadThumb(f, wrap) {
           const img = document.createElement('img');
           img.loading = 'lazy';
           img.referrerPolicy = 'no-referrer';
-          img.onerror = () => { img.onerror = null; wrap.innerHTML = '<span class="placeholder">🎬</span>'; };
+          img.onerror = async () => {
+            img.onerror = null;
+            const fresh = await freshThumbnailLink(f);   // expired link? retry once with a new one
+            if (fresh) {
+              img.onerror = () => { img.onerror = null; wrap.innerHTML = '<span class="placeholder">🎬</span>'; };
+              img.src = fresh.replace(/=s\d+(-[a-z]+)?$/, '=s400');
+            } else wrap.innerHTML = '<span class="placeholder">🎬</span>';
+          };
           img.src = f.thumbnailLink.replace(/=s\d+(-[a-z]+)?$/, '=s400');
           wrap.innerHTML = ''; wrap.appendChild(img);
           wrap.insertAdjacentHTML('beforeend', '<span class="play-badge">▶</span>');
@@ -3158,17 +3204,23 @@ async function loadThumb(f, wrap) {
         const img = document.createElement('img');
         img.loading = 'lazy';
         img.referrerPolicy = 'no-referrer';
-        let triedFallback = false;            // onerror acts at most once — no reliance on same-src being a no-op
-        img.onerror = async () => {
-          if (triedFallback) return;
-          triedFallback = true;
-          img.onerror = null;                 // detach before any further src change
-          // Server thumbnail failed. Only the server thumbnail can show raw/psd/pdf — never feed
-          // their undecodable bytes into an <img> (that was the flicker loop).
+        let triedFallback = false;            // the recovery chain runs at most once
+        // Last resort: download the bytes ourselves (only for formats the browser can decode).
+        const blobFallback = async () => {
+          img.onerror = null;
           if (!imgDecodable(f)) { wrap.innerHTML = `<span class="placeholder">${f.kind === 'raw' ? '🖼️' : '🚫'}</span>`; return; }
           const url = await ensureBlobUrl(f);
           if (url) { img.onerror = () => { img.onerror = null; wrap.innerHTML = '<span class="placeholder">🚫</span>'; }; img.src = url; }
           else wrap.innerHTML = '<span class="placeholder">🚫</span>';
+        };
+        img.onerror = async () => {
+          if (triedFallback) return;
+          triedFallback = true;
+          img.onerror = null;                 // detach before any further src change
+          // Expired Drive link? Try a fresh one before the heavier blob download.
+          const fresh = await freshThumbnailLink(f);
+          if (fresh) { img.onerror = blobFallback; img.src = fresh.replace(/=s\d+(-[a-z]+)?$/, '=s400'); return; }
+          await blobFallback();
         };
         img.src = f.thumbnailLink.replace(/=s\d+(-[a-z]+)?$/, '=s400');
         wrap.innerHTML = ''; wrap.appendChild(img);

@@ -897,6 +897,37 @@ button {
 }
 .modal input[type=text]:focus { border-color: var(--accent); }
 .modal-actions { display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1.3rem; }
+/* Brand-profile manager */
+.modal:has(.bp-form) { width: 680px; }
+.modal textarea {
+  width: 100%;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.55rem 0.7rem;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  outline: none;
+  resize: vertical;
+  min-height: 58px;
+}
+.modal textarea:focus { border-color: var(--accent); }
+.modal select.bp-select {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.5rem 0.6rem;
+  color: var(--text);
+  font-size: 0.8rem;
+  outline: none;
+}
+.bp-row { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 1.1rem; flex-wrap: wrap; }
+.bp-row .grow { flex: 1; }
+.bp-form .field { margin-bottom: 0.85rem; }
+.bp-form .hint { font-size: 0.68rem; color: var(--text-muted); margin-top: 0.25rem; line-height: 1.5; }
+.bp-assign { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.7rem 0.8rem; margin-top: 1rem; }
 .folder-pick-list { display: flex; flex-direction: column; gap: 0.2rem; margin: 0.3rem 0 0.5rem; max-height: 50vh; overflow-y: auto; padding-right: 0.2rem; }
 .folder-pick {
   display: flex; align-items: center; gap: 0.5rem;
@@ -1098,6 +1129,7 @@ kbd {
     <button class="btn-secondary" id="reopenBtn" style="display:none;" onclick="reopenSource()">Change Folder</button>
     <button class="btn-ghost" id="shortcutsBtn" onclick="openShortcuts()" title="Keyboard shortcuts (press ?)">⌘</button>
     <button class="btn-ghost" id="themeToggle" onclick="toggleTheme()" title="Toggle light / dark theme">🌙</button>
+    <button class="btn-ghost" id="brandBtn" onclick="openBrandProfiles()" title="Brand profiles — the business context Claude uses when writing copy for your images">💼</button>
     <button class="btn-ghost" id="driveSettingsBtn" onclick="openDriveSetupModal(location.protocol==='file:')" title="Change / re-enter Google Drive Client ID">⚙</button>
     <button class="btn-secondary" id="driveBtn" onclick="connectDrive()">☁️ Google Drive</button>
     <button class="btn-primary" id="openBtn" onclick="openFolder()">📂 Open Folder</button>
@@ -2497,6 +2529,147 @@ function imgDecodable(f) { return f.kind === 'image' && RENDERABLE.includes(f.ex
 // ── Modal plumbing ──
 function modal(html) { $('modalRoot').innerHTML = `<div class="modal-backdrop" onclick="if(event.target===this)closeModal()"><div class="modal">${html}</div></div>`; }
 function closeModal() { $('modalRoot').innerHTML = ''; }
+
+// ════════════════════════════════════════════════════════
+//  Brand profiles — per-client business context for Claude features.
+//  A profile is the difference between "a pink garment" and
+//  "The Willow Romper in Dusty Pink". One profile = a brand;
+//  agencies keep one per client and assign them per folder.
+// ════════════════════════════════════════════════════════
+const BP_KEY = 'photoOrganizer:brandProfiles';
+const BP_FIELDS = [
+  ['about',      'About the brand',       'What they sell and who buys it.\ne.g. "Willow & Co makes linen childrenswear for eco-conscious parents. Sold DTC via Shopify."'],
+  ['voice',      'Voice & tone',          'How the copy should sound, plus 1–2 example sentences you love from their site.'],
+  ['vocabulary', 'Vocabulary',            'Their words: product terms, materials, and colour names (e.g. Dusty Pink, Aegean Teal, Pistachio).'],
+  ['rules',      'Rules & keywords',      'SEO keywords to include, banned words, length limits, formatting rules (e.g. no em dashes).'],
+  ['products',   'Product list (optional)', 'Paste product/SKU names so Claude matches images to real product names instead of guessing.'],
+];
+function loadBP() {
+  try {
+    const bp = JSON.parse(localStorage.getItem(BP_KEY) || 'null');
+    if (bp && Array.isArray(bp.profiles) && bp.assignments) return bp;
+  } catch (e) {}
+  return { profiles: [], assignments: {} };
+}
+function saveBP(bp) { try { localStorage.setItem(BP_KEY, JSON.stringify(bp)); } catch (e) { showToast('Could not save brand profiles', 'error'); } }
+// The profile in effect for the open folder: explicit assignment wins; a lone profile is the default.
+function activeBrandProfile() {
+  const bp = loadBP();
+  const assigned = bp.profiles.find(p => p.id === bp.assignments[state.rootName]);
+  if (assigned) return assigned;
+  if (bp.profiles.length === 1) return bp.profiles[0];
+  return null;
+}
+
+let bpEditingId = null;   // profile currently in the editor
+function openBrandProfiles(selectId) {
+  const bp = loadBP();
+  bpEditingId = selectId || (activeBrandProfile() || bp.profiles[0] || {}).id || null;
+  const p = bp.profiles.find(x => x.id === bpEditingId) || null;
+  const options = bp.profiles.map(x =>
+    `<option value="${esc(x.id)}" ${x.id === bpEditingId ? 'selected' : ''}>${esc(x.name || 'Untitled')}</option>`).join('');
+  const assignedId = bp.assignments[state.rootName] || '';
+  modal(`
+    <h2>💼 Brand profiles</h2>
+    <div class="sub">The business context Claude writes with — brand, voice, vocabulary, rules.
+    One profile if you're a brand; one per client if you're an agency. Stored only in this browser.</div>
+    <div class="bp-form">
+      <div class="bp-row">
+        <select class="bp-select grow" id="bpSelect" onchange="openBrandProfiles(this.value)" ${bp.profiles.length ? '' : 'disabled'}>
+          ${options || '<option>No profiles yet</option>'}
+        </select>
+        <button class="btn-secondary" onclick="bpNew()">＋ New</button>
+        ${p ? `<button class="btn-secondary" onclick="bpDelete()" title="Delete this profile">🗑</button>` : ''}
+      </div>
+      ${p ? `
+      <div class="field">
+        <label>Profile name</label>
+        <input type="text" id="bp_name" value="${esc(p.name || '')}" placeholder="Client or brand name">
+      </div>
+      ${BP_FIELDS.map(([key, label, hint]) => `
+      <div class="field">
+        <label>${esc(label)}</label>
+        <textarea id="bp_${key}" rows="3" placeholder="${esc(hint)}">${esc(p[key] || '')}</textarea>
+      </div>`).join('')}
+      ${state.rootName ? `
+      <div class="bp-assign">
+        <label>Profile for the open folder — <strong>${esc(state.rootName)}</strong></label>
+        <select class="bp-select" id="bpAssign" onchange="bpAssignFolder(this.value)">
+          <option value="">Auto (single profile or none)</option>
+          ${bp.profiles.map(x => `<option value="${esc(x.id)}" ${x.id === assignedId ? 'selected' : ''}>${esc(x.name || 'Untitled')}</option>`).join('')}
+        </select>
+        <div class="hint">Agencies: assign each client folder its profile — it switches automatically when you open that folder.</div>
+      </div>` : ''}
+      ` : `<div class="sub">Create your first profile to give Claude real business context — it takes two minutes and makes every generated word sound like the brand.</div>`}
+    </div>
+    <div class="modal-actions">
+      ${p ? `<button class="btn-ghost" onclick="bpExport()" title="Download this profile as a JSON file">⬇ Export</button>` : ''}
+      <button class="btn-ghost" onclick="bpImportPick()" title="Import a profile JSON file">⬆ Import</button>
+      <span style="flex:1"></span>
+      <button class="btn-secondary" onclick="closeModal()">Close</button>
+      ${p ? `<button class="btn-primary" onclick="bpSave()">Save</button>` : ''}
+    </div>
+    <input type="file" id="bpImportFile" accept=".json" style="display:none" onchange="bpImport(this.files[0])">
+  `);
+}
+function bpCollect() {
+  const p = { id: bpEditingId, name: ($('bp_name').value || '').trim() || 'Untitled' };
+  for (const [key] of BP_FIELDS) p[key] = ($('bp_' + key).value || '').trim();
+  return p;
+}
+function bpSave() {
+  const bp = loadBP();
+  const i = bp.profiles.findIndex(x => x.id === bpEditingId);
+  if (i === -1) return;
+  bp.profiles[i] = bpCollect();
+  saveBP(bp);
+  showToast(`Saved profile "${bp.profiles[i].name}"`, 'success');
+  openBrandProfiles(bpEditingId);   // re-render (updates names in the pickers)
+}
+function bpNew() {
+  const bp = loadBP();
+  const p = { id: 'bp_' + Date.now().toString(36), name: '', about: '', voice: '', vocabulary: '', rules: '', products: '' };
+  bp.profiles.push(p);
+  saveBP(bp);
+  openBrandProfiles(p.id);
+}
+function bpDelete() {
+  const bp = loadBP();
+  const p = bp.profiles.find(x => x.id === bpEditingId);
+  if (!p) return;
+  bp.profiles = bp.profiles.filter(x => x.id !== bpEditingId);
+  for (const k of Object.keys(bp.assignments)) if (bp.assignments[k] === bpEditingId) delete bp.assignments[k];
+  saveBP(bp);
+  showToast(`Deleted "${p.name || 'Untitled'}"`, 'success');
+  openBrandProfiles();
+}
+function bpAssignFolder(id) {
+  const bp = loadBP();
+  if (id) bp.assignments[state.rootName] = id; else delete bp.assignments[state.rootName];
+  saveBP(bp);
+  showToast(id ? 'Profile assigned to this folder' : 'Folder set to automatic', 'success');
+}
+function bpExport() {
+  const bp = loadBP();
+  const p = bp.profiles.find(x => x.id === bpEditingId);
+  if (!p) return;
+  saveBlob(new Blob([JSON.stringify(p, null, 2)], { type: 'application/json' }),
+    (p.name || 'brand-profile').replace(/[^\w.-]+/g, '_') + '.sift-brand.json');
+}
+function bpImportPick() { $('bpImportFile').click(); }
+async function bpImport(file) {
+  if (!file) return;
+  try {
+    const p = JSON.parse(await file.text());
+    if (!p || typeof p !== 'object' || !('name' in p)) throw new Error('not a profile file');
+    const bp = loadBP();
+    p.id = 'bp_' + Date.now().toString(36);   // never collide with an existing profile
+    bp.profiles.push(p);
+    saveBP(bp);
+    showToast(`Imported "${p.name || 'Untitled'}"`, 'success');
+    openBrandProfiles(p.id);
+  } catch (e) { showToast('Could not import: ' + e.message, 'error'); }
+}
 
 // ════════════════════════════════════════════════════════
 //  Folder tree rendering

@@ -2434,6 +2434,7 @@ function openDriveSetupModal(fileProtocol) {
     </ol>
     <label>Google OAuth Client ID</label>
     <input type="text" id="clientIdInput" placeholder="1234567890-abc….apps.googleusercontent.com" value="${esc(drive.clientId)}">
+    <div class="hint" style="font-size:0.68rem;color:var(--text-muted);margin-top:0.3rem;">This is a public identifier, safe to paste and share. It is not a password, and it only works from <strong>kingadow.com</strong>.</div>
     <div class="modal-actions">
       <button class="btn-ghost" onclick="closeModal()">Cancel</button>
       <button class="btn-primary" onclick="saveClientId()">Save &amp; connect</button>

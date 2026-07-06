@@ -888,7 +888,8 @@ a.btn-ghost { display: inline-flex; align-items: center; text-decoration: none; 
 }
 .modal a { color: var(--blue); }
 .modal label { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 0.4rem; }
-.modal input[type=text] {
+.modal input[type=text],
+.modal input[type=password] {
   width: 100%;
   background: var(--surface-2);
   border: 1px solid var(--border);
@@ -899,7 +900,17 @@ a.btn-ghost { display: inline-flex; align-items: center; text-decoration: none; 
   font-size: 0.76rem;
   outline: none;
 }
-.modal input[type=text]:focus { border-color: var(--accent); }
+.modal input[type=text]:focus,
+.modal input[type=password]:focus { border-color: var(--accent); }
+/* API key field with a show / hide toggle */
+.key-wrap { position: relative; }
+.key-wrap input { padding-right: 2.4rem !important; }
+.key-eye {
+  position: absolute; top: 50%; right: 0.35rem; transform: translateY(-50%);
+  background: transparent; border: none; padding: 0.25rem 0.4rem; cursor: pointer;
+  font-size: 0.9rem; line-height: 1; opacity: 0.6; border-radius: 6px;
+}
+.key-eye:hover { opacity: 1; background: var(--surface-3); }
 .modal-actions { display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1.3rem; }
 /* Brand-profile manager */
 .modal:has(.bp-form) { width: 680px; }
@@ -2762,6 +2773,14 @@ const AC_SCHEMA = {
 };
 function getClaudeKey() { try { return localStorage.getItem(CLAUDE_KEY) || ''; } catch (e) { return ''; } }
 function setClaudeKey(k) { try { if (k) localStorage.setItem(CLAUDE_KEY, k); else localStorage.removeItem(CLAUDE_KEY); } catch (e) {} }
+// Reveal / re-mask the API key so it can be entered privately but double-checked on demand.
+function toggleKeyVisibility() {
+  const input = $('acKey'), btn = $('acKeyEye');
+  if (!input) return;
+  const show = input.type === 'password';
+  input.type = show ? 'text' : 'password';
+  if (btn) { btn.textContent = show ? '🙈' : '👁'; btn.title = show ? 'Hide the key' : 'Show / hide the key'; }
+}
 
 // One message to Claude: brand context as system, image + task as user, JSON out (schema-enforced).
 async function claudeCopyForImage(system, b64, hint) {
@@ -2859,7 +2878,10 @@ function openAskClaude() {
         <a href="#" onclick="closeModal();openBrandProfiles();return false;">Set one up in 💼 Brand profiles</a> for on-brand output.</div>`}
       <div class="field" style="margin-top:0.8rem;">
         <label>Anthropic API key ${hasKey ? '<span style="color:var(--accent);text-transform:none;letter-spacing:0;">✓ saved in this browser</span>' : ''}</label>
-        <input type="text" id="acKey" placeholder="${hasKey ? '•••••••• (leave blank to keep the saved key)' : 'sk-ant-…  — from console.anthropic.com'}" autocomplete="off">
+        <div class="key-wrap">
+          <input type="password" id="acKey" placeholder="${hasKey ? '•••••••• (leave blank to keep the saved key)' : 'sk-ant-…  — from console.anthropic.com'}" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+          <button type="button" class="key-eye" id="acKeyEye" onclick="toggleKeyVisibility()" title="Show / hide the key" aria-label="Show or hide the key">👁</button>
+        </div>
         <div class="hint" style="font-size:0.68rem;color:var(--text-muted);margin-top:0.25rem;">Stored only in this browser. Images are sent to Claude only when you click Generate.</div>
       </div>
       <div class="ac-note"><strong>${files.length}</strong> image${files.length !== 1 ? 's' : ''} ready${skipped ? ` · ${skipped} skipped (format can't be analyzed)` : ''}.</div>

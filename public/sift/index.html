@@ -1054,7 +1054,14 @@ a.btn-ghost { display: inline-flex; align-items: center; text-decoration: none; 
   .resizer { display: none !important; }
 }
 @media (max-width: 720px) {
-  .sidebar { width: 210px; min-width: 180px; }
+  /* Stack the shell so the main content gets full width instead of a crushed column */
+  .app { flex-direction: column; height: auto; min-height: calc(100vh - 54px); }
+  .sidebar {
+    width: 100%; min-width: 0; max-height: 38vh;
+    border-right: none; border-bottom: 1px solid var(--border);
+  }
+  .main { width: 100%; min-width: 0; }
+  .resizer { display: none !important; }
   .toolbar { gap: 0.4rem; }
 }
 @media (max-width: 900px) {
@@ -1273,7 +1280,7 @@ kbd {
           <strong style="color:var(--text-dim)">Using Google Drive?</strong> Install <em>Google&nbsp;Drive for Desktop</em>, let it sync, then open that folder here — every nested project folder becomes instantly browsable. Nothing is uploaded; everything stays on your machine.
         </div>
         <div class="no-fsa" id="noFsa" style="display:none;">
-          ⚠️ This browser doesn't support the File System Access API. Please use <strong>Chrome</strong>, <strong>Edge</strong>, or another Chromium browser to open folders directly.
+          ⚠️ <strong>Sift is a desktop app.</strong> To browse your folders, open it on a computer in <strong>Chrome</strong> or <strong>Edge</strong>. Phones, tablets, Safari and Firefox can't open local folders. You can still <a href="guide/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">read the guide</a> here.
         </div>
       </div>
     </div>

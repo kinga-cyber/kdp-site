@@ -1056,11 +1056,16 @@ a.btn-ghost { display: inline-flex; align-items: center; text-decoration: none; 
 @media (max-width: 720px) {
   /* Stack the shell so the main content gets full width instead of a crushed column */
   .app { flex-direction: column; height: auto; min-height: calc(100vh - 54px); }
+  /* The desktop model is a fixed-height body with panels scrolling inside it.
+     Stacked on mobile the shell grows past the screen, so let the whole PAGE
+     scroll instead — otherwise anything below the fold gets trapped. */
+  html, body { height: auto; min-height: 100%; overflow-y: auto; overflow-x: hidden; }
   .sidebar {
     width: 100%; min-width: 0; max-height: 38vh;
     border-right: none; border-bottom: 1px solid var(--border);
   }
-  .main { width: 100%; min-width: 0; }
+  .main { width: 100%; min-width: 0; overflow: visible; }
+  .content { overflow: visible; }
   .resizer { display: none !important; }
   .toolbar { gap: 0.4rem; }
 }

@@ -985,6 +985,9 @@ a.btn-ghost { display: inline-flex; align-items: center; text-decoration: none; 
 }
 .picker-search:focus { border-color: var(--accent); }
 .picker-search::placeholder { color: var(--text-muted); }
+.picker-paste { display: flex; gap: 0.4rem; align-items: stretch; }
+.picker-paste input { flex: 1; min-width: 0; }
+.picker-paste button { flex-shrink: 0; white-space: nowrap; }
 .picker-section {
   display: flex; align-items: center; gap: 0.45rem;
   padding: 0.55rem 0.2rem 0.3rem; cursor: pointer; user-select: none;
@@ -2541,6 +2544,12 @@ function showPickerModal() {
     <h2>Choose a folder to browse</h2>
     <div class="crumbs" style="margin-bottom:0.55rem;">${crumb}</div>
     <input type="text" id="pickerSearch" class="picker-search" placeholder="🔍 Filter folders by name…" oninput="filterPicker(this.value)" autocomplete="off">
+    <div class="picker-paste">
+      <input type="text" id="pickerLink" class="picker-search" style="margin-bottom:0;" placeholder="🔗 Or paste a Google Drive folder link…"
+             onkeydown="if(event.key==='Enter'){event.preventDefault();openDriveLink();}" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <button class="btn-secondary" onclick="openDriveLink()">Open link</button>
+    </div>
+    <div class="hint" style="font-size:0.66rem;color:var(--text-muted);margin:0.2rem 0 0.7rem;">Someone shared a folder by link? Paste it here to open it, even if it isn't in your Drive.</div>
     ${browseCurrent}
     <div class="folder-pick-list" id="pickerList"></div>
     <div class="modal-actions"><button class="btn-ghost" onclick="closeModal()">Cancel</button></div>
@@ -2599,6 +2608,39 @@ function buildPickerListHTML() {
 function pickDriveRoot(id, name) {
   closeModal();
   loadDriveRoot(id, name);
+}
+
+// Pull a Drive folder ID out of a pasted link (…/folders/<id>, ?id=<id>, or a bare id).
+function parseDriveFolderId(s) {
+  if (!s) return null;
+  s = s.trim();
+  let m = s.match(/\/folders\/([A-Za-z0-9_-]{10,})/) ||
+          s.match(/[?&]id=([A-Za-z0-9_-]{10,})/) ||
+          s.match(/\/d\/([A-Za-z0-9_-]{10,})/);          // /file/d/<id> just in case
+  if (m) return m[1];
+  if (/^[A-Za-z0-9_-]{10,}$/.test(s)) return s;           // bare id
+  return null;
+}
+
+// Open a folder straight from a pasted link — works for link-shared folders that
+// never appear under "Shared with me", as long as this account can view the link.
+async function openDriveLink() {
+  const raw = ($('pickerLink') && $('pickerLink').value) || '';
+  const id = parseDriveFolderId(raw);
+  if (!id) { showToast('That does not look like a Google Drive folder link', 'error'); return; }
+  showProcessing('Opening shared folder…', '', false);
+  try {
+    const meta = await driveApi(`files/${id}?fields=id,name,mimeType&supportsAllDrives=true`);
+    hideProcessing();
+    if (meta.mimeType !== FOLDER_MIME) {
+      showToast('That link points to a file, not a folder. Paste a folder link.', 'error');
+      return;
+    }
+    pickDriveRoot(meta.id, meta.name || 'Shared folder');
+  } catch (e) {
+    hideProcessing();
+    showToast('Could not open that folder. Make sure the link opens for the Google account you connected.', 'error');
+  }
 }
 
 // ── Drive byte access (used by thumbnails, preview, lightbox, AI) ──

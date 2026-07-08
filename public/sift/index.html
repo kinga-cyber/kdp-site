@@ -1257,6 +1257,7 @@ kbd {
         <button class="btn-secondary" id="refreshBtn" style="display:none;" onclick="refreshDrive()" title="Re-scan this Drive folder for new or changed photos">↻ Refresh</button>
         <button class="btn-secondary" id="tagBtn" onclick="autoTag()" title="Run on-device AI over the images currently shown. It looks at each picture and labels what's in it (people, interiors, food, product, etc.), then adds category filter chips so you can jump to a type. Runs in your browser; nothing is uploaded.">✨ Auto-tag view</button>
         <button class="btn-secondary" id="colorBtn" onclick="tagColors()" title="Match each image's garment / subject colour to your palette (Sky blue, Dusty pink, Army green, etc.), then add colour filter chips. Runs in your browser; nothing is uploaded.">🎨 Tag colours</button>
+        <button class="btn-secondary" id="nameTagBtn" onclick="tagFromFilenames()" title="Turn each image's file name into one of your own tags (e.g. birthday-01.jpg becomes the tag &quot;birthday&quot;). Strips the extension and trailing numbers, then you can filter and Group by → Your tags. Shows a preview before applying.">🏷️ Tag from names</button>
         <button class="btn-secondary" id="cullBtn" onclick="findBestShots()" title="Group near-identical photos & video clips, score each for sharpness and exposure, and pick the single best shot from each pile. Runs in your browser; nothing is uploaded.">⭐ Find best shots</button>
         <label class="toggle-pill" id="bestOnlyPill" style="display:none;" onclick="toggleBestOnly()"><span id="bestOnlyCheck">☐</span> Best only</label>
         <span id="dupThreshWrap" style="display:none;align-items:center;gap:0.4rem;font-size:0.72rem;color:var(--text-dim);" title="How similar two shots must look to be grouped as near-duplicates. Slide left to group more aggressively, right to only group nearly identical frames.">
@@ -3734,6 +3735,55 @@ function clearTagsInView() {
   renderGrid();
   updateStats();
   showToast(`Cleared AI tags from ${tagged.length} image(s)`, 'success');
+}
+
+// Derive a clean "Your tag" from a file name: drop the extension, turn - and _
+// into spaces, strip a trailing counter (birthday-01 → birthday), lowercase.
+function labelFromFilename(name) {
+  let s = String(name || '').replace(/\.[^.]+$/, '');   // drop extension
+  s = s.replace(/[\-_]+/g, ' ');                          // separators to spaces
+  s = s.replace(/\(\s*\d+\s*\)/g, ' ');                   // (1), (2)
+  s = s.replace(/\b(copy|final|edit|edited)\b/gi, ' ');   // common noise words
+  s = s.replace(/\s*\d+\s*$/, '');                        // trailing counter
+  s = s.replace(/\s+/g, ' ').trim().toLowerCase();
+  return s;
+}
+// One click: turn every file name in the current view into a custom tag.
+function tagFromFilenames() {
+  let scope;
+  if (state.includeSubfolders) {
+    const prefix = state.currentPath === '' ? '' : state.currentPath + '/';
+    scope = state.files.filter(f => state.currentPath === '' ? true : f.path.startsWith(prefix));
+  } else {
+    scope = state.files.filter(f => f.dir === state.currentPath);
+  }
+  if (!scope.length) { showToast('No images in this view', 'error'); return; }
+  // build the derived tag per file, and a preview of the distinct tags
+  const plan = [];
+  const distinct = new Map();
+  for (const f of scope) {
+    const tag = labelFromFilename(f.name);
+    if (!tag) continue;
+    plan.push({ f, tag });
+    distinct.set(tag, (distinct.get(tag) || 0) + 1);
+  }
+  if (!plan.length) { showToast('Could not read tags from these file names', 'error'); return; }
+  const tags = [...distinct.keys()].sort();
+  const preview = tags.slice(0, 12).map(t => `• ${t} (${distinct.get(t)})`).join('\n');
+  const more = tags.length > 12 ? `\n…and ${tags.length - 12} more` : '';
+  if (!confirm(`Tag ${plan.length} image(s) from their file names?\n\n${tags.length} tag(s) will be created:\n${preview}${more}\n\nThese are added as Your tags. Nothing else changes.`)) return;
+  let added = 0;
+  for (const { f, tag } of plan) {
+    const cur = getMeta(f.path).labels || [];
+    if (cur.some(x => x.toLowerCase() === tag)) continue;
+    setMeta(f.path, { labels: [...cur, tag] }, true);
+    added++;
+  }
+  persistMeta();
+  if (state.selectedPath) renderInspLabels(state.selectedPath);
+  renderGrid();
+  updateStats();
+  showToast(added ? `Tagged ${added} image(s) from file names` : 'All images already had their name tag', 'success');
 }
 
 function renderStars(path) {

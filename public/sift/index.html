@@ -1575,6 +1575,16 @@ $('searchBox').addEventListener('input', e => {
   if (state.smart) { onSmartInput(e.target.value); }
   else { state.search = e.target.value.toLowerCase().trim(); renderGrid(); }
 });
+$('searchBox').addEventListener('keydown', e => {
+  // In smart mode, Enter runs the search (and the one-time indexing) so it never fires mid-typing.
+  if (e.key === 'Enter' && state.smart) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (smartTimer) clearTimeout(smartTimer);
+    state.smartQuery = e.target.value.trim();
+    runSmartSearch();
+  }
+});
 document.addEventListener('keydown', e => {
   if ($('lightbox').classList.contains('open')) {
     if (e.key === 'ArrowRight') lbStep(1);
@@ -4530,7 +4540,7 @@ function toggleSmart() {
   state.smart = !state.smart;
   $('smartToggle').classList.toggle('on', state.smart);
   $('searchBox').classList.toggle('smart', state.smart);
-  $('searchBox').placeholder = state.smart ? '✨ Describe what you’re looking for…' : 'Search by file name…';
+  $('searchBox').placeholder = state.smart ? '✨ Describe what you’re looking for, then press Enter…' : 'Search by file name…';
   $('searchBox').value = '';
   state.search = ''; state.smartQuery = ''; state.smartScores = null;
   state.smartNorm = null; state.smartTop = null; state.smartAll = false;
@@ -4546,7 +4556,13 @@ let smartTimer = null;
 function onSmartInput(v) {
   state.smartQuery = v.trim();
   if (smartTimer) clearTimeout(smartTimer);
-  smartTimer = setTimeout(runSmartSearch, 350);
+  if (!state.smartQuery) { smartTimer = setTimeout(runSmartSearch, 50); return; }  // cleared: reset results
+  // Only live-search once this folder is already indexed — that part is cheap. The
+  // first run downloads the model and builds embeddings, which pops a blocking
+  // overlay, so it must wait for Enter and never interrupt typing.
+  if (clip.visionModel && state.embeddings.size > 0) {
+    smartTimer = setTimeout(runSmartSearch, 350);
+  }
 }
 async function runSmartSearch() {
   if (!state.smart) return;

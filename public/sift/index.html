@@ -1225,6 +1225,7 @@ kbd {
           <option value="category">AI category</option>
           <option value="label">Your tags</option>
           <option value="color">Colour</option>
+          <option value="shape">Shape</option>
           <option value="cluster">Near-dup cluster</option>
           <option value="type">File type</option>
         </select>
@@ -1239,6 +1240,7 @@ kbd {
           <option value="size">Largest</option>
           <option value="rating">Rating</option>
           <option value="color">Colour</option>
+          <option value="shape">Shape</option>
           <option value="quality">Quality</option>
         </select>
         <select class="mini-select" id="sortColorSelect" style="display:none;" onchange="setSortColor(this.value)" title="Lead with this colour, then nearest shades"></select>
@@ -1425,6 +1427,7 @@ const state = {
   minStars: 0,             // rating filter: show only images rated ≥ this (0 = off)
   activeCategory: null,    // AI category filter
   activeLabel: null,       // custom user-tag filter
+  activeShape: null,       // orientation filter: 'square' | 'horizontal' | 'vertical'
   activeColor: null,       // colour filter (palette key)
   activeType: null,        // file-type filter (extension, e.g. 'jpg'/'tif'/'psd'/'mp4')
   smart: false,            // semantic-search mode (CLIP)
@@ -1812,6 +1815,7 @@ async function openLocalHandle(handle) {
   state.currentPath = '';
   state.activeCategory = null;
   state.activeLabel = null;
+  state.activeShape = null;
   state.activeType = null;
   state.includeSubfolders = state.files.length > 0 && (rootNode.dirs.length > 0);
   $('subCheck').textContent = state.includeSubfolders ? '☑' : '☐';
@@ -2377,6 +2381,7 @@ function finalizeDriveUI(rootName, info) {
   state.currentPath = '';
   state.activeCategory = null;
   state.activeLabel = null;
+  state.activeShape = null;
   state.activeType = null;
   state.includeSubfolders = state.files.length > 0 && state.tree.dirs.length > 0;
   $('subCheck').textContent = state.includeSubfolders ? '☑' : '☐';
@@ -3071,6 +3076,7 @@ function selectFolder(path) {
   state.currentPath = path;
   state.activeCategory = null;
   state.activeLabel = null;
+  state.activeShape = null;
   state.activeType = null;
   // auto-expand the chain of ancestor folders so the selection is visible in the tree
   let p = state.nodesByPath.get(path);
@@ -3112,6 +3118,7 @@ function filesForView() {
   if (state.minStars) list = list.filter(f => (getMeta(f.path).rating || 0) >= state.minStars);
   if (state.activeCategory) list = list.filter(f => getMeta(f.path).category === state.activeCategory);
   if (state.activeLabel) list = list.filter(f => (getMeta(f.path).labels || []).includes(state.activeLabel));
+  if (state.activeShape) list = list.filter(f => orientationOf(f) === state.activeShape);
   if (state.activeColor) list = list.filter(f => getColors(f.path).includes(state.activeColor));
   if (state.activeType) list = list.filter(f => f.ext === state.activeType);
   if (state.selectedOnly) list = list.filter(f => state.checked.has(f.path));             // review picks
@@ -3119,6 +3126,65 @@ function filesForView() {
     list = list.filter(f => state.smartTop && state.smartTop.has(f.path));                // top AI matches only
   if (state.bestOnly && state.culled) list = list.filter(f => !cullInfo(f.path).isDup);   // hide near-dups
   return list;
+}
+
+// ── Shape (orientation) from pixel dimensions ──
+// Drive files carry width/height from the API; local files get measured lazily
+// (thumbnail load) or by ensureDimensions(). Within ±5% of 1:1 counts as square.
+const SHAPE_ORDER = ['horizontal', 'square', 'vertical'];
+const SHAPE_LABELS = { horizontal: 'Horizontal', square: 'Square', vertical: 'Vertical' };
+function orientationOf(f) {
+  if (!f.width || !f.height) return null;
+  const r = f.width / f.height;
+  if (r >= 0.95 && r <= 1 / 0.95) return 'square';
+  return r > 1 ? 'horizontal' : 'vertical';
+}
+// Read pixel sizes for files that don't have them yet (local folders — Drive files
+// arrive with dimensions from the API). One-time per session; sizes stick to the
+// file entries, so shape sort/group/filter work across the whole view afterwards.
+async function ensureDimensions() {
+  // Measure with the shape filter lifted — unmeasured files have no shape yet, so
+  // the active filter would hide exactly the files that still need reading.
+  const keep = state.activeShape;
+  state.activeShape = null;
+  const todo = filesForView().filter(f => (!f.width || !f.height) &&
+    ((f.kind === 'image' && RENDERABLE.includes(f.ext)) || f.kind === 'video'));
+  state.activeShape = keep;
+  if (!todo.length) return;
+  showProcessing('Reading image sizes…', '', true);
+  state.cancel = false;
+  let done = 0;
+  const total = todo.length;
+  const measureOne = async (f) => {
+    const url = await ensureBlobUrl(f);
+    if (!url) return;
+    await new Promise(res => {
+      const bail = setTimeout(res, 8000);
+      if (f.kind === 'video') {
+        const v = document.createElement('video');
+        v.preload = 'metadata'; v.muted = true;
+        v.onloadedmetadata = () => { if (v.videoWidth) { f.width = v.videoWidth; f.height = v.videoHeight; } if (!f.duration && v.duration) f.duration = v.duration; clearTimeout(bail); v.removeAttribute('src'); res(); };
+        v.onerror = () => { clearTimeout(bail); res(); };
+        v.src = url;
+      } else {
+        const img = new Image();
+        img.onload = () => { f.width = img.naturalWidth; f.height = img.naturalHeight; clearTimeout(bail); res(); };
+        img.onerror = () => { clearTimeout(bail); res(); };
+        img.src = url;
+      }
+    });
+  };
+  const queue = [...todo];
+  const worker = async () => {
+    while (queue.length && !state.cancel) {
+      const f = queue.shift();
+      done++;
+      updateProcessing(`Reading sizes ${done} of ${total}…`, f.name, (done / total) * 100);
+      try { await measureOne(f); } catch (e) { /* unreadable file — stays "unknown" */ }
+    }
+  };
+  await Promise.all([worker(), worker(), worker(), worker()]);
+  hideProcessing();
 }
 
 function sortFiles(list) {
@@ -3146,6 +3212,15 @@ function sortFiles(list) {
         return minColorOrder(ca) - minColorOrder(cb) || a.name.localeCompare(b.name, undefined, { numeric: true });
       }
       case 'quality': return (qualityOf(b.path) ?? -1) - (qualityOf(a.path) ?? -1);
+      case 'shape': {
+        // Horizontal → square → vertical, unknown last; widest first within a bucket.
+        const oa = orientationOf(a), ob = orientationOf(b);
+        const ia = oa ? SHAPE_ORDER.indexOf(oa) : 99, ib = ob ? SHAPE_ORDER.indexOf(ob) : 99;
+        if (ia !== ib) return ia - ib;
+        const ra = a.width && a.height ? a.width / a.height : 0;
+        const rb = b.width && b.height ? b.width / b.height : 0;
+        return rb - ra || a.name.localeCompare(b.name, undefined, { numeric: true });
+      }
       default: return 0;
     }
   });
@@ -3164,7 +3239,7 @@ function renderGrid() {
 
   if (!list.length) {
     content.innerHTML = `<div class="empty-state"><div class="icon">📂</div><p>${
-      state.search || state.activeCategory || state.activeLabel || state.activeColor || state.activeType || state.minStars || state.bestOnly || state.selectedOnly || (state.smart && state.smartNorm && !state.smartAll)
+      state.search || state.activeCategory || state.activeLabel || state.activeShape || state.activeColor || state.activeType || state.minStars || state.bestOnly || state.selectedOnly || (state.smart && state.smartNorm && !state.smartAll)
         ? 'No images match the current filters.'
         : 'No images in this folder.' + (state.nodesByPath.get(state.currentPath)?.dirs.length ? ' Try “Include subfolders”.' : '')
     }</p></div>`;
@@ -3213,6 +3288,7 @@ function groupFiles(list, mode) {
     if (mode === 'folder') { key = f.dir; title = f.dir === '' ? state.rootName : f.dir; }
     else if (mode === 'category') { key = getMeta(f.path).category || 'untagged'; title = key === 'untagged' ? 'Untagged' : (CATEGORIES[key]?.label || cap(key)); badge = 'AI'; }
     else if (mode === 'color') { key = getColors(f.path)[0] || 'untagged'; title = key === 'untagged' ? 'No colour' : colorLabel(key); badge = 'COLOUR'; }
+    else if (mode === 'shape') { const o = orientationOf(f); key = o || 'unknown'; title = o ? SHAPE_LABELS[o] : 'Size not read yet'; badge = 'SHAPE'; }
     else if (mode === 'cluster') {
       const c = cullInfo(f.path);
       const solo = !(state.culled && c.size > 1);
@@ -3244,6 +3320,11 @@ function groupFiles(list, mode) {
     groups.sort((a, b) =>
       (a.key === 'untagged' ? 1 : 0) - (b.key === 'untagged' ? 1 : 0) ||
       a.title.localeCompare(b.title, undefined, { numeric: true }));
+  } else if (mode === 'shape') {
+    groups.sort((a, b) => {
+      const ia = SHAPE_ORDER.indexOf(a.key), ib = SHAPE_ORDER.indexOf(b.key);
+      return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+    });
   } else {
     groups.sort((a, b) => a.title.localeCompare(b.title, undefined, { numeric: true }));
   }
@@ -3432,14 +3513,17 @@ function renderFilterChips() {
   } else {
     scope = state.files.filter(f => f.dir === state.currentPath);
   }
-  const counts = {}, colorCounts = {}, typeCounts = {}, labelCounts = {};
+  const counts = {}, colorCounts = {}, typeCounts = {}, labelCounts = {}, shapeCounts = {};
   scope.forEach(f => {
     const m = getMeta(f.path);
     if (m.category) counts[m.category] = (counts[m.category] || 0) + 1;
     (m.labels || []).forEach(l => { labelCounts[l] = (labelCounts[l] || 0) + 1; });
     getColors(f.path).forEach(c => { colorCounts[c] = (colorCounts[c] || 0) + 1; });
     if (f.ext) typeCounts[f.ext] = (typeCounts[f.ext] || 0) + 1;
+    const o = orientationOf(f); if (o) shapeCounts[o] = (shapeCounts[o] || 0) + 1;
   });
+  const shapes = SHAPE_ORDER.filter(s => shapeCounts[s]);
+  const showShapes = shapes.length >= 2 || state.activeShape;  // one shape only = nothing to narrow
   const labels = Object.keys(labelCounts).sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
 
   const cats = Object.keys(counts).sort((a, b) => {
@@ -3454,7 +3538,7 @@ function renderFilterChips() {
   const showTypes = types.length >= 2;   // only worth a filter when the folder mixes types
 
   const smartActive = state.smart && state.smartNorm;
-  if (cats.length === 0 && labels.length === 0 && cols.length === 0 && !showTypes && !smartActive) { row.classList.add('hidden'); return; }
+  if (cats.length === 0 && labels.length === 0 && cols.length === 0 && !showTypes && !showShapes && !smartActive) { row.classList.add('hidden'); return; }
   row.classList.remove('hidden');
   let html = '', prev = false;
   const divider = () => prev ? `<span class="divider" style="width:1px;height:20px;background:var(--border);margin:0 0.3rem;"></span>` : '';
@@ -3496,6 +3580,16 @@ function renderFilterChips() {
     });
     prev = true;
   }
+  if (showShapes) {
+    const glyph = { horizontal: '▭', square: '□', vertical: '▯' };
+    html += divider();
+    html += `<span class="filter-label">Shape</span>`;
+    html += `<span class="chip ${!state.activeShape ? 'active' : ''}" onclick="setShapeFilter(null)">All <span class="chip-count">${scope.length}</span></span>`;
+    shapes.forEach(s => {
+      html += `<span class="chip ${state.activeShape === s ? 'active' : ''}" onclick="setShapeFilter('${s}')">${glyph[s]} ${SHAPE_LABELS[s]} <span class="chip-count">${shapeCounts[s]}</span></span>`;
+    });
+    prev = true;
+  }
   if (cols.length) {
     html += divider();
     html += `<span class="filter-label">Colours</span>`;
@@ -3511,6 +3605,12 @@ function renderFilterChips() {
 function setCategory(c) { state.activeCategory = c; renderGrid(); }
 function setColorFilter(c) { state.activeColor = c; renderGrid(); }
 function setTypeFilter(t) { state.activeType = t; renderGrid(); }
+function setShapeFilter(s) {
+  state.activeShape = s;
+  // Measure any not-yet-read files first, so the filter doesn't silently drop them.
+  if (s) { ensureDimensions().then(renderGrid); return; }
+  renderGrid();
+}
 
 // ════════════════════════════════════════════════════════
 //  Selection + Inspector
@@ -3730,6 +3830,7 @@ function clearTagsInView() {
   persistMeta();
   state.activeCategory = null;
   state.activeLabel = null;
+  state.activeShape = null;
   state.activeType = null;
   if (state.selectedPath) renderInspTags(state.selectedPath);
   renderGrid();
@@ -3893,11 +3994,14 @@ function exportPickedCsv() {
   const picked = pickedFiles();
   if (!picked.length) { showToast('Nothing selected yet', 'error'); return; }
   const q = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
-  const rows = [['Name', 'Folder', 'Type', 'Size (bytes)', 'Rating', 'Colours', 'Category', 'Your tags', 'AI tags', 'Quality', 'Note', 'Alt text', 'Description', 'Caption'].map(q).join(',')];
+  const rows = [['Name', 'Folder', 'Type', 'Size (bytes)', 'Dimensions', 'Shape', 'Rating', 'Colours', 'Category', 'Your tags', 'AI tags', 'Quality', 'Note', 'Alt text', 'Description', 'Caption'].map(q).join(',')];
   for (const f of picked) {
     const m = getMeta(f.path);
+    const o = orientationOf(f);
     rows.push([
       f.name, f.dir || state.rootName, f.ext, f.size || '',
+      f.width && f.height ? `${f.width}×${f.height}` : '',
+      o ? SHAPE_LABELS[o] : '',
       m.rating || '', getColors(f.path).map(colorLabel).join('; '),
       m.category ? (CATEGORIES[m.category]?.label || m.category) : '',
       (m.labels || []).join('; '),
@@ -4790,15 +4894,21 @@ function toggleSubfolders() {
   $('subfoldersPill').classList.toggle('on', state.includeSubfolders);
   state.activeCategory = null;
   state.activeLabel = null;
+  state.activeShape = null;
   state.activeType = null;
   state.activeColor = null;
   renderGrid();
 }
-function setGroupBy(v) { state.groupBy = v; renderGrid(); }
+function setGroupBy(v) {
+  state.groupBy = v;
+  if (v === 'shape') { ensureDimensions().then(renderGrid); return; }
+  renderGrid();
+}
 function setSort(v) {
   state.sort = v;
   const cs = $('sortColorSelect');
   if (cs) cs.style.display = v === 'color' ? '' : 'none';
+  if (v === 'shape') { ensureDimensions().then(renderGrid); return; }
   renderGrid();
 }
 function setSortColor(v) { state.sortColor = v || null; renderGrid(); }

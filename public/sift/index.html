@@ -988,6 +988,7 @@ a.btn-ghost { display: inline-flex; align-items: center; text-decoration: none; 
 .picker-paste { display: flex; gap: 0.4rem; align-items: stretch; }
 .picker-paste input { flex: 1; min-width: 0; }
 .picker-paste button { flex-shrink: 0; white-space: nowrap; }
+.picker-local-btn { width: 100%; margin-bottom: 0.7rem; border-style: dashed; }
 .picker-section {
   display: flex; align-items: center; gap: 0.45rem;
   padding: 0.55rem 0.2rem 0.3rem; cursor: pointer; user-select: none;
@@ -2566,6 +2567,7 @@ function showPickerModal() {
       <button class="btn-secondary" onclick="openDriveLink()">Open link</button>
     </div>
     <div class="hint" style="font-size:0.66rem;color:var(--text-muted);margin:0.2rem 0 0.7rem;">Someone shared a folder by link? Paste it here to open it, even if it isn't in your Drive.</div>
+    ${window.showDirectoryPicker ? `<button class="btn-secondary picker-local-btn" onclick="closeModal();openFolder();" title="Switch to a folder on your computer instead of Google Drive">💻 Open a folder on this computer instead</button>` : ''}
     ${browseCurrent}
     <div class="folder-pick-list" id="pickerList"></div>
     <div class="modal-actions"><button class="btn-ghost" onclick="closeModal()">Cancel</button></div>

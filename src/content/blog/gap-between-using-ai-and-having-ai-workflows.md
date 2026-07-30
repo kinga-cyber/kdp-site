@@ -16,7 +16,7 @@ keywords:
   - "retention marketing"
 metaTitle: "The Gap Between Using AI and Having AI Workflows | Kinga Dow"
 metaDescription: "Most agencies think they're using AI. They're in the chatbot phase. Here's what separates tool usage from connected workflows — and what the gap is costing you."
-featured: true
+featured: false
 draft: false
 ---
 

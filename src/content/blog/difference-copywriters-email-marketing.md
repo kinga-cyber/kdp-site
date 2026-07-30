@@ -15,7 +15,7 @@ keywords:
   - "email marketing vs copywriting"
 metaTitle: "Email Copywriter vs Copywriter: What Differs | Kinga Dow"
 metaDescription: "A copywriter optimizes for attention. An email copywriter optimizes for a decision. The real difference, and which half of the job is still scarce."
-featured: true
+featured: false
 draft: false
 ---
 

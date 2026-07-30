@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ConsultationCTA from "../components/ConsultationCTA.astro";
-import { getPublishedPosts, freshness } from "../lib/posts";
+import { getPublishedPosts, freshness, type Post } from "../lib/posts";
 
 // Published = not a draft, and not dated in the future. Sorted by freshness
 // rather than original publication date, so a refreshed post reads as new.
@@ -9,8 +9,16 @@ const allPosts = (await getPublishedPosts()).sort(
   (a, b) => freshness(b) - freshness(a)
 );
 
-// Split into featured (max 2) and popular (the rest)
-const featuredPosts = allPosts.filter((p) => p.data.featured).slice(0, 2);
+// Featured is automatic: the newest posts lead the page, so a new post never
+// has to be manually promoted and an old one never gets stranded at the top.
+// `featured: true` still works as a manual pin for a post worth keeping up
+// regardless of age; pins take the first slots, the newest fill the rest.
+const FEATURED_COUNT = 3;
+const featuredPosts = [
+  ...allPosts.filter((p) => p.data.featured),
+  ...allPosts.filter((p) => !p.data.featured),
+].slice(0, FEATURED_COUNT);
+
 const featuredSlugs = new Set(featuredPosts.map((p) => p.id));
 const popularPosts = allPosts.filter((p) => !featuredSlugs.has(p.id));
 
@@ -28,7 +36,7 @@ const formatDate = (d: Date) =>
   });
 
 // Show the update date on refreshed posts so the card matches the article page
-const dateLabel = (p: CollectionEntry<"blog">) =>
+const dateLabel = (p: Post) =>
   p.data.updated
     ? `Updated ${formatDate(p.data.updated)}`
     : formatDate(p.data.date);
@@ -74,12 +82,12 @@ const INITIAL_VISIBLE = 9;
           Featured Posts
         </h2>
 
-        <!-- Featured Posts Grid -->
+        <!-- Featured Posts Grid: hero, with the rest stacked alongside it.
+             Count is controlled by FEATURED_COUNT above. -->
         <div class="grid md:grid-cols-12 gap-6 md:gap-8">
-          <!-- Main Featured Post (larger) -->
           {featuredPosts[0] && (
             <div class="md:col-span-7 animate-on-scroll fade-in-up">
-              <article class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+              <article class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow h-full flex flex-col">
                 <a href={`/blog/${featuredPosts[0].id}/`} class="block aspect-[1200/630] bg-kd-cream relative overflow-hidden">
                   <img
                     src={featuredPosts[0].data.image}
@@ -88,7 +96,7 @@ const INITIAL_VISIBLE = 9;
                   />
                 </a>
 
-                <div class="p-6">
+                <div class="p-6 flex-1 flex flex-col">
                   <span class="text-kd-gold text-[12px] md:text-[13px] font-montserrat font-medium tracking-[1.2px] uppercase">
                     {featuredPosts[0].data.category}
                   </span>
@@ -103,11 +111,11 @@ const INITIAL_VISIBLE = 9;
                     {dateLabel(featuredPosts[0])}
                   </p>
 
-                  <p class="text-kd-grey text-[14px] md:text-[15px] leading-[22px] md:leading-[24px] font-montserrat font-light tracking-[0.7px] mb-4">
+                  <p class="text-kd-grey text-[14px] md:text-[15px] leading-[22px] md:leading-[24px] font-montserrat font-light tracking-[0.7px] mb-4 flex-1">
                     {featuredPosts[0].data.excerpt}
                   </p>
 
-                  <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                  <div class="flex items-center gap-3 pt-4 border-t border-gray-100 mt-auto">
                     <div class="w-8 h-8 rounded-full bg-kd-cream flex items-center justify-center">
                       <span class="text-kd-navy text-[12px] font-montserrat font-medium">
                         {featuredPosts[0].data.author.charAt(0)}
@@ -122,51 +130,37 @@ const INITIAL_VISIBLE = 9;
             </div>
           )}
 
-          {featuredPosts[1] && (
-            <div class="md:col-span-5 animate-on-scroll fade-in-up delay-100">
-              <article class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow h-full flex flex-col">
-                <a href={`/blog/${featuredPosts[1].id}/`} class="block aspect-[1200/630] bg-kd-cream relative overflow-hidden">
-                  <img
-                    src={featuredPosts[1].data.image}
-                    alt={featuredPosts[1].data.imageAlt ?? featuredPosts[1].data.title}
-                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                  />
-                </a>
+          {featuredPosts.length > 1 && (
+            <div class="md:col-span-5 flex flex-col gap-6 md:gap-8 animate-on-scroll fade-in-up delay-100">
+              {featuredPosts.slice(1).map((post) => (
+                <article class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex-1 flex">
+                  <a href={`/blog/${post.id}/`} class="block w-2/5 shrink-0 bg-kd-cream overflow-hidden">
+                    <img
+                      src={post.data.image}
+                      alt={post.data.imageAlt ?? post.data.title}
+                      class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    />
+                  </a>
 
-                <div class="p-6 flex-1 flex flex-col">
-                  <span class="text-kd-gold text-[12px] md:text-[13px] font-montserrat font-medium tracking-[1.2px] uppercase">
-                    {featuredPosts[1].data.category}
-                  </span>
-
-                  <h3 class="font-aktiv text-kd-navy text-[16px] md:text-[18px] font-semibold leading-[24px] md:leading-[26px] tracking-[0.8px] md:tracking-[0.9px] mt-2 mb-2">
-                    <a href={`/blog/${featuredPosts[1].id}/`} class="hover:text-kd-gold transition-colors">
-                      {featuredPosts[1].data.title}
-                    </a>
-                  </h3>
-
-                  <p class="text-kd-grey text-[12px] md:text-[13px] font-montserrat tracking-[1.2px] mb-3">
-                    {dateLabel(featuredPosts[1])}
-                  </p>
-
-                  <p class="text-kd-grey text-[13px] md:text-[14px] leading-[20px] md:leading-[22px] font-montserrat font-light tracking-[0.7px] mb-4 flex-1">
-                    {featuredPosts[1].data.excerpt}
-                  </p>
-
-                  <div class="flex items-center gap-3 pt-4 border-t border-gray-100 mt-auto">
-                    <div class="w-8 h-8 rounded-full bg-kd-cream flex items-center justify-center">
-                      <span class="text-kd-navy text-[12px] font-montserrat font-medium">
-                        {featuredPosts[1].data.author.charAt(0)}
-                      </span>
-                    </div>
-                    <span class="text-kd-navy text-[13px] font-montserrat font-medium tracking-[0.6px]">
-                      {featuredPosts[1].data.author}
+                  <div class="p-4 md:p-5 flex-1 flex flex-col justify-center">
+                    <span class="text-kd-gold text-[11px] md:text-[12px] font-montserrat font-medium tracking-[1.1px] uppercase">
+                      {post.data.category}
                     </span>
+
+                    <h3 class="font-aktiv text-kd-navy text-[15px] md:text-[16px] font-semibold leading-[21px] md:leading-[23px] tracking-[0.7px] mt-1.5 mb-2">
+                      <a href={`/blog/${post.id}/`} class="hover:text-kd-gold transition-colors">
+                        {post.data.title}
+                      </a>
+                    </h3>
+
+                    <p class="text-kd-grey text-[11px] md:text-[12px] font-montserrat tracking-[1.1px]">
+                      {dateLabel(post)}
+                    </p>
                   </div>
-                </div>
-              </article>
+                </article>
+              ))}
             </div>
           )}
-        </div>
       </div>
     </section>
   )}

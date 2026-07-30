@@ -16,7 +16,7 @@ keywords:
 metaTitle: "How to Predict When a Customer Will Reorder | Kinga Dow"
 metaDescription: "Klaviyo's Expected Date of Next Order, the requirements most guides skip, and how to find your brand's real repurchase interval when the box is empty."
 featured: false
-draft: true
+draft: false
 ---
 
 Klaviyo predicts this for you. The field is called Expected Date of Next Order, it sits in the Predictive Analytics box on a customer profile, and it updates as new orders come in.

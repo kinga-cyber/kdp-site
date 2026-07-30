@@ -5,7 +5,7 @@ updated: 2026-08-11
 author: "Kinga Dow"
 category: "Email Marketing"
 excerpt: "A general copywriter optimizes for attention. An email copywriter optimizes for a decision. But the more useful question now is which half of that job you are actually hiring for, because one half stopped being scarce."
-image: "/images/blog/copywriter-difference.png"
+image: "/images/blog/copywriter-difference.jpg"
 imageAlt: "Title card reading 'Copywriters vs Email Marketing Copywriters', next to a photograph of Kinga Dow"
 keywords:
   - "email copywriter"

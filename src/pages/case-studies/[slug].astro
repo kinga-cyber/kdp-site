@@ -65,7 +65,7 @@ export function getStaticPaths() {
         category: "Beauty & Cosmetics",
         client: "MoxieLash",
         technologies: ["LoyaltyLion", "Klaviyo", "Shopify Plus"],
-        image: "/images/case-studies/loyalty-lion.png",
+        image: "/images/case-studies/loyalty-lion.jpg",
         stat: "700%",
         statLabel: "Increased Engagement",
         content: `
@@ -115,7 +115,7 @@ export function getStaticPaths() {
         category: "Beauty & SMS Marketing",
         client: "Leading Beauty Brand",
         technologies: ["Attentive", "Klaviyo", "SMS Marketing"],
-        image: "/images/case-studies/attentive-return.png",
+        image: "/images/case-studies/attentive-return.jpg",
         stat: "25X",
         statLabel: "Return on Investment",
         content: `
@@ -328,7 +328,7 @@ export function getStaticPaths() {
         category: "Beauty & Email Marketing",
         client: "eCommerce Beauty Brand",
         technologies: ["Klaviyo", "Gamification", "Email Flows"],
-        image: "/images/case-studies/gamification-boosts-rev.png",
+        image: "/images/case-studies/gamification-boosts-rev.jpg",
         stat: "$5.53M",
         statLabel: "Revenue Generated",
         content: `
@@ -386,7 +386,7 @@ export function getStaticPaths() {
         category: "Online Gifts & Conversion",
         client: "Online Gifts Company",
         technologies: ["OptinMonster", "Klaviyo", "A/B Testing"],
-        image: "/images/case-studies/optinmonster-expansion.png",
+        image: "/images/case-studies/optinmonster-expansion.jpg",
         stat: "28.57%",
         statLabel: "Conversion Rate",
         content: `
@@ -432,13 +432,13 @@ const { title, subtitle, category, client, technologies, image, stat, statLabel,
 // Get other case studies for related section
 const allCaseStudies = [
   { slug: "ai-powered-gift-ecommerce", title: "AI-Powered Gift E-commerce: 273% Growth", image: "/images/case-studies/ai-powered-gift-ecommerce.jpg", stat: "273%", statLabel: "Revenue Growth" },
-  { slug: "loyaltylion", title: "MoxieLash + LoyaltyLion", image: "/images/case-studies/loyalty-lion.png", stat: "700%", statLabel: "Increased Engagement" },
-  { slug: "25x-return-attentive", title: "25X Return With Attentive", image: "/images/case-studies/attentive-return.png", stat: "25X", statLabel: "ROI" },
+  { slug: "loyaltylion", title: "MoxieLash + LoyaltyLion", image: "/images/case-studies/loyalty-lion.jpg", stat: "700%", statLabel: "Increased Engagement" },
+  { slug: "25x-return-attentive", title: "25X Return With Attentive", image: "/images/case-studies/attentive-return.jpg", stat: "25X", statLabel: "ROI" },
   { slug: "octane-ai-moxielash", title: "MoxieLash + Octane AI", image: "/images/case-studies/octane-ai-moxielash.jpg", stat: "187.85%", statLabel: "List Growth" },
   { slug: "ai-powered-hawaiian-footwear", title: "AI-Powered Hawaiian Footwear: 40% Growth", image: "/images/case-studies/ai-powered-hawaiian-footwear.jpg", stat: "40%", statLabel: "YoY Growth" },
   { slug: "specialty-gift-email-transformation", title: "Specialty Gift: 205% Revenue Growth", image: "/images/case-studies/specialty-gift-email-transformation.jpg", stat: "205%", statLabel: "Revenue Growth" },
-  { slug: "gamification-boosts-rev", title: "Gamification Boosts Revenue", image: "/images/case-studies/gamification-boosts-rev.png", stat: "$5.53M", statLabel: "Revenue" },
-  { slug: "optinmonster-expansion", title: "OptinMonster Expansion", image: "/images/case-studies/optinmonster-expansion.png", stat: "28.57%", statLabel: "Conversion" }
+  { slug: "gamification-boosts-rev", title: "Gamification Boosts Revenue", image: "/images/case-studies/gamification-boosts-rev.jpg", stat: "$5.53M", statLabel: "Revenue" },
+  { slug: "optinmonster-expansion", title: "OptinMonster Expansion", image: "/images/case-studies/optinmonster-expansion.jpg", stat: "28.57%", statLabel: "Conversion" }
 ];
 
 const relatedCaseStudies = allCaseStudies.filter(cs => cs.slug !== slug).slice(0, 3);

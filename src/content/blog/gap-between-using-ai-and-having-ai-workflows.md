@@ -4,7 +4,7 @@ date: 2026-04-27
 author: "Kinga Dow"
 category: "AI Systems"
 excerpt: "Most agencies think they're using AI. They're in the chatbot phase. Here's what separates tool usage from connected workflows — and what the gap is costing you."
-image: "/images/blog/gap-ai-workflows.png"
+image: "/images/blog/gap-ai-workflows.jpg"
 imageAlt: "Diagram showing the difference between fragmented AI tool usage and connected AI workflows in an agency setting"
 keywords:
   - "AI workflows"

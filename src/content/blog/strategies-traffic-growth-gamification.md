@@ -4,7 +4,7 @@ date: 2024-04-04
 author: "Kinga Dow"
 category: "eCommerce"
 excerpt: "I'm back after a great week at Cosmoprof, Bologna. I'm ready to dissect all the key strategies for capturing traffic and turning visitors into loyal customers..."
-image: "/images/blog/gamification-traffic.png"
+image: "/images/blog/gamification-traffic.jpg"
 featured: false
 draft: false
 metaTitle: "Gamification and Email Acquisition Tactics | Kinga Dow"

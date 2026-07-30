@@ -189,9 +189,12 @@ const pageDescription = post.data.metaDescription ?? post.data.excerpt;
 
           <span class="text-kd-grey">|</span>
 
-          <!-- Date -->
+          <!-- Date: show the update date when a post has been refreshed, so readers
+               see the post is current. Schema already reports both (see dateModified). -->
           <span class="text-kd-grey text-[14px] font-montserrat tracking-[0.7px]">
-            {formatDate(post.data.date)}
+            {post.data.updated
+              ? `Updated ${formatDate(post.data.updated)}`
+              : formatDate(post.data.date)}
           </span>
 
           <span class="text-kd-grey hidden md:inline">|</span>

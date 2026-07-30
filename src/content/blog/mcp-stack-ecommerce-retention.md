@@ -3,7 +3,7 @@ title: "The MCP Stack for Ecommerce Retention Marketing"
 date: 2026-08-13
 author: "Kinga Dow"
 category: "AI Systems"
-excerpt: "An MCP connection is the difference between an assistant that can describe your Klaviyo account and one that can read it. Here are the six I use daily, what each unlocks, and why the value is in the chain rather than any single one."
+excerpt: "Six MCP connectors I use daily, and what each one actually exposes. What you can ask it, what it can change, and where each one bites. Written from using them, not from reading their marketing pages."
 image: "/images/blog/mcp-stack.svg"
 imageAlt: "Diagram of a campaign moving through connected MCP servers: context from Fireflies and Drive, brief in Asana, design in Figma, build in Klaviyo, verified against Shopify"
 keywords:
@@ -11,115 +11,99 @@ keywords:
   - "klaviyo mcp"
   - "model context protocol marketing"
   - "shopify mcp"
-  - "ai workflows ecommerce"
   - "figma mcp"
-metaTitle: "MCP Servers for Ecommerce: The Stack I Use | Kinga Dow"
-metaDescription: "The six MCP servers I use daily for retention marketing, what each one unlocks, and why connecting them matters more than any single one."
+  - "fireflies mcp"
+metaTitle: "MCP Servers for Ecommerce: What Each One Does | Kinga Dow"
+metaDescription: "Six MCP connectors for retention marketing, what each actually exposes, what it makes cheap to ask, and the limits worth knowing before you set them up."
 featured: false
 draft: false
 ---
 
 An MCP connection is the difference between an assistant that can describe your Klaviyo account and one that can read it.
 
-That sounds like a small distinction. It is not. Without a connection, everything you get back is a general answer about how Klaviyo works, dressed up in your context. With one, the answer comes from your flows, your segments, your actual numbers.
+Model Context Protocol is an open standard for how an AI assistant connects to an outside tool. Before it, connecting a model to Klaviyo meant someone building a custom integration for that specific pairing. MCP standardises the socket, so a tool builds one server and any assistant that speaks the protocol can use it.
 
-Six of these run in my working setup every day. What follows is what each one unlocks, and then the part most write-ups skip: why the value is in connecting them rather than in any single one.
+That is the whole concept. What follows is the part that is harder to find: what each connector actually exposes, what it makes cheap to ask, and where each one bites. Written from using them daily rather than from their marketing pages.
 
-## What an MCP Actually Is
+## Klaviyo
 
-Model Context Protocol is an open standard for how an AI assistant connects to an outside tool. That is genuinely all it is.
+**What it exposes.** Campaigns, flows, segments, lists, templates, metrics, profiles, catalogs, coupons, forms, reviews, tags, images. Reads and writes both. You can pull a campaign report, query metric aggregates over a date range, get flow performance broken down by message, create or update a segment, clone a template, and render one to check it.
 
-Think of it as a socket. Before MCP, connecting a model to Klaviyo meant someone writing a custom integration for that specific pairing. Every tool times every assistant, built separately. MCP standardises the socket, so a tool builds one server and any assistant that speaks the protocol can use it.
+**What it makes cheap.** Comparative questions. Klaviyo's dashboards answer the questions Klaviyo anticipated, which are mostly "how did this perform". The expensive ones are comparative and awkward: how does this segment's repeat rate compare to that one, what share of a flow's revenue comes from the first email versus the rest, which flows have not been edited in a year, what percentage of a list has engaged with anything in six months.
 
-For anyone running marketing operations, the practical translation is short: **your tools stop being places you go and become things your assistant can reach.**
+Those are all answerable from the API and none are one click in the interface, which is why they mostly go unasked.
 
-## Why It Matters More Than It Sounds
+**A real one.** I checked a pop-up's actual numbers rather than trusting a summary. The old forms were converting at 2.26% and 3.93%. The replacement, a multi-step form collecting zero-party data on the way in, came in at 9.11% from 3,947 views and 420 submits. Roughly four times better on mobile, and the winning mechanic was not a bigger discount, it was asking a question during signup. That comparison took about a minute.
 
-The honest case for this is not that it saves you clicks.
+**Where it bites.** The hosted connector runs an OAuth flow and, on Claude, needs a paid plan. There is also a local server you run yourself against a private API key, which is worth knowing if you manage several client accounts and want them separated. You need an Owner, Admin or Manager role on the account either way.
 
-It is that certain questions stop being expensive. "Where does repurchase actually stall for this brand" is a two-hour job with exports and a spreadsheet, which means nobody does it and the ninety-day convention survives unexamined. Connected, it is a question you ask in a sentence.
+## Shopify
 
-When the cost of asking drops far enough, you start asking things you previously assumed. That is the actual change, and it shows up as better decisions rather than saved time.
+**What it exposes.** Products, variants, collections, orders, customers, inventory levels by location, discounts, and analytics through ShopifyQL. There is also a general GraphQL escape hatch, which matters more than it sounds: the Admin API covers hundreds of resources and the convenience tools only wrap the common ones. Metafields, pages, markets, gift cards and the rest are all reachable through raw GraphQL.
 
-## The Six
+**What it makes cheap.** Anything that requires knowing what is actually true about the catalog right now. Prices, variant names, what is in a collection, what is in stock and where.
 
-### Klaviyo
+**A real one.** Every campaign brief I build pulls live per-SKU stock at build time. If a featured product is under roughly fifty units and the send is going to a whole list, that gets raised as a blocker before the design is approved rather than after the email lands. Promoting something into a sellout is expensive, specific and entirely preventable, and preventing it needs exactly one thing: the stock number being present at the moment the decision gets made.
 
-The centre of the stack for retention work. Campaigns, flows, segments, templates, metrics, profiles.
+**Where it bites.** Inventory is per location, so a single "in stock" number can be misleading for a brand with multiple warehouses or retail stock. Check the location breakdown, not just the total.
 
-What it unlocks is interrogation rather than reporting. Klaviyo's own dashboards answer the questions Klaviyo anticipated. A connection answers the ones you actually have, which are usually comparative and awkward: how does this segment's repeat rate compare to that one, what share of a flow's revenue comes from the first email, which flows have not been touched in a year.
+## Figma
 
-Concrete: I checked a pop-up's real performance rather than trusting the dashboard summary. The old forms were converting at 2.26% and 3.93%. The replacement, a multi-step form collecting zero-party data on the way in, came in at 9.11% from 3,947 views. Roughly four times better on mobile, and the mechanism was not a bigger discount. That comparison took a minute to pull and would not have happened otherwise.
+**What it exposes.** Design context for a selected frame, component and variable definitions, screenshots, file metadata, Code Connect mappings, and writes to the canvas.
 
-### Shopify
+**What it makes cheap.** Turning a design into something buildable without a human interpreting it. When the assistant can read the actual component structure and the variable definitions, a frame stops being a picture and becomes a specification. It also means design tokens can be read from the file rather than restated in a prompt, which is what stops colours and spacing drifting between emails.
 
-Products, inventory, orders, customers, analytics.
+**A real one.** Components map to email blocks. Hero component, hero block. Product row component, product row block. Once that correspondence exists and can be read, output stops varying between builds because there is no decision left to make.
 
-The obvious use is product data for campaigns. The one that has actually saved me is inventory.
+**Where it bites.** Two things. Your designs have to be built from components. A file of loose grouped elements arranged to look like an email has no structure to read, and no amount of tooling fixes that. And writes to the canvas are considerably fussier than reads, so treat "read the design" and "build the design" as different levels of maturity.
 
-Every campaign brief I build pulls live per-SKU stock at build time. If a featured product is under roughly fifty units and the send goes to a whole list, that gets flagged as a blocker before the design is approved, not after the email goes out. Promoting something into a sellout is a specific, expensive, entirely preventable mistake, and preventing it requires exactly one thing: the stock number being present at the moment the decision is made.
+## Asana
 
-### Figma
+**What it exposes.** Tasks, projects, sections, custom fields, comments, attachments, and search. Reads and writes.
 
-Design context, components, variables, the canvas itself.
+**What it makes cheap.** Making the campaign brief the single source of truth, and keeping it there. Every campaign is a task carrying the copy, the segment, the send time, the inclusions and exclusions, the product links. When that information is scattered across an email thread, a spreadsheet and a message, building becomes reassembly, and reassembly is where things get missed.
 
-This is what makes design-to-build work rather than being a demo. When components map to email blocks and the assistant can read the actual component structure, a Figma frame becomes a buildable specification instead of a picture to interpret.
+It also makes the calendar answerable. "What is not scheduled yet this month" is a question, not an audit.
 
-The prerequisite is real and worth stating: your designs have to be built from components. A file of loose grouped elements arranged to look like an email has no structure to read.
+**A real one.** A build session takes two links as input: the Figma frame and the Asana task. Everything else the build needs is already in one of those two places.
 
-### Asana
+**Where it bites.** Advanced task search is a Premium feature. On a free workspace you can list and filter but not full-text search across descriptions and comments, which is a meaningful difference if you are trying to find that campaign from March.
 
-Tasks, projects, sections, fields.
+## Fireflies
 
-Less glamorous than the others and arguably the one holding everything together. Every campaign is a task, and the task carries the copy, the segment, the send time, the inclusions and exclusions, the product links.
+**What it exposes.** Call transcripts, summaries, soundbites, search across everything with filters for date, participant and keyword scope.
 
-That matters because it gives the chain a single source of truth. When campaign information is scattered across an email thread, a spreadsheet and a message, the build stage becomes reassembly, and reassembly is where things go missing.
+**What it makes cheap.** Retrieval from your own spoken record. Search accepts a proper query grammar, so you can pull every call in a date range where a particular topic came up, filtered to specific participants.
 
-### Fireflies
+**A real one.** The clearest explanation of your own methodology is almost always something you said out loud to someone who asked a good question, not something you sat down to write. Those explanations already exist in your call history. Being able to search them turns a back catalogue of calls into a content pipeline and, more usefully, into institutional memory that survives someone leaving.
 
-Call transcripts, summaries, search.
+**Where it bites.** It only knows about calls that were actually recorded, which sounds obvious and still catches people out. And transcripts contain everything said, including things a client would not expect to see published, so anything mined from them needs a deliberate confidentiality pass before it goes anywhere.
 
-The one people are most surprised by, because it is not a marketing tool. Every training call, strategy session and client conversation becomes searchable text.
+## Google Drive
 
-What that unlocks is content and institutional memory. The clearest explanation of your own methodology is almost always something you said out loud to someone who asked a good question, not something you sat down to write. Those explanations are sitting in your call history.
+**What it exposes.** File search using a structured query syntax, file content, metadata, and creation.
 
-### Google Drive
+**What it makes cheap.** Grounding. Brand guidelines, positioning documents, past reports, research, tone references. This is the layer that makes output sound like you rather than like competent generic marketing.
 
-File search and content.
-
-Brand guidelines, positioning documents, past reports, research. The context that makes output sound like you instead of like generic marketing copy.
-
-On its own it is unremarkable. As the thing the other five draw on for tone and standards, it does a lot of quiet work.
-
-## What Actually Changes
-
-Here is the part the listicles miss. Any one of these is a faster lookup. Several of them connected is a different category of thing.
-
-A campaign moves through all of them without anyone carrying it between tools. Context comes out of Drive and Fireflies. The brief lands in Asana with the segment and the offer decided. The design is read from Figma. The template is built in Klaviyo. Stock is verified against Shopify before it goes anywhere. Nobody copies anything from one window into another, and nothing gets dropped in transit, because there is no transit.
-
-**That is the difference between using AI and having an AI workflow.** Asking a model for subject lines is the chatbot phase. Having it read the account, build from the real design, check the stock and write into the campaign task is the workflow phase. The first saves twenty minutes. The second changes what is possible to run at all.
-
-The compounding is worth naming too. Each connection makes the others more useful. Klaviyo alone tells you a segment's size. Klaviyo plus Shopify tells you whether the products that segment buys are in stock. Add Asana and that check happens automatically as part of building the campaign, rather than being something a careful person remembers.
+**Where it bites.** The search syntax is more restrictive than the Drive interface. It supports specific query terms combined with operators, and full-text search behaves differently from what you would expect from the search box. Expect to be more precise than you are used to.
 
 ## What Is Still Missing
 
-The ecosystem is uneven, and it is worth being honest about where.
+The platforms are well covered. The gap is the **reporting and analytics layer above them**.
 
-The platforms are well covered. Klaviyo, Shopify, Figma, the project tools. Those are solved.
+Agencies run consolidated reporting across many client accounts, and that consolidated view is exactly what you would most want to interrogate conversationally: which clients are trending down, where the same problem appears in three accounts at once. Most of those tools have no MCP server yet.
 
-The gap is in the **reporting and analytics layer that sits above them**. Agencies run consolidated reporting across many client accounts, and that consolidated view is exactly the thing you would most want to interrogate conversationally. Most of those tools have no MCP server yet. So the raw data is reachable and the synthesised view is not, which is backwards from where the value sits.
-
-That will close. It is a young protocol, and reporting tools have an obvious incentive. But if you are assembling a stack today, expect to reach the platforms directly and to do the cross-account synthesis yourself.
+So the raw data is reachable and the synthesised view is not, which is backwards from where the value sits. That will close, because the protocol is young and reporting tools have an obvious incentive. Until then, expect to reach the platforms directly and do the cross-account synthesis yourself.
 
 ## Where to Start
 
-If you are setting this up from nothing, connect them in this order:
+Connect them in this order:
 
 1. **Klaviyo**, because it answers the most questions per unit of effort
 2. **Shopify**, because it makes the Klaviyo answers real
 3. **Your project tool**, because that is what turns answers into work that actually happens
 
-Figma, call transcripts and document storage are the layer after. Powerful, but only once the first three are producing something worth designing and briefing.
+Figma, call transcripts and document storage come after. Powerful, but only once the first three are producing something worth designing and briefing.
 
 The most common mistake is connecting everything at once and using none of it. One connection you interrogate daily beats six you configured and forgot.
 

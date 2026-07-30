@@ -283,6 +283,9 @@
 .prose-kd {
   color: #3F455D;
   font-family: var(--font-montserrat);
+  /* The global body weight is 300 (Montserrat Light). Light is a display
+     weight and is hard to read at 16px, so article copy overrides it. */
+  font-weight: 400;
   line-height: 1.75;
   letter-spacing: 0.01em;
 }
@@ -298,9 +301,10 @@
 }
 
 .prose-kd p {
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.75;
-  color: #4A4F5C;
+  font-weight: 400;
+  color: #3F455D;
   margin-bottom: 1.25rem;
 }
 
@@ -355,13 +359,14 @@
   list-style: none;
   padding-left: 0;
   margin: 1rem 0 1.5rem;
-  color: #4A4F5C;
+  color: #3F455D;
+  font-weight: 400;
 }
 .prose-kd ul li {
   position: relative;
   padding-left: 1.5rem;
   margin-bottom: 0.5rem;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.7;
 }
 .prose-kd ul li::before {
@@ -380,7 +385,8 @@
   list-style: none;
   padding-left: 0;
   margin: 1rem 0 1.5rem;
-  color: #4A4F5C;
+  color: #3F455D;
+  font-weight: 400;
   counter-reset: ol-counter;
 }
 .prose-kd ol li {

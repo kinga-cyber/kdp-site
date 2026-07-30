@@ -34,7 +34,7 @@ const formatDate = (d: Date) =>
 const allPosts = await getCollection("blog", ({ data }) => !data.draft);
 const relatedPosts = allPosts
   .filter((p) => p.data.category === post.data.category && p.id !== post.id)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .sort((a, b) => (b.data.updated ?? b.data.date).valueOf() - (a.data.updated ?? a.data.date).valueOf())
   .slice(0, 3);
 
 // SEO + canonical
@@ -287,7 +287,7 @@ const pageDescription = post.data.metaDescription ?? post.data.excerpt;
                 </h3>
 
                 <p class="text-kd-grey text-[11px] md:text-[12px] font-montserrat tracking-[1.1px]">
-                  {formatDate(relatedPost.data.date)}
+                  {relatedPost.data.updated ? `Updated ${formatDate(relatedPost.data.updated)}` : formatDate(relatedPost.data.date)}
                 </p>
               </div>
             </article>

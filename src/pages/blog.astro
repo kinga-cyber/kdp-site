@@ -1,11 +1,16 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import ConsultationCTA from "../components/ConsultationCTA.astro";
 
 // Pull all non-draft posts, newest first
+// Sort by freshness, not original publication date. A refreshed post is the
+// newest thing on the site and should read that way in the listing.
+const freshness = (p: CollectionEntry<"blog">) =>
+  (p.data.updated ?? p.data.date).valueOf();
+
 const allPosts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+  (a, b) => freshness(b) - freshness(a)
 );
 
 // Split into featured (max 2) and popular (the rest)
@@ -25,6 +30,12 @@ const formatDate = (d: Date) =>
     month: "long",
     day: "numeric",
   });
+
+// Show the update date on refreshed posts so the card matches the article page
+const dateLabel = (p: CollectionEntry<"blog">) =>
+  p.data.updated
+    ? `Updated ${formatDate(p.data.updated)}`
+    : formatDate(p.data.date);
 
 // How many popular posts to show before Load More kicks in
 const INITIAL_VISIBLE = 9;
@@ -93,7 +104,7 @@ const INITIAL_VISIBLE = 9;
                   </h3>
 
                   <p class="text-kd-grey text-[12px] md:text-[13px] font-montserrat tracking-[1.2px] mb-3">
-                    {formatDate(featuredPosts[0].data.date)}
+                    {dateLabel(featuredPosts[0])}
                   </p>
 
                   <p class="text-kd-grey text-[14px] md:text-[15px] leading-[22px] md:leading-[24px] font-montserrat font-light tracking-[0.7px] mb-4">
@@ -138,7 +149,7 @@ const INITIAL_VISIBLE = 9;
                   </h3>
 
                   <p class="text-kd-grey text-[12px] md:text-[13px] font-montserrat tracking-[1.2px] mb-3">
-                    {formatDate(featuredPosts[1].data.date)}
+                    {dateLabel(featuredPosts[1])}
                   </p>
 
                   <p class="text-kd-grey text-[13px] md:text-[14px] leading-[20px] md:leading-[22px] font-montserrat font-light tracking-[0.7px] mb-4 flex-1">
@@ -223,7 +234,7 @@ const INITIAL_VISIBLE = 9;
               </h3>
 
               <p class="text-kd-grey text-[11px] md:text-[12px] font-montserrat tracking-[1.1px] mb-2">
-                {formatDate(post.data.date)}
+                {dateLabel(post)}
               </p>
 
               <p class="text-kd-grey text-[13px] md:text-[14px] leading-[20px] md:leading-[22px] font-montserrat font-light tracking-[0.65px] mb-4 line-clamp-3">

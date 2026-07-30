@@ -120,4 +120,4 @@ Three things to confirm, in this order, because each one can end the project:
 
 The integration is genuinely useful. It is just useful in proportion to how much thinking went into the segments before you connected anything.
 
-*If you want a second pair of eyes on how your segments map to paid, [book a strategy session](/consultation).*
+*If you want a second pair of eyes on how your segments map to paid, [book a strategy session](/consultation/).*

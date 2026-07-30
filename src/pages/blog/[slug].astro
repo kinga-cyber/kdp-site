@@ -157,7 +157,7 @@ const pageDescription = post.data.metaDescription ?? post.data.excerpt;
           <ol class="flex items-center gap-2 text-[13px] font-montserrat tracking-[0.6px]">
             <li><a href="/" class="text-kd-grey hover:text-kd-gold transition-colors">Home</a></li>
             <li class="text-kd-grey">/</li>
-            <li><a href="/blog" class="text-kd-grey hover:text-kd-gold transition-colors">Blog</a></li>
+            <li><a href="/blog/" class="text-kd-grey hover:text-kd-gold transition-colors">Blog</a></li>
             <li class="text-kd-grey">/</li>
             <li class="text-kd-gold">{post.data.category}</li>
           </ol>
@@ -267,7 +267,7 @@ const pageDescription = post.data.metaDescription ?? post.data.excerpt;
         <div class="grid md:grid-cols-3 gap-6 md:gap-8">
           {relatedPosts.map((relatedPost, index) => (
             <article class="animate-on-scroll fade-in-up bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow" style={`animation-delay: ${index * 0.1}s;`}>
-              <a href={`/blog/${relatedPost.id}`} class="block aspect-[1200/630] bg-kd-cream relative overflow-hidden">
+              <a href={`/blog/${relatedPost.id}/`} class="block aspect-[1200/630] bg-kd-cream relative overflow-hidden">
                 <img
                   src={relatedPost.data.image}
                   alt={relatedPost.data.imageAlt ?? relatedPost.data.title}
@@ -281,7 +281,7 @@ const pageDescription = post.data.metaDescription ?? post.data.excerpt;
                 </span>
 
                 <h3 class="font-aktiv text-kd-navy text-[15px] md:text-[16px] font-semibold leading-[22px] md:leading-[24px] tracking-[0.75px] md:tracking-[0.8px] mt-2 mb-2">
-                  <a href={`/blog/${relatedPost.id}`} class="hover:text-kd-gold transition-colors line-clamp-2">
+                  <a href={`/blog/${relatedPost.id}/`} class="hover:text-kd-gold transition-colors line-clamp-2">
                     {relatedPost.data.title}
                   </a>
                 </h3>
@@ -296,7 +296,7 @@ const pageDescription = post.data.metaDescription ?? post.data.excerpt;
 
         <!-- Back to Blog -->
         <div class="animate-on-scroll fade-in-up text-center mt-10">
-          <a href="/blog" class="btn-gold px-8 py-3.5 rounded-lg text-[14px] font-montserrat font-medium tracking-[1.4px] inline-flex items-center gap-3 hover:opacity-90 transition-opacity">
+          <a href="/blog/" class="btn-gold px-8 py-3.5 rounded-lg text-[14px] font-montserrat font-medium tracking-[1.4px] inline-flex items-center gap-3 hover:opacity-90 transition-opacity">
             <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
             </svg>

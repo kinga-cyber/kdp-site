@@ -101,4 +101,4 @@ If you are hiring, the brief has changed. Three things worth testing:
 
 The writing is the easy part to assess and the least scarce thing you are buying. Test the thinking, and give whoever you hire access to the data the thinking depends on.
 
-*If you want a second opinion on how your lifecycle and segments are structured before you hire against them, [book a strategy session](/consultation).*
+*If you want a second opinion on how your lifecycle and segments are structured before you hire against them, [book a strategy session](/consultation/).*

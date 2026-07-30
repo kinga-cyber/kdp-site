@@ -117,10 +117,10 @@ This isn't theoretical. It's what agencies that figure this out in the next 6-12
 
 The tools exist now. MCP connectors, Claude projects, Asana integrations, Klaviyo API connections. The infrastructure for building connected workflows is available today.
 
-But there's a window. Right now, having [AI workflows](/ai-systems) is a competitive advantage. Within a year, it'll be table stakes. And by then, the agencies that built early will already be servicing twice the clients at half the cost. Waiting doesn't save you anything — it just means you're building under pressure instead of ahead of it.
+But there's a window. Right now, having [AI workflows](/ai-systems/) is a competitive advantage. Within a year, it'll be table stakes. And by then, the agencies that built early will already be servicing twice the clients at half the cost. Waiting doesn't save you anything — it just means you're building under pressure instead of ahead of it.
 
 Every agency owner I've spoken with this year has been impressed by what connected AI workflows can do. Being impressed is easy. I've watched it happen on 20+ calls. What I haven't seen enough of is people actually building. That's where the separation happens.
 
 ---
 
-*If you want to see what connected AI workflows look like in practice, [book a consultation](/contact) or [explore our AI systems](/ai-systems).*
+*If you want to see what connected AI workflows look like in practice, [book a consultation](/contact/) or [explore our AI systems](/ai-systems/).*

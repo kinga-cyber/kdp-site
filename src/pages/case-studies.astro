@@ -128,7 +128,7 @@ const projects = [
         {featuredCaseStudies.map((study, index) => (
           <article class="animate-on-scroll fade-in-up group" style={`animation-delay: ${index * 0.1}s;`}>
             <!-- Image -->
-            <a href={`/case-studies/${study.slug}`} class="block">
+            <a href={`/case-studies/${study.slug}/`} class="block">
               <div class="aspect-[4/3] bg-kd-cream rounded-xl overflow-hidden mb-5 relative">
                 <img
                   src={study.image}
@@ -161,7 +161,7 @@ const projects = [
               </p>
 
               <!-- Learn More Link -->
-              <a href={`/case-studies/${study.slug}`} class="inline-flex items-center gap-2 text-kd-gold text-[13px] md:text-[14px] font-montserrat font-medium tracking-[1.3px] hover:text-kd-navy transition-colors group">
+              <a href={`/case-studies/${study.slug}/`} class="inline-flex items-center gap-2 text-kd-gold text-[13px] md:text-[14px] font-montserrat font-medium tracking-[1.3px] hover:text-kd-navy transition-colors group">
                 <span>Learn More</span>
                 <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -193,7 +193,7 @@ const projects = [
       <div class="grid md:grid-cols-2 gap-6 md:gap-8">
         {projects.map((project, index) => (
           <article class="animate-on-scroll fade-in-up group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow" style={`animation-delay: ${index * 0.1}s;`}>
-            <a href={`/case-studies/${project.slug}`} class="flex flex-col md:flex-row">
+            <a href={`/case-studies/${project.slug}/`} class="flex flex-col md:flex-row">
               <!-- Image -->
               <div class="md:w-2/5 aspect-video md:aspect-square bg-kd-cream overflow-hidden relative">
                 <img

@@ -448,7 +448,7 @@ const relatedCaseStudies = allCaseStudies.filter(cs => cs.slug !== slug).slice(0
     <div class="max-w-6xl mx-auto px-6 relative z-10">
       <!-- Breadcrumb -->
       <nav class="animate-on-scroll fade-in-up mb-6">
-        <a href="/case-studies" class="text-kd-gold text-[13px] font-montserrat tracking-[1.3px] hover:text-kd-navy transition-colors inline-flex items-center gap-2">
+        <a href="/case-studies/" class="text-kd-gold text-[13px] font-montserrat tracking-[1.3px] hover:text-kd-navy transition-colors inline-flex items-center gap-2">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
           </svg>
@@ -527,7 +527,7 @@ const relatedCaseStudies = allCaseStudies.filter(cs => cs.slug !== slug).slice(0
 
       <div class="grid md:grid-cols-3 gap-6 md:gap-8">
         {relatedCaseStudies.map((cs, index) => (
-          <a href={`/case-studies/${cs.slug}`} class="animate-on-scroll fade-in-up group block" style={`animation-delay: ${index * 0.1}s;`}>
+          <a href={`/case-studies/${cs.slug}/`} class="animate-on-scroll fade-in-up group block" style={`animation-delay: ${index * 0.1}s;`}>
             <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
               <div class="aspect-[4/3] bg-kd-cream overflow-hidden relative">
                 <img

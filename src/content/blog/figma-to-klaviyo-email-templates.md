@@ -1,6 +1,6 @@
 ---
 title: "Figma to Klaviyo: Building Email Templates Without Slicing"
-date: 2026-07-30
+date: 2026-08-06
 author: "Kinga Dow"
 category: "AI Systems"
 excerpt: "You can build a Klaviyo template straight from a Figma design, with live text rather than image slices. It works by mapping components to blocks, and it depends on one thing about your design file that most guides never mention."
@@ -16,7 +16,7 @@ keywords:
 metaTitle: "Figma to Klaviyo Email Templates, No Slicing | Kinga Dow"
 metaDescription: "How to build a Klaviyo template from a Figma design with live text instead of image slices, and the design-file prerequisite that decides whether it works."
 featured: false
-draft: true
+draft: false
 ---
 
 You can build a Klaviyo template directly from a Figma design, and get a real drag-and-drop template with live text blocks rather than a stack of image slices.

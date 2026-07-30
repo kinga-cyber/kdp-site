@@ -6,7 +6,7 @@ author: "Kinga Dow"
 category: "Klaviyo"
 excerpt: "The integration syncs your segments into Google Customer Match in real time. But if you manage the ad account through a manager account, it won't connect at all. Here's the setup and the four limits that decide whether it's worth doing."
 image: "/images/blog/klaviyo-google-ads.jpg"
-imageAlt: "The Klaviyo logo shown alongside a mobile device"
+imageAlt: "Klaviyo and Google Ads logos on interlocking wooden puzzle pieces, with text reading 'Up your game with this dynamic duo: Klaviyo and Google Ads'"
 keywords:
   - "klaviyo google ads integration"
   - "klaviyo customer match"

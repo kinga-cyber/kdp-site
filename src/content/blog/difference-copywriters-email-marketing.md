@@ -1,52 +1,104 @@
 ---
-title: "The Crucial Difference Between Copywriters and Email Marketing Copywriters"
+title: "Email Copywriter vs Copywriter: What Actually Differs Now"
 date: 2024-01-30
+updated: 2026-08-11
 author: "Kinga Dow"
 category: "Email Marketing"
-excerpt: "In the ever-evolving landscape of digital marketing, the role of copywriters has diversified, with email marketing copywriters emerging as specialists..."
+excerpt: "A general copywriter optimizes for attention. An email copywriter optimizes for a decision. But the more useful question now is which half of that job you are actually hiring for, because one half stopped being scarce."
 image: "/images/blog/copywriter-difference.png"
+imageAlt: "Title card reading 'Copywriters vs Email Marketing Copywriters', next to a photograph of Kinga Dow"
+keywords:
+  - "email copywriter"
+  - "email marketing copywriter"
+  - "copywriter vs email copywriter"
+  - "hiring an email copywriter"
+  - "email marketing vs copywriting"
+metaTitle: "Email Copywriter vs Copywriter: What Differs | Kinga Dow"
+metaDescription: "A copywriter optimizes for attention. An email copywriter optimizes for a decision. The real difference, and which half of the job is still scarce."
 featured: false
 draft: false
 ---
 
-## Introduction
+A general copywriter optimizes for attention. An email copywriter optimizes for a decision, made in a few seconds, by someone who already knows who you are.
 
-In the ever-evolving landscape of digital marketing, the role of copywriters has diversified, with a distinct emphasis on specialists who craft persuasive email content. This blog aims to unravel the intricate differences between regular copywriters and those specializing in email marketing. As we explore this, we'll also highlight the crucial SEO elements that contribute to effective email marketing in the realm of ecommerce.
+That difference is real and it still matters. But it is no longer the useful question.
 
-## Understanding the Basics of Copywriting
+The useful question is which half of the job you are hiring for, because the two halves separated recently and only one of them is still scarce. Producing competent email copy is fast and cheap now. Knowing what the email is for, who it is going to, and whether it should be sent at all is not.
 
-Copywriting, in its essence, is the art of using words to captivate, inform, and engage an audience. Regular copywriters are versatile wordsmiths who craft content for various mediums, including blogs, advertisements, and social media posts. Their primary goal is to communicate a message effectively, tailoring their approach to suit diverse platforms and audiences.
+I wrote the first version of this post in 2024, describing a multi-year search for a specialist email copywriter and a decision to train writers ourselves instead. The search was real. What changed is which part of it was actually hard.
 
-## The Rise of Email Marketing Copywriters
+## What Email Demands That General Copy Does Not
 
-With the exponential growth of digital communication, the demand for specialized email marketing copywriters has surged. Unlike their generalist counterparts, email marketing copywriters focus on mastering the intricacies of email campaigns. They are strategic thinkers, weaving words to not just convey a message but to drive engagement and prompt specific actions within the crowded inbox.
+Most copywriting is written for strangers. An ad, a landing page, a social post. The reader arrives with no relationship and no reason to care, so the job is to earn interest from a standing start.
 
-At the heart of email marketing lies the need for content that not only grabs attention but also prompts the desired response. Email marketing copywriters excel in creating concise, engaging, and purpose-driven content. This unique skill ensures that the recipient not only opens the email but also takes the intended action – be it making a purchase, subscribing, or participating in a survey.
+Email inverts that. The reader subscribed. They may have bought three times, or abandoned a cart last Tuesday. The context is not something you build in the copy, it is something you inherit and have to write against.
 
-## Our Quest for the Perfect Copywriter
+Four things follow.
 
-Behind the scenes, our journey for finding a copywriter has had its challenges. For years, we've been on the lookout for a talent that not only masters the art of persuasion but also understands the intricacies of email marketing. Despite our rigorous hiring efforts, we found a gap – a scarcity of professionals possessing the precise set of skills demanded by the dynamic world of ecommerce and email marketing.
+**Brevity is structural, not stylistic.** A landing page can afford to warm someone up. An email cannot, because the reader is deciding whether to keep reading while standing in a queue. Cutting a good sentence because it delays the point is a specific discipline, and writers trained on long-form find it genuinely uncomfortable.
 
-## The Need for Specialization
+**The call to action is singular.** A page can carry several paths. An email offering three actions usually gets none, because the cost of choosing exceeds the cost of closing the tab.
 
-Training new hires became a common theme in our pursuit of the ideal copywriter. The challenge lay in finding individuals with a knack for brevity, an understanding of persuasive calls to action (CTAs), and an inherent sense of urgency – all essential components in the world of email marketing.
+**Urgency has to be honest.** Manufactured scarcity works once and trains people to discount you afterwards. Real urgency comes from something true about the situation: stock, a date, where the customer actually is in their own cycle.
 
-## The Science of Subject Lines
+**The subject line is a separate discipline.** It is the only part most recipients read, it is written under a character limit, and it has to intrigue without misleading. Overpromise and you win the open and lose the sender reputation.
 
-In email marketing, the subject line is a make-or-break element. Crafting an effective subject line requires a mix of art and science – it needs to be intriguing, clear, and relevant. Email marketing copywriters invest significant time in perfecting subject lines that not only resonate with the audience but also stand out amid a sea of emails.
+## Writing Against a Segment, Not an Audience
 
-## Personalization and Audience Segmentation
+This is what separates people who are good at email from people who are good at writing emails.
 
-A distinctive strength of email marketing copywriters lies in their ability to personalize content. By segmenting audiences based on demographics, behaviors, or preferences, they create targeted messages that enhance relevance and increase engagement. This level of personalization is particularly crucial in the competitive ecommerce space.
+A general copywriter writes to a persona. An email copywriter writes to a segment, and a segment is a real, queryable group defined by what people actually did. Someone who bought twice in ninety days is not the same reader as someone who subscribed eight months ago and has never opened anything.
 
-## SEO Integration in Email Marketing
+Sending both the same email is the most common failure I see, and it does not present as a copy problem. It presents as a performance problem. The copy was fine. It was addressed to nobody in particular.
 
-While SEO is traditionally associated with web content, its principles are equally relevant in email marketing. Email marketing copywriters adeptly integrate keywords into their content, making it not only engaging for the reader but also optimized for search engines. This ensures that the content aligns with the latest trends and searches related to email marketing, enhancing its visibility.
+## What Changed
 
-## Staying Compliant and Ethical
+Drafting, variants, subject line options, adapting one message across five segments: that work has become fast. Pretending otherwise does not help anyone decide who to hire.
 
-In an era where data privacy is paramount, email marketing copywriters must navigate laws and regulations like GDPR and CAN-SPAM. Writing content that is not only compelling but also compliant is a crucial skill that sets professional email marketers apart, especially when dealing with ecommerce data and customer information.
+What did not get easier is everything upstream of the draft. Knowing what this email is for. Knowing which segment it is going to and why that segment exists. Knowing where it sits in the lifecycle, what the reader saw last week, and what happens if they do not respond. Knowing when the honest answer is to send nothing.
 
-## Conclusion
+That was always the scarce skill. It was hidden underneath the production work, and production took long enough that nobody had to separate them.
 
-As the digital marketing landscape evolves, the role of email marketing copywriters emerges as a crucial element in successful ecommerce strategies. Understanding the nuances that set them apart from regular copywriters is essential for businesses looking to leverage email marketing effectively. As we continue our journey, we invite aspiring email marketing copywriters to join us in this exciting venture. Together, we can transform how brands connect with their audiences through strategic, compelling email communication.
+They are separate now. A writer who only produces copy is competing with something that produces copy instantly. A writer who understands lifecycle position and segment logic is doing work that does not commoditize, because the judgment has to come from somewhere and the model does not have the context.
+
+## Where the Judgment Actually Comes From
+
+Saying "hire for judgment" is easy advice and slightly useless on its own, because judgment about a specific brand has to be grounded in that brand's data. Otherwise it is just taste.
+
+This is where connecting the account to an AI layer changes the work rather than decorating it. With Klaviyo connected through MCP, the questions underneath every segment become answerable directly instead of assumed.
+
+Where does repurchase actually stall for this brand? A ninety-day win-back window is a convention, not a finding. Some categories stall at six weeks and some at nine months, and the wrong number fills your win-back audience with people who were never coming back while missing the ones who were.
+
+Which customers belong in a high-value segment? "Top spenders" is the easy query. Realized lifetime value against acquisition cohort is the useful one, and they rarely produce the same list.
+
+What share of a segment has engaged with anything in the last six months? Worth knowing before you write to them, and worth knowing before you count them as an audience at all.
+
+None of this is hard. It is tedious enough that it does not get done, so the generic segment ships and the copy gets blamed.
+
+Then there is the maintenance problem. Segments drift. A definition that made sense in March describes a different group by September, and nobody notices because nothing breaks loudly. A weekly automated check catches that. A person with good intentions does not.
+
+That is the difference between using AI and having an AI workflow. Asking a model to write five subject lines is the chatbot phase. Having it read the account, define the segment from what is actually there, and flag when the definition has drifted is the workflow phase. The first saves a writer twenty minutes. The second is what makes the writing point at the right people.
+
+It is also the same distinction that separates email marketing from retention marketing. Email marketing optimizes a channel. Retention marketing optimizes a customer. Production versus the reason production is aimed anywhere useful.
+
+## A Correction: Email Copy and SEO
+
+An earlier version of this post said email copywriters optimize email content for search engines by integrating keywords. That was wrong, and it is worth correcting rather than quietly deleting.
+
+**Email bodies are not crawled or indexed.** Keywords in an email do nothing for search visibility. The inbox is not a search surface.
+
+There is a narrower true version: if you publish emails as web pages, a public archive or a newsletter landing page, those pages are indexable and normal SEO applies. That is a publishing decision about the archive, not a copywriting decision about the send.
+
+Anyone telling you to write emails for SEO has confused two jobs.
+
+## What to Look for Now
+
+If you are hiring, the brief has changed. Three things worth testing:
+
+1. **Give them a segment, not a topic.** Ask what they would send to customers who bought twice and have gone quiet for sixty days. A production writer asks what the offer is. A retention-minded writer asks what those customers bought and what the normal repurchase interval looks like.
+2. **Ask what they would not send.** Restraint is the clearest signal of judgment. Someone who has never argued against a send has not been responsible for a list.
+3. **Ask them to explain a subject line they rejected.** It reveals whether they are thinking about sender reputation and the next twenty emails, or only the open rate on this one.
+
+The writing is the easy part to assess and the least scarce thing you are buying. Test the thinking, and give whoever you hire access to the data the thinking depends on.
+
+*If you want a second opinion on how your lifecycle and segments are structured before you hire against them, [book a strategy session](/consultation).*

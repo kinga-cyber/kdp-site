@@ -47,7 +47,20 @@ kdp-site/
 | `/privacy` | privacy.astro | Privacy policy (GDPR, CCPA, third-party disclosures) |
 
 ## Brand
-- **Colors:** Navy `#3F455D`, Gold `#BA9200`, Cream `#F6EFE6`, Grey `#333333`, Sage `#59A56D`
+- **Colors — canonical, verified against `src/styles/global.css` on 2026-07-30.** These CSS custom properties are the single source of truth for anything rendered on kingadow.com:
+
+| Token | Hex | Use |
+|---|---|---|
+| `--color-kd-navy` | `#3F455D` | Primary text, dark surfaces |
+| `--color-kd-gold` | `#BA9200` | Accent, links, rules |
+| `--color-kd-gold-btn` | `#E0B000` | Button fill (brighter than accent gold) |
+| `--color-kd-cream` | `#F6EFE6` | Background |
+| `--color-kd-cream-light` | `#FFF8F0` | Lighter background |
+| `--color-kd-grey` | `#333333` | Body text |
+| `--color-kd-sage` | `#59A56D` | Sage accent |
+| `--color-kd-sage-light` | `#8CAB95` | Sage tint |
+
+  ⚠️ **Known conflict:** the `kinga-dow-brand` skill lists navy `#40455B`, cream `#F7F0E7`, sage `#8CAB95`, grey `#9F9FAE`, and no gold. Three of those are wrong for the site: navy and cream are near-miss values (likely eyedropped from a rendering rather than taken from source), and what it calls "sage" is actually this system's `sage-light`. Its grey `#9F9FAE` does not exist anywhere in the site's CSS. **For web work, use the table above.** The brand skill may still be correct for print and decks; it has not been reconciled.
 - **Fonts:** Aktiv Grotesk (headlines), Montserrat (body), Silver South Script (accents)
 - **Social:** LinkedIn, Instagram, Substack, YouTube (all in footer + JSON-LD schema)
 

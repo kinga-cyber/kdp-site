@@ -1,7 +1,7 @@
 ---
 title: "Klaviyo and Google Ads: How to Set It Up, and What It Won't Do"
 date: 2023-01-20
-updated: 2026-08-04
+updated: 2026-07-30
 author: "Kinga Dow"
 category: "Klaviyo"
 excerpt: "The integration syncs your segments into Google Customer Match in real time. But if you manage the ad account through a manager account, it won't connect at all. Here's the setup and the four limits that decide whether it's worth doing."

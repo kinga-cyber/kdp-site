@@ -1,7 +1,7 @@
 ---
 title: "Email Copywriter vs Copywriter: What Actually Differs Now"
 date: 2024-01-30
-updated: 2026-08-11
+updated: 2026-07-30
 author: "Kinga Dow"
 category: "Email Marketing"
 excerpt: "A general copywriter optimizes for attention. An email copywriter optimizes for a decision. But the more useful question now is which half of that job you are actually hiring for, because one half stopped being scarce."

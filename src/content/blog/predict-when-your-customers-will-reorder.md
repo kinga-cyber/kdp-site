@@ -1,6 +1,6 @@
 ---
 title: "How to Predict When a Customer Will Reorder"
-date: 2026-08-18
+date: 2026-07-30
 author: "Kinga Dow"
 category: "Klaviyo"
 excerpt: "Klaviyo predicts this per customer, and the feature has hard requirements a lot of accounts do not meet. Here is how it works, what to do when the box is empty, and why a per-customer date still will not tell you when to send the win-back."

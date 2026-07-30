@@ -5,7 +5,7 @@ author: "Kinga Dow"
 category: "Email Marketing"
 excerpt: "In the competitive world of eCommerce, particularly within the food industry, effective email marketing can be the difference between a brand that thrives and one that merely survives..."
 image: "/images/blog/food-brand-klaviyo.png"
-featured: true
+featured: false
 draft: false
 metaTitle: "Email Marketing for Food Brands in Klaviyo | Kinga Dow"
 metaDescription: "What works for food and beverage brands in Klaviyo: segmentation, replenishment timing, and the flows that drive repeat orders."

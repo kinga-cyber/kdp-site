@@ -5,7 +5,7 @@ author: "Kinga Dow"
 category: "eCommerce"
 excerpt: "I'm back after a great week at Cosmoprof, Bologna. I'm ready to dissect all the key strategies for capturing traffic and turning visitors into loyal customers..."
 image: "/images/blog/gamification-traffic.png"
-featured: true
+featured: false
 draft: false
 metaTitle: "Gamification and Email Acquisition Tactics | Kinga Dow"
 metaDescription: "Spin-to-win, quizzes, and social tactics brands use to turn visitors into subscribers, with examples observed at Cosmoprof Bologna."

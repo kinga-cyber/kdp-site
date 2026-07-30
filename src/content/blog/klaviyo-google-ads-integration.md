@@ -16,7 +16,7 @@ keywords:
   - "klaviyo integrations"
 metaTitle: "Klaviyo + Google Ads: Setup and the Limits | Kinga Dow"
 metaDescription: "The Klaviyo Google Ads integration syncs segments to Customer Match in real time. Here's the setup, and the four limits that stop most agencies."
-featured: false
+featured: true
 draft: false
 ---
 

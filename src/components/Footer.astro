@@ -11,6 +11,15 @@ const navLinks = [
   { label: "STRATEGY SESSION", href: "/consultation/" },
   { label: "CONTACT US", href: "/contact/" },
 ];
+
+const toolLinks = [
+  { label: "Retention Maturity Calculator", href: "/calculator/" },
+  { label: "AI Workflow ROI Calculator", href: "/roi-calculator/" },
+  { label: "Free Resource", href: "/resource/" },
+  { label: "A/B Testing Blueprint", href: "/blueprint/" },
+  { label: "Flow Health Monitor", href: "/demo/flow-health-monitor/" },
+  { label: "Portfolio", href: "/portfolio/" },
+];
 ---
 
 <footer class="bg-white pt-6 md:pt-10 pb-0">
@@ -46,11 +55,25 @@ const navLinks = [
     </div>
 
     <!-- Footer navigation -->
-    <div class="flex flex-wrap justify-center gap-4 md:gap-12 mb-10">
+    <div class="flex flex-wrap justify-center gap-4 md:gap-12 mb-8">
       {navLinks.map((link) => (
         <a
           href={link.href}
           class="font-aktiv text-kd-navy font-medium text-[13px] tracking-[1.3px] hover:text-kd-gold transition-colors uppercase"
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+
+    <!-- Tools and resources: these pages were orphaned (no incoming internal
+         links anywhere on the site), so they received no crawl priority and
+         no visitor could navigate to them. -->
+    <div class="flex flex-wrap justify-center gap-3 md:gap-8 mb-10">
+      {toolLinks.map((link) => (
+        <a
+          href={link.href}
+          class="font-montserrat text-kd-grey font-light text-[12px] tracking-[0.8px] hover:text-kd-gold transition-colors"
         >
           {link.label}
         </a>

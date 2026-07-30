@@ -6,6 +6,7 @@ const navLinks = [
   { label: "CASE STUDIES", href: "/case-studies/" },
   { label: "ABOUT US", href: "/about/" },
   { label: "BLOG", href: "/blog/" },
+  { label: "STRATEGY SESSION", href: "/consultation/" },
   { label: "CONTACT US", href: "/contact/" },
 ];
 ---
@@ -28,11 +29,11 @@ const navLinks = [
   </div>
 
   <!-- Desktop Navigation: Centered below logo -->
-  <nav class="hidden md:flex justify-center items-center gap-12 py-4">
+  <nav class="hidden md:flex justify-center items-center gap-8 py-4">
     {navLinks.map((link) => (
       <a
         href={link.href}
-        class="font-aktiv text-black font-medium text-sm tracking-[0.7px] hover:text-kd-gold transition-colors"
+        class="font-aktiv text-black font-medium text-xs tracking-[0.7px] hover:text-kd-gold transition-colors"
       >
         {link.label}
       </a>

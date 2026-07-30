@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Staged copies of oversized images (working folder, not deployed)
+_image-optimization/

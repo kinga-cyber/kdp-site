@@ -1,10 +1,13 @@
 ---
-import { getCollection, render, type CollectionEntry } from "astro:content";
+import { render, type CollectionEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import ConsultationCTA from "../../components/ConsultationCTA.astro";
+import { getPublishedPosts, freshness } from "../../lib/posts";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  // A post excluded here never gets a page generated, which is also what keeps
+  // it out of the sitemap. This is the gate that matters most.
+  const posts = await getPublishedPosts();
   return posts.map((post) => ({
     params: { slug: post.id },
     props: { post },
@@ -30,11 +33,12 @@ const formatDate = (d: Date) =>
     day: "numeric",
   });
 
-// Related posts: same category, exclude current, max 3, exclude drafts
-const allPosts = await getCollection("blog", ({ data }) => !data.draft);
+// Related posts: same category, exclude current, max 3. Uses the same gate as
+// everything else so a scheduled post cannot surface here early.
+const allPosts = await getPublishedPosts();
 const relatedPosts = allPosts
   .filter((p) => p.data.category === post.data.category && p.id !== post.id)
-  .sort((a, b) => (b.data.updated ?? b.data.date).valueOf() - (a.data.updated ?? a.data.date).valueOf())
+  .sort((a, b) => freshness(b) - freshness(a))
   .slice(0, 3);
 
 // SEO + canonical

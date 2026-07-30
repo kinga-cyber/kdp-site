@@ -1,8 +1,10 @@
 import rss from "@astrojs/rss";
-import { getCollection } from "astro:content";
+import { getPublishedPosts } from "../lib/posts";
 
 export async function GET(context) {
-  const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  // Must use the same gate as the rest of the site, or subscribers receive a
+  // scheduled post before it is live on the web.
+  const posts = (await getPublishedPosts()).sort(
     (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
   );
 

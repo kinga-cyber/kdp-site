@@ -1,15 +1,11 @@
 ---
-import { getCollection, type CollectionEntry } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import ConsultationCTA from "../components/ConsultationCTA.astro";
+import { getPublishedPosts, freshness } from "../lib/posts";
 
-// Pull all non-draft posts, newest first
-// Sort by freshness, not original publication date. A refreshed post is the
-// newest thing on the site and should read that way in the listing.
-const freshness = (p: CollectionEntry<"blog">) =>
-  (p.data.updated ?? p.data.date).valueOf();
-
-const allPosts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+// Published = not a draft, and not dated in the future. Sorted by freshness
+// rather than original publication date, so a refreshed post reads as new.
+const allPosts = (await getPublishedPosts()).sort(
   (a, b) => freshness(b) - freshness(a)
 );
 

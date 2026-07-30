@@ -1,0 +1,37 @@
+name: Weekly publish
+
+# Posts are date-gated at build time (see src/lib/posts.ts), so a post dated in
+# the future stays hidden until a build runs on or after that date. This is the
+# build that runs on the date.
+#
+# Without this workflow the date gate would be a trap: scheduled posts would be
+# excluded from every build and never appear at all.
+
+on:
+  schedule:
+    # Thursday 13:00 UTC = 9am EDT / 8am EST.
+    # GitHub cron is UTC only and does not follow daylight saving.
+    # Free-tier scheduled runs are queued and can be delayed 15-60 minutes.
+    - cron: "0 13 * * 4"
+
+  # Adds a "Run workflow" button in the Actions tab, for publishing something
+  # that should not wait for Thursday.
+  workflow_dispatch:
+
+jobs:
+  trigger-build:
+    name: Trigger Netlify build
+    runs-on: ubuntu-latest
+    steps:
+      - name: POST to the Netlify build hook
+        run: |
+          if [ -z "${{ secrets.NETLIFY_BUILD_HOOK }}" ]; then
+            echo "::error::NETLIFY_BUILD_HOOK secret is not set."
+            echo "Create a build hook in Netlify (Site settings > Build & deploy >"
+            echo "Build hooks, branch main), then add the URL as a repository"
+            echo "secret named NETLIFY_BUILD_HOOK."
+            exit 1
+          fi
+          curl -fsSL --retry 3 --retry-delay 10 \
+            -X POST -d '{}' "${{ secrets.NETLIFY_BUILD_HOOK }}"
+          echo "Build triggered."

@@ -7,6 +7,8 @@ excerpt: "11 Best Apps for Building Up Your Klaviyo Ecosystem. When it comes to 
 image: "/images/blog/ecommerce-partners.jpg"
 featured: false
 draft: false
+metaTitle: "11 Best Apps for Your Klaviyo Ecosystem | Kinga Dow"
+metaDescription: "The eleven apps worth connecting to Klaviyo: reviews, loyalty, SMS, shipping and more. What each does, and which ones you can skip."
 ---
 
 ## 11 Best Apps for Building Up Your Klaviyo Ecosystem

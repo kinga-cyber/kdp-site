@@ -7,6 +7,8 @@ excerpt: "In the digital marketing realm, delivering emails that reach your audi
 image: "/images/blog/google-yahoo-2024.png"
 featured: false
 draft: false
+metaTitle: "Google and Yahoo Sender Requirements | Kinga Dow"
+metaDescription: "What Google and Yahoo require from bulk senders: SPF, DKIM, DMARC, one-click unsubscribe, and spam complaint rates. What to check first."
 ---
 
 ## Introduction to New Email Marketing Compliance Standards

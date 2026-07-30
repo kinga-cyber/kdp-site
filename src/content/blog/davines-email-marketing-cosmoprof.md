@@ -7,6 +7,8 @@ excerpt: "Examining how this sustainable hair care brand executed their email ma
 image: "/images/blog/davines-email-marketing.jpg"
 featured: false
 draft: false
+metaTitle: "How Davines Does Email Marketing | Kinga Dow"
+metaDescription: "A breakdown of how the sustainable hair care brand ran their email marketing around Cosmoprof Bologna, and what was worth copying."
 ---
 
 ## See how Davines, the sustainable hair care brand, executed a marketing strategy leveraging email!

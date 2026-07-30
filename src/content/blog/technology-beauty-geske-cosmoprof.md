@@ -7,6 +7,8 @@ excerpt: "Leveraging technology for unique customer experiences in the beauty se
 image: "/images/blog/geske-cosmoprof.gif"
 featured: false
 draft: false
+metaTitle: "Technology in Beauty: What Geske Got Right | Kinga Dow"
+metaDescription: "How a beauty tech brand used connected devices and customer data to build its experience, observed at Cosmoprof Bologna."
 ---
 
 ## About Geske

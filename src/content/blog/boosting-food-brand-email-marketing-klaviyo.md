@@ -7,6 +7,8 @@ excerpt: "In the competitive world of eCommerce, particularly within the food in
 image: "/images/blog/food-brand-klaviyo.png"
 featured: true
 draft: false
+metaTitle: "Email Marketing for Food Brands in Klaviyo | Kinga Dow"
+metaDescription: "What works for food and beverage brands in Klaviyo: segmentation, replenishment timing, and the flows that drive repeat orders."
 ---
 
 In the competitive world of eCommerce, particularly within the food industry, effective email marketing can make all the difference in growing your brand and driving sales. Leveraging the power of Klaviyo, an advanced email marketing platform, you can create highly personalized, targeted campaigns that resonate with your audience and keep them coming back for more. Here's a detailed look at the strategies we used to grow Made In New Mexico food and gift shop eCommerce store, which you can adapt to boost your own brand's success.

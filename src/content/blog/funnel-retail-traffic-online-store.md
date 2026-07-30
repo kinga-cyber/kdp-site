@@ -7,6 +7,8 @@ excerpt: "QR codes are a unique way to bridge your retail presence with your onl
 image: "/images/blog/retail-traffic.jpg"
 featured: false
 draft: false
+metaTitle: "Turn Retail Foot Traffic Into Email Subscribers | Kinga Dow"
+metaDescription: "How to use QR codes in store to capture customers into your email list, and what to send them once they subscribe."
 ---
 
 ## How Can QR Codes Be Used For Marketing?

@@ -8,6 +8,8 @@ export function getStaticPaths() {
       params: { slug: "ai-powered-gift-ecommerce" },
       props: {
         title: "AI-Powered Email Marketing Transformation: 273% Revenue Growth",
+        seoTitle: "273% Email Revenue Growth With AI | Kinga Dow",
+        seoDescription: "How an RFM and CLV segmentation system built with Claude AI grew a gift brand's email revenue by 273% year over year.",
         subtitle: "How we built a proprietary RFM + CLV segmentation system with Claude AI that grew email revenue from $346K to $1.29M in 7 months",
         category: "E-commerce & Claude AI",
         client: "Premium Gift E-commerce Brand",
@@ -58,6 +60,7 @@ export function getStaticPaths() {
       params: { slug: "loyaltylion" },
       props: {
         title: "MoxieLash + LoyaltyLion",
+        seoDescription: "How a beauty brand tripled repeat purchase rates and lifted customer engagement by 700% with a LoyaltyLion rewards programme.",
         subtitle: "How MoxieLash tripled repeat purchase rates and increased customer engagement by 700% with LoyaltyLion",
         category: "Beauty & Cosmetics",
         client: "MoxieLash",
@@ -163,6 +166,7 @@ export function getStaticPaths() {
       params: { slug: "octane-ai-moxielash" },
       props: {
         title: "MoxieLash + Octane AI",
+        seoDescription: "How an interactive product quiz drove 187.85% email list growth and a 22% lift in Black Friday sales for a beauty brand.",
         subtitle: "From Quiz to Conversion: How MoxieLash's Interactive Quiz Drove 187.85% List Growth and 22% BFCM Sales Lift",
         category: "Beauty & Quizzes",
         client: "MoxieLash",
@@ -220,6 +224,8 @@ export function getStaticPaths() {
       params: { slug: "ai-powered-hawaiian-footwear" },
       props: {
         title: "AI-Powered Marketing Coaching: 40% Year-Over-Year Sales Growth",
+        seoTitle: "AI Marketing Coaching: 40% Sales Growth | Kinga Dow",
+        seoDescription: "How AI-assisted coaching turned an overwhelmed ecommerce operator into a confident, data-driven decision maker, with 40% YoY sales growth.",
         subtitle: "How we transformed an overwhelmed e-commerce operator into a confident, data-driven decision maker with AI-powered marketing systems and a 10+ year partnership",
         category: "AI-Powered Retention",
         client: "Legacy Hawaiian Footwear Brand",
@@ -267,6 +273,8 @@ export function getStaticPaths() {
       params: { slug: "specialty-gift-email-transformation" },
       props: {
         title: "Email Marketing Transformation: 205% Year-Over-Year Revenue Growth",
+        seoTitle: "205% Email Revenue Growth, Year Over Year | Kinga Dow",
+        seoDescription: "How infrastructure rebuilding, SMS integration, and RFM analytics turned a seasonal gift business into a year-round revenue engine.",
         subtitle: "How systematic infrastructure building, SMS integration, and RFM analytics turned a seasonal gift business into a consistent revenue driver",
         category: "AI-Powered Retention",
         client: "Specialty Gift Basket Company",
@@ -373,6 +381,7 @@ export function getStaticPaths() {
       params: { slug: "optinmonster-expansion" },
       props: {
         title: "OptinMonster Expansion",
+        seoDescription: "How targeted on-site popups converted 28.57% of website visitors into email subscribers, and the targeting rules that made it work.",
         subtitle: "How Kinga Dow helped convert 28.57% of website visitors into email list subscribers using OptinMonster",
         category: "Online Gifts & Conversion",
         client: "Online Gifts Company",
@@ -418,7 +427,7 @@ export function getStaticPaths() {
 }
 
 const { slug } = Astro.params;
-const { title, subtitle, category, client, technologies, image, stat, statLabel, content, results } = Astro.props;
+const { title, subtitle, category, client, technologies, image, stat, statLabel, content, results, seoTitle, seoDescription } = Astro.props;
 
 // Get other case studies for related section
 const allCaseStudies = [
@@ -436,8 +445,8 @@ const relatedCaseStudies = allCaseStudies.filter(cs => cs.slug !== slug).slice(0
 ---
 
 <Layout
-  title={`${title} | Kinga Dow Case Study`}
-  description={subtitle}
+  title={seoTitle ?? `${title} | Kinga Dow`}
+  description={seoDescription ?? subtitle}
 >
   <!-- Hero Section -->
   <section class="relative py-12 md:py-20 overflow-hidden" style="background: linear-gradient(180deg, #F6EFE6 0%, #FAFAFA 100%);">

@@ -7,6 +7,8 @@ excerpt: "I'm back after a great week at Cosmoprof, Bologna. I'm ready to dissec
 image: "/images/blog/gamification-traffic.png"
 featured: true
 draft: false
+metaTitle: "Gamification and Email Acquisition Tactics | Kinga Dow"
+metaDescription: "Spin-to-win, quizzes, and social tactics brands use to turn visitors into subscribers, with examples observed at Cosmoprof Bologna."
 ---
 
 ## Introduction

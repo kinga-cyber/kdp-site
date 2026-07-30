@@ -7,6 +7,8 @@ excerpt: "As AI technology continues to advance, more and more businesses are tu
 image: "/images/blog/ai-role-business.jpg"
 featured: false
 draft: false
+metaTitle: "The Role of AI in Business: What It Changes | Kinga Dow"
+metaDescription: "How AI is changing day-to-day business operations, and what ecommerce brands can realistically use it for right now."
 ---
 
 As AI technology continues to advance, more and more businesses are turning to artificial intelligence to improve their efficiency and provide creative results. Klaviyo's AI and ChatGPT are two powerful tools that can help you optimize your business and stay ahead of the curve!

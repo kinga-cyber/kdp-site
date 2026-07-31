@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" font-family="Montserrat, 'Helvetica Neue', Arial, sans-serif">
+<rect width="1200" height="630" fill="#F6EFE6"/>
+<text x="60" y="56" fill="#3F455D" font-size="14" font-weight="600" letter-spacing="2" opacity="0.6">KLAVIYO RFM</text>
+<text x="60" y="104" fill="#3F455D" font-size="34" font-weight="600">The six groups, and their scores</text>
+<text x="60" y="138" fill="#333333" font-size="19" opacity="0.85">Recency, frequency and monetary each scored 1 to 3. 333 is your best customer.</text>
+<rect x="60" y="182" width="345" height="168" rx="7" fill="#FFFFFF" stroke="#BA9200" stroke-opacity="0.50"/>
+<rect x="60" y="182" width="6" height="168" rx="3" fill="#BA9200" fill-opacity="1.00"/>
+<text x="90" y="234" fill="#3F455D" font-size="23" font-weight="600">Champions</text>
+<text x="90" y="272" fill="#BA9200" fill-opacity="1.00" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="15.5">333 · 332 · 323</text>
+<text x="90" y="308" fill="#333333" font-size="15" opacity="0.7">Recent, frequent, top spend</text>
+<rect x="427" y="182" width="345" height="168" rx="7" fill="#FFFFFF" stroke="#BA9200" stroke-opacity="0.31"/>
+<rect x="427" y="182" width="6" height="168" rx="3" fill="#BA9200" fill-opacity="0.62"/>
+<text x="457" y="234" fill="#3F455D" font-size="23" font-weight="600">Loyal</text>
+<text x="457" y="272" fill="#BA9200" fill-opacity="0.75" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="15.5">321 · 322 · 331 · 232 · 233</text>
+<text x="457" y="308" fill="#333333" font-size="15" opacity="0.7">Reliable, a rung below</text>
+<rect x="794" y="182" width="345" height="168" rx="7" fill="#FFFFFF" stroke="#59A56D" stroke-opacity="0.42"/>
+<rect x="794" y="182" width="6" height="168" rx="3" fill="#59A56D" fill-opacity="0.85"/>
+<text x="824" y="234" fill="#3F455D" font-size="23" font-weight="600">Recent</text>
+<text x="824" y="272" fill="#59A56D" fill-opacity="0.85" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="15.5">312 · 313 · 311 · 222 · 223</text>
+<text x="824" y="308" fill="#333333" font-size="15" opacity="0.7">Bought once, not a habit</text>
+<rect x="60" y="372" width="345" height="168" rx="7" fill="#FFFFFF" stroke="#8CAB95" stroke-opacity="0.45"/>
+<rect x="60" y="372" width="6" height="168" rx="3" fill="#8CAB95" fill-opacity="0.90"/>
+<text x="90" y="424" fill="#3F455D" font-size="23" font-weight="600">Needs Attention</text>
+<text x="90" y="462" fill="#8CAB95" fill-opacity="0.90" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="15.5">213 · 221 · 123 · 132 · 133</text>
+<text x="90" y="498" fill="#333333" font-size="15" opacity="0.7">Valuable, and drifting</text>
+<rect x="427" y="372" width="345" height="168" rx="7" fill="#FFFFFF" stroke="#3F455D" stroke-opacity="0.28"/>
+<rect x="427" y="372" width="6" height="168" rx="3" fill="#3F455D" fill-opacity="0.55"/>
+<text x="457" y="424" fill="#3F455D" font-size="23" font-weight="600">At Risk</text>
+<text x="457" y="462" fill="#3F455D" fill-opacity="0.75" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="15.5">231 · 212 · 122 · 131 · 211</text>
+<text x="457" y="498" fill="#333333" font-size="15" opacity="0.7">Slipping on recency or spend</text>
+<rect x="794" y="372" width="345" height="168" rx="7" fill="#FFFFFF" stroke="#3F455D" stroke-opacity="0.15"/>
+<rect x="794" y="372" width="6" height="168" rx="3" fill="#3F455D" fill-opacity="0.30"/>
+<text x="824" y="424" fill="#3F455D" font-size="23" font-weight="600">Inactive</text>
+<text x="824" y="462" fill="#3F455D" fill-opacity="0.75" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="15.5">111 · 112 · 113 · 121</text>
+<text x="824" y="498" fill="#333333" font-size="15" opacity="0.7">Lapsed and long quiet</text>
+<line x1="60" y1="566" x2="1140" y2="566" stroke="#BA9200" stroke-opacity="0.35"/>
+<text x="60" y="600" fill="#3F455D" font-size="18" opacity="0.8">Klaviyo also stores the previous group, so you can trigger on customers moving between them.</text>
+</svg>

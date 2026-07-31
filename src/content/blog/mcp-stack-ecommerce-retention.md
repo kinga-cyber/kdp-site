@@ -49,9 +49,19 @@ All of those are answerable from the data. None of them is one click in the inte
 
 ## Shopify
 
-**What it reaches.** Products, variants, collections, orders, customers, inventory levels by location, discounts, and analytics through ShopifyQL. There is also a general GraphQL escape hatch, which matters more than it sounds: the Admin API covers hundreds of resources and the convenience tools only wrap the common ones. Metafields, pages, markets and gift cards are all reachable through raw GraphQL.
+**What it reaches.** Products, variants, collections, orders, customers, inventory levels by location, discounts, and analytics through ShopifyQL. The analytics go further than people expect: sessions, conversion rate, returning customer rate and revenue grouped by referrer source are all queryable, which is a slice of the attribution picture without any separate tool.
 
-**What I use it for.** Anything that depends on what is actually true right now. Prices, variant names, what is in a collection, what is in stock and where.
+There is also a general GraphQL escape hatch, which matters more than it sounds. The Admin API covers hundreds of resources and the convenience tools only wrap the common ones. Metafields, metaobjects, pages, blogs, markets, translations and gift cards are all reachable through raw GraphQL.
+
+**And unlike Klaviyo's, it writes properly.** It creates and updates products and collections, bulk-updates product status, creates discount codes, and sets inventory quantities at a given location.
+
+Read those last two again. It will create a live discount code, active immediately unless you give it a future start date. It will change your stock numbers.
+
+That is the opposite of where Klaviyo drew its line, and the contrast is worth noticing. Klaviyo will not let a model build a flow. Shopify will let one put a percentage off your entire catalog. Same protocol, two vendors, completely different appetite for risk.
+
+To be fair to Shopify, the inventory tool is built carefully. It wants the current quantity passed back to it as a comparison value, so the write fails rather than silently overwriting if stock moved between reading and writing. That is a proper safeguard and more than most tools bother with.
+
+**What I use it for.** Almost entirely reading, despite all of the above. Anything that depends on what is actually true right now. Prices, variant names, what is in a collection, what is in stock and where.
 
 **A real one.** Every campaign brief pulls live per-SKU stock at build time. If a featured product is under roughly fifty units and the send is going to a whole list, that gets raised before the design is approved rather than after the email lands. Promoting something into a sellout is expensive, specific and entirely preventable, and preventing it needs one thing: the stock number being present at the moment somebody decides.
 

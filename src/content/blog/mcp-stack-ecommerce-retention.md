@@ -97,7 +97,9 @@ It also makes the calendar answerable. What is not scheduled yet this month beco
 
 **A real one.** The clearest explanation of your own methodology is almost always something you said out loud to somebody who asked a good question, not something you sat down to write. Those explanations already exist in your call history. Being able to search them turns a back catalog into a content pipeline, and more usefully into institutional memory that survives somebody leaving.
 
-**Where it stops.** It only knows about calls that were actually recorded, which sounds obvious and still catches people out. And transcripts contain everything said, including things a client would not expect to see published, so anything mined out needs a deliberate confidentiality pass.
+**Where it stops.** It only knows about calls that were actually recorded, which sounds obvious and still catches people out.
+
+The bigger one is that this connector writes, and the writes are about access rather than content. It can share a meeting, change a meeting's privacy setting, and revoke somebody's access. Transcripts already contain everything that was said, including plenty a client would not expect to see published, so anything mined out of them needs a deliberate confidentiality pass. Knowing that the same connection can also change who is able to read them is worth holding onto.
 
 ## Google Drive
 

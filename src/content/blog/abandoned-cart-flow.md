@@ -57,6 +57,10 @@ A single flow sending the same thing to everyone is the default, and it is where
 
 None of this requires new tooling. It is conditional splits on data already sitting in the account.
 
+![Abandoned cart flow split by purchase history, showing a buyer path and a non-buyer path sharing the same timing, with only the middle email differing between them](/images/blog/abandoned-cart-flow-structure.svg)
+
+Put together, the whole structure is smaller than people expect. One trigger, one split on purchase history, three emails on each side, and only the middle one genuinely differing.
+
 ## Timing
 
 The convention is roughly one hour, then a day, then three days. It is fine as a starting point and it is worth knowing it is a convention rather than a finding.

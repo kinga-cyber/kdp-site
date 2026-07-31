@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" font-family="Montserrat, 'Helvetica Neue', Arial, sans-serif">
+<rect width="1200" height="630" fill="#F6EFE6"/>
+<text x="120" y="80" fill="#3F455D" font-size="38" font-weight="600">The bill is not the work</text>
+<text x="120" y="118" fill="#333333" font-size="20" opacity="0.85">A twenty turn build, at 1,000 tokens per turn. What you are actually charged.</text>
+<text x="120" y="166" fill="#3F455D" font-size="15" font-weight="600" letter-spacing="1.6" opacity="0.65">CUMULATIVE INPUT TOKENS</text>
+<line x1="180" y1="500.0" x2="1080" y2="500.0" stroke="#3F455D" stroke-opacity="0.16"/><text x="162" y="506.0" text-anchor="end" fill="#333333" font-size="17" opacity="0.7">0</text><line x1="180" y1="355.2" x2="1080" y2="355.2" stroke="#3F455D" stroke-opacity="0.16"/><text x="162" y="361.2" text-anchor="end" fill="#333333" font-size="17" opacity="0.7">100k</text><line x1="180" y1="210.5" x2="1080" y2="210.5" stroke="#3F455D" stroke-opacity="0.16"/><text x="162" y="216.5" text-anchor="end" fill="#333333" font-size="17" opacity="0.7">200k</text>
+<line x1="180" y1="500" x2="1080" y2="500" stroke="#3F455D" stroke-width="2"/>
+<polyline points="180.0,500.0 225.0,498.6 270.0,497.1 315.0,495.7 360.0,494.2 405.0,492.8 450.0,491.3 495.0,489.9 540.0,488.4 585.0,487.0 630.0,485.5 675.0,484.1 720.0,482.6 765.0,481.2 810.0,479.7 855.0,478.3 900.0,476.8 945.0,475.4 990.0,473.9 1035.0,472.5 1080.0,471.0" fill="none" stroke="#59A56D" stroke-width="3" stroke-dasharray="8 6"/>
+<polyline points="180.0,500.0 225.0,498.6 270.0,495.7 315.0,491.3 360.0,485.5 405.0,478.3 450.0,469.6 495.0,459.5 540.0,447.9 585.0,434.9 630.0,420.4 675.0,404.5 720.0,387.1 765.0,368.3 810.0,348.0 855.0,326.3 900.0,303.1 945.0,278.5 990.0,252.5 1035.0,225.0 1080.0,196.0" fill="none" stroke="#3F455D" stroke-width="5" stroke-linejoin="round"/>
+<circle cx="1080.0" cy="196.0" r="9" fill="#BA9200"/>
+<text x="1064.0" y="200.0" text-anchor="end" fill="#BA9200" font-size="25" font-weight="600">210,000 actually billed</text>
+<text x="1064.0" y="455.0" text-anchor="end" fill="#59A56D" font-size="20" font-weight="600">20,000 if you estimate per step</text>
+<text x="225.0" y="530" text-anchor="middle" fill="#333333" font-size="17" opacity="0.7">1</text><text x="630.0" y="530" text-anchor="middle" fill="#333333" font-size="17" opacity="0.7">10</text><text x="1080.0" y="530" text-anchor="middle" fill="#333333" font-size="17" opacity="0.7">20</text>
+<text x="630.0" y="558" text-anchor="middle" fill="#333333" font-size="17" opacity="0.7">Turns in the conversation</text>
+<line x1="120" y1="588" x2="1080" y2="588" stroke="#BA9200" stroke-opacity="0.35"/>
+<text x="120" y="614" fill="#3F455D" font-size="18" opacity="0.8">Every call re-sends the whole conversation, so cost tracks turns, not complexity.</text>
+</svg>

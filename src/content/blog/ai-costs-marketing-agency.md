@@ -75,7 +75,11 @@ A written system file is stable by definition. It is a document. It loads once a
 
 Discovery is the exact opposite. It is different every run, it lands in the middle of the conversation rather than the top, and when it changes it takes the cacheability of everything after it down with it.
 
-So a system does not only use fewer tokens. It puts the tokens it does use in the position that costs ninety percent less to re-read, while discovery puts them in the worst position available. One honest limit: the default cache lifetime is five minutes, with a one hour option. That covers a working session. It does not carry across days.
+So a system does not only use fewer tokens. It puts the tokens it does use in the position that costs ninety percent less to re-read, while discovery puts them in the worst position available.
+
+Two honest limits, and they are not the same limit. The cache has a lifetime, five minutes by default with a one hour option, so leaving a session idle over lunch means the next thing you ask pays full price for the whole conversation again even though nothing has been forgotten. Separately, starting a **new** session loses the context altogether rather than just the discount.
+
+That second one is what decides how you work. Memory is a property of the session. Cost is a property of the clock. It is also the reason the build file has to be a file, rather than something you explained well once in a conversation that has since ended.
 
 ## The Cost That Is Not on the Invoice
 

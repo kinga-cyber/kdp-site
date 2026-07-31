@@ -89,11 +89,17 @@ It also makes the calendar answerable. "What is not scheduled yet this month" is
 
 ## What Is Still Missing
 
-The platforms are well covered. The gap is the **reporting and analytics layer above them**.
+The platforms are well covered. The gap used to be the **reporting and analytics layer above them**, and that has started to close faster than I expected.
 
-Agencies run consolidated reporting across many client accounts, and that consolidated view is exactly what you would most want to interrogate conversationally: which clients are trending down, where the same problem appears in three accounts at once. Most of those tools have no MCP server yet.
+**Triple Whale** now ships an official MCP server, with documentation, a public repository, and OAuth2 connection at read-only access. It is listed in both the Claude and OpenAI connector directories.
 
-So the raw data is reachable and the synthesised view is not, which is backwards from where the value sits. That will close, because the protocol is young and reporting tools have an obvious incentive. Until then, expect to reach the platforms directly and do the cross-account synthesis yourself.
+**Polar Analytics** has one too, and its design is the more interesting of the two. Rather than exposing raw tables for the model to write SQL against, it exposes a defined metrics layer, so you are querying agreed definitions instead of hoping a generated query means what you think it means. Worth noting that most of what is published about that comparison comes from Polar themselves.
+
+So brand-side analytics is arriving. What has not arrived is the **agency** layer.
+
+The consolidated view across many client accounts is the one I would most want to interrogate conversationally: which clients are trending down, where the same problem shows up in three accounts at once. Those tools are built for agencies rather than brands, and they are still closed. Hiro Analytics, which exists specifically to automate reporting for retention agencies across Klaviyo, Attentive, Postscript, Omnisend, Yotpo and Sendlane, publishes no MCP server and no API at all.
+
+That is the more interesting absence. Cross-client synthesis is the thing an agency cannot get anywhere else, and it is exactly the kind of question a model is good at. Until it opens up, expect to reach each platform directly and do that synthesis yourself.
 
 ## Where to Start
 

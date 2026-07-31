@@ -31,9 +31,13 @@ One thing worth saying before the list. **Everything below is what the connector
 
 On the writing side it creates campaigns and clones them, builds email templates including proper drag-and-drop ones, creates lists, profiles, coupons and coupon codes, catalog items and variants, tags, custom metrics and universal content. It can render a template to check what it looks like.
 
-**Four things it will not create.** Segments, flows, forms and webhooks. It reads all four, and it will happily delete any of them, but there is no create tool for any of the four. It will also update a flow without being able to build one.
+**Four things it will not create.** Segments, flows, forms and webhooks. It reads all four, and it will delete any of them with nothing but an ID, but there is no create tool for any of the four.
 
-That is worth knowing before you plan a workflow around it, because those four are exactly what people assume they will automate first.
+Flows are the strange one. There is an update tool, and all it does is set the status, draft or manual or live, across the flow and every action inside it. So the connector can switch a live flow off, switch a draft one on, or delete the whole thing. What it cannot do is build one or change anything inside it.
+
+Sit with that ordering for a second, because it is the opposite of what you would design. Turning somebody's abandoned cart flow off is a considerably larger action than editing a subject line, and turning it off is the one it will do.
+
+Worth knowing before you plan a workflow around any of this, because those four are exactly what people assume they will automate first.
 
 **What I use it for.** Comparative questions, almost entirely. Klaviyo's dashboards answer the questions Klaviyo anticipated, which are mostly "how did this perform". The awkward ones are comparative: how does this segment's repeat rate compare to that one, what share of a flow's revenue comes from the first email rather than the rest, which flows have not been edited in a year, what proportion of the list has engaged with anything in six months.
 

@@ -44,9 +44,9 @@ There are four things it will not create.
 | Coupons and codes | Forms |
 | Catalog items, profiles, lists | Webhooks |
 
-Here is the part that gave the game away for me. The connector will **delete** a flow. It will delete a segment, a form and a webhook too. It simply will not create any of them.
+Here is the part that gave the game away for me. The connector will **delete** a flow. It will delete a segment, a form and a webhook too. It will also switch a live flow off, or a draft one on, because status is the single thing about a flow it is allowed to change. It simply will not create any of them.
 
-You can knock the door down. You cannot build it.
+You can knock the door down and you can turn the lights off. You cannot build the room.
 
 ## Why That Line Is There
 

@@ -16,7 +16,7 @@ keywords:
 metaTitle: "Figma to Klaviyo Email Templates, No Slicing | Kinga Dow"
 metaDescription: "How to build a Klaviyo template from a Figma design with live text instead of image slices, and the design-file prerequisite that decides whether it works."
 featured: false
-draft: true
+draft: false
 ---
 
 Every email gets built twice. Once in Figma, where it looks right, and once in Klaviyo, where somebody rebuilds it block by block and hopes it comes out the same.

@@ -16,7 +16,7 @@ keywords:
 metaTitle: "Abandoned Cart Emails: What Actually Works | Kinga Dow"
 metaDescription: "Why abandoned cart revenue is over-credited, what the sequence should actually do, and how to find out what your flow is genuinely earning."
 featured: false
-draft: true
+draft: false
 ---
 
 Your abandoned cart flow is earning less than the dashboard says. That is not a criticism of the flow, it is how attribution works, and understanding it changes what you build.

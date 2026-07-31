@@ -121,7 +121,9 @@ The reason this matters more than another connector is what it makes answerable.
 
 Brand-side analytics is arriving. The **agency** layer has not.
 
-The consolidated view across many client accounts is the one I would most want to interrogate conversationally: which clients are trending down, where the same problem shows up in three accounts at once. Those tools are built for agencies rather than brands, and they are still closed. Hiro Analytics, which exists specifically to automate reporting for retention agencies across Klaviyo, Attentive, Postscript, Omnisend, Yotpo and Sendlane, publishes no MCP server and no API at all.
+The consolidated view across many client accounts is the one I would most want to interrogate conversationally: which clients are trending down, where the same problem shows up in three accounts at once. Those tools are built for agencies rather than brands, and they are still shut.
+
+Hiro Analytics is the clearest example, because it exists specifically to automate reporting for retention agencies across Klaviyo, Attentive, Postscript, Omnisend, Yotpo and Sendlane. Exactly the shape of thing you would want to ask questions of. As far as I can find, it publishes no MCP server, and nothing public about an API either. If that has changed I would genuinely like to know.
 
 That is the more interesting absence. Cross-client synthesis is the thing an agency cannot get anywhere else, and it is exactly the kind of question a model is good at.
 

@@ -120,9 +120,21 @@ With the [Klaviyo MCP connector](/blog/mcp-stack-ecommerce-retention/), Claude c
 
 The Shopify connector is the one that matters more than it first appears, because it solves the monetary problem from the section above. Klaviyo will not calculate lifetime spend for an account under its thresholds. Shopify has every order regardless. So you pull the order history, group it by customer, and take the cutoffs from source. The axis Klaviyo declined to give you was sitting in the other system the whole time, and joining the two is the entire trick.
 
-One limit worth knowing before you plan around it. **The Klaviyo connector reads segments and deletes them. It does not create them.** You can pull an existing segment's exact definition, which is genuinely useful for checking your work against something that already behaves the way you want, but the six groups still get built by hand in the interface.
+One limit worth knowing. **The Klaviyo connector reads segments and deletes them. It does not create them.** You can pull an existing segment's full definition including its condition groups, which is useful for checking your work against something that already behaves the way you want. But there is no create tool, so through the connector alone the six groups get built by hand.
 
-So the assistant does the analysis and you do the clicking. That split is about right at the moment. Working out the thresholds is the part that needs judgment and the part almost nobody does properly. Entering six segment definitions once you know the numbers is twenty minutes.
+## Where MCP Stops and the API Starts
+
+That limit is worth understanding properly, because the same thing comes up with every connector you will ever set up.
+
+An MCP server is a **curated surface**. The vendor decides which operations to expose, wraps them in a standard protocol and puts an OAuth login in front, which is why connecting takes two minutes and involves no keys. Klaviyo chose around forty tools. Segment creation is not among them.
+
+The REST API underneath is the **full surface**, and it does have the endpoint. `POST /api/segments` takes a name and a definition containing condition groups, which is precisely the structure of the six groups above. It needs an API key carrying the `segments:write` scope, and it is rate limited to fifteen calls a minute and a hundred a day, which is far more headroom than a one time build needs.
+
+So the useful rule: **the connector for asking questions, the API for the things the connector does not cover.** Connect the MCP first, because it costs nothing and answers most of what you actually want to know. Reach for a key when you hit a wall. The part worth internalizing is that the wall is usually a curation decision rather than a technical limit, which means the answer to "the connector cannot do this" is often "the API can."
+
+For this particular job it splits cleanly. The thresholds come from the connectors, because that is a question. The six segments get clicked in by hand or posted through the API, depending on scale. Doing this once for one brand, click them. Doing it across a roster, write it once and run it per account.
+
+Either way the assistant does the analysis, which is the part that needs judgment and the part almost nobody does properly. Entering six definitions once you know the numbers is twenty minutes.
 
 ## What It Is Actually Worth
 

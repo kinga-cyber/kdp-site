@@ -93,6 +93,6 @@ It is worth doing once a year on your highest-volume flows. Not as an ongoing pr
 4. **Split by cart value**, since it is the highest-value segmentation and the easiest to implement.
 5. **Run a holdout** once the rest is stable, so you know what you are actually working with.
 
-Most abandoned cart work goes into subject lines and countdown timers. Almost all of the available improvement is in the four items above them.
+Most abandoned cart work goes into subject lines and countdown timers. Neither one appears on that list, which is rather the point. Almost all of the improvement available to you sits in the five things that do.
 
 *If you want a second opinion on what your flows are genuinely contributing before you invest more in them, [book a strategy session](/consultation/).*

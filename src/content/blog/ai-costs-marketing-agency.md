@@ -19,9 +19,11 @@ metaTitle: "What AI Actually Costs to Run in an Agency | Kinga Dow"
 metaDescription: "AI bills you for the conversation, not the work. Why agency AI costs grow faster than expected, and the setup change that flattens them."
 ---
 
-AI does not bill you for the work. It bills you for the conversation.
+In June I spent a single session building the same email five different ways. The brief never changed. Nothing in my setup told the model how my design file worked, so every attempt started by reading it again and guessing again.
 
-Every call to the model re-sends the entire conversation up to that point, and you pay for all of it again. So the cost of running AI on client work tracks how many back and forth turns a task took, not how complicated the deliverable was. That means the bill is set by your setup, not by the AI, and it is the one part of this most agency owners never budget for.
+The design was never the expensive part.
+
+AI does not bill you for the work. It bills you for the conversation. Every call to the model re-sends the entire conversation up to that point, and you pay for all of it again. So the cost of running AI on client work tracks how many back and forth turns a task took, not how complicated the deliverable was. That means the bill is set by your setup, not by the AI, and it is the one part of this most agency owners never budget for.
 
 I learned it the expensive way. In June I spent a single session building the same email five different ways, because nothing in my setup told the model how my design file worked. Every attempt started by reading the file again and guessing again. The design was never what cost money.
 

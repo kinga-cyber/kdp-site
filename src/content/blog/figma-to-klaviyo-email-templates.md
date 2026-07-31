@@ -19,7 +19,11 @@ featured: false
 draft: true
 ---
 
-You can build a Klaviyo template directly from a Figma design, and get a real drag-and-drop template with live text blocks rather than a stack of image slices.
+Every email gets built twice. Once in Figma, where it looks right, and once in Klaviyo, where somebody rebuilds it block by block and hopes it comes out the same.
+
+It does not have to be built twice.
+
+A Klaviyo template can be built straight from the Figma design, and you get a real drag-and-drop template with live text blocks rather than a stack of image slices.
 
 It works by mapping each Figma component to a specific Klaviyo block. Hero component to hero block, product row component to product row block. Once that correspondence is written down, there is nothing left for anything to interpret.
 

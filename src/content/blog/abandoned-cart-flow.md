@@ -19,6 +19,10 @@ featured: false
 draft: true
 ---
 
+Abandoned cart is usually the best performing flow in the account, and everybody knows it. It is the number that gets quoted when somebody asks how the email program is doing.
+
+It is also the number most likely to be flattering itself.
+
 Your abandoned cart flow is earning less than the dashboard says. That is not a criticism of the flow, it is how attribution works, and understanding it changes what you build.
 
 Someone puts items in a cart, leaves, gets your email, comes back and buys. The flow gets credited. But a share of those people were coming back regardless, because they were interrupted, or comparing, or waiting for payday. The email arrived during a purchase they had already decided to make.

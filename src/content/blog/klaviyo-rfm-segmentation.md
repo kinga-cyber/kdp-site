@@ -19,7 +19,11 @@ metaTitle: "RFM Segmentation in Klaviyo: A Practical Guide | Kinga Dow"
 metaDescription: "How Klaviyo scores RFM, the six customer groups it creates, why most accounts cannot use the report, and how to rebuild it from ordinary segments."
 ---
 
-You have one list, and most of what you send goes to all of it. The usual fix is to guess. A VIP segment at some round number of orders, a lapsed segment at some round number of days, thresholds picked because they sounded about right when someone suggested them.
+You probably do not send to your whole list. Most accounts send to engaged, with bounced and sunset suppressed and anyone who ordered in the last seven days excluded. That is sensible and worth doing.
+
+It is also a deliverability decision rather than a segmentation one. It answers who is safe to email. It says nothing about who a given message is for. Inside that one engaged audience sits somebody who has bought twelve times and somebody who bought once, eleven months ago, and both are getting the same email.
+
+The usual attempt at fixing that is to guess. A VIP segment at some round number of orders, a lapsed segment at some round number of days, thresholds picked because they sounded about right when somebody suggested them.
 
 RFM is that same idea with the guessing taken out. It sorts customers by three things, how recently they bought, how often they buy and how much they spend, and it sets the cutoffs from your actual data rather than from a number you liked. Klaviyo scores each on a 1 to 3 scale and sorts everyone into six groups, where 333 is your best customer and 111 is someone effectively gone.
 

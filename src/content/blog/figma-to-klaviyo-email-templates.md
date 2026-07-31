@@ -89,6 +89,22 @@ It arrives complete in the parts that are easy to forget: alt text on every imag
 
 That distinction is worth being clear about, because the pitch you usually hear is full automation. This is not that. It is the removal of the mechanical half of the job so the remaining time goes into judgment: whether this campaign should exist, who it goes to, and what it needs to say.
 
+## Something Reads It Before Your Reader Does
+
+There is a newer reason to care about live text, and it arrived quietly.
+
+Apple Mail now writes its own summary of your email and puts it in the inbox list, in the space your preview text used to occupy. Nobody asks for it. It is simply there, under the subject line, before anything has been opened. Gmail is heading the same way with Gemini summaries and an AI inbox.
+
+Those summaries are built from real, coded text. An image is not read. And the part that catches people out is that **alt text is not read either.** Apple's summary generator ignores it.
+
+So picture the sliced version of your email landing. The headline is inside the hero image. The offer is inside the hero image. The call to action is inside the hero image. None of it exists as far as the summary is concerned, so the line sitting under your subject line, the one now doing the job your preview text used to do, gets assembled from whatever scraps of real text survived. Often that is the footer.
+
+To be fair about it, Gemini copes with an image-heavy email noticeably better than Apple Intelligence does. But Apple Mail is where the summary has already replaced the preview line, which makes it the one to design for.
+
+This is a new kind of failure. Not a rendering fault, not a spam score. The email arrives looking perfect and describes itself badly, in the exact place where somebody decides whether to open it.
+
+A template built from live text blocks never has this problem, because everything that matters is already text. Which quietly turns what used to be a craft preference into an operational one.
+
 ## Slicing Was Never the Bottleneck
 
 An agency owner pushed back on me about this. Slicing an email into a template, he said, is the most basic task there is. Why complicate it.

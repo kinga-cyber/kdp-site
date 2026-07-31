@@ -19,9 +19,11 @@ metaTitle: "RFM Segmentation in Klaviyo: A Practical Guide | Kinga Dow"
 metaDescription: "How Klaviyo scores RFM, the six customer groups it creates, why most accounts cannot use the report, and how to rebuild it from ordinary segments."
 ---
 
-RFM sorts your customers by three things: how recently they bought, how often they buy, and how much they spend. Klaviyo scores each on a 1 to 3 scale and sorts everyone into six groups, where 333 is your best customer and 111 is someone who is effectively gone.
+You have one list, and most of what you send goes to all of it. The usual fix is to guess. A VIP segment at some round number of orders, a lapsed segment at some round number of days, thresholds picked because they sounded about right when someone suggested them.
 
-Klaviyo has a report that does this for you. Most accounts cannot use it, for two separate reasons neither of which is obvious until you go looking. The good news is that the version you build by hand is close enough to run a real retention program on, and building it teaches you more about your list than the report would have.
+RFM is that same idea with the guessing taken out. It sorts customers by three things, how recently they bought, how often they buy and how much they spend, and it sets the cutoffs from your actual data rather than from a number you liked. Klaviyo scores each on a 1 to 3 scale and sorts everyone into six groups, where 333 is your best customer and 111 is someone effectively gone.
+
+Klaviyo also has a report that does this for you, and most accounts cannot use it, for two separate reasons neither of which is obvious until you go looking. The version you build by hand is close enough to run a real retention program on, and building it teaches you more about your list than the report would have.
 
 ## What RFM Actually Measures
 
@@ -104,9 +106,23 @@ So build it yourself. All three axes exist in the ordinary segment builder.
 
 **Monetary** is where it gets awkward. The clean route is Historic CLV under `Predictive analytics about someone`, which is the total value of a customer's previous orders after refunds and returns. But predictive analytics carries the same 500 customer and 180 day thresholds, so if you failed the first test you fail this one too.
 
-If that applies to you, drop the axis. **Run RF instead of RFM.** Recency and frequency carry most of the signal, order count correlates with spend in most catalogs anyway, and a two axis grid you actually use beats a three axis one you cannot build. Add monetary later, when the account is big enough that Klaviyo will calculate it for you.
+If that applies to you, one option is to drop the axis and **run RF instead of RFM**. Recency and frequency carry most of the signal, order count correlates with spend in most catalogs anyway, and a two axis grid you actually use beats a three axis one you cannot build. The better option is to calculate the spend yourself, which is the next section.
 
 Build the six groups as six saved segments using the score combinations in the table above. It takes an afternoon. After that they maintain themselves.
+
+## Doing the Arithmetic With Claude
+
+The hard part of building this by hand is not creating the segments. It is knowing where the thresholds go, because two of Klaviyo's three axes are percentiles of your own list, and almost nobody knows their own percentiles.
+
+That is the part worth connecting an assistant to.
+
+With the [Klaviyo MCP connector](/blog/mcp-stack-ecommerce-retention/), Claude can query your metric aggregates directly. What the distribution of order counts actually looks like, where the spend cutoff falls at the top and bottom third. One question each, instead of an export and an afternoon in a spreadsheet.
+
+The Shopify connector is the one that matters more than it first appears, because it solves the monetary problem from the section above. Klaviyo will not calculate lifetime spend for an account under its thresholds. Shopify has every order regardless. So you pull the order history, group it by customer, and take the cutoffs from source. The axis Klaviyo declined to give you was sitting in the other system the whole time, and joining the two is the entire trick.
+
+One limit worth knowing before you plan around it. **The Klaviyo connector reads segments and deletes them. It does not create them.** You can pull an existing segment's exact definition, which is genuinely useful for checking your work against something that already behaves the way you want, but the six groups still get built by hand in the interface.
+
+So the assistant does the analysis and you do the clicking. That split is about right at the moment. Working out the thresholds is the part that needs judgment and the part almost nobody does properly. Entering six segment definitions once you know the numbers is twenty minutes.
 
 ## What It Is Actually Worth
 

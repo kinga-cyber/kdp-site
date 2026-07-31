@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" font-family="Montserrat, 'Helvetica Neue', Arial, sans-serif">
+<rect width="1200" height="630" fill="#F6EFE6"/>
+<text x="60" y="54" fill="#3F455D" font-size="14" font-weight="600" letter-spacing="2" opacity="0.6">KLAVIYO AUDIT</text>
+<text x="60" y="100" fill="#3F455D" font-size="34" font-weight="600">Five layers, bottom first</text>
+<text x="60" y="134" fill="#333333" font-size="19" opacity="0.85">Each one makes the layer above it readable. Skip the base and the rest is noise.</text>
+<rect x="60" y="176" width="1080" height="76" rx="8" fill="#FFFFFF" stroke="#BA9200" stroke-opacity="0.50"/>
+<rect x="60" y="176" width="7" height="76" rx="3.5" fill="#BA9200" fill-opacity="1.00"/>
+<circle cx="112" cy="214" r="20" fill="#BA9200" fill-opacity="0.16"/>
+<text x="112" y="221" text-anchor="middle" fill="#BA9200" fill-opacity="1.00" font-size="19" font-weight="700">5</text>
+<text x="154" y="210" fill="#3F455D" font-size="22" font-weight="600">Are the numbers honest?</text>
+<text x="154" y="235" fill="#333333" font-size="16" opacity="0.7">attributed is not caused</text>
+<rect x="60" y="264" width="1080" height="76" rx="8" fill="#FFFFFF" stroke="#BA9200" stroke-opacity="0.31"/>
+<rect x="60" y="264" width="7" height="76" rx="3.5" fill="#BA9200" fill-opacity="0.62"/>
+<circle cx="112" cy="302" r="20" fill="#BA9200" fill-opacity="0.10"/>
+<text x="112" y="309" text-anchor="middle" fill="#BA9200" fill-opacity="0.80" font-size="19" font-weight="700">4</text>
+<text x="154" y="298" fill="#3F455D" font-size="22" font-weight="600">Is anyone being told apart?</text>
+<text x="154" y="323" fill="#333333" font-size="16" opacity="0.7">segmentation, not suppression</text>
+<rect x="60" y="352" width="1080" height="76" rx="8" fill="#FFFFFF" stroke="#59A56D" stroke-opacity="0.42"/>
+<rect x="60" y="352" width="7" height="76" rx="3.5" fill="#59A56D" fill-opacity="0.85"/>
+<circle cx="112" cy="390" r="20" fill="#59A56D" fill-opacity="0.14"/>
+<text x="112" y="397" text-anchor="middle" fill="#59A56D" fill-opacity="0.85" font-size="19" font-weight="700">3</text>
+<text x="154" y="386" fill="#3F455D" font-size="22" font-weight="600">Do the flows cover anything?</text>
+<text x="154" y="411" fill="#333333" font-size="16" opacity="0.7">gaps sit between purchases</text>
+<rect x="60" y="440" width="1080" height="76" rx="8" fill="#FFFFFF" stroke="#3F455D" stroke-opacity="0.28"/>
+<rect x="60" y="440" width="7" height="76" rx="3.5" fill="#3F455D" fill-opacity="0.55"/>
+<circle cx="112" cy="478" r="20" fill="#3F455D" fill-opacity="0.09"/>
+<text x="112" y="485" text-anchor="middle" fill="#3F455D" fill-opacity="0.80" font-size="19" font-weight="700">2</text>
+<text x="154" y="474" fill="#3F455D" font-size="22" font-weight="600">Are the flows even on?</text>
+<text x="154" y="499" fill="#333333" font-size="16" opacity="0.7">and do they stop on purchase</text>
+<rect x="60" y="528" width="1080" height="76" rx="8" fill="#FFFFFF" stroke="#3F455D" stroke-opacity="0.42"/>
+<rect x="60" y="528" width="7" height="76" rx="3.5" fill="#3F455D" fill-opacity="0.85"/>
+<circle cx="112" cy="566" r="20" fill="#3F455D" fill-opacity="0.14"/>
+<text x="112" y="573" text-anchor="middle" fill="#3F455D" fill-opacity="0.85" font-size="19" font-weight="700">1</text>
+<text x="154" y="562" fill="#3F455D" font-size="22" font-weight="600">Who are you allowed to email?</text>
+<text x="154" y="587" fill="#333333" font-size="16" opacity="0.7">consent and deliverability</text>
+<text x="1116" y="221" text-anchor="end" fill="#333333" font-size="14" opacity="0.55">hardest</text>
+<text x="1116" y="573" text-anchor="end" fill="#333333" font-size="14" opacity="0.55">start here</text>
+</svg>

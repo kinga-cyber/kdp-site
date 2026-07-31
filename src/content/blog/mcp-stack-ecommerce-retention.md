@@ -93,15 +93,19 @@ It also makes the calendar answerable. What is not scheduled yet this month beco
 
 **Where it stops.** The search syntax is more restrictive than the Drive interface. Full-text search behaves differently from what the search box trains you to expect, so plan on being more precise than usual.
 
+## The Analytics Layer Just Opened Up
+
+Everything above is a platform connector. The layer that sits above them, the analytics and attribution tools, was closed until recently and is not any more. If a brand runs either of these, they are the next two I would connect.
+
+**Triple Whale** ships an official MCP server, with documentation, a public repository, and OAuth2 at read-only access. It is listed in both the Claude and OpenAI connector directories, so setup is the same two minutes as anything else here.
+
+**Polar Analytics** has one too, and its design is the more interesting of the two. Rather than exposing raw tables for a model to write SQL against, it exposes a defined metrics layer, so you query agreed definitions instead of hoping a generated query means what you think it means. Worth flagging that most of what is published comparing the two comes from Polar themselves.
+
+The reason this matters more than another connector is what it makes answerable. Klaviyo can tell you what email earned. It cannot tell you what email earned against everything else that was happening that week. Attribution tools can, and until this year that answer lived behind a dashboard somebody had to go and read.
+
 ## What Is Still Missing
 
-The platforms are well covered. The gap used to be the reporting and analytics layer above them, and that has started to close faster than I expected.
-
-**Triple Whale** now ships an official MCP server, with documentation, a public repository, and OAuth2 connection at read-only access. It is listed in both the Claude and OpenAI connector directories.
-
-**Polar Analytics** has one too, and its design is the more interesting of the two. Rather than exposing raw tables for the model to write SQL against, it exposes a defined metrics layer, so you are querying agreed definitions instead of hoping a generated query means what you think it means. Worth noting that most of what is published about that comparison comes from Polar themselves.
-
-So brand-side analytics is arriving. What has not arrived is the **agency** layer.
+Brand-side analytics is arriving. The **agency** layer has not.
 
 The consolidated view across many client accounts is the one I would most want to interrogate conversationally: which clients are trending down, where the same problem shows up in three accounts at once. Those tools are built for agencies rather than brands, and they are still closed. Hiro Analytics, which exists specifically to automate reporting for retention agencies across Klaviyo, Attentive, Postscript, Omnisend, Yotpo and Sendlane, publishes no MCP server and no API at all.
 

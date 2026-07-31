@@ -1,6 +1,6 @@
 ---
 title: "Abandoned Cart Emails: What Actually Recovers Revenue"
-date: 2026-08-27
+date: 2026-08-20
 author: "Kinga Dow"
 category: "Klaviyo"
 excerpt: "Abandoned cart is the most over-credited number in ecommerce email, and knowing that changes how you build the flow. What the sequence should do, what to segment on, and how to find out what it is genuinely earning."
@@ -55,7 +55,7 @@ A single flow sending the same thing to everyone is the default, and it is where
 
 **Cart value.** A $40 cart and a $400 cart are different conversations. The larger one deserves more reassurance and almost never deserves a discount, because the margin you hand over is proportionally larger and the hesitation is usually about confidence rather than price.
 
-**Customer history.** Someone who has bought four times does not need convincing that you are legitimate. A first-time visitor might. Sending the trust-building email to a loyal customer is mildly insulting and definitely wasted. If you want to do this properly rather than by eye, [sorting people by how recently and how often they buy](/blog/klaviyo-rfm-segmentation/) gives you the split without guessing at the thresholds.
+**Customer history.** Someone who has bought four times does not need convincing that you are legitimate. A first-time visitor might. Sending the trust-building email to a loyal customer is mildly insulting and definitely wasted. Splitting on whether somebody has ever bought is the crude version and still worth doing. Grouping people properly, by how recently and how often they buy, is the better one, and it deserves its own post.
 
 **What is in the cart.** A consumable being repurchased and a considered one-off purchase abandon for entirely different reasons.
 

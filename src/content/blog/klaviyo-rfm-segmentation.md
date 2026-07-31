@@ -1,6 +1,6 @@
 ---
 title: "RFM Segmentation in Klaviyo, and How to Build It Without the Paid Tier"
-date: 2026-08-20
+date: 2026-08-27
 author: "Kinga Dow"
 category: "Klaviyo"
 excerpt: "RFM sorts your customers by how recently, how often and how much they buy. Klaviyo has a report for it, most accounts cannot use it, and the version you build yourself is close enough to run a retention program on."
@@ -146,7 +146,7 @@ Three things, in the order you will notice them.
 
 **You stop sending everything to everyone.** Six groups that need six different things replaces one list that gets one message. Smaller sends, better engagement, and less of the list fatigue that quietly erodes deliverability.
 
-**You stop discounting people who were going to buy anyway.** A discount to Champions buys nothing. A discount to At Risk might buy back a customer. Same code, completely different economics, and RFM is what tells you which one you are looking at.
+**You stop discounting people who were going to buy anyway.** This is the same argument as the one in the [abandoned cart post](/blog/abandoned-cart-flow/). A discount to Champions buys nothing. A discount to At Risk might buy back a customer. Same code, completely different economics, and RFM is what tells you which one you are looking at.
 
 **It is a diagnostic before it is a tool.** The shape of your six groups is a description of your business. A large Recent group and a small Loyal group means you acquire well and retain badly. A large Needs Attention group means you had something good and stopped tending it. Most brands have never seen that picture, and it usually answers a question they have been arguing about for months.
 

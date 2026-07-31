@@ -31,9 +31,9 @@ The prerequisite is that **your emails have to be built from components, not fro
 
 Open your Figma file and look at it honestly. If your designs are separate text boxes, rectangles and images grouped together to look like an email, no system can read them reliably. There is no structure to translate, so anything reading the file has to infer what each piece is meant to be. Inference is guessing, and guessing is fine until the day it guesses wrong on a send.
 
-I learned this from the wrong end. My first AI-built emails came back with colours I never specified and layouts I never drew. The model was not the problem. Nothing in my setup described how a design becomes a template, so it improvised, and improvisation is the last thing you want in email production.
+I learned this from the wrong end. My first AI-built emails came back with colors I never specified and layouts I never drew. The model was not the problem. Nothing in my setup described how a design becomes a template, so it improvised, and improvisation is the last thing you want in email production.
 
-Componentising a design library costs a designer a few days, once. It is the single biggest unlock in this entire pipeline, and it is boring, which is why it gets skipped in favour of looking for a better tool.
+Componentising a design library costs a designer a few days, once. It is the single biggest unlock in this entire pipeline, and it is boring, which is why it gets skipped in favor of looking for a better tool.
 
 ## The Mapping
 
@@ -43,7 +43,7 @@ Every component in the library has one block it becomes in the Klaviyo editor. W
 
 Two things have to sit alongside it.
 
-**Design tokens live with the design system, not in a prompt.** Colours, spacing, type scale. If the values only exist in someone's instructions, they drift the moment anyone rewrites the instructions.
+**Design tokens live with the design system, not in a prompt.** Colors, spacing, type scale. If the values only exist in someone's instructions, they drift the moment anyone rewrites the instructions.
 
 **Each client gets a folder structure**, and each folder carries its own context. Brand, Klaviyo, Figma, campaigns, reports, reference. Instructions on their own are not a system. The tokens, the reference docs and the rules have to live where the work happens, or they get forgotten precisely when they matter.
 

@@ -39,7 +39,7 @@ This is where a lot of people stop, because the box is not there.
 
 Klaviyo's stated requirements for predictive analytics:
 
-- **"At least 500 customers have placed an order"**, meaning non-cancelled, non-refunded, non-zero value
+- **"At least 500 customers have placed an order"**, meaning non-canceled, non-refunded, non-zero value
 - **"An ecommerce integration (e.g., Shopify, BigCommerce, Magento, or WooCommerce) or use our API to send placed orders"**
 - **"At least 180 days of order history and have orders within the last 30 days"**
 - **"At least some customers who have placed 3 or more orders"**

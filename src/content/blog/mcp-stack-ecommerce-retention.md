@@ -21,7 +21,7 @@ draft: false
 
 An MCP connection is the difference between an assistant that can describe your Klaviyo account and one that can read it.
 
-Model Context Protocol is an open standard for how an AI assistant connects to an outside tool. Before it, connecting a model to Klaviyo meant someone building a custom integration for that specific pairing. MCP standardises the socket, so a tool builds one server and any assistant that speaks the protocol can use it.
+Model Context Protocol is an open standard for how an AI assistant connects to an outside tool. Before it, connecting a model to Klaviyo meant someone building a custom integration for that specific pairing. MCP standardizes the socket, so a tool builds one server and any assistant that speaks the protocol can use it.
 
 That is the whole concept. What follows is the part that is harder to find: what each connector actually exposes, what it makes cheap to ask, and where each one bites. Written from using them daily rather than from their marketing pages.
 
@@ -51,7 +51,7 @@ Those are all answerable from the API and none are one click in the interface, w
 
 **What it exposes.** Design context for a selected frame, component and variable definitions, screenshots, file metadata, Code Connect mappings, and writes to the canvas.
 
-**What it makes cheap.** Turning a design into something buildable without a human interpreting it. When the assistant can read the actual component structure and the variable definitions, a frame stops being a picture and becomes a specification. It also means design tokens can be read from the file rather than restated in a prompt, which is what stops colours and spacing drifting between emails.
+**What it makes cheap.** Turning a design into something buildable without a human interpreting it. When the assistant can read the actual component structure and the variable definitions, a frame stops being a picture and becomes a specification. It also means design tokens can be read from the file rather than restated in a prompt, which is what stops colors and spacing drifting between emails.
 
 **A real one.** Components map to email blocks. Hero component, hero block. Product row component, product row block. Once that correspondence exists and can be read, output stops varying between builds because there is no decision left to make.
 
@@ -75,7 +75,7 @@ It also makes the calendar answerable. "What is not scheduled yet this month" is
 
 **What it makes cheap.** Retrieval from your own spoken record. Search accepts a proper query grammar, so you can pull every call in a date range where a particular topic came up, filtered to specific participants.
 
-**A real one.** The clearest explanation of your own methodology is almost always something you said out loud to someone who asked a good question, not something you sat down to write. Those explanations already exist in your call history. Being able to search them turns a back catalogue of calls into a content pipeline and, more usefully, into institutional memory that survives someone leaving.
+**A real one.** The clearest explanation of your own methodology is almost always something you said out loud to someone who asked a good question, not something you sat down to write. Those explanations already exist in your call history. Being able to search them turns a back catalog of calls into a content pipeline and, more usefully, into institutional memory that survives someone leaving.
 
 **Where it bites.** It only knows about calls that were actually recorded, which sounds obvious and still catches people out. And transcripts contain everything said, including things a client would not expect to see published, so anything mined from them needs a deliberate confidentiality pass before it goes anywhere.
 

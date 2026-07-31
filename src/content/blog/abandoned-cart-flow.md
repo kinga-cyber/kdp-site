@@ -49,7 +49,7 @@ Three emails is a reasonable default, but the count matters far less than each o
 
 A single flow sending the same thing to everyone is the default, and it is where the easiest improvements are.
 
-**Cart value.** A £40 cart and a £400 cart are different conversations. The larger one deserves more reassurance and almost never deserves a discount, because the margin you hand over is proportionally larger and the hesitation is usually about confidence rather than price.
+**Cart value.** A $40 cart and a $400 cart are different conversations. The larger one deserves more reassurance and almost never deserves a discount, because the margin you hand over is proportionally larger and the hesitation is usually about confidence rather than price.
 
 **Customer history.** Someone who has bought four times does not need convincing that you are legitimate. A first-time visitor might. Sending the trust-building email to a loyal customer is mildly insulting and definitely wasted.
 
@@ -61,7 +61,7 @@ None of this requires new tooling. It is conditional splits on data already sitt
 
 The convention is roughly one hour, then a day, then three days. It is fine as a starting point and it is worth knowing it is a convention rather than a finding.
 
-The first email genuinely should be quick, because the interrupted-checkout case decays fast. Beyond that, the right spacing depends on your considered purchase cycle. A brand selling a £15 consumable and one selling a £900 sofa should not be on the same schedule, and both usually are.
+The first email genuinely should be quick, because the interrupted-checkout case decays fast. Beyond that, the right spacing depends on your considered purchase cycle. A brand selling a $15 consumable and one selling a $900 sofa should not be on the same schedule, and both usually are.
 
 One thing worth more attention than the intervals: **make sure the flow stops when someone buys.** Sounds obvious. It is one of the most common broken things I find in accounts, and the failure mode is emailing a customer about the cart they just checked out, which reads as incompetence at exactly the moment you wanted to look reliable.
 

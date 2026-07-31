@@ -40,7 +40,7 @@ The original version of this post covered the Google and Yahoo rules that took e
 
 **A From header on a domain you own.** Not a generic Gmail or Outlook address.
 
-**One-click unsubscribe** on marketing mail, and the unsubscribe must be honoured within two days.
+**One-click unsubscribe** on marketing mail, and the unsubscribe must be honored within two days.
 
 **A spam complaint rate you monitor**, with two numbers that matter.
 

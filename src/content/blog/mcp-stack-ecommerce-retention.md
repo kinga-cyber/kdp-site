@@ -19,7 +19,7 @@ featured: false
 draft: true
 ---
 
-Ask an assistant how your Klaviyo account is doing and it will tell you how Klaviyo accounts generally do. It has never seen yours, so it is describing the category and hoping that is close enough.
+Ask Claude how your Klaviyo account is doing, with nothing connected to it, and you get an answer about how Klaviyo accounts generally do. It has never seen yours. It is describing the category and hoping that lands close enough to be useful.
 
 That gap closes with one connection, and it is a bigger change than it sounds.
 

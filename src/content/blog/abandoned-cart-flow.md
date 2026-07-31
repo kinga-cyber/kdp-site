@@ -16,7 +16,7 @@ keywords:
 metaTitle: "Abandoned Cart Emails: What Actually Works | Kinga Dow"
 metaDescription: "Why abandoned cart revenue is over-credited, what the sequence should actually do, and how to find out what your flow is genuinely earning."
 featured: false
-draft: true
+draft: false
 ---
 
 Abandoned cart is usually the best performing flow in the account, and everybody knows it. It is the number that gets quoted when somebody asks how the email program is doing.

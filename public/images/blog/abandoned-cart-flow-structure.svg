@@ -1,71 +1,71 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1150" width="1200" height="1150" font-family="Montserrat, 'Helvetica Neue', Arial, sans-serif">
-<rect width="1200" height="1150" fill="#F6EFE6"/>
-<text x="60" y="50" fill="#3F455D" font-size="14" font-weight="600" letter-spacing="2" opacity="0.6">FLOW STRUCTURE</text>
-<text x="60" y="96" fill="#3F455D" font-size="34" font-weight="600">Abandoned cart, split by purchase history</text>
-<text x="60" y="130" fill="#333333" font-size="19" opacity="0.85">Two paths from one trigger. Same timing, different job for the middle email.</text>
-<rect x="420" y="168" width="360" height="92" rx="6" fill="#FFFFFF" fill-opacity="1" stroke="#3F455D" stroke-opacity="0.45" stroke-width="1"/>
-<text x="442" y="196" fill="#3F455D" font-size="12.5" font-weight="700" letter-spacing="1.5">TRIGGER</text>
-<text x="442" y="226" fill="#3F455D" font-size="21" font-weight="600">Started checkout</text>
-<text x="442" y="252" fill="#333333" font-size="16" opacity="0.75">Fires when a cart enters checkout</text>
-<line x1="600" y1="260" x2="600" y2="289" stroke="#3F455D" stroke-opacity="0.5" stroke-width="2"/>
-<path d="M594,288 L600,298 L606,288 Z" fill="#3F455D" fill-opacity="0.5"/>
-<rect x="400" y="298" width="400" height="74" rx="6" fill="#59A56D" fill-opacity="0.14" stroke="#59A56D" stroke-opacity="0.45" stroke-width="1"/>
-<text x="422" y="326" fill="#59A56D" font-size="12.5" font-weight="700" letter-spacing="1.5">FLOW FILTER</text>
-<text x="422" y="356" fill="#3F455D" font-size="21" font-weight="600">Has this person ordered before?</text>
-<line x1="600" y1="372" x2="600" y2="392" stroke="#3F455D" stroke-opacity="0.5" stroke-width="2"/>
-<line x1="320" y1="392" x2="880" y2="392" stroke="#3F455D" stroke-opacity="0.5" stroke-width="2"/>
-<line x1="320" y1="392" x2="320" y2="415" stroke="#3F455D" stroke-opacity="0.5" stroke-width="2"/>
-<path d="M314,414 L320,424 L326,414 Z" fill="#3F455D" fill-opacity="0.5"/>
-<line x1="880" y1="392" x2="880" y2="415" stroke="#3F455D" stroke-opacity="0.5" stroke-width="2"/>
-<path d="M874,414 L880,424 L886,414 Z" fill="#3F455D" fill-opacity="0.5"/>
-<rect x="60" y="424" width="520" height="86" rx="6" fill="#FFFFFF" fill-opacity="1" stroke="#3F455D" stroke-opacity="0.45" stroke-width="1"/>
-<text x="82" y="452" fill="#3F455D" font-size="12.5" font-weight="700" letter-spacing="1.5">YES  ·  EXISTING CUSTOMER</text>
-<text x="82" y="482" fill="#3F455D" font-size="21" font-weight="600">Buyer path</text>
-<text x="82" y="508" fill="#333333" font-size="16" opacity="0.75">They already know you are real</text>
-<rect x="620" y="424" width="520" height="86" rx="6" fill="#FFFFFF" fill-opacity="1" stroke="#BA9200" stroke-opacity="0.45" stroke-width="1"/>
-<text x="642" y="452" fill="#BA9200" font-size="12.5" font-weight="700" letter-spacing="1.5">NO  ·  FIRST PURCHASE</text>
-<text x="642" y="482" fill="#3F455D" font-size="21" font-weight="600">Non-buyer path</text>
-<text x="642" y="508" fill="#333333" font-size="16" opacity="0.75">Every objection is still open</text>
-<rect x="60" y="528" width="520" height="74" rx="6" fill="#3F455D" fill-opacity="0.07" stroke="#3F455D" stroke-opacity="0.45" stroke-width="1"/>
-<text x="82" y="556" fill="#3F455D" font-size="12.5" font-weight="700" letter-spacing="1.5">CONDITIONAL BLOCK</text>
-<text x="82" y="586" fill="#3F455D" font-size="21" font-weight="600">Loyalty balance reminder</text>
-<rect x="620" y="528" width="520" height="74" rx="6" fill="#BA9200" fill-opacity="0.09" stroke="#BA9200" stroke-opacity="0.45" stroke-width="1"/>
-<text x="642" y="556" fill="#BA9200" font-size="12.5" font-weight="700" letter-spacing="1.5">SPLIT</text>
-<text x="642" y="586" fill="#3F455D" font-size="21" font-weight="600">Below or above the free shipping threshold</text>
-<rect x="60" y="624" width="520" height="92" rx="6" fill="#FFFFFF" stroke="#3F455D" stroke-opacity="0.35"/>
-<rect x="82" y="642" width="122" height="26" rx="13" fill="#3F455D" fill-opacity="0.13"/>
-<text x="143" y="660" text-anchor="middle" fill="#3F455D" font-size="13" font-weight="700">Wait 1 hour</text>
-<text x="82" y="690" fill="#3F455D" font-size="21" font-weight="600">Reminder, no discount</text>
-<text x="82" y="710" fill="#333333" font-size="15" opacity="0.75">Just a link back to the cart</text>
-<rect x="620" y="624" width="520" height="92" rx="6" fill="#FFFFFF" stroke="#BA9200" stroke-opacity="0.35"/>
-<rect x="642" y="642" width="122" height="26" rx="13" fill="#BA9200" fill-opacity="0.13"/>
-<text x="703" y="660" text-anchor="middle" fill="#BA9200" font-size="13" font-weight="700">Wait 1 hour</text>
-<text x="642" y="690" fill="#3F455D" font-size="21" font-weight="600">Reminder, no discount</text>
-<text x="642" y="710" fill="#333333" font-size="15" opacity="0.75">Just a link back to the cart</text>
-<rect x="60" y="732" width="520" height="92" rx="6" fill="#FFFFFF" stroke="#3F455D" stroke-opacity="0.35"/>
-<rect x="82" y="750" width="122" height="26" rx="13" fill="#3F455D" fill-opacity="0.13"/>
-<text x="143" y="768" text-anchor="middle" fill="#3F455D" font-size="13" font-weight="700">Wait +1 day</text>
-<text x="82" y="798" fill="#3F455D" font-size="21" font-weight="600">Delivery and timing</text>
-<text x="82" y="818" fill="#333333" font-size="15" opacity="0.75">No trust building, they have bought before</text>
-<rect x="620" y="732" width="520" height="92" rx="6" fill="#FFFFFF" stroke="#BA9200" stroke-opacity="0.35"/>
-<rect x="642" y="750" width="122" height="26" rx="13" fill="#BA9200" fill-opacity="0.13"/>
-<text x="703" y="768" text-anchor="middle" fill="#BA9200" font-size="13" font-weight="700">Wait +1 day</text>
-<text x="642" y="798" fill="#3F455D" font-size="21" font-weight="600">Reviews, returns, sizing</text>
-<text x="642" y="818" fill="#333333" font-size="15" opacity="0.75">Handle the reason they hesitated</text>
-<rect x="60" y="840" width="520" height="92" rx="6" fill="#FFFFFF" stroke="#3F455D" stroke-opacity="0.35"/>
-<rect x="82" y="858" width="122" height="26" rx="13" fill="#3F455D" fill-opacity="0.13"/>
-<text x="143" y="876" text-anchor="middle" fill="#3F455D" font-size="13" font-weight="700">Wait +3 days</text>
-<text x="82" y="906" fill="#3F455D" font-size="21" font-weight="600">Incentive, if you use one</text>
-<text x="82" y="926" fill="#333333" font-size="15" opacity="0.75">The only group where it buys something</text>
-<rect x="620" y="840" width="520" height="92" rx="6" fill="#FFFFFF" stroke="#BA9200" stroke-opacity="0.35"/>
-<rect x="642" y="858" width="122" height="26" rx="13" fill="#BA9200" fill-opacity="0.13"/>
-<text x="703" y="876" text-anchor="middle" fill="#BA9200" font-size="13" font-weight="700">Wait +3 days</text>
-<text x="642" y="906" fill="#3F455D" font-size="21" font-weight="600">Incentive, if you use one</text>
-<text x="642" y="926" fill="#333333" font-size="15" opacity="0.75">The only group where it buys something</text>
-<rect x="60" y="966" width="1080" height="164" rx="6" fill="#FFFFFF" stroke="#3F455D" stroke-opacity="0.25"/>
-<text x="86" y="1000" fill="#3F455D" font-size="13" font-weight="700" letter-spacing="1.5" opacity="0.65">NOTES</text>
-<text x="86" y="1034" fill="#333333" font-size="16" opacity="0.85">·  Both paths share the same timing. Only the middle email changes.</text>
-<text x="86" y="1060" fill="#333333" font-size="16" opacity="0.85">·  No discount in the first email on either path. It buys nothing that a link would not.</text>
-<text x="86" y="1086" fill="#333333" font-size="16" opacity="0.85">·  The flow must stop on purchase. This is the most common broken thing in accounts.</text>
-<text x="86" y="1112" fill="#333333" font-size="16" opacity="0.85">·  Splitting on cart value can sit on top of this, and is usually worth more than a fourth email.</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1528" width="1200" height="1528" font-family="Montserrat, 'Helvetica Neue', Arial, sans-serif">
+<rect width="1200" height="1528" fill="#F6EFE6"/>
+<text x="50" y="56" fill="#3F455D" font-size="14" font-weight="600" letter-spacing="2" opacity="0.6">FLOW STRUCTURE</text>
+<text x="50" y="104" fill="#3F455D" font-size="34" font-weight="600">Abandoned cart, split by purchase history</text>
+<text x="50" y="140" fill="#333333" font-size="19" opacity="0.85">Two paths from one trigger. Same timing, different job for the middle email.</text>
+<rect x="400" y="196" width="400" height="122" rx="7" fill="#FFFFFF" fill-opacity="1" stroke="#3F455D" stroke-opacity="0.45"/>
+<text x="430" y="232" fill="#3F455D" font-size="12.5" font-weight="700" letter-spacing="1.5">TRIGGER</text>
+<text x="430" y="266" fill="#3F455D" font-size="21" font-weight="600">Started checkout</text>
+<text x="430" y="294" fill="#333333" font-size="16" opacity="0.75">Fires when a cart enters checkout</text>
+<line x1="600" y1="318" x2="600" y2="350" stroke="#3F455D" stroke-opacity="0.5" stroke-width="2"/>
+<path d="M594,349 L600,360 L606,349 Z" fill="#3F455D" fill-opacity="0.5"/>
+<rect x="390" y="360" width="420" height="92" rx="7" fill="#59A56D" fill-opacity="0.14" stroke="#59A56D" stroke-opacity="0.45"/>
+<text x="420" y="396" fill="#59A56D" font-size="12.5" font-weight="700" letter-spacing="1.5">FLOW FILTER</text>
+<text x="420" y="430" fill="#3F455D" font-size="21" font-weight="600">Has this person ordered before?</text>
+<line x1="600" y1="452" x2="600" y2="478" stroke="#3F455D" stroke-opacity="0.5" stroke-width="2"/>
+<line x1="322" y1="478" x2="877" y2="478" stroke="#3F455D" stroke-opacity="0.5" stroke-width="2"/>
+<line x1="322" y1="478" x2="322" y2="514" stroke="#3F455D" stroke-opacity="0.5" stroke-width="2"/>
+<path d="M316,513 L322,524 L328,513 Z" fill="#3F455D" fill-opacity="0.5"/>
+<line x1="877" y1="478" x2="877" y2="514" stroke="#3F455D" stroke-opacity="0.5" stroke-width="2"/>
+<path d="M871,513 L877,524 L883,513 Z" fill="#3F455D" fill-opacity="0.5"/>
+<rect x="50" y="524" width="545" height="122" rx="7" fill="#FFFFFF" fill-opacity="1" stroke="#3F455D" stroke-opacity="0.45"/>
+<text x="80" y="560" fill="#3F455D" font-size="12.5" font-weight="700" letter-spacing="1.5">YES  ·  EXISTING CUSTOMER</text>
+<text x="80" y="594" fill="#3F455D" font-size="21" font-weight="600">Buyer path</text>
+<text x="80" y="622" fill="#333333" font-size="16" opacity="0.75">They already know you are real</text>
+<rect x="605" y="524" width="545" height="122" rx="7" fill="#FFFFFF" fill-opacity="1" stroke="#BA9200" stroke-opacity="0.45"/>
+<text x="635" y="560" fill="#BA9200" font-size="12.5" font-weight="700" letter-spacing="1.5">NO  ·  FIRST PURCHASE</text>
+<text x="635" y="594" fill="#3F455D" font-size="21" font-weight="600">Non-buyer path</text>
+<text x="635" y="622" fill="#333333" font-size="16" opacity="0.75">Every objection is still open</text>
+<rect x="50" y="668" width="545" height="92" rx="7" fill="#3F455D" fill-opacity="0.07" stroke="#3F455D" stroke-opacity="0.45"/>
+<text x="80" y="704" fill="#3F455D" font-size="12.5" font-weight="700" letter-spacing="1.5">CONDITIONAL BLOCK</text>
+<text x="80" y="738" fill="#3F455D" font-size="21" font-weight="600">Loyalty balance reminder</text>
+<rect x="605" y="668" width="545" height="92" rx="7" fill="#BA9200" fill-opacity="0.09" stroke="#BA9200" stroke-opacity="0.45"/>
+<text x="635" y="704" fill="#BA9200" font-size="12.5" font-weight="700" letter-spacing="1.5">SPLIT</text>
+<text x="635" y="738" fill="#3F455D" font-size="21" font-weight="600">Above or below free shipping</text>
+<rect x="50" y="790" width="545" height="134" rx="7" fill="#FFFFFF" stroke="#3F455D" stroke-opacity="0.35"/>
+<rect x="80" y="814" width="128" height="28" rx="14" fill="#3F455D" fill-opacity="0.13"/>
+<text x="144" y="833" text-anchor="middle" fill="#3F455D" font-size="13" font-weight="700">Wait 1 hour</text>
+<text x="80" y="874" fill="#3F455D" font-size="21" font-weight="600">Reminder, no discount</text>
+<text x="80" y="902" fill="#333333" font-size="16" opacity="0.75">Just a link back to the cart</text>
+<rect x="605" y="790" width="545" height="134" rx="7" fill="#FFFFFF" stroke="#BA9200" stroke-opacity="0.35"/>
+<rect x="635" y="814" width="128" height="28" rx="14" fill="#BA9200" fill-opacity="0.13"/>
+<text x="699" y="833" text-anchor="middle" fill="#BA9200" font-size="13" font-weight="700">Wait 1 hour</text>
+<text x="635" y="874" fill="#3F455D" font-size="21" font-weight="600">Reminder, no discount</text>
+<text x="635" y="902" fill="#333333" font-size="16" opacity="0.75">Just a link back to the cart</text>
+<rect x="50" y="946" width="545" height="134" rx="7" fill="#FFFFFF" stroke="#3F455D" stroke-opacity="0.35"/>
+<rect x="80" y="970" width="128" height="28" rx="14" fill="#3F455D" fill-opacity="0.13"/>
+<text x="144" y="989" text-anchor="middle" fill="#3F455D" font-size="13" font-weight="700">Wait +1 day</text>
+<text x="80" y="1030" fill="#3F455D" font-size="21" font-weight="600">Delivery and timing</text>
+<text x="80" y="1058" fill="#333333" font-size="16" opacity="0.75">No trust building needed here</text>
+<rect x="605" y="946" width="545" height="134" rx="7" fill="#FFFFFF" stroke="#BA9200" stroke-opacity="0.35"/>
+<rect x="635" y="970" width="128" height="28" rx="14" fill="#BA9200" fill-opacity="0.13"/>
+<text x="699" y="989" text-anchor="middle" fill="#BA9200" font-size="13" font-weight="700">Wait +1 day</text>
+<text x="635" y="1030" fill="#3F455D" font-size="21" font-weight="600">Reviews, returns, sizing</text>
+<text x="635" y="1058" fill="#333333" font-size="16" opacity="0.75">Handle the reason they hesitated</text>
+<rect x="50" y="1102" width="545" height="134" rx="7" fill="#FFFFFF" stroke="#3F455D" stroke-opacity="0.35"/>
+<rect x="80" y="1126" width="128" height="28" rx="14" fill="#3F455D" fill-opacity="0.13"/>
+<text x="144" y="1145" text-anchor="middle" fill="#3F455D" font-size="13" font-weight="700">Wait +3 days</text>
+<text x="80" y="1186" fill="#3F455D" font-size="21" font-weight="600">Incentive, if you use one</text>
+<text x="80" y="1214" fill="#333333" font-size="16" opacity="0.75">The only group where it buys something</text>
+<rect x="605" y="1102" width="545" height="134" rx="7" fill="#FFFFFF" stroke="#BA9200" stroke-opacity="0.35"/>
+<rect x="635" y="1126" width="128" height="28" rx="14" fill="#BA9200" fill-opacity="0.13"/>
+<text x="699" y="1145" text-anchor="middle" fill="#BA9200" font-size="13" font-weight="700">Wait +3 days</text>
+<text x="635" y="1186" fill="#3F455D" font-size="21" font-weight="600">Incentive, if you use one</text>
+<text x="635" y="1214" fill="#333333" font-size="16" opacity="0.75">The only group where it buys something</text>
+<rect x="50" y="1276" width="1100" height="202" rx="7" fill="#FFFFFF" stroke="#3F455D" stroke-opacity="0.25"/>
+<text x="80" y="1316" fill="#3F455D" font-size="13" font-weight="700" letter-spacing="1.5" opacity="0.65">NOTES</text>
+<text x="80" y="1354" fill="#333333" font-size="16" opacity="0.85">·  Both paths share the same timing. Only the middle email changes.</text>
+<text x="80" y="1384" fill="#333333" font-size="16" opacity="0.85">·  No discount in the first email on either path. It buys nothing that a link would not.</text>
+<text x="80" y="1414" fill="#333333" font-size="16" opacity="0.85">·  The flow must stop on purchase. This is the most common broken thing in accounts.</text>
+<text x="80" y="1444" fill="#333333" font-size="16" opacity="0.85">·  Splitting on cart value can sit on top of this, and is usually worth more than a fourth email.</text>
 </svg>

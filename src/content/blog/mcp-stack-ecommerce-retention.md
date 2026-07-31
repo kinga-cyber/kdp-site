@@ -14,7 +14,7 @@ keywords:
   - "shopify mcp"
   - "mcp servers marketing"
 featured: false
-draft: true
+draft: false
 metaTitle: "The MCP Servers I Use for Ecommerce Email | Kinga Dow"
 metaDescription: "Six MCP connectors for ecommerce email work, what each one reaches, what it is genuinely good for, and where each one stops."
 ---

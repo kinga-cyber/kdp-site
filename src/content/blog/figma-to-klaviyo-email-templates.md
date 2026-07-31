@@ -49,7 +49,7 @@ Two things have to sit alongside it.
 
 **Design tokens live with the design system, not in a prompt.** Colors, spacing, type scale. If the values only exist in someone's instructions, they drift the moment anyone rewrites the instructions.
 
-**Each client gets a folder structure**, and each folder carries its own context. Brand, Klaviyo, Figma, campaigns, reports, reference. Instructions on their own are not a system. The tokens, the reference docs and the rules have to live where the work happens, or they get forgotten precisely when they matter.
+**Each client gets a folder structure**, and each folder carries its own context. Brand, Klaviyo, Figma, campaigns, reports, reference. Instructions on their own are not a system. The tokens, the reference docs and the rules have to live where the work happens, or they get forgotten precisely when they matter. That distinction, between using a tool and having something that runs, is [the whole gap I wrote about earlier this year](/blog/gap-between-using-ai-and-having-ai-workflows/).
 
 ## Where the Campaign Information Lives
 

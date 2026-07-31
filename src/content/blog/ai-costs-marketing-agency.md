@@ -47,7 +47,7 @@ Once turns are the unit of cost, the question becomes which turns you can delete
 
 **Writing is cheap.** Set this headline to that. Swap this price. Change this link. Those instructions are a handful of tokens each, and they are the actual work.
 
-**Reading is where the money goes.** Asking a model to look at a design file and understand it pulls the whole structure of that file into context. Every layer, every property, every nested component. [Figma's own documentation](https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Figma-MCP-server) warns that without tight scoping, requests get slower and more token-consuming as the file grows.
+**Reading is where the money goes.** Asking a model to look at a design file and understand it pulls the whole structure of that file into context. Every layer, every property, every nested component. [Figma's own documentation](https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Figma-MCP-server) warns that without tight scoping, requests get slower and more token-consuming as the file grows. The same is true of every connector you attach, which is worth knowing before you [wire up six of them](/blog/mcp-stack-ecommerce-retention/).
 
 One read can cost more than the entire build that follows it.
 

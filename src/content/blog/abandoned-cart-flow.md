@@ -55,7 +55,7 @@ A single flow sending the same thing to everyone is the default, and it is where
 
 **Cart value.** A $40 cart and a $400 cart are different conversations. The larger one deserves more reassurance and almost never deserves a discount, because the margin you hand over is proportionally larger and the hesitation is usually about confidence rather than price.
 
-**Customer history.** Someone who has bought four times does not need convincing that you are legitimate. A first-time visitor might. Sending the trust-building email to a loyal customer is mildly insulting and definitely wasted.
+**Customer history.** Someone who has bought four times does not need convincing that you are legitimate. A first-time visitor might. Sending the trust-building email to a loyal customer is mildly insulting and definitely wasted. If you want to do this properly rather than by eye, [sorting people by how recently and how often they buy](/blog/klaviyo-rfm-segmentation/) gives you the split without guessing at the thresholds.
 
 **What is in the cart.** A consumable being repurchased and a considered one-off purchase abandon for entirely different reasons.
 
@@ -69,7 +69,7 @@ Put together, the whole structure is smaller than people expect. One trigger, on
 
 The convention is roughly one hour, then a day, then three days. It is fine as a starting point and it is worth knowing it is a convention rather than a finding.
 
-The first email genuinely should be quick, because the interrupted-checkout case decays fast. Beyond that, the right spacing depends on your considered purchase cycle. A brand selling a $15 consumable and one selling a $900 sofa should not be on the same schedule, and both usually are.
+The first email genuinely should be quick, because the interrupted-checkout case decays fast. Beyond that, the right spacing depends on your considered purchase cycle. A brand selling a $15 consumable and one selling a $900 sofa should not be on the same schedule, and both usually are. Your own order data already knows [roughly when your customers come back](/blog/predict-when-your-customers-will-reorder/), which beats borrowing an interval from a template.
 
 One thing worth more attention than the intervals: **make sure the flow stops when someone buys.** Sounds obvious. It is one of the most common broken things I find in accounts, and the failure mode is emailing a customer about the cart they just checked out, which reads as incompetence at exactly the moment you wanted to look reliable.
 

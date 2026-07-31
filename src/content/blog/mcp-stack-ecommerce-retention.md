@@ -73,7 +73,7 @@ To be fair to Shopify, the inventory tool is built carefully. It wants the curre
 
 **What I use it for.** Turning a design into something buildable without a person interpreting it in between. When the component structure and variable definitions can be read directly, a frame stops being a picture and becomes a specification. Design tokens come from the file rather than being restated in a prompt, which is what stops colors and spacing drifting between emails.
 
-**A real one.** Components map to email blocks. Hero component, hero block. Product row component, product row block. Once that correspondence exists and can be read, output stops varying between builds, because there is no decision left to make.
+**A real one.** Components map to email blocks. Hero component, hero block. Product row component, product row block. Once that correspondence exists and can be read, output stops varying between builds, because there is no decision left to make. That mapping is [the whole basis of building a Klaviyo template from a Figma design](/blog/figma-to-klaviyo-email-templates/) rather than slicing it into images.
 
 **Where it stops.** Two things. Your designs have to be built from components. A file of loose grouped elements arranged to look like an email has no structure to read, and no tooling fixes that. And writes to the canvas are considerably fussier than reads, so treat reading a design and building one as different levels of maturity.
 
@@ -140,5 +140,7 @@ Connect them in this order:
 Figma, call transcripts and document storage come after. Powerful, but only once the first three are producing something worth designing and briefing.
 
 The most common mistake is connecting everything at once and using none of it. One connection you interrogate daily beats six you configured and forgot.
+
+That is the same trap as [owning AI tools without having AI workflows](/blog/gap-between-using-ai-and-having-ai-workflows/). A connector you never ask anything is a subscription, not a system.
 
 *If you want a second opinion on which parts of your stack are worth connecting first, [book a strategy session](/consultation/).*

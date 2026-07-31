@@ -71,7 +71,7 @@ The shape of a production month matters more than it sounds. I design everything
 
 **The first email takes around ten minutes**, because the design system, the tokens and the documentation all have to be read before anything is built. Every email after that takes a fraction of it, because that context is already loaded.
 
-That single fact is the argument for batching. One email on Tuesday and one on Thursday pays the warm-up cost twice for two emails. Ten in a session pays it once.
+That single fact is the argument for batching, and the unit that matters is the session rather than the day. One email on Tuesday and another on Thursday, started fresh each time, pays that warm-up cost twice for two emails. Ten in one sitting pays it once.
 
 Two rules that came out of getting it wrong:
 
@@ -85,7 +85,7 @@ What lands in Klaviyo is a genuine drag-and-drop template built from live text b
 
 It arrives complete in the parts that are easy to forget: alt text on every image, links in place, subject line and preview text already written from the brief. Those are the things that get skipped at 6pm on a send day, and they are exactly the things a system should be holding.
 
-**It is not finished.** I still go in and adjust padding and spacing, and I have stopped expecting otherwise. What it is, reliably, is structurally complete with the error-prone busywork already done.
+**It is not finished.** I still go in and adjust padding and spacing, and drop in the universal blocks and the product feeds where they belong. I have stopped expecting otherwise. What it is, reliably, is structurally complete with the error-prone busywork already done.
 
 That distinction is worth being clear about, because the pitch you usually hear is full automation. This is not that. It is the removal of the mechanical half of the job so the remaining time goes into judgment: whether this campaign should exist, who it goes to, and what it needs to say.
 

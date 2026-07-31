@@ -84,13 +84,25 @@ Segmenting on where people are is fine. Triggering on where they are heading is 
 
 ## How We Use It
 
-The most useful thing I have done with RFM is not a campaign, it is a tier.
+The VIP tier is the obvious use, so start there and then get past it.
 
 The top RFM group becomes a genuine VIP tier, with perks that are actually different, and its own landing page built to feel like a different place rather than the same store with a discount code stapled on. The segment defines who gets in. The experience is what makes it worth being in.
 
 That distinction matters more than it sounds. Most VIP programs are a bigger discount sent to a smaller list, which trains your best customers to expect a bigger discount. Giving them early access, or a better page, or something the general list does not get, costs less and does not erode the thing that made them valuable.
 
 RFM is what makes the tier defensible. You are not guessing who belongs in it.
+
+But a tier is a single use of a six-group framework, and if that is all you do with it you have bought a very expensive way to find your best customers. Four others earn their place.
+
+**Every group gets a flow, triggered by arrival.** This is the movement idea from earlier, built. Each group is a segment, and entering that segment is what starts the sequence. Somebody who lands in At Risk gets the At Risk emails the day they land there, not whenever the next campaign happens to go out. The group stops being an audience you send to and becomes an event you respond to.
+
+**One segment exists only to catch people moving up.** Its whole job is to hold customers who have just crossed from Loyal into Champions, with a flow behind it. Klaviyo does not ship that. You define it because you have decided that particular transition is worth marking, and marking it is cheap.
+
+**RFM leaves the inbox entirely.** The groups sync to paid media. Your best two become the seed for lookalike audiences, on the reasoning that people resembling your Champions are a better acquisition target than people resembling everyone who has ever bought. The drifting groups go the other way, into retargeting. Neither of those is email, and both are far better inputs than an undifferentiated customer list.
+
+**Predictive sits on top of it.** RFM tells you which group somebody is in. Klaviyo's predictive properties, expected date of next order and the rest, tell you roughly when they are due back. One gives you a reason to send. The other gives you a time. They are considerably more useful together than apart, and they come from the same data requirements, so if you qualify for one you qualify for both.
+
+None of those four is a bigger discount, which is the point. RFM is worth having because it tells you who somebody is to your business. What you do with that ought to be more imaginative than a coupon.
 
 ## Building It Without the Paid Tier
 

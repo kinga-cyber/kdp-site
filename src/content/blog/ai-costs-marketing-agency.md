@@ -14,7 +14,7 @@ keywords:
   - "does ai save agencies money"
   - "ai automation agency margin"
 featured: false
-draft: false
+draft: true
 metaTitle: "What AI Actually Costs to Run in an Agency | Kinga Dow"
 metaDescription: "AI bills you for the conversation, not the work. Why agency AI costs grow faster than expected, and the setup change that flattens them."
 ---

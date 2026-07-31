@@ -16,7 +16,7 @@ keywords:
 metaTitle: "MCP Servers for Ecommerce: What Each One Does | Kinga Dow"
 metaDescription: "Six MCP connectors for retention marketing, what each actually exposes, what it makes cheap to ask, and the limits worth knowing before you set them up."
 featured: false
-draft: false
+draft: true
 ---
 
 An MCP connection is the difference between an assistant that can describe your Klaviyo account and one that can read it.

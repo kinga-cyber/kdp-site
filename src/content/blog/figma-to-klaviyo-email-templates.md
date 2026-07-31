@@ -37,11 +37,11 @@ Open your Figma file and look at it honestly. If your designs are separate text 
 
 I learned this from the wrong end. My first AI-built emails came back with colors I never specified and layouts I never drew. The model was not the problem. Nothing in my setup described how a design becomes a template, so it improvised, and improvisation is the last thing you want in email production.
 
-Componentising a design library costs a designer a few days, once. It is the single biggest unlock in this entire pipeline, and it is boring, which is why it gets skipped in favor of looking for a better tool.
+Componentizing a design library costs a designer a few days, once. It is the single biggest change you can make to this whole pipeline, and it is boring, which is why it gets skipped in favor of looking for a better tool.
 
 ## The Mapping
 
-The unlock is a stated correspondence, not a cleverer prompt.
+What makes it work is a stated correspondence, not a cleverer prompt.
 
 Every component in the library has one block it becomes in the Klaviyo editor. Written down, checked, unambiguous. When that mapping exists, output stops varying between emails, because there is no decision left to make.
 

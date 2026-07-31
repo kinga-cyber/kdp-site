@@ -91,11 +91,13 @@ That distinction is worth being clear about, because the pitch you usually hear 
 
 ## Something Reads It Before Your Reader Does
 
-There is a newer reason to care about live text, and it arrived quietly.
+There is another reason to care about live text, and it is not new, which is rather the point. Both major inboxes have been doing this for a while and most email programs still send as though they were not.
 
-Apple Mail now writes its own summary of your email and puts it in the inbox list, in the space your preview text used to occupy. Nobody asks for it. It is simply there, under the subject line, before anything has been opened. Gmail is heading the same way with Gemini summaries and an AI inbox.
+Apple Mail has summarized messages since iOS 18.1. The summary replaces your preview text in the inbox list, it is on by default, and nobody asked for it. Gmail has run its own version since May 2025, with Gemini summary cards on by default in the mobile apps, though those sit above the email once it is opened rather than in the list, and they are limited to paid tiers and to English.
 
-Those summaries are built from real, coded text. An image is not read. And the part that catches people out is that **alt text is not read either.** Apple's summary generator ignores it.
+That difference is worth holding on to. Apple's version affects whether the email gets opened at all. Gmail's affects what somebody takes away once they are already inside it.
+
+Both are built from real, coded text. An image is not read. And the part that catches people out is that **alt text is not read either.** Apple's summary generator ignores it.
 
 So picture the sliced version of your email landing. The headline is inside the hero image. The offer is inside the hero image. The call to action is inside the hero image. None of it exists as far as the summary is concerned, so the line sitting under your subject line, the one now doing the job your preview text used to do, gets assembled from whatever scraps of real text survived. Often that is the footer.
 

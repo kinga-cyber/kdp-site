@@ -53,7 +53,7 @@ There is an asymmetry in that table worth pausing on. **Recency uses fixed bound
 
 ## The Six Groups
 
-Klaviyo combines the three scores into one number and sorts everyone into six groups. These are the exact combinations.
+Klaviyo combines the three scores into one number and sorts everyone into six groups. These are [the exact combinations](https://help.klaviyo.com/hc/en-us/articles/17797937793179), which are worth having in one place because they are what you need to rebuild any of this by hand.
 
 | Group | Scores | What it means |
 |---|---|---|
@@ -108,7 +108,7 @@ None of those four is a bigger discount, which is the point. RFM is worth having
 
 Here are the two barriers, because you will hit them in this order.
 
-**It is a paid add-on.** The RFM report lives inside Advanced KDP or Marketing Analytics, and Klaviyo states plainly that these "are not included in Klaviyo's standard marketing application, and a subscription is required to access the associated functionality."
+**It is a paid add-on.** The RFM report lives inside Advanced KDP or Marketing Analytics, and [Klaviyo states plainly](https://help.klaviyo.com/hc/en-us/articles/17797889315355) that these "are not included in Klaviyo's standard marketing application, and a subscription is required to access the associated functionality."
 
 **It also needs data you may not have.** Even with the subscription, the report will not run unless you have at least 500 customers who have placed an order, at least 180 days of order history with orders in the last 30 days, and at least some customers with three or more orders.
 
@@ -120,7 +120,7 @@ So build it yourself. All three axes exist in the ordinary segment builder.
 
 **Frequency** is close. Placed Order at least three times over all time is a 3, twice is a 2, once is a 1. Klaviyo's own bands are typically the same, it just derives them from your percentiles rather than fixing them.
 
-**Monetary** is where it gets awkward. The clean route is Historic CLV under `Predictive analytics about someone`, which is the total value of a customer's previous orders after refunds and returns. But predictive analytics carries the same 500 customer and 180 day thresholds, so if you failed the first test you fail this one too.
+**Monetary** is where it gets awkward. The clean route is Historic CLV under `Predictive analytics about someone`, which is the total value of a customer's previous orders after refunds and returns. But [predictive analytics carries the same thresholds](https://help.klaviyo.com/hc/en-us/articles/360020919731), 500 customers and 180 days, so if you failed the first test you fail this one too.
 
 If that applies to you, one option is to drop the axis and **run RF instead of RFM**. Recency and frequency carry most of the signal, order count correlates with spend in most catalogs anyway, and a two axis grid you actually use beats a three axis one you cannot build. The better option is to calculate the spend yourself, which is the next section.
 

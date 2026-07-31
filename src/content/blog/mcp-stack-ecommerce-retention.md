@@ -35,7 +35,7 @@ Those are all answerable from the API and none are one click in the interface, w
 
 **A real one.** I checked a pop-up's actual numbers rather than trusting a summary. The old forms were converting at 2.26% and 3.93%. The replacement, a multi-step form collecting zero-party data on the way in, came in at 9.11% from 3,947 views and 420 submits. Roughly four times better on mobile, and the winning mechanic was not a bigger discount, it was asking a question during signup. That comparison took about a minute.
 
-**Where it bites.** The hosted connector runs an OAuth flow and, on Claude, needs a paid plan. There is also a local server you run yourself against a private API key, which is worth knowing if you manage several client accounts and want them separated. You need an Owner, Admin or Manager role on the account either way.
+**Where it bites.** Role first: you need Owner, Admin or Manager on the account whichever route you take. The hosted server then comes in two shapes, and the difference matters if you run more than one account. The listed connector is the quick one and covers a single account. Connecting several means building a custom connector, and that is the part that requires a paid Claude plan. There is also a local server you run yourself against a private API key, which is the route worth knowing if you keep client accounts properly separated, though it only works with Claude Desktop, Cursor and VS Code.
 
 ## Shopify
 

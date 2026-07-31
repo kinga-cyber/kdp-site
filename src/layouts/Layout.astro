@@ -15,6 +15,7 @@ interface Props {
   articleSection?: string;
   keywords?: string[];
   canonicalOverride?: string;
+  noindex?: boolean;
 }
 
 const {
@@ -28,6 +29,7 @@ const {
   articleSection,
   keywords,
   canonicalOverride,
+  noindex = false,
 } = Astro.props;
 
 const siteUrl = "https://kingadow.com";
@@ -41,6 +43,7 @@ const canonicalUrl =
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     {keywords && keywords.length > 0 && (
       <meta name="keywords" content={keywords.join(", ")} />
     )}

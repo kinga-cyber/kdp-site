@@ -12,14 +12,12 @@ const navLinks = [
   { label: "CONTACT US", href: "/contact/" },
 ];
 
-const toolLinks = [
-  { label: "Retention Maturity Calculator", href: "/calculator/" },
-  { label: "AI Workflow ROI Calculator", href: "/roi-calculator/" },
-  { label: "Free Resource", href: "/resource/" },
-  { label: "A/B Testing Blueprint", href: "/blueprint/" },
-  { label: "Flow Health Monitor", href: "/demo/flow-health-monitor/" },
-  { label: "Portfolio", href: "/portfolio/" },
-];
+// Tools and resources row removed 2026-07-30. It was added earlier the same day
+// to give the calculator, roi-calculator, resource, blueprint and
+// flow-health-monitor pages an internal link, since all five were orphans.
+// Removing it re-orphans them; they need a home somewhere else before they can
+// earn crawl priority again. Portfolio was pulled deliberately and is
+// separately noindexed while it still shows former-client creative.
 ---
 
 <footer class="bg-white pt-6 md:pt-10 pb-0">
@@ -54,8 +52,10 @@ const toolLinks = [
       </a>
     </div>
 
-    <!-- Footer navigation -->
-    <div class="flex flex-wrap justify-center gap-4 md:gap-12 mb-8">
+    <!-- Footer navigation. mb-10 (not mb-8) because this is now the last block
+         before the copyright bar; it inherits the spacing the removed tools
+         row used to provide. -->
+    <div class="flex flex-wrap justify-center gap-4 md:gap-12 mb-10">
       {navLinks.map((link) => (
         <a
           href={link.href}
@@ -66,19 +66,6 @@ const toolLinks = [
       ))}
     </div>
 
-    <!-- Tools and resources: these pages were orphaned (no incoming internal
-         links anywhere on the site), so they received no crawl priority and
-         no visitor could navigate to them. -->
-    <div class="flex flex-wrap justify-center gap-3 md:gap-8 mb-10">
-      {toolLinks.map((link) => (
-        <a
-          href={link.href}
-          class="font-montserrat text-kd-grey font-light text-[12px] tracking-[0.8px] hover:text-kd-gold transition-colors"
-        >
-          {link.label}
-        </a>
-      ))}
-    </div>
   </div>
 
   <!-- Copyright bar — cream background -->

@@ -12,10 +12,14 @@ export default defineConfig({
     // masterclass (gated), webinar (302s to /masterclass-flows), and
     // post-action pages. Each was an orphan in the sitemap, which is a
     // contradictory signal: "index this" plus "nothing links to it".
+    // portfolio is excluded while it still shows former-client creative and
+    // has only placeholder-grade content. Remove this line once the real
+    // portfolio ships, and drop the matching noindex in portfolio.astro.
     filter: (page) =>
       !page.includes('/masterclass') &&
       !page.includes('/webinar') &&
-      !page.includes('/thank-you-vote')
+      !page.includes('/thank-you-vote') &&
+      !page.includes('/portfolio')
   })],
   vite: {
     plugins: [tailwindcss()]

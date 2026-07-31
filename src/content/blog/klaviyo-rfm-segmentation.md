@@ -19,13 +19,13 @@ metaTitle: "RFM Segmentation in Klaviyo: A Practical Guide | Kinga Dow"
 metaDescription: "How Klaviyo scores RFM, the six customer groups it creates, why most accounts cannot use the report, and how to rebuild it from ordinary segments."
 ---
 
-You probably do not send to your whole list. Most accounts send to engaged, with bounced and sunset suppressed and anyone who ordered in the last seven days excluded. That is sensible and worth doing.
+Almost every Klaviyo account I look at has the same shape. The sending is careful and the segmentation is not.
 
-It is also a deliverability decision rather than a segmentation one. It answers who is safe to email. It says nothing about who a given message is for. Inside that one engaged audience sits somebody who has bought twelve times and somebody who bought once, eleven months ago, and both are getting the same email.
+The care goes into deliverability. Engaged only, bounced and sunset suppressed, anyone who ordered in the last seven days kept out of the promotional sends. All sensible, all worth doing. None of it says anything about who a message is actually for, and inside that one engaged audience sits somebody who has bought twelve times next to somebody who bought once, eleven months ago, both getting the same email.
 
-The usual attempt at fixing that is to guess. A VIP segment at some round number of orders, a lapsed segment at some round number of days, thresholds picked because they sounded about right when somebody suggested them.
+The usual attempt at fixing that is a guess. A VIP segment at some round number of orders, a lapsed segment at some round number of days, thresholds chosen because they sounded about right when somebody suggested them.
 
-RFM is that same idea with the guessing taken out. It sorts customers by three things, how recently they bought, how often they buy and how much they spend, and it sets the cutoffs from your actual data rather than from a number you liked. Klaviyo scores each on a 1 to 3 scale and sorts everyone into six groups, where 333 is your best customer and 111 is someone effectively gone.
+RFM is the same instinct with the guessing taken out. It sorts customers by three things, how recently they bought, how often they buy and how much they spend, and it takes the cutoffs from your own data rather than from a number you liked. Klaviyo scores each on a 1 to 3 scale and sorts everyone into six groups, where 333 is your best customer and 111 is someone effectively gone.
 
 Klaviyo also has a report that does this for you, and most accounts cannot use it, for two separate reasons neither of which is obvious until you go looking. The version you build by hand is close enough to run a real retention program on, and building it teaches you more about your list than the report would have.
 

@@ -14,7 +14,7 @@ keywords:
   - "customer segmentation klaviyo"
   - "retention segmentation"
 featured: false
-draft: true
+draft: false
 metaTitle: "RFM Segmentation in Klaviyo: A Practical Guide | Kinga Dow"
 metaDescription: "How Klaviyo scores RFM, the six customer groups it creates, why most accounts cannot use the report, and how to rebuild it from ordinary segments."
 ---
@@ -25,9 +25,9 @@ The care goes into deliverability. Engaged only, bounced and sunset suppressed, 
 
 The usual attempt at fixing that is a guess. A VIP segment at some round number of orders, a lapsed segment at some round number of days, thresholds chosen because they sounded about right when somebody suggested them.
 
-RFM is the same instinct with the guessing taken out. It sorts customers by three things, how recently they bought, how often they buy and how much they spend, and it takes the cutoffs from your own data rather than from a number you liked. Klaviyo scores each on a 1 to 3 scale and sorts everyone into six groups, where 333 is your best customer and 111 is someone effectively gone.
+Let me introduce you to the RFM system, which is the same instinct with the guessing taken out. It sorts customers by three things, how recently they bought, how often they buy and how much they spend, and it takes the cutoffs from your own data rather than from a number you liked. Klaviyo scores each on a 1 to 3 scale and sorts everyone into six groups, where 333 is your best customer and 111 is someone effectively gone.
 
-Klaviyo also has a report that does this for you, and most accounts cannot use it, for two separate reasons neither of which is obvious until you go looking. The version you build by hand is close enough to run a real retention program on, and building it teaches you more about your list than the report would have.
+Klaviyo also has a report that does it for you. Most accounts cannot use it. It sits behind a paid add-on, and even with the subscription it will not run until your store clears a set of data thresholds, which a lot of brands never do. So you build it by hand. That version is close enough to run a real retention program on, and you come out of it knowing more about your list than the report would have told you.
 
 ## What RFM Actually Measures
 
@@ -66,15 +66,15 @@ Klaviyo combines the three scores into one number and sorts everyone into six gr
 
 Read that table as a set of instructions rather than a set of labels. Needs Attention and At Risk are different problems: one is a good customer who has drifted, the other is a marginal customer who is drifting. Sending both the same win-back email is the mistake RFM exists to prevent.
 
-## The Part Almost Nobody Uses
+## The Two Properties Worth More Than the Groups
 
-When the report runs, Klaviyo writes three properties onto each profile. Everyone finds the first one. The other two are where the value is.
+When the report runs, Klaviyo writes three properties onto each profile. The last two are where the value is.
 
 - `Current RFM group`
 - `Previous RFM group`
 - `RFM group last changed`
 
-The current group is a state. You can segment on it, and most people stop there. But the previous group and the change date describe **movement**, and movement is the thing you actually want to act on.
+The current group is a state. You can segment on it. But the previous group and the change date describe **movement**, and movement is the thing you actually want to act on.
 
 A customer sitting in Champions needs nothing from you. A customer who was in Champions last month and is not this month is a different situation entirely, and it is one you can now trigger a flow on. Same for the opposite direction: someone who has just moved up into Loyal is a candidate for the thing that pushes them into Champions.
 
@@ -112,7 +112,7 @@ Here are the two barriers, because you will hit them in this order.
 
 **It also needs data you may not have.** Even with the subscription, the report will not run unless you have at least 500 customers who have placed an order, at least 180 days of order history with orders in the last 30 days, and at least some customers with three or more orders.
 
-That second barrier is the one nobody mentions, and it excludes a lot of the brands with the most to gain. If you are under 500 purchasing customers, this feature is unavailable to you at any price.
+That second barrier is the one nobody mentions, and it excludes a lot of the brands with the most to gain.
 
 So build it yourself. All three axes exist in the ordinary segment builder.
 
@@ -128,9 +128,9 @@ Build the six groups as six saved segments using the score combinations in the t
 
 ## Doing the Arithmetic With Claude
 
-The hard part of building this by hand is not creating the segments. It is knowing where the thresholds go, because two of Klaviyo's three axes are percentiles of your own list, and almost nobody knows their own percentiles.
+The hard part of building this by hand is not creating the segments. It is knowing where the thresholds go, because two of Klaviyo's three axes are percentiles of your own list, and the segment builder will not tell you what yours are.
 
-That is the part worth connecting an assistant to.
+That is the part worth handing to Claude.
 
 With the [Klaviyo MCP connector](/blog/mcp-stack-ecommerce-retention/), Claude can query your metric aggregates directly. What the distribution of order counts actually looks like, where the spend cutoff falls at the top and bottom third. One question each, instead of an export and an afternoon in a spreadsheet.
 
@@ -148,9 +148,9 @@ The REST API underneath is the **full surface**, and it does have the endpoint. 
 
 So the useful rule: **the connector for asking questions, the API for the things the connector does not cover.** Connect the MCP first, because it costs nothing and answers most of what you actually want to know. Reach for a key when you hit a wall. The part worth internalizing is that the wall is usually a curation decision rather than a technical limit, which means the answer to "the connector cannot do this" is often "the API can."
 
-For this particular job it splits cleanly. The thresholds come from the connectors, because that is a question. The six segments get clicked in by hand or posted through the API, depending on scale. Doing this once for one brand, click them. Doing it across a roster, write it once and run it per account.
+For this particular job it splits cleanly. Finding the thresholds is a question, so it goes through the connector. Building the six segments is not a question, so it goes one of two ways. For a single brand, enter them by hand in Klaviyo's segment builder. For a roster of accounts, write the API call once and run it per account.
 
-Either way the assistant does the analysis, which is the part that needs judgment and the part almost nobody does properly. Entering six definitions once you know the numbers is twenty minutes.
+Either way Claude does the analysis, which is the part that needs judgment. Entering six definitions once you know the numbers is twenty minutes.
 
 ## What It Is Actually Worth
 
@@ -160,7 +160,7 @@ Three things, in the order you will notice them.
 
 **You stop discounting people who were going to buy anyway.** This is the same argument as the one in the [abandoned cart post](/blog/abandoned-cart-flow/). A discount to Champions buys nothing. A discount to At Risk might buy back a customer. Same code, completely different economics, and RFM is what tells you which one you are looking at.
 
-**It is a diagnostic before it is a tool.** The shape of your six groups is a description of your business. A large Recent group and a small Loyal group means you acquire well and retain badly. A large Needs Attention group means you had something good and stopped tending it. Most brands have never seen that picture, and it usually answers a question they have been arguing about for months.
+**It is a diagnostic before it is a tool.** The shape of your six groups is a description of your business. A large Recent group and a small Loyal group means you acquire well and retain badly. A large Needs Attention group means you had something good and stopped tending it. Most of the brands I work with have never seen that picture, and it usually answers a question they have been arguing about for months.
 
 If you want the picture without building it first, the [reorder timing post](/blog/predict-when-your-customers-will-reorder/) covers the recency half in more depth.
 

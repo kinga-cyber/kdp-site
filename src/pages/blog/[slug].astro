@@ -1,7 +1,7 @@
 ---
 import { render, type CollectionEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
-import ConsultationCTA from "../../components/ConsultationCTA.astro";
+import BlogSubscribe from "../../components/BlogSubscribe.astro";
 import { getPublishedPosts, freshness } from "../../lib/posts";
 
 export async function getStaticPaths() {
@@ -260,6 +260,13 @@ const pageDescription = post.data.metaDescription ?? post.data.excerpt;
     </div>
   </article>
 
+  <!-- Subscribe. Sits here on purpose: it is the low-commitment ask, offered
+       at the one moment the reader has proof the writing is worth their inbox.
+       The consultation CTA used to close this page; two asks stacked was too
+       much, and subscribing is the right next step for someone who arrived
+       cold from search. -->
+  <BlogSubscribe source="Blog Post" />
+
   <!-- Related Posts -->
   {relatedPosts.length > 0 && (
     <section class="py-12 md:py-16 px-6 bg-[#FAFAFA]">
@@ -311,8 +318,6 @@ const pageDescription = post.data.metaDescription ?? post.data.excerpt;
     </section>
   )}
 
-  <!-- Consultation CTA -->
-  <ConsultationCTA />
 </Layout>
 
 

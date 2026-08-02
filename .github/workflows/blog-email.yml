@@ -1,0 +1,59 @@
+name: Thursday blog email
+
+# Announces a newly published post to the Blog Subscribers list in Klaviyo,
+# scheduled for 9:15am Eastern. The script is a no-op on any week where no post
+# went live, so a quiet Thursday costs nothing.
+#
+# This chains off "Weekly publish" rather than running on its own cron. That
+# workflow POSTs the Netlify build hook; this one starts as soon as it finishes
+# and then waits for the post to actually appear on the site, because the build
+# itself takes a few more minutes after the hook fires.
+#
+# A second cron was the obvious first design and it was wrong: free-tier
+# scheduled runs are queued up to an hour late, so any fixed time either fires
+# before the post exists or after the intended send time. Chaining removes the
+# guess entirely.
+#
+# Timeline on a normal Thursday:
+#   06:00 ET  Weekly publish fires and POSTs the Netlify build hook
+#   ~06:05    Netlify finishes, post is live
+#   ~06:05    this workflow confirms the post and schedules the campaign
+#   09:15 ET  Klaviyo sends
+#
+# The three-hour gap is deliberate headroom for a queued run plus the build.
+
+on:
+  workflow_run:
+    workflows: ["Weekly publish"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Plan only, do not create anything in Klaviyo"
+        type: boolean
+        default: true
+
+concurrency:
+  group: blog-email
+  cancel-in-progress: false
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    # Do not announce a post if the publish step itself failed.
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Create and schedule the campaign
+        env:
+          KLAVIYO_API_KEY: ${{ secrets.KLAVIYO_API_KEY }}
+        run: |
+          node scripts/blog-email/send.mjs ${{ github.event.inputs.dry_run == 'true' && '--dry-run' || '' }}

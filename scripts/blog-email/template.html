@@ -1,0 +1,123 @@
+<!--
+  Base HTML for the Thursday blog email.
+
+  Tokens use double square brackets rather than double curly braces on purpose:
+  Klaviyo's own template language owns the curly form, and anything left in
+  curlies would be rendered away to an empty string before you ever saw it.
+  These are replaced by send.mjs before the template is uploaded, so nothing
+  token-shaped survives into Klaviyo.
+
+  This comment block is stripped at render time and never reaches the inbox.
+
+  Tokens:
+    [[POST_TITLE]]     post title, HTML-escaped
+    [[POST_EXCERPT]]   excerpt, HTML-escaped
+    [[POST_URL]]       absolute URL to the post
+    [[POST_CATEGORY]]  category label
+    [[IMAGE_BLOCK]]    a full <tr> hero image row, or empty. SVG post images are
+                       dropped here because most email clients will not render
+                       them.
+
+  Edit this file to change the design permanently. Editing the generated
+  template inside Klaviyo only changes that one week's send.
+-->
+<html>
+  <body style="margin:0; padding:0; background-color:#F6EFE6;">
+    <!-- Preheader: shown in the inbox list, hidden in the body. -->
+    <div style="display:none; font-size:1px; color:#F6EFE6; line-height:1px; max-height:0; max-width:0; opacity:0; overflow:hidden;">
+      [[POST_EXCERPT]]
+    </div>
+
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#F6EFE6;">
+      <tr>
+        <td align="center" style="padding:32px 16px;">
+
+          <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:100%; background-color:#ffffff; border-radius:12px; overflow:hidden;">
+
+            <!-- Masthead -->
+            <tr>
+              <td align="center" style="padding:32px 32px 24px 32px;">
+                <a href="https://kingadow.com/" style="text-decoration:none;">
+                  <img src="https://kingadow.com/images/global/logo.png" width="150" alt="Kinga Dow" style="display:block; width:150px; max-width:150px; height:auto; border:0;" />
+                </a>
+              </td>
+            </tr>
+
+            [[IMAGE_BLOCK]]
+
+            <!-- Category -->
+            <tr>
+              <td style="padding:32px 40px 0 40px;">
+                <p style="margin:0; font-family:'Montserrat',Helvetica,Arial,sans-serif; font-size:11px; font-weight:600; letter-spacing:1.8px; text-transform:uppercase; color:#BA9200;">
+                  [[POST_CATEGORY]]
+                </p>
+              </td>
+            </tr>
+
+            <!-- Title -->
+            <tr>
+              <td style="padding:12px 40px 0 40px;">
+                <h1 style="margin:0; font-family:Helvetica,Arial,sans-serif; font-size:26px; line-height:34px; font-weight:700; letter-spacing:0.5px; color:#3F455D;">
+                  [[POST_TITLE]]
+                </h1>
+              </td>
+            </tr>
+
+            <!-- Excerpt -->
+            <tr>
+              <td style="padding:18px 40px 0 40px;">
+                <p style="margin:0; font-family:'Montserrat',Helvetica,Arial,sans-serif; font-size:15px; line-height:26px; font-weight:300; letter-spacing:0.5px; color:#333333;">
+                  [[POST_EXCERPT]]
+                </p>
+              </td>
+            </tr>
+
+            <!-- Button -->
+            <tr>
+              <td style="padding:28px 40px 40px 40px;">
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                  <tr>
+                    <td align="center" bgcolor="#E0B000" style="border-radius:8px;">
+                      <a href="[[POST_URL]]" style="display:inline-block; padding:14px 30px; font-family:'Montserrat',Helvetica,Arial,sans-serif; font-size:13px; font-weight:500; letter-spacing:1.4px; text-transform:uppercase; color:#ffffff; text-decoration:none; border-radius:8px;">
+                        Read the post
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Sign-off -->
+            <tr>
+              <td style="padding:0 40px 36px 40px; border-top:1px solid #EAE6E0;">
+                <p style="margin:24px 0 0 0; font-family:'Montserrat',Helvetica,Arial,sans-serif; font-size:14px; line-height:24px; font-weight:300; letter-spacing:0.5px; color:#333333;">
+                  Kinga
+                </p>
+              </td>
+            </tr>
+
+          </table>
+
+          <!-- Footer -->
+          <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:100%;">
+            <tr>
+              <td align="center" style="padding:24px 32px 8px 32px;">
+                <p style="margin:0; font-family:'Montserrat',Helvetica,Arial,sans-serif; font-size:12px; line-height:20px; font-weight:300; letter-spacing:0.5px; color:#8a8580;">
+                  You are getting this because you subscribed to new posts at kingadow.com.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" style="padding:4px 32px 32px 32px;">
+                <p style="margin:0; font-family:'Montserrat',Helvetica,Arial,sans-serif; font-size:12px; line-height:20px; font-weight:300; letter-spacing:0.5px; color:#8a8580;">
+                  {% unsubscribe 'Unsubscribe' %}
+                </p>
+              </td>
+            </tr>
+          </table>
+
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

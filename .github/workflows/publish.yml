@@ -9,10 +9,19 @@ name: Weekly publish
 
 on:
   schedule:
-    # Thursday 13:00 UTC = 9am EDT / 8am EST.
+    # Thursday 10:00 UTC = 6am EDT / 5am EST.
     # GitHub cron is UTC only and does not follow daylight saving.
     # Free-tier scheduled runs are queued and can be delayed 15-60 minutes.
-    - cron: "0 13 * * 4"
+    #
+    # Moved earlier from 13:00 UTC on 2026-07-31. The subscriber email that
+    # announces the post is scheduled for 9:15am Eastern, and the post has to be
+    # live before that time can be scheduled. Publishing at 6am leaves roughly
+    # three hours of headroom, which absorbs a worst-case queue delay plus the
+    # Netlify build. Nobody sees the post until the email goes out, so the
+    # earlier publish costs nothing.
+    #
+    # If you move this later, move the send time in blog-email.yml too.
+    - cron: "0 10 * * 4"
 
   # Adds a "Run workflow" button in the Actions tab, for publishing something
   # that should not wait for Thursday.

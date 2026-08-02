@@ -1,0 +1,223 @@
+---
+/**
+ * Blog subscribe band. Sits between the article and Related Posts on a post
+ * page, and below the post grid on the blog index.
+ *
+ * Submits to Klaviyo with the same client-side pattern as contact.astro:
+ * no server needed, which matters because the site is a static build.
+ *   Company:  SqUgaK (Kinga Dow Marketing)
+ *   List:     SHnzMn (Blog Subscribers) — deliberately NOT the master list
+ *             W3XhAb, so the Thursday send goes only to people who asked for
+ *             posts, and blog consent stays separate from contact-form consent.
+ *
+ * COPY OPTIONS — swap by passing `heading` and `body`, or change the defaults.
+ *
+ *   1. Cadence-led (current default)
+ *      "New post every Thursday"
+ *      "Klaviyo strategy, retention systems, and the AI workflows I run in
+ *       real accounts. One email a week."
+ *
+ *   2. Practitioner-led
+ *      "Written from inside the work"
+ *      "Not roundups of other people's takes. What I build in Klaviyo, what
+ *       breaks, and what I would do differently. New post every Thursday."
+ *
+ *   3. Plainest
+ *      "Get new posts by email"
+ *      "One email every Thursday on Klaviyo, retention, and AI workflows."
+ */
+interface Props {
+  id?: string;
+  heading?: string;
+  body?: string;
+  /** Identifies the placement in Klaviyo, e.g. "Blog Post" or "Blog Index". */
+  source?: string;
+  /**
+   * "band"    — full-width cream section. The blog pages.
+   * "compact" — single row, no background. The site footer, where it must not
+   *             compete with the page's own CTA or collide with the cream
+   *             copyright bar directly beneath it.
+   */
+  variant?: "band" | "compact";
+}
+
+const {
+  id = "blog-subscribe",
+  heading = "New post every Thursday",
+  body = "Klaviyo strategy, retention systems, and the AI workflows I run in real accounts. One email a week.",
+  source = "Blog",
+  variant = "band",
+} = Astro.props;
+
+const isCompact = variant === "compact";
+---
+
+<section
+  class={isCompact
+    ? "px-6 pb-8 mb-8 border-b border-kd-navy/10"
+    : "bg-kd-cream py-12 md:py-16 px-6"}
+  data-subscribe-source={source}
+>
+  <div
+    class={isCompact
+      ? "max-w-6xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-5"
+      : "max-w-3xl mx-auto text-center"}
+  >
+    <div class={isCompact ? "md:max-w-sm" : ""}>
+      <span class="text-kd-gold text-[11px] md:text-[12px] font-montserrat font-medium tracking-[1.8px] uppercase">
+        Subscribe
+      </span>
+      <h2
+        class={isCompact
+          ? "font-aktiv text-kd-navy text-[17px] md:text-[19px] font-semibold leading-[24px] md:leading-[26px] tracking-[1px] mt-2 mb-1"
+          : "animate-on-scroll fade-in-up font-aktiv text-kd-navy text-[21px] md:text-[28px] font-semibold leading-[30px] md:leading-[38px] tracking-[1.2px] md:tracking-[1.4px] mt-3 mb-3"}
+      >
+        {heading}
+      </h2>
+      <p
+        class={isCompact
+          ? "text-kd-grey text-[12px] font-montserrat font-light leading-[20px] tracking-[0.9px]"
+          : "text-kd-grey text-[14px] md:text-[15px] font-montserrat font-light leading-[24px] md:leading-[26px] tracking-[1px] max-w-xl mx-auto mb-7"}
+      >
+        {body}
+      </p>
+    </div>
+
+    <div class={isCompact ? "w-full md:w-auto md:min-w-[420px]" : ""}>
+    <form
+      id={id}
+      class="flex flex-col sm:flex-row gap-3 w-full max-w-lg mx-auto"
+    >
+      <label class="sr-only" for={`${id}-email`}>Email address</label>
+      <input
+        type="email"
+        id={`${id}-email`}
+        name="email"
+        placeholder="Email address"
+        required
+        autocomplete="email"
+        class="flex-1 px-5 py-3.5 rounded-lg border border-kd-navy/15 bg-white focus:outline-none focus:border-kd-gold text-[15px] font-montserrat font-light text-kd-navy placeholder:text-gray-500"
+      />
+      <!-- Honeypot: hidden from people, filled by bots. -->
+      <div style="position:absolute;left:-9999px;" aria-hidden="true">
+        <input type="text" id={`${id}-website`} name="website" tabindex="-1" autocomplete="off" />
+      </div>
+      <button
+        type="submit"
+        id={`${id}-btn`}
+        class="btn-gold px-7 py-3.5 rounded-lg text-[13px] font-montserrat font-medium tracking-[1.4px] whitespace-nowrap"
+      >
+        <span id={`${id}-btn-text`}>SUBSCRIBE</span>
+      </button>
+    </form>
+
+    <p
+      id={`${id}-note`}
+      class={isCompact
+        ? "text-kd-grey/60 text-[11px] font-montserrat font-light tracking-[0.8px] mt-3 text-center"
+        : "text-kd-grey/60 text-[11px] font-montserrat font-light tracking-[0.8px] mt-4"}
+    >
+      One email a week. Unsubscribe any time.
+    </p>
+
+    <!-- Success state, swapped in for the form on submit. -->
+    <div id={`${id}-success`} class="hidden max-w-lg mx-auto text-center">
+      <div class={isCompact
+        ? "w-9 h-9 mx-auto mb-2 rounded-full bg-kd-sage/15 flex items-center justify-center"
+        : "w-12 h-12 mx-auto mb-4 rounded-full bg-kd-sage/15 flex items-center justify-center"}>
+        <svg class={isCompact ? "w-5 h-5 text-kd-sage" : "w-6 h-6 text-kd-sage"} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+      <p class={isCompact
+        ? "text-kd-navy text-[14px] font-montserrat font-medium tracking-[1px]"
+        : "text-kd-navy text-[16px] font-montserrat font-medium tracking-[1px]"}>
+        You're on the list.
+      </p>
+      <p class={isCompact
+        ? "text-kd-grey text-[12px] font-montserrat font-light tracking-[1px] mt-1"
+        : "text-kd-grey text-[13px] font-montserrat font-light tracking-[1px] mt-2"}>
+        The next post lands Thursday.
+      </p>
+    </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline define:vars={{ id, source }}>
+  document.addEventListener("DOMContentLoaded", function () {
+    var form = document.getElementById(id);
+    if (!form) return;
+
+    var emailEl = document.getElementById(id + "-email");
+    var honeypot = document.getElementById(id + "-website");
+    var btn = document.getElementById(id + "-btn");
+    var btnText = document.getElementById(id + "-btn-text");
+    var note = document.getElementById(id + "-note");
+    var success = document.getElementById(id + "-success");
+
+    var companyId = "SqUgaK";
+    var listId = "SHnzMn";
+
+    function showSuccess() {
+      form.classList.add("hidden");
+      note.classList.add("hidden");
+      success.classList.remove("hidden");
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // Bot filled the honeypot. Show success so it does not retry.
+      if (honeypot.value) {
+        showSuccess();
+        return;
+      }
+
+      btn.disabled = true;
+      btnText.textContent = "SENDING...";
+
+      fetch("https://a.klaviyo.com/client/subscriptions/?company_id=" + companyId, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          revision: "2024-10-15",
+        },
+        body: JSON.stringify({
+          data: {
+            type: "subscription",
+            attributes: {
+              custom_source: source,
+              profile: {
+                data: {
+                  type: "profile",
+                  attributes: {
+                    email: emailEl.value,
+                    properties: {
+                      blog_subscriber: true,
+                      blog_subscribe_source: source,
+                    },
+                  },
+                },
+              },
+            },
+            relationships: {
+              list: { data: { type: "list", id: listId } },
+            },
+          },
+        }),
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error("Klaviyo responded " + res.status);
+          showSuccess();
+        })
+        .catch(function () {
+          btnText.textContent = "TRY AGAIN";
+          btn.disabled = false;
+          setTimeout(function () {
+            btnText.textContent = "SUBSCRIBE";
+          }, 3000);
+        });
+    });
+  });
+</script>

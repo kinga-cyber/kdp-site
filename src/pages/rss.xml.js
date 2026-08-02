@@ -20,6 +20,10 @@ export async function GET(context) {
       link: `/blog/${post.id}/`,
       categories: [post.data.category, ...(post.data.keywords ?? [])],
       author: post.data.author,
+      // Non-standard <image> element. Feed readers ignore elements they do not
+      // recognise, and the Thursday subscriber email reads it to build its hero
+      // image without needing a second request to the post page.
+      customData: `<image>${new URL(post.data.image, context.site ?? "https://kingadow.com").href}</image>`,
     })),
     customData: `<language>en-us</language>`,
   });

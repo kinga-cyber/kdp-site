@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ConsultationCTA from "../components/ConsultationCTA.astro";
+import BlogSubscribe from "../components/BlogSubscribe.astro";
 import { getPublishedPosts, freshness, type Post } from "../lib/posts";
 
 // Published = not a draft, and not dated in the future. Sorted by freshness
@@ -269,8 +269,13 @@ const INITIAL_VISIBLE = 9;
     </div>
   </section>
 
-  <!-- Consultation CTA -->
-  <ConsultationCTA />
+  <!-- Subscribe closes the index. Copy is shorter here than on a post page,
+       because a browsing reader has not read anything yet and the ask has to
+       stand on the cadence alone. -->
+  <BlogSubscribe
+    source="Blog Index"
+    body="Klaviyo strategy, retention systems, and the AI workflows behind the work. One email a week."
+  />
 </Layout>
 
 <style>

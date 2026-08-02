@@ -1,5 +1,13 @@
 ---
+import BlogSubscribe from "./BlogSubscribe.astro";
+
 const currentYear = new Date().getFullYear();
+
+// The blog pages carry the full-width subscribe band already. Showing the
+// footer row there too would put the same form on the page twice, so it is
+// suppressed by path rather than by a prop threaded through Layout — a prop
+// is one more thing to forget when a new blog route is added.
+const showSubscribe = !Astro.url.pathname.startsWith("/blog");
 
 const navLinks = [
   { label: "HOME", href: "/" },
@@ -21,6 +29,15 @@ const navLinks = [
 ---
 
 <footer class="bg-white pt-6 md:pt-10 pb-0">
+  {showSubscribe && (
+    <BlogSubscribe
+      variant="compact"
+      id="footer-subscribe"
+      source="Footer"
+      body="One email every Thursday on Klaviyo, retention, and AI workflows."
+    />
+  )}
+
   <div class="max-w-6xl mx-auto px-6">
     <!-- Logo -->
     <div class="flex justify-center mb-8">

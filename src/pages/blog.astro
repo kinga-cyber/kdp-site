@@ -67,8 +67,14 @@ const INITIAL_VISIBLE = 9;
       </span>
 
       <!-- Headline -->
-      <h1 class="font-aktiv text-kd-navy text-[24px] md:text-[42px] leading-[36px] md:leading-[52px] tracking-[1.4px] md:tracking-[2.1px] font-semibold max-w-4xl mx-auto">
-        Browse our blog for tutorials<br class="hidden md:block" />and other informational resources
+      {/* 21px on mobile, not 24px: at 24px this wraps to four lines. 21 is the
+          largest that holds three from 360px up. 22px fits 375px but leaves
+          2px of slack at 360 and breaks to four on a 320px SE. */}
+      <h1 class="font-aktiv text-kd-navy text-[21px] md:text-[42px] leading-[30px] md:leading-[52px] tracking-[1.1px] md:tracking-[2.1px] font-semibold max-w-4xl mx-auto">
+        {/* The space before the <br> matters. The break is display:none on
+            mobile, so without it "tutorials" and "and" render fused as
+            "tutorialsand". Desktop collapses the trailing space at the break. */}
+        Browse our blog for tutorials <br class="hidden md:block" />and other informational resources
       </h1>
     </div>
   </section>
@@ -133,8 +139,10 @@ const INITIAL_VISIBLE = 9;
           {featuredPosts.length > 1 && (
             <div class="md:col-span-5 flex flex-col gap-6 md:gap-8 animate-on-scroll fade-in-up delay-100">
               {featuredPosts.slice(1).map((post) => (
-                <article class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex-1 flex">
-                  <a href={`/blog/${post.id}/`} class="block w-2/5 shrink-0 bg-kd-cream overflow-hidden">
+                <article class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex-1 flex flex-col">
+                  {/* Aspect ratio matches the 1200x630 source, so object-cover has
+                      nothing to crop. Edge to edge, same treatment as the hero. */}
+                  <a href={`/blog/${post.id}/`} class="block aspect-[1200/630] bg-kd-cream overflow-hidden">
                     <img
                       src={post.data.image}
                       alt={post.data.imageAlt ?? post.data.title}
@@ -142,7 +150,7 @@ const INITIAL_VISIBLE = 9;
                     />
                   </a>
 
-                  <div class="p-4 md:p-5 flex-1 flex flex-col justify-center">
+                  <div class="p-4 md:p-5 flex-1 flex flex-col">
                     <span class="text-kd-gold text-[11px] md:text-[12px] font-montserrat font-medium tracking-[1.1px] uppercase">
                       {post.data.category}
                     </span>
@@ -155,6 +163,13 @@ const INITIAL_VISIBLE = 9;
 
                     <p class="text-kd-grey text-[11px] md:text-[12px] font-montserrat tracking-[1.1px]">
                       {dateLabel(post)}
+                    </p>
+
+                    {/* Clamped: excerpts run to two or three sentences and these
+                        cards are narrow, so an unbounded one would blow the
+                        card past the hero it sits beside. */}
+                    <p class="text-kd-grey text-[13px] leading-[20px] font-montserrat font-light tracking-[0.5px] mt-2.5 line-clamp-3">
+                      {post.data.excerpt}
                     </p>
                   </div>
                 </article>

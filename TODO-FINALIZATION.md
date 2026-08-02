@@ -97,6 +97,14 @@
 ### 6. Stripe Payment Link (Optional)
 - [ ] Add Stripe payment link ($275) if payment step is wanted before Calendly
 
+### 7. Blog post hero images look interchangeable
+- [ ] The post SVGs share one treatment: cream background, a row of outlined
+      boxes, a caption under a rule. Side by side on `/blog/` they read as the
+      same graphic four times rather than four different posts. Raised
+      2026-08-01, after the featured cards went vertical and started rendering
+      the images at 461px instead of 160px, which made the sameness obvious.
+      Needs a visual pass across the set, not a per-post fix.
+
 ---
 
 ## Notes

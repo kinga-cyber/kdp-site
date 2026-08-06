@@ -192,7 +192,7 @@ async function alreadySent(campaignName) {
   const res = await klaviyo(
     `/api/campaigns/?filter=${encodeURIComponent(
       "equals(messages.channel,'email')"
-    )}&sort=-created_at&page%5Bsize%5D=25&fields%5Bcampaign%5D=name`
+    )}&sort=-created_at&fields%5Bcampaign%5D=name`
   );
   return (res.data ?? []).some((c) => c.attributes?.name === campaignName);
 }

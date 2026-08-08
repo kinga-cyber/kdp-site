@@ -29,8 +29,8 @@
 <text x="80" y="496" fill="#3F455D" font-size="21" font-weight="600">Claude + Klaviyo MCP</text>
 <text x="80" y="522" fill="#59A56D" font-size="13" font-weight="600" letter-spacing="1.2">NO API, NO CODE</text>
 <text x="400" y="508" fill="#333333" font-size="17.5" opacity="0.9">Any cut of the data you can describe</text>
-<text x="790" y="508" fill="#333333" font-size="17.5" opacity="0.9">On demand</text>
+<text x="790" y="508" fill="#333333" font-size="17.5" opacity="0.9">Once or weekly</text>
 <text x="1020" y="508" fill="#59A56D" font-size="17.5" font-weight="600">Free</text>
 
-<text x="50" y="596" fill="#3F455D" font-size="18" font-weight="500" opacity="0.9">A connector sells you a schedule. The MCP answers a question.</text>
+<text x="50" y="596" fill="#3F455D" font-size="18" font-weight="500" opacity="0.9">A connector gives you one shape of report. The MCP gives you whichever shape you asked for.</text>
 </svg>

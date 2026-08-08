@@ -15,7 +15,7 @@ keywords:
   - "klaviyo mcp"
   - "connect klaviyo to claude"
 metaTitle: "Klaviyo to Google Sheets: Three Routes | Kinga Dow"
-metaDescription: "There is no native Klaviyo Google Sheets integration. Here are the three routes that work, what each one costs, and which to use for reporting versus a one off."
+metaDescription: "There is no native Klaviyo Google Sheets integration. Here are the three routes that work, what each one costs, and how to pick between them."
 featured: false
 draft: true
 ---
@@ -84,13 +84,17 @@ A connector gives you campaign performance, every day, in the columns it support
 
 This is where the interesting work lives. [Predicting when a customer will reorder](/blog/predict-when-your-customers-will-reorder/) and [building RFM segments](/blog/klaviyo-rfm-segmentation/) both need a cut of data that no standard report hands you, and both are questions rather than dashboards.
 
-That is a different kind of tool. Connectors are for reports you will read repeatedly. This is for questions.
+That is a different kind of tool. A connector gives you one shape of report, over and over. This gives you whatever shape answers the question.
+
+**It also runs on a schedule,** which is the part most people miss about it. The same connection can run as a repeating task, so a report arrives without you asking each time. My weekly campaign report works this way. Every send, with the list it went to, opens, click-through, revenue per recipient, spam complaints and unsubscribes, filling in the gaps in the sheet on its own.
+
+So the choice between asking once and having it arrive every Monday is a setting rather than a second purchase.
 
 **What it costs.** A Claude subscription you likely already have, and nothing else. Both connectors are free.
 
-**Where it breaks.** It is pull, not push. There is no schedule, so nothing arrives on Monday morning unless you ask for it. If you want a report that appears without you, use a connector. Also confirm both connections are live before you rely on it, because Klaviyo alone can read but cannot write anywhere, and Drive alone has nothing to write.
+**Where it breaks.** Both connections have to be live, because Klaviyo alone can read and cannot write anywhere, and Drive alone has nothing to write. The output is also only as good as the request, so a vague question gets a vague sheet. A connector's fixed schema is a limitation and a guardrail at the same time.
 
-**Use it when** you have a specific question, or when the cut of data you need does not exist as a standard report.
+**Use it when** the cut of data you need does not exist as a standard report, whether you want it once or every week.
 
 ## Going the Other Way: Sheets Into Klaviyo
 
@@ -106,11 +110,11 @@ If the sheet is the ongoing source of truth rather than a one time list, a conne
 
 Once, for one answer: export the CSV.
 
-A standing report someone reads on a schedule: use a connector, and expect to pay for it.
+A standing report on a fixed set of fields, set up through a UI with no describing required: a connector, and expect to pay for it.
 
-A question about the account, especially one Klaviyo's own reporting will not answer: Claude with the MCP.
+Anything where the shape of the answer matters, whether you need it once or every Monday: Claude with the MCP.
 
-Most accounts I see need the third one far more often than they think, and buy the second one first, because the second one is the one being advertised.
+Most accounts I see buy the connector first, because the connector is the thing being advertised. The better question is whether the report a connector can hand you is the one you actually wanted.
 
 ## Before You Build It
 

@@ -1,6 +1,6 @@
 ---
 title: "When Email Revenue Is High, Something Else Is Usually Wrong"
-date: 2026-09-24
+date: 2026-10-01
 author: "Kinga Dow"
 category: "Email Marketing"
 excerpt: "Email at forty percent of revenue gets reported as a win. It rises when email improves and when everything else collapses, and those look identical on a dashboard. How to tell which one you have."
@@ -29,7 +29,7 @@ Both were true, and the first was a symptom of the second.
 
 Email revenue share goes up when email gets better. It also goes up when everything else gets worse.
 
-Paid gets more expensive and the budget comes down. Organic slips. The store stops acquiring at the rate it used to. Email keeps converting the people who are still arriving, and its slice of a shrinking pie gets larger every month.
+Paid ads get more expensive and the budget comes down. The traffic you do not pay for slips. The store stops acquiring at the rate it used to. Email keeps converting the people who are still arriving, and its slice of a shrinking pie gets larger every month.
 
 On a dashboard those two situations produce the same chart moving the same direction. Opposite diagnosis, opposite response, and only one of them is worth being pleased about.
 
@@ -39,15 +39,15 @@ Which is why the percentage is close to meaningless on its own. It only says som
 
 There is a structural reason this happens, and it is not a flaw in email.
 
-**Email converts demand. It does not create much of it.** Almost everyone receiving your campaign already bought from you, or gave you an address because they were interested. That audience was assembled by past acquisition spend, and it keeps responding for a good while after the spending that built it has stopped.
+**Email converts demand. It does not create much of it.** Almost everyone receiving your campaign already bought from you, or gave you an address because they were interested. That audience was assembled by money spent in the past on bringing in new customers, and it keeps responding for a good while after the spending that built it has stopped.
 
-So when acquisition weakens, email is the last thing to show it. The list still converts. The flows still fire. Revenue per send holds up, sometimes improves, because the people left on the list are the most engaged ones.
+So when fewer new customers are coming in, email is the last thing to show it. The list still converts. The flows, the automated emails that go out on their own, still fire. Revenue per send holds up, sometimes improves, because the people left on the list are the most engaged ones.
 
 Email is a lagging indicator wearing the costume of a leading one. By the time the email numbers turn, the problem is a year old.
 
 ## What That Account Actually Had
 
-The email program was fine. Deliverability was clean, flows were live, campaigns went out on schedule.
+The email program was fine. Emails were landing in inboxes, flows were live, campaigns went out on schedule.
 
 What had happened was that new customer acquisition had fallen away, and nothing in the email reporting had any reason to mention it. Klaviyo reports on the list it has. It has nothing to say about the customers who never arrived to join it.
 
@@ -57,17 +57,17 @@ The tell, once we looked, was the mix. The proportion of revenue coming from peo
 
 ## Three Checks
 
-**Look at absolute email revenue, not the share.** Is it growing in actual money, year on year, on comparable sends. A rising share with flat or falling absolute revenue means the denominator moved, not the numerator. That is the whole story in one comparison and it takes two minutes.
+**Look at absolute email revenue, not the share.** Is it growing in actual money, year on year, on comparable sends. A rising share with flat or falling absolute revenue means the total got smaller rather than email getting bigger. That is the whole story in one comparison and it takes two minutes.
 
-**Look at where new list members come from, and whether there are fewer of them.** List growth is the closest thing email has to an acquisition signal. A list that is growing slower than it churns is a business that will feel it in about two quarters, and email will be the last place it shows up.
+**Look at where new list members come from, and whether there are fewer of them.** List growth is the closest thing email has to an acquisition signal. A list that is losing people faster than it adds them is a business that will feel it in about two quarters, and email will be the last place it shows up.
 
-**Look at the split between first-time and returning buyers.** If returning-customer revenue is a growing proportion while total revenue falls, you do not have a retention success. You have an acquisition problem that retention is temporarily masking. Sorting people by [how recently and how often they buy](/blog/klaviyo-rfm-segmentation/) makes that visible quickly, because the shape of the groups tells you where the base is thinning.
+**Look at the split between first-time and returning buyers.** If returning-customer revenue is a growing proportion while total revenue falls, that is an acquisition problem that retention is temporarily masking, not a retention success. Sorting people by [how recently and how often they buy](/blog/klaviyo-rfm-segmentation/) makes that visible quickly, because the shape of the groups tells you where the base is thinning.
 
 ## The Same Trap One Level Down
 
 This repeats inside the email program itself.
 
-A high share of email revenue coming from flows rather than campaigns gets reported the same proud way, and it is ambiguous for the same reason. Flows fire at people who have already done something, so they convert an audience that was largely coming anyway. It is [the same over-crediting that makes abandoned cart look better than it is](/blog/abandoned-cart-flow/).
+A high share of email revenue coming from flows rather than one-off campaigns gets reported the same proud way, and it is ambiguous for the same reason. Flows fire at people who have already done something, so they convert an audience that was largely coming anyway. It is [the same over-crediting that makes abandoned cart look better than it is](/blog/abandoned-cart-flow/).
 
 Flows carrying the program can mean the flows are excellent. It can also mean the campaigns are not doing anything the flows were not already doing.
 

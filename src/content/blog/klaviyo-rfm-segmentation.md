@@ -1,6 +1,7 @@
 ---
 title: "RFM Segmentation in Klaviyo, and How to Build It Without the Paid Tier"
 date: 2026-08-27
+updated: 2026-09-03
 author: "Kinga Dow"
 category: "Klaviyo"
 excerpt: "RFM sorts your customers by how recently, how often and how much they buy. Klaviyo has a report for it, most accounts cannot use it, and the version you build yourself is close enough to run a retention program on."
@@ -132,23 +133,23 @@ The hard part of building this by hand is not creating the segments. It is knowi
 
 That is the part worth handing to Claude.
 
-With the [Klaviyo MCP connector](/blog/mcp-stack-ecommerce-retention/), Claude can query your metric aggregates directly. What the distribution of order counts actually looks like, where the spend cutoff falls at the top and bottom third. One question each, instead of an export and an afternoon in a spreadsheet.
+With the [Klaviyo MCP connector](/blog/mcp-stack-ecommerce-retention/), which is the link that lets Claude read your account, Claude can look at your order numbers directly. What the spread of order counts actually looks like, where the spend cutoff falls at the top and bottom third. One question each, instead of an export and an afternoon in a spreadsheet.
 
-The Shopify connector is the one that matters more than it first appears, because it solves the monetary problem from the section above. Klaviyo will not calculate lifetime spend for an account under its thresholds. Shopify has every order regardless. So you pull the order history, group it by customer, and take the cutoffs from source. The axis Klaviyo declined to give you was sitting in the other system the whole time, and joining the two is the entire trick.
+The Shopify connector is the one that matters more than it first appears, because it solves the monetary problem from the section above. Klaviyo will not calculate lifetime spend for an account under its thresholds. Shopify has every order regardless. So you pull the order history, group it by customer, and take the cutoffs from there. The axis Klaviyo declined to give you was sitting in the other system the whole time, and joining the two is the entire trick.
 
-One limit worth knowing. **The Klaviyo connector reads segments and deletes them. It does not create them.** You can pull an existing segment's full definition including its condition groups, which is useful for checking your work against something that already behaves the way you want. But there is no create tool, so through the connector alone the six groups get built by hand.
+One limit worth knowing. **The Klaviyo connector reads segments and deletes them. It does not create them.** You can pull an existing segment's full definition, every rule inside it, which is useful for checking your work against something that already behaves the way you want. But there is nothing in it that creates one, so through the connector alone the six groups get built by hand.
 
 ## Where MCP Stops and the API Starts
 
 That limit is worth understanding properly, because the same thing comes up with every connector you will ever set up.
 
-An MCP server is a **curated surface**. The vendor decides which operations to expose, wraps them in a standard protocol and puts an OAuth login in front, which is why connecting takes two minutes and involves no keys. Klaviyo chose around forty tools. Segment creation is not among them.
+A connector is a **curated list**. The software company decides which actions Claude is allowed to take, packages them up and puts an ordinary login screen in front, which is why connecting takes two minutes and involves no keys. Klaviyo chose around forty actions. Creating a segment is not among them.
 
-The REST API underneath is the **full surface**, and it does have the endpoint. `POST /api/segments` takes a name and a definition containing condition groups, which is precisely the structure of the six groups above. It needs an API key carrying the `segments:write` scope, and it is rate limited to fifteen calls a minute and a hundred a day, which is far more headroom than a one time build needs.
+Underneath the connector sits Klaviyo's developer interface, the API in the heading above, and that is the **full list**. It can create segments, which the connector cannot. You give it a name and a set of rules, which is exactly what each of the six groups above is. It needs a key with permission to create segments, and it can make more than enough calls for a one-time build.
 
-So the useful rule: **the connector for asking questions, the API for the things the connector does not cover.** Connect the MCP first, because it costs nothing and answers most of what you actually want to know. Reach for a key when you hit a wall. The part worth internalizing is that the wall is usually a curation decision rather than a technical limit, which means the answer to "the connector cannot do this" is often "the API can."
+So the useful rule: **the connector for asking questions, the developer route for the things the connector does not cover.** Set up the connector first, because it costs nothing and answers most of what you actually want to know. Reach for a key when you hit a wall. The part worth remembering is that the wall is usually a choice about what to include rather than a technical limit, which means the answer to "the connector cannot do this" is often "the developer route can."
 
-For this particular job it splits cleanly. Finding the thresholds is a question, so it goes through the connector. Building the six segments is not a question, so it goes one of two ways. For a single brand, enter them by hand in Klaviyo's segment builder. For a roster of accounts, write the API call once and run it per account.
+For this particular job it splits cleanly. Finding the thresholds is a question, so it goes through the connector. Building the six segments is not a question, so it goes one of two ways. For a single brand, enter them by hand in Klaviyo's segment builder. For a roster of accounts, set the build up once through the developer route and run it for each account.
 
 Either way Claude does the analysis, which is the part that needs judgment. Entering six definitions once you know the numbers is twenty minutes.
 
@@ -156,7 +157,7 @@ Either way Claude does the analysis, which is the part that needs judgment. Ente
 
 Three things, in the order you will notice them.
 
-**You stop sending everything to everyone.** Six groups that need six different things replaces one list that gets one message. Smaller sends, better engagement, and less of the list fatigue that quietly erodes deliverability.
+**You stop sending everything to everyone.** Six groups that need six different things replaces one list that gets one message. Smaller sends, better engagement, and less of the list fatigue that slowly erodes deliverability.
 
 **You stop discounting people who were going to buy anyway.** This is the same argument as the one in the [abandoned cart post](/blog/abandoned-cart-flow/). A discount to Champions buys nothing. A discount to At Risk might buy back a customer. Same code, completely different economics, and RFM is what tells you which one you are looking at.
 

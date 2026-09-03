@@ -1,6 +1,6 @@
 ---
 title: "Klaviyo Google Sheets Integration: Three Routes, and the One Nobody Sells You"
-date: 2026-09-03
+date: 2026-09-10
 author: "Kinga Dow"
 category: "Klaviyo"
 excerpt: "Klaviyo has no native Google Sheets integration, which is why every guide on the first page of results is published by a company selling you a connector. Here are all three routes, including the two that cost nothing."
@@ -20,9 +20,9 @@ featured: false
 draft: true
 ---
 
-Klaviyo has no native Google Sheets integration. There is no toggle in the integrations directory, and there never has been.
+Klaviyo has no built-in Google Sheets integration. There is no toggle in the integrations directory, and there never has been.
 
-That matters more than it sounds, because it explains something odd about searching for this. Almost every result on the first page is published by a company that sells you a connector. Coefficient, Coupler.io, Catchr, Adzviser and Funnel.io all run guides on how to connect Klaviyo to Google Sheets, and all of them arrive at the same conclusion, which is to use their connector.
+That matters more than it sounds, because it explains something odd about searching for this. Almost every result on the first page is published by a company that sells you a connector, a tool that copies Klaviyo data into a sheet for you on a schedule. Coefficient, Coupler.io, Catchr, Adzviser and Funnel.io all run guides on how to connect Klaviyo to Google Sheets, and all of them arrive at the same conclusion, which is to use their connector.
 
 Sometimes that is the right answer. Often it is not, and the two routes that cost nothing get left out because nobody makes money recommending them.
 
@@ -40,7 +40,7 @@ Most of what follows is about getting data out, because that is the harder probl
 
 ## Route One: The CSV Export
 
-Klaviyo exports CSV from Campaigns, Flows, Analytics and segment views. Download, open in Sheets, done.
+Klaviyo exports a CSV, a plain spreadsheet file, from Campaigns, Flows, Analytics and segment views. Download, open in Sheets, done.
 
 I mention this first because it gets dismissed too quickly. If you need a number once, this is the correct answer, and anything more elaborate is procrastination dressed as infrastructure.
 
@@ -54,17 +54,17 @@ I mention this first because it gets dismissed too quickly. If you need a number
 
 This is what the search results push you toward, and for standing reports it earns its place.
 
-A connector authenticates to Klaviyo, lets you pick the fields you want, writes them into a sheet, and then refreshes on a schedule you set. On most of them the shortest interval is measured in minutes rather than hours, which is far more frequent than any reporting cadence actually needs.
+A connector logs into Klaviyo with your permission, lets you pick the fields you want, writes them into a sheet, and then refreshes on a schedule you set. On most of them the shortest interval is measured in minutes rather than hours, which is far more frequent than any reporting cadence actually needs.
 
 The refresh is the entire value. You are not paying for the export, you are paying to never think about the export again.
 
-**What it costs.** These are paid tools with free tiers that are usually too small for real client reporting. Check current pricing before you commit, because it moves, and check whether the limit is rows, refreshes or destinations, because that determines whether the free tier is genuinely usable or just a demo.
+**What it costs.** These are paid tools with free tiers that are usually too small for real client reporting. Check current pricing before you commit, because it moves, and check whether the limit is rows, refreshes or the number of sheets it can write to, because that determines whether the free tier is genuinely usable or just a demo.
 
 **Where it breaks.** Three places, in my experience.
 
-You get a fixed schema. The connector pulls the fields it supports, in the shape it supports. If the question you have needs two metrics joined in a way the connector does not offer, you end up building the join yourself in the sheet, and now the sheet is the fragile part.
+You get a fixed set of columns. The connector pulls the fields it supports, in the shape it supports. If the question you have needs two metrics combined in a way the connector does not offer, you end up combining them yourself in the sheet, and now the sheet is the fragile part.
 
-You get another subscription and another set of credentials, per client, sitting between you and your data. For an agency that is real overhead.
+You get another subscription and another login, per client, sitting between you and your data. For an agency that is real overhead.
 
 And a scheduled refresh answers the same question forever. That is exactly right for a dashboard someone checks every Monday. It is the wrong tool for the question you have once and then never again, which in practice is most questions.
 
@@ -72,13 +72,13 @@ And a scheduled refresh answers the same question forever. That is exactly right
 
 ## Route Three: Claude With the Klaviyo MCP
 
-This is the route the guides leave out, and it needs no API work and no code.
+This is the route the guides leave out, and it needs no developer work and no code.
 
-Klaviyo has an MCP connector. So does Google Drive. Both are on my list of [the MCP servers I actually use](/blog/mcp-stack-ecommerce-retention/). You connect them to Claude, and then you ask for what you want in plain English. Claude reads the account and writes the sheet.
+Klaviyo has an MCP connector, which is a plug-in that lets Claude work with your account once you have given it permission. So does Google Drive. Both are on my list of [the MCP servers I actually use](/blog/mcp-stack-ecommerce-retention/). You connect them to Claude, and then you ask for what you want in plain English. Claude reads the account and writes the sheet.
 
-MCP is the piece that removes the developer from this picture. Nothing gets built and no keys get handled. You authorize a connection the same way you authorize any app, and Claude can read the account from there.
+MCP is the piece that removes the developer from this picture. Nothing gets built and there is no password or access key to copy anywhere. You authorize a connection the same way you authorize any app, and Claude can read the account from there.
 
-**What makes it different from a connector** is not speed or cost, though both are better. It is that you ask a question instead of syncing a schema.
+**What makes it different from a connector** is that you ask a question instead of syncing a fixed set of columns. Speed and cost are both better too, but they are the smaller part.
 
 A connector gives you campaign performance, every day, in the columns it supports. With the MCP route you can ask which campaign types earned the most per recipient for this account in the last quarter, split by segment, and get a sheet that answers only that. Then you can ask something else tomorrow, and the shape changes to fit.
 
@@ -92,7 +92,7 @@ So the choice between asking once and having it arrive every Monday is a setting
 
 **What it costs.** A Claude subscription you likely already have, and nothing else. Both connectors are free.
 
-**Where it breaks.** Both connections have to be live, because Klaviyo alone can read and cannot write anywhere, and Drive alone has nothing to write. The output is also only as good as the request, so a vague question gets a vague sheet. A connector's fixed schema is a limitation and a guardrail at the same time.
+**Where it breaks.** Both connections have to be live, because Klaviyo alone can read and cannot write anywhere, and Drive alone has nothing to write. The output is also only as good as the request, so a vague question gets a vague sheet. A connector's fixed set of columns is a limitation and a guardrail at the same time.
 
 **Use it when** the cut of data you need does not exist as a standard report, whether you want it once or every week.
 
@@ -110,7 +110,7 @@ If the sheet is the ongoing source of truth rather than a one time list, a conne
 
 Once, for one answer: export the CSV.
 
-A standing report on a fixed set of fields, set up through a UI with no describing required: a connector, and expect to pay for it.
+A standing report on a fixed set of fields, set up by clicking through a settings screen with no describing required: a connector, and expect to pay for it.
 
 Anything where the shape of the answer matters, whether you need it once or every Monday: Claude with the MCP.
 

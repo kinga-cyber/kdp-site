@@ -21,6 +21,11 @@ name: Thursday blog email
 #   09:15 ET  Klaviyo sends
 #
 # The three-hour gap is deliberate headroom for a queued run plus the build.
+#
+# When the queue eats all of that headroom (the 2026-08-27 run fired at 20:01
+# UTC), the script schedules for the next quarter hour the same day instead of
+# giving up. If a post exists and nothing could be scheduled, the job fails, so
+# a missed email shows red here rather than green.
 
 on:
   workflow_run:

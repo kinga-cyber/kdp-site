@@ -3,7 +3,9 @@
  * Thursday blog email.
  *
  * Reads the site's RSS feed, and if a post went live today, builds a Klaviyo
- * campaign for it and schedules it for 9:15am Eastern.
+ * campaign for it and schedules it for 9:15am Eastern. If the run arrives
+ * after 9:15am, it schedules for the next quarter hour instead, so a late
+ * publish still gets announced the same day.
  *
  * The order matters: the post is published by the Netlify scheduled build, and
  * this only announces it. Every guard below exists so that a subscriber never
@@ -32,6 +34,14 @@ const FROM_LABEL = "Kinga Dow";
 const SEND_HOUR = 9;
 const SEND_MINUTE = 15;
 const SEND_TZ = "America/New_York";
+
+/**
+ * When the run arrives after the send time, schedule for the next quarter
+ * hour at least this many minutes out rather than giving up. Free-tier cron
+ * runs have been seen queued for ten hours, and a late email beats none.
+ */
+const LATE_LEAD_MINUTES = 5;
+const QUARTER_HOUR_MS = 15 * 60_000;
 
 /** How long to keep checking for today's post before giving up, in minutes. */
 const WAIT_FOR_POST_MINUTES = 40;
@@ -110,8 +120,17 @@ function zonedTimeToUtc(y, m, d, hh, mm, tz) {
   return result;
 }
 
-/** Today's calendar date in `tz`, as { y, m, d } and an ISO yyyy-mm-dd. */
-function todayIn(tz) {
+/**
+ * The first quarter hour (:00, :15, :30, :45) at least `leadMs` after `from`.
+ * Quarter hours line up across any zone whose offset is a whole number of
+ * hours, which Eastern is, so rounding the UTC timestamp is enough.
+ */
+function nextQuarterHour(from, leadMs) {
+  return new Date(Math.ceil((from.getTime() + leadMs) / QUARTER_HOUR_MS) * QUARTER_HOUR_MS);
+}
+
+/** Calendar date of `at` (default now) in `tz`, as { y, m, d } and an ISO yyyy-mm-dd. */
+function dateIn(tz, at = new Date()) {
   const parts = Object.fromEntries(
     new Intl.DateTimeFormat("en-CA", {
       timeZone: tz,
@@ -119,7 +138,7 @@ function todayIn(tz) {
       month: "2-digit",
       day: "2-digit",
     })
-      .formatToParts(new Date())
+      .formatToParts(at)
       .map((p) => [p.type, p.value])
   );
   return {
@@ -310,7 +329,7 @@ async function main() {
     throw new Error("KLAVIYO_API_KEY is not set");
   }
 
-  const today = todayIn(SEND_TZ);
+  const today = dateIn(SEND_TZ);
   log(`Today in ${SEND_TZ}: ${today.iso}${DRY_RUN ? "  (dry run)" : ""}`);
 
   // Wait for the scheduled Netlify build to publish, rather than assuming it
@@ -341,12 +360,24 @@ async function main() {
   log("  live:     yes");
 
   const campaignName = `Blog: ${post.slug} (${today.iso})`;
-  const sendAt = zonedTimeToUtc(today.y, today.m, today.d, SEND_HOUR, SEND_MINUTE, SEND_TZ);
+  let sendAt = zonedTimeToUtc(today.y, today.m, today.d, SEND_HOUR, SEND_MINUTE, SEND_TZ);
   log(`  send at:  ${sendAt.toISOString()} (9:15am ${SEND_TZ})`);
 
   if (sendAt.getTime() < Date.now()) {
-    log("Warning: 9:15am Eastern has already passed. Scheduling would fail, so stopping.");
-    return;
+    // The publish cron has fired as late as 20:01 UTC, ten hours after its
+    // slot. Klaviyo rejects a send time in the past, and stopping here left
+    // the 27 Aug 2026 post unannounced under a green workflow. Send later the
+    // same day instead: the post is live either way, so the only cost is a
+    // less predictable arrival time. Past midnight Eastern the campaign name
+    // and the post date would no longer agree, and that is a failure rather
+    // than a quiet return, so the miss shows in the Actions tab.
+    sendAt = nextQuarterHour(new Date(), LATE_LEAD_MINUTES * 60_000);
+    if (dateIn(SEND_TZ, sendAt).iso !== today.iso) {
+      throw new Error(
+        `9:15am ${SEND_TZ} has passed and the next slot (${sendAt.toISOString()}) falls on the next day. Not sending.`
+      );
+    }
+    log(`  late run: 9:15am ${SEND_TZ} has passed. Sending at ${sendAt.toISOString()} instead.`);
   }
 
   if (DRY_RUN) {

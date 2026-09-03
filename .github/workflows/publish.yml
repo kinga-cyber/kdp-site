@@ -11,7 +11,9 @@ on:
   schedule:
     # Thursday 10:00 UTC = 6am EDT / 5am EST.
     # GitHub cron is UTC only and does not follow daylight saving.
-    # Free-tier scheduled runs are queued and can be delayed 15-60 minutes.
+    # Free-tier scheduled runs are queued and are usually 15-60 minutes late.
+    # The 2026-08-27 run fired ten hours late, which is why blog-email.yml no
+    # longer gives up when 9:15am Eastern has passed.
     #
     # Moved earlier from 13:00 UTC on 2026-07-31. The subscriber email that
     # announces the post is scheduled for 9:15am Eastern, and the post has to be

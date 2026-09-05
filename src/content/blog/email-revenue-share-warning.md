@@ -1,9 +1,9 @@
 ---
-title: "When Email Revenue Is High, Something Else Is Usually Wrong"
+title: "When Email Attribution Is High, Something Else Is Usually Wrong"
 date: 2026-10-01
 author: "Kinga Dow"
 category: "Email Marketing"
-excerpt: "Email at forty percent of revenue gets reported as a win. It rises when email improves and when everything else collapses, and those look identical on a dashboard. How to tell which one you have."
+excerpt: "Klaviyo attributes forty percent of revenue to email and it gets reported as a win. That attributed share climbs when email improves and when everything else collapses, and the two look identical on a dashboard. How to tell which one you have."
 image: "/images/blog/email-revenue-share.svg"
 imageAlt: "Two stores with an identical forty percent email revenue share, one with total revenue growing and one with total revenue falling"
 keywords:
@@ -12,14 +12,15 @@ keywords:
   - "email revenue benchmark ecommerce"
   - "is 40 percent of revenue from email good"
   - "klaviyo attributed revenue"
+  - "email attribution ecommerce"
   - "ecommerce retention benchmarks"
 featured: false
 draft: true
-metaTitle: "When High Email Revenue Is a Warning | Kinga Dow"
-metaDescription: "A high email share of total revenue can mean email is excellent or that acquisition has stalled. The three checks that tell you which."
+metaTitle: "When High Email Attribution Is a Warning | Kinga Dow"
+metaDescription: "A high email share of attributed revenue can mean email is excellent or that acquisition has stalled. The three checks that tell you which."
 ---
 
-Email revenue share is the number people quote when they want the retention work to sound like it is paying off. Forty percent of revenue from email. Sometimes higher, and said with some pride.
+Email attribution is the number people quote when they want the retention work to sound like it is paying off. Klaviyo credits email with forty percent of revenue, sometimes more, and it gets said with some pride. That figure is an attributed share, a model deciding how much of each sale to hand to email, and it moves for reasons that have nothing to do with how the email is doing.
 
 I looked at an account like that. The email share was healthy and climbing. Total revenue was down thirty percent year on year.
 
@@ -27,7 +28,7 @@ Both were true, and the first was a symptom of the second.
 
 ## A Ratio Has Two Sides
 
-Email revenue share goes up when email gets better. It also goes up when everything else gets worse.
+The attributed share goes up when email gets better. It also goes up when everything else gets worse.
 
 Paid ads get more expensive and the budget comes down. The traffic you do not pay for slips. The store stops acquiring at the rate it used to. Email keeps converting the people who are still arriving, and its slice of a shrinking pie gets larger every month.
 
@@ -81,6 +82,6 @@ The healthy version is unglamorous. Absolute email revenue growing, total revenu
 
 The unhealthy version is a percentage moving decisively in one direction while the totals move in the other.
 
-Which makes email revenue share a diagnostic rather than a performance metric. If it went up and you were pleased, that is worth [half an hour with the rest of the account](/blog/how-to-audit-a-klaviyo-account/) before anyone puts it in a deck.
+Which makes the attributed share a diagnostic rather than a performance metric. If it went up and you were pleased, that is worth [half an hour with the rest of the account](/blog/how-to-audit-a-klaviyo-account/) before anyone puts it in a deck.
 
 *If the numbers look good and the business does not feel like it, [book a strategy session](/consultation/) and we will work out which one is lying.*

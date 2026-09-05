@@ -3,7 +3,7 @@ title: "How to Audit a Klaviyo Account"
 date: 2026-09-24
 author: "Kinga Dow"
 category: "Klaviyo"
-excerpt: "Most audits are a settings checklist that finds nothing. A useful one answers two questions: is anything broken that nobody has noticed, and is the revenue coming from where you think it is. Here is the order to ask them in."
+excerpt: "A useful Klaviyo audit answers two questions: is anything broken that nobody has noticed, and is the revenue coming from where you think it is. Here is the order to ask them in, and the handful of problems that turn up in almost every account."
 image: "/images/blog/klaviyo-audit.svg"
 imageAlt: "The five layers of a Klaviyo audit stacked in order, from consent and deliverability at the base up to attribution honesty at the top"
 keywords:
@@ -27,13 +27,13 @@ The order matters, because each layer makes the one above it readable. Checking 
 
 ## Start With Who You Are Allowed to Email
 
-This is the dull part, and everything that comes after it depends on it.
+This is the foundation, and everything above it stands on it.
 
 Is the sending domain authenticated, so inbox providers can confirm the emails really come from you. Is there a sunset policy that actually runs, one that stops emailing people who never open, or does the list just accumulate. What proportion of the list has engaged with anything in the last six months, and what is being done about the rest.
 
-The number worth calculating here is not list size but the share of the list that has opened or clicked anything this year. Most brands have never worked it out, and it is usually lower than they expect. A list that grows while engagement falls is not growing, it is aging.
+The number worth calculating here is not list size but the share of the list that has opened or clicked anything this year. Most brands have never worked it out, and it is usually lower than they expect. A list that grows while engagement falls is aging, not growing.
 
-If this layer is bad, everything above it is noise, because your good work is landing in spam folders.
+This layer decides whether everything above it reaches the inbox at all, which is why it goes first.
 
 ## Then Whether the Flows Are On
 
@@ -43,13 +43,13 @@ Go through every flow and check three things. Is it live, or was it switched to 
 
 Flows that do not stop on purchase are the single most common broken thing I find. What that looks like is emailing someone about the cart they just checked out, which reads as incompetence at precisely the moment you wanted to look reliable.
 
-A flow nobody has touched in eighteen months is not stable, it is unattended. Prices moved, products were discontinued, the brand voice changed, and it is still sending January 2025's offer.
+A flow nobody has touched in eighteen months is unattended, not stable. Prices moved, products were discontinued, the brand voice changed, and it is still sending January 2025's offer.
 
 ## Then Whether They Cover Anything
 
 Different question from whether they work. Most accounts have thirty flows and four customer situations covered.
 
-The gaps that matter are the ones between purchases rather than before the first one. Almost everyone has a welcome series and an abandoned cart. Far fewer have anything for a second-time buyer, or a post-purchase sequence that does more than confirm shipping, or a win-back that fires on the right interval for their actual repurchase cycle rather than a round ninety days.
+The richest ground is between purchases, not before the first one. Almost everyone has a welcome series and an abandoned cart. Far fewer have anything for a second-time buyer, or a post-purchase sequence that does more than confirm shipping, or a win-back that fires on the right interval for their actual repurchase cycle rather than a round ninety days.
 
 That last one is worth its own look, because the [right interval is knowable from your own order data](/blog/predict-when-your-customers-will-reorder/) rather than borrowed from a template.
 
@@ -67,7 +67,7 @@ Sorting that out properly means grouping people by how recently and how often th
 
 The last layer, and the one nearly every audit skips.
 
-Klaviyo will happily report that your flows earned a large share of your email revenue. That number is not wrong, but it is generous, and two things hide inside it.
+Klaviyo will happily report that your flows earned a large share of your email revenue. That number is accurate, but it is generous, and two things sit inside it.
 
 The first is that flows catch people who were already coming back. An [abandoned cart flow gets credit for purchases that were going to happen anyway](/blog/abandoned-cart-flow/), which inflates its apparent contribution and makes discounting look more effective than it is.
 
@@ -91,9 +91,9 @@ None of those are exotic. All of them are worth more than the tenth flow nobody 
 
 The first two layers you can genuinely do alone in an afternoon. Deliverability settings and a flow-by-flow status check need patience rather than expertise, and the patience is the scarce part.
 
-The last two are harder, not because the questions are difficult but because answering them means pulling comparisons the interface does not offer in one click. What share of the list has engaged this year. How does this segment's repeat rate compare to that one. What proportion of a flow's revenue comes from its first email versus the rest.
+The last two are harder, because answering them means pulling comparisons the interface does not offer in one click. What share of the list has engaged this year. How does this segment's repeat rate compare to that one. What proportion of a flow's revenue comes from its first email versus the rest.
 
-That is the part where having the account connected to Claude changes the economics. An audit that used to take four hours happens in about thirty minutes, not because the thinking got faster but because the fetching did. Fifty flows across ninety days is a lot of clicking and very little judgment.
+That is the part where having the account connected to Claude changes the economics. An audit that used to take four hours happens in about thirty minutes. The thinking takes as long as ever, and the fetching is what collapsed. Fifty flows across ninety days is a lot of clicking and very little judgment.
 
 The judgment is still the job. Knowing that a win-back interval is wrong is easy once you see the repurchase curve. Getting the curve is the tedious part, and it is the part worth automating.
 

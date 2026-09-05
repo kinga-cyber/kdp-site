@@ -81,7 +81,7 @@ Two rules that came out of getting it wrong:
 
 ## What Comes Out, and What It Does Not Do
 
-What lands in Klaviyo is a genuine drag-and-drop template built from live text blocks. Not JPEG slices. Not one large image pretending to be an email. Editable text, real blocks, the same structure a careful person would build by hand.
+What lands in Klaviyo is a genuine drag-and-drop template built from live text blocks, with no JPEG slices and no single large image pretending to be an email. Editable text, real blocks, the same structure a careful person would build by hand.
 
 It arrives complete in the parts that are easy to forget: alt text on every image, links in place, subject line and preview text already written from the brief. Those are the things that get skipped at 6pm on a send day, and they are exactly the things a system should be holding.
 
@@ -103,7 +103,7 @@ So picture the sliced version of your email landing. The headline is inside the 
 
 To be fair about it, Gemini copes with an image-heavy email noticeably better than Apple Intelligence does. But Apple Mail is where the summary has already replaced the preview line, which makes it the one to design for.
 
-This is a new kind of failure. Not a rendering fault, not a spam score. The email arrives looking perfect and describes itself badly, in the exact place where somebody decides whether to open it.
+This is a new kind of failure, neither a rendering fault nor a spam score. The email arrives looking perfect and describes itself badly, in the exact place where somebody decides whether to open it.
 
 A template built from live text blocks never has this problem, because everything that matters is already text. Which turns what used to be a craft preference into an operational one.
 

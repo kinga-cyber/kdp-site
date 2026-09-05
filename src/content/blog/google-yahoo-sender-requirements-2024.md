@@ -34,7 +34,7 @@ The original version of this post covered the Google and Yahoo rules that took e
 
 ## The Requirements
 
-**SPF and DKIM.** Both. Not one or the other.
+**SPF and DKIM.** Both of them, rather than one or the other.
 
 **DMARC**, with alignment. At minimum a policy of `p=none`, which is a monitoring policy and does not reject anything. The important part is not the policy strength, it is that either SPF or DKIM must pass **and** the passing domain must match the domain in your From header. That match is what alignment means, and it is where most failures actually happen.
 
@@ -86,7 +86,7 @@ Four things, in order:
 
 1. **Your DNS records.** Look for TXT records for SPF, DKIM and DMARC. A DMARC record starts with `v=DMARC1`. If it is missing, that is the first job.
 2. **Alignment.** Confirm the domain in your From header matches the domain passing SPF or DKIM. Passing authentication on a domain that is not the one in the From header does not count.
-3. **The headers on a real email.** Send yourself a campaign and look at the raw source for `List-Unsubscribe-Post`. Not the settings page, the actual message.
+3. **The headers on a real email.** Send yourself a campaign and look at the raw source of the actual message, rather than the settings page, for `List-Unsubscribe-Post`.
 4. **Postmaster Tools.** If you are not set up, do that. If you are, look at where your complaint rate has been sitting for the last month, not just today.
 
 If all four are clean, the requirements are not your problem, and any deliverability issue you have is about who you are sending to rather than how.

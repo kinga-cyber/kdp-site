@@ -3,9 +3,9 @@ title: "When Email Attribution Is High, Something Else Is Usually Wrong"
 date: 2026-10-01
 author: "Kinga Dow"
 category: "Email Marketing"
-excerpt: "A healthy account sees around a third of revenue attributed to email. When that share climbs past half, it usually means something else is shrinking, not that email got better. How to tell the difference."
+excerpt: "A healthy account sees around 30% of revenue attributed to email. When that share climbs past 50%, it usually means something else is shrinking, not that email got better. How to tell the difference."
 image: "/images/blog/email-revenue-share.svg"
-imageAlt: "Two stores with an identical forty percent email revenue share, one with total revenue growing and one with total revenue falling"
+imageAlt: "Two stores compared: a healthy one with email at 30% of revenue and the business growing, and a warning one with email at 60% of revenue because the business shrank"
 keywords:
   - "email revenue percentage of total revenue"
   - "what percentage of revenue should come from email"
@@ -20,9 +20,9 @@ metaTitle: "When High Email Attribution Is a Warning | Kinga Dow"
 metaDescription: "A high email share of attributed revenue can mean email is excellent or that acquisition has stalled. The three checks that tell you which."
 ---
 
-Email attribution is the number people quote when they want the retention work to sound like it is paying off. A healthy account usually sees email credited with somewhere around a third of revenue. When that figure climbs to half, or past it, to fifty, sixty, seventy percent, it tends to get said with even more pride. That is the point where I start to look harder. The figure is an attributed share, a model deciding how much of each sale to hand to email, and it can climb for reasons that have nothing to do with how the email is doing.
+Email attribution is the number people quote when they want the retention work to sound like it is paying off. A healthy account usually sees email credited with somewhere around 30% of revenue. When that figure climbs past 50%, to 60% or 70%, it tends to get said with even more pride. That is the point where I start to look harder. The figure is an attributed share, a model deciding how much of each sale to hand to email, and it can climb for reasons that have nothing to do with how the email is doing.
 
-I looked at an account like that once. The email share was high and still climbing, well past half. Total revenue was down thirty percent year on year.
+I looked at an account like that once. The email share was high and still climbing, well past 50%. Total revenue was down 30% year on year.
 
 Both were true, and the first was a symptom of the second.
 
@@ -58,9 +58,9 @@ The tell, once we looked, was the mix. The proportion of revenue coming from peo
 
 ## Three Checks
 
-**Look at absolute email revenue, not the share.** Is it growing in actual money, year on year, on comparable sends. A rising share with flat or falling absolute revenue means the total got smaller rather than email getting bigger. That is the whole story in one comparison and it takes two minutes.
+**Look at absolute email revenue, not the share.** Is it growing in actual money, year on year, on comparable sends. A rising share with flat or falling absolute revenue means the total got smaller rather than email getting bigger. That is the whole story in one comparison and it takes 2 minutes.
 
-**Look at where new list members come from, and whether there are fewer of them.** List growth is the closest thing email has to an acquisition signal. A list that is losing people faster than it adds them is a business that will feel it in about two quarters, and email will be the last place it shows up.
+**Look at where new list members come from, and whether there are fewer of them.** List growth is the closest thing email has to an acquisition signal. A list that is losing people faster than it adds them is a business that will feel it in about 2 quarters, and email will be the last place it shows up.
 
 **Look at the split between first-time and returning buyers.** If returning-customer revenue is a growing proportion while total revenue falls, that is an acquisition problem that retention is temporarily masking, not a retention success. Sorting people by [how recently and how often they buy](/blog/klaviyo-rfm-segmentation/) makes that visible quickly, because the shape of the groups tells you where the base is thinning.
 
@@ -76,7 +76,7 @@ Same shape, one level down: a ratio rising while the totals do not.
 
 ## What Good Actually Looks Like
 
-There is no single correct number, and it varies by category, price point and how much of the business runs on subscription. As a rough shape, a healthy account tends to sit around a third of revenue attributed to email. The figure to watch is the extreme: a share climbing to half or more while the totals stay flat or fall is the shape that means something else is shrinking.
+There is no single correct number, and it varies by category, price point and how much of the business runs on subscription. As a rough shape, a healthy account tends to sit around 30% of revenue attributed to email. The figure to watch is the extreme: a share climbing to 50% or more while the totals stay flat or fall is the shape that means something else is shrinking.
 
 The healthy version is unglamorous. Absolute email revenue growing, total revenue growing, list growing, and the percentage wandering around without anyone paying it much attention.
 

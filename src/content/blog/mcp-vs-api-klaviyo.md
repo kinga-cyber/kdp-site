@@ -14,7 +14,7 @@ keywords:
   - "claude code marketing"
   - "mcp connector capabilities"
 featured: false
-draft: true
+draft: false
 metaTitle: "MCP or the API: What Each Can Actually Do | Kinga Dow"
 metaDescription: "How the Klaviyo MCP connector, the API and the interface each earn their place. What Claude builds directly, what a key is for, and the work best kept in the interface."
 ---

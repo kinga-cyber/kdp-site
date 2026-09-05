@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" font-family="Montserrat, 'Helvetica Neue', Arial, sans-serif">
+<rect width="1200" height="630" fill="#F6EFE6"/>
+<text x="60" y="54" fill="#3F455D" font-size="14" font-weight="600" letter-spacing="2" opacity="0.6">KLAVIYO FLOW AUDIT</text>
+<text x="60" y="100" fill="#3F455D" font-size="34" font-weight="600">Six phases, one pipeline</text>
+<text x="60" y="134" fill="#333333" font-size="19" opacity="0.85">Map how the flows overlap, then score every one the same way.</text>
+<line x1="112" y1="200" x2="112" y2="555" stroke="#3F455D" stroke-opacity="0.16" stroke-width="2"/>
+<rect x="60" y="170" width="1080" height="60" rx="8" fill="#FFFFFF" stroke="#BA9200" stroke-opacity="0.50"/>
+<rect x="60" y="170" width="7" height="60" rx="3.5" fill="#BA9200" fill-opacity="1.00"/>
+<circle cx="112" cy="200" r="18" fill="#BA9200" fill-opacity="0.16"/>
+<text x="112" y="206" text-anchor="middle" fill="#BA9200" fill-opacity="1.00" font-size="18" font-weight="700">0</text>
+<text x="152" y="196" fill="#3F455D" font-size="21" font-weight="600">Architecture discovery</text>
+<text x="152" y="218" fill="#333333" font-size="15" opacity="0.7">map where flows overlap: high, medium, low risk</text>
+<rect x="60" y="241" width="1080" height="60" rx="8" fill="#FFFFFF" stroke="#3F455D" stroke-opacity="0.30"/>
+<rect x="60" y="241" width="7" height="60" rx="3.5" fill="#3F455D" fill-opacity="0.55"/>
+<circle cx="112" cy="271" r="18" fill="#3F455D" fill-opacity="0.10"/>
+<text x="112" y="277" text-anchor="middle" fill="#3F455D" fill-opacity="0.80" font-size="18" font-weight="700">1</text>
+<text x="152" y="267" fill="#3F455D" font-size="21" font-weight="600">Discovery and inventory</text>
+<text x="152" y="289" fill="#333333" font-size="15" opacity="0.7">pull every active flow and its trigger</text>
+<rect x="60" y="312" width="1080" height="60" rx="8" fill="#FFFFFF" stroke="#3F455D" stroke-opacity="0.30"/>
+<rect x="60" y="312" width="7" height="60" rx="3.5" fill="#3F455D" fill-opacity="0.55"/>
+<circle cx="112" cy="342" r="18" fill="#3F455D" fill-opacity="0.10"/>
+<text x="112" y="348" text-anchor="middle" fill="#3F455D" fill-opacity="0.80" font-size="18" font-weight="700">2</text>
+<text x="152" y="338" fill="#3F455D" font-size="21" font-weight="600">Categorization</text>
+<text x="152" y="360" fill="#333333" font-size="15" opacity="0.7">sort into nine customer-journey stages</text>
+<rect x="60" y="383" width="1080" height="60" rx="8" fill="#FFFFFF" stroke="#3F455D" stroke-opacity="0.30"/>
+<rect x="60" y="383" width="7" height="60" rx="3.5" fill="#3F455D" fill-opacity="0.55"/>
+<circle cx="112" cy="413" r="18" fill="#3F455D" fill-opacity="0.10"/>
+<text x="112" y="419" text-anchor="middle" fill="#3F455D" fill-opacity="0.80" font-size="18" font-weight="700">3</text>
+<text x="152" y="409" fill="#3F455D" font-size="21" font-weight="600">Ninety-day performance</text>
+<text x="152" y="431" fill="#333333" font-size="15" opacity="0.7">per flow and per message, against your benchmarks</text>
+<rect x="60" y="454" width="1080" height="60" rx="8" fill="#FFFFFF" stroke="#59A56D" stroke-opacity="0.50"/>
+<rect x="60" y="454" width="7" height="60" rx="3.5" fill="#59A56D" fill-opacity="0.90"/>
+<circle cx="112" cy="484" r="18" fill="#59A56D" fill-opacity="0.16"/>
+<text x="112" y="490" text-anchor="middle" fill="#59A56D" fill-opacity="0.90" font-size="18" font-weight="700">4</text>
+<text x="152" y="480" fill="#3F455D" font-size="21" font-weight="600">Scoring and priority</text>
+<text x="152" y="502" fill="#333333" font-size="15" opacity="0.7">five tiers, ranked by revenue, list cost, effort</text>
+<rect x="60" y="525" width="1080" height="60" rx="8" fill="#FFFFFF" stroke="#3F455D" stroke-opacity="0.30"/>
+<rect x="60" y="525" width="7" height="60" rx="3.5" fill="#3F455D" fill-opacity="0.55"/>
+<circle cx="112" cy="555" r="18" fill="#3F455D" fill-opacity="0.10"/>
+<text x="112" y="561" text-anchor="middle" fill="#3F455D" fill-opacity="0.80" font-size="18" font-weight="700">5</text>
+<text x="152" y="551" fill="#3F455D" font-size="21" font-weight="600">Quality control</text>
+<text x="152" y="573" fill="#333333" font-size="15" opacity="0.7">one brief per flow, then follow up</text>
+<text x="1116" y="206" text-anchor="end" fill="#BA9200" font-size="13" opacity="0.85">the part most audits skip</text>
+<text x="1116" y="561" text-anchor="end" fill="#333333" font-size="13" opacity="0.5">under an hour, start to finish</text>
+</svg>

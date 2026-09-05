@@ -1,29 +1,31 @@
 ---
-title: "How to Audit a Klaviyo Account"
+title: "How to Audit Your Klaviyo Flows"
 date: 2026-09-24
 author: "Kinga Dow"
 category: "Klaviyo"
-excerpt: "A real Klaviyo audit is a repeatable system, not a tour of the settings screens. The order it runs in, how to score every flow the same way, and the one number that decides whether a flow is worth keeping."
-image: "/images/blog/klaviyo-audit.svg"
+excerpt: "The flow audit is the deepest part of a Klaviyo account audit. The order it runs in, how to score every flow the same way, and the one number that decides whether a flow is worth keeping."
+image: "/images/blog/klaviyo-flow-audit.svg"
 imageAlt: "Stacked stages of a Klaviyo flow audit, from mapping how flows overlap up to a prioritized list of fixes"
 keywords:
-  - "klaviyo audit"
-  - "how to audit a klaviyo account"
-  - "klaviyo account audit checklist"
   - "klaviyo flow audit"
-  - "email marketing audit"
-  - "klaviyo account review"
+  - "how to audit klaviyo flows"
+  - "klaviyo flow audit checklist"
+  - "klaviyo flow analysis"
+  - "email flow audit"
+  - "klaviyo account audit"
 featured: false
 draft: true
-metaTitle: "How to Audit a Klaviyo Account | Kinga Dow"
-metaDescription: "How to audit a Klaviyo account the way it actually gets done: map flow overlap first, score every flow against your own benchmarks, and rank fixes by revenue, list cost and effort."
+metaTitle: "How to Audit Your Klaviyo Flows | Kinga Dow"
+metaDescription: "How to audit your Klaviyo flows the way it actually gets done: map flow overlap first, score every flow against your own benchmarks, and rank fixes by revenue, list cost and effort."
 ---
 
-A full Klaviyo audit done by hand takes the better part of a day. Pull every flow, read ninety days of numbers, compare each one to a benchmark, write it all up. Across a roster of accounts that afternoon never quite happens, so the audit gets done once a year, or once, and the problems it would have caught run for months in the meantime.
+A full audit of a Klaviyo account covers a few things: deliverability and list health, the capture forms, the campaigns, attribution, and the flows. This is about the flows. They hold the most revenue and the most hidden waste, they take the longest to check by hand, and they are the part I have turned into a repeatable system.
+
+A flow audit done properly takes the better part of a day. Pull every flow, read ninety days of numbers, compare each one to the right benchmark, write it all up. Across a roster of accounts that afternoon never quite happens, so it gets done once a year, or once, and the problems it would have caught run for months in the meantime.
 
 The audit I run is a system instead, and it fits in about an hour. Same steps every time, same scoring, same output. What follows is the framework behind it. The prompts that make it run are the part I build with people directly, and the framework stands on its own without them.
 
-Most audits are a walk through the settings screens: sending domain authenticated, welcome flow exists, done. A useful one does something harder. It looks at every flow the same way, scores each against the right benchmark, and ranks what to fix by what it is actually worth. Here is the order it runs in.
+Most flow reviews are a spot-check: open the welcome series, skim the copy, move on. A real audit does something harder. It looks at every flow the same way, scores each against the right benchmark, and ranks what to fix by what it is actually worth. Here is the order it runs in.
 
 ## Start Above the Flows, With How They Interact
 

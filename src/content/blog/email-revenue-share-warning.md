@@ -82,6 +82,6 @@ The healthy version is unglamorous. Absolute email revenue growing, total revenu
 
 The unhealthy version is a percentage moving decisively in one direction while the totals move in the other.
 
-Which makes the attributed share a diagnostic rather than a performance metric. If it went up and you were pleased, that is worth [half an hour with the rest of the account](/blog/how-to-audit-a-klaviyo-account/) before anyone puts it in a deck.
+Which makes the attributed share a diagnostic rather than a performance metric. If it went up and you were pleased, that is worth [a proper look at the flows behind it](/blog/klaviyo-flow-audit/) before anyone puts it in a deck.
 
 *If the numbers look good and the business does not feel like it, [book a strategy session](/consultation/) and we will work out which one is lying.*

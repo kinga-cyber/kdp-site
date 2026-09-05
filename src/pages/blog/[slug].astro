@@ -2,7 +2,7 @@
 import { render, type CollectionEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import BlogSubscribe from "../../components/BlogSubscribe.astro";
-import { getPublishedPosts, freshness } from "../../lib/posts";
+import { getPublishedPosts } from "../../lib/posts";
 
 export async function getStaticPaths() {
   // A post excluded here never gets a page generated, which is also what keeps
@@ -38,7 +38,7 @@ const formatDate = (d: Date) =>
 const allPosts = await getPublishedPosts();
 const relatedPosts = allPosts
   .filter((p) => p.data.category === post.data.category && p.id !== post.id)
-  .sort((a, b) => freshness(b) - freshness(a))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
 
 // SEO + canonical

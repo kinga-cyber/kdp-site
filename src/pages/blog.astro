@@ -1,12 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import BlogSubscribe from "../components/BlogSubscribe.astro";
-import { getPublishedPosts, freshness, type Post } from "../lib/posts";
+import { getPublishedPosts, type Post } from "../lib/posts";
 
-// Published = not a draft, and not dated in the future. Sorted by freshness
-// rather than original publication date, so a refreshed post reads as new.
+// Published = not a draft, and not dated in the future. Sorted by publication
+// date so the order stays stable when a post is refreshed.
 const allPosts = (await getPublishedPosts()).sort(
-  (a, b) => freshness(b) - freshness(a)
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
 
 // Featured is automatic: the newest posts lead the page, so a new post never

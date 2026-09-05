@@ -24,9 +24,3 @@ export async function getPublishedPosts(): Promise<Post[]> {
     return data.date.valueOf() <= now;
   });
 }
-
-/**
- * Sort key for listings. A refreshed post is the newest thing on the site and
- * should read that way, so `updated` wins over the original publication date.
- */
-export const freshness = (p: Post) => (p.data.updated ?? p.data.date).valueOf();

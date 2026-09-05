@@ -3,7 +3,7 @@ title: "When Email Attribution Is High, Something Else Is Usually Wrong"
 date: 2026-10-01
 author: "Kinga Dow"
 category: "Email Marketing"
-excerpt: "Klaviyo attributes forty percent of revenue to email and it gets reported as a win. That attributed share climbs when email improves and when everything else collapses, and the two look identical on a dashboard. How to tell which one you have."
+excerpt: "A healthy account sees around a third of revenue attributed to email. When that share climbs past half, it usually means something else is shrinking, not that email got better. How to tell the difference."
 image: "/images/blog/email-revenue-share.svg"
 imageAlt: "Two stores with an identical forty percent email revenue share, one with total revenue growing and one with total revenue falling"
 keywords:
@@ -20,9 +20,9 @@ metaTitle: "When High Email Attribution Is a Warning | Kinga Dow"
 metaDescription: "A high email share of attributed revenue can mean email is excellent or that acquisition has stalled. The three checks that tell you which."
 ---
 
-Email attribution is the number people quote when they want the retention work to sound like it is paying off. Klaviyo credits email with forty percent of revenue, sometimes more, and it gets said with some pride. That figure is an attributed share, a model deciding how much of each sale to hand to email, and it moves for reasons that have nothing to do with how the email is doing.
+Email attribution is the number people quote when they want the retention work to sound like it is paying off. A healthy account usually sees email credited with somewhere around a third of revenue. When that figure climbs to half, or past it, to fifty, sixty, seventy percent, it tends to get said with even more pride. That is the point where I start to look harder. The figure is an attributed share, a model deciding how much of each sale to hand to email, and it can climb for reasons that have nothing to do with how the email is doing.
 
-I looked at an account like that. The email share was healthy and climbing. Total revenue was down thirty percent year on year.
+I looked at an account like that once. The email share was high and still climbing, well past half. Total revenue was down thirty percent year on year.
 
 Both were true, and the first was a symptom of the second.
 
@@ -30,11 +30,11 @@ Both were true, and the first was a symptom of the second.
 
 The attributed share goes up when email gets better. It also goes up when everything else gets worse.
 
-Paid ads get more expensive and the budget comes down. The traffic you do not pay for slips. The store stops acquiring at the rate it used to. Email keeps converting the people who are still arriving, and its slice of a shrinking pie gets larger every month.
+Ad costs rise, so the budget buys fewer new visitors. Fewer people find the store on their own, through search and word of mouth. New customers arrive more slowly than they used to. Email keeps converting the people who are still there, so its slice of a smaller pie grows every month.
 
 On a dashboard those two situations produce the same chart moving the same direction. Opposite diagnosis, opposite response, and only one of them is worth being pleased about.
 
-Which is why the percentage is close to meaningless on its own. It only says something next to the absolute numbers, and hardly anyone looks at both at once.
+So the share is a prompt, not a verdict. When it climbs past what is normal for the business, that is the moment to look at the absolute numbers, and hardly anyone looks at both at once.
 
 ## Why Email Holds Up While Everything Else Falls
 
@@ -52,7 +52,7 @@ The email program was fine. Emails were landing in inboxes, flows were live, cam
 
 What had happened was that new customer acquisition had fallen away, and nothing in the email reporting had any reason to mention it. Klaviyo reports on the list it has. It has nothing to say about the customers who never arrived to join it.
 
-So every monthly report said email was performing, which was accurate, while the business it was reporting on got smaller.
+Email will always look good in its own report when it is built well, so the report was never going to raise the alarm. The signal was the share itself, climbing past anything the business could explain.
 
 The tell, once we looked, was the mix. The proportion of revenue coming from people who had bought before kept rising. That reads as a retention win right up until you notice it is rising because the first-time buyers stopped coming, not because the repeat buyers increased.
 
@@ -76,7 +76,7 @@ Same shape, one level down: a ratio rising while the totals do not.
 
 ## What Good Actually Looks Like
 
-There is no correct number, and be wary of anyone who offers you one. It varies enormously by category, price point and how much of the business is subscription.
+There is no single correct number, and it varies by category, price point and how much of the business runs on subscription. As a rough shape, a healthy account tends to sit around a third of revenue attributed to email. The figure to watch is the extreme: a share climbing to half or more while the totals stay flat or fall is the shape that means something else is shrinking.
 
 The healthy version is unglamorous. Absolute email revenue growing, total revenue growing, list growing, and the percentage wandering around without anyone paying it much attention.
 

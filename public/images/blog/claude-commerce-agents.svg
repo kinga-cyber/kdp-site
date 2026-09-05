@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" font-family="Montserrat, 'Helvetica Neue', Arial, sans-serif">
+<rect width="1200" height="630" fill="#F6EFE6"/>
+<text x="60" y="54" fill="#3F455D" font-size="14" font-weight="600" letter-spacing="2" opacity="0.6">CLAUDE COMMERCE AGENTS</text>
+<text x="60" y="100" fill="#3F455D" font-size="34" font-weight="600">Two agents, one foundation</text>
+<text x="60" y="134" fill="#333333" font-size="19" opacity="0.85">Neither one arrives connected to your store. Both read the same data.</text>
+
+<rect x="60" y="172" width="1080" height="256" rx="10" fill="#FFFFFF" stroke="#3F455D" stroke-opacity="0.5" stroke-width="2"/>
+
+<text x="92" y="208" fill="#59A56D" font-size="13" font-weight="700" letter-spacing="1.6">SHOPPING AGENT</text>
+<text x="92" y="232" fill="#333333" font-size="15" opacity="0.7">Faces your customers</text>
+<rect x="92" y="248" width="500" height="40" rx="20" fill="#59A56D" fill-opacity="0.16" stroke="#59A56D" stroke-opacity="0.45"/>
+<text x="112" y="274" fill="#3F455D" font-size="16.5" font-weight="500">Search, compare, plan a purchase</text>
+<rect x="92" y="296" width="500" height="40" rx="20" fill="#59A56D" fill-opacity="0.16" stroke="#59A56D" stroke-opacity="0.45"/>
+<text x="112" y="322" fill="#3F455D" font-size="16.5" font-weight="500">Build a cart, hand off to checkout</text>
+<rect x="92" y="344" width="500" height="40" rx="20" fill="#59A56D" fill-opacity="0.16" stroke="#59A56D" stroke-opacity="0.45"/>
+<text x="112" y="370" fill="#3F455D" font-size="16.5" font-weight="500">Answer order and policy questions</text>
+<text x="92" y="410" fill="#333333" font-size="15" opacity="0.7">First needs logins, permissions, compliance</text>
+
+<line x1="600" y1="196" x2="600" y2="404" stroke="#3F455D" stroke-opacity="0.18"/>
+
+<text x="628" y="208" fill="#BA9200" font-size="13" font-weight="700" letter-spacing="1.6">MERCHANT AGENT</text>
+<text x="628" y="232" fill="#333333" font-size="15" opacity="0.7">Faces your team</text>
+<rect x="628" y="248" width="480" height="40" rx="20" fill="#BA9200" fill-opacity="0.15" stroke="#BA9200" stroke-opacity="0.45"/>
+<text x="648" y="274" fill="#3F455D" font-size="16.5" font-weight="500">Explain what sales actually did</text>
+<rect x="628" y="296" width="480" height="40" rx="20" fill="#BA9200" fill-opacity="0.15" stroke="#BA9200" stroke-opacity="0.45"/>
+<text x="648" y="322" fill="#3F455D" font-size="16.5" font-weight="500">Flag inventory before someone does</text>
+<rect x="628" y="344" width="480" height="40" rx="20" fill="#BA9200" fill-opacity="0.15" stroke="#BA9200" stroke-opacity="0.45"/>
+<text x="648" y="370" fill="#3F455D" font-size="16.5" font-weight="500">Draft campaigns, pricing, promotions</text>
+<text x="628" y="410" fill="#333333" font-size="15" opacity="0.7">Every change waits for a person to approve it</text>
+
+<path d="M 342 428 L 342 452" stroke="#3F455D" stroke-opacity="0.45" stroke-width="2"/>
+<path d="M 336 446 L 342 454 L 348 446" fill="none" stroke="#3F455D" stroke-opacity="0.45" stroke-width="2"/>
+<path d="M 868 428 L 868 452" stroke="#3F455D" stroke-opacity="0.45" stroke-width="2"/>
+<path d="M 862 446 L 868 454 L 874 446" fill="none" stroke="#3F455D" stroke-opacity="0.45" stroke-width="2"/>
+
+<rect x="60" y="458" width="1080" height="86" rx="10" fill="#3F455D" fill-opacity="0.09" stroke="#3F455D" stroke-opacity="0.4" stroke-width="2"/>
+<text x="92" y="490" fill="#3F455D" font-size="13" font-weight="700" letter-spacing="1.6">YOUR STORE DATA  ·  BOTH AGENTS READ THE SAME INFORMATION</text>
+<text x="92" y="522" fill="#3F455D" font-size="17" font-weight="500">Product codes  ·  Variants  ·  Prices  ·  Availability  ·  Shipping, returns and sizing policies</text>
+
+<line x1="60" y1="572" x2="1140" y2="572" stroke="#BA9200" stroke-opacity="0.35"/>
+<text x="60" y="604" fill="#3F455D" font-size="18" opacity="0.8">Nothing arrives connected to your store. Your catalog decides whether it works.</text>
+</svg>

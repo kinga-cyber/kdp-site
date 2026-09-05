@@ -21,19 +21,17 @@ metaDescription: "How the Klaviyo MCP connector, the API and the interface relat
 
 There are two ways to build in Klaviyo with Claude. One is the MCP connector: the link you switch on so Claude can read and act on your account. The other is the API underneath it: the developer route, which needs a key and someone comfortable with code. Which you reach for depends on what you are doing, and most of the time the connector is enough on its own.
 
-There is a third thing worth naming up front, because it is the part people get wrong. Above both of those sits the Klaviyo interface, and it can do more than either the connector or the API. A real slice of the platform has no developer route at all. So the honest picture is three layers, not two: what Claude reaches through the connector, the wider set the API adds, and the work that lives only in the interface where no automation goes.
+I keep both open at once. Most of my work now happens in Claude Code, the version of Claude that runs on my computer rather than in a chat window, because it holds the connector and a key in the same place. When I build a flow, I start with the connector for everything it will do, and drop to the API for the little it will not. There is no switching tools and no stopping to decide which is which.
 
-I keep the first two open at once. Most of my work now happens in Claude Code, the version of Claude that runs on my computer rather than in a chat window, because it holds the connector and a key in the same place. When I build a flow, I start with the connector for everything it will do, drop to the API for the little it will not, and open Klaviyo itself for the handful of things neither can touch. There is no switching tools and no stopping to decide which is which.
-
-The rest of this is where each layer stops.
+The rest of this is where each one stops.
 
 ## A Connector Is a Keycard
 
 Think of the MCP connector as the keycard a hotel gives you. It opens your room, the gym and the pool. It does not open the plant room, not because that door is special, but because somebody decided which doors you get.
 
-The API is the bigger keyring the staff carry. It opens far more, because the company wrapped more of the building in it. Even that keyring does not open every door, though. Some things only the front desk can do, and no key hands them to you. That front desk is the Klaviyo interface, and it sits above both of the other two.
+The API is the bigger keyring the staff carry. It opens far more, because the company wrapped more of the building in it. Even that keyring does not open every door, though. A few things only the front desk can do, and no key hands them to you.
 
-Every connector, then, has an edge that a person chose. It is a decision rather than a technical limit, which is the single most useful thing to understand about it. The doors it leaves off the card are usually open on the API, and a few of the doors on neither are open only in the interface.
+Every connector, then, has an edge that a person chose. It is a decision rather than a technical limit, which is the single most useful thing to understand about it. The doors it leaves off the card are usually open on the API.
 
 ## What the Connector Actually Does
 
@@ -57,9 +55,9 @@ The real reason agencies reach for the API is control at scale. A key lets you r
 
 ## Where Neither One Reaches
 
-Here is the correction to the idea that the API is the whole of Klaviyo. It is not. A meaningful part of the platform was never built to be automated, and no key opens it.
+This is the third place the work can live, and the one people forget. Above the connector and the API sits the Klaviyo interface itself, and a real part of it has no developer route at all. The idea that the API is the whole of Klaviyo is simply wrong. No key, through Claude or otherwise, opens what was never built to be automated.
 
-Designing a sign-up form, its look, its timing, the rules for who sees it, is an interface job. So is the deliverability work: inbox testing, spam checks, sender reputation. So are the benchmarks that compare you against other senders, the built-in AI assists, connecting an integration like Shopify in the first place, and the account, billing and user settings. You can read some of the results of those through the API. You cannot do the work through it.
+Designing a sign-up form, its look, its timing, the rules for who sees it, is an interface job. So is the deliverability work: inbox testing, spam checks, sender reputation. So are the benchmarks that compare you against other senders, the AI features that draft subject lines and suggest segments, connecting an integration like Shopify in the first place, and the account, billing and user settings. You can read some of the results of those through the API. You cannot do the work through it.
 
 That matters more than it sounds, because it is exactly where judgment lives. The parts of Klaviyo with no developer route are mostly the parts that need a person deciding something: how a form should feel, whether the list is healthy enough to send, which integration to trust. Automation stops at the edge of judgment, which is a reasonable place for it to stop.
 

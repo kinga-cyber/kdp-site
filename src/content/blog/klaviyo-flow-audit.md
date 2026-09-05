@@ -14,7 +14,7 @@ keywords:
   - "email flow audit"
   - "klaviyo account audit"
 featured: false
-draft: true
+draft: false
 metaTitle: "How to Audit Your Klaviyo Flows | Kinga Dow"
 metaDescription: "How to audit your Klaviyo flows the way it actually gets done: map flow overlap first, score every flow against your own benchmarks, and rank fixes by revenue, list cost and effort."
 ---

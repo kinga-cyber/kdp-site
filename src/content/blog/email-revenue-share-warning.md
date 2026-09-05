@@ -15,7 +15,7 @@ keywords:
   - "email attribution ecommerce"
   - "ecommerce retention benchmarks"
 featured: false
-draft: true
+draft: false
 metaTitle: "When High Email Attribution Is a Warning | Kinga Dow"
 metaDescription: "A high email share of attributed revenue can mean email is excellent or that acquisition has stalled. The three checks that tell you which."
 ---

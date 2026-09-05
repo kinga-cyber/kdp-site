@@ -24,7 +24,7 @@ Everyone's using AI now. Your copywriter uses ChatGPT. Your strategist asks Clau
 
 But there's a difference between using AI tools and having AI workflows — and that difference is where the actual competitive advantage lives.
 
-I've spent the first four months of 2026 on calls with Klaviyo agency owners across the UK, France, Sweden, Iceland, China, Colombia, Canada, and the US. Teams ranging from solo operators to 200+ people. Every single one of them is using AI. Almost none of them have AI workflows.
+I've spent the first 4 months of 2026 on calls with Klaviyo agency owners across the UK, France, Sweden, Iceland, China, Colombia, Canada, and the US. Teams ranging from solo operators to 200+ people. Every single one of them is using AI. Almost none of them have AI workflows.
 
 That gap is the subject of this post.
 
@@ -107,11 +107,11 @@ If you recognized three or more of those — you're not behind. You're exactly w
 
 On the other side, the strategy conversation becomes the brief. The brief becomes the tasks. The tasks become the campaigns. The performance data feeds back into the next cycle. A human checks each transition point but doesn't do the manual labor of carrying information between systems.
 
-An audit that used to take four hours happens in thirty minutes. Not because someone types faster, but because the system already has access to every flow, every trigger, every metric — and it knows what to look for because the methodology is built into the workflow, not stored in someone's memory.
+An audit that used to take 4 hours happens in 30 minutes. Not because someone types faster, but because the system already has access to every flow, every trigger, every metric — and it knows what to look for because the methodology is built into the workflow, not stored in someone's memory.
 
 When someone leaves, the system stays. The knowledge is in the infrastructure, not in the person.
 
-This isn't theoretical. It's what agencies that figure this out in the next 6-12 months will look like. The ones that don't will get undercut on price by those that do — because when your competitor can service five brands with the same team that you need for three, they can offer better pricing and still make better margins.
+This isn't theoretical. It's what agencies that figure this out in the next 6-12 months will look like. The ones that don't will get undercut on price by those that do — because when your competitor can service 5 brands with the same team that you need for 3, they can offer better pricing and still make better margins.
 
 ## The Window
 

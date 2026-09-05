@@ -29,7 +29,7 @@ Four things: predicted customer lifetime value, churn risk, expected date of nex
 
 For reorder timing, the two that matter are **expected date of next order** and **churn risk**, and they are only useful together.
 
-A date on its own is misleading. Klaviyo can tell you a customer is expected to order on the fourteenth of next month, but that says nothing about whether they are likely to order at all. A customer with a steady three-month rhythm and a customer who bought twice in 2024 and vanished can both carry a predicted date. Churn risk is what separates them.
+A date on its own is misleading. Klaviyo can tell you a customer is expected to order on the fourteenth of next month, but that says nothing about whether they are likely to order at all. A customer with a steady 3-month rhythm and a customer who bought twice in 2024 and vanished can both carry a predicted date. Churn risk is what separates them.
 
 So the pairing is: **the date tells you when to send, churn risk tells you whether it is worth sending and what to send.** A low-risk customer near their expected date gets a nudge. A high-risk customer near theirs is a win-back, and it is a different email.
 
@@ -46,7 +46,7 @@ Klaviyo's stated requirements for predictive analytics:
 
 The model retrains at least weekly, so predictions move as your data does.
 
-Read those together and the exclusions become obvious. A brand in its first year misses the history requirement. A brand with 400 customers misses the threshold regardless of how good its data is. A brand with a genuinely long purchase cycle, furniture, mattresses, anything annual, may have plenty of customers and almost nobody with three orders.
+Read those together and the exclusions become obvious. A brand in its first year misses the history requirement. A brand with 400 customers misses the threshold regardless of how good its data is. A brand with a genuinely long purchase cycle, furniture, mattresses, anything annual, may have plenty of customers and almost nobody with 3 orders.
 
 **If you do not qualify, you have not lost access to the answer.** You have lost access to Klaviyo's convenience layer. The underlying question is a property of your order data, and your order data exists whether or not a model has been trained on it.
 
@@ -60,7 +60,7 @@ It is the wrong shape for almost every planning decision you actually make. When
 
 The instinct is to reach for the average time between orders. Resist it, because the average is usually a number that describes nobody.
 
-Suppose half your customers reorder around three weeks and the other half around five months. The average lands somewhere near three months, which is a point where almost nobody buys. Build your win-back window on that number and you are late for one group and early for the other, and both emails underperform for reasons that will look like a copy problem.
+Suppose half your customers reorder around 3 weeks and the other half around 5 months. The average lands somewhere near 3 months, which is a point where almost nobody buys. Build your win-back window on that number and you are late for one group and early for the other, and both emails underperform for reasons that will look like a copy problem.
 
 **You need the distribution, not the average.** Where does repurchase actually cluster, and where does it fall off? Those two points are your flow timing and your lapsed definition, and neither is visible from a mean.
 
@@ -70,7 +70,7 @@ This is the work, and it is the part that gets skipped because it is tedious rat
 
 You need the gap, in days, between consecutive orders for every customer who has ordered more than once, plotted as a distribution. Then you look for two things: the cluster, which tells you the normal rhythm, and the point where the curve flattens, which is where a customer stops being between purchases and starts being gone.
 
-That is an afternoon in a spreadsheet, which is why almost nobody does it and the ninety-day window survives as a convention nobody has checked.
+That is an afternoon in a spreadsheet, which is why almost nobody does it and the 90-day window survives as a convention nobody has checked.
 
 With the account connected to an AI layer through MCP, it stops being an afternoon. You can ask the account directly: pull the interval distribution, find the drop-off, split it by first product purchased, and check whether the pattern differs for customers acquired on discount versus full price. That last one usually does differ, and it changes what you send.
 
@@ -78,13 +78,13 @@ The point is not that a model produces the number. The point is that the number 
 
 **And it moves.** Assortment changes, a subscription launch, seasonality, a shift in acquisition mix. An interval computed once and hardcoded into a flow stops being true, and the flow keeps sending with nothing reporting an error. That is a scheduled check, not a one-off analysis.
 
-This is the difference between using AI and having an AI workflow. Asking a model what a good win-back window is gets you the same ninety days everyone else has, because that is what is written on the internet. Having it read your account, compute the interval from your orders, and re-check quarterly is a different thing entirely.
+This is the difference between using AI and having an AI workflow. Asking a model what a good win-back window is gets you the same 90 days everyone else has, because that is what is written on the internet. Having it read your account, compute the interval from your orders, and re-check quarterly is a different thing entirely.
 
 ## What to Do With the Number
 
 Three decisions it settles:
 
-**Win-back timing.** Fire at the drop-off point, not at a round number. If your curve flattens at fifty-two days, a ninety-day flow is reaching people a month after they mentally moved on.
+**Win-back timing.** Fire at the drop-off point, not at a round number. If your curve flattens at 52 days, a 90-day flow is reaching people a month after they mentally moved on.
 
 **Replenishment.** For consumables the cluster is your product's actual consumption rate. Send slightly before it, not after. The whole value of a replenishment email is arriving while the customer still has some left and no reason to shop around.
 

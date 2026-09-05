@@ -20,9 +20,9 @@ metaTitle: "The MCP Servers I Use for Ecommerce Email | Kinga Dow"
 metaDescription: "Six MCP connectors for ecommerce email work, what each one reaches, what it is genuinely good for, and where each one stops."
 ---
 
-These are the six MCP connectors I have running on a normal working day, and what each one actually does once it is connected.
+These are the 6 MCP connectors I have running on a normal working day, and what each one actually does once it is connected.
 
-I am going to assume you know roughly what MCP is by now. The part that is harder to find, and the part that decides whether a connector is worth the ten minutes of setup, is what each server actually reaches. Vendors describe the ambition. This is the inventory.
+I am going to assume you know roughly what MCP is by now. The part that is harder to find, and the part that decides whether a connector is worth the 10 minutes of setup, is what each server actually reaches. Vendors describe the ambition. This is the inventory.
 
 One thing worth saying before the list. **Everything below is what the connector does, not what the platform can do.** Every one of these sits on top of a much larger API, and the server exposes a slice of it that somebody chose. Where those two things come apart, I have said so.
 
@@ -32,7 +32,7 @@ One thing worth saying before the list. **Everything below is what the connector
 
 On the writing side it creates campaigns and clones them, builds email templates including proper drag-and-drop ones, creates lists, profiles, coupons and coupon codes, catalog items and variants, tags, custom metrics and universal content. It can render a template to check what it looks like.
 
-**One thing it will not create: a webhook.** When I first wrote this in August the connector refused to create four things, segments, flows, forms and webhooks. Three of those have since arrived, so the list is down to one. It reads webhooks and it will delete one with nothing but an ID, but it still will not make one. Everything below about flows is the correction, and it is worth reading because the shape of what changed tells you how to think about any connector.
+**One thing it will not create: a webhook.** When I first wrote this in August the connector refused to create 4 things, segments, flows, forms and webhooks. Three of those have since arrived, so the list is down to one. It reads webhooks and it will delete one with nothing but an ID, but it still will not make one. Everything below about flows is the correction, and it is worth reading because the shape of what changed tells you how to think about any connector.
 
 Flows used to be the strange one. In August the connector could set a flow's status, draft or manual or live, and delete the whole thing, but it could not build one or edit a step inside it. That looked backwards, since turning somebody's abandoned cart flow off is a larger action than editing a subject line, and turning it off was the one it would do.
 
@@ -40,11 +40,11 @@ That gap is closed. The connector now builds a flow from a full definition, trig
 
 The lesson is not the specific list, which will be shorter again by the time you read this. It is that a connector's limits are a vendor's decisions, and vendors revisit them. Check what the connector does today rather than trusting a table someone published, this one included. Verified against Klaviyo's connector documentation on 5 September 2026.
 
-**What I use it for.** Comparative questions, almost entirely. Klaviyo's dashboards answer the questions Klaviyo anticipated, which are mostly "how did this perform". The awkward ones are comparative: how does this segment's repeat rate compare to that one, what share of a flow's revenue comes from the first email rather than the rest, which flows have not been edited in a year, what proportion of the list has engaged with anything in six months.
+**What I use it for.** Comparative questions, almost entirely. Klaviyo's dashboards answer the questions Klaviyo anticipated, which are mostly "how did this perform". The awkward ones are comparative: how does this segment's repeat rate compare to that one, what share of a flow's revenue comes from the first email rather than the rest, which flows have not been edited in a year, what proportion of the list has engaged with anything in 6 months.
 
 All of those are answerable from the data. None of them is one click in the interface, which is why they mostly go unasked.
 
-**A real one.** I checked a pop-up's actual numbers rather than trusting a summary. The old forms were converting at 2.26% and 3.93%. The replacement, a multi-step form collecting zero-party data on the way in, came in at 9.11% from 3,947 views and 420 submits. Roughly four times better on mobile, and the winning mechanic was not a bigger discount, it was asking a question during signup. That comparison took about a minute.
+**A real one.** I checked a pop-up's actual numbers rather than trusting a summary. The old forms were converting at 2.26% and 3.93%. The replacement, a multi-step form collecting zero-party data on the way in, came in at 9.11% from 3,947 views and 420 submits. Roughly 4 times better on mobile, and the winning mechanic was not a bigger discount, it was asking a question during signup. That comparison took about a minute.
 
 **Where it stops.** Role first: you need Owner, Admin or Manager on the account. The hosted server comes in two shapes and the difference matters if you run more than one account. The listed connector is the quick one and covers a single account. Several accounts means building a custom connector, and that is the part requiring a paid Claude plan. There is also a local server you run against a private API key, which is the route worth knowing if you keep client accounts properly separated, though it only works with Claude Desktop, Cursor and VS Code. One setting is worth turning on regardless of route: a read-only mode that switches off every action that changes the account, so Claude can answer questions but cannot touch anything. If all you want is the comparative reporting below, that is the safe way to run it.
 
@@ -64,7 +64,7 @@ To be fair to Shopify, the inventory tool is built carefully. It wants the curre
 
 **What I use it for.** Almost entirely reading, despite all of the above. Anything that depends on what is actually true right now. Prices, variant names, what is in a collection, what is in stock and where.
 
-**A real one.** Every campaign brief pulls live per-SKU stock at build time. If a featured product is under roughly fifty units and the send is going to a whole list, that gets raised before the design is approved rather than after the email lands. Promoting something into a sellout is expensive, specific and entirely preventable, and preventing it needs one thing: the stock number being present at the moment somebody decides.
+**A real one.** Every campaign brief pulls live per-SKU stock at build time. If a featured product is under roughly 50 units and the send is going to a whole list, that gets raised before the design is approved rather than after the email lands. Promoting something into a sellout is expensive, specific and entirely preventable, and preventing it needs one thing: the stock number being present at the moment somebody decides.
 
 **Where it stops.** Inventory is per location, so a single "in stock" number can mislead badly for a brand with several warehouses or retail stock. Read the location breakdown, not the total.
 
@@ -140,7 +140,7 @@ Connect them in this order:
 
 Figma, call transcripts and document storage come after. Powerful, but only once the first three are producing something worth designing and briefing.
 
-The most common mistake is connecting everything at once and using none of it. One connection you interrogate daily beats six you configured and forgot.
+The most common mistake is connecting everything at once and using none of it. One connection you interrogate daily beats 6 you configured and forgot.
 
 That is the same trap as [owning AI tools without having AI workflows](/blog/gap-between-using-ai-and-having-ai-workflows/). A connector you never ask anything is a subscription, not a system.
 

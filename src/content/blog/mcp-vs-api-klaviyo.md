@@ -43,7 +43,7 @@ A few specific jobs belong to the API or the interface instead, and the list is 
 - **Reworking a form once it exists.** The connector builds a form and the interface designs it; changing one already in place is an API job.
 - **Rebuilding a whole flow in a single pass.** The connector builds a flow, tunes its individual steps and switches its status. A top-to-bottom replacement in one move belongs to the API.
 
-There is a clean logic to which jobs sit where. The connector handles the things that happen once, and hands the things that keep running to a person or a key. The reasoning is about blast radius: a campaign goes out once, while a flow keeps sending, so a flow earns a second pair of eyes. Klaviyo puts it plainly in its own developer notes, "Klaviyo does not recommend pre-creation of flows in customer accounts," and it gives you two dials to set your own comfort: a read-only mode that keeps Claude to questions, and a core-tools mode that trims it to around forty actions for tools with less room.
+There is a clean logic to which jobs sit where. The connector handles the things that happen once, and hands the things that keep running to a person or a key. The reasoning is about blast radius: a campaign goes out once, while a flow keeps sending, so a flow earns a second pair of eyes. Klaviyo puts it plainly in its own developer notes, "Klaviyo does not recommend pre-creation of flows in customer accounts," and it gives you two dials to set your own comfort: a read-only mode that keeps Claude to questions, and a core-tools mode that trims it to around 40 actions for tools with less room.
 
 ## Where the API Adds Something
 
@@ -61,9 +61,9 @@ This is where judgment lives, which is exactly why it stayed hands-on. How a for
 
 ## How I Actually Decide
 
-Connector first, every time. It answers most of what I want to know, it costs nothing, and honestly most of the work is questions rather than actions. What is the repeat rate on this segment. Which flows have not been touched in a year. What did this campaign really earn once you strip out the people who were buying anyway. Building follows the same order: the six segments of an [RFM grid](/blog/klaviyo-rfm-segmentation/) are a connector job, so I let Claude build them there.
+Connector first, every time. It answers most of what I want to know, it costs nothing, and honestly most of the work is questions rather than actions. What is the repeat rate on this segment. Which flows have not been touched in a year. What did this campaign really earn once you strip out the people who were buying anyway. Building follows the same order: the 6 segments of an [RFM grid](/blog/klaviyo-rfm-segmentation/) are a connector job, so I let Claude build them there.
 
-The API key comes out for the short list it owns, and for anything I am running across several accounts at once, where writing the instructions once and running them per account beats doing it by hand eight times.
+The API key comes out for the short list it owns, and for anything I am running across several accounts at once, where writing the instructions once and running them per account beats doing it by hand 8 times.
 
 The interface is where I go for the design and setup work it does best, and where I would rather be a person anyway. Knowing which of the three a task belongs to, before I start, is most of what makes the whole setup fast. It is the practical version of the [difference between using AI and having AI workflows](/blog/gap-between-using-ai-and-having-ai-workflows/).
 

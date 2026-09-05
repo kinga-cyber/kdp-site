@@ -20,7 +20,7 @@ featured: false
 draft: false
 ---
 
-It is Monday morning and the weekly call is at ten. The tracker wants last week's campaign revenue, flow revenue, deliveries, unsubscribes and sign-ups, in that order, and every one of those numbers sits on a different screen in Klaviyo. So someone opens five reports, reads the figures off, and types them into the sheet one cell at a time.
+It is Monday morning and the weekly call is at ten. The tracker wants last week's campaign revenue, flow revenue, deliveries, unsubscribes and sign-ups, in that order, and every one of those numbers sits on a different screen in Klaviyo. So someone opens 5 reports, reads the figures off, and types them into the sheet one cell at a time.
 
 Klaviyo has no built-in Google Sheets integration. There is no toggle in the integrations directory, and there never has been. That matters more than it sounds, because it explains something odd about searching for this. Almost every result on the first page is published by a company that sells you a connector, a tool that copies Klaviyo data into a sheet for you on a schedule. Coefficient, Coupler.io, Catchr, Adzviser and Funnel.io all run guides on how to connect Klaviyo to Google Sheets, and all of them arrive at the same conclusion, which is to use their connector.
 
@@ -46,7 +46,7 @@ I mention this first because it gets dismissed too quickly. If you need a number
 
 **What it costs.** Nothing.
 
-**Where it breaks.** The moment you need it again. A CSV is a snapshot, so a weekly report means doing the whole thing weekly, and a month later nobody can tell you which export a given tab came from. Every manual reporting process I have inherited failed the same way. The export was fine. The person doing it stopped, and nobody noticed for six weeks. That is the difference between [using a tool and having a workflow](/blog/gap-between-using-ai-and-having-ai-workflows/), and it applies to spreadsheets as much as it does to AI.
+**Where it breaks.** The moment you need it again. A CSV is a snapshot, so a weekly report means doing the whole thing weekly, and a month later nobody can tell you which export a given tab came from. Every manual reporting process I have inherited failed the same way. The export was fine. The person doing it stopped, and nobody noticed for 6 weeks. That is the difference between [using a tool and having a workflow](/blog/gap-between-using-ai-and-having-ai-workflows/), and it applies to spreadsheets as much as it does to AI.
 
 **Use it when** the answer is needed once, or the sheet is a scratchpad rather than a report.
 

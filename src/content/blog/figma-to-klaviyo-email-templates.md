@@ -69,13 +69,13 @@ The input is two links: the Figma frame and the task.
 
 The shape of a production month matters more than it sounds. I design everything in Figma across about a week, all the campaigns, refined until I am sure. Then I sit down for one build session and work through them.
 
-**The first email takes around ten minutes**, because the design system, the tokens and the documentation all have to be read before anything is built. Every email after that takes a fraction of it, because that context is already loaded.
+**The first email takes around 10 minutes**, because the design system, the tokens and the documentation all have to be read before anything is built. Every email after that takes a fraction of it, because that context is already loaded.
 
-That single fact is the argument for batching, and the unit that matters is the session rather than the day. One email on Tuesday and another on Thursday, started fresh each time, pays that warm-up cost twice for two emails. Ten in one sitting pays it once.
+That single fact is the argument for batching, and the unit that matters is the session rather than the day. One email on Tuesday and another on Thursday, started fresh each time, pays that warm-up cost twice for 2 emails. Ten in one sitting pays it once.
 
 Two rules that came out of getting it wrong:
 
-**One campaign at a time.** Hand over five at once and quality degrades. Things get missed, and nothing flags the miss because the build still completes.
+**One campaign at a time.** Hand over 5 at once and quality degrades. Things get missed, and nothing flags the miss because the build still completes.
 
 **For flows, map before you build.** I have the flow laid out as a chart first, something you can look at and argue with, before anything touches the API. Building is the cheap part now. Knowing exactly what you meant to build is still the actual work, and it is the part that never got automated.
 

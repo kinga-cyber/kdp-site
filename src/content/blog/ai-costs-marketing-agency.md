@@ -23,7 +23,7 @@ Writing is cheap. Set this headline to that. Swap this price. Change this link. 
 
 Reading is where the money goes. Asking the AI to look at the design file and understand it pulls the whole structure of that file into the conversation, every layer, every property, every nested component. One read can cost more than the entire build that follows it.
 
-I learned that in June, in a single session where I built the same email five different ways. The brief never changed. Nothing in my setup told the AI how my Figma file worked, so every attempt started by reading it again and guessing again. The design was never the expensive part.
+I learned that in June, in a single session where I built the same email 5 different ways. The brief never changed. Nothing in my setup told the AI how my Figma file worked, so every attempt started by reading it again and guessing again. The design was never the expensive part.
 
 AI does not bill you for the work. It bills you for the conversation. Every time you send a message, the tool sends the whole conversation so far back to the AI, and you pay for all of it again. So the cost of running AI on client work tracks how many back and forth turns a task took, not how complicated the deliverable was. That means the bill is set by your setup, not by the AI, and it is the one part of this most agency owners never budget for.
 
@@ -34,11 +34,11 @@ The AI has no memory between messages. Each time you say "now change the headlin
 
 So cost does not grow in a straight line. It grows on a curve.
 
-Say every turn adds a thousand tokens. A token is the unit AI is priced in, roughly three quarters of a word, so a thousand of them is a long paragraph. Turn one costs you a thousand. Turn two costs two thousand, because it carries turn one with it. By turn twenty you are paying twenty thousand for that single instruction, and the running total is not twenty thousand. It is 210,000.
+Say every turn adds 1,000 tokens. A token is the unit AI is priced in, roughly three quarters of a word, so 1,000 of them is a long paragraph. Turn 1 costs you 1,000. Turn 2 costs 2,000, because it carries turn 1 with it. By turn 20 you are paying 20,000 for that single instruction, and the running total is not 20,000. It is 210,000.
 
 It works like a taxi that charges you for the whole journey so far every time you speak to the driver. The last question costs more than the first mile.
 
-[Augment Code ran this on a real agent loop](https://www.augmentcode.com/guides/ai-agent-loop-token-cost-context-constraints) and published the numbers. Their ten-step file-reading process burned 472,500 tokens. The same work done in a single pass took 9,000. That is their benchmark on their task, not a measurement of email production, but the shape holds anywhere.
+[Augment Code ran this on a real agent loop](https://www.augmentcode.com/guides/ai-agent-loop-token-cost-context-constraints) and published the numbers. Their 10-step file-reading process burned 472,500 tokens. The same work done in a single pass took 9,000. That is their benchmark on their task, not a measurement of email production, but the shape holds anywhere.
 
 Which reorders what expensive means. A complicated deliverable is not expensive. A long conversation about a simple one is expensive.
 
@@ -48,7 +48,7 @@ Once turns are the unit of cost, the question becomes which turns you can delete
 
 **Writing turns** are a handful of tokens each. There is nothing to save there.
 
-**Reading turns** are the expensive ones, and they get more expensive as the file grows. Everything the AI reads lands in the conversation, which is what people mean when they say context, and it gets re-sent on every turn after. [Figma's own documentation](https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Figma-MCP-server) warns that without tight scoping, requests get slower and more token-consuming as the file grows. The same is true of every connector you attach, which is worth knowing before you [wire up six of them](/blog/mcp-stack-ecommerce-retention/).
+**Reading turns** are the expensive ones, and they get more expensive as the file grows. Everything the AI reads lands in the conversation, which is what people mean when they say context, and it gets re-sent on every turn after. [Figma's own documentation](https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Figma-MCP-server) warns that without tight scoping, requests get slower and more token-consuming as the file grows. The same is true of every connector you attach, which is worth knowing before you [wire up 6 of them](/blog/mcp-stack-ecommerce-retention/).
 
 The read is the turn to delete.
 
@@ -76,9 +76,9 @@ A written system file is stable by definition. It is a document. It loads once a
 
 Discovery is the exact opposite. It is different every run, it lands in the middle of the conversation rather than the top, and when it changes it takes the cacheability of everything after it down with it.
 
-So a system does not only use fewer tokens. It puts the tokens it does use in the position that costs ninety percent less to re-read, while discovery puts them in the worst position available.
+So a system does not only use fewer tokens. It puts the tokens it does use in the position that costs 90% less to re-read, while discovery puts them in the worst position available.
 
-Two honest limits, and they are not the same limit. The cached copy has a lifetime, five minutes by default with a one hour option, so leaving a session idle over lunch means the next thing you ask pays full price for the whole conversation again even though nothing has been forgotten. Separately, starting a **new** session loses the conversation altogether rather than just the discount.
+Two honest limits, and they are not the same limit. The cached copy has a lifetime, 5 minutes by default with a 1 hour option, so leaving a session idle over lunch means the next thing you ask pays full price for the whole conversation again even though nothing has been forgotten. Separately, starting a **new** session loses the conversation altogether rather than just the discount.
 
 That second one is what decides how you work. Memory is a property of the session. Cost is a property of the clock. It is also the reason the build file has to be a file, rather than something you explained well once in a conversation that has since ended.
 
@@ -100,9 +100,9 @@ None of the fix is exotic. It is documentation, which is why it gets skipped.
 
 For each client I keep a build file. It holds which campaign type clones which existing layout, the exact name of every field that can be edited, where prices and links get verified from, and which components are broken. Section five of it is called "writes, not reads."
 
-That last category earns its place fastest. Two components in one client's design file hang for about sixty seconds on any attempt to read their properties. I found that out several times before I wrote it down. Now nothing reads them, and that single line has saved more than most of the positive instructions in the file.
+That last category earns its place fastest. Two components in one client's design file hang for about 60 seconds on any attempt to read their properties. I found that out several times before I wrote it down. Now nothing reads them, and that single line has saved more than most of the positive instructions in the file.
 
-The whole document runs to roughly 4,000 tokens, about three pages. It loads once at the start of a build, and the build goes straight to changing content. No looking around. Anthropic's own guidance points the same way: letting the AI explore as it goes is slower than handing it what it needs, and they recommend loading the essentials up front.
+The whole document runs to roughly 4,000 tokens, about 3 pages. It loads once at the start of a build, and the build goes straight to changing content. No looking around. Anthropic's own guidance points the same way: letting the AI explore as it goes is slower than handing it what it needs, and they recommend loading the essentials up front.
 
 Two operational consequences follow, and both are free.
 

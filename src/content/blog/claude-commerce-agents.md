@@ -30,7 +30,7 @@ What decides whether either of them works is not the technology. It is your prod
 
 Plans, not a product.
 
-Anthropic published a worked design for two kinds of AI agent, along with four example versions covering retail, travel, telecom and entertainment. Every one of those examples runs on an invented store selling invented products. You can watch a demo agent hold a genuinely good conversation about camping equipment, help you compare options and fill a cart, and none of the tents exist.
+Anthropic published a worked design for two kinds of AI agent, along with 4 example versions covering retail, travel, telecom and entertainment. Every one of those examples runs on an invented store selling invented products. You can watch a demo agent hold a genuinely good conversation about camping equipment, help you compare options and fill a cart, and none of the tents exist.
 
 What is missing from those plans is the part that connects them to a real business. They do not plug into Shopify, or into any other ecommerce platform. Getting from the demo to something that knows your actual products, prices and orders is work that someone has to do for you.
 
@@ -40,7 +40,7 @@ So what Anthropic gave away is the hard thinking rather than the finished thing.
 
 The distance between the two is much larger than the announcement suggests.
 
-The **shopping agent** faces your customer. It searches your catalog, compares products, plans a multi-item purchase, fills a cart, answers questions about orders and policies, and remembers what someone told it three messages ago. It hands over to your existing checkout. It does not take payment.
+The **shopping agent** faces your customer. It searches your catalog, compares products, plans a multi-item purchase, fills a cart, answers questions about orders and policies, and remembers what someone told it 3 messages ago. It hands over to your existing checkout. It does not take payment.
 
 The **merchant agent** faces your team. It explains what happened to sales last week, flags inventory problems before anyone notices them, keeps listings current, suggests pricing and promotions, and drafts campaigns. Every change it wants to make waits for a person to approve it.
 
@@ -90,7 +90,7 @@ Dynamic product blocks in Klaviyo read the same fields: codes, titles, prices, i
 
 So there is a split forming, and it does not track brand size.
 
-Brands that cleaned up their catalog because their emails kept rendering wrong are most of the way to being ready for this, and they did not do it for this. Brands that never had to confront it, because a person was always in the loop quietly translating messy data into a decent customer experience, are going to meet the whole bill at once.
+Brands that cleaned up their catalog because their emails kept rendering wrong are most of the way to being ready for this, and they did not do it for this. Brands that never had to confront it, because a person was always in the loop translating messy data into a decent customer experience by hand, are going to meet the whole bill at once.
 
 That is worth sitting with, because it reframes what the work actually is. Getting ready for commerce agents is not an AI project. It is catalog hygiene, written policies and properly structured product information. Unglamorous, nobody wants to own it, and it pays for itself in email and on-site search whether or not you ever launch an agent.
 
@@ -100,15 +100,15 @@ It is the same distinction I keep coming back to. Asking a model to write you so
 
 The announcement says carts up to 35% larger and shoppers 60% more likely to complete a purchase. Nearly every article about it repeats both.
 
-They are worth exactly what they are. Figures published by the vendor, drawn from large deployments by companies with engineering teams. The named early customers include Shopify, Priceline, Intuit, Square, Wix and Klaviyo. None of them is a useful comparison for a brand doing seven figures with a three-person marketing team.
+They are worth exactly what they are. Figures published by the vendor, drawn from large deployments by companies with engineering teams. The named early customers include Shopify, Priceline, Intuit, Square, Wix and Klaviyo. None of them is a useful comparison for a brand doing seven figures with a 3-person marketing team.
 
-Do not plan against those numbers, and be wary of anyone quoting them at you as a forecast. The underlying idea is reasonable enough. A shopper who can ask for a two-person tent under $250 and get a real answer probably does buy more than one clicking through a category page. The size of that effect at your scale is unknown, and nobody currently selling this to you knows it either.
+Do not plan against those numbers, and be wary of anyone quoting them at you as a forecast. The underlying idea is reasonable enough. A shopper who can ask for a 2-person tent under $250 and get a real answer probably does buy more than one clicking through a category page. The size of that effect at your scale is unknown, and nobody currently selling this to you knows it either.
 
 ## What to Do This Quarter
 
 Three options, in order of cost, and the first one is legitimate.
 
-**Do nothing, on purpose.** The plans are weeks old, building on them takes real engineering, and nothing about your business gets worse while you wait. Most brands should choose this and look again in six months, once the platforms have absorbed it. Choosing that deliberately is a different thing from missing it.
+**Do nothing, on purpose.** The plans are weeks old, building on them takes real engineering, and nothing about your business gets worse while you wait. Most brands should choose this and look again in 6 months, once the platforms have absorbed it. Choosing that deliberately is a different thing from missing it.
 
 **Fix the catalog.** No engineering required, and it is the only item on this list that pays off whether or not agents turn out to matter. Consistent product codes, complete variant information, accurate availability, and your shipping, returns and sizing policies written once in a form anything can quote. Your emails improve immediately. So does your on-site search. And if you do build later, you skip the part that would have stalled it.
 

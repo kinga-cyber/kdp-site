@@ -1,9 +1,10 @@
 ---
 title: "The MCP Servers I Actually Use for Ecommerce Email"
 date: 2026-08-13
+updated: 2026-09-05
 author: "Kinga Dow"
 category: "AI Systems"
-excerpt: "Six connectors, what each one reaches, what I use it for, and where it stops. Including the four things the Klaviyo connector will not build, which is the part nobody mentions until you have planned around it."
+excerpt: "Six connectors, what each one reaches, what I use it for, and where it stops. Including the one thing the Klaviyo connector still will not build, and how quickly that list of exceptions is shrinking."
 image: "/images/blog/mcp-stack.svg"
 imageAlt: "Diagram of a campaign moving through connected MCP servers: context from Fireflies and Drive, brief in Asana, design in Figma, build in Klaviyo, verified against Shopify"
 keywords:
@@ -31,13 +32,13 @@ One thing worth saying before the list. **Everything below is what the connector
 
 On the writing side it creates campaigns and clones them, builds email templates including proper drag-and-drop ones, creates lists, profiles, coupons and coupon codes, catalog items and variants, tags, custom metrics and universal content. It can render a template to check what it looks like.
 
-**Four things it will not create.** Segments, flows, forms and webhooks. It reads all four, and it will delete any of them with nothing but an ID, but there is no create tool for any of the four.
+**One thing it will not create: a webhook.** When I first wrote this in August the connector refused to create four things, segments, flows, forms and webhooks. Three of those have since arrived, so the list is down to one. It reads webhooks and it will delete one with nothing but an ID, but it still will not make one. Everything below about flows is the correction, and it is worth reading because the shape of what changed tells you how to think about any connector.
 
-Flows are the strange one. There is an update tool, and all it does is set the status, draft or manual or live, across the flow and every action inside it. So the connector can switch a live flow off, switch a draft one on, or delete the whole thing. What it cannot do is build one or change anything inside it.
+Flows used to be the strange one. In August the connector could set a flow's status, draft or manual or live, and delete the whole thing, but it could not build one or edit a step inside it. That looked backwards, since turning somebody's abandoned cart flow off is a larger action than editing a subject line, and turning it off was the one it would do.
 
-Sit with that ordering for a second, because it is the opposite of what you would design. Turning somebody's abandoned cart flow off is a considerably larger action than editing a subject line, and turning it off is the one it will do.
+That gap is closed. The connector now builds a flow from a full definition, triggers, actions and all, and it edits individual actions inside one. Klaviyo's own developer notes add a caution worth repeating, **"Klaviyo does not recommend pre-creation of flows in customer accounts,"** so the ability is there and they are telling you to use it carefully. Rewriting a whole live flow in one move is still the sharpest edit in the account, which is roughly where the remaining care sits.
 
-Worth knowing before you plan a workflow around any of this, because those four are exactly what people assume they will automate first.
+The lesson is not the specific list, which will be shorter again by the time you read this. It is that a connector's limits are a vendor's decisions, and vendors revisit them. Check what the connector does today rather than trusting a table someone published, this one included. Verified against Klaviyo's connector documentation on 5 September 2026.
 
 **What I use it for.** Comparative questions, almost entirely. Klaviyo's dashboards answer the questions Klaviyo anticipated, which are mostly "how did this perform". The awkward ones are comparative: how does this segment's repeat rate compare to that one, what share of a flow's revenue comes from the first email rather than the rest, which flows have not been edited in a year, what proportion of the list has engaged with anything in six months.
 
@@ -45,7 +46,7 @@ All of those are answerable from the data. None of them is one click in the inte
 
 **A real one.** I checked a pop-up's actual numbers rather than trusting a summary. The old forms were converting at 2.26% and 3.93%. The replacement, a multi-step form collecting zero-party data on the way in, came in at 9.11% from 3,947 views and 420 submits. Roughly four times better on mobile, and the winning mechanic was not a bigger discount, it was asking a question during signup. That comparison took about a minute.
 
-**Where it stops.** Role first: you need Owner, Admin or Manager on the account. The hosted server comes in two shapes and the difference matters if you run more than one account. The listed connector is the quick one and covers a single account. Several accounts means building a custom connector, and that is the part requiring a paid Claude plan. There is also a local server you run against a private API key, which is the route worth knowing if you keep client accounts properly separated, though it only works with Claude Desktop, Cursor and VS Code.
+**Where it stops.** Role first: you need Owner, Admin or Manager on the account. The hosted server comes in two shapes and the difference matters if you run more than one account. The listed connector is the quick one and covers a single account. Several accounts means building a custom connector, and that is the part requiring a paid Claude plan. There is also a local server you run against a private API key, which is the route worth knowing if you keep client accounts properly separated, though it only works with Claude Desktop, Cursor and VS Code. One setting is worth turning on regardless of route: a read-only mode that switches off every action that changes the account, so Claude can answer questions but cannot touch anything. If all you want is the comparative reporting below, that is the safe way to run it.
 
 ## Shopify
 
@@ -55,9 +56,9 @@ There is also a general GraphQL escape hatch, which matters more than it sounds.
 
 **And unlike Klaviyo's, it writes properly.** It creates and updates products and collections, bulk-updates product status, creates discount codes, and sets inventory quantities at a given location.
 
-Read those last two again. It will create a live discount code, active immediately unless you give it a future start date. It will change your stock numbers.
+Read those last two again. It will create a discount code, though it now insists you state a start time and who is eligible before it makes one, rather than defaulting to live and everyone. It will change your stock numbers.
 
-That is the opposite of where Klaviyo drew its line, and the contrast is worth noticing. Klaviyo's connector will not let a model build a flow, though the API underneath it will do that perfectly happily. Shopify's connector will let one put a percentage off the entire catalog. Same protocol, two vendors, completely different appetite for what they hand over through it.
+The interesting contrast is how differently two vendors treat the same protocol. Klaviyo hedges its most dangerous write, a whole live flow, with a documented caution and a read-only switch. Shopify will let a model put a percentage off the entire catalog, and its guard is narrower and more literal: the discount tool now stops and asks for a start date and an audience rather than assuming them. Same protocol, two vendors, two different theories of which mistakes to prevent.
 
 To be fair to Shopify, the inventory tool is built carefully. It wants the current quantity passed back to it as a comparison value, so the write fails rather than overwriting the newer number if stock moved between reading and writing. That is a proper safeguard and more than most tools bother with.
 
@@ -87,7 +88,7 @@ It also makes the calendar answerable. What is not scheduled yet this month beco
 
 **A real one.** A build session takes two links as input: the Figma frame and the Asana task. Everything the build needs is already inside one of those two.
 
-**Where it stops.** Advanced task search is a Premium feature. On a free workspace you can list and filter but not search full text across descriptions and comments, which matters the moment you go looking for that campaign from March.
+**Where it stops.** Advanced task search is a Premium feature. On a free workspace you can list and filter but not run the full-text search, and even on Premium that search covers task names and descriptions rather than comments, which matters the moment you go looking for that campaign from March.
 
 ## Fireflies
 
@@ -99,11 +100,11 @@ It also makes the calendar answerable. What is not scheduled yet this month beco
 
 **Where it stops.** It only knows about calls that were actually recorded, which sounds obvious and still catches people out.
 
-The bigger one is that this connector writes, and the writes are about access rather than content. It can share a meeting, change a meeting's privacy setting, and revoke somebody's access. Transcripts already contain everything that was said, including plenty a client would not expect to see published, so anything mined out of them needs a deliberate confidentiality pass. Knowing that the same connection can also change who is able to read them is worth holding onto.
+The bigger one is that this connector writes, and the writes go further than you might expect. It can share a meeting, change a meeting's privacy setting and revoke somebody's access, and it can also cut a clip from a call, one of them with a public setting, rename a meeting and move it between folders. Transcripts already contain everything that was said, including plenty a client would not expect to see published, so anything mined out of them needs a deliberate confidentiality pass. Knowing that the same connection can also change who is able to read them is worth holding onto.
 
 ## Google Drive
 
-**What it reaches.** File search using a structured query syntax, file contents, metadata and creation.
+**What it reaches.** File search using a structured query syntax, file contents and metadata, plus creating a file, and moving, copying, sharing and trashing one.
 
 **What I use it for.** Grounding. Brand guidelines, positioning documents, past reports, tone references. This is the layer that makes output sound like the brand rather than like competent generic marketing.
 
@@ -113,7 +114,7 @@ The bigger one is that this connector writes, and the writes are about access ra
 
 Everything above is a platform connector. The layer that sits above them, the analytics and attribution tools, was closed until recently and is not any more. If a brand runs either of these, they are the next two I would connect.
 
-**Triple Whale** ships an official MCP server, with documentation, a public repository, and OAuth2 at read-only access. It is listed in both the Claude and OpenAI connector directories, so setup is the same two minutes as anything else here.
+**Triple Whale** ships an official MCP server, documented on their site, with a hosted server URL and OAuth2 at read-only access, so it cannot change anything in the account. You add it as a custom connector in the tools that support one, Claude among them.
 
 **Polar Analytics** has one too, and its design is the more interesting of the two. Rather than exposing raw tables for a model to write SQL against, it exposes a defined metrics layer, so you query agreed definitions instead of hoping a generated query means what you think it means. Worth flagging that most of what is published comparing the two comes from Polar themselves.
 

@@ -3,9 +3,9 @@ title: "MCP or the API: What Each One Can Actually Do"
 date: 2026-09-17
 author: "Kinga Dow"
 category: "AI Systems"
-excerpt: "There are two ways to build in Klaviyo with Claude: the MCP connector and the API underneath it. What each one is for, when to reach for which, and why I keep both open at once."
+excerpt: "The MCP connector, the API and the Klaviyo interface are three layers, not two. The connector does almost everything, the API covers a short list beyond it, and some of Klaviyo has no automation at all."
 image: "/images/blog/mcp-vs-api.svg"
-imageAlt: "Comparison showing the MCP connector as a small curated subset of tools sitting inside the much larger surface of the full REST API"
+imageAlt: "Three nested layers: the MCP connector inside the larger API surface, both inside the full Klaviyo interface"
 keywords:
   - "mcp vs api"
   - "klaviyo mcp server"
@@ -16,80 +16,65 @@ keywords:
 featured: false
 draft: true
 metaTitle: "MCP or the API: What Each Can Actually Do | Kinga Dow"
-metaDescription: "The Klaviyo MCP connector and the Klaviyo API are two routes into the same account. What each one does, when to use which, and how to run both together in Claude Code."
+metaDescription: "How the Klaviyo MCP connector, the API and the interface relate. What Claude builds directly, the short list that needs a key, and what lives only in the UI."
 ---
 
-There are two ways to build in Klaviyo with Claude, and telling them apart is the first thing worth knowing. One is the MCP connector: a link you switch on so Claude can read and act on your account. The other is the API underneath it: the developer route, which needs a key and someone comfortable with code. Most people meet the connector and never learn there is a second door behind it. Knowing both, and when each is the right one, is the actual skill.
+There are two ways to build in Klaviyo with Claude. One is the MCP connector: the link you switch on so Claude can read and act on your account. The other is the API underneath it: the developer route, which needs a key and someone comfortable with code. Which you reach for depends on what you are doing, and most of the time the connector is enough on its own.
 
-Which one you reach for depends on what you are doing. The connector handles the bulk of the work. It reads everything in the account and builds most of what you would want to build, campaigns, flows, segments, templates. The API handles the few things the connector leaves out, and the case where you are running the same build across a roster of accounts rather than one.
+There is a third thing worth naming up front, because it is the part people get wrong. Above both of those sits the Klaviyo interface, and it can do more than either the connector or the API. A real slice of the platform has no developer route at all. So the honest picture is three layers, not two: what Claude reaches through the connector, the wider set the API adds, and the work that lives only in the interface where no automation goes.
 
-I keep both open at once, which is the honest answer to how I work. Most of my work now happens in Claude Code, the version of Claude that runs on my computer rather than in a chat window, because it holds the connector and an API key in the same place. When I build a flow, I start with the connector for everything it will do, and drop to the API only for the piece it will not. There is no switching tools and no stopping to decide which is which.
+I keep the first two open at once. Most of my work now happens in Claude Code, the version of Claude that runs on my computer rather than in a chat window, because it holds the connector and a key in the same place. When I build a flow, I start with the connector for everything it will do, drop to the API for the little it will not, and open Klaviyo itself for the handful of things neither can touch. There is no switching tools and no stopping to decide which is which.
 
-Using both well comes down to knowing where the connector stops and why it stops there. The rest of this post is that map.
+The rest of this is where each layer stops.
 
 ## A Connector Is a Keycard
 
-Think of an MCP connector as the keycard a hotel gives you. It opens your room, the gym and the pool. It does not open the plant room, not because that door is special, but because somebody decided which doors you get.
+Think of the MCP connector as the keycard a hotel gives you. It opens your room, the gym and the pool. It does not open the plant room, not because that door is special, but because somebody decided which doors you get.
 
-That is what an [MCP connector](/blog/mcp-stack-ecommerce-retention/) is. The company picks which actions to hand out, wraps them up, and puts a login in front. That curation is exactly why setting one up takes two minutes and involves no keys, no permission settings and no documentation to read.
+The API is the bigger keyring the staff carry. It opens far more, because the company wrapped more of the building in it. Even that keyring does not open every door, though. Some things only the front desk can do, and no key hands them to you. That front desk is the Klaviyo interface, and it sits above both of the other two.
 
-It also means every connector has an edge that a person chose. It is a decision rather than a technical limit, which is the single most useful thing to understand about it. The doors you cannot open are not locked by nature. Somebody decided not to hand them over, and those same doors are usually open on the API.
+Every connector, then, has an edge that a person chose. It is a decision rather than a technical limit, which is the single most useful thing to understand about it. The doors it leaves off the card are usually open on the API, and a few of the doors on neither are open only in the interface.
 
-## What Klaviyo Will and Will Not Make
+## What the Connector Actually Does
 
-Klaviyo's connector is genuinely capable. It will create campaigns, email templates, flows, segments, forms, lists, customer profiles, coupons and codes, catalog items, tags and images, and it reads essentially everything.
+Start with the connector, because it does far more than people assume. Pulling from Klaviyo, it has full create, update and delete across campaigns, flows, segments, lists, profiles, templates, catalogs, coupons, events and metrics, tags, images, translations, brands, sending domains and text-message senders. It reads essentially everything, and it carries all the reporting. For day-to-day marketing work, the connector is the workhorse, not a stripped-down preview of one.
 
-Two things are still off the card.
+The list of what it will not do is short:
 
-| It will make | It will not do |
-|---|---|
-| Campaigns and email templates | Create a webhook, the automatic notice Klaviyo sends to another app when something happens. It can list and delete webhooks, but not make one. |
-| Flows, segments, forms and lists | Rebuild a flow that already exists. It can switch a flow's status, edit a single step, or delete the flow. It cannot rewrite the whole thing. |
-| Profiles, coupons, catalog items | |
+- **Create or update a webhook**, the automatic notice Klaviyo sends another app when something happens. It reads and deletes webhooks, but will not make one.
+- **Edit an existing form.** It creates a form and deletes one, but there is no tool to change a form already in place.
+- **Rewrite a whole flow in one move.** It builds a flow, edits individual steps, switches a flow's status and deletes it. There is no single call that swaps the entire flow from top to bottom.
 
-That list is current as of writing and tends to grow, so a glance at Klaviyo's connector documentation is worth it before you assume something is missing.
+That is close to the whole gap. Notice the shape of it: the things held back are the ones that keep running after you walk away. A webhook fires on its own. A live flow keeps sending. If the AI misreads a campaign, one bad email goes out and you apologize. If it misreads a live flow, bad email keeps going out until a person notices. Klaviyo says as much in its own developer notes, "Klaviyo does not recommend pre-creation of flows in customer accounts," and it builds two settings into the connector so you can hold the line tighter still: a read-only mode that switches off every write, and a core-tools mode that trims it to around forty actions for tools with less room.
 
-There are also two settings worth knowing about, because they put part of the curation in your hands. A read-only mode switches off every action that changes the account, which is the right setting for anyone who only wants questions answered. And a core-tools mode trims the connector to around forty actions, for tools with less room to hold them all.
+## Where the API Adds Something
 
-## Why the Line Is Where It Is
+The connector is a curated wrapper over the API, so most of what the API can do, the connector now does too. That changes what the API is actually for.
 
-The line has a logic, and understanding it tells you what to expect from any connector, not only this one. Most of what the connector builds is something that happens once. A campaign goes out and it is done. A template sits there until someone uses it. A coupon does nothing until it is redeemed. The things it holds back, or hedges, tend to be the ones that keep running after you walk away.
+It is for the short list the connector leaves out. Creating a webhook, or making an edit the connector cannot, is a developer-route job. Everything else the connector already builds, flows and segments and forms included, so reaching for a key to make one of those is rarely about capability.
 
-A webhook fires every time something happens. A live flow keeps sending. If the AI misreads a campaign, one bad email goes out and you apologize. If it misreads a live flow, bad email keeps going out until a person happens to notice. That difference is the whole reason the two remaining exceptions are a webhook and the wholesale rewrite of an existing flow.
+The real reason agencies reach for the API is control at scale. A key lets you run the same build across a roster of accounts without clicking through each one, or script Klaviyo into another system with no Claude in the loop at all. One safety note if you make a key: Klaviyo's default is full permission on everything, rather than permission to look and nothing else. Narrow it deliberately, the same way you would set the connector to read-only if all you want is answers.
 
-Klaviyo pairs flow building with a caution in its own developer notes: **"Klaviyo does not recommend pre-creation of flows in customer accounts."** They built the ability, on both routes, and told people to use it carefully. The read-only setting is the same instinct handed to you, a way to draw the line tighter than they did.
+## Where Neither One Reaches
 
-## When You Do Hit the Wall
+Here is the correction to the idea that the API is the whole of Klaviyo. It is not. A meaningful part of the platform was never built to be automated, and no key opens it.
 
-The important thing is that the wall is a curation decision, not a technical one. Underneath every connector is the company's full API, and the full API has the thing the connector withheld.
+Designing a sign-up form, its look, its timing, the rules for who sees it, is an interface job. So is the deliverability work: inbox testing, spam checks, sender reputation. So are the benchmarks that compare you against other senders, the built-in AI assists, connecting an integration like Shopify in the first place, and the account, billing and user settings. You can read some of the results of those through the API. You cannot do the work through it.
 
-Klaviyo's does. Webhooks can be created through the developer route. Flow creation became a fully supported feature in January 2025, after a spell as a test feature. Form creation followed in October 2025. Segment creation has been there all along.
-
-The practical difference is what it costs you to get at them:
-
-| | Connector | API |
-|---|---|---|
-| Setting it up | a couple of minutes, log in and go | make a key, choose what it can touch, store it somewhere safe |
-| What it can reach | the doors on the card | everything |
-| Several accounts | needs a paid Claude plan | a key per account |
-| Who it suits | anyone | someone comfortable being handed a key |
-
-One safety note if you go and make a key. Klaviyo's default when you create one is **full permission on everything**, rather than permission to look and nothing else. Narrow it deliberately, the same way you would switch the connector to read-only if all you want is answers.
+That matters more than it sounds, because it is exactly where judgment lives. The parts of Klaviyo with no developer route are mostly the parts that need a person deciding something: how a form should feel, whether the list is healthy enough to send, which integration to trust. Automation stops at the edge of judgment, which is a reasonable place for it to stop.
 
 ## How I Actually Decide
 
-Connector first, every time. It answers most of what I want to know, it costs nothing, and honestly most of the work is questions rather than actions. What is the repeat rate on this segment. Which flows have not been touched in a year. What did this campaign really earn once you strip out the people who were buying anyway.
+Connector first, every time. It answers most of what I want to know, it costs nothing, and honestly most of the work is questions rather than actions. What is the repeat rate on this segment. Which flows have not been touched in a year. What did this campaign really earn once you strip out the people who were buying anyway. Building follows the same order: the six segments of an [RFM grid](/blog/klaviyo-rfm-segmentation/) are a connector job, so I let Claude build them there.
 
-Building things follows the same order. The six segments of an [RFM grid](/blog/klaviyo-rfm-segmentation/) are a connector job, so I let Claude build them there. The API key only comes out when the connector has no door for the thing, which means a webhook or rebuilding an existing flow from scratch. Most days it stays in the drawer.
+The API key comes out for the short list the connector will not touch, and for anything I am running across several accounts at once, where writing the instructions once and running them per account beats doing it by hand eight times.
 
-The deciding factor is usually repetition rather than capability. Doing something once, for one brand, I ask the connector, and it is done in a few minutes. Doing the same thing across eight brands is where writing the instructions once and running them per account starts to pay, and where asking eight times becomes the expensive way.
-
-What makes any of this comfortable is having both to hand in the same place. That is the whole reason I moved out of chat, and it is the practical version of the [difference between using AI and having AI workflows](/blog/gap-between-using-ai-and-having-ai-workflows/).
+The interface is where I go for the design and setup work neither route reaches, and where I would rather be a person anyway. Knowing which of the three a task belongs to, before I start, is most of what makes the whole setup fast. It is the practical version of the [difference between using AI and having AI workflows](/blog/gap-between-using-ai-and-having-ai-workflows/).
 
 ## The Bit Worth Remembering
 
-When a connector will not do something, it is usually because someone chose not to expose it, not because it cannot be done. So the useful question is "is this off the card, or just off my card," and the answer is nearly always sitting in the vendor's API documentation.
+The connector is the fast path, and for everyday marketing work it does almost everything. The API is the wider path, for the short list beyond the connector and for running things at scale. The interface is the whole of Klaviyo, and part of it will never be a path at all.
 
-The connector is the fast path. The API is the whole path. Knowing which one you are standing on is most of the skill.
+So when someone tells you to "just automate it through the API," the useful question is which layer the task actually lives on. Most of the time the connector already has it. Sometimes it needs a key. And sometimes the honest answer is that this one was built for a person, and it should stay that way.
 
 *If you are working out how much of your stack is worth wiring up this way, [book a strategy session](/consultation/).*

@@ -1,7 +1,7 @@
 ---
 title: "RFM Segmentation in Klaviyo, and How to Build It Without the Paid Tier"
 date: 2026-08-27
-updated: 2026-09-03
+updated: 2026-09-05
 author: "Kinga Dow"
 category: "Klaviyo"
 excerpt: "RFM sorts your customers by how recently, how often and how much they buy. Klaviyo has a report for it, most accounts cannot use it, and the version you build yourself is close enough to run a retention program on."
@@ -137,21 +137,21 @@ With the [Klaviyo MCP connector](/blog/mcp-stack-ecommerce-retention/), which is
 
 The Shopify connector is the one that matters more than it first appears, because it solves the monetary problem from the section above. Klaviyo will not calculate lifetime spend for an account under its thresholds. Shopify has every order regardless. So you pull the order history, group it by customer, and take the cutoffs from there. The axis Klaviyo declined to give you was sitting in the other system the whole time, and joining the two is the entire trick.
 
-One limit worth knowing. **The Klaviyo connector reads segments and deletes them. It does not create them.** You can pull an existing segment's full definition, every rule inside it, which is useful for checking your work against something that already behaves the way you want. But there is nothing in it that creates one, so through the connector alone the six groups get built by hand.
+One thing to check before you start, because it changed after this post first went out. In August the Klaviyo connector could read a segment and delete one but could not create one, so the six groups had to be entered by hand. Klaviyo has since added a create-segment action to the connector. It takes a name and a set of rules, which is exactly what each of the six groups is, so the whole build can now go through Claude. Checked against Klaviyo's connector documentation on 5 September 2026.
 
 ## Where MCP Stops and the API Starts
 
-That limit is worth understanding properly, because the same thing comes up with every connector you will ever set up.
+That change is worth understanding properly, because the same thing comes up with every connector you will ever set up.
 
-A connector is a **curated list**. The software company decides which actions Claude is allowed to take, packages them up and puts an ordinary login screen in front, which is why connecting takes two minutes and involves no keys. Klaviyo chose around forty actions. Creating a segment is not among them.
+A connector is a **curated list**. The software company decides which actions Claude is allowed to take, packages them up and puts an ordinary login screen in front, which is why connecting takes two minutes and involves no keys. Klaviyo's list has grown a great deal this year. It also comes with a trimmed version of around forty core actions for tools with less room, and a read-only setting that switches off every action that changes the account.
 
-Underneath the connector sits Klaviyo's developer interface, the API in the heading above, and that is the **full list**. It can create segments, which the connector cannot. You give it a name and a set of rules, which is exactly what each of the six groups above is. It needs a key with permission to create segments, and it can make more than enough calls for a one-time build.
+Underneath the connector sits Klaviyo's developer interface, the API in the heading above, and that is the **full list**. It has always been able to create segments. You give it a name and a set of rules, it needs a key with permission to create segments, and it allows more than enough calls for a one-time build. The connector caught up with it in August.
 
-So the useful rule: **the connector for asking questions, the developer route for the things the connector does not cover.** Set up the connector first, because it costs nothing and answers most of what you actually want to know. Reach for a key when you hit a wall. The part worth remembering is that the wall is usually a choice about what to include rather than a technical limit, which means the answer to "the connector cannot do this" is often "the developer route can."
+So the useful rule: **the connector for asking questions and for anything on its list, the developer route for the things the connector does not cover.** Set up the connector first, because it costs nothing and answers most of what you actually want to know. Reach for a key when you hit a wall, and check the wall again every few months, because it moves. The part worth remembering is that the wall is a choice about what to include rather than a technical limit, which means the answer to "the connector cannot do this" is often "the developer route can," and sometimes "it can now."
 
-For this particular job it splits cleanly. Finding the thresholds is a question, so it goes through the connector. Building the six segments is not a question, so it goes one of two ways. For a single brand, enter them by hand in Klaviyo's segment builder. For a roster of accounts, set the build up once through the developer route and run it for each account.
+For this particular job it now splits like this. Finding the thresholds is a question, so it goes through the connector. Building the six segments goes through the connector too, for a single brand. For a roster of accounts the developer route still wins, because you set the build up once and run it for each account.
 
-Either way Claude does the analysis, which is the part that needs judgment. Entering six definitions once you know the numbers is twenty minutes.
+Either way Claude does the analysis, which is the part that needs judgment. Entering six definitions once you know the numbers is twenty minutes by hand, or one request.
 
 ## What It Is Actually Worth
 

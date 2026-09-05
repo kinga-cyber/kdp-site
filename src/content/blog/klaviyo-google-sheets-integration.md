@@ -74,7 +74,7 @@ And a scheduled refresh answers the same question forever. That is exactly right
 
 This is the route the guides leave out, and it needs no developer work and no code.
 
-Klaviyo has an MCP connector, which is a plug-in that lets Claude work with your account once you have given it permission. So does Google Drive. Both are on my list of [the MCP servers I actually use](/blog/mcp-stack-ecommerce-retention/). You connect them to Claude, and then you ask for what you want in plain English. Claude reads the account and writes the sheet.
+Klaviyo has an MCP connector, which is a plug-in that lets Claude work with your account once you have given it permission. So does Google Drive. Both are on my list of [the MCP servers I actually use](/blog/mcp-stack-ecommerce-retention/). You connect them to Claude, and then you ask for what you want in plain English. Claude reads the account, works out the numbers, and saves them as a new Google Sheet.
 
 MCP is the piece that removes the developer from this picture. Nothing gets built and there is no password or access key to copy anywhere. You authorize a connection the same way you authorize any app, and Claude can read the account from there.
 
@@ -86,9 +86,11 @@ This is where the interesting work lives. [Predicting when a customer will reord
 
 That is a different kind of tool. A connector gives you one shape of report, over and over. This gives you whatever shape answers the question.
 
-**It also runs on a schedule,** which is the part most people miss about it. The same connection can run as a repeating task, so a report arrives without you asking each time. My weekly campaign report works this way. Every send, with the list it went to, opens, click-through, revenue per recipient, spam complaints and unsubscribes, filling in the gaps in the sheet on its own.
+**It also runs on a schedule,** which is the part most people miss about it. The same connection can run as a repeating task, so a report arrives without you asking for it each time. I run one of these every Monday morning for a client's weekly tracker. Before anyone is at their desk, Claude pulls the week's numbers from Klaviyo: campaign and flow revenue, deliveries, unsubscribes, sign-ups, and the split between sale and non-sale sends. It works out revenue per recipient and the other derived rows, then lays everything out in the same order as the tracker. By the time the Monday call starts, the week is on the table.
 
 So the choice between asking once and having it arrive every Monday is a setting rather than a second purchase.
+
+**One honest limit.** The Drive connector creates a new sheet each time. It does not write into an existing one, since the only changes it can make to a file you already have are its name and its folder. So if you keep one running tracker and want the new week to land in the next column on its own, that last step needs Google's developer route: an access key and a small one-time setup, after which the schedule runs with no browser and no person involved. Until you add that, the routine produces the numbers in tracker order and someone pastes them in, which takes about a minute.
 
 **What it costs.** A Claude subscription you likely already have, and nothing else. Both connectors are free.
 

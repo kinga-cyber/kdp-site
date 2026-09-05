@@ -17,12 +17,12 @@ keywords:
 metaTitle: "Klaviyo to Google Sheets: Three Routes | Kinga Dow"
 metaDescription: "There is no native Klaviyo Google Sheets integration. Here are the three routes that work, what each one costs, and how to pick between them."
 featured: false
-draft: true
+draft: false
 ---
 
-Klaviyo has no built-in Google Sheets integration. There is no toggle in the integrations directory, and there never has been.
+It is Monday morning and the weekly call is at ten. The tracker wants last week's campaign revenue, flow revenue, deliveries, unsubscribes and sign-ups, in that order, and every one of those numbers sits on a different screen in Klaviyo. So someone opens five reports, reads the figures off, and types them into the sheet one cell at a time.
 
-That matters more than it sounds, because it explains something odd about searching for this. Almost every result on the first page is published by a company that sells you a connector, a tool that copies Klaviyo data into a sheet for you on a schedule. Coefficient, Coupler.io, Catchr, Adzviser and Funnel.io all run guides on how to connect Klaviyo to Google Sheets, and all of them arrive at the same conclusion, which is to use their connector.
+Klaviyo has no built-in Google Sheets integration. There is no toggle in the integrations directory, and there never has been. That matters more than it sounds, because it explains something odd about searching for this. Almost every result on the first page is published by a company that sells you a connector, a tool that copies Klaviyo data into a sheet for you on a schedule. Coefficient, Coupler.io, Catchr, Adzviser and Funnel.io all run guides on how to connect Klaviyo to Google Sheets, and all of them arrive at the same conclusion, which is to use their connector.
 
 Sometimes that is the right answer. Often it is not, and the two routes that cost nothing get left out because nobody makes money recommending them.
 

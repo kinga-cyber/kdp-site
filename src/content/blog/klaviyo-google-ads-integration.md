@@ -116,7 +116,7 @@ Three things to confirm, in this order, because each one can end the project:
 1. **Access.** Is the Google Ads account managed through a manager account? If yes, resolve that first.
 2. **Size.** Will each segment you plan to sync clear 100 matched members, not 100 profiles?
 3. **Purpose.** Can you say what each audience is for, in one sentence, in lifecycle terms? If the answer is "retargeting," the segment is not specific enough yet.
-4. **Maintenance.** Who checks in six months that these audiences are still eligible, and how do they find out? If the answer is nobody, the integration will quietly stop working and no one will notice.
+4. **Maintenance.** Who checks in six months that these audiences are still eligible, and how do they find out? If the answer is nobody, the integration will stop working and no one will notice, since nothing reports it.
 
 The integration is genuinely useful. It is just useful in proportion to how much thinking went into the segments before you connected anything.
 

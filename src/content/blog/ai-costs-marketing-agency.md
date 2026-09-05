@@ -19,16 +19,18 @@ metaTitle: "What AI Actually Costs to Run in an Agency | Kinga Dow"
 metaDescription: "AI bills you for the conversation, not the work. Why agency AI costs grow faster than expected, and the setup change that flattens them."
 ---
 
-In June I spent a single session building the same email five different ways. The brief never changed. Nothing in my setup told the model how my design file worked, so every attempt started by reading it again and guessing again.
+Writing is cheap. Set this headline to that. Swap this price. Change this link. When Claude builds an email from a Figma design, those instructions are a sentence each, and they are the actual work.
 
-The design was never the expensive part.
+Reading is where the money goes. Asking the AI to look at the design file and understand it pulls the whole structure of that file into the conversation, every layer, every property, every nested component. One read can cost more than the entire build that follows it.
+
+I learned that in June, in a single session where I built the same email five different ways. The brief never changed. Nothing in my setup told the AI how my Figma file worked, so every attempt started by reading it again and guessing again. The design was never the expensive part.
 
 AI does not bill you for the work. It bills you for the conversation. Every time you send a message, the tool sends the whole conversation so far back to the AI, and you pay for all of it again. So the cost of running AI on client work tracks how many back and forth turns a task took, not how complicated the deliverable was. That means the bill is set by your setup, not by the AI, and it is the one part of this most agency owners never budget for.
 
 
 ## Why the Bill Does Not Match the Work
 
-The AI has no memory between messages. Each time you say "now change the headline," you are silently re-sending everything that came before it.
+The AI has no memory between messages. Each time you say "now change the headline," the tool re-sends everything that came before it, and nothing on screen shows that happening.
 
 So cost does not grow in a straight line. It grows on a curve.
 
@@ -42,13 +44,13 @@ Which reorders what expensive means. A complicated deliverable is not expensive.
 
 ## The Two Kinds of Turns
 
-Once turns are the unit of cost, the question becomes which turns you can delete. They split into two types, and they do not cost remotely the same.
+Once turns are the unit of cost, the question becomes which turns you can delete. They split into the two types from the opening, and they do not cost remotely the same.
 
-**Writing is cheap.** Set this headline to that. Swap this price. Change this link. Those instructions are a handful of tokens each, and they are the actual work.
+**Writing turns** are a handful of tokens each. There is nothing to save there.
 
-**Reading is where the money goes.** Asking the AI to look at a design file and understand it pulls the whole structure of that file into the conversation, which is what people mean when they say context. Every layer, every property, every nested component. [Figma's own documentation](https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Figma-MCP-server) warns that without tight scoping, requests get slower and more token-consuming as the file grows. The same is true of every connector you attach, which is worth knowing before you [wire up six of them](/blog/mcp-stack-ecommerce-retention/).
+**Reading turns** are the expensive ones, and they get more expensive as the file grows. Everything the AI reads lands in the conversation, which is what people mean when they say context, and it gets re-sent on every turn after. [Figma's own documentation](https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Figma-MCP-server) warns that without tight scoping, requests get slower and more token-consuming as the file grows. The same is true of every connector you attach, which is worth knowing before you [wire up six of them](/blog/mcp-stack-ecommerce-retention/).
 
-One read can cost more than the entire build that follows it.
+The read is the turn to delete.
 
 ## What Rediscovery Costs Every Month
 

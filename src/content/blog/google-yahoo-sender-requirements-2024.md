@@ -48,7 +48,7 @@ The original version of this post covered the Google and Yahoo rules that took e
 
 An earlier version of this post said the unsubscribe needed to be a clear, easy, one-step process, but "not necessarily facilitating a one-click unsubscribe action."
 
-That was wrong, and it is worth correcting rather than quietly deleting because the same phrasing still circulates.
+That was wrong, and it is worth correcting rather than deleting it and saying nothing, because the same phrasing still circulates.
 
 **It is genuinely one-click, and it is a technical requirement, not a design one.** The mail has to carry two headers, `List-Unsubscribe` and `List-Unsubscribe-Post`, so the inbox provider can render its own unsubscribe control and process the request without the recipient ever visiting your site. The link must work without forcing anyone to log in.
 
@@ -72,11 +72,11 @@ Google Postmaster Tools shows you this. It is free, it takes a few minutes to se
 
 Authentication is a one-time job. You configure DNS records, you verify them, and unless somebody changes your DNS they keep working. It is genuinely the easy half, and it is the half every article about this concentrates on.
 
-The complaint rate is the ongoing one, and it is the one that degrades quietly.
+The complaint rate is the ongoing one, and it is the one that degrades without anything reporting it.
 
-Nothing announces a rising spam rate. Deliverability does not fail loudly, it erodes. Open rates drift down over weeks in a way that looks like creative fatigue or seasonality, and by the time it is obvious enough to investigate you are looking at months of damage and a reputation that takes far longer to rebuild than it took to lose.
+Nothing announces a rising spam rate. Deliverability does not fail all at once, it erodes. Open rates drift down over weeks in a way that looks like creative fatigue or seasonality, and by the time it is obvious enough to investigate you are looking at months of damage and a reputation that takes far longer to rebuild than it took to lose.
 
-The reason it goes unnoticed is not carelessness. It is that checking requires deliberately logging into a tool that reports nothing most of the time, which is exactly the kind of task that quietly stops happening.
+The reason it goes unnoticed is not carelessness. It is that checking requires deliberately logging into a tool that reports nothing most of the time, which is exactly the kind of task that stops happening without anyone deciding to stop.
 
 That makes it a scheduled check rather than a habit. A weekly automated look at the complaint rate, the authentication status and whether either has moved is the difference between catching a bad send in days and finding out in a quarter. It is also the sort of thing that is tedious for a person and trivial to automate, which is usually a sign of where the automation belongs.
 

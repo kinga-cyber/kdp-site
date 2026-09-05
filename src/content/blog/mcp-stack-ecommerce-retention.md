@@ -59,7 +59,7 @@ Read those last two again. It will create a live discount code, active immediate
 
 That is the opposite of where Klaviyo drew its line, and the contrast is worth noticing. Klaviyo's connector will not let a model build a flow, though the API underneath it will do that perfectly happily. Shopify's connector will let one put a percentage off the entire catalog. Same protocol, two vendors, completely different appetite for what they hand over through it.
 
-To be fair to Shopify, the inventory tool is built carefully. It wants the current quantity passed back to it as a comparison value, so the write fails rather than silently overwriting if stock moved between reading and writing. That is a proper safeguard and more than most tools bother with.
+To be fair to Shopify, the inventory tool is built carefully. It wants the current quantity passed back to it as a comparison value, so the write fails rather than overwriting the newer number if stock moved between reading and writing. That is a proper safeguard and more than most tools bother with.
 
 **What I use it for.** Almost entirely reading, despite all of the above. Anything that depends on what is actually true right now. Prices, variant names, what is in a collection, what is in stock and where.
 

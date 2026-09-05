@@ -61,7 +61,7 @@ Before the copy exists, there is a brief. **This is the stage most teams skip**,
 
 I watched a copywriter go from campaign idea straight to finished subject lines in a single conversation. Nothing was wrong with the prompt. What was missing was the step where the campaign gets decided: what this send actually is, who receives it, what the offer is, what it has to achieve. Brief feeds copy, copy feeds the task, the task feeds the build. Remove the first link and everything downstream is confidently built on an assumption.
 
-One line worth adding to any brief prompt: **ask me questions if you need any more information.** A model fills gaps silently by default. It asks when you tell it to.
+One line worth adding to any brief prompt: **ask me questions if you need any more information.** A model fills gaps with its own guess by default, and it does not tell you it guessed. It asks when you tell it to.
 
 ## What Running It Looks Like
 
@@ -75,7 +75,7 @@ That single fact is the argument for batching, and the unit that matters is the 
 
 Two rules that came out of getting it wrong:
 
-**One campaign at a time.** Hand over five at once and quality degrades. Things get missed, and they get missed quietly.
+**One campaign at a time.** Hand over five at once and quality degrades. Things get missed, and nothing flags the miss because the build still completes.
 
 **For flows, map before you build.** I have the flow laid out as a chart first, something you can look at and argue with, before anything touches the API. Building is the cheap part now. Knowing exactly what you meant to build is still the actual work, and it is the part that never got automated.
 
@@ -105,7 +105,7 @@ To be fair about it, Gemini copes with an image-heavy email noticeably better th
 
 This is a new kind of failure. Not a rendering fault, not a spam score. The email arrives looking perfect and describes itself badly, in the exact place where somebody decides whether to open it.
 
-A template built from live text blocks never has this problem, because everything that matters is already text. Which quietly turns what used to be a craft preference into an operational one.
+A template built from live text blocks never has this problem, because everything that matters is already text. Which turns what used to be a craft preference into an operational one.
 
 ## Slicing Was Never the Bottleneck
 

@@ -76,7 +76,7 @@ With the account connected to an AI layer through MCP, it stops being an afterno
 
 The point is not that a model produces the number. The point is that the number comes out of the account instead of out of habit.
 
-**And it moves.** Assortment changes, a subscription launch, seasonality, a shift in acquisition mix. An interval computed once and hardcoded into a flow quietly stops being true, and nothing breaks loudly enough to tell you. That is a scheduled check, not a one-off analysis.
+**And it moves.** Assortment changes, a subscription launch, seasonality, a shift in acquisition mix. An interval computed once and hardcoded into a flow stops being true, and the flow keeps sending with nothing reporting an error. That is a scheduled check, not a one-off analysis.
 
 This is the difference between using AI and having an AI workflow. Asking a model what a good win-back window is gets you the same ninety days everyone else has, because that is what is written on the internet. Having it read your account, compute the interval from your orders, and re-check quarterly is a different thing entirely.
 

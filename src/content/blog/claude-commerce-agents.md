@@ -15,7 +15,7 @@ keywords:
   - "shopify ai agent"
   - "ecommerce ai strategy"
 featured: false
-draft: true
+draft: false
 metaTitle: "Claude Commerce Agents: What They Need | Kinga Dow"
 metaDescription: "Anthropic announced AI shopping agents. What was actually released, which agent to start with, and the catalog problem underneath both of them."
 ---

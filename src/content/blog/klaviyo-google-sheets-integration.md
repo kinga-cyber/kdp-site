@@ -90,7 +90,7 @@ That is a different kind of tool. A connector gives you one shape of report, ove
 
 So the choice between asking once and having it arrive every Monday is a setting rather than a second purchase.
 
-**One honest limit.** The Drive connector creates a new sheet each time. It does not write into an existing one, since the only changes it can make to a file you already have are its name and its folder. So if you keep one running tracker and want the new week to land in the next column on its own, that last step needs Google's developer route: an access key and a small one-time setup, after which the schedule runs with no browser and no person involved. Until you add that, the routine produces the numbers in tracker order and someone pastes them in, which takes about a minute.
+**One honest limit.** Each run saves as its own new sheet, with the numbers already laid out in tracker order. Moving them into the master tracker you keep is the one manual step, and it takes about a minute.
 
 **What it costs.** A Claude subscription you likely already have, and nothing else. Both connectors are free.
 

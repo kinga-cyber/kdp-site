@@ -20,7 +20,7 @@ featured: false
 draft: false
 ---
 
-Everyone's using AI now. Your copywriter uses ChatGPT. Your strategist asks Claude for campaign ideas. Maybe you've even connected Klaviyo through MCP. You feel like you're ahead.
+Everyone's using AI now. Your [copywriter uses ChatGPT](/blog/difference-copywriters-email-marketing/). Your strategist asks Claude for campaign ideas. Maybe you've even [connected Klaviyo through MCP](/blog/mcp-stack-ecommerce-retention/). You feel like you're ahead.
 
 But there's a difference between using AI tools and having AI workflows — and that difference is where the actual competitive advantage lives.
 
@@ -32,7 +32,7 @@ That gap is the subject of this post.
 
 Here's the pattern I see on nearly every call: individual team members using AI in their own way, on their own accounts, with no centralization.
 
-One person uses ChatGPT for subject lines. Another uses Claude for campaign briefs. Someone else pastes flow screenshots into an AI chat and asks what's wrong. The outputs get copy-pasted into Slack, dropped into a Google Doc, or just stay in someone's browser tab.
+One person uses [ChatGPT for subject lines](/blog/ai-role-growing-business/). Another uses Claude for campaign briefs. Someone else pastes flow screenshots into an AI chat and asks what's wrong. The outputs get copy-pasted into Slack, dropped into a Google Doc, or just stay in someone's browser tab.
 
 As one agency team lead put it:
 
@@ -72,7 +72,7 @@ She's not wrong about the first part. But she's dramatically underestimating wha
 
 The cost isn't a dramatic failure. It's a slow bleed that compounds across clients and months.
 
-**Hours on manual campaign setup.** Every campaign that gets built by hand — briefing designers, writing copy, setting up in Klaviyo, QA-ing the send — is time that a connected system could compress from hours to minutes. One solo agency owner I spoke with was spending 55 hours on a single client paying $3,000 a month. The math doesn't work without automation.
+**Hours on manual campaign setup.** Every campaign that gets built by hand — briefing designers, writing copy, [setting up in Klaviyo](/blog/figma-to-klaviyo-email-templates/), QA-ing the send — is time that a connected system could compress from hours to minutes. One solo agency owner I spoke with was spending 55 hours on a single client paying $3,000 a month. The math doesn't work without automation. What that automation [actually costs to run](/blog/ai-costs-marketing-agency/) is a separate question, and it depends more on how you set it up than on the AI.
 
 **Flows with missed triggers nobody catches.** One team lead told me:
 

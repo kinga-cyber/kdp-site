@@ -15,7 +15,7 @@ metaDescription: "How to use QR codes in store to capture customers into your em
 
 QR (Quick Response) codes serve as a bridge connecting physical retail locations to digital channels. These scannable codes enable businesses to move in-store customers onto email databases by directing them to online platforms.
 
-The strategy involves advertising the advantages of shopping online compared to in-store experiences, coupled with incentive offers. Once customers join mailing lists through this method, brands can create conversion opportunities through targeted email sequences.
+The strategy involves advertising the advantages of shopping online compared to in-store experiences, coupled with incentive offers. Once customers join mailing lists through this method, brands can create conversion opportunities through targeted email sequences, starting with a welcome flow and, for the people who browse without buying, [a cart sequence](/blog/abandoned-cart-flow/).
 
 ## Displaying Your QR Code
 
@@ -55,4 +55,4 @@ Social proof in the form of reviews demonstrates brand credibility and builds cu
 
 ## Conclusion
 
-QR codes provide a seamless way to bridge the gap between your physical retail presence and your online store. By implementing this strategy with well-designed landing pages and targeted email flows, you can effectively convert in-store traffic into loyal online customers.
+QR codes provide a seamless way to bridge the gap between your physical retail presence and your online store. By implementing this strategy with well-designed landing pages and targeted email flows, you can effectively convert in-store traffic into loyal online customers. From there the next question is when they come back, which [your own order data can answer](/blog/predict-when-your-customers-will-reorder/).

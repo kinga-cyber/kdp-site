@@ -17,17 +17,17 @@ I recently attended Cosmoprof in Bologna and observed innovative strategies bran
 
 ## Email Capture
 
-Email collection emerged as a critical strategy for maximizing event ROI. Several beauty brands implemented quiz and survey mechanisms to gather contact information while simultaneously learning about customer preferences.
+Email collection emerged as a critical strategy for maximizing event ROI. The in-store equivalent, using [QR codes to move retail traffic onto your list](/blog/funnel-retail-traffic-online-store/), works on the same principle. Several beauty brands implemented quiz and survey mechanisms to gather contact information while simultaneously learning about customer preferences. The same tactic runs well over email, and [a food brand we work with uses it for recipe contests and product feedback](/blog/boosting-food-brand-email-marketing-klaviyo/).
 
 **Rica Hair** offered a survey addressing participant hair concerns and recommending products accordingly. This approach built substantial email databases while gathering preference data. However, the quiz's Italian-only language limitation potentially restricted international engagement.
 
-**Davines** employed personalized surveys collecting information about customer hair needs, visitor interests, and language preferences. This enabled precise audience segmentation. The brand complemented surveys with customized product samples, enhancing the consumer experience.
+**[Davines](/blog/davines-email-marketing-cosmoprof/)** employed personalized surveys collecting information about customer hair needs, visitor interests, and language preferences. This enabled precise audience segmentation. The brand complemented surveys with customized product samples, enhancing the consumer experience.
 
 **Anaplais** from Greece introduced a claw machine game where email submission served as entry. Winners received product prizes, effectively combining engagement with data collection while strengthening brand connection.
 
 ## Gamification Brand Awareness
 
-**Geske** and **Olaplex** utilized spin wheels offering prizes and substantial branded materials. Though less focused on email collection, these tactics generated significant brand visibility through interactive experiences and elevated product presentation.
+**[Geske](/blog/technology-beauty-geske-cosmoprof/)** and **Olaplex** utilized spin wheels offering prizes and substantial branded materials. Though less focused on email collection, these tactics generated significant brand visibility through interactive experiences and elevated product presentation.
 
 **The Humble Company** from Sweden showcased sustainability commitments through ring-toss and spin-wheel games without requiring email or social media follow-ups, prioritizing memorable brand experiences over data collection.
 

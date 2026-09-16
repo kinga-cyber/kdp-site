@@ -103,6 +103,22 @@ const blogPostingSchema = {
   inLanguage: "en-US",
 };
 
+// FAQPage JSON-LD — only emitted when the post has faqs in frontmatter
+const faqSchema = post.data.faqs?.length
+  ? {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: post.data.faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer,
+        },
+      })),
+    }
+  : null;
+
 // BreadcrumbList JSON-LD
 const breadcrumbSchema = {
   "@context": "https://schema.org",
@@ -146,6 +162,13 @@ const pageDescription = post.data.metaDescription ?? post.data.excerpt;
       is:inline
       set:html={JSON.stringify(breadcrumbSchema)}
     />
+    {faqSchema && (
+      <script
+        type="application/ld+json"
+        is:inline
+        set:html={JSON.stringify(faqSchema)}
+      />
+    )}
   </Fragment>
 
   <!-- Hero / Article Header -->

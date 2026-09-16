@@ -53,7 +53,7 @@ Rebuy offers hyper-personalized product recommendations, post-purchase upsells, 
 
 ### 9. Lifetimely: Analytics Tool
 
-This platform provides in-depth customer lifetime value analytics to optimize marketing strategies.
+This platform provides in-depth customer lifetime value analytics to optimize marketing strategies. You can also [build the same view out of your own order data](/blog/klaviyo-rfm-segmentation/).
 
 ### 10. Gorgias: Customer Support
 
@@ -65,4 +65,4 @@ Typeform creates interactive surveys and forms to gather valuable customer feedb
 
 ## Conclusion
 
-Building the right ecosystem around Klaviyo can dramatically improve your email marketing results. Each of these partners brings unique capabilities that complement Klaviyo's core functionality, helping you create more personalized, engaging, and effective campaigns.
+Building the right ecosystem around Klaviyo can dramatically improve your email marketing results. Each of these partners brings unique capabilities that complement Klaviyo's core functionality, helping you create more personalized, engaging, and effective campaigns. Klaviyo's own integrations count too, and [the Google Ads one](/blog/klaviyo-google-ads-integration/) is the one most people connect without checking its limits first. The newer layer is [the set of connectors that let an AI read all of this](/blog/mcp-stack-ecommerce-retention/).

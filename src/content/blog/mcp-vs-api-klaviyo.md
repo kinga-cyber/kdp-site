@@ -17,6 +17,17 @@ featured: false
 draft: false
 metaTitle: "MCP or the API: What Each Can Actually Do | Kinga Dow"
 metaDescription: "How the Klaviyo MCP connector, the API and the interface each earn their place. What Claude builds directly, what a key is for, and the work best kept in the interface."
+faqs:
+  - question: "What is the Klaviyo MCP connector?"
+    answer: "The Klaviyo MCP connector is a link that lets AI tools like Claude read and act on your Klaviyo account without requiring API keys. It covers campaigns, flows, segments, lists, templates, profiles, catalogs, reporting, and most day-to-day marketing tasks."
+  - question: "When should I use the Klaviyo API instead of the MCP connector?"
+    answer: "Use the Klaviyo API when you need to create a new webhook, or when you are running the same operation across multiple accounts at once. For all other day-to-day tasks, the MCP connector handles the work without a key."
+  - question: "Can the Klaviyo MCP connector build flows?"
+    answer: "Yes. The Klaviyo MCP connector can build a flow from a full definition including triggers and actions, and it can edit individual actions inside an existing flow. Klaviyo recommends against wholesale replacement of a live flow in one move, so treat that action with care."
+  - question: "What is the Klaviyo interface best for?"
+    answer: "The Klaviyo interface is best for work that belongs with a person: designing signup forms, running inbox and deliverability tests, reading sender reputation, connecting integrations like Shopify, and reviewing AI-generated subject line suggestions. These parts of Klaviyo were deliberately kept hands-on."
+  - question: "What is the difference between the Klaviyo MCP connector and the Klaviyo API?"
+    answer: "The MCP connector is a curated subset of the full API, designed for everyday use without developer setup or a private key. The API gives broader access and is better suited for multi-account automation and the short list of actions the connector does not cover, such as creating a webhook."
 ---
 
 There are two ways to build in Klaviyo with Claude. One is the MCP connector: the link you switch on so Claude can read and act on your account. The other is the API underneath it: the developer route, which needs a key and someone comfortable with code. Which you reach for depends on what you are doing, and most of the time the connector does the job on its own.

@@ -38,7 +38,7 @@ Keeping your audience informed and excited about new product launches can signif
 
 ### Our Approach:
 
-- **Segmentation:** We segmented our email list based on past purchases and interests, ensuring that product launch emails reached the most interested customers.
+- **Segmentation:** We segmented our email list based on [past purchases and interests](/blog/klaviyo-rfm-segmentation/), ensuring that product launch emails reached the most interested customers.
 - **Back-in-Stock Alerts:** Automated emails were sent to notify customers when popular items were restocked, maintaining high engagement and sales.
 
 ## 4. Gathering Customer Feedback and Conducting Surveys
@@ -70,7 +70,7 @@ Collaborations with chefs, food bloggers, and influencers can expand your reach 
 
 ## 7. Developing Exclusive VIP Programs and Loyalty Programs
 
-A VIP program can make your most loyal customers feel special, encouraging repeat purchases and fostering long-term loyalty.
+A VIP program can make your most loyal customers feel special, encouraging repeat purchases and fostering long-term loyalty. Knowing [when those customers actually reorder](/blog/predict-when-your-customers-will-reorder/) is what decides the timing.
 
 ### Our Approach:
 
@@ -92,7 +92,7 @@ Utilizing cross-sell strategies can increase your average order value. Wondermen
 
 ### Our Approach:
 
-- **Transactional Emails:** We partner with Wonderment to build a transactional email flow to help during the busy season to track deliveries.
+- **Transactional Emails:** We partner with [Wonderment](/blog/best-ecommerce-partners-email-marketing/) to build a transactional email flow to help during the busy season to track deliveries.
 - **Dynamic Recommendations:** We used Wonderment emails to recommend products that complemented customers' previous purchases.
 - **Enhanced Cross-Selling:** This strategy boosted our average order value and overall sales.
 

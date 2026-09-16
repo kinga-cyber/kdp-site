@@ -13,7 +13,7 @@ metaDescription: "A breakdown of how the sustainable hair care brand ran their e
 
 ## See how Davines, the sustainable hair care brand, executed a marketing strategy leveraging email!
 
-Cosmoprof Bologna is the biggest cosmetics and makeup trade show in Europe, and this year, I had the pleasure of attending. As an email strategist, I was excited to see how brands leveraged email marketing to engage with their audiences. To my surprise, only a few brands were doing a fantastic job, and Davines was one of them.
+Cosmoprof Bologna is the biggest cosmetics and makeup trade show in Europe, and this year, I had the pleasure of attending. I went back the following year and wrote up [the acquisition and gamification tactics on the floor](/blog/strategies-traffic-growth-gamification/). As an email strategist, I was excited to see how brands leveraged email marketing to engage with their audiences. To my surprise, only a few brands were doing a fantastic job, and Davines was one of them.
 
 Davines is a sustainable hair care brand committed to sustainability and education. They use eco-friendly packaging and natural ingredients, and they offer a wide range of products designed for different hair types. In addition, they provide educational resources on their website and partner with organizations to support social and environmental causes.
 
@@ -21,7 +21,7 @@ Davines is a sustainable hair care brand committed to sustainability and educati
 
 At the trade show, Davines was offering attendees a sample of their shampoo, and all they had to do was scan a QR code and provide their email addresses. The follow-up email with a code for the sample was executed flawlessly, and I was blown away by their marketing department's skill.
 
-Working with QR codes is not unusual for me, as I have used this strategy with my clients! I even have a blog post and a YouTube video on this topic- so you can learn how to reach your customers with relevant messaging – whether it's new products, sales, or more, sequentially creating more opportunities for you to sell.
+Working with QR codes is not unusual for me, as I have used this strategy with my clients! I even have [a blog post](/blog/funnel-retail-traffic-online-store/) and a YouTube video on this topic- so you can learn how to reach your customers with relevant messaging – whether it's new products, sales, or more, sequentially creating more opportunities for you to sell.
 
 ## My Thoughts
 

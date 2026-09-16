@@ -72,13 +72,13 @@ You need the gap, in days, between consecutive orders for every customer who has
 
 That is an afternoon in a spreadsheet, which is why almost nobody does it and the 90-day window survives as a convention nobody has checked.
 
-With the account connected to an AI layer through MCP, it stops being an afternoon. You can ask the account directly: pull the interval distribution, find the drop-off, split it by first product purchased, and check whether the pattern differs for customers acquired on discount versus full price. That last one usually does differ, and it changes what you send.
+With the account connected to an AI layer [through MCP](/blog/mcp-stack-ecommerce-retention/), it stops being an afternoon. You can ask the account directly: pull the interval distribution, find the drop-off, split it by first product purchased, and check whether the pattern differs for customers acquired on discount versus full price. That last one usually does differ, and it changes what you send.
 
 The point is not that a model produces the number. The point is that the number comes out of the account instead of out of habit.
 
 **And it moves.** Assortment changes, a subscription launch, seasonality, a shift in acquisition mix. An interval computed once and hardcoded into a flow stops being true, and the flow keeps sending with nothing reporting an error. That is a scheduled check, not a one-off analysis.
 
-This is the difference between using AI and having an AI workflow. Asking a model what a good win-back window is gets you the same 90 days everyone else has, because that is what is written on the internet. Having it read your account, compute the interval from your orders, and re-check quarterly is a different thing entirely.
+This is [the difference between using AI and having an AI workflow](/blog/gap-between-using-ai-and-having-ai-workflows/). Asking a model what a good win-back window is gets you the same 90 days everyone else has, because that is what is written on the internet. Having it read your account, compute the interval from your orders, and re-check quarterly is a different thing entirely.
 
 ## What to Do With the Number
 
@@ -88,7 +88,7 @@ Three decisions it settles:
 
 **Replenishment.** For consumables the cluster is your product's actual consumption rate. Send slightly before it, not after. The whole value of a replenishment email is arriving while the customer still has some left and no reason to shop around.
 
-**What "lapsed" means.** Segments built on a guessed threshold produce audiences that are too big to be relevant or too small to be worth sending to. Anchoring the definition to your real distribution fixes both.
+**What "lapsed" means.** Segments built on a guessed threshold produce audiences that are too big to be relevant or too small to be worth sending to. Anchoring the definition to your real distribution fixes both, and it is the recency half of [an RFM grid](/blog/klaviyo-rfm-segmentation/).
 
 And once you have all three anchored to the same number, they stop contradicting each other, which is a problem most accounts have and nobody notices because each flow was built at a different time by a different person.
 

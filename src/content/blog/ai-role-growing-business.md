@@ -61,8 +61,8 @@ Since it is so easy to come up with unlimited versions of subject lines, this is
 
 ## What Do You Think?
 
-AI is growing in importance for businesses and tools like Klaviyo AI and ChatGPT are making it easier for companies to use AI. As AI continues to evolve, it will be interesting to see how businesses choose to incorporate these technologies into their strategies.
+AI is growing in importance for businesses and tools like Klaviyo AI and ChatGPT are making it easier for companies to use AI. As AI continues to evolve, it will be interesting to see how businesses choose to incorporate these technologies into their strategies. Three years on, the dividing line turned out to be [the gap between using AI and having AI workflows](/blog/gap-between-using-ai-and-having-ai-workflows/), and [the connectors that close it](/blog/mcp-stack-ecommerce-retention/).
 
 So, that's it! How do you see AI fitting into your business's future?
 
-We are going to start A/B testing AI copy vs. our copywriters and will be back with a new blog post and video at some point to report the results!
+We are going to start A/B testing AI copy vs. our [copywriters](/blog/difference-copywriters-email-marketing/) and will be back with a new blog post and video at some point to report the results!

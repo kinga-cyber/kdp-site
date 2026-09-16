@@ -27,6 +27,11 @@ const blog = defineCollection({
     metaDescription: z.string().optional(),
     updated: z.coerce.date().optional(),
     ogImage: z.string().optional(),
+
+    // AEO: FAQ pairs rendered as FAQPage JSON-LD schema
+    faqs: z
+      .array(z.object({ question: z.string(), answer: z.string() }))
+      .optional(),
   }),
 });
 

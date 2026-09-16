@@ -17,6 +17,17 @@ featured: false
 draft: false
 metaTitle: "How to Audit Your Klaviyo Flows | Kinga Dow"
 metaDescription: "How to audit your Klaviyo flows the way it actually gets done: map flow overlap first, score every flow against your own benchmarks, and rank fixes by revenue, list cost and effort."
+faqs:
+  - question: "What is a Klaviyo flow audit?"
+    answer: "A Klaviyo flow audit is a systematic review of every flow in an account. It maps how flows overlap, scores each flow and each message inside it against the account's own benchmarks, and ranks fixes by revenue impact, list cost, and effort required."
+  - question: "How long does a Klaviyo flow audit take?"
+    answer: "A thorough manual audit typically takes the better part of a day. Using a structured framework with AI assistance connected through the Klaviyo MCP connector, the same audit can be completed in about an hour."
+  - question: "What does a Klaviyo flow audit actually check?"
+    answer: "A flow audit checks flow overlap and duplicate flows, performance per message (opens, clicks, conversions, unsubscribes), comparison against Klaviyo's peer-group benchmarks for your industry, the list cost of each flow (not just revenue), and produces a ranked fix list ordered by what each improvement is actually worth."
+  - question: "What is the most common problem found in a Klaviyo flow audit?"
+    answer: "The most common findings are flows that compete with each other by targeting the same customer at the same time, flows whose revenue is offset by high unsubscribe rates, broken links or expired codes masking as a drop-off in the funnel, and duplicate flows from a rebuild that was never retired."
+  - question: "Why does a flow audit measure list cost, not just revenue?"
+    answer: "Revenue alone can be misleading. A flow that earns positive revenue while also generating high unsubscribe and complaint rates is often net-negative when you account for the engaged subscribers it burns through. Those are customers who will not be reachable on future sends."
 ---
 
 A full audit of a Klaviyo account covers a few things: deliverability and list health, the capture forms, the campaigns, attribution, and the flows. This is about the flows. They hold the most revenue and the most hidden waste, they take the longest to check by hand, and they are the part I have turned into a repeatable system.

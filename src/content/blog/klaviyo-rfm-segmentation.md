@@ -18,6 +18,17 @@ featured: false
 draft: false
 metaTitle: "RFM Segmentation in Klaviyo: A Practical Guide | Kinga Dow"
 metaDescription: "How Klaviyo scores RFM, the six customer groups it creates, why most accounts cannot use the report, and how to rebuild it from ordinary segments."
+faqs:
+  - question: "What is RFM segmentation in Klaviyo?"
+    answer: "RFM segmentation scores every customer on three dimensions: Recency (how recently they bought), Frequency (how often they buy), and Monetary (how much they spend). Klaviyo scores each dimension 1 to 3 and sorts customers into 6 groups, from Champions at score 333 down to Inactive at score 111."
+  - question: "Do I need a paid Klaviyo plan to use RFM segmentation?"
+    answer: "The built-in Klaviyo RFM report is a paid add-on and requires at least 500 customers with 180 days of order history. If your account does not qualify, you can build equivalent segments by hand in Klaviyo's segment builder using the same score boundaries Klaviyo applies internally."
+  - question: "What are the 6 Klaviyo RFM groups?"
+    answer: "Champions (scores 333, 332, 323), Loyal (321, 322, 331, 232, 233), Recent (312, 313, 311, 222, 223), Needs Attention (213, 221, 123, 132, 133), At Risk (231, 212, 122, 131, 211), and Inactive (111, 112, 113, 121). Each number represents the customer's Recency, Frequency, and Monetary scores in that order."
+  - question: "How do I build RFM segments in Klaviyo without the paid tier?"
+    answer: "Use Klaviyo's segment builder. For Recency, use the Placed Order condition with 180-day and 365-day boundaries. For Frequency, segment on total order count using 3+ orders, 2 orders, and 1 order. For Monetary, use Historic CLV if available, or pull spend data from Shopify if your account is below Klaviyo's predictive analytics thresholds."
+  - question: "How should I use Klaviyo RFM segments beyond just identifying VIP customers?"
+    answer: "Trigger a flow when a customer's RFM group changes, not just based on where they currently sit. Sync your top two groups to paid media as lookalike seed audiences. Use the shape of all 6 groups as a business diagnostic — a large Recent group with a small Loyal group means you acquire well but retain badly."
 ---
 
 Almost every Klaviyo account I look at has the same shape. The sending is careful and the segmentation is not.

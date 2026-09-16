@@ -97,17 +97,17 @@ Syncing segments to Google Ads is only useful if the segments encode something r
 
 Every recommendation above assumes you know things about the account that most people never check.
 
-Where does repurchase actually stall for this brand? A 90-day win-back window is a convention, not a finding. Some categories stall at six weeks and some at nine months, and using the wrong number means your win-back audience is full of people who were never going to come back and missing the ones who were.
+Where does [repurchase actually stall for this brand](/blog/predict-when-your-customers-will-reorder/)? A 90-day win-back window is a convention, not a finding. Some categories stall at six weeks and some at nine months, and using the wrong number means your win-back audience is full of people who were never going to come back and missing the ones who were.
 
 Which customers belong in the lookalike seed? "Everyone who purchased" is the default because it is the easy query, and it is a weak seed when a small fraction of buyers carry most of the lifetime value.
 
 These are answerable questions. They are just tedious enough that nobody answers them, so the generic segment ships instead.
 
-This is where connecting Klaviyo to an AI layer changes the work rather than decorating it. With the account connected through MCP, you can interrogate it directly: pull the actual repurchase interval distribution and find where the drop-off sits, rank customers by realized lifetime value and cut the seed there, check what share of a segment has ever engaged with anything before you spend money reaching them again. The segment definition comes out of the data instead of out of habit.
+This is where connecting Klaviyo to an AI layer changes the work rather than decorating it. With the account [connected through MCP](/blog/mcp-stack-ecommerce-retention/), you can interrogate it directly: pull the actual repurchase interval distribution and find where the drop-off sits, [rank customers by realized lifetime value](/blog/klaviyo-rfm-segmentation/) and cut the seed there, check what share of a segment has ever engaged with anything before you spend money reaching them again. The segment definition comes out of the data instead of out of habit.
 
 Then there is the maintenance problem this post already described. The 100-member threshold and the 540-day clock are invisible from the Klaviyo side, and a segment can look healthy while being ineligible in Google. Nobody remembers to check that manually, which means eventually nobody does.
 
-That is the difference between using AI and having an AI workflow. Asking a model to suggest segment ideas is the chatbot phase. Having it read the account, define the segment from what is actually there, and check on a schedule whether the audience is still eligible is the workflow phase. The first one saves you ten minutes. The second one is the reason the integration keeps working six months after you set it up.
+That is [the difference between using AI and having an AI workflow](/blog/gap-between-using-ai-and-having-ai-workflows/). Asking a model to suggest segment ideas is the chatbot phase. Having it read the account, define the segment from what is actually there, and check on a schedule whether the audience is still eligible is the workflow phase. The first one saves you ten minutes. The second one is the reason the integration keeps working six months after you set it up.
 
 ## Before You Build It
 

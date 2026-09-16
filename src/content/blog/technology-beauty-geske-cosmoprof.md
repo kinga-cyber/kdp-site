@@ -17,7 +17,7 @@ Geske is an innovative beauty brand that impressed attendees at Cosmoprof Bologn
 
 ## Geske ft. Technology
 
-Personalization represents a significant trend in email marketing, and Geske elevates this approach through advanced technology. According to research, "91% of consumers are more likely to shop with brands that provide personalized recommendations" and personalization can increase sales by up to 15%.
+Personalization represents a significant trend in email marketing, and Geske elevates this approach through advanced technology. On the email side, the practical version of it is [sorting customers by how recently and how often they buy](/blog/klaviyo-rfm-segmentation/). According to research, "91% of consumers are more likely to shop with brands that provide personalized recommendations" and personalization can increase sales by up to 15%.
 
 Geske's AI and machine learning technology analyzes each customer's skin type, preferences, and specific concerns to recommend customized skincare and makeup products, which are created on-site. This delivers a truly individualized beauty experience. Additionally, the brand's commitment to sustainability includes eco-friendly packaging, cruelty-free formulations, and vegan products—values that resonate with today's conscious consumers.
 

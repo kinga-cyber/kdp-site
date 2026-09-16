@@ -18,6 +18,17 @@ featured: false
 draft: false
 metaTitle: "The MCP Servers I Use for Ecommerce Email | Kinga Dow"
 metaDescription: "Six MCP connectors for ecommerce email work, what each one reaches, what it is genuinely good for, and where each one stops."
+faqs:
+  - question: "What MCP servers are most useful for ecommerce email marketing?"
+    answer: "The three to connect first are Klaviyo (for campaign and flow analytics), Shopify (for live product and stock data), and your project management tool such as Asana. Figma, call transcript tools, and document storage come after, once the first three are producing useful output."
+  - question: "What is MCP in the context of marketing tools?"
+    answer: "Model Context Protocol (MCP) is a standard that lets AI tools like Claude connect directly to third-party platforms — Klaviyo, Shopify, Asana, Figma — and read or act on them. A connector exposes a chosen set of platform actions without requiring developer keys or setup."
+  - question: "What can the Klaviyo MCP server do?"
+    answer: "The Klaviyo MCP server reads and writes campaigns, flows, segments, lists, profiles, templates, catalogs, coupons, forms, images, tags, and reporting. As of September 2026 it can also create and edit flows. The one action it still does not support is creating a new webhook."
+  - question: "What does the Shopify MCP server do for email marketing?"
+    answer: "The Shopify MCP server reads live product data, variant names, pricing, inventory levels by location, and order and customer history. The main email marketing use is confirming stock at campaign build time, so a low-stock product gets flagged before the email sends rather than after."
+  - question: "What is the difference between an MCP connector and the platform API?"
+    answer: "An MCP connector is a curated subset of the full platform API, packaged for use without a private key. The API gives broader access and is better for multi-account operations or the few actions a connector does not cover. Start with the connector; reach for the API only when you hit a wall."
 ---
 
 These are the 6 MCP connectors I have running on a normal working day, and what each one actually does once it is connected.

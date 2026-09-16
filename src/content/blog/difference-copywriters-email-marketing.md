@@ -17,6 +17,17 @@ metaTitle: "Email Copywriter vs Copywriter: What Differs | Kinga Dow"
 metaDescription: "A copywriter optimizes for attention. An email copywriter optimizes for a decision. The real difference, and which half of the job is still scarce."
 featured: false
 draft: false
+faqs:
+  - question: "What is the difference between a copywriter and an email copywriter?"
+    answer: "A general copywriter writes for strangers — ads, landing pages, social content — and earns attention from a standing start. An email copywriter writes for people who already know the brand, against the context of what they have bought and when. Email demands brevity, a singular call to action, honest urgency, and copy mapped to a specific segment rather than a broad audience."
+  - question: "Has AI changed what email copywriters do?"
+    answer: "Yes. Drafting, writing variants, and adapting copy across segments is now faster and cheaper with AI. What has not changed is the judgment work: knowing which segment to write to, where the customer is in their lifecycle, and whether to send at all. That upstream thinking is the scarcer skill."
+  - question: "Do email bodies need to be optimized for SEO?"
+    answer: "No. Email bodies are not crawled or indexed by search engines, so keywords in an email do nothing for search visibility. The exception is if you publish emails as web pages or a public archive, in which case normal SEO applies to those pages. That is a publishing decision, not a copywriting one."
+  - question: "What should I look for when hiring an email copywriter?"
+    answer: "Test judgment, not just writing. Give candidates a segment and see whether they ask about the offer (production writer) or ask about purchase history and repurchase timing (retention-minded writer). Ask what they would not send. Ask them to explain a subject line they rejected. The scarce skill is the thinking upstream of the draft."
+  - question: "What is the difference between email marketing and retention marketing?"
+    answer: "Email marketing optimizes a channel. Retention marketing optimizes a customer relationship. The difference shows up in how segments are built, when flows fire, and whether a send is warranted at all. An email marketer asks what to say. A retention marketer asks who is ready to hear something, and what will actually move them."
 ---
 
 A general copywriter optimizes for attention. An email copywriter optimizes for a decision, made in a few seconds, by someone who already knows who you are.
@@ -41,7 +52,7 @@ Four things follow.
 
 **Urgency has to be honest.** Manufactured scarcity works once and trains people to discount you afterwards. Real urgency comes from something true about the situation: stock, a date, where the customer actually is in their own cycle.
 
-**The subject line is a separate discipline.** It's the only part most recipients read, it's written under a character limit, and it has to intrigue without misleading. Overpromise and you win the open and lose the sender reputation.
+**The subject line is a separate discipline.** It's the only part most recipients read, it's written under a character limit, and it has to intrigue without misleading. Overpromise and you win the open and lose the [sender reputation](/blog/google-yahoo-sender-requirements-2024/).
 
 ## Writing Against a Segment, Not an Audience
 
@@ -65,11 +76,11 @@ They're separate now. A writer who only produces copy is competing with somethin
 
 All of which adds up to hire for judgment, which is easy for me to say and close to useless on its own. Judgment about a specific brand has to be grounded in that brand's data. Otherwise it's just taste.
 
-This is where connecting the account to an AI layer changes the work rather than decorating it. With Klaviyo connected through MCP, the questions underneath every segment become answerable directly instead of assumed.
+This is where connecting the account to an AI layer changes the work rather than decorating it. With Klaviyo [connected through MCP](/blog/mcp-stack-ecommerce-retention/), the questions underneath every segment become answerable directly instead of assumed.
 
-Where does repurchase actually stall for this brand? A ninety-day win-back window is a convention, not a finding. Some categories stall at six weeks and some at nine months, and the wrong number fills your win-back audience with people who were never coming back while missing the ones who were.
+Where does [repurchase actually stall for this brand](/blog/predict-when-your-customers-will-reorder/)? A ninety-day win-back window is a convention, not a finding. Some categories stall at six weeks and some at nine months, and the wrong number fills your win-back audience with people who were never coming back while missing the ones who were.
 
-Which customers belong in a high-value segment? "Top spenders" is the easy query. Realized lifetime value against acquisition cohort is the useful one, and they rarely produce the same list.
+Which customers belong in a [high-value segment](/blog/klaviyo-rfm-segmentation/)? "Top spenders" is the easy query. Realized lifetime value against acquisition cohort is the useful one, and they rarely produce the same list.
 
 What share of a segment has engaged with anything in the last six months? Worth knowing before you write to them, and worth knowing before you count them as an audience at all.
 
@@ -77,7 +88,7 @@ This isn't hard work. It's just tedious, and tedious enough that it doesn't get 
 
 Then there's the maintenance problem. Segments drift. A definition that made sense in March describes a different group by September, and nobody notices, because the flow keeps sending and nothing reports an error. A weekly automated check catches that. A person with good intentions doesn't.
 
-That's the difference between using AI and having an AI workflow. Asking a model to write five subject lines is the chatbot phase. Having it read the account, define the segment from what's actually there, and flag when the definition has drifted is the workflow phase. The first saves a writer twenty minutes. The second is what makes the writing point at the right people.
+That's [the difference between using AI and having an AI workflow](/blog/gap-between-using-ai-and-having-ai-workflows/). Asking a model to write five subject lines is the chatbot phase. Having it read the account, define the segment from what's actually there, and flag when the definition has drifted is the workflow phase. The first saves a writer twenty minutes. The second is what makes the writing point at the right people.
 
 It's also the same distinction that separates email marketing from retention marketing. Email marketing optimizes a channel. Retention marketing optimizes a customer. Production versus the reason production is aimed anywhere useful.
 

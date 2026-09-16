@@ -64,7 +64,7 @@ Most summaries cite 0.10%. That is the target, not the limit.
 
 **0.30% is the cliff.** Reaching it is what causes real damage, and the damage is not proportionate. It is a threshold, not a slope.
 
-The gap between those two numbers is the entire warning zone, and it is narrow. On a list of 100,000, the difference between comfortable and in trouble is a few hundred complaints. That is one badly targeted campaign.
+The gap between those two numbers is the entire warning zone, and it is narrow. On a list of 100,000, the difference between comfortable and in trouble is a few hundred complaints. That is one badly targeted campaign, which is the argument for [sending to segments that mean something](/blog/klaviyo-rfm-segmentation/) rather than to the whole list.
 
 Google Postmaster Tools shows you this. It is free, it takes a few minutes to set up, and almost nobody looks at it until something has already gone wrong.
 
@@ -78,7 +78,7 @@ Nothing announces a rising spam rate. Deliverability does not fail all at once, 
 
 The reason it goes unnoticed is not carelessness. It is that checking requires deliberately logging into a tool that reports nothing most of the time, which is exactly the kind of task that stops happening without anyone deciding to stop.
 
-That makes it a scheduled check rather than a habit. A weekly automated look at the complaint rate, the authentication status and whether either has moved is the difference between catching a bad send in days and finding out in a quarter. It is also the sort of thing that is tedious for a person and trivial to automate, which is usually a sign of where the automation belongs.
+That makes it a scheduled check rather than a habit. A weekly automated look at the complaint rate, the authentication status and whether either has moved is the difference between catching a bad send in days and finding out in a quarter. It is also the sort of thing that is tedious for a person and [trivial to automate](/blog/gap-between-using-ai-and-having-ai-workflows/), which is usually a sign of where the automation belongs.
 
 ## What to Check Today
 

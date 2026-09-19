@@ -1,0 +1,195 @@
+---
+/**
+ * Upcoming posts schedule for the blog index, modelled on the live-trainings
+ * list in Klaviyo's BFCM hub: a scrollable list of dates on the left, a
+ * description of the selected post on the right, and a subscribe row under
+ * both.
+ *
+ * Reads approved, future-dated posts, so it never needs editing by hand. A
+ * post drops off on the build that publishes it. Renders nothing when the
+ * schedule is empty.
+ */
+import BlogSubscribe from "./BlogSubscribe.astro";
+import { getUpcomingPosts } from "../lib/posts";
+
+const upcoming = await getUpcomingPosts(5);
+
+const month = (d: Date) =>
+  d.toLocaleDateString("en-US", { month: "short", timeZone: "UTC" });
+const day = (d: Date) =>
+  d.toLocaleDateString("en-US", { day: "numeric", timeZone: "UTC" });
+const weekday = (d: Date) =>
+  d.toLocaleDateString("en-US", { weekday: "long", timeZone: "UTC" });
+const longDate = (d: Date) =>
+  d.toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    timeZone: "UTC",
+  });
+---
+
+{upcoming.length > 0 && (
+  <section class="py-12 md:py-16 px-6 bg-white" aria-labelledby="upcoming-heading">
+    <div class="max-w-6xl mx-auto">
+      <h2
+        id="upcoming-heading"
+        class="animate-on-scroll fade-in-up font-aktiv text-kd-navy text-[21px] md:text-[28px] font-semibold tracking-[1.2px] md:tracking-[1.4px] mb-2"
+      >
+        Upcoming Posts
+      </h2>
+      <p class="text-kd-grey text-[14px] font-montserrat font-light tracking-[0.8px] mb-8">
+        What's on the schedule. A new post goes live every Thursday.
+      </p>
+
+      <div class="upcoming-card rounded-xl border border-kd-navy/10 overflow-hidden">
+        <div class="grid md:grid-cols-12">
+          <!-- Left: scrollable list of scheduled posts -->
+          <div
+            class="md:col-span-5 upcoming-list max-h-[340px] md:max-h-[420px] overflow-y-auto border-b md:border-b-0 md:border-r border-kd-navy/10"
+            role="tablist"
+            aria-label="Upcoming posts"
+            aria-orientation="vertical"
+          >
+            {upcoming.map((post, i) => (
+              <button
+                type="button"
+                role="tab"
+                id={`upcoming-tab-${post.id}`}
+                aria-controls={`upcoming-panel-${post.id}`}
+                aria-selected={i === 0 ? "true" : "false"}
+                tabindex={i === 0 ? 0 : -1}
+                data-upcoming-tab={post.id}
+                class="upcoming-item w-full text-left flex items-center gap-4 px-5 py-4 border-b border-kd-navy/10 last:border-b-0"
+              >
+                <span class="date-chip shrink-0 w-12 rounded-md text-center py-1.5">
+                  <span class="block text-[11px] font-montserrat font-medium tracking-[1px] uppercase">
+                    {month(post.data.date)}
+                  </span>
+                  <span class="block font-aktiv text-[18px] font-semibold leading-[20px]">
+                    {day(post.data.date)}
+                  </span>
+                </span>
+                <span class="min-w-0">
+                  <span class="item-title block text-kd-navy text-[14px] font-montserrat font-medium leading-[20px] tracking-[0.4px] line-clamp-2">
+                    {post.data.title}
+                  </span>
+                  <span class="block text-kd-grey/70 text-[12px] font-montserrat font-light tracking-[0.6px] mt-0.5">
+                    {weekday(post.data.date)}
+                  </span>
+                </span>
+              </button>
+            ))}
+          </div>
+
+          <!-- Right: description of the selected post -->
+          <div class="md:col-span-7 bg-kd-cream-light">
+            {upcoming.map((post, i) => (
+              <div
+                role="tabpanel"
+                id={`upcoming-panel-${post.id}`}
+                aria-labelledby={`upcoming-tab-${post.id}`}
+                data-upcoming-panel={post.id}
+                class:list={["p-6 md:p-8", { hidden: i !== 0 }]}
+              >
+                <div class="aspect-[1200/630] rounded-lg overflow-hidden bg-kd-cream mb-5">
+                  <img
+                    src={post.data.image}
+                    alt={post.data.imageAlt ?? post.data.title}
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <span class="text-kd-gold text-[12px] font-montserrat font-medium tracking-[1.4px] uppercase">
+                  {post.data.category} · {longDate(post.data.date)}
+                </span>
+                <h3 class="font-aktiv text-kd-navy text-[18px] md:text-[22px] font-semibold leading-[26px] md:leading-[30px] tracking-[0.8px] mt-2 mb-3">
+                  {post.data.title}
+                </h3>
+                <p class="text-kd-grey text-[14px] md:text-[15px] font-montserrat font-light leading-[24px] tracking-[0.6px]">
+                  {post.data.excerpt}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Subscribe, directly under the schedule -->
+        <div class="border-t border-kd-navy/10 px-5 md:px-8 py-6 bg-white">
+          <BlogSubscribe
+            id="upcoming-subscribe"
+            variant="inline"
+            source="Blog Upcoming"
+            heading="Subscribe to be notified when the next blog is released."
+            body="One email every Thursday, the day a new post goes live."
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  .upcoming-item {
+    background: #ffffff;
+    transition: background-color 0.15s ease;
+    cursor: pointer;
+  }
+  .upcoming-item:hover {
+    background: #fff8f0;
+  }
+  .upcoming-item[aria-selected="true"] {
+    background: #fff8f0;
+    box-shadow: inset 3px 0 0 #ba9200;
+  }
+  .upcoming-item:focus-visible {
+    outline: 2px solid #ba9200;
+    outline-offset: -2px;
+  }
+  .date-chip {
+    background: #f6efe6;
+    color: #3f455d;
+  }
+  .upcoming-item[aria-selected="true"] .date-chip {
+    background: #3f455d;
+    color: #ffffff;
+  }
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
+
+<script>
+  const tabs = Array.from(
+    document.querySelectorAll<HTMLButtonElement>("[data-upcoming-tab]")
+  );
+  const panels = Array.from(
+    document.querySelectorAll<HTMLElement>("[data-upcoming-panel]")
+  );
+
+  function select(tab: HTMLButtonElement, focus = false) {
+    const id = tab.dataset.upcomingTab;
+    tabs.forEach((t) => {
+      const on = t === tab;
+      t.setAttribute("aria-selected", on ? "true" : "false");
+      t.tabIndex = on ? 0 : -1;
+    });
+    panels.forEach((p) =>
+      p.classList.toggle("hidden", p.dataset.upcomingPanel !== id)
+    );
+    if (focus) tab.focus();
+  }
+
+  tabs.forEach((tab, i) => {
+    tab.addEventListener("click", () => select(tab));
+    tab.addEventListener("keydown", (e) => {
+      const step = e.key === "ArrowDown" ? 1 : e.key === "ArrowUp" ? -1 : 0;
+      if (!step) return;
+      e.preventDefault();
+      select(tabs[(i + step + tabs.length) % tabs.length], true);
+    });
+  });
+</script>

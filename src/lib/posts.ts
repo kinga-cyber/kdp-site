@@ -24,3 +24,22 @@ export async function getPublishedPosts(): Promise<Post[]> {
     return data.date.valueOf() <= now;
   });
 }
+
+/**
+ * Posts that are approved and dated in the future, soonest first. Feeds the
+ * "Upcoming posts" schedule on the blog index.
+ *
+ * Unlike getPublishedPosts, this ignores dev mode: the schedule should look
+ * the same locally as it will in production. A post leaves this list on the
+ * same build that publishes it, so the two can never disagree.
+ */
+export async function getUpcomingPosts(limit = 5): Promise<Post[]> {
+  const now = Date.now();
+  const posts = await getCollection(
+    "blog",
+    ({ data }) => !data.draft && data.date.valueOf() > now
+  );
+  return posts
+    .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf())
+    .slice(0, limit);
+}

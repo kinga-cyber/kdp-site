@@ -45,8 +45,11 @@ const longDate = (d: Date) =>
       <div class="upcoming-card rounded-xl border border-kd-navy/10 overflow-hidden">
         <div class="grid md:grid-cols-12">
           <!-- Left: scrollable list of scheduled posts -->
+          <!-- On desktop the list fills the column and scrolls inside it, so it
+               always runs the full height of the description panel. -->
+          <div class="md:col-span-5 relative border-b md:border-b-0 md:border-r border-kd-navy/10">
           <div
-            class="md:col-span-5 upcoming-list max-h-[340px] md:max-h-[420px] overflow-y-auto border-b md:border-b-0 md:border-r border-kd-navy/10"
+            class="upcoming-list max-h-[340px] md:max-h-none md:absolute md:inset-0 overflow-y-auto"
             role="tablist"
             aria-label="Upcoming posts"
             aria-orientation="vertical"
@@ -80,6 +83,7 @@ const longDate = (d: Date) =>
                 </span>
               </button>
             ))}
+          </div>
           </div>
 
           <!-- Right: description of the selected post -->

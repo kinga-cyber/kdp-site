@@ -80,6 +80,10 @@ const INITIAL_VISIBLE = 9;
     </div>
   </section>
 
+  <!-- What is scheduled next, with a subscribe row under it. Leads the page
+       so readers see what is coming before the archive. -->
+  <UpcomingPosts />
+
   {featuredPosts.length > 0 && (
     <!-- Featured Posts Section -->
     <section class="py-12 md:py-16 px-6 bg-white">
@@ -180,9 +184,6 @@ const INITIAL_VISIBLE = 9;
       </div>
     </section>
   )}
-
-  <!-- What is scheduled next, with a subscribe row under it -->
-  <UpcomingPosts />
 
   <!-- Popular Posts Section -->
   <section class="py-12 md:py-16 px-6 bg-[#FAFAFA]">

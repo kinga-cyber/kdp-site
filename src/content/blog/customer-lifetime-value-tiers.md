@@ -14,7 +14,7 @@ keywords:
   - "clv tiers"
   - "klaviyo customer lifetime value"
 featured: false
-draft: true
+draft: false
 metaTitle: "How to Calculate Customer Lifetime Value | Kinga Dow"
 metaDescription: "Calculate customer lifetime value the easy way by asking Claude, connected to your store. The step by step, the by-hand version, and how to tier your list by real spend."
 ---

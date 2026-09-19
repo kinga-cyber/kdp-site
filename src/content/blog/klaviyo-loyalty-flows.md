@@ -14,7 +14,7 @@ keywords:
   - "points program emails"
   - "loyalty tiers email"
 featured: false
-draft: true
+draft: false
 metaTitle: "Klaviyo Loyalty Flows: Tiers, Points, Build | Kinga Dow"
 metaDescription: "The loyalty flow architecture that moves customers up a tier, the dynamic block that shows their points, and the LoyaltyLion, Figma and Klaviyo workflow that sped up the build."
 ---

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" font-family="Montserrat, Arial, sans-serif">
+<rect width="1200" height="630" fill="#F6EFE6"/>
+<text x="60" y="56" fill="#3F455D" font-size="14" font-weight="600" letter-spacing="2" opacity="0.6">LOYALTY FLOWS</text>
+<text x="60" y="102" fill="#3F455D" font-size="34" font-weight="600">Five flows that move customers up a tier</text>
+<text x="60" y="136" fill="#333333" font-size="19" opacity="0.85">Each stage is its own flow, keyed to what the customer does.</text>
+<rect x="60.0" y="200" width="196" height="96" rx="10" fill="#FFFFFF" stroke="#3F455D" stroke-opacity="0.4" stroke-width="1.5"/>
+<text x="158.0" y="232" text-anchor="middle" fill="#BA9200" font-size="12" font-weight="700" letter-spacing="1">STAGE 1</text>
+<text x="158.0" y="258" text-anchor="middle" fill="#3F455D" font-size="16" font-weight="600">Join</text>
+<text x="158.0" y="278" text-anchor="middle" fill="#3F455D" font-size="16" font-weight="600">&amp; Earn</text>
+<path d="M 262.0 248 L 275.0 248" stroke="#3F455D" stroke-opacity="0.45" stroke-width="2"/>
+<path d="M 269.0 243 L 275.0 248 L 269.0 253" fill="none" stroke="#3F455D" stroke-opacity="0.45" stroke-width="2"/>
+<rect x="281.0" y="200" width="196" height="96" rx="10" fill="#FFFFFF" stroke="#3F455D" stroke-opacity="0.4" stroke-width="1.5"/>
+<text x="379.0" y="232" text-anchor="middle" fill="#BA9200" font-size="12" font-weight="700" letter-spacing="1">STAGE 2</text>
+<text x="379.0" y="258" text-anchor="middle" fill="#3F455D" font-size="16" font-weight="600">Status</text>
+<text x="379.0" y="278" text-anchor="middle" fill="#3F455D" font-size="16" font-weight="600">&amp; Tiers</text>
+<path d="M 483.0 248 L 496.0 248" stroke="#3F455D" stroke-opacity="0.45" stroke-width="2"/>
+<path d="M 490.0 243 L 496.0 248 L 490.0 253" fill="none" stroke="#3F455D" stroke-opacity="0.45" stroke-width="2"/>
+<rect x="502.0" y="200" width="196" height="96" rx="10" fill="#FFFFFF" stroke="#3F455D" stroke-opacity="0.4" stroke-width="1.5"/>
+<text x="600.0" y="232" text-anchor="middle" fill="#BA9200" font-size="12" font-weight="700" letter-spacing="1">STAGE 3</text>
+<text x="600.0" y="258" text-anchor="middle" fill="#3F455D" font-size="16" font-weight="600">Rewards</text>
+<text x="600.0" y="278" text-anchor="middle" fill="#3F455D" font-size="16" font-weight="600">&amp; Redemption</text>
+<path d="M 704.0 248 L 717.0 248" stroke="#3F455D" stroke-opacity="0.45" stroke-width="2"/>
+<path d="M 711.0 243 L 717.0 248 L 711.0 253" fill="none" stroke="#3F455D" stroke-opacity="0.45" stroke-width="2"/>
+<rect x="723.0" y="200" width="196" height="96" rx="10" fill="#FFFFFF" stroke="#3F455D" stroke-opacity="0.4" stroke-width="1.5"/>
+<text x="821.0" y="232" text-anchor="middle" fill="#BA9200" font-size="12" font-weight="700" letter-spacing="1">STAGE 4</text>
+<text x="821.0" y="258" text-anchor="middle" fill="#3F455D" font-size="16" font-weight="600">Referrals</text>
+<text x="821.0" y="278" text-anchor="middle" fill="#3F455D" font-size="16" font-weight="600">&amp; Win-Back</text>
+<path d="M 925.0 248 L 938.0 248" stroke="#3F455D" stroke-opacity="0.45" stroke-width="2"/>
+<path d="M 932.0 243 L 938.0 248 L 932.0 253" fill="none" stroke="#3F455D" stroke-opacity="0.45" stroke-width="2"/>
+<rect x="944.0" y="200" width="196" height="96" rx="10" fill="#FFFFFF" stroke="#3F455D" stroke-opacity="0.4" stroke-width="1.5"/>
+<text x="1042.0" y="232" text-anchor="middle" fill="#BA9200" font-size="12" font-weight="700" letter-spacing="1">STAGE 5</text>
+<text x="1042.0" y="264" text-anchor="middle" fill="#3F455D" font-size="16" font-weight="600">Birthday</text>
+<rect x="340" y="360" width="520" height="150" rx="12" fill="#FFFFFF" stroke="#BA9200" stroke-opacity="0.55" stroke-width="2"/>
+<text x="370" y="394" fill="#BA9200" font-size="12" font-weight="700" letter-spacing="1.4">YOUR REWARDS</text>
+<text x="370" y="430" fill="#3F455D" font-size="24" font-weight="600">You have 1,240 points</text>
+<rect x="370" y="452" width="460" height="14" rx="7" fill="#3F455D" fill-opacity="0.12"/>
+<rect x="370" y="452" width="377" height="14" rx="7" fill="#59A56D"/>
+<text x="370" y="500" fill="#333333" font-size="15" opacity="0.85">260 points to your next tier</text>
+<line x1="60" y1="548" x2="1140" y2="548" stroke="#BA9200" stroke-opacity="0.35"/>
+<text x="60" y="586" fill="#3F455D" font-size="18" opacity="0.85">A dynamic block reads each customer's live balance, so the same email speaks to everyone differently.</text>
+</svg>

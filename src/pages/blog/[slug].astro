@@ -247,9 +247,26 @@ const pageDescription = post.data.metaDescription ?? post.data.excerpt;
 
     <!-- Article Content -->
     <div class="max-w-3xl mx-auto px-6 pb-16">
-      <div class="prose prose-lg prose-kd">
+      <div class="prose prose-lg prose-kd" id="post-body">
         <Content />
       </div>
+
+      <!-- Mid-article Klaviyo embed form "Blog Inline · Subscribe" (WCLuqH, list SHnzMn).
+           Moved before the third section heading (or the second, on short posts) so it
+           sits mid-read, well ahead of the BlogSubscribe band at the end. Runs inline,
+           ahead of the async klaviyo.js, so the embed is in place when Klaviyo scans. -->
+      <div id="inline-subscribe" class="not-prose my-10">
+        <div class="klaviyo-form-WCLuqH"></div>
+      </div>
+      <script is:inline>
+        (function () {
+          var slot = document.getElementById("inline-subscribe");
+          var h2s = document.querySelectorAll("#post-body > h2");
+          var target = h2s[2] || h2s[1];
+          if (slot && target) target.parentNode.insertBefore(slot, target);
+          else if (slot) slot.remove();
+        })();
+      </script>
 
       <!-- Share Section -->
       <div class="animate-on-scroll fade-in-up mt-12 pt-8 border-t border-gray-200">

@@ -19,7 +19,7 @@ metaTitle: "Klaviyo's Flow Audit AI vs the One I Built | Kinga Dow"
 metaDescription: "I ran Klaviyo's new Composer flow audit on an account with close to 60 flows, next to the framework I built over a year. What the AI catches, and the judgment it hands back."
 faqs:
   - question: "Can Klaviyo's AI audit your flows?"
-    answer: "Yes. Klaviyo's Composer reads every live flow, pulls 90 days of per-message performance, compares each message to your peer benchmark, and flags broken branches, weak sends, and overlapping flows. It is a strong replacement for reading each flow by hand. It reports and drafts. The decisions about what to fix, and the changes themselves, stay with you."
+    answer: "Yes. Klaviyo's Composer reads every live flow, pulls 30 days of per-message performance, compares each message to your peer benchmark, and flags broken branches, weak sends, and overlapping flows. It is a strong replacement for reading each flow by hand. It reports and drafts. The decisions about what to fix, and the changes themselves, stay with you."
   - question: "What does a full flow audit add on top of Klaviyo's Composer?"
     answer: "It weighs each flow's revenue against its list cost, resolves which flow should own a customer two flows are competing for, decides which missing flows are worth building, ranks every fix by what it is worth, and then makes the changes. Composer surfaces and recommends. The audit decides and executes."
   - question: "Does Klaviyo Composer fix your flows for you?"
@@ -40,7 +40,7 @@ The rest of this is where it helped, and where I had to take over.
 
 Start with what it got right, because it is a lot.
 
-It read 90 days of numbers for every email inside every flow, not just the flow-level totals, and scored each one against a peer group of similar brands rather than a figure from a blog post. It found a flow that was broken, where every customer was sliding past the real emails into a dead end. It caught 5 emails in one sequence sharing a single subject line. It flagged a discount that changed halfway through a series and a tracking tag that was never valid. It marked where flows overlap. It even named the flows that were missing.
+It read 30 days of numbers for every email inside every flow, not just the flow-level totals, and scored each one against a peer group of similar brands rather than a figure from a blog post. It found a flow that was broken, where every customer was sliding past the real emails into a dead end. It caught 5 emails in one sequence sharing a single subject line. It flagged a discount that changed halfway through a series and a tracking tag that was never valid. It marked where flows overlap. It even named the flows that were missing.
 
 If your flow review today is opening each one and skimming the copy, this replaces that, and it does it better than you can by hand.
 

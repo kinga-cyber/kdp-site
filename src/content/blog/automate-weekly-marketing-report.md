@@ -14,7 +14,7 @@ keywords:
   - "marketing reporting automation"
   - "weekly report automation"
 featured: false
-draft: true
+draft: false
 metaTitle: "How to Automate Your Weekly Marketing Report | Kinga Dow"
 metaDescription: "A scheduled routine that pulls every number from Klaviyo, Shopify and more in one run, builds the report, and fills your tracker sheet. How to automate weekly reporting."
 ---

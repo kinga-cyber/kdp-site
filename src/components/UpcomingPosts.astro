@@ -12,7 +12,7 @@
 import BlogSubscribe from "./BlogSubscribe.astro";
 import { getUpcomingPosts } from "../lib/posts";
 
-const upcoming = await getUpcomingPosts(5);
+const upcoming = await getUpcomingPosts(6);
 
 const month = (d: Date) =>
   d.toLocaleDateString("en-US", { month: "short", timeZone: "UTC" });

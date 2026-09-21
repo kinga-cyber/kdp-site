@@ -56,11 +56,11 @@ const navLinks = [
     <!-- Footer navigation. mb-10 (not mb-8) because this is now the last block
          before the copyright bar; it inherits the spacing the removed tools
          row used to provide. -->
-    <div class="flex flex-wrap justify-center gap-4 md:gap-12 mb-10">
+    <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 md:gap-x-6 mb-10">
       {navLinks.map((link) => (
         <a
           href={link.href}
-          class="font-aktiv text-kd-navy font-medium text-[13px] tracking-[1.3px] hover:text-kd-gold transition-colors uppercase"
+          class="font-aktiv text-kd-navy font-medium text-[11px] tracking-[0.8px] hover:text-kd-gold transition-colors uppercase whitespace-nowrap"
         >
           {link.label}
         </a>

@@ -1,6 +1,6 @@
 ---
 title: "How to Audit Your Klaviyo Flows"
-date: 2026-09-24
+date: 2026-11-12
 author: "Kinga Dow"
 category: "Klaviyo"
 excerpt: "The flow audit is the deepest part of a Klaviyo account audit. The order it runs in, how to score every flow the same way, and the one number that decides whether a flow is worth keeping."
@@ -14,7 +14,7 @@ keywords:
   - "email flow audit"
   - "klaviyo account audit"
 featured: false
-draft: false
+draft: true
 metaTitle: "How to Audit Your Klaviyo Flows | Kinga Dow"
 metaDescription: "How to audit your Klaviyo flows the way it actually gets done: map flow overlap first, score every flow against your own benchmarks, and rank fixes by revenue, list cost and effort."
 faqs:

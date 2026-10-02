@@ -39,27 +39,27 @@ export function getStaticPaths() {
                 <li><strong>The code on the success screen.</strong> Each shopper gets their own unique, single-use code, shown straight away with a copy button and a Start Shopping button, so they can buy without waiting for the email. The original pop-up only told them to check their inbox.</li>
           </ol>
           <ul>
-            <li><strong>Tested a fixed-dollar offer against a percentage offer,</strong> both with the same minimum spend and expiry. Before launch, Claude modelled both against 90 days of orders so the two cost almost exactly the same at the typical basket. The test measured how shoppers reacted to the framing, not to a bigger discount. The fixed-dollar version won with a 10.1% sign-up rate against 7.9%, 29% higher, and became the only offer after the first week.</li>
+            <li><strong>Tested a fixed-dollar offer against a percentage offer,</strong> both with the same minimum spend and expiry. Before launch, we used Claude to model both against 90 days of orders so the two cost almost exactly the same at the typical basket. The test measured how shoppers reacted to the framing, not to a bigger discount. The fixed-dollar version won with a 10.1% sign-up rate against 7.9%, 29% higher, and became the only offer after the first week.</li>
             <li><strong>Found that the pop-up sells in the first hour.</strong> Of all orders placed with the welcome code within a week of signing up, 55% came in the first hour. With the code right there on screen, the pop-up was not just collecting emails for later; it was closing sales on the spot.</li>
             <li><strong>Moved the pop-up to Alia to push it further.</strong> Alia kept the code on the success screen and added more control: the pop-up shows only to new visitors and smart triggering decides when it appears.</li>
-            <li><strong>Built an attribution method the dashboards cannot match.</strong> Every month Claude checks every code order in Shopify against the customer's Klaviyo email activity. If they opened or clicked a welcome email before ordering, the sale belongs to the welcome flow; if not, it belongs to the pop-up.</li>
-            <li><strong>Used Claude as builder and analyst throughout.</strong> Connected to Klaviyo and Shopify through MCP, Claude built the form logic, profile properties, welcome flow wiring and code tags in every email. It set the before-and-after conversion baselines on matched weeks without a sale, read the offer test, ran the sign-up-to-order analysis that found the first-hour pattern, and checked the form set-up before launch.</li>
+            <li><strong>Built an attribution method the dashboards cannot match.</strong> Every month we use Claude to check every code order in Shopify against the customer's Klaviyo email activity. If they opened or clicked a welcome email before ordering, the sale belongs to the welcome flow; if not, it belongs to the pop-up.</li>
+            <li><strong>Used Claude as builder and analyst throughout.</strong> With Claude connected to Klaviyo and Shopify through MCP, we built the form logic, profile properties, welcome flow wiring and code tags in every email, set the before-and-after conversion baselines on matched weeks without a sale, read the offer test, ran the sign-up-to-order analysis that found the first-hour pattern, and checked the form set-up before launch.</li>
           </ul>
 
           <h2>The Results</h2>
           <h3>Sales</h3>
           <ul>
             <li><strong>Pop-up sales grew 2.5×.</strong> Monthly sales from orders using the pop-up's code in September were 2.5× the old pop-up's monthly average for January to June.</li>
-            <li><strong>Orders straight from the pop-up grew almost 7×,</strong> from about 10 a month with the old pop-up to 68 in September. Counting every order that used the code, including those placed after a welcome email, orders nearly doubled, from about 61 a month to 118.</li>
+            <li><strong>Orders straight from the pop-up grew almost 7×,</strong> from about 10 a month with the old pop-up to 68 in September.</li>
             <li><strong>Sales straight from the pop-up grew about 10×, from about 1% to 15.5% of store revenue.</strong> These are orders using the pop-up's code where the shopper had not opened a welcome email first. The old pop-up only sent the code by email, so almost none of its sales came this way.</li>
-            <li><strong>Klaviyo's dashboard doesn't count these sales.</strong> Klaviyo only credits an order to email if an email was opened or clicked first. In August and September, 58–62% of orders using the code came straight from the pop-up, and in Alia's first 10 days the welcome flow was credited with just 7 of 44 code orders.</li>
+            <li><strong>Most of these sales were invisible before.</strong> Klaviyo only credits an order to email if an email was opened or clicked first. In August and September, 58–62% of orders using the pop-up's code came straight from the pop-up, sales that would never have appeared in a standard email report.</li>
           </ul>
           <h3>Sign-ups</h3>
           <ul>
             <li><strong>231% more pop-up sign-ups.</strong> Weekly sign-ups went from about 52 to about 174 after the rebuild, comparing weeks without a sale.</li>
             <li><strong>Sign-up rate doubled,</strong> from 3.5% to 7.0%, while about two-thirds more visitors saw the pop-up each week.</li>
             <li><strong>New email subscribers per month nearly tripled,</strong> from 270 in June, the month before the rebuild, to 789 in August.</li>
-            <li><strong>Alia took it further, to an 11% sign-up rate, more than 3× the original pop-up's 3.5%:</strong> about 31 sign-ups a day in its first 10 days, 26% more than the rebuilt pop-up and about 4× the original. Sign-ups ordering with their code within an hour rose from 7.3% to 8.7%.</li>
+            <li><strong>Alia took it further, to an 11% sign-up rate, more than 3× the original pop-up's 3.5%:</strong> about 31 sign-ups a day in its first 10 days, 26% more than the rebuilt pop-up and about 4× the original. And 8.7% of sign-ups now order with their code within the hour, up from 7.3%.</li>
           </ul>
 
           <h2>Key Takeaway</h2>

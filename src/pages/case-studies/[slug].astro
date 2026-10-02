@@ -5,6 +5,76 @@ import ConsultationCTA from "../../components/ConsultationCTA.astro";
 export function getStaticPaths() {
   return [
     {
+      params: { slug: "ai-powered-welcome-popup" },
+      props: {
+        title: "AI-Powered Welcome Pop-Up: 15.5% of Store Revenue",
+        seoTitle: "Welcome Pop-Up Drives 15.5% of Store Revenue | Kinga Dow",
+        seoDescription: "How a rebuilt welcome pop-up with an instant discount code grew sales straight from the pop-up about 10x, measured order by order with Claude AI.",
+        subtitle: "How we rebuilt a baby clothing brand's welcome pop-up around a stronger offer and an instant discount code, taking sales straight from the pop-up from about 1% to 15.5% of store revenue, with Claude as builder and analyst at every step: modelling the offer, building and testing the pop-up, and tracking every sale it drives.",
+        category: "E-commerce & Claude AI",
+        client: "Premium Baby & Kids Clothing Brand",
+        technologies: ["Klaviyo", "Alia", "Shopify", "Claude AI", "MCP Integrations"],
+        image: "/images/case-studies/ai-powered-welcome-popup.jpg",
+        stat: "15.5%",
+        statLabel: "Of Revenue From the Pop-Up",
+        content: `
+          <h2>The Client</h2>
+          <p>A premium baby and kids' clothing brand selling online. Its customers fall into two groups: parents buying for their own children, and people buying a gift for someone else's baby or child, from new arrivals to birthdays. The welcome pop-up is the main way new visitors join the email list and receive a first-order offer.</p>
+
+          <h2>The Challenge</h2>
+          <p>When we took over the account, the pop-up we inherited was losing both sign-ups and sales. It ran as two separate Klaviyo forms, one for mobile and one for desktop, offering a small fixed discount with no minimum spend. After signing up, shoppers were told to check their inbox for the code.</p>
+          <ul>
+            <li><strong>Sign-ups were falling.</strong> Outside sale weeks it averaged a 3.5% sign-up rate, and mobile, where most of the traffic was, fell from 3.97% in early May to 1.37% by late July.</li>
+            <li><strong>Sales from the code were falling too.</strong> Monthly sales from orders using the pop-up's code nearly halved between January and June. By June, those orders made up just 7% of store orders and 7% of store revenue, down from 14% of orders in January. And because the code only arrived by email, almost none of those sales came straight from the pop-up: about 1% of store revenue.</li>
+          </ul>
+          <p>There was a second, hidden problem: nobody could see what the pop-up was really worth. The form dashboard showed sign-ups, and Klaviyo credited the welcome flow with orders from people who had opened or clicked an email. A shopper who signed up and bought with their code without engaging an email was credited to neither. Judged on these reports alone, the pop-up looked like a list-building tool and nothing more.</p>
+
+          <h2>The Solution</h2>
+          <p>We rebuilt the pop-up as a sales tool, not just a sign-up form: a stronger offer, a discount code the shopper can use the moment they sign up, and a way to measure exactly how many sales it drives. Once the results showed what it could do, we moved it to Alia to push it further. Claude, connected to Klaviyo and Shopify through MCP, worked alongside us at every stage.</p>
+          <ul>
+            <li><strong>Rebuilt the pop-up in Klaviyo around four changes.</strong> Together they took the sign-up rate from 3.5% to 7.0% and turned the pop-up into a sales channel.
+              <ol>
+                <li><strong>One multi-step form</strong> replaced the separate mobile and desktop forms.</li>
+                <li><strong>A much stronger offer.</strong> The small no-minimum discount became a far more valuable first-order offer with a minimum spend.</li>
+                <li><strong>Zero-party data.</strong> The first step asks one question, "Who are you shopping for?", and saves the answer to the subscriber's profile before the email step.</li>
+                <li><strong>The code on the success screen.</strong> Each shopper gets their own unique, single-use code, shown straight away with a copy button and a Start Shopping button, so they can buy without waiting for the email. The original pop-up only told them to check their inbox.</li>
+              </ol>
+            </li>
+            <li><strong>Tested a fixed-dollar offer against a percentage offer,</strong> both with the same minimum spend and expiry. Before launch, Claude modelled both against 90 days of orders so the two cost almost exactly the same at the typical basket. The test measured how shoppers reacted to the framing, not to a bigger discount. The fixed-dollar version won with a 10.1% sign-up rate against 7.9%, 29% higher, and became the only offer after the first week.</li>
+            <li><strong>Found that the pop-up sells in the first hour.</strong> Of all orders placed with the welcome code within a week of signing up, 55% came in the first hour. With the code right there on screen, the pop-up was not just collecting emails for later; it was closing sales on the spot.</li>
+            <li><strong>Moved the pop-up to Alia to push it further.</strong> Alia kept the code on the success screen and added more control: the pop-up shows only to new visitors and smart triggering decides when it appears.</li>
+            <li><strong>Built an attribution method the dashboards cannot match.</strong> Every month Claude checks every code order in Shopify against the customer's Klaviyo email activity. If they opened or clicked a welcome email before ordering, the sale belongs to the welcome flow; if not, it belongs to the pop-up.</li>
+            <li><strong>Used Claude as builder and analyst throughout.</strong> Connected to Klaviyo and Shopify through MCP, Claude built the form logic, profile properties, welcome flow wiring and code tags in every email. It set the before-and-after conversion baselines on matched weeks without a sale, read the offer test, ran the sign-up-to-order analysis that found the first-hour pattern, and checked the form set-up before launch.</li>
+          </ul>
+
+          <h2>The Results</h2>
+          <h3>Sales</h3>
+          <ul>
+            <li><strong>Pop-up sales grew 2.5×.</strong> Monthly sales from orders using the pop-up's code in September were 2.5× the old pop-up's monthly average for January to June.</li>
+            <li><strong>Orders straight from the pop-up grew almost 7×,</strong> from about 10 a month with the old pop-up to 68 in September, and sales straight from the pop-up about 10×. Counting every order that used the code, including those placed after a welcome email, orders nearly doubled, from about 61 a month to 118.</li>
+            <li><strong>15.5% of store revenue now comes straight from the pop-up.</strong> These are orders using the pop-up's code where the shopper had not opened a welcome email first. With the old pop-up, which only sent the code by email, that was about 1% of store revenue. In September it was 15.5%.</li>
+            <li><strong>Klaviyo's dashboard doesn't count these sales.</strong> Klaviyo only credits an order to email if an email was opened or clicked first. In August and September, 58–62% of orders using the code came straight from the pop-up, and in Alia's first 10 days the welcome flow was credited with just 7 of 44 code orders.</li>
+          </ul>
+          <h3>Sign-ups</h3>
+          <ul>
+            <li><strong>231% more pop-up sign-ups.</strong> Weekly sign-ups went from about 52 to about 174 after the rebuild, comparing weeks without a sale.</li>
+            <li><strong>Sign-up rate doubled,</strong> from 3.5% to 7.0%, while about two-thirds more visitors saw the pop-up each week.</li>
+            <li><strong>New email subscribers per month nearly tripled,</strong> from 270 in June, the month before the rebuild, to 789 in August.</li>
+            <li><strong>Alia took it further, to an 11% sign-up rate, more than 3× the original pop-up's 3.5%:</strong> about 31 sign-ups a day in its first 10 days, 26% more than the rebuilt pop-up and about 4× the original. Sign-ups ordering with their code within an hour rose from 7.3% to 8.7%.</li>
+          </ul>
+
+          <h2>Key Takeaway</h2>
+          <p>A welcome pop-up is not just a list-building tool; it can be one of the store's biggest sales drivers. Give shoppers a strong offer and the code the moment they sign up, and more than half of the resulting orders happen within the hour, often before a single email is opened. Here, sales straight from the pop-up grew about 10×, from about 1% to 15.5% of store revenue, as much as all of the store's email campaigns bring in. Platform dashboards cannot show this, because each only sees its own part of the journey. Matching every order to its email history with Claude turned the pop-up from a line item nobody could value into a sales channel we measure month by month.</p>
+          <p>The next step is taking the same idea beyond new subscribers: pop-ups with their own offer and message for repeat customers, customers who have gone quiet, loyalty members, and other key segments.</p>
+        `,
+        results: [
+          { value: "15.5%", label: "Of Store Revenue Straight From the Pop-Up" },
+          { value: "10×", label: "Sales Straight From the Pop-Up" },
+          { value: "3×", label: "Pop-Up Sign-Up Rate" }
+        ]
+      }
+    },
+    {
       params: { slug: "ai-powered-gift-ecommerce" },
       props: {
         title: "AI-Powered Email Marketing Transformation: 273% Revenue Growth",
@@ -431,6 +501,7 @@ const { title, subtitle, category, client, technologies, image, stat, statLabel,
 
 // Get other case studies for related section
 const allCaseStudies = [
+  { slug: "ai-powered-welcome-popup", title: "AI-Powered Welcome Pop-Up: 15.5% of Revenue", image: "/images/case-studies/ai-powered-welcome-popup.jpg", stat: "15.5%", statLabel: "Of Revenue" },
   { slug: "ai-powered-gift-ecommerce", title: "AI-Powered Gift E-commerce: 273% Growth", image: "/images/case-studies/ai-powered-gift-ecommerce.jpg", stat: "273%", statLabel: "Revenue Growth" },
   { slug: "loyaltylion", title: "MoxieLash + LoyaltyLion", image: "/images/case-studies/loyalty-lion.jpg", stat: "700%", statLabel: "Increased Engagement" },
   { slug: "25x-return-attentive", title: "25X Return With Attentive", image: "/images/case-studies/attentive-return.jpg", stat: "25X", statLabel: "ROI" },

@@ -14,7 +14,7 @@ keywords:
   - "claude for ecommerce"
   - "claude kpi dashboard"
 featured: false
-draft: true
+draft: false
 metaTitle: "Hit Your Q4 Goal Week by Week With Claude | Kinga Dow"
 metaDescription: "Give every department a weekly number from your own history, let Claude pull the data every Monday, and fix what's behind before the month closes."
 ---

@@ -31,7 +31,7 @@ This post will help you tell the two apart before you hire an agency for either 
 
 Retention marketing is the practice of growing the value of the customers you already have. Email is one input into that. So is the offer, the reorder timing, the packaging, the support reply, the loyalty program, a subscription where the product suits one, and whether the product arrives the way the customer hoped it would.
 
-Thomas Lalas, who wrote *Retention Economics*, puts the same point more bluntly: ["Email is a channel. Retention is a systematic approach."](https://www.linkedin.com/in/thomaslalas/) I'll come back to his book later. It's the best thing I've read on retention, with one catch: it's written for subscription brands.
+Thomas Lalas, who wrote [*Retention Economics*](https://artecomm.co/retention-economics), puts the same point more bluntly: "Email is a channel. Retention is a systematic approach." I'll come back to his book later. It's the best thing I've read on retention, with one catch: it's written for subscription brands.
 
 ## What Each Engagement Actually Produces
 
@@ -88,7 +88,7 @@ What replaces the billing cycle is the repurchase clock, and non-subscription br
 
 Two of the engagements I'm proudest of were in this territory, both gift businesses, both rebuilt around [RFM and lifetime value rather than a calendar](/case-studies/ai-powered-gift-ecommerce/). Neither sold a subscription. Neither had a churn event to intercept. The work was finding the clock each customer was running on.
 
-Which brings me back to the book. *Retention Economics* by Thomas Lalas is the sharpest treatment of retention economics I've read, and I bought it to learn outside my own lane. Read it knowing what it is: it's written for subscription and CPG brands at 8 and 9 figures, its first growth lever is to go subscription-first, and its benchmarks are subscription benchmarks. If you sell gifts or apparel, take the economics and leave the billing mechanics. The reasoning transfers. The thresholds don't.
+Which brings me back to the book. [*Retention Economics*](https://artecomm.co/retention-economics) by Thomas Lalas is the sharpest treatment of retention economics I've read, and I bought it to learn outside my own lane. Read it knowing what it is: it's written for subscription and CPG brands at 8 and 9 figures, its first growth lever is to go subscription-first, and its benchmarks are subscription benchmarks. If you sell gifts or apparel, take the economics and leave the billing mechanics. The reasoning transfers. The thresholds don't.
 
 ## Where The AI Layer Earns Its Place
 

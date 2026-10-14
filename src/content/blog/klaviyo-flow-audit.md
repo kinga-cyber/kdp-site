@@ -1,6 +1,6 @@
 ---
 title: "How to Audit Your Klaviyo Flows"
-date: 2026-11-12
+date: 2026-12-31
 author: "Kinga Dow"
 category: "Klaviyo"
 excerpt: "The flow audit is the deepest part of a Klaviyo account audit. The order it runs in, how to score every flow the same way, and the one number that decides whether a flow is worth keeping."

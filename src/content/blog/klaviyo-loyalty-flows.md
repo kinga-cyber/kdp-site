@@ -1,6 +1,6 @@
 ---
 title: "Klaviyo Loyalty Flows: The Tiers, the Points Block, and a Faster Build"
-date: 2026-10-22
+date: 2026-10-29
 author: "Kinga Dow"
 category: "Klaviyo"
 excerpt: "Loyalty gets written off, but for the right account it is one of the highest-leverage programs you can run. Here is the flow architecture that moves customers up a tier, the dynamic block that shows them their points, and the 3-step workflow, LoyaltyLion to Figma to Klaviyo, that made the build easy."

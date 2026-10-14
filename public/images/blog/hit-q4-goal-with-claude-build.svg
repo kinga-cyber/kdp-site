@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 990" width="1200" height="990" font-family="Montserrat, 'Helvetica Neue', Arial, sans-serif">
+<rect width="1200" height="990" fill="#F6EFE6"/>
+<text x="60" y="56" fill="#3F455D" font-size="14" font-weight="600" opacity="0.6" letter-spacing="2">WHO BUILDS WHAT</text>
+<text x="60" y="102" fill="#3F455D" font-size="34" font-weight="600">I design the system. Your team builds it with Claude.</text>
+<text x="60" y="136" fill="#333333" font-size="19" font-weight="400" opacity="0.85">The spec is the hand-off. Everything after it belongs to the brand.</text>
+<rect x="50" y="176" width="535" height="784" rx="12" fill="none" stroke="#3F455D" stroke-opacity="0.18" stroke-width="1.5"/>
+<rect x="615" y="176" width="535" height="784" rx="12" fill="none" stroke="#3F455D" stroke-opacity="0.18" stroke-width="1.5"/>
+<text x="80" y="216" fill="#3F455D" font-size="19" font-weight="600" opacity="0.75">My part: the Claude expertise</text>
+<text x="645" y="216" fill="#3F455D" font-size="19" font-weight="600" opacity="0.75">The brand’s team: built with Claude</text>
+<rect x="80" y="244" width="475" height="72" rx="10" fill="#FFFFFF" stroke="#3F455D" stroke-opacity="0.4" stroke-width="1.5"/>
+<text x="104" y="275" fill="#3F455D" font-size="20" font-weight="600">1. Connect the data</text>
+<text x="104" y="301" fill="#333333" font-size="17" font-weight="400">Store via MCP connector, Klaviyo via its API</text>
+<rect x="80" y="346" width="475" height="72" rx="10" fill="#FFFFFF" stroke="#3F455D" stroke-opacity="0.4" stroke-width="1.5"/>
+<text x="104" y="377" fill="#3F455D" font-size="20" font-weight="600">2. Set the benchmarks</text>
+<text x="104" y="403" fill="#333333" font-size="17" font-weight="400">From 3 years of the brand’s own orders</text>
+<rect x="645" y="448" width="475" height="72" rx="10" fill="#FFFFFF" stroke="#3F455D" stroke-opacity="0.4" stroke-width="1.5"/>
+<text x="669" y="479" fill="#3F455D" font-size="20" font-weight="600">3. Each department sets its number</text>
+<text x="669" y="505" fill="#333333" font-size="17" font-weight="400">Against the benchmark, one owner each</text>
+<rect x="80" y="550" width="475" height="72" rx="10" fill="#FFFFFF" stroke="#3F455D" stroke-opacity="0.4" stroke-width="1.5"/>
+<text x="104" y="581" fill="#3F455D" font-size="20" font-weight="600">4. Write the spec</text>
+<text x="104" y="607" fill="#333333" font-size="17" font-weight="400">Markdown files Claude can build from</text>
+<rect x="645" y="652" width="475" height="72" rx="10" fill="#BA9200" fill-opacity="0.09" stroke="#BA9200" stroke-opacity="0.75" stroke-width="2.5"/>
+<text x="669" y="683" fill="#3F455D" font-size="20" font-weight="600">5. Build the KPI page with Claude</text>
+<text x="669" y="709" fill="#333333" font-size="17" font-weight="400">The owner, 5 days after the demo</text>
+<rect x="80" y="754" width="475" height="72" rx="10" fill="#FFFFFF" stroke="#3F455D" stroke-opacity="0.4" stroke-width="1.5"/>
+<text x="104" y="785" fill="#3F455D" font-size="20" font-weight="600">6. Feed it every Monday</text>
+<text x="104" y="811" fill="#333333" font-size="17" font-weight="400">A scheduled task in Claude Code</text>
+<rect x="645" y="856" width="475" height="72" rx="10" fill="#FFFFFF" stroke="#3F455D" stroke-opacity="0.4" stroke-width="1.5"/>
+<text x="669" y="887" fill="#3F455D" font-size="20" font-weight="600">7. Run the weekly standup</text>
+<text x="669" y="913" fill="#333333" font-size="17" font-weight="400">On target, or troubleshoot together</text>
+<path d="M 317.5 316 L 317.5 342" fill="none" stroke="#3F455D" stroke-opacity="0.4" stroke-width="2"/>
+<path d="M 312.5 336 L 317.5 344 L 322.5 336" fill="none" stroke="#3F455D" stroke-opacity="0.5" stroke-width="2"/>
+<path d="M 317.5 418 L 317.5 433.0 L 882.5 433.0 L 882.5 444" fill="none" stroke="#3F455D" stroke-opacity="0.4" stroke-width="2"/>
+<path d="M 877.5 438 L 882.5 446 L 887.5 438" fill="none" stroke="#3F455D" stroke-opacity="0.5" stroke-width="2"/>
+<path d="M 882.5 520 L 882.5 535.0 L 317.5 535.0 L 317.5 546" fill="none" stroke="#3F455D" stroke-opacity="0.4" stroke-width="2"/>
+<path d="M 312.5 540 L 317.5 548 L 322.5 540" fill="none" stroke="#3F455D" stroke-opacity="0.5" stroke-width="2"/>
+<path d="M 317.5 622 L 317.5 637.0 L 882.5 637.0 L 882.5 648" fill="none" stroke="#3F455D" stroke-opacity="0.4" stroke-width="2"/>
+<path d="M 877.5 642 L 882.5 650 L 887.5 642" fill="none" stroke="#3F455D" stroke-opacity="0.5" stroke-width="2"/>
+<text x="669" y="629.0" fill="#BA9200" font-size="16" font-weight="600">the spec</text>
+<path d="M 882.5 724 L 882.5 739.0 L 317.5 739.0 L 317.5 750" fill="none" stroke="#3F455D" stroke-opacity="0.4" stroke-width="2"/>
+<path d="M 312.5 744 L 317.5 752 L 322.5 744" fill="none" stroke="#3F455D" stroke-opacity="0.5" stroke-width="2"/>
+<path d="M 317.5 826 L 317.5 841.0 L 882.5 841.0 L 882.5 852" fill="none" stroke="#3F455D" stroke-opacity="0.4" stroke-width="2"/>
+<path d="M 877.5 846 L 882.5 854 L 887.5 846" fill="none" stroke="#3F455D" stroke-opacity="0.5" stroke-width="2"/>
+</svg>

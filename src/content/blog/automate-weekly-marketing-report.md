@@ -1,6 +1,6 @@
 ---
 title: "How to Automate Your Weekly Marketing Report"
-date: 2026-10-29
+date: 2026-11-05
 author: "Kinga Dow"
 category: "AI Systems"
 excerpt: "Pulling last week's numbers off Klaviyo, Shopify and every other tab used to take half my Monday morning before a client call. A scheduled routine does it now: it pulls every number in one run, builds the report in the format the client reads, and enters the figures into the tracker."

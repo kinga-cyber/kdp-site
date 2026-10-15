@@ -27,7 +27,10 @@ const SITE = "https://kingadow.com";
 // Overridable so the whole path can be exercised against a local dev server
 // without waiting for a real Thursday.
 const FEED_URL = process.env.BLOG_EMAIL_FEED_URL ?? `${SITE}/rss.xml`;
-const KLAVIYO_REVISION = "2024-10-15";
+// Klaviyo retires a revision two years after release. 2024-10-15 stopped
+// accepting the old campaign shape on 2026-10-15 and failed that week's send.
+// Move this forward before 2027-10-15.
+const KLAVIYO_REVISION = "2025-10-15";
 const LIST_ID = "SHnzMn"; // Blog Subscribers
 const FROM_EMAIL = "kinga@kingadow.com";
 const FROM_LABEL = "Kinga Dow";
@@ -269,15 +272,13 @@ async function createCampaign(post, campaignName, sendAt) {
         attributes: {
           name: campaignName,
           audiences: { included: [LIST_ID] },
-          // Verified against revision 2024-10-15: the datetime lives inside
-          // options_static, not alongside `method`. is_local false means one
+          // Verified against revision 2025-10-15: the datetime sits alongside
+          // `method`, and is_local lives in `options`. is_local false means one
           // absolute UTC send rather than 9:15 in each recipient's own zone.
           send_strategy: {
             method: "static",
-            options_static: {
-              datetime: sendAt.toISOString(),
-              is_local: false,
-            },
+            datetime: sendAt.toISOString(),
+            options: { is_local: false },
           },
           send_options: { use_smart_sending: false },
           tracking_options: {
@@ -294,18 +295,20 @@ async function createCampaign(post, campaignName, sendAt) {
             data: [
               {
                 type: "campaign-message",
-                // Also verified: on this revision `channel` and `content` sit
-                // directly on attributes. Nesting them under `definition` is
-                // the newer shape and is rejected here.
+                // Also verified: on this revision `channel`, `label` and
+                // `content` are nested under `definition`. Sent flat, Klaviyo
+                // rejects the message with "'definition' is a required field".
                 attributes: {
-                  channel: "email",
-                  label: campaignName,
-                  content: {
-                    subject: post.title,
-                    preview_text: post.excerpt.slice(0, 150),
-                    from_email: FROM_EMAIL,
-                    from_label: FROM_LABEL,
-                    reply_to_email: FROM_EMAIL,
+                  definition: {
+                    channel: "email",
+                    label: campaignName,
+                    content: {
+                      subject: post.title,
+                      preview_text: post.excerpt.slice(0, 150),
+                      from_email: FROM_EMAIL,
+                      from_label: FROM_LABEL,
+                      reply_to_email: FROM_EMAIL,
+                    },
                   },
                 },
               },

@@ -511,6 +511,30 @@
   padding: 0;
 }
 
+/* Code. Fenced blocks render as Shiki <pre class="astro-code"> with an inline
+   background, hence the !important on the navy fill. */
+.prose-kd pre {
+  margin: 1.5rem 0 1.75rem;
+  padding: 1.1rem 1.25rem;
+  border-radius: 0.5rem;
+  background-color: var(--color-kd-navy) !important;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  overflow-x: auto;
+}
+.prose-kd pre code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+.prose-kd :not(pre) > code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.875em;
+  color: var(--color-kd-navy);
+  background: var(--color-kd-cream);
+  border: 1px solid rgba(63, 69, 93, 0.12);
+  border-radius: 0.25rem;
+  padding: 0.1em 0.35em;
+}
+
 @media (max-width: 640px) {
   .prose-kd table {
     font-size: 0.85rem;

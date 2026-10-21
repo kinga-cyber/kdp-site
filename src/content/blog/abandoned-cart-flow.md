@@ -42,7 +42,7 @@ Assume some of the credit is borrowed and you build differently. You spend less 
 
 Most brands send one email. Some send 2 identical ones with a discount bolted onto the second.
 
-Three emails is a reasonable default, but the count matters far less than each one having a distinct job.
+[Three emails](/blog/klaviyo-abandoned-cart-template/) is a reasonable default, but the count matters far less than each one having a distinct job.
 
 **The first is a reminder, and it should be boring.** No discount, no urgency. Someone's checkout got interrupted by a phone call and they need a link back. Discounting here is the single most expensive habit in ecommerce email, because it hands margin to people who needed nothing but a link.
 

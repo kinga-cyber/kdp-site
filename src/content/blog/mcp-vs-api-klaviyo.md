@@ -77,7 +77,7 @@ This is where judgment lives, which is exactly why it stayed hands-on. How a for
 
 ## How I Actually Decide
 
-Connector first, every time. It answers most of what I want to know, it costs nothing, and honestly most of the work is questions rather than actions. What is the repeat rate on this segment. Which flows have not been touched in a year. What did this campaign really earn once you strip out the people who were buying anyway. Building follows the same order: the 6 segments of an [RFM grid](/blog/klaviyo-rfm-segmentation/) are a connector job, so I let Claude build them there.
+Connector first, every time. It answers most of what I want to know, it costs nothing, and honestly most of the work is questions rather than actions. What is the repeat rate on this segment. [Which flows have not been touched in a year](/blog/klaviyo-composer-flow-audit/). What did this campaign really earn once you strip out the people who were buying anyway. Building follows the same order: the 6 segments of an [RFM grid](/blog/klaviyo-rfm-segmentation/) are a connector job, so I let Claude build them there.
 
 The API key comes out for the short list it owns, and for anything I am running across several accounts at once, where writing the instructions once and running them per account beats doing it by hand 8 times.
 

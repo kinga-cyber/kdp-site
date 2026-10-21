@@ -21,7 +21,7 @@ metaDescription: "Calculate customer lifetime value the easy way by asking Claud
 
 Most Klaviyo accounts I open have a segment called VIP, and its definition is "spent over $500." A single number, picked once, probably years ago. It files a customer who spent $520 across 2 years into the same group as one who spent $12,000, and it leaves out a loyal buyer sitting at $480. The threshold was a guess, and the list has been sorted by that guess ever since.
 
-Customer lifetime value replaces the guess with your own numbers. It used to be a spreadsheet job. Now, if your store is connected to Claude, it is a question you ask in plain English.
+Customer lifetime value replaces the guess with your own numbers. It used to be a spreadsheet job. Now, if [your store is connected to Claude](/blog/claude-commerce-agents/), it is a question you ask in plain English.
 
 ## What Customer Lifetime Value Is
 

@@ -69,7 +69,7 @@ The input is two links: the Figma frame and the task.
 
 The shape of a production month matters more than it sounds. I design everything in Figma across about a week, all the campaigns, refined until I am sure. Then I sit down for one build session and work through them.
 
-**The first email takes around 10 minutes**, because the design system, the tokens and the documentation all have to be read before anything is built. Every email after that takes a fraction of it, because that context is already loaded.
+**The first email takes around 10 minutes**, because the design system, the tokens and the documentation all [have to be read before anything is built](/blog/ai-costs-marketing-agency/). Every email after that takes a fraction of it, because that context is already loaded.
 
 That single fact is the argument for batching, and the unit that matters is the session rather than the day. One email on Tuesday and another on Thursday, started fresh each time, pays that warm-up cost twice for 2 emails. Ten in one sitting pays it once.
 

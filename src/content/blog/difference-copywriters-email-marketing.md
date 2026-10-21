@@ -8,13 +8,14 @@ excerpt: "A general copywriter optimizes for attention. An email copywriter opti
 image: "/images/blog/copywriter-difference.jpg"
 imageAlt: "Title card reading 'Copywriters vs Email Marketing Copywriters', next to a photograph of Kinga Dow"
 keywords:
+  - "email marketing vs email copywriting"
   - "email copywriter"
   - "email marketing copywriter"
   - "copywriter vs email copywriter"
   - "hiring an email copywriter"
   - "email marketing vs copywriting"
-metaTitle: "Email Copywriter vs Copywriter: What Differs | Kinga Dow"
-metaDescription: "A copywriter optimizes for attention. An email copywriter optimizes for a decision. The real difference, and which half of the job is still scarce."
+metaTitle: "Email Copywriting vs Email Marketing, Explained | Kinga Dow"
+metaDescription: "How email copywriting differs from general copywriting and from email marketing strategy, and which half of the job is worth hiring for now."
 featured: false
 draft: false
 faqs:

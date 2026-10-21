@@ -1,5 +1,5 @@
 ---
-title: "Abandoned Cart Emails: What Actually Recovers Revenue"
+title: "Klaviyo Abandoned Cart Flow: What Actually Recovers Revenue"
 date: 2026-08-20
 author: "Kinga Dow"
 category: "Klaviyo"
@@ -7,14 +7,15 @@ excerpt: "Abandoned cart is the most over-credited number in ecommerce email, an
 image: "/images/blog/abandoned-cart.svg"
 imageAlt: "Diagram of an abandoned cart sequence branching by cart value and customer history rather than sending one identical email to everyone"
 keywords:
+  - "klaviyo abandoned cart flow"
+  - "klaviyo abandoned cart"
   - "abandoned cart email"
   - "abandoned cart flow"
-  - "klaviyo abandoned cart"
   - "cart abandonment strategy"
   - "abandoned cart sequence"
   - "ecommerce email flows"
-metaTitle: "Abandoned Cart Emails: What Actually Works | Kinga Dow"
-metaDescription: "Why abandoned cart revenue is over-credited, what the sequence should actually do, and how to find out what your flow is genuinely earning."
+metaTitle: "Klaviyo Abandoned Cart Flow: What Actually Works | Kinga Dow"
+metaDescription: "How to build a Klaviyo abandoned cart flow: what each email should do, what to segment on, the timing, and how to measure what it really earns."
 featured: false
 draft: false
 ---

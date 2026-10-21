@@ -20,7 +20,7 @@ featured: false
 draft: false
 ---
 
-Everyone's using AI now. Your [copywriter uses ChatGPT](/blog/difference-copywriters-email-marketing/). Your strategist asks Claude for campaign ideas. Maybe you've even [connected Klaviyo through MCP](/blog/mcp-stack-ecommerce-retention/). You feel like you're ahead.
+Everyone's using AI now. Your [copywriter uses ChatGPT](/blog/difference-copywriters-email-marketing/). Your strategist asks Claude for campaign ideas. Maybe you've even [connected Klaviyo through MCP](/blog/mcp-vs-api-klaviyo/). You feel like you're ahead.
 
 But there's a difference between using AI tools and having AI workflows — and that difference is where the actual competitive advantage lives.
 

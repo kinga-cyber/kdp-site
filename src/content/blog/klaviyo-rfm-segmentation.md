@@ -16,8 +16,8 @@ keywords:
   - "retention segmentation"
 featured: false
 draft: false
-metaTitle: "RFM Segmentation in Klaviyo: A Practical Guide | Kinga Dow"
-metaDescription: "How Klaviyo scores RFM, the six customer groups it creates, why most accounts cannot use the report, and how to rebuild it from ordinary segments."
+metaTitle: "Klaviyo RFM Segments: How to Build Them | Kinga Dow"
+metaDescription: "Build Klaviyo RFM segments on any plan, with the 6 groups Klaviyo uses, the score boundaries behind them, and the flows to trigger when a customer moves."
 faqs:
   - question: "What is RFM segmentation in Klaviyo?"
     answer: "RFM segmentation scores every customer on three dimensions: Recency (how recently they bought), Frequency (how often they buy), and Monetary (how much they spend). Klaviyo scores each dimension 1 to 3 and sorts customers into 6 groups, from Champions at score 333 down to Inactive at score 111."
@@ -132,7 +132,7 @@ So build it yourself. All 3 axes exist in the ordinary segment builder.
 
 **Frequency** is close. Placed Order at least 3 times over all time is a 3, twice is a 2, once is a 1. Klaviyo's own bands are typically the same, it just derives them from your percentiles rather than fixing them.
 
-**Monetary** is where it gets awkward. The clean route is Historic CLV under `Predictive analytics about someone`, which is the total value of a customer's previous orders after refunds and returns. But [predictive analytics carries the same thresholds](https://help.klaviyo.com/hc/en-us/articles/360020919731), 500 customers and 180 days, so if you failed the first test you fail this one too.
+**Monetary** is where it gets awkward. The clean route is [Historic CLV](/blog/customer-lifetime-value-tiers/) under `Predictive analytics about someone`, which is the total value of a customer's previous orders after refunds and returns. But [predictive analytics carries the same thresholds](https://help.klaviyo.com/hc/en-us/articles/360020919731), 500 customers and 180 days, so if you failed the first test you fail this one too.
 
 If that applies to you, one option is to drop the axis and **run RF instead of RFM**. Recency and frequency carry most of the signal, order count correlates with spend in most catalogs anyway, and a 2-axis grid you actually use beats a 3-axis one you cannot build. The better option is to calculate the spend yourself, which is the next section.
 
@@ -144,7 +144,7 @@ The hard part of building this by hand is not creating the segments. It is knowi
 
 That is the part worth handing to Claude.
 
-With the [Klaviyo MCP connector](/blog/mcp-stack-ecommerce-retention/), which is the link that lets Claude read your account, Claude can look at your order numbers directly. What the spread of order counts actually looks like, where the spend cutoff falls at the top and bottom third. One question each, instead of an export and an afternoon in a spreadsheet.
+With the [Klaviyo MCP connector](/blog/mcp-vs-api-klaviyo/), which is the link that lets Claude read your account, Claude can look at your order numbers directly. What the spread of order counts actually looks like, where the spend cutoff falls at the top and bottom third. One question each, instead of an export and an afternoon in a spreadsheet.
 
 The Shopify connector is the one that matters more than it first appears, because it solves the monetary problem from the section above. Klaviyo will not calculate lifetime spend for an account under its thresholds. Shopify has every order regardless. So you pull the order history, group it by customer, and take the cutoffs from there. The axis Klaviyo declined to give you was sitting in the other system the whole time, and joining the two is the entire trick.
 

@@ -11,7 +11,6 @@ keywords:
   - "mcp servers ecommerce"
   - "what mcp servers do i need"
   - "best mcp servers for ecommerce"
-  - "klaviyo mcp"
   - "shopify mcp"
   - "mcp servers marketing"
 featured: false
@@ -49,7 +48,7 @@ Flows used to be the strange one. In August the connector could set a flow's sta
 
 That gap is closed. The connector now builds a flow from a full definition, triggers, actions and all, and it edits individual actions inside one. Klaviyo's own developer notes add a caution worth repeating, **"Klaviyo does not recommend pre-creation of flows in customer accounts,"** so the ability is there and they are telling you to use it carefully. Rewriting a whole live flow in one move is still the sharpest edit in the account, which is roughly where the remaining care sits.
 
-The lesson is not the specific list, which will be shorter again by the time you read this. It is that a connector's limits are a vendor's decisions, and vendors revisit them. Check what the connector does today rather than trusting a table someone published, this one included. Verified against Klaviyo's connector documentation on 5 September 2026.
+The lesson is not the specific list, which will be shorter again by the time you read this. It is that a connector's limits are a vendor's decisions, and vendors revisit them. Check [what the connector does today](/blog/mcp-vs-api-klaviyo/) rather than trusting a table someone published, this one included. Verified against Klaviyo's connector documentation on 5 September 2026.
 
 **What I use it for.** Comparative questions, almost entirely. Klaviyo's dashboards answer the questions Klaviyo anticipated, which are mostly "how did this perform". The awkward ones are comparative: how does this segment's repeat rate compare to that one, what share of a flow's revenue comes from the first email rather than the rest, which flows have not been edited in a year, what proportion of the list has engaged with anything in 6 months.
 
@@ -69,7 +68,7 @@ There is also a general GraphQL escape hatch, which matters more than it sounds.
 
 Read those last two again. It will create a discount code, though it now insists you state a start time and who is eligible before it makes one, rather than defaulting to live and everyone. It will change your stock numbers.
 
-The interesting contrast is how differently two vendors treat the same protocol. Klaviyo hedges its most dangerous write, a whole live flow, with a documented caution and a read-only switch. Shopify will let a model put a percentage off the entire catalog, and its guard is narrower and more literal: the discount tool now stops and asks for a start date and an audience rather than assuming them. Same protocol, two vendors, two different theories of which mistakes to prevent.
+The interesting contrast is how differently two vendors treat the same protocol. Klaviyo hedges its most dangerous write, a whole live flow, with a documented caution and a read-only switch. Shopify will let a model put a percentage off [the entire catalog](/blog/claude-commerce-agents/), and its guard is narrower and more literal: the discount tool now stops and asks for a start date and an audience rather than assuming them. Same protocol, two vendors, two different theories of which mistakes to prevent.
 
 To be fair to Shopify, the inventory tool is built carefully. It wants the current quantity passed back to it as a comparison value, so the write fails rather than overwriting the newer number if stock moved between reading and writing. That is a proper safeguard and more than most tools bother with.
 
@@ -129,7 +128,7 @@ Everything above is a platform connector. The layer that sits above them, the an
 
 **Polar Analytics** has one too, and its design is the more interesting of the two. Rather than exposing raw tables for a model to write SQL against, it exposes a defined metrics layer, so you query agreed definitions instead of hoping a generated query means what you think it means. Worth flagging that most of what is published comparing the two comes from Polar themselves.
 
-The reason this matters more than another connector is what it makes answerable. Klaviyo can tell you what email earned. It cannot tell you what email earned against everything else that was happening that week. Attribution tools can, and until this year that answer lived behind a dashboard somebody had to go and read.
+The reason this matters more than another connector is what it makes answerable. Klaviyo can tell you [what email earned](/blog/email-revenue-share-warning/). It cannot tell you what email earned against everything else that was happening that week. Attribution tools can, and until this year that answer lived behind a dashboard somebody had to go and read.
 
 ## What Is Still Missing
 

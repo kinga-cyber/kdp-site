@@ -12,10 +12,9 @@ keywords:
   - "klaviyo to google sheets"
   - "klaviyo export data"
   - "klaviyo reporting"
-  - "klaviyo mcp"
   - "connect klaviyo to claude"
-metaTitle: "Klaviyo to Google Sheets: Three Routes | Kinga Dow"
-metaDescription: "There is no native Klaviyo Google Sheets integration. Here are the three routes that work, what each one costs, and how to pick between them."
+metaTitle: "Klaviyo Google Sheets Integration: 3 Ways | Kinga Dow"
+metaDescription: "Connect Klaviyo to Google Sheets 3 ways, 2 of them free, with what each one costs and how to pick the right one for your reports."
 featured: false
 draft: false
 ---
@@ -74,7 +73,7 @@ And a scheduled refresh answers the same question forever. That is exactly right
 
 This is the route the guides leave out, and it needs no developer work and no code.
 
-Klaviyo has an MCP connector, which is a plug-in that lets Claude work with your account once you have given it permission. So does Google Drive. Both are on my list of [the MCP servers I actually use](/blog/mcp-stack-ecommerce-retention/). You connect them to Claude, and then you ask for what you want in plain English. Claude reads the account, works out the numbers, and saves them as a new Google Sheet.
+Klaviyo has [an MCP connector](/blog/mcp-vs-api-klaviyo/), which is a plug-in that lets Claude work with your account once you have given it permission. So does Google Drive. Both are on my list of [the MCP servers I actually use](/blog/mcp-stack-ecommerce-retention/). You connect them to Claude, and then you ask for what you want in plain English. Claude reads the account, works out the numbers, and saves them as a new Google Sheet.
 
 MCP is the piece that removes the developer from this picture. Nothing gets built and there is no password or access key to copy anywhere. You authorize a connection the same way you authorize any app, and Claude can read the account from there.
 

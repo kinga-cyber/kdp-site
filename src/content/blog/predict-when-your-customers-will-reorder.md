@@ -13,8 +13,8 @@ keywords:
   - "average time between orders"
   - "win-back window"
   - "klaviyo predictive analytics"
-metaTitle: "How to Predict When a Customer Will Reorder | Kinga Dow"
-metaDescription: "Klaviyo's Expected Date of Next Order, the requirements most guides skip, and how to find your brand's real repurchase interval when the box is empty."
+metaTitle: "Predict When a Customer Will Reorder in Klaviyo | Kinga Dow"
+metaDescription: "How Klaviyo calculates Expected Date of Next Order, what your account needs to show it, and how to find your real reorder window and use it in flows."
 featured: false
 draft: false
 ---
@@ -25,7 +25,7 @@ Two things that most explanations of it leave out. It has hard account-level req
 
 ## What Klaviyo Actually Predicts
 
-Four things: predicted customer lifetime value, churn risk, expected date of next order, and predicted gender.
+Four things: [predicted customer lifetime value](/blog/customer-lifetime-value-tiers/), churn risk, expected date of next order, and predicted gender.
 
 For reorder timing, the two that matter are **expected date of next order** and **churn risk**, and they are only useful together.
 
@@ -70,7 +70,7 @@ This is the work, and it is the part that gets skipped because it is tedious rat
 
 You need the gap, in days, between consecutive orders for every customer who has ordered more than once, plotted as a distribution. Then you look for two things: the cluster, which tells you the normal rhythm, and the point where the curve flattens, which is where a customer stops being between purchases and starts being gone.
 
-That is an afternoon in a spreadsheet, which is why almost nobody does it and the 90-day window survives as a convention nobody has checked.
+That is [an afternoon in a spreadsheet](/blog/klaviyo-google-sheets-integration/), which is why almost nobody does it and the 90-day window survives as a convention nobody has checked.
 
 With the account connected to an AI layer [through MCP](/blog/mcp-stack-ecommerce-retention/), it stops being an afternoon. You can ask the account directly: pull the interval distribution, find the drop-off, split it by first product purchased, and check whether the pattern differs for customers acquired on discount versus full price. That last one usually does differ, and it changes what you send.
 

@@ -1,5 +1,5 @@
 ---
-title: "MCP or the API: What Each One Can Actually Do"
+title: "Klaviyo MCP Server: What It Does, and When to Use the API"
 date: 2026-09-17
 updated: 2026-09-21
 author: "Kinga Dow"
@@ -8,16 +8,17 @@ excerpt: "The MCP connector, the API and the Klaviyo interface each have a job. 
 image: "/images/blog/mcp-vs-api.svg"
 imageAlt: "The MCP connector inside the larger API surface, with the Klaviyo interface beside them for the work a person checks"
 keywords:
-  - "mcp vs api"
+  - "klaviyo mcp"
   - "klaviyo mcp server"
+  - "mcp vs api"
   - "klaviyo api"
   - "model context protocol limitations"
   - "claude code marketing"
   - "mcp connector capabilities"
 featured: false
 draft: false
-metaTitle: "MCP or the API: What Each One Can Actually Do | Kinga Dow"
-metaDescription: "How the Klaviyo MCP connector, the API and the interface each earn their place. What Claude builds directly, what a key is for, and the work best kept in the interface."
+metaTitle: "Klaviyo MCP Server: What It Does vs the API | Kinga Dow"
+metaDescription: "What the Klaviyo MCP server does day to day, which jobs belong to the API, and the work best kept in the Klaviyo interface."
 faqs:
   - question: "What is the Klaviyo MCP connector?"
     answer: "The Klaviyo MCP connector is a link that lets AI tools like Claude read and act on your Klaviyo account without requiring API keys. It covers campaigns, flows, segments, lists, templates, profiles, catalogs, reporting, and most day-to-day marketing tasks."

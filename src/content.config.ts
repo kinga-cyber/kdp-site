@@ -21,6 +21,9 @@ const blog = defineCollection({
     // Status
     featured: z.boolean().default(false),
     draft: z.boolean().default(false),
+    // Lists a draft in Upcoming Posts before it is approved. It still never
+    // publishes while draft is true.
+    announce: z.boolean().default(false),
 
     // Optional overrides — only set when defaults don't fit the spec
     metaTitle: z.string().optional(),

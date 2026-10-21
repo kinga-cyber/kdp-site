@@ -29,6 +29,12 @@ export async function getPublishedPosts(): Promise<Post[]> {
  * Posts that are approved and dated in the future, soonest first. Feeds the
  * "Upcoming posts" schedule on the blog index.
  *
+ * A draft with `announce: true` is listed too, so an approved topic can sit on
+ * the schedule while the post is still being finished. It still never
+ * publishes: if its date passes while it is a draft, it drops off this list
+ * and nothing goes live. The schedule shows no links, so a listed draft
+ * cannot 404.
+ *
  * Unlike getPublishedPosts, this ignores dev mode: the schedule should look
  * the same locally as it will in production. A post leaves this list on the
  * same build that publishes it, so the two can never disagree.
@@ -37,7 +43,7 @@ export async function getUpcomingPosts(limit = 5): Promise<Post[]> {
   const now = Date.now();
   const posts = await getCollection(
     "blog",
-    ({ data }) => !data.draft && data.date.valueOf() > now
+    ({ data }) => (!data.draft || data.announce) && data.date.valueOf() > now
   );
   return posts
     .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf())

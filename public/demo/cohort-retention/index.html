@@ -43,19 +43,21 @@
     background: var(--navy);
     color: var(--white);
     padding: 48px 0 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .report-header::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 40%;
+    background: linear-gradient(135deg, rgba(140,171,149,0.08) 0%, rgba(64,69,91,0) 70%);
+    pointer-events: none;
   }
   .header-content {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-  }
-  .brand-mark {
-    flex-shrink: 0;
-  }
-  .brand-mark img {
-    height: 140px;
-    width: auto;
   }
   .header-left h1 {
     font-size: 28px;
@@ -64,7 +66,6 @@
     margin-bottom: 8px;
     text-transform: uppercase;
   }
-  .header-left h1 .title-break { display: inline; }
   .header-left .subtitle {
     font-size: 15px;
     font-weight: 300;
@@ -74,7 +75,7 @@
   .header-meta {
     display: flex;
     gap: 32px;
-    font-size: 14px;
+    font-size: 12px;
     color: rgba(255,255,255,0.55);
     font-weight: 400;
   }
@@ -82,9 +83,27 @@
   .header-meta strong {
     color: rgba(255,255,255,0.85);
     font-weight: 600;
-    font-size: 15px;
     display: block;
-    margin-top: 3px;
+    margin-top: 2px;
+  }
+  .brand-mark {
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .brand-mark .brand-name {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+  .brand-mark .brand-tagline {
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.45);
+    margin-top: 4px;
+    text-transform: uppercase;
+    font-weight: 400;
   }
 
   /* ─── Section Wrappers ────────────────────────── */
@@ -214,6 +233,20 @@
   .cell-healthy { color: var(--sage); font-weight: 600; }
   .cell-warning { color: var(--amber); font-weight: 600; }
   .cell-critical { color: var(--red); font-weight: 600; }
+  .cell-na { color: var(--grey); }
+  .cell-up { color: var(--sage); font-weight: 600; }
+  .cell-down { color: var(--red); font-weight: 600; }
+  tr.row-highlight td { background: rgba(140,171,149,0.10); }
+
+  .section-intro { font-size: 13px; line-height: 1.65; color: var(--charcoal); margin: -4px 0 16px; max-width: 780px; }
+  .table-note { font-size: 11px; line-height: 1.6; color: var(--grey); margin-top: 12px; max-width: 780px; }
+
+  /* ─── Data & Method ───────────────────────────── */
+  .data-notes dl { display: grid; grid-template-columns: 200px 1fr; gap: 10px 20px; font-size: 13px; line-height: 1.55; margin: 0; }
+  .data-notes dt { color: var(--grey); font-weight: 600; }
+  .data-notes dd { margin: 0; color: var(--charcoal); }
+  .data-notes summary { cursor: pointer; font-size: 13px; font-weight: 600; color: var(--navy); margin-top: 20px; }
+  .data-notes pre { background: var(--lavender); border-radius: 8px; padding: 16px; font-size: 11px; line-height: 1.5; overflow-x: auto; margin-top: 10px; }
 
   .status-pill {
     display: inline-block;
@@ -330,12 +363,7 @@
     background: var(--cream);
     border-radius: 8px;
     padding: 20px;
-    overflow: hidden;
-    min-width: 0;
-  }
-  .chart-box canvas {
-    max-width: 100%;
-    height: auto !important;
+    min-width: 0;  /* let the canvas shrink on phones */
   }
   .chart-box h4 {
     font-size: 12px;
@@ -418,6 +446,15 @@
     text-transform: none;
     margin-left: 8px;
   }
+  .demo-banner a {
+    color: var(--white);
+    letter-spacing: 0.5px;
+    text-transform: none;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    margin-left: 12px;
+    white-space: nowrap;
+  }
 
   /* ─── Benchmark Section ──────────────────────── */
   .benchmark-grid {
@@ -460,7 +497,7 @@
     display: flex;
     align-items: baseline;
     gap: 8px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   .benchmark-card .bm-value {
     font-size: 24px;
@@ -511,26 +548,98 @@
     margin-top: 2px;
   }
 
-  /* ─── Demo Banner ─────────────────────────────── */
-  .demo-banner {
+  /* ─── Password Gate ─────────────────────────────── */
+  .pw-gate {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
     background: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  .pw-gate.hidden { display: none; }
+  .pw-box {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 48px 40px;
     text-align: center;
-    padding: 10px 16px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
   }
-  .demo-banner span {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2px;
+  .pw-box .pw-brand {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 4px;
     text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .pw-box .pw-tagline {
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--grey);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  .pw-box h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--charcoal);
+    margin-bottom: 8px;
+  }
+  .pw-box p {
+    font-size: 13px;
+    color: var(--grey);
+    margin-bottom: 24px;
+  }
+  .pw-box input[type="password"] {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .pw-box input[type="password"]:focus {
+    border-color: var(--navy);
+  }
+  .pw-box input[type="password"].pw-error {
+    border-color: var(--red);
+    animation: shake 0.4s ease;
+  }
+  .pw-box button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 16px;
+    background: var(--navy);
     color: var(--white);
+    border: none;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
   }
-  .demo-banner .demo-sub {
-    font-weight: 300;
-    letter-spacing: 0.5px;
-    opacity: 0.6;
-    margin-left: 8px;
+  .pw-box button:hover { background: #565b72; }
+  .pw-error-msg {
+    color: var(--red);
+    font-size: 12px;
+    margin-top: 10px;
+    min-height: 18px;
   }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-8px); }
+    40%, 80% { transform: translateX(8px); }
+  }
+  .report-locked { display: none; }
+  .report-locked.unlocked { display: block; }
 
   /* ─── Print Styles ────────────────────────────── */
   @media print {
@@ -545,126 +654,58 @@
   @media (max-width: 768px) {
     .container { padding: 0 16px; }
     .section { padding: 20px 16px; margin-top: 16px; }
-
-    /* Header */
-    .report-header { padding: 24px 16px 28px; }
-    .header-content { flex-direction: column; }
-    .brand-mark { order: -1; margin-bottom: 4px; }
-    .brand-mark img { height: 80px; }
-    .header-left h1 { font-size: 18px; line-height: 1.3; }
-    .header-left h1 .title-break { display: block; }
-    .header-left .subtitle { font-size: 13px; margin-bottom: 16px; }
-    .header-meta { flex-wrap: wrap; gap: 16px 24px; font-size: 12px; }
-    .header-meta strong { font-size: 13px; }
-
-    /* Executive Summary */
-    .exec-grid { grid-template-columns: 1fr; }
-    .exec-finding { padding: 16px; }
-    .exec-finding p { font-size: 14px; }
-    .health-badge { flex-direction: column; gap: 4px; padding: 16px 20px; align-items: center; text-align: center; }
-
-    /* KPI Cards */
-    .kpi-row { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .kpi-card { padding: 14px 10px; }
-    .kpi-card .kpi-value { font-size: 22px; }
-    .kpi-card .kpi-label { font-size: 10px; }
-
-    /* Benchmarks */
-    .benchmark-grid { grid-template-columns: 1fr; }
-    .benchmark-card { padding: 14px 16px; }
-
-    /* Charts */
-    .chart-grid { grid-template-columns: 1fr; }
-    .chart-box { padding: 14px; }
-
-    /* Cohort Table */
-    .table-wrapper {
-      position: relative;
-      margin: 8px -16px 0;
-      padding: 0 16px;
-    }
-    .table-wrapper::after {
-      content: '← Scroll →';
-      display: block;
-      text-align: center;
-      font-size: 10px;
-      color: var(--grey);
-      padding: 8px 0 0;
-      letter-spacing: 1px;
-    }
-    table { font-size: 12px; }
-    thead th { padding: 10px 10px; font-size: 10px; }
-    tbody td { padding: 9px 10px; }
-
-    /* Detail Cards */
     .detail-card { padding: 20px 16px; margin-top: 16px; }
-    .detail-header { flex-direction: column; align-items: flex-start; gap: 10px; }
-    .detail-header h3 { font-size: 16px; }
-    .detail-metrics { grid-template-columns: repeat(3, 1fr); gap: 8px; }
-    .metric-box { padding: 10px 8px; }
-    .metric-box .metric-value { font-size: 16px; }
-    .metric-box .metric-label { font-size: 9px; letter-spacing: 0.5px; }
-    .detail-section ul li { font-size: 12px; padding-left: 16px; }
-    .detail-section p { font-size: 13px; }
-
-    /* CRM Tasks */
-    .task-item {
-      grid-template-columns: 1fr;
-      gap: 6px;
-      padding: 12px 0;
-    }
-    .task-title { font-size: 13px; }
-
-    /* Password Gate */
-    .pw-box { padding: 32px 24px; }
-    .pw-box h2 { font-size: 16px; }
-    .pw-box p { font-size: 12px; }
-
-    /* Footer */
-    .report-footer { padding: 28px 0 36px; margin-top: 20px; }
-
-    /* Demo Banner */
-    .demo-banner { font-size: 10px; padding: 10px 16px; letter-spacing: 1.5px; }
-    .demo-banner span { display: block; margin-left: 0; margin-top: 4px; }
-  }
-
-  /* ─── Small phones ─────────────────────────────── */
-  @media (max-width: 380px) {
-    .kpi-row { grid-template-columns: 1fr; }
+    .chart-box { padding: 14px; }
+    .report-header { padding: 28px 0; }
+    .header-left h1 { font-size: 20px; line-height: 1.3; }
+    .header-meta { flex-wrap: wrap; gap: 12px 24px; }
+    .header-content { flex-direction: column; gap: 20px; }
+    .brand-mark { text-align: left; }
+    .exec-grid { grid-template-columns: 1fr; }
+    .kpi-row { grid-template-columns: repeat(2, 1fr); }
+    .chart-grid { grid-template-columns: 1fr; }
     .detail-metrics { grid-template-columns: 1fr; }
-    .header-meta { flex-direction: column; gap: 10px; }
-    .header-left h1 { font-size: 18px; }
+    .task-item { grid-template-columns: 1fr; gap: 4px; }
+    .data-notes dl { grid-template-columns: 1fr; gap: 2px; }
+    .data-notes dd { margin-bottom: 10px; }
   }
 </style>
 </head>
 <body>
 
 
-<!-- ═══════════════════════ DEMO BANNER ═══════════════════════ -->
+
+
+
+
+
+
+
+<div id="reportContent" class="">
+
+
 <div class="demo-banner">
-  <span>Demo — Sample Data</span>
-  <span class="demo-sub">This report uses simulated data to demonstrate capabilities.</span>
+  Demo report <span>Bloom & Barrel is a fictional store and every order in it is simulated. A real report reads the store's own order history.</span>
+  <a href="https://kingadow.com/">Back to kingadow.com</a>
 </div>
-
-<div id="reportContent">
-
 
 
 <!-- ═══════════════════════ HEADER ═══════════════════════ -->
 <div class="report-header">
   <div class="container header-content">
     <div class="header-left">
-      <h1>Cohort Retention <span class="title-break">Intelligence Report</span></h1>
+      <h1>Cohort Retention Intelligence Report</h1>
       <div class="subtitle">Retention analysis &amp; actionable recommendations</div>
       <div class="header-meta">
-        <div><span>Client</span><strong>Bloom & Barrel Co.</strong></div>
-        <div><span>Generated</span><strong>February 20, 2026</strong></div>
-        <div><span>Period</span><strong>Feb 2025 — Feb 2026</strong></div>
-        <div><span>Customers</span><strong>26,340</strong></div>
+        <div><span>Client</span><strong>Bloom & Barrel</strong></div>
+        <div><span>Generated</span><strong>October 23, 2026</strong></div>
+        <div><span>Period</span><strong>Nov 2025 — Oct 2026</strong></div>
+        <div><span>New customers</span><strong>16,421</strong></div>
       </div>
     </div>
     <div class="brand-mark">
-      <img src="/images/global/logo-gold.png" alt="Kinga Dow — Exponential Brand Growth">
+      <div class="brand-name">KINGA DOW</div>
+      <div class="brand-tagline">EXPONENTIAL BRAND GROWTH</div>
     </div>
   </div>
 </div>
@@ -676,7 +717,7 @@
   <div class="section-title">Executive Summary</div>
   <div class="exec-grid">
     <div class="exec-finding">
-      <p>Your <strong>June 2025 cohort</strong> has a <strong>8.3% repurchase rate</strong> at 90 days — <strong>17% below the 10% benchmark</strong>. Overall retention health is <strong>WARNING</strong> with 6 cohort(s) needing review.</p>
+      <p>Your weakest recent cohort is <strong>May 2026</strong>: <strong>4.5%</strong> of its new customers ordered again within 90 days, 55% below the 10% benchmark for Gifting / Occasion-Based. <strong>5 of 8</strong> cohorts we can compare repurchased better than the same month last year. The biggest story is <strong>December 2025</strong>: <strong>1,368 past customers came back</strong> after 6+ months away (987 yearly regulars and 381 gone 18+ months), 28% of that month's buyers. 1 cohort is critical and 2 are in warning status.</p>
     </div>
     <div class="health-badge badge-WARNING">
       <div class="badge-label">Overall Health</div>
@@ -686,479 +727,209 @@
 
   <div class="kpi-row">
     <div class="kpi-card">
-      <div class="kpi-value">26,340</div>
-      <div class="kpi-label">Customers Analyzed</div>
+      <div class="kpi-value">16,421</div>
+      <div class="kpi-label">New Customers</div>
     </div>
     <div class="kpi-card">
-      <div class="kpi-value">11.8%</div>
+      <div class="kpi-value">10.8%</div>
       <div class="kpi-label">Avg Repurchase Rate (90d)</div>
     </div>
     <div class="kpi-card">
-      <div class="kpi-value">6</div>
+      <div class="kpi-value">3</div>
       <div class="kpi-label">Cohorts Needing Attention</div>
     </div>
     <div class="kpi-card">
-      <div class="kpi-value">33,210</div>
-      <div class="kpi-label">Total Orders</div>
+      <div class="kpi-value">5,078</div>
+      <div class="kpi-label">Past Customers Back After 6+ Months</div>
     </div>
   </div>
 </div>
 
 <!-- ═══════════════════════ BENCHMARKS ═══════════════════════ -->
 
-<div class="section">
-  <div class="section-title">Klaviyo Industry Benchmarks — Home & Garden</div>
-  <div class="benchmark-grid">
-    
-    <div class="benchmark-card">
-      <div class="bm-header">
-        <span class="bm-label">Avg Order Count</span>
-        <span class="bm-status bm-Good">Good</span>
-      </div>
-      <div class="bm-value-row">
-        <span class="bm-value">1.54</span>
-        <span class="bm-percentile">56th percentile</span>
-      </div>
-      <div class="benchmark-bar">
-        <div class="bar-fill" style="width: 56.0%; background: rgba(140,171,149,0.6);"></div>
-        <div class="bar-marker" style="left: 25%;"><span class="bar-marker-label">25th</span></div>
-        <div class="bar-marker" style="left: 50%;"><span class="bar-marker-label">Med</span></div>
-        <div class="bar-marker" style="left: 75%;"><span class="bar-marker-label">75th</span></div>
-      </div>
-      <div class="benchmark-legend">
-        <span>1.20</span>
-        <span>2.05</span>
-      </div>
-    </div>
-    
-    <div class="benchmark-card">
-      <div class="bm-header">
-        <span class="bm-label">Avg Cart Size</span>
-        <span class="bm-status bm-Poor">Poor</span>
-      </div>
-      <div class="bm-value-row">
-        <span class="bm-value">1.06</span>
-        <span class="bm-percentile">4th percentile</span>
-      </div>
-      <div class="benchmark-bar">
-        <div class="bar-fill" style="width: 4.0%; background: rgba(196,91,91,0.7);"></div>
-        <div class="bar-marker" style="left: 25%;"><span class="bar-marker-label">25th</span></div>
-        <div class="bar-marker" style="left: 50%;"><span class="bar-marker-label">Med</span></div>
-        <div class="bar-marker" style="left: 75%;"><span class="bar-marker-label">75th</span></div>
-      </div>
-      <div class="benchmark-legend">
-        <span>1.28</span>
-        <span>2.70</span>
-      </div>
-    </div>
-    
-    <div class="benchmark-card">
-      <div class="bm-header">
-        <span class="bm-label">Avg Order Value</span>
-        <span class="bm-status bm-Fair">Fair</span>
-      </div>
-      <div class="bm-value-row">
-        <span class="bm-value">$109.50</span>
-        <span class="bm-percentile">26th percentile</span>
-      </div>
-      <div class="benchmark-bar">
-        <div class="bar-fill" style="width: 26.0%; background: rgba(212,168,67,0.7);"></div>
-        <div class="bar-marker" style="left: 25%;"><span class="bar-marker-label">25th</span></div>
-        <div class="bar-marker" style="left: 50%;"><span class="bar-marker-label">Med</span></div>
-        <div class="bar-marker" style="left: 75%;"><span class="bar-marker-label">75th</span></div>
-      </div>
-      <div class="benchmark-legend">
-        <span>$107</span>
-        <span>$344</span>
-      </div>
-    </div>
-    
-    <div class="benchmark-card">
-      <div class="bm-header">
-        <span class="bm-label">Cart Recovery (Email)</span>
-        <span class="bm-status bm-Excellent">Excellent</span>
-      </div>
-      <div class="bm-value-row">
-        <span class="bm-value">3.6%</span>
-        <span class="bm-percentile">77th percentile</span>
-      </div>
-      <div class="benchmark-bar">
-        <div class="bar-fill" style="width: 77.0%; background: rgba(140,171,149,0.8);"></div>
-        <div class="bar-marker" style="left: 25%;"><span class="bar-marker-label">25th</span></div>
-        <div class="bar-marker" style="left: 50%;"><span class="bar-marker-label">Med</span></div>
-        <div class="bar-marker" style="left: 75%;"><span class="bar-marker-label">75th</span></div>
-      </div>
-      <div class="benchmark-legend">
-        <span>0.6%</span>
-        <span>3.2%</span>
-      </div>
-    </div>
-    
-    <div class="benchmark-card">
-      <div class="bm-header">
-        <span class="bm-label">Cart Recovery (SMS)</span>
-        <span class="bm-status bm-Excellent">Excellent</span>
-      </div>
-      <div class="bm-value-row">
-        <span class="bm-value">11.4%</span>
-        <span class="bm-percentile">95th percentile</span>
-      </div>
-      <div class="benchmark-bar">
-        <div class="bar-fill" style="width: 95.0%; background: rgba(140,171,149,0.8);"></div>
-        <div class="bar-marker" style="left: 25%;"><span class="bar-marker-label">25th</span></div>
-        <div class="bar-marker" style="left: 50%;"><span class="bar-marker-label">Med</span></div>
-        <div class="bar-marker" style="left: 75%;"><span class="bar-marker-label">75th</span></div>
-      </div>
-      <div class="benchmark-legend">
-        <span>0.0%</span>
-        <span>3.2%</span>
-      </div>
-    </div>
-    
-    <div class="benchmark-card">
-      <div class="bm-header">
-        <span class="bm-label">Cart Rev/Recipient (Email)</span>
-        <span class="bm-status bm-Excellent">Excellent</span>
-      </div>
-      <div class="bm-value-row">
-        <span class="bm-value">$7.59</span>
-        <span class="bm-percentile">77th percentile</span>
-      </div>
-      <div class="benchmark-bar">
-        <div class="bar-fill" style="width: 77.0%; background: rgba(140,171,149,0.8);"></div>
-        <div class="bar-marker" style="left: 25%;"><span class="bar-marker-label">25th</span></div>
-        <div class="bar-marker" style="left: 50%;"><span class="bar-marker-label">Med</span></div>
-        <div class="bar-marker" style="left: 75%;"><span class="bar-marker-label">75th</span></div>
-      </div>
-      <div class="benchmark-legend">
-        <span>$1</span>
-        <span>$6</span>
-      </div>
-    </div>
-    
-    <div class="benchmark-card">
-      <div class="bm-header">
-        <span class="bm-label">Campaign Open Rate</span>
-        <span class="bm-status bm-Fair">Fair</span>
-      </div>
-      <div class="bm-value-row">
-        <span class="bm-value">45.0%</span>
-        <span class="bm-percentile">41st percentile</span>
-      </div>
-      <div class="benchmark-bar">
-        <div class="bar-fill" style="width: 41.0%; background: rgba(212,168,67,0.7);"></div>
-        <div class="bar-marker" style="left: 25%;"><span class="bar-marker-label">25th</span></div>
-        <div class="bar-marker" style="left: 50%;"><span class="bar-marker-label">Med</span></div>
-        <div class="bar-marker" style="left: 75%;"><span class="bar-marker-label">75th</span></div>
-      </div>
-      <div class="benchmark-legend">
-        <span>38.3%</span>
-        <span>60.0%</span>
-      </div>
-    </div>
-    
-    <div class="benchmark-card">
-      <div class="bm-header">
-        <span class="bm-label">Campaign Click Rate</span>
-        <span class="bm-status bm-Poor">Poor</span>
-      </div>
-      <div class="bm-value-row">
-        <span class="bm-value">0.4%</span>
-        <span class="bm-percentile">23rd percentile</span>
-      </div>
-      <div class="benchmark-bar">
-        <div class="bar-fill" style="width: 23.0%; background: rgba(196,91,91,0.7);"></div>
-        <div class="bar-marker" style="left: 25%;"><span class="bar-marker-label">25th</span></div>
-        <div class="bar-marker" style="left: 50%;"><span class="bar-marker-label">Med</span></div>
-        <div class="bar-marker" style="left: 75%;"><span class="bar-marker-label">75th</span></div>
-      </div>
-      <div class="benchmark-legend">
-        <span>0.4%</span>
-        <span>1.6%</span>
-      </div>
-    </div>
-    
-    <div class="benchmark-card">
-      <div class="bm-header">
-        <span class="bm-label">Campaign Placed Order Rate</span>
-        <span class="bm-status bm-Fair">Fair</span>
-      </div>
-      <div class="bm-value-row">
-        <span class="bm-value">0.0%</span>
-        <span class="bm-percentile">44th percentile</span>
-      </div>
-      <div class="benchmark-bar">
-        <div class="bar-fill" style="width: 44.0%; background: rgba(212,168,67,0.7);"></div>
-        <div class="bar-marker" style="left: 25%;"><span class="bar-marker-label">25th</span></div>
-        <div class="bar-marker" style="left: 50%;"><span class="bar-marker-label">Med</span></div>
-        <div class="bar-marker" style="left: 75%;"><span class="bar-marker-label">75th</span></div>
-      </div>
-      <div class="benchmark-legend">
-        <span>0.0%</span>
-        <span>0.1%</span>
-      </div>
-    </div>
-    
-    <div class="benchmark-card">
-      <div class="bm-header">
-        <span class="bm-label">Flow Placed Order Rate</span>
-        <span class="bm-status bm-Fair">Fair</span>
-      </div>
-      <div class="bm-value-row">
-        <span class="bm-value">0.6%</span>
-        <span class="bm-percentile">35th percentile</span>
-      </div>
-      <div class="benchmark-bar">
-        <div class="bar-fill" style="width: 35.0%; background: rgba(212,168,67,0.7);"></div>
-        <div class="bar-marker" style="left: 25%;"><span class="bar-marker-label">25th</span></div>
-        <div class="bar-marker" style="left: 50%;"><span class="bar-marker-label">Med</span></div>
-        <div class="bar-marker" style="left: 75%;"><span class="bar-marker-label">75th</span></div>
-      </div>
-      <div class="benchmark-legend">
-        <span>0.4%</span>
-        <span>1.8%</span>
-      </div>
-    </div>
-    
-    <div class="benchmark-card">
-      <div class="bm-header">
-        <span class="bm-label">Flow Rev/Recipient</span>
-        <span class="bm-status bm-Fair">Fair</span>
-      </div>
-      <div class="bm-value-row">
-        <span class="bm-value">$0.86</span>
-        <span class="bm-percentile">35th percentile</span>
-      </div>
-      <div class="benchmark-bar">
-        <div class="bar-fill" style="width: 35.0%; background: rgba(212,168,67,0.7);"></div>
-        <div class="bar-marker" style="left: 25%;"><span class="bar-marker-label">25th</span></div>
-        <div class="bar-marker" style="left: 50%;"><span class="bar-marker-label">Med</span></div>
-        <div class="bar-marker" style="left: 75%;"><span class="bar-marker-label">75th</span></div>
-      </div>
-      <div class="benchmark-legend">
-        <span>$1</span>
-        <span>$4</span>
-      </div>
-    </div>
-    
-    <div class="benchmark-card">
-      <div class="bm-header">
-        <span class="bm-label">Welcome Flow Conv Rate</span>
-        <span class="bm-status bm-Fair">Fair</span>
-      </div>
-      <div class="bm-value-row">
-        <span class="bm-value">0.9%</span>
-        <span class="bm-percentile">38th percentile</span>
-      </div>
-      <div class="benchmark-bar">
-        <div class="bar-fill" style="width: 38.0%; background: rgba(212,168,67,0.7);"></div>
-        <div class="bar-marker" style="left: 25%;"><span class="bar-marker-label">25th</span></div>
-        <div class="bar-marker" style="left: 50%;"><span class="bar-marker-label">Med</span></div>
-        <div class="bar-marker" style="left: 75%;"><span class="bar-marker-label">75th</span></div>
-      </div>
-      <div class="benchmark-legend">
-        <span>0.5%</span>
-        <span>3.3%</span>
-      </div>
-    </div>
-    
-  </div>
-</div>
-
 
 <!-- ═══════════════════════ COHORT TABLE ═══════════════════════ -->
 <div class="section">
   <div class="section-title">Cohort Overview</div>
+  <p class="section-intro">Each row is the customers who placed their first ever order that month, and how many of them ordered again within 30, 60, 90 and 180 days. "vs last year" compares the 90-day rate with the same month a year earlier, so seasonal swings don't read as problems.</p>
   <div class="table-wrapper">
     <table>
       <thead>
         <tr>
           <th>Cohort</th>
-          <th>Customers</th>
+          <th>New customers</th>
           <th>RR 30d</th>
           <th>RR 60d</th>
           <th>RR 90d</th>
-          <th>LTV 30d</th>
-          <th>LTV 60d</th>
+          <th>RR 180d</th>
+          <th>90d vs last year</th>
           <th>LTV 90d</th>
-          <th>AOV</th>
+          <th>First order</th>
           <th>Status</th>
         </tr>
       </thead>
       <tbody>
         
         <tr>
-          <td><strong>2026-02</strong></td>
-          <td>1,517</td>
-          <td class="cell-healthy">6.1%</td>
-          <td class="cell-warning">6.1%</td>
-          <td class="cell-warning">6.1%</td>
-          <td>$110</td>
-          <td>$110</td>
-          <td>$110</td>
-          <td>$100.65</td>
+          <td><strong>2026-10</strong></td>
+          <td>805</td>
+          <td class="cell-na">—</td>
+          <td class="cell-na">—</td>
+          <td class="cell-na">—</td>
+          <td class="cell-na">—</td>
+          <td class="cell-na">—</td>
+          <td>—</td>
+          <td>$105</td>
           <td><span class="status-pill pill-MATURING">MATURING</span></td>
+        </tr>
+        
+        <tr>
+          <td><strong>2026-09</strong></td>
+          <td>992</td>
+          <td class="cell-na">—</td>
+          <td class="cell-na">—</td>
+          <td class="cell-na">—</td>
+          <td class="cell-na">—</td>
+          <td class="cell-na">—</td>
+          <td>—</td>
+          <td>$100</td>
+          <td><span class="status-pill pill-MATURING">MATURING</span></td>
+        </tr>
+        
+        <tr>
+          <td><strong>2026-08</strong></td>
+          <td>827</td>
+          <td class="cell-healthy">8.5%</td>
+          <td class="cell-na">—</td>
+          <td class="cell-na">—</td>
+          <td class="cell-na">—</td>
+          <td class="cell-na">—</td>
+          <td>—</td>
+          <td>$94</td>
+          <td><span class="status-pill pill-MATURING">MATURING</span></td>
+        </tr>
+        
+        <tr>
+          <td><strong>2026-07</strong></td>
+          <td>887</td>
+          <td class="cell-healthy">8.7%</td>
+          <td class="cell-healthy">12.2%</td>
+          <td class="cell-na">—</td>
+          <td class="cell-na">—</td>
+          <td class="cell-na">—</td>
+          <td>—</td>
+          <td>$94</td>
+          <td><span class="status-pill pill-MATURING">MATURING</span></td>
+        </tr>
+        
+        <tr>
+          <td><strong>2026-06</strong></td>
+          <td>1,055</td>
+          <td class="cell-healthy">8.0%</td>
+          <td class="cell-healthy">12.4%</td>
+          <td class="cell-healthy">13.7%</td>
+          <td class="cell-na">—</td>
+          <td class="cell-up">+1.4 pts</td>
+          <td>$110</td>
+          <td>$94</td>
+          <td><span class="status-pill pill-HEALTHY">HEALTHY</span></td>
+        </tr>
+        
+        <tr>
+          <td><strong>2026-05</strong></td>
+          <td>1,973</td>
+          <td class="cell-critical">3.0%</td>
+          <td class="cell-warning">4.1%</td>
+          <td class="cell-critical">4.5%</td>
+          <td class="cell-na">—</td>
+          <td class="cell-down">-0.9 pts</td>
+          <td>$120</td>
+          <td>$115</td>
+          <td><span class="status-pill pill-CRITICAL">CRITICAL</span></td>
+        </tr>
+        
+        <tr>
+          <td><strong>2026-04</strong></td>
+          <td>1,097</td>
+          <td class="cell-healthy">9.1%</td>
+          <td class="cell-healthy">14.2%</td>
+          <td class="cell-healthy">16.0%</td>
+          <td class="cell-na">—</td>
+          <td class="cell-up">+2.5 pts</td>
+          <td>$119</td>
+          <td>$98</td>
+          <td><span class="status-pill pill-HEALTHY">HEALTHY</span></td>
+        </tr>
+        
+        <tr>
+          <td><strong>2026-03</strong></td>
+          <td>915</td>
+          <td class="cell-healthy">9.4%</td>
+          <td class="cell-healthy">12.7%</td>
+          <td class="cell-healthy">14.1%</td>
+          <td class="cell-healthy">15.7%</td>
+          <td class="cell-up">+2.9 pts</td>
+          <td>$109</td>
+          <td>$92</td>
+          <td><span class="status-pill pill-HEALTHY">HEALTHY</span></td>
+        </tr>
+        
+        <tr>
+          <td><strong>2026-02</strong></td>
+          <td>1,554</td>
+          <td class="cell-healthy">8.1%</td>
+          <td class="cell-healthy">12.0%</td>
+          <td class="cell-healthy">13.3%</td>
+          <td class="cell-healthy">16.3%</td>
+          <td class="cell-up">+2.1 pts</td>
+          <td>$121</td>
+          <td>$106</td>
+          <td><span class="status-pill pill-HEALTHY">HEALTHY</span></td>
         </tr>
         
         <tr>
           <td><strong>2026-01</strong></td>
-          <td>1,739</td>
-          <td class="cell-healthy">6.3%</td>
-          <td class="cell-warning">6.6%</td>
-          <td class="cell-warning">6.6%</td>
-          <td>$121</td>
-          <td>$121</td>
-          <td>$121</td>
-          <td>$109.14</td>
-          <td><span class="status-pill pill-MATURING">MATURING</span></td>
+          <td>831</td>
+          <td class="cell-healthy">6.9%</td>
+          <td class="cell-healthy">10.7%</td>
+          <td class="cell-healthy">12.2%</td>
+          <td class="cell-healthy">14.4%</td>
+          <td class="cell-up">+2.0 pts</td>
+          <td>$104</td>
+          <td>$91</td>
+          <td><span class="status-pill pill-HEALTHY">HEALTHY</span></td>
         </tr>
         
         <tr>
           <td><strong>2025-12</strong></td>
-          <td>5,610</td>
-          <td class="cell-healthy">14.5%</td>
-          <td class="cell-healthy">15.1%</td>
-          <td class="cell-healthy">15.3%</td>
-          <td>$279</td>
-          <td>$280</td>
-          <td>$281</td>
-          <td>$215.99</td>
-          <td><span class="status-pill pill-MATURING">MATURING</span></td>
+          <td>3,365</td>
+          <td class="cell-warning">3.4%</td>
+          <td class="cell-warning">5.2%</td>
+          <td class="cell-warning">5.9%</td>
+          <td class="cell-warning">9.1%</td>
+          <td class="cell-down">-0.8 pts</td>
+          <td>$137</td>
+          <td>$130</td>
+          <td><span class="status-pill pill-WARNING">WARNING</span></td>
         </tr>
         
         <tr>
           <td><strong>2025-11</strong></td>
-          <td>1,958</td>
-          <td class="cell-healthy">9.6%</td>
-          <td class="cell-healthy">10.7%</td>
-          <td class="cell-healthy">11.5%</td>
-          <td>$248</td>
-          <td>$250</td>
-          <td>$252</td>
-          <td>$210.00</td>
-          <td><span class="status-pill pill-HEALTHY">HEALTHY</span></td>
-        </tr>
-        
-        <tr>
-          <td><strong>2025-10</strong></td>
-          <td>1,393</td>
-          <td class="cell-warning">6.0%</td>
-          <td class="cell-healthy">8.3%</td>
-          <td class="cell-warning">9.0%</td>
-          <td>$153</td>
-          <td>$161</td>
-          <td>$163</td>
-          <td>$142.53</td>
+          <td>2,120</td>
+          <td class="cell-warning">4.1%</td>
+          <td class="cell-warning">6.3%</td>
+          <td class="cell-warning">7.1%</td>
+          <td class="cell-warning">10.0%</td>
+          <td class="cell-down">-1.9 pts</td>
+          <td>$89</td>
+          <td>$80</td>
           <td><span class="status-pill pill-WARNING">WARNING</span></td>
-        </tr>
-        
-        <tr>
-          <td><strong>2025-09</strong></td>
-          <td>1,875</td>
-          <td class="cell-healthy">6.7%</td>
-          <td class="cell-healthy">8.5%</td>
-          <td class="cell-healthy">11.8%</td>
-          <td>$133</td>
-          <td>$141</td>
-          <td>$162</td>
-          <td>$138.33</td>
-          <td><span class="status-pill pill-HEALTHY">HEALTHY</span></td>
-        </tr>
-        
-        <tr>
-          <td><strong>2025-08</strong></td>
-          <td>1,458</td>
-          <td class="cell-warning">5.3%</td>
-          <td class="cell-warning">6.7%</td>
-          <td class="cell-warning">8.1%</td>
-          <td>$110</td>
-          <td>$112</td>
-          <td>$114</td>
-          <td>$103.45</td>
-          <td><span class="status-pill pill-WARNING">WARNING</span></td>
-        </tr>
-        
-        <tr>
-          <td><strong>2025-07</strong></td>
-          <td>1,201</td>
-          <td class="cell-warning">5.6%</td>
-          <td class="cell-warning">6.9%</td>
-          <td class="cell-warning">8.1%</td>
-          <td>$109</td>
-          <td>$111</td>
-          <td>$114</td>
-          <td>$107.64</td>
-          <td><span class="status-pill pill-WARNING">WARNING</span></td>
-        </tr>
-        
-        <tr>
-          <td><strong>2025-06</strong></td>
-          <td>1,085</td>
-          <td class="cell-warning">4.9%</td>
-          <td class="cell-warning">6.5%</td>
-          <td class="cell-warning">7.2%</td>
-          <td>$122</td>
-          <td>$125</td>
-          <td>$129</td>
-          <td>$116.14</td>
-          <td><span class="status-pill pill-WARNING">WARNING</span></td>
-        </tr>
-        
-        <tr>
-          <td><strong>2025-05</strong></td>
-          <td>1,271</td>
-          <td class="cell-warning">4.6%</td>
-          <td class="cell-warning">6.1%</td>
-          <td class="cell-warning">7.2%</td>
-          <td>$104</td>
-          <td>$106</td>
-          <td>$108</td>
-          <td>$100.61</td>
-          <td><span class="status-pill pill-WARNING">WARNING</span></td>
-        </tr>
-        
-        <tr>
-          <td><strong>2025-04</strong></td>
-          <td>958</td>
-          <td class="cell-warning">5.0%</td>
-          <td class="cell-warning">7.4%</td>
-          <td class="cell-warning">8.0%</td>
-          <td>$113</td>
-          <td>$117</td>
-          <td>$120</td>
-          <td>$107.02</td>
-          <td><span class="status-pill pill-WARNING">WARNING</span></td>
-        </tr>
-        
-        <tr>
-          <td><strong>2025-03</strong></td>
-          <td>4,119</td>
-          <td class="cell-healthy">12.7%</td>
-          <td class="cell-healthy">13.7%</td>
-          <td class="cell-healthy">14.5%</td>
-          <td>$149</td>
-          <td>$151</td>
-          <td>$153</td>
-          <td>$125.71</td>
-          <td><span class="status-pill pill-WARNING">WARNING</span></td>
-        </tr>
-        
-        <tr>
-          <td><strong>2025-02</strong></td>
-          <td>688</td>
-          <td class="cell-healthy">15.3%</td>
-          <td class="cell-healthy">16.4%</td>
-          <td class="cell-healthy">17.3%</td>
-          <td>$207</td>
-          <td>$211</td>
-          <td>$214</td>
-          <td>$163.20</td>
-          <td><span class="status-pill pill-HEALTHY">HEALTHY</span></td>
         </tr>
         
       </tbody>
     </table>
   </div>
+  <p class="table-note">A dash means the window isn't over yet: every customer in the cohort needs the full 30, 60, 90 or 180 days after their first order before the rate is final. MATURING cohorts are less than 90 days past the end of their month. Status combines the 90-day rate with the first-order value vs the same month last year.</p>
 </div>
 
 <!-- ═══════════════════════ CHARTS ═══════════════════════ -->
@@ -1176,12 +947,321 @@
   </div>
 </div>
 
+<!-- ═══════════════════════ WHO BOUGHT EACH MONTH ═══════════════════════ -->
+
+<div class="section">
+  <div class="section-title">Who Bought Each Month</div>
+  <p class="section-intro">Not everyone who orders in a month is new. This splits each month's buyers by how long it had been since their previous order. December 2025 stands out: 1,368 past customers came back, worth $193,554.</p>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Month</th>
+          <th>Buyers</th>
+          <th>New</th>
+          <th>Back within 6 mo</th>
+          <th>Yearly regulars</th>
+          <th>Won back (18+ mo)</th>
+          <th>Back after 6+ mo</th>
+          <th>Their revenue</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr class="">
+          <td><strong>2025-11</strong></td>
+          <td>2,790</td>
+          <td>2,120</td>
+          <td>146</td>
+          <td>439</td>
+          <td>85</td>
+          <td><strong>19%</strong></td>
+          <td>$44,043</td>
+        </tr>
+        
+        <tr class="row-highlight">
+          <td><strong>2025-12</strong></td>
+          <td>4,876</td>
+          <td>3,365</td>
+          <td>143</td>
+          <td>987</td>
+          <td>381</td>
+          <td><strong>28%</strong></td>
+          <td>$193,554</td>
+        </tr>
+        
+        <tr class="">
+          <td><strong>2026-01</strong></td>
+          <td>1,238</td>
+          <td>831</td>
+          <td>201</td>
+          <td>196</td>
+          <td>10</td>
+          <td><strong>17%</strong></td>
+          <td>$19,941</td>
+        </tr>
+        
+        <tr class="">
+          <td><strong>2026-02</strong></td>
+          <td>2,213</td>
+          <td>1,554</td>
+          <td>168</td>
+          <td>402</td>
+          <td>89</td>
+          <td><strong>22%</strong></td>
+          <td>$55,203</td>
+        </tr>
+        
+        <tr class="">
+          <td><strong>2026-03</strong></td>
+          <td>1,368</td>
+          <td>915</td>
+          <td>249</td>
+          <td>194</td>
+          <td>10</td>
+          <td><strong>15%</strong></td>
+          <td>$20,195</td>
+        </tr>
+        
+        <tr class="">
+          <td><strong>2026-04</strong></td>
+          <td>1,516</td>
+          <td>1,097</td>
+          <td>204</td>
+          <td>202</td>
+          <td>13</td>
+          <td><strong>14%</strong></td>
+          <td>$22,677</td>
+        </tr>
+        
+        <tr class="">
+          <td><strong>2026-05</strong></td>
+          <td>3,093</td>
+          <td>1,973</td>
+          <td>227</td>
+          <td>722</td>
+          <td>171</td>
+          <td><strong>29%</strong></td>
+          <td>$110,804</td>
+        </tr>
+        
+        <tr class="">
+          <td><strong>2026-06</strong></td>
+          <td>1,476</td>
+          <td>1,055</td>
+          <td>178</td>
+          <td>236</td>
+          <td>7</td>
+          <td><strong>16%</strong></td>
+          <td>$24,289</td>
+        </tr>
+        
+        <tr class="">
+          <td><strong>2026-07</strong></td>
+          <td>1,268</td>
+          <td>887</td>
+          <td>156</td>
+          <td>218</td>
+          <td>7</td>
+          <td><strong>18%</strong></td>
+          <td>$21,683</td>
+        </tr>
+        
+        <tr class="">
+          <td><strong>2026-08</strong></td>
+          <td>1,243</td>
+          <td>827</td>
+          <td>175</td>
+          <td>226</td>
+          <td>15</td>
+          <td><strong>19%</strong></td>
+          <td>$25,145</td>
+        </tr>
+        
+        <tr class="">
+          <td><strong>2026-09</strong></td>
+          <td>1,381</td>
+          <td>992</td>
+          <td>146</td>
+          <td>228</td>
+          <td>15</td>
+          <td><strong>18%</strong></td>
+          <td>$25,021</td>
+        </tr>
+        
+        <tr class="">
+          <td><strong>2026-10</strong></td>
+          <td>1,150</td>
+          <td>805</td>
+          <td>120</td>
+          <td>215</td>
+          <td>10</td>
+          <td><strong>20%</strong></td>
+          <td>$25,127</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+  <p class="table-note">Each buyer is counted once per month, by the gap since their previous order: within 6 months, 6 to 18 months (yearly regulars, usually back for the same occasion) or more than 18 months (won back). "Their revenue" is what the yearly regulars and won-back customers spent that month.</p>
+</div>
+
+
+<!-- ═══════════════════════ NEXT-OCCASION RETURN ═══════════════════════ -->
+
+<div class="section">
+  <div class="section-title">Did Last Year's New Customers Come Back?</div>
+  <p class="section-intro">The cohorts from a year earlier, now old enough to show what happens over a full year. For occasion buyers the next occasion is the real test, so the 365-day rate matters more than the 90-day one. On average 22.9% came back within a year, vs 10.4% within 90 days.</p>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Cohort</th>
+          <th>New customers</th>
+          <th>RR 90d</th>
+          <th>RR 180d</th>
+          <th>RR 365d</th>
+          <th>LTV 365d</th>
+          <th>First order</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><strong>2025-10</strong></td>
+          <td>967</td>
+          <td class="cell-healthy">13.9%</td>
+          <td class="cell-healthy">16.3%</td>
+          <td><strong>—</strong></td>
+          <td>—</td>
+          <td>$100</td>
+        </tr>
+        
+        <tr>
+          <td><strong>2025-09</strong></td>
+          <td>923</td>
+          <td class="cell-healthy">11.3%</td>
+          <td class="cell-healthy">13.9%</td>
+          <td><strong>20.8%</strong></td>
+          <td>$123</td>
+          <td>$97</td>
+        </tr>
+        
+        <tr>
+          <td><strong>2025-08</strong></td>
+          <td>681</td>
+          <td class="cell-healthy">14.0%</td>
+          <td class="cell-healthy">15.9%</td>
+          <td><strong>22.8%</strong></td>
+          <td>$122</td>
+          <td>$92</td>
+        </tr>
+        
+        <tr>
+          <td><strong>2025-07</strong></td>
+          <td>748</td>
+          <td class="cell-warning">9.4%</td>
+          <td class="cell-warning">11.0%</td>
+          <td><strong>18.2%</strong></td>
+          <td>$112</td>
+          <td>$90</td>
+        </tr>
+        
+        <tr>
+          <td><strong>2025-06</strong></td>
+          <td>908</td>
+          <td class="cell-healthy">12.3%</td>
+          <td class="cell-healthy">14.3%</td>
+          <td><strong>20.8%</strong></td>
+          <td>$120</td>
+          <td>$94</td>
+        </tr>
+        
+        <tr>
+          <td><strong>2025-05</strong></td>
+          <td>1,778</td>
+          <td class="cell-warning">5.4%</td>
+          <td class="cell-warning">7.4%</td>
+          <td><strong>27.2%</strong></td>
+          <td>$146</td>
+          <td>$112</td>
+        </tr>
+        
+        <tr>
+          <td><strong>2025-04</strong></td>
+          <td>1,022</td>
+          <td class="cell-healthy">13.5%</td>
+          <td class="cell-healthy">15.6%</td>
+          <td><strong>22.3%</strong></td>
+          <td>$124</td>
+          <td>$95</td>
+        </tr>
+        
+        <tr>
+          <td><strong>2025-03</strong></td>
+          <td>798</td>
+          <td class="cell-healthy">11.2%</td>
+          <td class="cell-healthy">13.8%</td>
+          <td><strong>21.3%</strong></td>
+          <td>$116</td>
+          <td>$90</td>
+        </tr>
+        
+        <tr>
+          <td><strong>2025-02</strong></td>
+          <td>1,368</td>
+          <td class="cell-healthy">11.2%</td>
+          <td class="cell-healthy">13.5%</td>
+          <td><strong>28.6%</strong></td>
+          <td>$138</td>
+          <td>$104</td>
+        </tr>
+        
+        <tr>
+          <td><strong>2025-01</strong></td>
+          <td>722</td>
+          <td class="cell-healthy">10.1%</td>
+          <td class="cell-healthy">11.9%</td>
+          <td><strong>18.3%</strong></td>
+          <td>$111</td>
+          <td>$89</td>
+        </tr>
+        
+        <tr>
+          <td><strong>2024-12</strong></td>
+          <td>2,911</td>
+          <td class="cell-warning">6.7%</td>
+          <td class="cell-warning">9.9%</td>
+          <td><strong>29.0%</strong></td>
+          <td>$165</td>
+          <td>$125</td>
+        </tr>
+        
+        <tr>
+          <td><strong>2024-11</strong></td>
+          <td>1,784</td>
+          <td class="cell-warning">9.0%</td>
+          <td class="cell-healthy">11.2%</td>
+          <td><strong>22.5%</strong></td>
+          <td>$124</td>
+          <td>$97</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+  
+  <p class="table-note">A dash means the year isn't over yet: every customer in the cohort needs a full 365 days after their first order.</p>
+  
+</div>
+
+
 <!-- ═══════════════════════ DETAILED ANALYSIS ═══════════════════════ -->
 
 
 <div class="detail-card">
   <div class="detail-header">
-    <h3>March 2025 Cohort</h3>
+    <h3>November 2025 Cohort</h3>
     <div>
       <span class="status-pill pill-WARNING">WARNING</span>
       <span class="priority-tag priority-MEDIUM">MEDIUM PRIORITY</span>
@@ -1191,7 +1271,7 @@
   <div class="detail-metrics">
     <div class="metric-box">
       <div class="metric-label">Repurchase Rate (90d)</div>
-      <div class="metric-value cell-healthy">14.5%</div>
+      <div class="metric-value cell-warning">7.1%</div>
     </div>
     <div class="metric-box">
       <div class="metric-label">Benchmark</div>
@@ -1199,155 +1279,51 @@
     </div>
     <div class="metric-box">
       <div class="metric-label">Your Average</div>
-      <div class="metric-value">11.8%</div>
+      <div class="metric-value">10.8%</div>
     </div>
   </div>
 
   <div class="detail-section">
     <h4>What This Means</h4>
-    <p>Of 4,119 customers acquired in March 2025, 912 made a second purchase within 90 days (14.5%). This is -45% below the 10% benchmark. This cohort ranks #2 of 10.</p>
+    <p>Of 2,120 customers acquired in November 2025, 150 made a second purchase within 90 days (7.1%). This is 29% below the 10% benchmark and below your 10.8% average across all cohorts. This cohort ranks #6 of 8.</p>
   </div>
 
   <div class="detail-section">
     <h4>Contributing Factors to Investigate</h4>
     <ul>
-
-      <li>Acquisition spike (4,119 customers, 3.0x normal) — check what drove the surge. Paid campaigns that scale too fast often attract lower-intent buyers who inflate the cohort but deflate retention.</li>
-
-      <li>Repurchase rate dropped vs February (17.3% → 14.5%). Investigate what changed: acquisition channels, product mix, or promotional strategy.</li>
-
-      <li>AOV dropped 23% vs the prior cohort — possible shift toward lower-margin products or heavier discounting.</li>
-
+      
+      <li>Holiday-season cohort — customers acquired in November 2025 are disproportionately gift buyers whose next natural purchase occasion may be 6–12 months out.</li>
+      
+      <li>Below-average AOV ($84 vs $101 median) suggests discount-driven or entry-level buyers. Price-sensitive customers are harder to retain without ongoing incentives — consider whether the margin supports it.</li>
+      
+      <li>Repurchase rate is down vs November 2024 (9.0% → 7.1%). Same season, so this is a real change: check acquisition channels, product mix, or promotional strategy.</li>
+      
+      <li>90-day LTV is down more than 15% vs November 2024: new customers from this season are worth less than they were a year ago.</li>
+      
+      <li>First-order value dropped 17% vs November 2024 — possible shift toward lower-margin products or heavier discounting.</li>
+      
+      <li>For context: 22.5% of November 2024's new customers came back within a year, vs 9.0% within 90 days. For occasion buyers the next occasion, not the next 90 days, is the real test.</li>
+      
     </ul>
   </div>
 
   <div class="detail-section">
     <h4>Recommended Actions</h4>
     <ul>
-
-      <li>Create a Klaviyo segment for March 2025 one-time buyers and analyze their acquisition source and product categories to identify the highest-intent sub-segment.</li>
-
-      <li>This cohort is above your average but still below the benchmark — it's close to healthy. A targeted nudge campaign (not a deep discount) may be enough to tip the remaining non-repeaters into a second purchase.</li>
-
-      <li>With 4,119 customers, even a 1% improvement in retention = 41 additional repeat buyers at ~$126 AOV. Audit which acquisition channels from this period produced the highest-retention customers and reallocate budget accordingly.</li>
-
-      <li>Build a cross-sell recommendation campaign based on complementary products to what this cohort originally purchased — the next purchase is easier to trigger than the first.</li>
-
-    </ul>
-  </div>
-</div>
-
-<div class="detail-card">
-  <div class="detail-header">
-    <h3>April 2025 Cohort</h3>
-    <div>
-      <span class="status-pill pill-WARNING">WARNING</span>
-      <span class="priority-tag priority-MEDIUM">MEDIUM PRIORITY</span>
-    </div>
-  </div>
-
-  <div class="detail-metrics">
-    <div class="metric-box">
-      <div class="metric-label">Repurchase Rate (90d)</div>
-      <div class="metric-value cell-warning">8.0%</div>
-    </div>
-    <div class="metric-box">
-      <div class="metric-label">Benchmark</div>
-      <div class="metric-value">10%</div>
-    </div>
-    <div class="metric-box">
-      <div class="metric-label">Your Average</div>
-      <div class="metric-value">11.8%</div>
-    </div>
-  </div>
-
-  <div class="detail-section">
-    <h4>What This Means</h4>
-    <p>Of 958 customers acquired in April 2025, 137 made a second purchase within 90 days (8.0%). This is 20% below the 10% benchmark and below your 11.8% average across all cohorts. This cohort ranks #8 of 10.</p>
-  </div>
-
-  <div class="detail-section">
-    <h4>Contributing Factors to Investigate</h4>
-    <ul>
-
-      <li>Repurchase rate dropped vs March (14.5% → 8.0%). Investigate what changed: acquisition channels, product mix, or promotional strategy.</li>
-
-    </ul>
-  </div>
-
-  <div class="detail-section">
-    <h4>Recommended Actions</h4>
-    <ul>
-
-      <li>Create a Klaviyo segment for April 2025 one-time buyers and analyze their acquisition source and product categories to identify the highest-intent sub-segment.</li>
-
-      <li>Build a cross-sell recommendation campaign based on complementary products to what this cohort originally purchased — the next purchase is easier to trigger than the first.</li>
-
-      <li>Repeaters in this cohort show strong LTV growth ($113 → $120 over 90 days). The problem isn't repeat buyer value — it's getting more first-timers to convert. Focus the campaign on the non-repeaters specifically.</li>
-
-    </ul>
-  </div>
-</div>
-
-<div class="detail-card">
-  <div class="detail-header">
-    <h3>May 2025 Cohort</h3>
-    <div>
-      <span class="status-pill pill-WARNING">WARNING</span>
-      <span class="priority-tag priority-MEDIUM">MEDIUM PRIORITY</span>
-    </div>
-  </div>
-
-  <div class="detail-metrics">
-    <div class="metric-box">
-      <div class="metric-label">Repurchase Rate (90d)</div>
-      <div class="metric-value cell-warning">7.2%</div>
-    </div>
-    <div class="metric-box">
-      <div class="metric-label">Benchmark</div>
-      <div class="metric-value">10%</div>
-    </div>
-    <div class="metric-box">
-      <div class="metric-label">Your Average</div>
-      <div class="metric-value">11.8%</div>
-    </div>
-  </div>
-
-  <div class="detail-section">
-    <h4>What This Means</h4>
-    <p>Of 1,271 customers acquired in May 2025, 147 made a second purchase within 90 days (7.2%). This is 28% below the 10% benchmark and below your 11.8% average across all cohorts. This cohort ranks #9 of 10.</p>
-  </div>
-
-  <div class="detail-section">
-    <h4>Contributing Factors to Investigate</h4>
-    <ul>
-
-      <li>Mother's Day cohort — strongly occasion-driven buyers. The gap between gifting occasions means retention depends on converting them to self-purchasers or reminding them of future occasions.</li>
-
-      <li>Below-average AOV ($101 vs $126 median) suggests discount-driven or entry-level buyers. Price-sensitive customers are harder to retain without ongoing incentives — consider whether the margin supports it.</li>
-
-      <li>LTV is trending downward vs 3 months ago — the customer mix or purchase behavior is deteriorating over time, not just in this one cohort.</li>
-
-    </ul>
-  </div>
-
-  <div class="detail-section">
-    <h4>Recommended Actions</h4>
-    <ul>
-
-      <li>Build an occasion-reminder flow for May 2025 buyers targeting the holiday season (Nov/Dec). These buyers already demonstrated gifting intent — remind them before the next occasion.</li>
-
+      
+      <li>Create a Klaviyo segment for November 2025 holiday buyers and split them: gift-for-others vs self-purchasers. The retention strategy is fundamentally different — gift buyers need occasion reminders, self-buyers need product follow-ups.</li>
+      
       <li>Test switching from percentage discounts to value-adds (free shipping, bonus item, loyalty points) for this buyer profile — discounts attract price-shoppers, value-adds attract brand-engaged buyers.</li>
-
+      
       <li>For gift buyers, test a "reminder" flow triggered 2–3 weeks before the next major gifting occasion (birthday, anniversary, holiday) with a curated "gifts they'll love" collection.</li>
-
+      
     </ul>
   </div>
 </div>
 
 <div class="detail-card">
   <div class="detail-header">
-    <h3>June 2025 Cohort</h3>
+    <h3>December 2025 Cohort</h3>
     <div>
       <span class="status-pill pill-WARNING">WARNING</span>
       <span class="priority-tag priority-HIGH">HIGH PRIORITY</span>
@@ -1357,7 +1333,7 @@
   <div class="detail-metrics">
     <div class="metric-box">
       <div class="metric-label">Repurchase Rate (90d)</div>
-      <div class="metric-value cell-warning">7.2%</div>
+      <div class="metric-value cell-warning">5.9%</div>
     </div>
     <div class="metric-box">
       <div class="metric-label">Benchmark</div>
@@ -1365,188 +1341,102 @@
     </div>
     <div class="metric-box">
       <div class="metric-label">Your Average</div>
-      <div class="metric-value">11.8%</div>
+      <div class="metric-value">10.8%</div>
     </div>
   </div>
 
   <div class="detail-section">
     <h4>What This Means</h4>
-    <p>Of 1,085 customers acquired in June 2025, 130 made a second purchase within 90 days (7.2%). This is 28% below the 10% benchmark and below your 11.8% average across all cohorts. This cohort ranks #10 of 10.</p>
+    <p>Of 3,365 customers acquired in December 2025, 198 made a second purchase within 90 days (5.9%). This is 41% below the 10% benchmark and below your 10.8% average across all cohorts. This cohort ranks #7 of 8.</p>
   </div>
 
   <div class="detail-section">
     <h4>Contributing Factors to Investigate</h4>
     <ul>
-
-      <li>LTV is trending downward vs 3 months ago — the customer mix or purchase behavior is deteriorating over time, not just in this one cohort.</li>
-
+      
+      <li>Holiday acquisition surge — 3,365 customers is 2.2x your typical monthly cohort. Holiday buyers are often one-time gift purchasers with no personal attachment to the brand, making repeat purchases structurally harder.</li>
+      
+      <li>Premium AOV ($127 vs $101 median) — these are high-value buyers worth prioritizing. Even small improvements in retention yield outsized revenue gains.</li>
+      
+      <li>Repurchase rate is down vs December 2024 (6.7% → 5.9%). Same season, so this is a real change: check acquisition channels, product mix, or promotional strategy.</li>
+      
+      <li>For context: 29.0% of December 2024's new customers came back within a year, vs 6.7% within 90 days. For occasion buyers the next occasion, not the next 90 days, is the real test.</li>
+      
     </ul>
   </div>
 
   <div class="detail-section">
     <h4>Recommended Actions</h4>
     <ul>
+      
+      <li>Create a Klaviyo segment for December 2025 holiday buyers and split them: gift-for-others vs self-purchasers. The retention strategy is fundamentally different — gift buyers need occasion reminders, self-buyers need product follow-ups.</li>
+      
+      <li>With 3,365 customers, even a 1% improvement in retention = 34 additional repeat buyers at ~$127 AOV. Audit which acquisition channels from this period produced the highest-retention customers and reallocate budget accordingly.</li>
+      
+      <li>These $127+ buyers are VIP candidates. Build a high-touch post-purchase sequence: personal thank-you, curated recommendations, early access to new products. The ROI on retaining premium buyers is 2–3x a standard cohort.</li>
+      
+      <li>For gift buyers, test a "reminder" flow triggered 2–3 weeks before the next major gifting occasion (birthday, anniversary, holiday) with a curated "gifts they'll love" collection.</li>
+      
+    </ul>
+  </div>
+</div>
 
-      <li>Create a Klaviyo segment for June 2025 one-time buyers and analyze their acquisition source and product categories to identify the highest-intent sub-segment.</li>
+<div class="detail-card">
+  <div class="detail-header">
+    <h3>May 2026 Cohort</h3>
+    <div>
+      <span class="status-pill pill-CRITICAL">CRITICAL</span>
+      <span class="priority-tag priority-HIGH">HIGH PRIORITY</span>
+    </div>
+  </div>
 
+  <div class="detail-metrics">
+    <div class="metric-box">
+      <div class="metric-label">Repurchase Rate (90d)</div>
+      <div class="metric-value cell-critical">4.5%</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-label">Benchmark</div>
+      <div class="metric-value">10%</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-label">Your Average</div>
+      <div class="metric-value">10.8%</div>
+    </div>
+  </div>
+
+  <div class="detail-section">
+    <h4>What This Means</h4>
+    <p>Of 1,973 customers acquired in May 2026, 89 made a second purchase within 90 days (4.5%). This is 55% below the 10% benchmark and below your 10.8% average across all cohorts. This cohort ranks #8 of 8.</p>
+  </div>
+
+  <div class="detail-section">
+    <h4>Contributing Factors to Investigate</h4>
+    <ul>
+      
+      <li>Mother's Day cohort — strongly occasion-driven buyers. The gap between gifting occasions means retention depends on converting them to self-purchasers or reminding them of future occasions.</li>
+      
+      <li>Repurchase rate is down vs May 2025 (5.4% → 4.5%). Same season, so this is a real change: check acquisition channels, product mix, or promotional strategy.</li>
+      
+      <li>For context: 27.2% of May 2025's new customers came back within a year, vs 5.4% within 90 days. For occasion buyers the next occasion, not the next 90 days, is the real test.</li>
+      
+    </ul>
+  </div>
+
+  <div class="detail-section">
+    <h4>Recommended Actions</h4>
+    <ul>
+      
+      <li>Build an occasion-reminder flow for May 2026 buyers targeting the holiday season (Nov/Dec). These buyers already demonstrated gifting intent — remind them before the next occasion.</li>
+      
       <li>This is your weakest cohort — prioritize a dedicated investigation into what was different about this month's acquisition. Compare UTM sources, landing pages, and offer types vs your best-performing cohort.</li>
-
+      
       <li>Build a cross-sell recommendation campaign based on complementary products to what this cohort originally purchased — the next purchase is easier to trigger than the first.</li>
-
-      <li>Repeaters in this cohort show strong LTV growth ($122 → $129 over 90 days). The problem isn't repeat buyer value — it's getting more first-timers to convert. Focus the campaign on the non-repeaters specifically.</li>
-
-    </ul>
-  </div>
-</div>
-
-<div class="detail-card">
-  <div class="detail-header">
-    <h3>July 2025 Cohort</h3>
-    <div>
-      <span class="status-pill pill-WARNING">WARNING</span>
-      <span class="priority-tag priority-MEDIUM">MEDIUM PRIORITY</span>
-    </div>
-  </div>
-
-  <div class="detail-metrics">
-    <div class="metric-box">
-      <div class="metric-label">Repurchase Rate (90d)</div>
-      <div class="metric-value cell-warning">8.1%</div>
-    </div>
-    <div class="metric-box">
-      <div class="metric-label">Benchmark</div>
-      <div class="metric-value">10%</div>
-    </div>
-    <div class="metric-box">
-      <div class="metric-label">Your Average</div>
-      <div class="metric-value">11.8%</div>
-    </div>
-  </div>
-
-  <div class="detail-section">
-    <h4>What This Means</h4>
-    <p>Of 1,201 customers acquired in July 2025, 144 made a second purchase within 90 days (8.1%). This is 19% below the 10% benchmark and below your 11.8% average across all cohorts. This cohort ranks #7 of 10.</p>
-  </div>
-
-  <div class="detail-section">
-    <h4>Contributing Factors to Investigate</h4>
-    <ul>
-
-      <li>Improving trend — up from 7.2% in June to 8.1%. Still flagged, but moving in the right direction. Identify what's working and double down.</li>
-
-    </ul>
-  </div>
-
-  <div class="detail-section">
-    <h4>Recommended Actions</h4>
-    <ul>
-
-      <li>Create a Klaviyo segment for July 2025 one-time buyers and analyze their acquisition source and product categories to identify the highest-intent sub-segment.</li>
-
-      <li>Build a cross-sell recommendation campaign based on complementary products to what this cohort originally purchased — the next purchase is easier to trigger than the first.</li>
-
-    </ul>
-  </div>
-</div>
-
-<div class="detail-card">
-  <div class="detail-header">
-    <h3>August 2025 Cohort</h3>
-    <div>
-      <span class="status-pill pill-WARNING">WARNING</span>
-      <span class="priority-tag priority-MEDIUM">MEDIUM PRIORITY</span>
-    </div>
-  </div>
-
-  <div class="detail-metrics">
-    <div class="metric-box">
-      <div class="metric-label">Repurchase Rate (90d)</div>
-      <div class="metric-value cell-warning">8.1%</div>
-    </div>
-    <div class="metric-box">
-      <div class="metric-label">Benchmark</div>
-      <div class="metric-value">10%</div>
-    </div>
-    <div class="metric-box">
-      <div class="metric-label">Your Average</div>
-      <div class="metric-value">11.8%</div>
-    </div>
-  </div>
-
-  <div class="detail-section">
-    <h4>What This Means</h4>
-    <p>Of 1,458 customers acquired in August 2025, 161 made a second purchase within 90 days (8.1%). This is 19% below the 10% benchmark and below your 11.8% average across all cohorts. This cohort ranks #6 of 10.</p>
-  </div>
-
-  <div class="detail-section">
-    <h4>Contributing Factors to Investigate</h4>
-    <ul>
-
-      <li>Below-average AOV ($103 vs $126 median) suggests discount-driven or entry-level buyers. Price-sensitive customers are harder to retain without ongoing incentives — consider whether the margin supports it.</li>
-
-    </ul>
-  </div>
-
-  <div class="detail-section">
-    <h4>Recommended Actions</h4>
-    <ul>
-
-      <li>Create a Klaviyo segment for August 2025 one-time buyers and analyze their acquisition source and product categories to identify the highest-intent sub-segment.</li>
-
-      <li>Test switching from percentage discounts to value-adds (free shipping, bonus item, loyalty points) for this buyer profile — discounts attract price-shoppers, value-adds attract brand-engaged buyers.</li>
-
-    </ul>
-  </div>
-</div>
-
-<div class="detail-card">
-  <div class="detail-header">
-    <h3>October 2025 Cohort</h3>
-    <div>
-      <span class="status-pill pill-WARNING">WARNING</span>
-      <span class="priority-tag priority-MEDIUM">MEDIUM PRIORITY</span>
-    </div>
-  </div>
-
-  <div class="detail-metrics">
-    <div class="metric-box">
-      <div class="metric-label">Repurchase Rate (90d)</div>
-      <div class="metric-value cell-warning">9.0%</div>
-    </div>
-    <div class="metric-box">
-      <div class="metric-label">Benchmark</div>
-      <div class="metric-value">10%</div>
-    </div>
-    <div class="metric-box">
-      <div class="metric-label">Your Average</div>
-      <div class="metric-value">11.8%</div>
-    </div>
-  </div>
-
-  <div class="detail-section">
-    <h4>What This Means</h4>
-    <p>Of 1,393 customers acquired in October 2025, 138 made a second purchase within 90 days (9.0%). This is 10% below the 10% benchmark and below your 11.8% average across all cohorts. This cohort ranks #5 of 10.</p>
-  </div>
-
-  <div class="detail-section">
-    <h4>Contributing Factors to Investigate</h4>
-    <ul>
-
-      <li>Repurchase rate dropped vs September (11.8% → 9.0%). Investigate what changed: acquisition channels, product mix, or promotional strategy.</li>
-
-    </ul>
-  </div>
-
-  <div class="detail-section">
-    <h4>Recommended Actions</h4>
-    <ul>
-
-      <li>Create a Klaviyo segment for October 2025 one-time buyers and analyze their acquisition source and product categories to identify the highest-intent sub-segment.</li>
-
-      <li>Build a cross-sell recommendation campaign based on complementary products to what this cohort originally purchased — the next purchase is easier to trigger than the first.</li>
-
-      <li>Repeaters in this cohort show strong LTV growth ($153 → $163 over 90 days). The problem isn't repeat buyer value — it's getting more first-timers to convert. Focus the campaign on the non-repeaters specifically.</li>
-
+      
+      <li>For gift buyers, test a "reminder" flow triggered 2–3 weeks before the next major gifting occasion (birthday, anniversary, holiday) with a curated "gifts they'll love" collection.</li>
+      
+      <li>Consider a re-engagement survey to understand why these buyers didn't return. For gift buyers, the answer may be simple: they don't need another gift yet. The insight determines whether to invest in win-back or accept the natural cycle.</li>
+      
     </ul>
   </div>
 </div>
@@ -1560,11 +1450,11 @@
     
     <div class="task-item">
       <div class="task-id">
-        <span class="priority-tag priority-MEDIUM">MEDIUM</span>
+        <span class="priority-tag priority-HIGH">HIGH</span>
       </div>
       <div>
-        <div class="task-title">Build March 2025 one-time buyer segment in Klaviyo</div>
-        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">March 2025 cohort: 14.5% repurchase rate — need to understand who these customers are</div>
+        <div class="task-title">Build one-time buyer segments for the Nov 2025–Dec 2025, May 2026 cohorts</div>
+        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">New customers from these months who haven't ordered again. Split gift-for-others vs self-purchasers before messaging.</div>
       </div>
       <div class="task-role">CRM Strategist</div>
       <div class="task-deadline">Within 3 days</div>
@@ -1575,8 +1465,8 @@
         <span class="priority-tag priority-HIGH">HIGH</span>
       </div>
       <div>
-        <div class="task-title">Launch personalized win-back campaign for March 2025 non-repeaters</div>
-        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">Only 14.5% repurchased — segment by product category and send targeted offers</div>
+        <div class="task-title">Launch a second-purchase campaign for Nov 2025–Dec 2025, May 2026 non-repeaters</div>
+        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">90-day repurchase: Nov 7.1%, Dec 5.9%, May 4.5%. Segment by product category and send targeted offers.</div>
       </div>
       <div class="task-role">Email Marketing Manager</div>
       <div class="task-deadline">Within 1 week</div>
@@ -1587,8 +1477,32 @@
         <span class="priority-tag priority-MEDIUM">MEDIUM</span>
       </div>
       <div>
-        <div class="task-title">Audit acquisition sources for March 2025 cohort</div>
-        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">Compare retention by UTM source — identify which channels drove one-time vs repeat buyers</div>
+        <div class="task-title">Occasion-reminder flow for Nov 2025–Dec 2025, May 2026 gift buyers</div>
+        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">Occasion buyers come back for the next occasion. Trigger reminders 2–3 weeks before it with a curated gift edit.</div>
+      </div>
+      <div class="task-role">Email Marketing Manager</div>
+      <div class="task-deadline">Within 2 weeks</div>
+    </div>
+    
+    <div class="task-item">
+      <div class="task-id">
+        <span class="priority-tag priority-HIGH">HIGH</span>
+      </div>
+      <div>
+        <div class="task-title">Yearly-regular reminder ahead of next December</div>
+        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">In December 2025, 987 yearly regulars (last order 6–18 months earlier) and 381 customers gone 18+ months came back ($193,554). Remind last year's buyers before the occasion instead of waiting for them to remember.</div>
+      </div>
+      <div class="task-role">CRM Strategist</div>
+      <div class="task-deadline">4–6 weeks before the occasion</div>
+    </div>
+    
+    <div class="task-item">
+      <div class="task-id">
+        <span class="priority-tag priority-MEDIUM">MEDIUM</span>
+      </div>
+      <div>
+        <div class="task-title">Audit acquisition sources for the Nov 2025–Dec 2025, May 2026 cohorts</div>
+        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">Compare retention by UTM source — identify which channels drove one-time vs repeat buyers.</div>
       </div>
       <div class="task-role">Growth Lead</div>
       <div class="task-deadline">Within 2 weeks</div>
@@ -1599,214 +1513,10 @@
         <span class="priority-tag priority-MEDIUM">MEDIUM</span>
       </div>
       <div>
-        <div class="task-title">Build April 2025 one-time buyer segment in Klaviyo</div>
-        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">April 2025 cohort: 8.0% repurchase rate — need to understand who these customers are</div>
+        <div class="task-title">Review customer satisfaction signals for May 2026</div>
+        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">Check support tickets, product reviews, and delivery metrics for this period.</div>
       </div>
-      <div class="task-role">CRM Strategist</div>
-      <div class="task-deadline">Within 3 days</div>
-    </div>
-    
-    <div class="task-item">
-      <div class="task-id">
-        <span class="priority-tag priority-HIGH">HIGH</span>
-      </div>
-      <div>
-        <div class="task-title">Launch personalized win-back campaign for April 2025 non-repeaters</div>
-        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">Only 8.0% repurchased — segment by product category and send targeted offers</div>
-      </div>
-      <div class="task-role">Email Marketing Manager</div>
-      <div class="task-deadline">Within 1 week</div>
-    </div>
-    
-    <div class="task-item">
-      <div class="task-id">
-        <span class="priority-tag priority-MEDIUM">MEDIUM</span>
-      </div>
-      <div>
-        <div class="task-title">Audit acquisition sources for April 2025 cohort</div>
-        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">Compare retention by UTM source — identify which channels drove one-time vs repeat buyers</div>
-      </div>
-      <div class="task-role">Growth Lead</div>
-      <div class="task-deadline">Within 2 weeks</div>
-    </div>
-    
-    <div class="task-item">
-      <div class="task-id">
-        <span class="priority-tag priority-MEDIUM">MEDIUM</span>
-      </div>
-      <div>
-        <div class="task-title">Build May 2025 one-time buyer segment in Klaviyo</div>
-        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">May 2025 cohort: 7.2% repurchase rate — need to understand who these customers are</div>
-      </div>
-      <div class="task-role">CRM Strategist</div>
-      <div class="task-deadline">Within 3 days</div>
-    </div>
-    
-    <div class="task-item">
-      <div class="task-id">
-        <span class="priority-tag priority-HIGH">HIGH</span>
-      </div>
-      <div>
-        <div class="task-title">Launch personalized win-back campaign for May 2025 non-repeaters</div>
-        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">Only 7.2% repurchased — segment by product category and send targeted offers</div>
-      </div>
-      <div class="task-role">Email Marketing Manager</div>
-      <div class="task-deadline">Within 1 week</div>
-    </div>
-    
-    <div class="task-item">
-      <div class="task-id">
-        <span class="priority-tag priority-MEDIUM">MEDIUM</span>
-      </div>
-      <div>
-        <div class="task-title">Audit acquisition sources for May 2025 cohort</div>
-        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">Compare retention by UTM source — identify which channels drove one-time vs repeat buyers</div>
-      </div>
-      <div class="task-role">Growth Lead</div>
-      <div class="task-deadline">Within 2 weeks</div>
-    </div>
-    
-    <div class="task-item">
-      <div class="task-id">
-        <span class="priority-tag priority-HIGH">HIGH</span>
-      </div>
-      <div>
-        <div class="task-title">Build June 2025 one-time buyer segment in Klaviyo</div>
-        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">June 2025 cohort: 7.2% repurchase rate — need to understand who these customers are</div>
-      </div>
-      <div class="task-role">CRM Strategist</div>
-      <div class="task-deadline">Within 3 days</div>
-    </div>
-    
-    <div class="task-item">
-      <div class="task-id">
-        <span class="priority-tag priority-HIGH">HIGH</span>
-      </div>
-      <div>
-        <div class="task-title">Launch personalized win-back campaign for June 2025 non-repeaters</div>
-        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">Only 7.2% repurchased — segment by product category and send targeted offers</div>
-      </div>
-      <div class="task-role">Email Marketing Manager</div>
-      <div class="task-deadline">Within 1 week</div>
-    </div>
-    
-    <div class="task-item">
-      <div class="task-id">
-        <span class="priority-tag priority-MEDIUM">MEDIUM</span>
-      </div>
-      <div>
-        <div class="task-title">Audit acquisition sources for June 2025 cohort</div>
-        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">Compare retention by UTM source — identify which channels drove one-time vs repeat buyers</div>
-      </div>
-      <div class="task-role">Growth Lead</div>
-      <div class="task-deadline">Within 2 weeks</div>
-    </div>
-    
-    <div class="task-item">
-      <div class="task-id">
-        <span class="priority-tag priority-MEDIUM">MEDIUM</span>
-      </div>
-      <div>
-        <div class="task-title">Build July 2025 one-time buyer segment in Klaviyo</div>
-        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">July 2025 cohort: 8.1% repurchase rate — need to understand who these customers are</div>
-      </div>
-      <div class="task-role">CRM Strategist</div>
-      <div class="task-deadline">Within 3 days</div>
-    </div>
-    
-    <div class="task-item">
-      <div class="task-id">
-        <span class="priority-tag priority-HIGH">HIGH</span>
-      </div>
-      <div>
-        <div class="task-title">Launch personalized win-back campaign for July 2025 non-repeaters</div>
-        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">Only 8.1% repurchased — segment by product category and send targeted offers</div>
-      </div>
-      <div class="task-role">Email Marketing Manager</div>
-      <div class="task-deadline">Within 1 week</div>
-    </div>
-    
-    <div class="task-item">
-      <div class="task-id">
-        <span class="priority-tag priority-MEDIUM">MEDIUM</span>
-      </div>
-      <div>
-        <div class="task-title">Audit acquisition sources for July 2025 cohort</div>
-        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">Compare retention by UTM source — identify which channels drove one-time vs repeat buyers</div>
-      </div>
-      <div class="task-role">Growth Lead</div>
-      <div class="task-deadline">Within 2 weeks</div>
-    </div>
-    
-    <div class="task-item">
-      <div class="task-id">
-        <span class="priority-tag priority-MEDIUM">MEDIUM</span>
-      </div>
-      <div>
-        <div class="task-title">Build August 2025 one-time buyer segment in Klaviyo</div>
-        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">August 2025 cohort: 8.1% repurchase rate — need to understand who these customers are</div>
-      </div>
-      <div class="task-role">CRM Strategist</div>
-      <div class="task-deadline">Within 3 days</div>
-    </div>
-    
-    <div class="task-item">
-      <div class="task-id">
-        <span class="priority-tag priority-HIGH">HIGH</span>
-      </div>
-      <div>
-        <div class="task-title">Launch personalized win-back campaign for August 2025 non-repeaters</div>
-        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">Only 8.1% repurchased — segment by product category and send targeted offers</div>
-      </div>
-      <div class="task-role">Email Marketing Manager</div>
-      <div class="task-deadline">Within 1 week</div>
-    </div>
-    
-    <div class="task-item">
-      <div class="task-id">
-        <span class="priority-tag priority-MEDIUM">MEDIUM</span>
-      </div>
-      <div>
-        <div class="task-title">Audit acquisition sources for August 2025 cohort</div>
-        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">Compare retention by UTM source — identify which channels drove one-time vs repeat buyers</div>
-      </div>
-      <div class="task-role">Growth Lead</div>
-      <div class="task-deadline">Within 2 weeks</div>
-    </div>
-    
-    <div class="task-item">
-      <div class="task-id">
-        <span class="priority-tag priority-MEDIUM">MEDIUM</span>
-      </div>
-      <div>
-        <div class="task-title">Build October 2025 one-time buyer segment in Klaviyo</div>
-        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">October 2025 cohort: 9.0% repurchase rate — need to understand who these customers are</div>
-      </div>
-      <div class="task-role">CRM Strategist</div>
-      <div class="task-deadline">Within 3 days</div>
-    </div>
-    
-    <div class="task-item">
-      <div class="task-id">
-        <span class="priority-tag priority-HIGH">HIGH</span>
-      </div>
-      <div>
-        <div class="task-title">Launch personalized win-back campaign for October 2025 non-repeaters</div>
-        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">Only 9.0% repurchased — segment by product category and send targeted offers</div>
-      </div>
-      <div class="task-role">Email Marketing Manager</div>
-      <div class="task-deadline">Within 1 week</div>
-    </div>
-    
-    <div class="task-item">
-      <div class="task-id">
-        <span class="priority-tag priority-MEDIUM">MEDIUM</span>
-      </div>
-      <div>
-        <div class="task-title">Audit acquisition sources for October 2025 cohort</div>
-        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">Compare retention by UTM source — identify which channels drove one-time vs repeat buyers</div>
-      </div>
-      <div class="task-role">Growth Lead</div>
+      <div class="task-role">Customer Experience Lead</div>
       <div class="task-deadline">Within 2 weeks</div>
     </div>
     
@@ -1816,7 +1526,7 @@
       </div>
       <div>
         <div class="task-title">Analyze discount strategy impact on customer retention</div>
-        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">Multiple cohorts underperforming — assess whether promotional strategy is attracting one-time discount seekers</div>
+        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">Multiple cohorts underperforming — assess whether promotional strategy is attracting one-time discount seekers.</div>
       </div>
       <div class="task-role">Marketing Director</div>
       <div class="task-deadline">Within 3 weeks</div>
@@ -1828,7 +1538,7 @@
       </div>
       <div>
         <div class="task-title">Review and optimize post-purchase email sequence timing</div>
-        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">Ensure post-purchase touchpoints align with product replenishment cycles and cross-sell opportunities</div>
+        <div style="font-size: 12px; color: var(--grey); margin-top: 2px;">Ensure post-purchase touchpoints align with the buying cycle: next occasion for gift buyers, replenishment for self-buyers.</div>
       </div>
       <div class="task-role">CRM Strategist</div>
       <div class="task-deadline">Within 1 month</div>
@@ -1837,12 +1547,39 @@
   </div>
 </div>
 
+<!-- ═══════════════════════ DATA & METHOD ═══════════════════════ -->
+<div class="section data-notes">
+  <div class="section-title">Data &amp; Method</div>
+  <dl>
+    
+    <dt>Source</dt><dd>Simulated order history for a fictional store</dd>
+    
+    <dt>First purchase</dt><dd>From the full order history (since January 2021), so every new customer is genuinely new.</dd>
+    
+    <dt>Customer</dt><dd>Store customer ID</dd>
+    
+    <dt>Order value</dt><dd>Order total at checkout</dd>
+    
+    <dt>Orders left out</dt><dd>1,195 orders across the full history: 1,176 cancelled, 19 test orders</dd>
+    
+    <dt>Orders analyzed</dt><dd>18,856 orders placed by the 16,421 new customers above</dd>
+    
+    <dt>Existing customers</dt><dd>4,974 customers ordered in the window but first ordered before it, so they are not counted as new</dd>
+    
+    <dt>Time zone</dt><dd>Store time (US Eastern)</dd>
+    
+    <dt>Data pulled</dt><dd>October 23, 2026 18:27</dd>
+    
+  </dl>
+  
+</div>
+
 </div><!-- /.container -->
 
 <!-- ═══════════════════════ FOOTER ═══════════════════════ -->
 <div class="report-footer">
-  <div class="footer-line">Confidential — Kinga Dow & Bloom & Barrel Co.</div>
-  <div class="footer-line">Generated by Cohort Retention Intelligence Agent · February 20, 2026</div>
+  <div class="footer-line">Confidential — Kinga Dow & Bloom & Barrel</div>
+  <div class="footer-line">Generated by Cohort Retention Intelligence Agent · October 23, 2026</div>
   <div class="footer-brand">KINGA DOW</div>
 </div>
 
@@ -1851,7 +1588,7 @@
 
 <!-- ═══════════════════════ CHARTS JS ═══════════════════════ -->
 <script>
-const chartData = {"labels": ["2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02"], "repurchase_rates": [18.9, 16.1, 9.4, 8.6, 8.3, 9.5, 9.7, 11.8, 10.4, 13.1, 16.8, 7.9, 7.2], "ltv_values": [235.0, 168.0, 132.0, 119.0, 142.0, 125.0, 125.0, 178.0, 179.0, 277.0, 309.0, 133.0, 121.0]};
+const chartData = {"labels": ["2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10"], "repurchase_rates": [7.1, 5.9, 12.2, 13.3, 14.1, 16.0, 4.5, 13.7, null, null, null, null], "ltv_values": [89.0, 137.0, 104.0, 121.0, 109.0, 119.0, 120.0, 110.0, null, null, null, null]};
 
 function initCharts() {
 
@@ -1935,7 +1672,7 @@ new Chart(document.getElementById('repurchaseChart'), {
 });
 
 // LTV Chart — Y-axis starts near the min value for better variation visibility
-const ltvMin = Math.min(...chartData.ltv_values);
+const ltvMin = Math.min(...chartData.ltv_values.filter(v => v !== null));
 const ltvFloor = Math.max(0, Math.floor((ltvMin - 20) / 50) * 50);
 
 new Chart(document.getElementById('ltvChart'), {
@@ -1950,7 +1687,7 @@ new Chart(document.getElementById('ltvChart'), {
       fill: true,
       tension: 0.3,
       pointBackgroundColor: chartData.ltv_values.map((v, i) => {
-        const prev = i > 0 ? chartData.ltv_values[i-1] : v;
+        const prev = i > 0 && chartData.ltv_values[i-1] !== null ? chartData.ltv_values[i-1] : v;
         return v >= prev ? '#8CAB95' : '#C45B5B';
       }),
       pointRadius: 5,
@@ -1992,8 +1729,9 @@ new Chart(document.getElementById('ltvChart'), {
 });
 } // end initCharts
 
-// Initialize charts on page load
-window.addEventListener('DOMContentLoaded', initCharts);
+// If password-protected, charts init after unlock; otherwise init immediately
+
+initCharts();
 
 </script>
 

@@ -86,7 +86,7 @@ Here is the part that matters most if you run a retention program, and it is the
 
 The data an agent needs is the data your email program already needed.
 
-Dynamic product blocks in Klaviyo read the same fields: codes, titles, prices, images, availability. Product feeds read them. On-site search reads them. When those fields drift, the email goes out showing something out of stock, or a price that is wrong, or an image belonging to a different variant. That failure is visible, and being visible is why brands who take email seriously have usually already fixed it. [The way we check against live store data while a campaign is being built](/blog/mcp-stack-ecommerce-retention/) exists for exactly this reason.
+[Dynamic product blocks in Klaviyo](/blog/klaviyo-abandoned-cart-template/) read the same fields: codes, titles, prices, images, availability. Product feeds read them. On-site search reads them. When those fields drift, the email goes out showing something out of stock, or a price that is wrong, or an image belonging to a different variant. That failure is visible, and being visible is why brands who take email seriously have usually already fixed it. [The way we check against live store data while a campaign is being built](/blog/mcp-stack-ecommerce-retention/) exists for exactly this reason.
 
 So there is a split forming, and it does not track brand size.
 
@@ -112,7 +112,7 @@ Three options, in order of cost, and the first one is legitimate.
 
 **Fix the catalog.** No engineering required, and it is the only item on this list that pays off whether or not agents turn out to matter. Consistent product codes, complete variant information, accurate availability, and your shipping, returns and sizing policies written once in a form anything can quote. Your emails improve immediately. So does your on-site search. And if you do build later, you skip the part that would have stalled it.
 
-**Run a look-only merchant pilot.** Internal, no customer exposure, nothing it can change. An agent that reads your store and answers the questions your team currently puts to an analyst, or to nobody. Shopify's version is the shortest route to a working one. If it earns its keep, you extend it later to proposing changes, with the approval step already built in.
+**Run a look-only merchant pilot.** Internal, no customer exposure, nothing it can change. An agent that reads your store and [answers the questions your team currently puts to an analyst](/blog/hit-q4-goal-with-claude/), or to nobody. Shopify's version is the shortest route to a working one. If it earns its keep, you extend it later to proposing changes, with the approval step already built in.
 
 The middle option is the one I would push almost every brand toward first, and it is the least interesting thing on this page. That is usually how it goes. The announcement is about agents. The work is about your product data, which was true last year, and would have been worth doing then.
 

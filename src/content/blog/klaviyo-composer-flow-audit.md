@@ -15,8 +15,8 @@ keywords:
   - "klaviyo flow audit"
 featured: false
 draft: false
-metaTitle: "Klaviyo's Flow Audit AI vs the One I Built | Kinga Dow"
-metaDescription: "I ran Klaviyo's new Composer flow audit on an account with close to 60 flows, next to the framework I built over a year. What the AI catches, and the judgment it hands back."
+metaTitle: "Klaviyo Flow Performance Audit: Composer Review | Kinga Dow"
+metaDescription: "How to run a Klaviyo flow performance audit: what Klaviyo's Composer AI checks, where it stops, and how I score each flow on revenue and list cost."
 faqs:
   - question: "Can Klaviyo's AI audit your flows?"
     answer: "Yes. Klaviyo's Composer reads every live flow, pulls 30 days of per-message performance, compares each message to your peer benchmark, and flags broken branches, weak sends, and overlapping flows. It is a strong replacement for reading each flow by hand. It reports and drafts. The decisions about what to fix, and the changes themselves, stay with you."
@@ -80,7 +80,7 @@ That call is mine to make, not the tool's.
 
 I sort every flow by where it sits in the customer's lifecycle: 9 groups, from the first welcome through to [winback](/blog/klaviyo-rfm-segmentation/) and the occasion sends. Laid out that way, the gaps show themselves. The stages crowded with flows, and the ones sitting empty.
 
-Most accounts are busy before the first purchase and thin after it. Plenty of welcome and cart emails, little for the second order or a winback timed to [when people actually reorder](/blog/predict-when-your-customers-will-reorder/) rather than a round 90 days.
+Most accounts are busy before the first purchase and thin after it. Plenty of welcome and [cart emails](/blog/klaviyo-abandoned-cart-template/), little for the second order or a winback timed to [when people actually reorder](/blog/predict-when-your-customers-will-reorder/) rather than a round 90 days.
 
 Composer will point out the gaps too, and it will draft a flow to fill one. What it leaves to you is the judgment: whether the gap is worth filling at all, and whether the draft is good enough to go live. It drafts, and it names the problem. Deciding and publishing stay on your side of the line.
 
@@ -93,6 +93,17 @@ The last step is sequencing. Three things set the order: what a flow earns, what
 Composer suggests fixes in the order it thinks will help most. My audit ranks them by what they are worth once cost and effort are in the math, and then it makes the changes. Connected to the account, it can switch off the duplicate, remap the broken flow, and shorten the one losing money, each change waiting for a yes before it goes live.
 
 Composer writes the list. The workflow works through it.
+
+## How to Run a Klaviyo Flow Performance Audit
+
+Start with 30 days of numbers for every email inside every flow, read message by message, and compare each one against a peer group of similar brands. Composer now does this first pass in about an hour. Then score every flow the same way:
+
+1. **Revenue against list cost.** Read what each flow earns next to the unsubscribes and spam complaints it causes.
+2. **Revenue per person.** Rank flows by what each one earns per person. The smallest flow often earns the most.
+3. **Overlap.** Find every order that sets off 2 or more flows, and decide which flow gets the customer.
+4. **Gaps.** Sort flows by lifecycle stage and look for the empty stages, usually after the first purchase.
+
+Then put the fixes in order by what each one earns, what it costs the list, and how long it takes.
 
 ## What Turns Up Almost Every Time
 

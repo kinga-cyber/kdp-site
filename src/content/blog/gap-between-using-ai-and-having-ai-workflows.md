@@ -105,7 +105,7 @@ If you recognized three or more of those — you're not behind. You're exactly w
 
 ## What Crossing the Gap Looks Like
 
-On the other side, the strategy conversation becomes the brief. The brief becomes the tasks. The tasks become the campaigns. The performance data feeds back into the next cycle. A human checks each transition point but doesn't do the manual labor of carrying information between systems.
+On the other side, the strategy conversation becomes the brief. The brief becomes the tasks. The tasks become the campaigns. The [performance data feeds back into the next cycle](/blog/hit-q4-goal-with-claude/). A human checks each transition point but doesn't do the manual labor of carrying information between systems.
 
 An audit that used to take 4 hours happens in 30 minutes. Not because someone types faster, but because the system already has access to every flow, every trigger, every metric — and it knows what to look for because the methodology is built into the workflow, not stored in someone's memory.
 

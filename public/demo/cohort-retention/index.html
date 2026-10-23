@@ -945,6 +945,7 @@
       <canvas id="ltvChart"></canvas>
     </div>
   </div>
+  <p class="table-note">The July to October 2026 cohorts aren't plotted yet: their customers haven't all had 90 days since their first order.</p>
 </div>
 
 <!-- ═══════════════════════ WHO BOUGHT EACH MONTH ═══════════════════════ -->
@@ -1568,7 +1569,7 @@
     
     <dt>Time zone</dt><dd>Store time (US Eastern)</dd>
     
-    <dt>Data pulled</dt><dd>October 23, 2026 18:27</dd>
+    <dt>Data pulled</dt><dd>October 23, 2026 18:31</dd>
     
   </dl>
   
@@ -1603,9 +1604,38 @@ const chartFont = { family: 'Montserrat', size: 11 };
 const gridColor = 'rgba(229,225,219,0.6)';
 const tickColor = '#9F9FAE';
 
+// Shade the newest cohorts whose 90 days aren't over (null at the end),
+// so the empty months read as "not yet" instead of missing data
+const pendingCohorts = {
+  id: 'pendingCohorts',
+  afterDatasetsDraw(chart) {
+    const data = chart.data.datasets[0].data;
+    let first = data.length;
+    while (first > 0 && data[first - 1] === null) first--;
+    if (first === data.length) return;
+    const x = chart.scales.x;
+    const { top, bottom, right } = chart.chartArea;
+    const left = first > 0
+      ? (x.getPixelForValue(first - 1) + x.getPixelForValue(first)) / 2
+      : chart.chartArea.left;
+    const ctx = chart.ctx;
+    ctx.save();
+    ctx.fillStyle = 'rgba(159,159,174,0.12)';
+    ctx.fillRect(left, top, right - left, bottom - top);
+    ctx.fillStyle = tickColor;
+    ctx.font = '500 11px Montserrat';
+    ctx.textAlign = 'center';
+    const mid = (top + bottom) / 2;
+    ctx.fillText('90 days', (left + right) / 2, mid - 7);
+    ctx.fillText('not over yet', (left + right) / 2, mid + 8);
+    ctx.restore();
+  },
+};
+
 // Repurchase Rate Chart
 new Chart(document.getElementById('repurchaseChart'), {
   type: 'bar',
+  plugins: [pendingCohorts],
   data: {
     labels: displayLabels,
     datasets: [{
@@ -1677,6 +1707,7 @@ const ltvFloor = Math.max(0, Math.floor((ltvMin - 20) / 50) * 50);
 
 new Chart(document.getElementById('ltvChart'), {
   type: 'line',
+  plugins: [pendingCohorts],
   data: {
     labels: displayLabels,
     datasets: [{

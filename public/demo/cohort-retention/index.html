@@ -497,7 +497,7 @@
     display: flex;
     align-items: baseline;
     gap: 8px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;  /* room for the 25th / Med / 75th labels */
   }
   .benchmark-card .bm-value {
     font-size: 24px;
@@ -541,11 +541,15 @@
     white-space: nowrap;
   }
   .benchmark-legend {
-    display: flex;
-    justify-content: space-between;
+    position: relative;
+    height: 14px;
     font-size: 9px;
     color: var(--grey);
     margin-top: 2px;
+  }
+  .benchmark-legend span {
+    position: absolute;
+    transform: translateX(-50%);  /* centered under the 25th / 75th markers */
   }
 
   /* ─── Password Gate ─────────────────────────────── */
@@ -656,6 +660,8 @@
     .section { padding: 20px 16px; margin-top: 16px; }
     .detail-card { padding: 20px 16px; margin-top: 16px; }
     .chart-box { padding: 14px; }
+    .benchmark-grid { grid-template-columns: 1fr; }
+    .benchmark-card { padding: 14px 16px; }
     .report-header { padding: 28px 0; }
     .header-left h1 { font-size: 20px; line-height: 1.3; }
     .header-meta { flex-wrap: wrap; gap: 12px 24px; }
@@ -685,7 +691,7 @@
 
 
 <div class="demo-banner">
-  Demo report <span>Bloom & Barrel is a fictional store and every order in it is simulated. A real report reads the store's own order history.</span>
+  Demo report <span>Bloom & Barrel is a fictional store and all its data is simulated. A real report reads the store's own order history.</span>
   <a href="https://kingadow.com/">Back to kingadow.com</a>
 </div>
 
@@ -746,6 +752,265 @@
 </div>
 
 <!-- ═══════════════════════ BENCHMARKS ═══════════════════════ -->
+
+<div class="section">
+  <div class="section-title">Klaviyo Benchmarks — Gifting / Occasion-Based · Oct 2025 – Sep 2026</div>
+  <div class="benchmark-grid">
+    
+    <div class="benchmark-card">
+      <div class="bm-header">
+        <span class="bm-label">Avg Order Count</span>
+        <span class="bm-status bm-Fair">Fair</span>
+      </div>
+      <div class="bm-value-row">
+        <span class="bm-value">1.13</span>
+        <span class="bm-percentile">32nd percentile</span>
+      </div>
+      <div class="benchmark-bar">
+        <div class="bar-fill" style="width: 32.0%; background: rgba(212,168,67,0.7);"></div>
+        <div class="bar-marker" style="left: 25%;"><span class="bar-marker-label">25th</span></div>
+        <div class="bar-marker" style="left: 50%;"><span class="bar-marker-label">Med</span></div>
+        <div class="bar-marker" style="left: 75%;"><span class="bar-marker-label">75th</span></div>
+      </div>
+      <div class="benchmark-legend">
+        <span style="left: 25%;">1.10</span>
+        <span style="left: 75%;">1.38</span>
+      </div>
+    </div>
+    
+    <div class="benchmark-card">
+      <div class="bm-header">
+        <span class="bm-label">Avg Cart Size</span>
+        <span class="bm-status bm-Fair">Fair</span>
+      </div>
+      <div class="bm-value-row">
+        <span class="bm-value">1.42</span>
+        <span class="bm-percentile">46th percentile</span>
+      </div>
+      <div class="benchmark-bar">
+        <div class="bar-fill" style="width: 46.0%; background: rgba(212,168,67,0.7);"></div>
+        <div class="bar-marker" style="left: 25%;"><span class="bar-marker-label">25th</span></div>
+        <div class="bar-marker" style="left: 50%;"><span class="bar-marker-label">Med</span></div>
+        <div class="bar-marker" style="left: 75%;"><span class="bar-marker-label">75th</span></div>
+      </div>
+      <div class="benchmark-legend">
+        <span style="left: 25%;">1.25</span>
+        <span style="left: 75%;">1.80</span>
+      </div>
+    </div>
+    
+    <div class="benchmark-card">
+      <div class="bm-header">
+        <span class="bm-label">Avg Order Value</span>
+        <span class="bm-status bm-Good">Good</span>
+      </div>
+      <div class="bm-value-row">
+        <span class="bm-value">$106.28</span>
+        <span class="bm-percentile">59th percentile</span>
+      </div>
+      <div class="benchmark-bar">
+        <div class="bar-fill" style="width: 59.0%; background: rgba(140,171,149,0.6);"></div>
+        <div class="bar-marker" style="left: 25%;"><span class="bar-marker-label">25th</span></div>
+        <div class="bar-marker" style="left: 50%;"><span class="bar-marker-label">Med</span></div>
+        <div class="bar-marker" style="left: 75%;"><span class="bar-marker-label">75th</span></div>
+      </div>
+      <div class="benchmark-legend">
+        <span style="left: 25%;">$72</span>
+        <span style="left: 75%;">$128</span>
+      </div>
+    </div>
+    
+    <div class="benchmark-card">
+      <div class="bm-header">
+        <span class="bm-label">Cart Recovery (Email)</span>
+        <span class="bm-status bm-Excellent">Excellent</span>
+      </div>
+      <div class="bm-value-row">
+        <span class="bm-value">4.1%</span>
+        <span class="bm-percentile">79th percentile</span>
+      </div>
+      <div class="benchmark-bar">
+        <div class="bar-fill" style="width: 79.0%; background: rgba(140,171,149,0.8);"></div>
+        <div class="bar-marker" style="left: 25%;"><span class="bar-marker-label">25th</span></div>
+        <div class="bar-marker" style="left: 50%;"><span class="bar-marker-label">Med</span></div>
+        <div class="bar-marker" style="left: 75%;"><span class="bar-marker-label">75th</span></div>
+      </div>
+      <div class="benchmark-legend">
+        <span style="left: 25%;">1.8%</span>
+        <span style="left: 75%;">3.8%</span>
+      </div>
+    </div>
+    
+    <div class="benchmark-card">
+      <div class="bm-header">
+        <span class="bm-label">Cart Recovery (SMS)</span>
+        <span class="bm-status bm-Excellent">Excellent</span>
+      </div>
+      <div class="bm-value-row">
+        <span class="bm-value">6.2%</span>
+        <span class="bm-percentile">80th percentile</span>
+      </div>
+      <div class="benchmark-bar">
+        <div class="bar-fill" style="width: 80.0%; background: rgba(140,171,149,0.8);"></div>
+        <div class="bar-marker" style="left: 25%;"><span class="bar-marker-label">25th</span></div>
+        <div class="bar-marker" style="left: 50%;"><span class="bar-marker-label">Med</span></div>
+        <div class="bar-marker" style="left: 75%;"><span class="bar-marker-label">75th</span></div>
+      </div>
+      <div class="benchmark-legend">
+        <span style="left: 25%;">2.1%</span>
+        <span style="left: 75%;">5.5%</span>
+      </div>
+    </div>
+    
+    <div class="benchmark-card">
+      <div class="bm-header">
+        <span class="bm-label">Cart Rev/Recipient (Email)</span>
+        <span class="bm-status bm-Excellent">Excellent</span>
+      </div>
+      <div class="bm-value-row">
+        <span class="bm-value">$4.85</span>
+        <span class="bm-percentile">79th percentile</span>
+      </div>
+      <div class="benchmark-bar">
+        <div class="bar-fill" style="width: 79.0%; background: rgba(140,171,149,0.8);"></div>
+        <div class="bar-marker" style="left: 25%;"><span class="bar-marker-label">25th</span></div>
+        <div class="bar-marker" style="left: 50%;"><span class="bar-marker-label">Med</span></div>
+        <div class="bar-marker" style="left: 75%;"><span class="bar-marker-label">75th</span></div>
+      </div>
+      <div class="benchmark-legend">
+        <span style="left: 25%;">$1.60</span>
+        <span style="left: 75%;">$4.40</span>
+      </div>
+    </div>
+    
+    <div class="benchmark-card">
+      <div class="bm-header">
+        <span class="bm-label">Campaign Open Rate</span>
+        <span class="bm-status bm-Fair">Fair</span>
+      </div>
+      <div class="bm-value-row">
+        <span class="bm-value">41.2%</span>
+        <span class="bm-percentile">47th percentile</span>
+      </div>
+      <div class="benchmark-bar">
+        <div class="bar-fill" style="width: 47.0%; background: rgba(212,168,67,0.7);"></div>
+        <div class="bar-marker" style="left: 25%;"><span class="bar-marker-label">25th</span></div>
+        <div class="bar-marker" style="left: 50%;"><span class="bar-marker-label">Med</span></div>
+        <div class="bar-marker" style="left: 75%;"><span class="bar-marker-label">75th</span></div>
+      </div>
+      <div class="benchmark-legend">
+        <span style="left: 25%;">36.0%</span>
+        <span style="left: 75%;">48.0%</span>
+      </div>
+    </div>
+    
+    <div class="benchmark-card">
+      <div class="bm-header">
+        <span class="bm-label">Campaign Click Rate</span>
+        <span class="bm-status bm-Poor">Poor</span>
+      </div>
+      <div class="bm-value-row">
+        <span class="bm-value">0.7%</span>
+        <span class="bm-percentile">19th percentile</span>
+      </div>
+      <div class="benchmark-bar">
+        <div class="bar-fill" style="width: 19.0%; background: rgba(196,91,91,0.7);"></div>
+        <div class="bar-marker" style="left: 25%;"><span class="bar-marker-label">25th</span></div>
+        <div class="bar-marker" style="left: 50%;"><span class="bar-marker-label">Med</span></div>
+        <div class="bar-marker" style="left: 75%;"><span class="bar-marker-label">75th</span></div>
+      </div>
+      <div class="benchmark-legend">
+        <span style="left: 25%;">0.9%</span>
+        <span style="left: 75%;">2.1%</span>
+      </div>
+    </div>
+    
+    <div class="benchmark-card">
+      <div class="bm-header">
+        <span class="bm-label">Campaign Placed Order Rate</span>
+        <span class="bm-status bm-Good">Good</span>
+      </div>
+      <div class="bm-value-row">
+        <span class="bm-value">0.2%</span>
+        <span class="bm-percentile">55th percentile</span>
+      </div>
+      <div class="benchmark-bar">
+        <div class="bar-fill" style="width: 55.0%; background: rgba(140,171,149,0.6);"></div>
+        <div class="bar-marker" style="left: 25%;"><span class="bar-marker-label">25th</span></div>
+        <div class="bar-marker" style="left: 50%;"><span class="bar-marker-label">Med</span></div>
+        <div class="bar-marker" style="left: 75%;"><span class="bar-marker-label">75th</span></div>
+      </div>
+      <div class="benchmark-legend">
+        <span style="left: 25%;">0.1%</span>
+        <span style="left: 75%;">0.4%</span>
+      </div>
+    </div>
+    
+    <div class="benchmark-card">
+      <div class="bm-header">
+        <span class="bm-label">Flow Placed Order Rate</span>
+        <span class="bm-status bm-Good">Good</span>
+      </div>
+      <div class="bm-value-row">
+        <span class="bm-value">1.1%</span>
+        <span class="bm-percentile">60th percentile</span>
+      </div>
+      <div class="benchmark-bar">
+        <div class="bar-fill" style="width: 60.0%; background: rgba(140,171,149,0.6);"></div>
+        <div class="bar-marker" style="left: 25%;"><span class="bar-marker-label">25th</span></div>
+        <div class="bar-marker" style="left: 50%;"><span class="bar-marker-label">Med</span></div>
+        <div class="bar-marker" style="left: 75%;"><span class="bar-marker-label">75th</span></div>
+      </div>
+      <div class="benchmark-legend">
+        <span style="left: 25%;">0.6%</span>
+        <span style="left: 75%;">1.4%</span>
+      </div>
+    </div>
+    
+    <div class="benchmark-card">
+      <div class="bm-header">
+        <span class="bm-label">Flow Rev/Recipient</span>
+        <span class="bm-status bm-Good">Good</span>
+      </div>
+      <div class="bm-value-row">
+        <span class="bm-value">$1.35</span>
+        <span class="bm-percentile">59th percentile</span>
+      </div>
+      <div class="benchmark-bar">
+        <div class="bar-fill" style="width: 59.0%; background: rgba(140,171,149,0.6);"></div>
+        <div class="bar-marker" style="left: 25%;"><span class="bar-marker-label">25th</span></div>
+        <div class="bar-marker" style="left: 50%;"><span class="bar-marker-label">Med</span></div>
+        <div class="bar-marker" style="left: 75%;"><span class="bar-marker-label">75th</span></div>
+      </div>
+      <div class="benchmark-legend">
+        <span style="left: 25%;">$0.55</span>
+        <span style="left: 75%;">$1.90</span>
+      </div>
+    </div>
+    
+    <div class="benchmark-card">
+      <div class="bm-header">
+        <span class="bm-label">Welcome Flow Conv Rate</span>
+        <span class="bm-status bm-Fair">Fair</span>
+      </div>
+      <div class="bm-value-row">
+        <span class="bm-value">1.9%</span>
+        <span class="bm-percentile">42nd percentile</span>
+      </div>
+      <div class="benchmark-bar">
+        <div class="bar-fill" style="width: 42.0%; background: rgba(212,168,67,0.7);"></div>
+        <div class="bar-marker" style="left: 25%;"><span class="bar-marker-label">25th</span></div>
+        <div class="bar-marker" style="left: 50%;"><span class="bar-marker-label">Med</span></div>
+        <div class="bar-marker" style="left: 75%;"><span class="bar-marker-label">75th</span></div>
+      </div>
+      <div class="benchmark-legend">
+        <span style="left: 25%;">1.2%</span>
+        <span style="left: 75%;">3.4%</span>
+      </div>
+    </div>
+    
+  </div>
+</div>
 
 
 <!-- ═══════════════════════ COHORT TABLE ═══════════════════════ -->

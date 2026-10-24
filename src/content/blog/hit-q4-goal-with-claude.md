@@ -88,7 +88,7 @@ The page earns its place in the conversation it starts. The question I put to th
 
 With the numbers in by noon, each department checks its own line against target. When one is behind, the team works out why and agrees the fix before the next week starts.
 
-In the first week, email flow revenue was running behind last year. I traced it with Claude to the abandoned cart flows: the original versions had been switched off, and the live ones open with a plain reminder before any offer. That's a fix you want in October, well before the peak weeks.
+In the first week, email flow revenue was running behind last year. I traced it with Claude to the abandoned cart flows: the original versions had been switched off. That's a fix you want in October, well before the peak weeks.
 
 ## How I Set This Up for Brands
 

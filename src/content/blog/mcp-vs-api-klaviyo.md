@@ -1,7 +1,7 @@
 ---
 title: "Klaviyo MCP Server: What It Does, and When to Use the API"
 date: 2026-09-17
-updated: 2026-09-21
+updated: 2026-10-24
 author: "Kinga Dow"
 category: "AI Systems"
 excerpt: "The MCP connector, the API and the Klaviyo interface each have a job. The connector does almost everything day to day, the API takes over at scale, and the interface is where the craft stays. How to use all three."
@@ -48,7 +48,7 @@ So a connector's shape is a choice, which is the single most useful thing to und
 
 ## What the Connector Actually Does
 
-Start with the connector, because it does far more than people assume. It can create and edit most of the account: campaigns, flows, segments, lists, profiles, templates, sign-up forms, catalogs, coupons, tags, translations, brand settings and more. It reads essentially everything, and it carries all the reporting. For day-to-day marketing work, the connector is the workhorse.
+Start with the connector, because it does far more than people assume. It can create and edit most of the account: campaigns, flows, segments, lists, profiles, templates, catalogs, coupons, tags, translations, brand settings and more, and it creates sign-up forms as drafts. It reads essentially everything, and it carries all the reporting. For day-to-day marketing work, the connector is the workhorse.
 
 A couple of jobs belong to the API or the interface instead:
 

@@ -27,11 +27,11 @@ Customer lifetime value replaces the guess with your own numbers. It used to be 
 
 Historic CLV is what a customer has actually spent with you. Add up their orders over a window of time, and that total is the number. I use a trailing 24 months as the default, because it reflects who a customer is now rather than who they were 5 years ago. All-time spend is the other option, and it suits brands with a long repeat cycle, where a purchase every 18 months is normal.
 
-Klaviyo already shows a Historic Customer Lifetime Value on every profile, though that figure is all-time. A 24-month window, or any window that matches how your customers actually buy, is the kind of thing people used to build a spreadsheet for. That is the part that just got easy.
+Klaviyo shows a Historic Customer Lifetime Value on profiles once an account meets its predictive analytics requirements, starting at 500 customers who have ordered, and that figure is all-time. A 24-month window, or any window that matches how your customers actually buy, is the kind of thing people used to build a spreadsheet for. That is the part that just got easy.
 
 ## The Easy Way: Ask Claude to Do It
 
-If your Klaviyo or Shopify account is connected to Claude through its connector, a plug-in that lets Claude read your account once you give it permission, you can ask for the whole thing in plain English and get segments back.
+If your Klaviyo account is connected to Claude through its connector, a plug-in that lets Claude work with your account once you give it permission, plus Shopify if your order history lives there, you can ask for the whole thing in plain English and get segments back.
 
 The request is roughly this: "Look at the last 24 months of orders, work out each customer's total spend, and split the list into high, mid and low tiers by percentile. Build them as segments." Here is what that does, step by step.
 
@@ -44,7 +44,7 @@ The whole thing takes one request and a minute of reading back what it built. Th
 
 ## Prefer to Do It by Hand
 
-The math is simple enough to do yourself. In Shopify, each customer record carries total spent and order count, and a customer export gives you every buyer with their lifetime total in a column. Filter to the last 24 months, sort by spend, and mark the top 20% as high, the next 30% as mid, and the rest as low. Then recreate those 3 groups in Klaviyo as segments with a spend threshold.
+The math is simple enough to do yourself. Export your store's orders for the last 24 months, total the spend for each customer in a spreadsheet, sort by spend, and mark the top 20% as high, the next 30% as mid, and the rest as low. Then recreate those 3 groups in Klaviyo as segments with a spend threshold.
 
 Same result, by hand. And it shows why a round number like "spent over $500" falls short: a $500 line might catch the top few percent of one brand's customers and nearly half of another's, so the same rule means something different in every account. A percentile reads your actual list, so "high value" means the same thing, the top slice of your customers, whatever your average order value happens to be.
 

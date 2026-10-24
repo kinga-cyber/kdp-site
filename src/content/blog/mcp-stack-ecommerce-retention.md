@@ -1,7 +1,7 @@
 ---
 title: "The MCP Servers I Actually Use for Ecommerce Email"
 date: 2026-08-13
-updated: 2026-09-05
+updated: 2026-10-24
 author: "Kinga Dow"
 category: "AI Systems"
 excerpt: "Six connectors, what each one reaches, what I use it for, and where it stops. Including the one thing the Klaviyo connector still will not build, and how quickly that list of exceptions is shrinking."
@@ -23,7 +23,7 @@ faqs:
   - question: "What is MCP in the context of marketing tools?"
     answer: "Model Context Protocol (MCP) is a standard that lets AI tools like Claude connect directly to third-party platforms — Klaviyo, Shopify, Asana, Figma — and read or act on them. A connector exposes a chosen set of platform actions without requiring developer keys or setup."
   - question: "What can the Klaviyo MCP server do?"
-    answer: "The Klaviyo MCP server reads and writes campaigns, flows, segments, lists, profiles, templates, catalogs, coupons, forms, images, tags, and reporting. As of September 2026 it can also create and edit flows. The one action it still does not support is creating a new webhook."
+    answer: "The Klaviyo MCP server reads campaigns, flows, segments, lists, profiles, templates, catalogs, coupons, forms, images, tags, and reporting, and creates or edits most of them. As of September 2026 it can also create and edit flows. Sign-up forms are created as drafts and can't be edited afterwards, and creating or changing a webhook still needs the API."
   - question: "What does the Shopify MCP server do for email marketing?"
     answer: "The Shopify MCP server reads live product data, variant names, pricing, inventory levels by location, and order and customer history. The main email marketing use is confirming stock at campaign build time, so a low-stock product gets flagged before the email sends rather than after."
   - question: "What is the difference between an MCP connector and the platform API?"
@@ -42,7 +42,7 @@ One thing worth saying before the list. **Everything below is what the connector
 
 On the writing side it creates campaigns and clones them, builds email templates including proper drag-and-drop ones, creates lists, profiles, coupons and coupon codes, catalog items and variants, tags, custom metrics and universal content. It can render a template to check what it looks like.
 
-**One thing it will not create: a webhook.** When I first wrote this in August the connector refused to create 4 things, segments, flows, forms and webhooks. Three of those have since arrived, so the list is down to one. It reads webhooks and it will delete one with nothing but an ID, but it still will not make one. Everything below about flows is the correction, and it is worth reading because the shape of what changed tells you how to think about any connector.
+**One thing it will not create: a webhook.** When I first wrote this in August the connector refused to create 4 things, segments, flows, forms and webhooks. Three of those have since arrived, so the list is down to one. Forms came with a catch: the connector saves a new form as a draft and cannot edit it after it is built. It reads webhooks and it will delete one with nothing but an ID, but it still will not make one. Everything below about flows is the correction, and it is worth reading because the shape of what changed tells you how to think about any connector.
 
 Flows used to be the strange one. In August the connector could set a flow's status, draft or manual or live, and delete the whole thing, but it could not build one or edit a step inside it. That looked backwards, since turning somebody's abandoned cart flow off is a larger action than editing a subject line, and turning it off was the one it would do.
 

@@ -75,7 +75,7 @@ This is the route the guides leave out, and it needs no developer work and no co
 
 Klaviyo has [an MCP connector](/blog/mcp-vs-api-klaviyo/), which is a plug-in that lets Claude work with your account once you have given it permission. So does Google Drive. Both are on my list of [the MCP servers I actually use](/blog/mcp-stack-ecommerce-retention/). You connect them to Claude, and then you ask for what you want in plain English. Claude reads the account, works out the numbers, and saves them as a new Google Sheet.
 
-MCP is the piece that removes the developer from this picture. Nothing gets built and there is no password or access key to copy anywhere. You authorize a connection the same way you authorize any app, and Claude can read the account from there.
+MCP is the piece that removes the developer from this picture. For questions you ask in a chat, nothing gets built and there is no password or access key to copy anywhere. You authorize a connection the same way you authorize any app, and Claude can read the account from there.
 
 **What makes it different from a connector** is that you ask a question instead of syncing a fixed set of columns. Speed and cost are both better too, but they are the smaller part.
 
@@ -85,11 +85,11 @@ This is where the interesting work lives. [Predicting when a customer will reord
 
 That is a different kind of tool. A connector gives you one shape of report, over and over. This gives you whatever shape answers the question.
 
-**It also runs on a schedule,** which is the part most people miss about it. The same connection can run as a repeating task, so a report arrives without you asking for it each time. I run one of these every Monday morning for a client's weekly tracker. Before anyone is at their desk, Claude pulls the week's numbers from Klaviyo: campaign and flow revenue, deliveries, unsubscribes, sign-ups, and the split between sale and non-sale sends. It works out revenue per recipient and the other derived rows, then lays everything out in the same order as the tracker. By the time the Monday call starts, the week is on the table.
+**It also runs on a schedule,** which is the part most people miss about it. A scheduled task in Claude runs the same request every week, so a report arrives without you asking for it each time. I run one of these every Monday morning for a client's weekly tracker. Before anyone is at their desk, Claude pulls the week's numbers from Klaviyo through its API: campaign and flow revenue, deliveries, unsubscribes, sign-ups, and the offer in every campaign. It works out revenue per recipient, which sends were sales and which weren't, and the other derived rows, then sends me one table in the same order as the tracker. By the time the Monday call starts, the week is on the table.
 
 So the choice between asking once and having it arrive every Monday is a setting rather than a second purchase.
 
-**One honest limit.** Each run saves as its own new sheet, with the numbers already laid out in tracker order. Moving them into the master tracker you keep is the one manual step, and it takes about a minute.
+**One honest limit.** The table arrives ready to paste, and pasting it into the master tracker is the one manual step. It takes about a minute.
 
 **What it costs.** A Claude subscription you likely already have, and nothing else. Both connectors are free.
 
